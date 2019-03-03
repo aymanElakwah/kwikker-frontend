@@ -10,9 +10,11 @@ import {AddTokenInterceptor} from './services/add-token.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CacheInterceptor } from './services/cache.interceptor';
 import { CoreModule } from './core/core.module';
+import { LogInComponent } from './log-in/log-in.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
