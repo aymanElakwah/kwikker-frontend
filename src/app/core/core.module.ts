@@ -5,7 +5,7 @@ import { LoggerService } from '../services/logger.service';
 import { DataService } from '../services/data.service';
 
 @NgModule({
-  declarations: [NavBarComponent],
+  declarations: [],
   imports: [
     CommonModule,
   ],
