@@ -11,7 +11,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CacheInterceptor } from './services/cache.interceptor';
 import { CoreModule } from './core/core.module';
 import { LogInComponent } from './log-in/log-in.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SearchModule } from './search/search.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    SearchModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
