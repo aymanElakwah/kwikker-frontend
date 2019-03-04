@@ -1,4 +1,6 @@
 <app-nav-bar> </app-nav-bar>
 <div id="filter-by">
- {{search}}
+   <h1 [ngClass]="{'arabic' : !ltr}">
+     {{search}}
+   </h1>
 </div>

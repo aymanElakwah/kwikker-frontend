@@ -1,0 +1,20 @@
+#filter-by{
+    
+    background-color: #1DA1F2 !important;
+    height: 32px;
+    padding:16px;
+    font-family:"Segoe UI",Arial,sans-serif;
+    
+}
+h1{
+    color:white;
+    padding-left: 12px;
+    font-size:27px;
+    margin:0px;
+    font-weight: bold;
+    
+}
+.arabic
+{
+    direction: rtl;
+}
