@@ -11,10 +11,11 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CacheInterceptor } from './services/cache.interceptor';
 import { CoreModule } from './core/core.module';
 import { LogInComponent } from './log-in/log-in.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent
+    LogInComponent,
   ],
   imports: [
     BrowserModule,
