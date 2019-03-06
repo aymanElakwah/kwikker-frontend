@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
-
+import { HttpErrorResponse, HttpClient, HttpParams } from '@angular/common/http';
+import { throwError , Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  // example for using get with jason file
+  getNumber(name: string): Observable<number> {
+    const options = name ?
+     { params: new HttpParams().set('name', name) } : {};
+    return this.http.get<number>('api/test', options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   // use retry func
   private handleError(error: HttpErrorResponse) {
