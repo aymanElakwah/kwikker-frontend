@@ -11,8 +11,9 @@ import { ProfilesListComponent } from '../profiles-list/profiles-list.component'
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'search', component: SearchComponent ,
+      {path: 'search', component: SearchComponent,
     children: [
+      {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
       {path: 'kweeks', component: KweekComponent },
       {path: 'people', component: ProfilesListComponent}
     ]}
