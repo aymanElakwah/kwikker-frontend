@@ -1,4 +1,4 @@
-#filter-by{
+#filter-by {
     
     background-color: #1DA1F2 !important;
     height: 32px;
@@ -6,19 +6,39 @@
     font-family:"Segoe UI",Arial,sans-serif;
     
 }
-h1{
+h1 {
     color:white;
-    padding-left: 60px;
+    padding-left: 100px;
     font-size:27px;
     margin:0px;
     font-weight: bold;
     
 }
-.arabic
-{
+.arabic {
     direction: rtl;
 }
 
+#second {
+    list-style-type: none;
+    margin:0px;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
+    padding-left: 100px;
+}
+a{
+    float: left;
+    font-weight: bold;
+    font-size:14px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color:#657786;
+    padding:16px;
+    text-decoration: none;
+}
+
+#filters
+{
+    background-color: white;
+    overflow: hidden;
+}
 @media only screen and (max-width: 600px) {
     h1 {
       padding-left: 12px;
