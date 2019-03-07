@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 import { LogInComponent } from './log-in/log-in.component';
 import { SearchModule } from './search/search.module';
 import { HomeComponent } from './home/home.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
