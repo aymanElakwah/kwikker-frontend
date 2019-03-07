@@ -28,4 +28,8 @@ export class TitleService {
   setTitleTweets(name: string , body: string): void {
     this.titleService.setTitle(`${name} on kwikker : "${body}"`);
   }
+
+  setTitleSearch(name: string) {
+    this.titleService.setTitle(`${name} - kwikker search`);
+  }
 }
