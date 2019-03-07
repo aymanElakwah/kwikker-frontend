@@ -12,10 +12,12 @@ import {CacheInterceptor } from './services/cache.interceptor';
 import { CoreModule } from './core/core.module';
 import { LogInComponent } from './log-in/log-in.component';
 import { SearchModule } from './search/search.module';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
