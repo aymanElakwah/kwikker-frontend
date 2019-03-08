@@ -13,19 +13,20 @@ import { CoreModule } from './core/core.module';
 import { LogInComponent } from './log-in/log-in.component';
 import { SearchModule } from './search/search.module';
 import { HomeComponent } from './home/home.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SettingsModule } from './settings/settings.module';
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    SearchModule
+    SearchModule,
+    SettingsModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
