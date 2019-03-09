@@ -4,11 +4,12 @@
     height: 32px;
     padding:16px;
     font-family:"Segoe UI",Arial,sans-serif;
-    
+    overflow: hidden;
+    height: auto;
 }
-h1 {
+#first {
     color:white;
-    padding-left: 100px;
+    padding-left: 200px;
     font-size:27px;
     margin:0px;
     font-weight: bold;
@@ -16,13 +17,14 @@ h1 {
 }
 .arabic {
     direction: rtl;
+    padding-right: 200px;
 }
 
 #second {
     list-style-type: none;
     margin:0px;
     box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
-    padding-left: 100px;
+    padding-left: 200px;
 }
 a{
     float: left;
@@ -42,5 +44,6 @@ a{
 @media only screen and (max-width: 600px) {
     h1 {
       padding-left: 12px;
+      padding-right: 12px;
     }
   }

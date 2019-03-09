@@ -1,6 +1,8 @@
 <app-nav-bar> </app-nav-bar>
+
+<!--search and filter bars-->
 <div id="filter-by">
-    <h1 [ngClass]="{'arabic' : !ltr}">
+    <h1 id="first" [ngClass]="{'arabic' : !ltr}">
      {{search}}
     </h1>
 </div>
@@ -8,7 +10,7 @@
   <ul id="second">
     <li>
       <a [routerLink]="['kweeks']" [queryParams]= "{ filterBy:search } ">
-        posts
+        latest
         </a>
     </li>
     <li>
@@ -18,4 +20,19 @@
     </li>
   </ul>
 </div>
-<router-outlet></router-outlet>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-who-to-follow>
+        
+      </app-who-to-follow>
+    </div>
+    <div class="col-lg-3">
+      <router-outlet >
+
+    </router-outlet>
+   </div>
+  </div>  
+</div>
