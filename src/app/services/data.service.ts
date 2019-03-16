@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient, HttpParams } from '@angular/common/http';
 import { throwError , Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Notification } from '../model/notification'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,22 @@ export class DataService {
     return this.http.get<number>('api/test', options)
       .pipe(
         catchError(this.handleError)
+      );
+  }
+
+  /**
+   * 
+   * to get request to get the latest notification
+   * @param last_notifications_retrieved_id {string} sends the last notification id to git 
+   * newer notifications after it and laso could be null
+   * @returns array of notifications
+   */
+  getNotificationsList(last_notifications_retrieved_id: string): Observable<Notification[]> {
+    const options = last_notifications_retrieved_id ?
+     { params: new HttpParams().set('last_notifications_retrieved_id', last_notifications_retrieved_id) } : {};
+    return this.http.get<Notification[]>('api/ARR', options)
+      .pipe(
+        catchError(this.handleError) // code 401 -> Unauthorized access.
       );
   }
 
