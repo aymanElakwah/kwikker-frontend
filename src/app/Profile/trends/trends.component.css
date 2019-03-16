@@ -1,0 +1,56 @@
+.Trends-Container
+{
+    width: 290px;
+    height: 465px;
+    background-color: white;
+    text-align: center
+
+}
+
+#Trends-Text
+{
+    width: 258px;
+    height: 433px;
+    display: inline-block;
+    position: relative;
+    Top: 17px;
+}
+
+#Trends-header
+{
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#Trends-Item
+{
+    line-height: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    text-align: left;
+    list-style: none;
+    position: relative;
+    right: 38px;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+#Trends-Item>h1
+{
+    font-size: 15px;
+    text-align: inherit;
+    line-height: inherit;
+    color:rgb(6, 120, 190);
+}
+
+#Trends-Item>p
+{
+    font-size: 13px;
+    text-align: inherit;
+    line-height: inherit;
+    margin-top: 13px;
+    color:#657786;
+}

@@ -5,18 +5,24 @@ import { ProfilesListComponent } from '../profiles-list/profiles-list.component'
 import { KweekComponent } from '../kweek/kweek.component';
 import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
 
+
 @NgModule({
-  declarations: [NavBarComponent,
+  declarations: [
+  NavBarComponent,
   ProfilesListComponent,
   KweekComponent,
-  WhoToFollowComponent],
+  WhoToFollowComponent
+],
+
   imports: [
-    CommonModule
+    CommonModule,
   ],
+  
   exports: [
   NavBarComponent,
   ProfilesListComponent,
   KweekComponent,
-  WhoToFollowComponent]
+  WhoToFollowComponent,
+]
 })
 export class SharedModule { }
