@@ -1,0 +1,128 @@
+.Page-Container
+{
+    width: 1343px;
+    overflow-x: hidden;
+}
+
+.Banner
+{
+    display: block;
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1343px;
+    box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.25);
+    z-index: 1;
+    background-color: #91D2FA;
+    height: 175px;
+    transition: height .3s;
+}
+
+.Profile-Picture
+{
+    background-color:#fff;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    bottom: -48px;
+    left: 86.5px;
+    position: relative;
+    z-index: 3;
+}
+
+.Profile-NavBar
+{
+    background-color: #fff;
+    box-sizing: border-box;
+    height: 60px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    line-height: 1.375;
+    z-index: 2;
+    position: relative;
+    bottom: 25px;
+}
+
+.Profile-Headercard
+{
+    position: relative;
+    left: 90px;
+    Top: 5px;
+}
+
+.Edit-Button
+{
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    left: 1160px;
+    Top: -48px;
+    align-self: center;
+    text-align: center;
+    white-space: nowrap;
+    background: transparent;
+    transition: box-shadow .15s ease-in-out; 
+    background-color: #fff;
+    border: 1px solid #66757f;
+    color: #66757f;
+}
+
+.Taps-Container
+{
+    background-color: white;
+    overflow: hidden;
+    height: 60px;
+    width: 50%;
+    position: relative;
+    left: 370px;
+    
+}
+
+#Taps
+{
+    list-style-type: none;
+    margin:0px;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
+    padding-left: 200px;
+    position: relative;
+    right: 200px;
+    color: #657786;
+    font-size: 12px;
+    text-align: center;
+}
+
+.active
+{
+    color:#1B95E0;
+    border-color: #1B95E0;
+    border-bottom: 2px solid;
+}
+
+li>a:hover
+{
+    color:#1B95E0 !important;
+}
+
+a {
+    float: left;
+    font-weight: bold;
+    font-size:14px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color:#657786;
+    padding:13px;
+    text-decoration: none;
+}
+
+.Profile-Trends
+{
+    position: relative;
+    left: 970px;
+    bottom: 210px;
+}
+
+
