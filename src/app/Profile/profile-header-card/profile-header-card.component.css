@@ -1,0 +1,72 @@
+.card-container
+{
+    width: 260px;
+    height: 196px;
+}
+
+.Profile-Name
+{
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 28px;
+    margin-right: 2px;
+    word-wrap: break-word;
+}
+
+.Profile-ScreenName
+{
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 12px;
+    position: relative;
+    bottom: 6px;
+    color: rgb(102, 117, 127);
+}
+
+.Profile-Bio
+{
+    color: #14171a;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+}
+
+.Date-Text
+{
+    vertical-align: middle;
+    line-height: 1;
+    padding-left: 3px;
+}
+
+.Profile-Joindate ,.Profile-Birthdate
+{
+    color: #657786;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+    position: relative;
+    text-align: left;
+}
+
+.Tweet-Button
+{
+    background-color: #48AAE6;
+    border-color: transparent;
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-top: 20px
+}
+
