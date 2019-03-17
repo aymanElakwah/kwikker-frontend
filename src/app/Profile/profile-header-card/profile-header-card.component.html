@@ -1,15 +1,15 @@
-<div class = "card-container">
+<div class = "card-container" *ngIf="profileHeaderInfo">
 
-  <h1 class = "Profile-Name"> Ahmed Mahmoud </h1>
-  <h1 class = "Profile-ScreenName"> @Ahmed_Mahmoud14 </h1>
-  <p class = "Profile-Bio"> Official Origin Twitter account. For technical support, please follow @EAHelp or visit http://help.ea.com .</p>
+  <h1 class = "Profile-Name"> {{profileHeaderInfo?.userName}} </h1>
+  <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.screenName}} </h1>
+  <p class = "Profile-Bio"> {{profileHeaderInfo?.Bio}} </p>
 
   <div class = "Profile-Joindate">
     <span style="font-size: 2ex; color:#657786;">
         <i class="fas fa-calendar-alt"></i>
     </span>
     <span class="Date-Text">
-        Joined June 2022
+        Joined {{profileHeaderInfo?.joinedDate | date: 'dd/MM/yyyy'}}
     </span>
   </div>
 
@@ -18,10 +18,10 @@
           <i class="fas fa-birthday-cake"></i>
       </span>
       <span class="Date-Text">
-          Born June 29, 2022
+       Born {{profileHeaderInfo?.birthDate | date: 'dd/MM/yyyy'}} 
       </span>
   </div>
 
-  <button class="Tweet-Button"> Tweet To Ahmed </button>
+  <button class="Tweet-Button"> Tweet To {{profileHeaderInfo.userName}} </button>
   
 </div>

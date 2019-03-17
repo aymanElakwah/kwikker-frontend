@@ -9,67 +9,11 @@
      <div id="Trends-body">
 
         <ul id="Trends-Items">
-          <li id="Trends-Item"> 
-            <h1> New Zeland </h1>
-            <p> 8,240 Tweets </p>
+          <li id="Trends-Item" *ngFor="let trend of trends"> 
+            <h1> {{trend?.Text}} </h1>
+            <p> {{trend?.NumberOfKweeks}} Kweeks </p>
           </li>
-        </ul>
-
-        <ul id="Trends-Items">
-          <li id="Trends-Item"> 
-            <h1> Al Ahly </h1>
-            <p> 8,240 Tweets </p>
-          </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-              <h1> #Egypt </h1>
-              <p> 8,240 Tweets </p>
-            </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-              <h1> #Kwikkers </h1>
-              <p> 8,240 Tweets </p>
-                </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-              <h1> #Avengers </h1>
-              <p> 8,240 Tweets </p>
-            </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-              <h1> #Ralph Breaks The Internet </h1>
-              <p> 8,240 Tweets </p>
-            </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-                <h1>  الأهلى_بطل_مصر </h1>
-                <p> 8,240 Tweets </p>
-            </li>
-        </ul>
-
-        <ul id="Trends-Items">
-            <li id="Trends-Item"> 
-                <h1> Pray </h1>
-                <p> 8,240 Tweets </p>
-            </li>
-        </ul>
-
-        <ul id="Trends-Items">
-             <li id="Trends-Item"> 
-                  <h1> Fast </h1>
-                  <p> 8,240 Tweets </p>
-             </li>
-        </ul>
+        </ul> 
 
     </div>
   </div>

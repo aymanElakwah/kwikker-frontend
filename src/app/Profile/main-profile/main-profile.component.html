@@ -1,4 +1,4 @@
-<div class = "Page-Container">
+<div class = "Page-Container" *ngIf="profileUser" >
     <app-nav-bar> </app-nav-bar>
 
     <div class = "Banner"> </div>
@@ -8,16 +8,16 @@
         <div class="Taps-Container">
             <ul id="Taps">
                 <li>
-                <a routerLinkActive="active" > Tweets <br> 255 </a>
+                <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
                 </li>
                 <li> 
-                <a routerLinkActive="active">  Following  <br> 33</a>
+                <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
                 </li>
                 <li> 
-                <a routerLinkActive="active">  Followers <br> 298 </a>
+                <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
                 </li>
                 <li> 
-                <a routerLinkActive="active">  Likes <br> 106 </a>
+                <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
                 </li>
             </ul>
         </div>
@@ -27,8 +27,10 @@
         </button>
     </div>
     
-    <app-profile-header-card class="Profile-Headercard"> </app-profile-header-card>
-    <app-trends class="Profile-Trends"> </app-trends>
+    <app-profile-header-card class="Profile-Headercard"
+                            [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
+    <app-trends class="Profile-Trends" *ngIf="trends"
+                [trends] = 'trends'> </app-trends>
 </div>
 
 

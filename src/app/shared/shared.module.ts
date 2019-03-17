@@ -4,6 +4,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfilesListComponent } from '../profiles-list/profiles-list.component';
 import { KweekComponent } from '../kweek/kweek.component';
 import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
+import { TrendsComponent } from '../Profile/trends/trends.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
   NavBarComponent,
   ProfilesListComponent,
   KweekComponent,
-  WhoToFollowComponent
+  WhoToFollowComponent,
+  TrendsComponent
 ],
 
   imports: [
@@ -23,6 +25,7 @@ import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
   ProfilesListComponent,
   KweekComponent,
   WhoToFollowComponent,
+  TrendsComponent
 ]
 })
 export class SharedModule { }
