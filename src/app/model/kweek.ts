@@ -5,7 +5,7 @@ import { Rekweek } from './rekweek';
 
 export interface Kweek {
     id: string;
-    created_at: Date;
+    created_at: string;
     text: string;
     media_url: string;
     user: User;
@@ -13,7 +13,7 @@ export interface Kweek {
     hashtags: Hashtag[];
     number_of_likes: number;
     number_of_rekweeks: number;
-    number_of_Replies: number;
+    number_of_replies: number;
     reply_to: string;
     liked_by_user: boolean;
     rekweeked_by_user: boolean;
