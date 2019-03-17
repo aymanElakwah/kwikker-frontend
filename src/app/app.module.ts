@@ -41,7 +41,7 @@ import { LogInModule } from './log-in/log-in.module';
     SearchModule,
     SettingsModule,
     HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false },
+    InMemoryDataService, {delay: 3000 },
     ),
     LogInModule,
     FormsModule
