@@ -17,9 +17,9 @@ import { ProfileHeaderCardComponent } from './profile-header-card/profile-header
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      { path: 'Profile', component: MainProfileComponent,
+      { path: 'profile', component: MainProfileComponent,
       children: [
-        {path: '', redirectTo: 'Profile', pathMatch: 'full'} ,
+        {path: '', redirectTo: 'profile', pathMatch: 'full'} ,
         {path: 'following', component: MainProfileComponent },
         {path: 'followers', component: MainProfileComponent},
         {path: 'likes', component: MainProfileComponent}

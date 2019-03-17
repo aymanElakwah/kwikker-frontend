@@ -38,11 +38,6 @@
     color: #1da1f2;
   }
   
-  #hash-mention:link,
-  #hash-mention:visited {
-    color: #1da1f2;
-  }
-  
   #reply,
   #rekweek,
   #like {
@@ -75,4 +70,16 @@
     margin-right: auto;
     width: 40%;
     border-radius: 10px;
+  }
+
+  .Mention,
+  .Hashtag {
+    color: #1da1f2;
+  }
+
+  .Mention:hover,
+  .Mention:active,
+  .Hashtag:hover,
+  .Hashtag:active {
+    text-decoration: underline;
   }

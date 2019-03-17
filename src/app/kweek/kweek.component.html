@@ -23,9 +23,7 @@
               </p>
             </div>
             <div class="container">
-              <p>
-                hello world
-              </p>
+              <p [innerHtml] = "kweek.text"></p>
             </div>
             <div class="container" *ngIf="kweek.media_url">
               <img id="media" [src]="kweek.media_url" />
