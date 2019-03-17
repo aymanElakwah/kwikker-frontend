@@ -1,14 +1,14 @@
-import { User } from './user';
 import { Mention } from './mention';
 import { Hashtag } from './Hashtag';
 import { Rekweek } from './rekweek';
+import { MiniUser } from './mini-user';
 
 export interface Kweek {
     id: string;
     created_at: string;
     text: string;
     media_url: string;
-    user: User;
+    user: MiniUser;
     mentions: Mention[];
     hashtags: Hashtag[];
     number_of_likes: number;

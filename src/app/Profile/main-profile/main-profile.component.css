@@ -1,6 +1,7 @@
 .Page-Container
 {
-    width: 1360px;
+    width: 100%;
+    height: 100%;
     overflow-x: hidden;
     margin:0 auto;
 }

@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Notification } from '../model/notification'
 import { User } from '../model/user';
 import { Trend } from '../model/Trend';
+import { Kweek } from '../model/kweek';
 
 
 @Injectable({
@@ -18,6 +19,15 @@ export class DataService {
     const userNameSent = userName ?
      { params: new HttpParams().set('username', userName) } : {};
     return this.http.get<User>('api/profileUserTest', userNameSent)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getKweeks(userName: string): Observable<Kweek[]> {
+    const options = userName ?
+     { params: new HttpParams().set('username', userName) } : {};
+    return this.http.get<Kweek[]>('api/KWK', options)
       .pipe(
         catchError(this.handleError)
       );
