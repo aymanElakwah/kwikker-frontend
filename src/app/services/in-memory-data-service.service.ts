@@ -68,6 +68,13 @@ export class InMemoryDataService {
       profie_pic_URL: "https://www.w3schools.com/images/w3schools_green.jpg",
     }
     ];
+    // const ARR2 = [
+    //   {
+    //     "username": "evram",
+    //     "password": "ev1234EV",
+    //     "email": "ev@ev.com"
+    //   }
+    // ];
     return {ARR};
   }
 }
