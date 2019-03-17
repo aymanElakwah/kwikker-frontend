@@ -40,10 +40,12 @@
 
 #Trends-Item>h1
 {
-    font-size: 15px;
+    font-size: 14px;
     text-align: inherit;
     line-height: inherit;
-    color:rgb(6, 120, 190);
+    color: #1B95E0;
+    font-weight: bold;
+
 }
 
 #Trends-Item>p
@@ -51,6 +53,6 @@
     font-size: 13px;
     text-align: inherit;
     line-height: inherit;
-    margin-top: 13px;
+    margin-top: 11px;
     color:#657786;
 }

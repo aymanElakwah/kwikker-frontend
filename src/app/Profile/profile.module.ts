@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module'
 import { RouterModule } from '@angular/router';
 import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
-import { TrendsComponent } from './trends/trends.component';
-import { TabsModule } from 'ngx-bootstrap/tabs';
+
+
 
 @NgModule({
   declarations: [
     MainProfileComponent,
-    ProfileHeaderCardComponent,
-    TrendsComponent
+    ProfileHeaderCardComponent
   ],
 
   imports: [
-    TabsModule.forRoot(),
+    CommonModule,
     SharedModule,
     RouterModule.forChild([
       { path: 'Profile', component: MainProfileComponent,

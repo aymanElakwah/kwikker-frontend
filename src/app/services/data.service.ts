@@ -3,12 +3,32 @@ import { HttpErrorResponse, HttpClient, HttpParams, HttpHeaders } from '@angular
 import { throwError , Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Notification } from '../model/notification'
+import { User } from '../model/user';
+import { Trend } from '../model/Trend';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   private base: string = "kwikker.com";
   constructor(private http: HttpClient) { }
+
+  getProfileInfo(userName: string): Observable<User> {
+    const userNameSent = userName ?
+     { params: new HttpParams().set('username', userName) } : {};
+    return this.http.get<User>('api/profileUserTest', userNameSent)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getTrends(): Observable<Trend[]> {
+    return this.http.get<Trend[]>('api/trendsTest')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   // example for using get with jason file
   getNumber(name: string): Observable<number> {

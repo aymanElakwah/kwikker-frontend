@@ -1,10 +1,17 @@
 export interface User {
-    username: string;
-    screen_name: string;
-    birthdate: string;
-    profile_image_url: string;
+    userName: string;
+    screenName: string;
+    Bio: string;
+    birthDate: Date;
+    joinedDate: Date;
+    profilePicUrl: string;
+    bannerUrl: string;
     following: boolean;
-    follows_you: boolean;
+    followsYou: boolean;
+    followersCount: number;
+    followingCount: number;
+    kweeksCount: number;
+    likesCount: number;
     blocked: boolean;
     muted: boolean;
 }

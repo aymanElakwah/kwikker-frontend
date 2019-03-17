@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input , OnInit } from '@angular/core';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-profile-header-card',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-header-card.component.css']
 })
 export class ProfileHeaderCardComponent implements OnInit {
+ 
+  @Input() profileHeaderInfo:User;
 
   constructor() { }
 

@@ -4,6 +4,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfilesListComponent } from '../profiles-list/profiles-list.component';
 import { KweekComponent } from '../kweek/kweek.component';
 import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
+import { TrendsComponent } from '../Profile/trends/trends.component';
 
 import { RouterModule } from '@angular/router'; //will be deleted
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router'; //will be deleted
   NavBarComponent,
   ProfilesListComponent,
   KweekComponent,
-  WhoToFollowComponent
+  WhoToFollowComponent,
+  TrendsComponent
 ],
 
   imports: [
@@ -28,6 +30,7 @@ import { RouterModule } from '@angular/router'; //will be deleted
   ProfilesListComponent,
   KweekComponent,
   WhoToFollowComponent,
+  TrendsComponent
 ]
 })
 export class SharedModule { }

@@ -18,6 +18,8 @@
     font-size: 14px;
     line-height: 20px;
     margin-bottom: 12px;
+    position: relative;
+    bottom: 6px;
     color: rgb(102, 117, 127);
 }
 
