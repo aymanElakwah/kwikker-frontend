@@ -1,0 +1,43 @@
+               <!-- Page-Container: Center The Page while Zooming -->
+               <div class = "Page-Container" *ngIf="profileUser" >
+                    <app-nav-bar> </app-nav-bar>
+                    
+                    <!--ProfilePic and Banner Images-->
+                    <div class = "Banner"> </div>
+                    <div class = "Profile-Picture"> </div>
+                     
+                    <!--Profile Page Secondry NavBar => Nested Taps -->
+                    <div class = "Profile-NavBar">
+                        <div class="Taps-Container">
+                            <ul id="Taps">
+                                <li>
+                                <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
+                                </li>
+                                <li> 
+                                <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
+                                </li>
+                                <li> 
+                                <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
+                                </li>
+                                <li> 
+                                <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
+                                </li>
+                            </ul>
+                        </div>
+  
+                        <!--Edit Button on the secondry Navbar -->
+                        <button class="Edit-Button"> 
+                            Edit profile
+                        </button>
+                    </div>
+                    
+                    <!-- Header Card on the left side of the page -->
+                    <app-profile-header-card class="Profile-Headercard"
+                                            [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
+                
+                    <!-- Trends Card on the right side of the page -->
+                    <app-trends class="Profile-Trends" *ngIf="trends"
+                                [trends] = 'trends'> </app-trends>
+                </div>
+
+

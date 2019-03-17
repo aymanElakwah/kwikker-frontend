@@ -1,0 +1,76 @@
+.msg
+{
+    position: relative;
+    z-index: 1;
+    padding: 15px;
+}
+
+
+
+.all
+{
+    border-bottom: 1px solid #e6ecf0;
+    background-color:white;
+    padding: 15px; 
+    cursor: pointer;
+}
+
+.all:hover
+{
+    background-color:#f5f8fa!important;
+}
+
+.frame
+{
+    height: 52px;
+    width: 52px;
+    display: block;
+    overflow: hidden;
+}
+
+.avatar
+{
+    width: 100%;
+    height: 100%;
+    border:0;
+    border-radius: 50%;
+}
+
+.fullname
+{
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.username 
+{
+    font-size: 14px;
+    color: #657786;
+    line-height: 20px;
+    display:inline-block;
+    overflow: hidden;
+    font-weight: normal;
+}
+
+.lastmsg
+{
+    color: #657786;
+    font-size: 14px;
+    line-height: 20px;
+    max-height: 40px;
+    overflow: hidden;
+    position: relative;
+    word-wrap: break-word;
+    margin-bottom: 0px;
+}
+
+.last 
+{
+    display: inline-flex;
+    margin-left: auto;
+}
+

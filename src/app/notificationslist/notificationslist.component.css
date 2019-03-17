@@ -1,0 +1,39 @@
+#notification_navbar{
+    background-color: #ffffff;
+    padding-top: 2%;
+    padding-bottom:2% 
+}
+
+
+
+#notificationHeader{
+    background-color: #ffffff;
+    border-color: #e6ecf0;    
+}
+
+#notificatioCard{
+    background-color: #ffffff;
+    border-color: #e6ecf0;   
+    
+}
+
+.notificationPics{
+    width: 24px;
+    height: 24px;
+    line-height: 20px
+}
+
+.userName{
+    margin-left:2%
+}
+
+.userHandle{
+    margin-left: .5%;
+     
+}
+
+.clapKweesk{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: visible;
+}

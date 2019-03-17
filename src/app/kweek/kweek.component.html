@@ -1,3 +1,117 @@
-<p>
-  kweek works!
-</p>
+<div *ngIf="kweeks && kweeks.length">
+  <!-- check if kweeks exists -->
+  <div class="container" *ngFor="let kweek of kweeks">
+    <!-- loop the kweeks as every kweek has the name kweek -->
+    <div *ngIf="!kweek.user.muted">
+      <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
+      <div class="container" id="kweek-style">
+        <div class="media border p-3">
+          <img
+            [src]="kweek.user.profile_image_url"
+            alt="https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png"
+            class="mr-3 rounded-circle"
+            id="kweek-img"
+          />
+          <!-- alt could be a pic in our files -->
+          <div class="media-body">
+            <div class="container">
+              <p>
+                <a href="">{{ kweek.user.screen_name }}</a> .
+                <small id="kweek-meta"
+                  >@{{ kweek.user.username }} . {{ kweek.created_at }}</small
+                >
+              </p>
+            </div>
+            <div class="container">
+              <p [innerHtml] = "kweek.text"></p>
+            </div>
+            <div class="container" *ngIf="kweek.media_url">
+              <img id="media" [src]="kweek.media_url" />
+            </div>
+            <div class="container-fluid" style="margin-top:12px;">
+              <div class="row">
+                <div class="col-2">
+                  <span id="reply">
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Reply"
+                      ><i class="far fa-comment"></i
+                    ></span>
+                    <span class="p-2"></span>
+                    <span style="font-weight:bold">{{
+                      kweek.number_of_replies === 0
+                        ? " "
+                        : kweek.number_of_replies
+                    }}</span>
+                  </span>
+                </div>
+                <div class="col-2" *ngIf="kweek.rekweeked_by_user">
+                  <span id="rekweeked">
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Undo Rekweek"
+                      ><i class="fas fa-retweet"></i
+                    ></span>
+                    <span class="p-2"></span>
+                    <span style="font-weight:bold">{{
+                      kweek.number_of_rekweeks === 0
+                        ? " "
+                        : kweek.number_of_rekweeks
+                    }}</span>
+                  </span>
+                </div>
+                <div class="col-2" *ngIf="!kweek.rekweeked_by_user">
+                  <span id="rekweek">
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Rekweek"
+                      ><i class="fas fa-retweet"></i
+                    ></span>
+                    <span class="p-2"></span>
+                    <span style="font-weight:bold">{{
+                      kweek.number_of_rekweeks === 0
+                        ? " "
+                        : kweek.number_of_rekweeks
+                    }}</span>
+                  </span>
+                </div>
+                <div class="col-2" *ngIf="kweek.liked_by_user">
+                  <span id="liked">
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Undo like"
+                      ><i class="fas fa-heart"></i
+                    ></span>
+                    <span class="p-2"></span>
+                    <span class="icon" style="font-weight:bold">{{
+                      kweek.number_of_likes === 0 ? " " : kweek.number_of_likes
+                    }}</span>
+                  </span>
+                </div>
+                <div class="col-2" *ngIf="!kweek.liked_by_user">
+                  <span id="like">
+                    <span
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Like"
+                      ><i class="far fa-heart"></i
+                    ></span>
+                    <span class="p-2"></span>
+                    <span style="font-weight:bold">{{
+                      kweek.number_of_likes === 0 ? " " : kweek.number_of_likes
+                    }}</span>
+                  </span>
+                </div>
+                <div class="col-8"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

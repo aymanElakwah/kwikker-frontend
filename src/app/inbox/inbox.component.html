@@ -1,0 +1,26 @@
+<div *ngFor="let conversation of conversations " class="row all" >
+  <div class="frame">
+    <img class="avatar" src="../../assets/test.jpg" title="hello">
+  </div>
+  <div>
+    <div class="row" style="margin-left: 9px;">
+    <b class="fullname">
+      {{conversation?.user?.screen_name}}
+    </b>
+    &nbsp;
+    <b class="username">
+      {{conversation?.user?.username}}
+    </b>
+    </div> 
+    <Div class="row" style="padding-left: 10px;">
+        <div class="msg" style="padding-top: 3px; padding-bottom: 0px">
+          <p class="lastmsg">  you:{{ conversation?.last_message?.text }} </p>
+        </div>
+    </Div>
+  </div>
+  <div class="last float-right" style="float:right;">
+    <p style="color: #657786;">
+      {{conversation?.last_message?.created_at}}
+    </p>
+  </div>
+</div>
