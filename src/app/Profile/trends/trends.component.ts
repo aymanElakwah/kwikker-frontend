@@ -8,6 +8,7 @@ import { Trend } from '../../model/Trend';
 })
 export class TrendsComponent implements OnInit {
   
+  /* Array of Tredns: Input from MainProfileComponent */
   @Input() trends:Trend[] = [];
   constructor() { }
 

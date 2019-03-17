@@ -9,8 +9,10 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./main-profile.component.css']
 })
 export class MainProfileComponent implements OnInit {
-
+ 
+  /* All Info for the profile user */
   profileUser: User;
+  /* Array of Tredns */
   trends: Trend[];
   
   constructor(private profileInfoService: DataService, 

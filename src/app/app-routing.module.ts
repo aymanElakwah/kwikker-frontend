@@ -5,9 +5,6 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { NotificationsComponent } from './notifications/notifications.component';
 
 
-
-
-
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path:'notifications', component: NotificationsComponent}

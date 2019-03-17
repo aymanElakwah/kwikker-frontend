@@ -8,6 +8,7 @@ import { User } from '../../model/user';
 })
 export class ProfileHeaderCardComponent implements OnInit {
  
+  /* All Info for the profile user: Input from MainProfileComponent */
   @Input() profileHeaderInfo:User;
 
   constructor() { }

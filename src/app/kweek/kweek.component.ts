@@ -15,14 +15,21 @@ export class KweekComponent implements OnInit {
       "text": "hello world",
       "media_url": "https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png",
       "user": {
-        "username": "ayy_abdulrahman",
-        "screen_name": "Abdulrahman Khalid",
-        "birthdate": "string",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "userName": "ayy_abdulrahman",
+        "screenName": "Abdulrahman Khalid",
+        "birthDate": new Date(),
+        "profilePicUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
         "following": true,
-        "follows_you": true,
+        "followsYou": true,
         "blocked": false,
-        "muted": false
+        "muted": false,
+        "joinedDate": new Date(),
+        "bannerUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "Bio": "AnyThing",
+        "followersCount": 100,
+        "followingCount": 100,
+        "kweeksCount": 100,
+        "likesCount": 100
       },
       "mentions": [
         {
@@ -57,14 +64,21 @@ export class KweekComponent implements OnInit {
       "text": "hello world",
       "media_url": "",
       "user": {
-        "username": "ayy_abdulrahman",
-        "screen_name": "Abdulrahman Khalid",
-        "birthdate": "string",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "userName": "ayy_abdulrahman",
+        "screenName": "Abdulrahman Khalid",
+        "birthDate": new Date(),
+        "profilePicUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
         "following": true,
-        "follows_you": true,
+        "followsYou": true,
         "blocked": false,
-        "muted": false
+        "muted": false,
+        "joinedDate": new Date(),
+        "bannerUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "Bio": "AnyThing",
+        "followersCount": 100,
+        "followingCount": 100,
+        "kweeksCount": 100,
+        "likesCount": 100
       },
       "mentions": [
         {
@@ -99,14 +113,21 @@ export class KweekComponent implements OnInit {
       "text": "hello world",
       "media_url": "https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png",
       "user": {
-        "username": "ayy_abdulrahman",
-        "screen_name": "Abdulrahman Khalid",
-        "birthdate": "string",
-        "profile_image_url": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "userName": "ayy_abdulrahman",
+        "screenName": "Abdulrahman Khalid",
+        "birthDate": new Date(),
+        "profilePicUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
         "following": true,
-        "follows_you": true,
+        "followsYou": true,
         "blocked": false,
-        "muted": false
+        "muted": false,
+        "joinedDate": new Date(),
+        "bannerUrl": "https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg",
+        "Bio": "AnyThing",
+        "followersCount": 100,
+        "followingCount": 100,
+        "kweeksCount": 100,
+        "likesCount": 100
       },
       "mentions": [
         {
