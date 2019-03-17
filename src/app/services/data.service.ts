@@ -103,7 +103,7 @@ export class DataService {
    /**
    *
    * to post user's name and user's password
-   * @param user {object} sends the user information to get 
+   * @param user {object} sends the user information to get
    * token after it and also could be null
    * @returns string
    */
