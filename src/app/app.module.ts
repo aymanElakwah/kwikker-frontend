@@ -40,9 +40,9 @@ import { LogInModule } from './log-in/log-in.module';
     ChatModule,
     SearchModule,
     SettingsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, {delay: 3000 },
-    ),
+    /*HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {delay: 3000 },
+      ),*/
     LogInModule,
     FormsModule
   ],
