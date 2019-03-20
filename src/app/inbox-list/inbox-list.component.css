@@ -1,0 +1,49 @@
+#title{
+    color: #14171a;
+    font-size: 18px;
+    font-weight: bold;
+   
+}
+.title
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+.activity{
+    padding-right: 0px;
+}
+
+.esc
+   {
+       background-color: transparent;
+       font-size: 18px;
+       display: inline-block;
+       vertical-align: baseline;
+       color: #657786;
+       border:0;
+       margin-left: 15px;
+   }
+
+   #back
+   {
+       margin-left: 0px;
+   }
+   
+   .esc:hover
+   {
+       color:#1B95E0;
+   }
+
+   .head
+{
+    background-color: white;
+    padding:15px 10px;
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.list{
+    display: flex;
+    flex-flow: column;
+    height: 80%;
+    overflow-y: scroll;
+}
