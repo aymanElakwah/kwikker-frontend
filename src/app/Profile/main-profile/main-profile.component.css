@@ -10,6 +10,7 @@
 {
     margin: 0 auto;
     max-width: 1200px;
+    height:100%;
     width:86%;
 }
 
@@ -59,16 +60,6 @@
     z-index: 999 !important;
 }
 
-.Profile-NavBar-Content
-{
-    background-color: #fff;
-    height: 60px;
-    line-height: 1.375;
-    z-index: 2;
-    max-width: 1360px;
-    text-align: center;
-    margin:0 auto;
-}
 
 .Edit-Button
 {
@@ -80,7 +71,6 @@
     padding: 6px 16px;
     white-space: nowrap;
     background: transparent;
-    transition: box-shadow .15s ease-in-out; 
     background-color: #fff;
     border: 1px solid #66757f;
     color: #66757f;
@@ -124,17 +114,24 @@ a {
 }
 
 
-#Profile-Trends
+#Left-Profile-Trends
 {
-    position:relative;
-    right:0;
+    position: relative;
+    right: 8%;
+    display: none;
+}
+
+.TrendsBar
+{
+    margin-top:12px;
 }
 
 
 #Header-Card
 {
-    position: absolute;
+    
     padding-top: 30px;
+    margin-bottom: 80px;
 }
 
 .smallmargin
@@ -143,3 +140,19 @@ a {
     padding-left: 0;
 }
 
+@media (max-width: 900px) { 
+    .App-Container
+    {
+        min-width:800px;
+        margin-left:20px;
+    }
+    #Right-Profile-Trends 
+    {
+        display: none !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: inline;
+    }
+ }

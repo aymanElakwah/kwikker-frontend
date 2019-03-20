@@ -20,7 +20,7 @@ export class DataService {
   getProfileInfo(userName: string): Observable<User> {
     const userNameSent = userName ?
      { params: new HttpParams().set('username', userName) } : {};
-    return this.http.get<User>(this.base + '', userNameSent)
+    return this.http.get<User>(`${this.base}user/profile`, userNameSent)
       .pipe(
         catchError(this.handleError)
       );
@@ -39,7 +39,8 @@ export class DataService {
   }
 
   getTrends(): Observable<Trend[]> {
-    return this.http.get<Trend[]>('api/trendsTest')
+    params: new HttpParams().set('last_retrieved_trend_id', null)
+    return this.http.get<Trend[]>(`${this.base}trends/`)
       .pipe(
         catchError(this.handleError)
       );
