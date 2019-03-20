@@ -12,9 +12,9 @@ export class InboxComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.getConverstations().subscribe(
+    /* this.data.getConverstations().subscribe(
       list => {this.conversations = list ; }
-    );
+    ); */
   }
 
 }

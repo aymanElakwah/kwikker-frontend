@@ -1,3 +1,26 @@
+<!--inbox head-->
+<div class="head row align-items-center">
+  <div class="col-7 ">
+    <h2 id="title">
+      Direct Messages
+    </h2>
+  </div>
+  <div class="activity col-5">
+    <button id="mark" >
+      <i class="fas fa-envelope-open-text">
+      </i>
+    </button>
+    <button id="new" [routerLink]="['/chat/', {outlets : {body:['new']} }]">
+      New Message
+    </button>
+    <button id="esc">
+      <i class="fas fa-times">
+      </i>
+    </button>
+  </div>
+</div>
+
+<!--inbox body-->
 <div *ngFor="let conversation of conversations " class="row all" >
   <div class="frame">
     <img class="avatar" src="../../assets/test.jpg" title="hello">
