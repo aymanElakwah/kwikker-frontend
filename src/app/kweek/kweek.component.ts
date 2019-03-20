@@ -24,7 +24,7 @@ export class KweekComponent implements OnInit {
   constructor(private kweekService: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.kweekService.getKweeks("").subscribe(
+    this.kweekService.getKweeks('', '').subscribe(
       lists=>{this.kweeks = lists;}
     );
     this.manageText();
