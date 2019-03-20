@@ -1,43 +1,61 @@
-               <!-- Page-Container: Center The Page while Zooming -->
-               <div class = "Page-Container" *ngIf="profileUser" >
-                    <app-nav-bar> </app-nav-bar>
-                    
-                    <!--ProfilePic and Banner Images-->
-                    <div class = "Banner"> </div>
-                    <div class = "Profile-Picture"> </div>
-                     
-                    <!--Profile Page Secondry NavBar => Nested Taps -->
-                    <div class = "Profile-NavBar">
-                        <div class="Taps-Container">
-                            <ul id="Taps">
-                                <li>
-                                <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
-                                </li>
-                            </ul>
-                        </div>
-  
-                        <!--Edit Button on the secondry Navbar -->
-                        <button class="Edit-Button"> 
-                            Edit profile
-                        </button>
+            <app-nav-bar> </app-nav-bar>
+            <!-- Page-Container: Center The Page while Zooming -->
+            <div class = "container-fluid" *ngIf="profileUser">
+                <div class ="page-container">
+                    <div class="row" id="header">
+                         <!--ProfilePic and Banner Images-->
+                         <div class="row" id = "Banner"> 
+                             <div class="App-Container">
+                                <div class="Profile-Picture"> </div>
+                                </div>
+                         </div>
+                         
+                        <!--Profile Page Secondry NavBar => Nested Taps -->
+                        <div class="row" id ="Profile-NavBar">
+                            <div class = "row justify-content-center App-Container">
+                                <div class="col-3 nopadding">  </div>
+                                <div class="col-9 nopadding">
+                                    <ul id="Taps">
+                                        <li>
+                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
+                                        </li>
+                                        <li> 
+                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
+                                        </li>
+                                        <li> 
+                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
+                                        </li>
+                                        <li> 
+                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
+                                        </li>    
+                                    </ul>
+
+                                     <!--Edit Button on the secondry Navbar -->
+                                    <button class="Edit-Button">  Edit profile </button>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
-                    
-                    <!-- Header Card on the left side of the page -->
-                    <app-profile-header-card class="Profile-Headercard"
-                                            [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
-                
-                    <!-- Trends Card on the right side of the page -->
-                    <app-trends class="Profile-Trends" *ngIf="trends"
-                                [trends] = 'trends'> </app-trends>
-                </div>
+                    <div class="row justify-content-center App-Container">          
+                        
+                        <!-- Header Card on the left side of the page -->
+                        <div class="col-md-3 col-sm-0 smallmargin" id="Temp1">
+                            <app-profile-header-card id='Header-Card'
+                                [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
+                        </div>
+                        
+                        <!-- Trends Card on the right side of the page -->
+                        <div class="col-md-9 col-sm-12 smallmargin">
+                            <div class=row>
+                                <div class="col-8" id="Temp3"> </div>
+                                <div class="col-4">    
+                                    <app-trends id="Profile-Trends" *ngIf="trends"
+                                    [trends] = 'trends'> </app-trends> 
+                                </div>
+                            </div>
+                        </div>         
+                   </div> 
+                </div>       
+            </div>
 
 

@@ -22,7 +22,7 @@ import { ProfileHeaderCardComponent } from './profile-header-card/profile-header
         {path: '', redirectTo: 'profile', pathMatch: 'full'} ,
         {path: 'following', component: MainProfileComponent },
         {path: 'followers', component: MainProfileComponent},
-        {path: 'likes', component: MainProfileComponent}
+        {path: 'likes', component: MainProfileComponent},
       ]} 
     ])
   ]
