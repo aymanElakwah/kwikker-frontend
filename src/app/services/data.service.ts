@@ -14,21 +14,24 @@ import { Kweek } from '../model/kweek';
 })
 export class DataService {
 
-  private base: String = 'kwikker.com';
+  private base: String = 'https://162c828c.ngrok.io/';
   constructor(private http: HttpClient) { }
 
   getProfileInfo(userName: string): Observable<User> {
     const userNameSent = userName ?
      { params: new HttpParams().set('username', userName) } : {};
-    return this.http.get<User>('api/profileUserTest', userNameSent)
+    return this.http.get<User>(this.base + '', userNameSent)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getKweeks(userName: string): Observable<Kweek[]> {
+  getKweeks(userName: string, pagenation: string): Observable<Kweek[]> {
     const options = userName ?
      { params: new HttpParams().set('username', userName) } : {};
+     if ( options) {
+      options.params.append('pagenation', pagenation );
+     }
     return this.http.get<Kweek[]>('api/KWK', options)
       .pipe(
         catchError(this.handleError)
@@ -53,7 +56,7 @@ export class DataService {
   }
 
   getConverstations(): Observable<Conversation[]> {
-      return this.http.get<Conversation[]>(`${this.base}direct_message/conversations `).pipe(
+      return this.http.get<Conversation[]>('api/Message').pipe(
         catchError(this.handleError)
       );
   }
@@ -67,13 +70,13 @@ export class DataService {
   getNotificationsList(last_notifications_retrieved_id: string): Observable<Notification[]> {
     const options = last_notifications_retrieved_id ?
      { params: new HttpParams().set('last_notifications_retrieved_id', last_notifications_retrieved_id) } : {};
-    return this.http.get<Notification[]>('api/ARR', options)
+    return this.http.get<Notification[]>(this.base + 'notifications', options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
   }
 
-  // use retry func
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -112,7 +115,7 @@ export class DataService {
     const body = JSON.stringify(user);
     console.log(body);
     const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-    return this.http.post<any>(this.base + '/account/login', body, headers)
+    return this.http.post<any>(this.base + 'account/login', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
