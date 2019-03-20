@@ -11,7 +11,7 @@ export class ChatComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.router.navigateByUrl('/chat/(body:inbox) ');
+    // this.router.navigateByUrl('/chat/(body:inbox) ');
   }
 
 }

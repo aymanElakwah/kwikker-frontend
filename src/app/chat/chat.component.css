@@ -1,105 +1,12 @@
-#title{
-    color: #14171a;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#mark{
-    height: 26px;
-    width: 26px;
-    border-radius: 50%;
-    padding:0;
-    border-color:#1B95E0;
-    color:#1B95E0;
-    background-color: #fff;
-    border-width: 1px;
-    box-sizing: border-box;
-    transition: box-shadow .15s ease-in-out;
-    margin-left: 59px;
-}
-#mark:hover{
-    background-color: rgb(230, 236, 240);
-}
-
-
-#mark:focus , #new:focus{
-    outline: none;
-    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px rgba(27,149,224,0.4);
-}
-
-#mark:active {
-    background-color: rgb(230, 236, 240);
-    border-style: 1px solid #1da1f2;
-    box-shadow:  0 0 0 2px #FFFFFF, 0 0 0 4px #1B95E0;
- }
-
-
  .test
  {
-     width:650px;
+     width:750px;
      border-style:solid;
+     height: 515px;
  }
-.activity{
-    padding-right: 0px;
-}
- @media only screen and (max-width: 600px) {
- .col-7 {
-     max-width:43%;
- }
-}
-@media only screen and (max-width: 760px) {
-    #mark {
-        margin-left: 10px;
+@media only screen and (max-width : 600px)
+{
+    .test{
+        width:400px;
     }
 }
-#new
-{
-    background-color:#1da1f2;
-    border-color:transparent;
-    font-size: 12px;
-    color:#fff;
-    line-height:16px;
-    margin-left: 15px;
-    border-radius: 100px;
-    white-space: nowrap;
-    padding: 4px 12px;
-    font-weight: bold;
-    overflow: visible;
-    text-align: center;
-    display: inline-block;
-}
-
-
-
-#new:active {
-    border-style: 1px solid #1da1f2;
-    box-shadow:  0 0 0 2px #FFFFFF, 0 0 0 4px #1B95E0;
- }
-
- #new:hover {
-     background-color: #1B95E0;
- }
-.head
-{
-    background-color: white;
-    padding:15px 10px;
-    border-bottom: 1px solid #e6ecf0;
-}
-
-#esc
-{
-    background-color: transparent;
-    font-size: 18px;
-    display: inline-block;
-    vertical-align: baseline;
-    color: #657786;
-    border:0;
-    margin-left: 15px;
-}
-
-#esc:hover
-{
-    color:#1B95E0;
-}
-
-
