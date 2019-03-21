@@ -6,8 +6,11 @@ export class AddTokenInterceptor implements HttpInterceptor {
     token: string;
     intercept(req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         this.token = localStorage.getItem('TOKEN');
+        if ( req.url === 'http://0d977716.ngrok.io/account/login') {
+            return next.handle(req);
+        }
         const jsonReq: HttpRequest<any> = req.clone({
-            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZXhwIjoxNTUzMTk4NDM2fQ.FWYgJXVHB-C4joR-CdQ1hbAa4RGO1L7IvShOEgk4444' }
+            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
         });
         return next.handle(jsonReq);
     }

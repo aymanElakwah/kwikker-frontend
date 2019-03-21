@@ -41,9 +41,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ChatModule,
     SearchModule,
     SettingsModule,
-    /*HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {delay: 3000 },
-      ),*/
+    HttpClientInMemoryWebApiModule.forRoot(
+    InMemoryDataService,
+    ),
     LogInModule,
     FormsModule,
     BrowserAnimationsModule
