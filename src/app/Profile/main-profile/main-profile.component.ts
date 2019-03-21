@@ -3,6 +3,7 @@ import { User } from '../../model/user';
 import { Trend } from '../../model/Trend';
 import { DataService } from 'src/app/services/data.service';
 
+
 @Component({
   selector: 'app-main-profile',
   templateUrl: './main-profile.component.html',
@@ -19,7 +20,7 @@ export class MainProfileComponent implements OnInit {
               private trendsService: DataService) { }
 
   ngOnInit() {
-    this.profileInfoService.getProfileInfo("").subscribe
+    this.profileInfoService.getProfileInfo("user1").subscribe
     ( userInfo => {this.profileUser = userInfo; } )
 
     this.profileInfoService.getTrends().subscribe

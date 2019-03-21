@@ -1,0 +1,66 @@
+.container
+{
+    background-color: red;
+    height:290px;
+    width:281px;
+    padding: 0 0;
+}
+
+.banner
+{
+    background-color: green;
+    height:90px;
+    
+}
+
+.profile-content
+{
+    height: 200px;
+    width: 281px;
+    background-color: yellow;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.content
+{
+    height: 170px;
+    width: 255px;
+    background-color: white;
+    display: inline-block;
+}
+
+.Follow
+{
+    border-radius: 100px;
+    box-shadow: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    padding: 4px 12px;
+    white-space: nowrap;
+    background: transparent;
+    background-color: #fff;
+    border: 1px solid  #1B95E0;
+    color:  #1B95E0;
+    min-width: 89px;
+}
+
+.Following
+{
+
+    border-radius: 100px;
+    box-shadow: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    padding: 4px 12px;
+    white-space: nowrap;
+    background: transparent;
+    background-color: #1B95E0;
+    border: 1px solid  #1B95E0;
+    color:  #fff;
+    min-width: 89px;
+
+}

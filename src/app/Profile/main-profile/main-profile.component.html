@@ -1,7 +1,7 @@
             <app-nav-bar> </app-nav-bar>
             <!-- Page-Container: Center The Page while Zooming -->
-            <div class = "container-fluid" *ngIf="profileUser">
-                <div class ="page-container">
+            <div class = "container-fluid" *ngIf="profileUser" >
+                <div class ="page-container" >
                     <div class="row" id="header">
                          <!--ProfilePic and Banner Images-->
                          <div class="row" id = "Banner"> 
@@ -17,16 +17,16 @@
                                 <div class="col-9 nopadding">
                                     <ul id="Taps">
                                         <li>
-                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
+                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeks_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
+                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.following_count}}</a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
+                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followers_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
+                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likes_count}} </a>
                                         </li>    
                                     </ul>
 
@@ -39,21 +39,24 @@
                     <div class="row justify-content-center App-Container">          
                         
                         <!-- Header Card on the left side of the page -->
-                        <div class="col-md-3 col-sm-0 smallmargin" id="Temp1">
-                            <app-profile-header-card id='Header-Card'
+                        <div class="col-3 smallmargin">
+                            <div class = "row">
+                            <app-profile-header-card id='Header-Card' *ngIf="profileUser"
                                 [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
+                             </div>
+                             <div class = "row">
+                            <app-trends id="Left-Profile-Trends"  *ngIf="trends"
+                                [trends] = 'trends'> </app-trends> 
+                            </div>
+                                  
                         </div>
                         
+                        <div class="col-6"> </div>
                         <!-- Trends Card on the right side of the page -->
-                        <div class="col-md-9 col-sm-12 smallmargin">
-                            <div class=row>
-                                <div class="col-8" id="Temp3"> </div>
-                                <div class="col-4">    
-                                    <app-trends id="Profile-Trends" *ngIf="trends"
-                                    [trends] = 'trends'> </app-trends> 
-                                </div>
-                            </div>
-                        </div>         
+                        <div class="TrendsBar col-3">    
+                             <app-trends id="Right-Profile-Trends" 
+                                 [trends] = 'trends'> </app-trends> 
+                        </div>     
                    </div> 
                 </div>       
             </div>
