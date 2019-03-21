@@ -7,7 +7,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         this.token = localStorage.getItem('TOKEN');
         const jsonReq: HttpRequest<any> = req.clone({
-            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZXhwIjoxNTUzMTk4NDM2fQ.FWYgJXVHB-C4joR-CdQ1hbAa4RGO1L7IvShOEgk4444' }
+            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
         });
         return next.handle(jsonReq);
     }
