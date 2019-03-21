@@ -7,7 +7,6 @@ import { ProfileHeaderCardComponent } from './profile-header-card/profile-header
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 
 
-
 @NgModule({
   declarations: [
     MainProfileComponent,

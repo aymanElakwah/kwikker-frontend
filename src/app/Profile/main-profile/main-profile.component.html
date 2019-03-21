@@ -1,7 +1,7 @@
             <app-nav-bar> </app-nav-bar>
             <!-- Page-Container: Center The Page while Zooming -->
-            <div class = "container-fluid" >
-                <div class ="page-container">
+            <div class = "container-fluid" *ngIf="profileUser" >
+                <div class ="page-container" >
                     <div class="row" id="header">
                          <!--ProfilePic and Banner Images-->
                          <div class="row" id = "Banner"> 
@@ -17,16 +17,16 @@
                                 <div class="col-9 nopadding">
                                     <ul id="Taps">
                                         <li>
-                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
+                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeks_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
+                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.following_count}}</a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
+                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followers_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
+                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likes_count}} </a>
                                         </li>    
                                     </ul>
 
@@ -41,11 +41,11 @@
                         <!-- Header Card on the left side of the page -->
                         <div class="col-3 smallmargin">
                             <div class = "row">
-                            <app-profile-header-card id='Header-Card'
+                            <app-profile-header-card id='Header-Card' *ngIf="profileUser"
                                 [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
                              </div>
                              <div class = "row">
-                            <app-trends id="Left-Profile-Trends" 
+                            <app-trends id="Left-Profile-Trends"  *ngIf="trends"
                                 [trends] = 'trends'> </app-trends> 
                             </div>
                                   

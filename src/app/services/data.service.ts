@@ -14,7 +14,7 @@ import { Kweek } from '../model/kweek';
 })
 export class DataService {
 
-  private base: String = 'https://162c828c.ngrok.io/';
+  private base: String = 'http://0d977716.ngrok.io/';
   constructor(private http: HttpClient) { }
 
   getProfileInfo(userName: string): Observable<User> {
