@@ -6,8 +6,6 @@ import { KweekComponent } from '../kweek/kweek.component';
 import { WhoToFollowComponent } from '../who-to-follow/who-to-follow.component';
 import { TrendsComponent } from '../Profile/trends/trends.component';
 
-import { RouterModule } from '@angular/router'; //will be deleted
-
 
 @NgModule({
   declarations: [
@@ -19,12 +17,9 @@ import { RouterModule } from '@angular/router'; //will be deleted
 ],
 
   imports: [
-    CommonModule,
-    RouterModule.forChild([
-      { path: "kweek", component: KweekComponent },
-    ]),
+    CommonModule
   ],
-  
+
   exports: [
   NavBarComponent,
   ProfilesListComponent,
