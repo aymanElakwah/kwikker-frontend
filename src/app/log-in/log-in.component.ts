@@ -28,18 +28,18 @@ export class LogInComponent implements OnInit {
    */
   submitForm(form: NgForm){
     this.isLoggedIn = false;
-    //before submitting anyhting, we need to validate the inputs
-    if(this.mail.length < 2 )
-      return;
-      if(this.pass.length < 8)
-      return;
+    // before submitting anyhting, we need to validate the inputs
+    if ( this.mail.length < 2 ) {
+       return; }
+      if ( this.pass.length < 8) {
+        return; }
 
-    let user = form.value;
+    const user = form.value;
     this.data.logInUser(user)
       .subscribe(
-       res=> {
+       res => {
          console.log(res);
-         localStorage.setItem('token',res.token);
+         localStorage.setItem('TOKEN', res.token);
          this.router.navigate(['/home']);
        },
         err=> console.log('error: ',err)
