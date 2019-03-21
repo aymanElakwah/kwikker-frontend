@@ -1,17 +1,19 @@
+
 .container-fluid
 {
     height: 100%;
-    overflow-x: hidden;
     margin: 0 0;
     padding: 0 0;
+    overflow: visible;
 }
 
 .App-Container
 {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1290px;
     height:100%;
-    width:86%;
+    width: 97%;
+
 }
 
 .nopadding
@@ -55,31 +57,109 @@
     height: 200px;
     width: 200px;
     position: relative;
-    left: 2%;
+    left: 6%;
     Top: 35%;
     z-index: 999 !important;
 }
 
 
-.Edit-Button
+.edit-button
 {
     border-radius: 100px;
+    border: 1px solid #66757f;
     box-shadow: none;
     font-size: 14px;
     font-weight: bold;
     line-height: 20px;
-    padding: 6px 16px;
-    white-space: nowrap;
-    background: transparent;
+    padding: 6px 16px;;
     background-color: #fff;
-    border: 1px solid #66757f;
     color: #66757f;
+    min-width: 89px;
     position: absolute;
-    right: 60px;
+    right: 10%;
     Top: 18%;
-
 }
 
+.follow-button
+{
+    border-radius: 100px;
+    border: 1px solid #1B95E0;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color:#1B95E0;;
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+}
+
+.following-button
+{
+    border-radius: 100px;
+    border: 1px solid #1B95E0;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #1B95E0;
+    color: #fff;
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+}
+
+.Dots-Icon
+{
+    position: absolute;
+    right: 30%;
+    Top: 0;
+}
+
+#dropdownMenuButton
+{
+    position: absolute;
+    right: 5%;
+    Top: 28%;
+    height: 30px;
+}
+
+.dropdown-menu
+{
+    position: absolute;
+    left: 680px;
+    Top: 55px;
+}
+
+.dropdown-menu li:hover
+{
+    background-color: #1B95E0  !important;
+}
+
+.dropdown-menu p:hover
+{
+    color: #fff !important;
+}
+
+.dropdown-item>p
+{
+    color: #66757f;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    float: none;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 5px;
+    position: relative;
+    min-width: 100%;
+    text-align: left;
+}
 
 #Taps
 {
@@ -96,6 +176,7 @@
     color:#1B95E0;
     border-color: #1B95E0;
     border-bottom: 2px solid;
+    transition: border-width 0.1s linear;
 }
 
 li>a:hover
@@ -109,7 +190,7 @@ a {
     font-size:14px;
     font-family: "Segoe UI",Arial,sans-serif;
     color:#657786;
-    padding:13px;
+    padding:10px;
     text-decoration: none;
 }
 
@@ -118,32 +199,33 @@ a {
 {
     position: relative;
     right: 8%;
-    display: none;
-}
-
-.TrendsBar
-{
     margin-top:12px;
+     display: none; 
 }
 
 
-#Header-Card
+.Header-Card
 {
-    
     padding-top: 30px;
     margin-bottom: 80px;
 }
 
-.smallmargin
+.left-side
 {
     margin-top: 12px;
-    padding-left: 0;
+    padding-left: 6%;
 }
 
-@media (max-width: 900px) { 
+.outlet-side
+{
+    margin-top: 12px;
+    padding-left: 1.8%;
+}
+
+@media (max-width: 1300px) { 
     .App-Container
     {
-        min-width:800px;
+        min-width:1300px;
         margin-left:20px;
     }
     #Right-Profile-Trends 
@@ -156,3 +238,16 @@ a {
         display: inline;
     }
  }
+
+ @media (min-width: 1200px) { 
+
+    #Right-Profile-Trends 
+    {
+        display: inline !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: none;
+    }
+}

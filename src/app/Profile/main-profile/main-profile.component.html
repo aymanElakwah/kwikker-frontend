@@ -1,14 +1,14 @@
             <app-nav-bar> </app-nav-bar>
             <!-- Page-Container: Center The Page while Zooming -->
-            <div class = "container-fluid" *ngIf="profileUser" >
+            <div class = "container-fluid" >
                 <div class ="page-container" >
                     <div class="row" id="header">
-                         <!--ProfilePic and Banner Images-->
-                         <div class="row" id = "Banner"> 
-                             <div class="App-Container">
+                        <!--ProfilePic and Banner Images-->
+                        <div class="row" id = "Banner"> 
+                            <div class="App-Container">
                                 <div class="Profile-Picture"> </div>
-                                </div>
-                         </div>
+                            </div>
+                        </div>
                          
                         <!--Profile Page Secondry NavBar => Nested Taps -->
                         <div class="row" id ="Profile-NavBar">
@@ -17,21 +17,38 @@
                                 <div class="col-9 nopadding">
                                     <ul id="Taps">
                                         <li>
-                                        <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeks_count}} </a>
+                                        <a routerLinkActive="active" [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Following  <br> {{profileUser?.following_count}}</a>
+                                        <a routerLinkActive="active" [routerLink]="['followers']">  Following  <br> {{profileUser?.following_count}}</a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Followers <br> {{profileUser?.followers_count}} </a>
+                                        <a routerLinkActive="active" [routerLink]="['following']">   Followers <br> {{profileUser?.followers_count}} </a>
                                         </li>
                                         <li> 
-                                        <a routerLinkActive="active">  Likes <br> {{profileUser?.likes_count}} </a>
+                                        <a routerLinkActive="active" [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a>
                                         </li>    
                                     </ul>
 
-                                     <!--Edit Button on the secondry Navbar -->
-                                    <button class="Edit-Button">  Edit profile </button>
+                                     <!--Edit, Follow and Following Buttons on the secondry Navbar -->
+                                    <button class="edit-button" *ngIf="isAuthorisedUser()"> <span> Edit Profile </span> </button>
+                                    <button class="follow-button"  *ngIf="!profileUser?.following"> <span> Follow </span></button>
+                                    <button class="following-button" *ngIf="profileUser?.following"><span> Following </span></button>
+                                    
+                                    <!--User Setting Dropdown Menu -->
+                                    <div class="user-setting-dropdown" *ngIf="isAuthorisedUser()">
+                                        <button class="btn"  id="dropdownMenuButton" data-toggle="dropdown">
+                                            <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
+                                              <i class="fas fa-ellipsis-v"></i>
+                                            </span>
+                                        </button>
+                                          
+                                        <div class="dropdown-menu dropdown-menu-left" id="main" aria-labelledby="dropdownMenuButton">
+                                            <li class="dropdown-item"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                            <li class="dropdown-item"> <P> Mute @{{profileUser?.screen_name}} </P></li>
+                                            <li class="dropdown-item"> <P> Block @{{profileUser?.screen_name}} </P></li>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>  
@@ -39,24 +56,19 @@
                     <div class="row justify-content-center App-Container">          
                         
                         <!-- Header Card on the left side of the page -->
-                        <div class="col-3 smallmargin">
-                            <div class = "row">
-                            <app-profile-header-card id='Header-Card' *ngIf="profileUser"
+                        <div class="col-3 left-side">
+                            <div class = "row Header-Card">
+                            <app-profile-header-card 
                                 [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
                              </div>
                              <div class = "row">
-                            <app-trends id="Left-Profile-Trends"  *ngIf="trends"
+                            <app-trends id="Left-Profile-Trends" 
                                 [trends] = 'trends'> </app-trends> 
-                            </div>
-                                  
+                             </div>   
                         </div>
-                        
-                        <div class="col-6"> </div>
-                        <!-- Trends Card on the right side of the page -->
-                        <div class="TrendsBar col-3">    
-                             <app-trends id="Right-Profile-Trends" 
-                                 [trends] = 'trends'> </app-trends> 
-                        </div>     
+                        <div class="col-9 outlet-side">
+                            <router-outlet> </router-outlet>
+                        </div>
                    </div> 
                 </div>       
             </div>

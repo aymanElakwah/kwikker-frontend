@@ -7,6 +7,7 @@ import { Notification } from '../model/notification';
 import { User } from '../model/user';
 import { Trend } from '../model/Trend';
 import { Kweek } from '../model/kweek';
+import { MiniUser } from '../model/mini-user';
 
 
 @Injectable({
@@ -17,6 +18,11 @@ export class DataService {
   private base: String = 'http://0d977716.ngrok.io/';
   constructor(private http: HttpClient) { }
 
+   /**
+   * get request to get All information about certain user
+   * @param userName {string} the user that we want to get his Information
+   * @returns User Model
+   */
   getProfileInfo(userName: string): Observable<User> {
     const userNameSent = userName ?
      { params: new HttpParams().set('username', userName) } : {};
@@ -25,7 +31,76 @@ export class DataService {
         catchError(this.handleError)
       );
   }
+  
+   /**
+   * get request to get All Kweeks made by a certain user
+   * @param userName {string} the user that we want to get his kweeks
+   * @param lastRetrivedId {string} sends the last kweek id to git
+   * newer kweeks after it and also could be null
+   * @returns array of Kweeks
+   */
+  getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
+    
+    const parametersSent = lastRetrivedId ?
+    { params: new HttpParams().set('last_retrieved_trend_id', lastRetrivedId) } : {};
 
+     if ( userName ) {
+      parametersSent.params.append('username', userName);
+     }
+
+    return this.http.get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+   
+  /**
+   * get request to get All Liked Kweeks by a certain user
+   * @param userName {string} the user that we want to get his liked kweeks
+   * @param lastRetrivedId {string} sends the last kweek id to git
+   * newer kweeks after it and also could be null
+   * @returns array of Kweeks
+   */
+  getUserLikedKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
+    const parametersSent = userName ?
+    { params: new HttpParams().set('username', userName) } : {};
+
+     if ( lastRetrivedId ) {
+      parametersSent.params.append('last_retrieved_trend_id', lastRetrivedId);
+     }
+
+    return this.http.get<Kweek[]>(`${this.base}kweeks/user/liked`, parametersSent)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+   /**
+   * get request to have little information about The users that follow the authorized user 
+   * No Parameters
+   * @returns array of MiniUsers
+   */
+  getUserFollowers(): Observable<MiniUser[]> {
+    return this.http.get<MiniUser[]>(`${this.base}interactions/followers`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  /**
+   * get request to have little information about The users that the authorized user follow
+   * No Parameters
+   * @returns array of MiniUsers
+   */
+  getUserFollowings(): Observable<MiniUser[]> {
+    return this.http.get<MiniUser[]>(`${this.base}interactions/following`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  
   getKweeks(userName: string, pagenation: string): Observable<Kweek[]> {
     const options = userName ?
      { params: new HttpParams().set('username', userName) } : {};
@@ -38,6 +113,11 @@ export class DataService {
       );
   }
 
+  /**
+   * get request to have the highest 10 Trends
+   * No Parameters
+   * @returns array of Trends
+   */
   getTrends(): Observable<Trend[]> {
     params: new HttpParams().set('last_retrieved_trend_id', null)
     return this.http.get<Trend[]>(`${this.base}trends/`)
@@ -61,6 +141,8 @@ export class DataService {
         catchError(this.handleError)
       );
   }
+
+
   /**
    *
    * to get request to get the latest notification

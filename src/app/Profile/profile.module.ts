@@ -5,25 +5,28 @@ import { RouterModule } from '@angular/router';
 import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
+import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 
 
 @NgModule({
   declarations: [
     MainProfileComponent,
     ProfileHeaderCardComponent,
-    MiniProfileComponent
+    MiniProfileComponent,
+    ProfileKweeksTabComponent,
   ],
 
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      { path: 'profile', component:  MainProfileComponent,
+      { path: ':username', component:  MainProfileComponent,
       children: [
-        {path: '', redirectTo: 'profile', pathMatch: 'full'} ,
-        {path: 'following', component: MainProfileComponent },
-        {path: 'followers', component: MainProfileComponent},
-        {path: 'likes', component: MainProfileComponent},
+        {path: '', component: ProfileKweeksTabComponent } ,
+        {path: 'kweeks', component: ProfileKweeksTabComponent},
+        {path: 'following', component: MiniProfileComponent },
+        {path: 'followers', component: MiniProfileComponent },
+        {path: 'likes', component: ProfileKweeksTabComponent }
       ]} 
     ])
   ]

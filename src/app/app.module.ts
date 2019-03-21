@@ -21,6 +21,7 @@ import { InMemoryDataService } from '../app/services/in-memory-data-service.serv
 import { ChatModule } from './chat/chat.module';
 import { ProfileModule } from './Profile/profile.module';
 import { LogInModule } from './log-in/log-in.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -44,7 +45,8 @@ import { LogInModule } from './log-in/log-in.module';
       InMemoryDataService, {delay: 3000 },
       ),*/
     LogInModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },

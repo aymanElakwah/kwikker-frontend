@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { text } from '@angular/core/src/render3';
@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ["./kweek.component.css"]
 })
 export class KweekComponent implements OnInit {
-  kweeks: Kweek[];
-
+  
+  @Input() kweeks: Kweek[] = [];
+  
   firstTagHashtag: string = "<a href='' class='Hashtag' (click)='searchHashtag(innerHTML)'>"
   endTag: string = "</a>"
   firstTagMention: string = "<a href='' class='Mention'>"
@@ -26,7 +27,7 @@ export class KweekComponent implements OnInit {
   ngOnInit() {
     this.kweekService.getKweeks('', '').subscribe(
       lists=>{this.kweeks = lists;}
-    );
+   );
     this.manageText();
   }
   
