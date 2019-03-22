@@ -11,7 +11,37 @@ import { DataService } from 'src/app/services/data.service';
 export class MiniProfileComponent implements OnInit {
 
   /* All Info for the profile user */
-  public miniCardProfileUsers: MiniUser[];
+  public miniCardProfileUsers: MiniUser[] =
+  [
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    }
+  ];
+   
 
   /* route children name which based on it, The right request will be sent */
   public routeChildName: string;
@@ -19,6 +49,7 @@ export class MiniProfileComponent implements OnInit {
   constructor(private miniProfileInfoService: DataService,
                private route: ActivatedRoute) { }
 
+  //This part will be updated
   FollowersOrFollowings(): void
   {
     if (this.route.snapshot.firstChild != null)
@@ -28,6 +59,8 @@ export class MiniProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+     //This part will be updated
     this.FollowersOrFollowings();
     if(this.routeChildName == 'followers')
     {

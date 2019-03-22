@@ -135,7 +135,9 @@
     margin: -65px 2px 0 -3px;
     padding: 3px;
     position: absolute;
-    background-image: url('../../../assets/main/test.png');
+    background-color:  white;
+    border-width: 1px;
+    border-color: #1B95E0;
     left: 0;
 }
 

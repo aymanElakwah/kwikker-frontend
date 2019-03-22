@@ -103,7 +103,7 @@ export class DataService {
   getKweeks(userName: string, pagenation: string): Observable<Kweek[]> {
     const options = userName ?
      { params: new HttpParams().set('username', userName) } : {};
-     if ( options) {
+     if (  pagenation ) {
       options.params.append('pagenation', pagenation );
      }
     return this.http.get<Kweek[]>('api/KWK', options)
