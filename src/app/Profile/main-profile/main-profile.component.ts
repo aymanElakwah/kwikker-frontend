@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
-import { Trend } from '../../model/Trend';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -31,9 +30,6 @@ export class MainProfileComponent implements OnInit {
       muted: false
   };
 
-  /* Array of Tredns */
-  trends: Trend[];
-
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem('username');
 
@@ -56,8 +52,6 @@ export class MainProfileComponent implements OnInit {
     this.profileInfoService.getProfileInfo( this.profileUser.username).subscribe
     ( userInfo => {this.profileUser = userInfo; } )
 
-    this.profileInfoService.getTrends().subscribe
-    ( trendsInfo => {this.trends = trendsInfo; } )
   }
 
 }

@@ -2,6 +2,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-kweek',
@@ -10,22 +11,55 @@ import { Kweek } from '../model/kweek';
 })
 export class KweekComponent implements OnInit {
 
-  @Input() kweeks: Kweek[] = [];
-  
+  kweeks: Kweek[] = [];
+
+  /* route children name which based on it, The right request will be sent */
+  public routeChildName: string;
+
   hashtagStartTagOpen: String = '<a href=\'';
   mentionStartTagOpen: String = '<a href=\'';
   startTagClose = '\'>';
   endTag: String = '</a>';
 
-  constructor(private kweekService: DataService) {}
+  constructor(private kweekService: DataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    
-    this.kweekService.getKweeks('', '').subscribe(lists => {
-      this.kweeks = lists;
-      this.injectTagsInText();
-    });
+    //This part will be updated
+    this.KweeksType();
+    let userName = this.route.snapshot.params['username'];
+    if(this.routeChildName == 'kweeks' || this.routeChildName == '' )
+    {
+      this.kweekService.getUserKweeks(userName ,null).subscribe
+      ( usersInfo => {
+        this.kweeks = usersInfo; 
+        this.injectTagsInText(); 
+      } )
+    }
 
+    else if (this.routeChildName == 'likes')
+    {
+      this.kweekService.getUserLikedKweeks(userName ,null).subscribe
+      ( usersInfo => {
+        this.kweeks = usersInfo; 
+        this.injectTagsInText();
+      } )
+    }
+    else
+    {
+      this.kweekService.getKweeks('', '').subscribe(lists => {
+        this.kweeks = lists;
+        this.injectTagsInText();
+      });
+    }
+  }
+
+  //will be Updated
+  KweeksType(): void
+  {
+    if (this.route.snapshot.firstChild != null)
+    {
+       this.routeChildName = this.route.snapshot.children[0].toString();
+    }
   }
 
   injectTagsInText(): void {
