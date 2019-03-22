@@ -9,16 +9,9 @@ import { Kweek } from '../model/kweek';
   styleUrls: ['./kweek.component.css']
 })
 export class KweekComponent implements OnInit {
-<<<<<<< HEAD
-  
+
   @Input() kweeks: Kweek[] = [];
   
-  firstTagHashtag: string = "<a href='' class='Hashtag' (click)='searchHashtag(innerHTML)'>"
-  endTag: string = "</a>"
-  firstTagMention: string = "<a href='' class='Mention'>"
-
-  kweeks: Kweek[];
-
   hashtagStartTagOpen: String = '<a href=\'';
   mentionStartTagOpen: String = '<a href=\'';
   startTagClose = '\'>';
