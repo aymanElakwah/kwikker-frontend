@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 
@@ -10,8 +10,8 @@ import { Kweek } from '../model/kweek';
 })
 export class KweekComponent implements OnInit {
 
-  @Input() kweeks: Kweek[] = [];
-  
+  kweeks: Kweek[];
+
   hashtagStartTagOpen: String = '<a href=\'';
   mentionStartTagOpen: String = '<a href=\'';
   startTagClose = '\'>';
@@ -20,12 +20,10 @@ export class KweekComponent implements OnInit {
   constructor(private kweekService: DataService) {}
 
   ngOnInit() {
-    
     this.kweekService.getKweeks('', '').subscribe(lists => {
       this.kweeks = lists;
       this.injectTagsInText();
     });
-
   }
 
   injectTagsInText(): void {
@@ -38,8 +36,9 @@ export class KweekComponent implements OnInit {
       // The function is looping until the injection completion
       while (true) {
         start = end; // There is two indices jumps on the string charcters
-                    // both start and end is used
+                     // both start and end is used in slice function to get string from start index to end index
         if (
+          // first if there is no mentions or hashtags left take the rest of string till the end
           iMentions === kweek.mentions.length &&
           iHashtags === kweek.hashtags.length
         ) {
@@ -47,9 +46,10 @@ export class KweekComponent implements OnInit {
           str += kweek.text.slice(start, end);
           break;
         } else if (
+          // second if there both mentions and hashtags exists
           iMentions !== kweek.mentions.length &&
           iHashtags !== kweek.hashtags.length
-        ) {
+        ) { // if the start index stopped on a mention do the injection of tags and mention
           if (start === kweek.mentions[iMentions].indices[0]) {
             end = kweek.mentions[iMentions].indices[1];
             iMentions += 1;
@@ -58,6 +58,7 @@ export class KweekComponent implements OnInit {
               this.mentionStartTagOpen + '/profile/' + sliceStr + this.startTagClose
               + '@' + sliceStr + this.endTag;
           } else if (start === kweek.hashtags[iHashtags].indices[0]) {
+            // if the start index stopped on a hashtag do the injection of tags and hashtag
             end = kweek.hashtags[iHashtags].indices[1];
             iHashtags += 1;
             const sliceStr = kweek.text.slice(start, end);
@@ -65,6 +66,9 @@ export class KweekComponent implements OnInit {
               this.hashtagStartTagOpen + '/search/people?filterBy='
               + sliceStr + this.startTagClose + sliceStr + this.endTag;
           } else if (
+            // if the start index not on a hashtag nor mention so I need to know which one is my end index to slice the string correctlly
+            // if the hashtag comes first make it the end index to slice
+            // else the mention comes first do the same
             kweek.hashtags[iHashtags].indices[0] <
             kweek.mentions[iMentions].indices[0]
           ) {
@@ -75,6 +79,8 @@ export class KweekComponent implements OnInit {
             str += kweek.text.slice(start, end);
           }
         } else {
+          // if there is only mentions and regular string
+          // loop and add them respectivly
           if (iMentions !== kweek.mentions.length) {
             while (iMentions !== kweek.mentions.length) {
               if (start === kweek.mentions[iMentions].indices[0]) {
@@ -91,6 +97,8 @@ export class KweekComponent implements OnInit {
               start = end;
             }
           } else {
+            // if there is only hashtags and regular string
+            // loop and add them respectivly
             while (iHashtags !== kweek.hashtags.length) {
               if (start === kweek.hashtags[iHashtags].indices[0]) {
                 end = kweek.mentions[iHashtags].indices[1];
@@ -106,12 +114,13 @@ export class KweekComponent implements OnInit {
               start = end;
             }
           }
+          // add the rest of the kweek to str
           end = kweek.text.length;
           str += kweek.text.slice(start, end);
           break;
         }
       }
-      kweek.text = str;
+      kweek.text = str; // finally make the kweek text equals the injected str
     });
   }
 }

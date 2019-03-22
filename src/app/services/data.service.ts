@@ -31,7 +31,7 @@ export class DataService {
         catchError(this.handleError)
       );
   }
-  
+
    /**
    * get request to get All Kweeks made by a certain user
    * @param userName {string} the user that we want to get his kweeks
@@ -40,7 +40,6 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    
     const parametersSent = lastRetrivedId ?
     { params: new HttpParams().set('last_retrieved_trend_id', lastRetrivedId) } : {};
 
@@ -54,7 +53,7 @@ export class DataService {
       );
   }
 
-   
+
   /**
    * get request to get All Liked Kweeks by a certain user
    * @param userName {string} the user that we want to get his liked kweeks
@@ -100,7 +99,7 @@ export class DataService {
       );
   }
 
-  
+
   getKweeks(userName: string, pagenation: string): Observable<Kweek[]> {
     const options = userName ?
      { params: new HttpParams().set('username', userName) } : {};
