@@ -18,7 +18,7 @@
         <p class="alertMsg">User name is required.</p>
       </div>
     </div>
-      <input #password="ngModel" [(ngModel)]="pass" type="password" id="password" class="fadeIn third " name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+      <input #password="ngModel" [(ngModel)]="pass" type="password" id="password" class="fadeIn third " name="password" placeholder="Password" required>
       <div  *ngIf="password.invalid && password.touched" class="msg alert alert-danger " role="alert">
           <p class="alertMsg">Password must be at least 8 characters.</p>
      </div>

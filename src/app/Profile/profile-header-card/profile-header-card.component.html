@@ -27,7 +27,7 @@
                 </span>
               </div>
               
-              <!-- Button Used To make a Tweeet To The Profile User , **Hidden if Same user -->
-              <button type ="button" class="btn btn-primary Tweet-Button"> Tweet To {{profileHeaderInfo.username}} </button>
+              <!-- Button Used To make a KweeeK To The Profile User , **Hidden if Same user -->
+              <button type ="button" class="btn btn-primary Tweet-Button"  *ngIf="!isAuthorisedUser"> Tweet To {{profileHeaderInfo.username}} </button>
               
             </div>

@@ -15,7 +15,7 @@ import { MiniUser } from '../model/mini-user';
 })
 export class DataService {
 
-  private base: String = 'http://0d977716.ngrok.io/';
+  private base: String = 'http://8978be66.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**

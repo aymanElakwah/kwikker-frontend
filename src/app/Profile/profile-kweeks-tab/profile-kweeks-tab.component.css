@@ -1,3 +1,9 @@
+.right-part
+{
+    margin-left: 0.01%;
+}
+
+/* Kweeks Container */
 .Kweeks
 {
     height:auto;
@@ -7,23 +13,6 @@
 
 }
 
-.right-part
-{
-    margin-left: 0.01%;
-}
-
-.square {
-    position: absolute;
-    top: -6px;
-    left: 10px;
-    width: 12px;
-    height: 12px;
-    border-top: 1px solid rgba(0,0,0,.15);
-    border-left: 1px solid rgba(0,0,0,.15);
-    background-color: #fff;
-    transform: rotate(45deg);
-}
-
 @media (max-width: 1200px) { 
 
     .right-part
@@ -31,7 +20,8 @@
         min-width: 1200px;
         margin-left:20px;
     } 
-
+    
+   /*  Trends Bar will disappear From right In small Devices */
     #Right-Profile-Trends 
     {
         display: none !important;
