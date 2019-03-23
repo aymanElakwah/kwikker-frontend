@@ -155,7 +155,7 @@ describe('KweekComponent', () => {
       // First Kweek Test
       // Text before injection: 'hello world #abdulrahman_khalid abdulrahman @abdulrahman'
       let toBeStr =
-      'hello world ' + component.hashtagStartTagOpen + '/search/people?filterBy=#abdulrahman_khalid'
+      'hello world ' + component.hashtagStartTagOpen + '/search/people?filterBy=#abdulrahman_khalid&src=hash'
       + component.startTagClose + '#abdulrahman_khalid' + component.endTag + ' abdulrahman '
       + component.mentionStartTagOpen + '/profile/abdulrahman' + component.startTagClose
       + '@abdulrahman' + component.endTag;
@@ -165,8 +165,8 @@ describe('KweekComponent', () => {
       toBeStr =
         component.mentionStartTagOpen + '/profile/a' + component.startTagClose + '@a' + component.endTag + ' '
         + component.mentionStartTagOpen + '/profile/b' + component.startTagClose + '@b' + component.endTag + ' '
-        + component.hashtagStartTagOpen + '/search/people?filterBy=#c' + component.startTagClose + '#c'
-        + component.endTag + ' d d ' + component.hashtagStartTagOpen + '/search/people?filterBy=#e'
+        + component.hashtagStartTagOpen + '/search/people?filterBy=#c&src=hash' + component.startTagClose + '#c'
+        + component.endTag + ' d d ' + component.hashtagStartTagOpen + '/search/people?filterBy=#e&src=hash'
         + component.startTagClose + '#e' + component.endTag + ' '  + component.mentionStartTagOpen + '/profile/f'
         + component.startTagClose + '@f' + component.endTag + ' abdulrahman';
       expect(component.kweeks[1].text).toBe(toBeStr); // expect the output to be as toBeStr argument

@@ -103,7 +103,7 @@ export class KweekComponent implements OnInit {
             const sliceStr = kweek.text.slice(start, end);
             str +=
               this.hashtagStartTagOpen + '/search/people?filterBy='
-              + sliceStr + this.startTagClose + sliceStr + this.endTag;
+              + sliceStr + '&src=hash' + this.startTagClose + sliceStr + this.endTag;
           } else if (
             // if the start index not on a hashtag nor mention so I need to know which one is my end index to slice the string correctlly
             // if the hashtag comes first make it the end index to slice
@@ -145,7 +145,7 @@ export class KweekComponent implements OnInit {
                 const sliceStr = kweek.text.slice(start, end);
                 str +=
                   this.hashtagStartTagOpen + '/search/people?filterBy='
-                  + sliceStr + this.startTagClose + sliceStr + this.endTag;
+                  + sliceStr + '&src=hash' + this.startTagClose + sliceStr + this.endTag;
               } else {
                 end = kweek.mentions[iHashtags].indices[0];
                 str += kweek.text.slice(start, end);
