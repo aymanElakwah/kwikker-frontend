@@ -4,6 +4,7 @@ describe('KweekComponent', () => {
   let component: KweekComponent;
   let KWEEKS;
   let mockDataService;
+  let mockActivatedRoute;
   beforeEach(() => {
     // Test objects to unit test kweeks before each unit test
     KWEEKS = [
@@ -139,8 +140,9 @@ describe('KweekComponent', () => {
     ];
 
     mockDataService = jasmine.createSpyObj(['getKweeks']);
+    mockActivatedRoute = jasmine.createSpyObj(['snapshot']);
 
-    component = new KweekComponent(mockDataService);
+    component = new KweekComponent(mockDataService, mockActivatedRoute);
   });
 
   describe('injectTagsInText', () => {

@@ -30,49 +30,41 @@ export class KweekComponent implements OnInit {
       this.injectTagsInText();
     });*/
 
-    //This part will be updated
+    // This part will be updated
     this.KweeksType();
-    let userName = this.route.snapshot.params['username'];
-    if(this.routeChildName == 'kweeks' || this.routeChildName == '' )
-    {
-      this.kweekService.getUserKweeks(userName ,null).subscribe
+    const userName = this.route.snapshot.params['username'];
+    if (this.routeChildName === 'kweeks' || this.routeChildName === '' ) {
+      this.kweekService.getUserKweeks(userName , null).subscribe
       ( usersInfo => {
-        this.kweeks = usersInfo; 
-        this.injectTagsInText(); 
-      } )
-    }
-
-    else if (this.routeChildName == 'likes')
-    {
-      this.kweekService.getUserLikedKweeks(userName ,null).subscribe
-      ( usersInfo => {
-        this.kweeks = usersInfo; 
+        this.kweeks = usersInfo;
         this.injectTagsInText();
-      } )
-    }
-    else
-    {
-      this.kweekService.getKweeks('', '').subscribe(lists => {
+      } );
+    } else if (this.routeChildName === 'likes') {
+      this.kweekService.getUserLikedKweeks(userName , null).subscribe
+      ( usersInfo => {
+        this.kweeks = usersInfo;
+        this.injectTagsInText();
+      } );
+    } else {
+      this.kweekService.getKweeks().subscribe(lists => {
         this.kweeks = lists;
         this.injectTagsInText();
       });
     }
   }
 
-  //will be Updated
-  KweeksType(): void
-  {
-    if (this.route.snapshot.firstChild != null)
-    {
+  // will be Updated
+  KweeksType(): void {
+    if (this.route.snapshot.firstChild != null) {
        this.routeChildName = this.route.snapshot.children[0].toString();
     }
   }
 
- /**
- * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
- * has no @params
- * @returns void
- */
+  /**
+   * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
+   * No Parameters
+   * @returns void
+  */
   injectTagsInText(): void {
     this.kweeks.forEach(kweek => {
       let iMentions = 0;

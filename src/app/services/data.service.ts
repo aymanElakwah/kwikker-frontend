@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { throwError , Observable } from 'rxjs';
+import {
+  HttpErrorResponse,
+  HttpClient,
+  HttpParams,
+  HttpHeaders
+} from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Conversation } from '../model/inbox';
 import { Notification } from '../model/notification';
@@ -9,30 +14,28 @@ import { Trend } from '../model/Trend';
 import { Kweek } from '../model/kweek';
 import { MiniUser } from '../model/mini-user';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   private base: String = 'http://8978be66.ngrok.io/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-   /**
+  /**
    * get request to get All information about certain user
    * @param userName {string} the user that we want to get his Information
    * @returns User Model
    */
   getProfileInfo(userName: string): Observable<User> {
-    const userNameSent = userName ?
-     { params: new HttpParams().set('username', userName) } : {};
-    return this.http.get<User>(`${this.base}user/profile`, userNameSent)
-      .pipe(
-        catchError(this.handleError)
-      );
+    const userNameSent = userName
+      ? { params: new HttpParams().set('username', userName) }
+      : {};
+    return this.http
+      .get<User>(`${this.base}user/profile`, userNameSent)
+      .pipe(catchError(this.handleError));
   }
 
-   /**
+  /**
    * get request to get All Kweeks made by a certain user
    * @param userName {string} the user that we want to get his kweeks
    * @param lastRetrivedId {string} sends the last kweek id to git
@@ -40,19 +43,23 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = lastRetrivedId ?
-    { params: new HttpParams().set('last_retrieved_trend_id', lastRetrivedId) } : {};
+    const parametersSent = lastRetrivedId
+      ? {
+          params: new HttpParams().set(
+            'last_retrieved_trend_id',
+            lastRetrivedId
+          )
+        }
+      : {};
 
-     if ( userName ) {
+    if (userName) {
       parametersSent.params.append('username', userName);
-     }
+    }
 
-    return this.http.get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
+      .pipe(catchError(this.handleError));
   }
-
 
   /**
    * get request to get All Liked Kweeks by a certain user
@@ -61,30 +68,32 @@ export class DataService {
    * newer kweeks after it and also could be null
    * @returns array of Kweeks
    */
-  getUserLikedKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = userName ?
-    { params: new HttpParams().set('username', userName) } : {};
+  getUserLikedKweeks(
+    userName: string,
+    lastRetrivedId: string
+  ): Observable<Kweek[]> {
+    const parametersSent = userName
+      ? { params: new HttpParams().set('username', userName) }
+      : {};
 
-     if ( lastRetrivedId ) {
+    if (lastRetrivedId) {
       parametersSent.params.append('last_retrieved_trend_id', lastRetrivedId);
-     }
+    }
 
-    return this.http.get<Kweek[]>(`${this.base}kweeks/user/liked`, parametersSent)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .get<Kweek[]>(`${this.base}kweeks/user/liked`, parametersSent)
+      .pipe(catchError(this.handleError));
   }
 
-   /**
-   * get request to have little information about The users that follow the authorized user 
+  /**
+   * get request to have little information about The users that follow the authorized user
    * No Parameters
    * @returns array of MiniUsers
    */
   getUserFollowers(): Observable<MiniUser[]> {
-    return this.http.get<MiniUser[]>(`${this.base}interactions/followers`)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .get<MiniUser[]>(`${this.base}interactions/followers`)
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -93,10 +102,20 @@ export class DataService {
    * @returns array of MiniUsers
    */
   getUserFollowings(): Observable<MiniUser[]> {
-    return this.http.get<MiniUser[]>(`${this.base}interactions/following`)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .get<MiniUser[]>(`${this.base}interactions/following`)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * get kweeks from in memory data service to test the kweeks
+   * No Parameters
+   * @returns array of kweeks
+  */
+  getKweeks(): Observable<Kweek[]> {
+    return this.http
+      .get<Kweek[]>('api/KWK')
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -105,29 +124,25 @@ export class DataService {
    * @returns array of Trends
    */
   getTrends(): Observable<Trend[]> {
-    params: new HttpParams().set('last_retrieved_trend_id', null)
-    return this.http.get<Trend[]>(`${this.base}trends/`)
-      .pipe(
-        catchError(this.handleError)
-      );
+    params: new HttpParams().set('last_retrieved_trend_id', null);
+    return this.http
+      .get<Trend[]>(`${this.base}trends/`)
+      .pipe(catchError(this.handleError));
   }
 
   // example for using get with jason file
   getNumber(name: string): Observable<number> {
-    const options = name ?
-     { params: new HttpParams().set('name', name) } : {};
-    return this.http.get<number>('api/test', options)
-      .pipe(
-        catchError(this.handleError)
-      );
+    const options = name ? { params: new HttpParams().set('name', name) } : {};
+    return this.http
+      .get<number>('api/test', options)
+      .pipe(catchError(this.handleError));
   }
 
   getConverstations(): Observable<Conversation[]> {
-      return this.http.get<Conversation[]>('api/Message').pipe(
-        catchError(this.handleError)
-      );
+    return this.http
+      .get<Conversation[]>('api/Message')
+      .pipe(catchError(this.handleError));
   }
-
 
   /**
    *
@@ -136,15 +151,23 @@ export class DataService {
    * newer notifications after it and also could be null
    * @returns array of notifications
    */
-  getNotificationsList(last_notifications_retrieved_id: string): Observable<Notification[]> {
-    const options = last_notifications_retrieved_id ?
-     { params: new HttpParams().set('last_notifications_retrieved_id', last_notifications_retrieved_id) } : {};
-    return this.http.get<Notification[]>(this.base + 'notifications', options)
+  getNotificationsList(
+    last_notifications_retrieved_id: string
+  ): Observable<Notification[]> {
+    const options = last_notifications_retrieved_id
+      ? {
+          params: new HttpParams().set(
+            'last_notifications_retrieved_id',
+            last_notifications_retrieved_id
+          )
+        }
+      : {};
+    return this.http
+      .get<Notification[]>(this.base + 'notifications', options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -153,41 +176,39 @@ export class DataService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      switch ( error.status)  {
-      case(404):
-        console.error('not found');
-        break ;
-        case(401):
+      switch (error.status) {
+        case 404:
+          console.error('not found');
+          break;
+        case 401:
           console.error('unauthorized');
-        break ;
+          break;
       }
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
     // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 
-
-
-   /**
+  /**
    *
    * to post user's name and user's password
    * @param user {object} sends the user information to get
    * token after it and also could be null
    * @returns string
    */
-   logInUser(user: any): Observable <any> {
+  logInUser(user: any): Observable<any> {
     // console.log(user);
     const body = JSON.stringify(user);
     console.log(body);
-    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-    return this.http.post<any>(this.base + 'account/login', body, headers)
-                              .pipe(
-                              map(res => res),
-                              catchError(this.handleError)
-                              );
+    const headers = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<any>(this.base + 'account/login', body, headers).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
   }
 }
