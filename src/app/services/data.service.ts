@@ -99,19 +99,6 @@ export class DataService {
       );
   }
 
-
-  getKweeks(userName: string, pagenation: string): Observable<Kweek[]> {
-    const options = userName ?
-     { params: new HttpParams().set('username', userName) } : {};
-     if (  pagenation ) {
-      options.params.append('pagenation', pagenation );
-     }
-    return this.http.get<Kweek[]>('api/KWK', options)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
   /**
    * get request to have the highest 10 Trends
    * No Parameters

@@ -68,6 +68,11 @@ export class KweekComponent implements OnInit {
     }
   }
 
+ /**
+ * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
+ * has no @params
+ * @returns void
+ */
   injectTagsInText(): void {
     this.kweeks.forEach(kweek => {
       let iMentions = 0;
