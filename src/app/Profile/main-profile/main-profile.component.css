@@ -129,12 +129,6 @@
     height: 30px;
 }
 
-.dropdown-menu
-{
-    position: absolute;
-    left: 680px;
-    Top: 55px;
-}
 
 .dropdown-menu li:hover
 {

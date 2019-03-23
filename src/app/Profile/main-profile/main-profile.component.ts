@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,8 @@ export class MainProfileComponent implements OnInit {
   /* All Info for the profile user */
   profileUser: User =
   {
-      username: '',
-      screen_name: '',
+      username: 'ahmed',
+      screen_name: 'ahmed',
       bio: '',
       birth_date: new Date,
       created_at: new Date,
@@ -44,12 +45,14 @@ export class MainProfileComponent implements OnInit {
   }
  
   
-  constructor(private profileInfoService: DataService) { }
+  constructor(private profileInfoService: DataService,
+              private route: ActivatedRoute) { }
 
 
   ngOnInit() {
 
-    this.profileInfoService.getProfileInfo( this.profileUser.username).subscribe
+    let profileUserName = this.route.snapshot.paramMap.get('username');
+    this.profileInfoService.getProfileInfo(profileUserName).subscribe
     ( userInfo => {this.profileUser = userInfo; } )
 
   }

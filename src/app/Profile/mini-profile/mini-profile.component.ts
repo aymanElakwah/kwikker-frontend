@@ -39,6 +39,15 @@ export class MiniProfileComponent implements OnInit {
       follows_you: false,
       blocked: false,
       muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
     }
   ];
    

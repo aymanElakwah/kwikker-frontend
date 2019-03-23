@@ -20,7 +20,7 @@ import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      { path: ':username', component:  MainProfileComponent,
+      { path: 'profile/:username', component:  MainProfileComponent,
       children: [
         {path: '', component: ProfileKweeksTabComponent } ,
         {path: 'kweeks', component: ProfileKweeksTabComponent},
