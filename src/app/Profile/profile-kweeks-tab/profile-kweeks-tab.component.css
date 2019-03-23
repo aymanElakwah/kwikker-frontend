@@ -1,0 +1,31 @@
+.right-part
+{
+    margin-left: 0.01%;
+}
+
+/* Kweeks Container */
+.Kweeks
+{
+    height:auto;
+    background-color: white;
+    padding: 0 0;
+    margin: 0 0;
+
+}
+
+@media (max-width: 1200px) { 
+
+    .right-part
+    {
+        min-width: 1200px;
+        margin-left:20px;
+    } 
+    
+   /*  Trends Bar will disappear From right In small Devices */
+    #Right-Profile-Trends 
+    {
+        display: none !important;
+    }
+ }
+
+

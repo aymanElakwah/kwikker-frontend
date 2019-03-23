@@ -5,25 +5,29 @@ import { RouterModule } from '@angular/router';
 import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
+import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
+
 
 
 @NgModule({
   declarations: [
-    MainProfileComponent,
-    ProfileHeaderCardComponent,
-    MiniProfileComponent
+    MainProfileComponent,                //The main architecture for the profile page
+    ProfileHeaderCardComponent,          //Profile User Information Card
+    MiniProfileComponent,                //Small card for any other user Information
+    ProfileKweeksTabComponent,           //All Kweeks that written or liked By The profile user + Trends Tab 
   ],
 
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      { path: 'profile', component:  MainProfileComponent,
+      { path: 'profile/:username', component:  MainProfileComponent,
       children: [
-        {path: '', redirectTo: 'profile', pathMatch: 'full'} ,
-        {path: 'following', component: MainProfileComponent },
-        {path: 'followers', component: MainProfileComponent},
-        {path: 'likes', component: MainProfileComponent},
+        {path: '', component: ProfileKweeksTabComponent } ,   
+        {path: 'kweeks', component: ProfileKweeksTabComponent},
+        {path: 'following', component: MiniProfileComponent },
+        {path: 'followers', component: MiniProfileComponent },
+        {path: 'likes', component: ProfileKweeksTabComponent }
       ]} 
     ])
   ]

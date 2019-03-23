@@ -3,7 +3,7 @@
     width: 260px;
     height: 196px;
 }
-
+/* Profile Username */
 .Profile-Name
 {
     font-size: 21px;
@@ -13,6 +13,7 @@
     word-wrap: break-word;
 }
 
+/* Profile Screen name */
 .Profile-ScreenName
 {
     font-size: 14px;
@@ -23,6 +24,7 @@
     color: rgb(102, 117, 127);
 }
 
+/* Profile Bio */
 .Profile-Bio
 {
     color: #14171a;
@@ -33,6 +35,7 @@
     word-wrap: break-word;
 }
 
+/* JoinDate and BirthDate */
 .Date-Text
 {
     vertical-align: middle;
@@ -50,13 +53,13 @@
     text-align: left;
 }
 
+/* Button to be able to Kweek to that User */
 .Tweet-Button
 {
     background-color: #48AAE6;
     border-color: transparent;
     border-radius: 100px;
     box-shadow: none;
-    cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     color: #fff;
@@ -69,4 +72,17 @@
     width: 100%;
     margin-top: 20px
 }
+
+.btn-primary:hover
+{
+    background-color: rgb(7, 116, 184);
+}
+
+
+.btn-primary:active
+{
+    outline: none !important;
+    box-shadow: rgb(7, 116, 184) 0 0 100px;
+}
+
 
