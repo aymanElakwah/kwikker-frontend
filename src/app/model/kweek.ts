@@ -8,8 +8,11 @@ export interface Kweek {
     created_at: string;
     text: string;
     media_url: string;
+    /* The User who wrote This Kweek */
     user: MiniUser;
+    /* All Mentions included in this Kweek */
     mentions: Mention[];
+    /* All Hashtags included in this Kweek */
     hashtags: Hashtag[];
     number_of_likes: number;
     number_of_rekweeks: number;
@@ -17,6 +20,7 @@ export interface Kweek {
     reply_to: string;
     liked_by_user: boolean;
     rekweeked_by_user: boolean;
+   /*  All Info about Rekweeks happened to this Kweek */
     rekweek_info: Rekweek ;
 }
 
