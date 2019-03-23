@@ -11,7 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MainProfileComponent implements OnInit {
  
-  /* All Info for the profile user */
+        /* All Info for the profile user */
+/* Initialised With Dummy Data To test Template */
   profileUser: User =
   {
       username: 'ahmed',
@@ -39,18 +40,18 @@ export class MainProfileComponent implements OnInit {
    * No Parameters
    * @returns {boolean} 
    */
-  isAuthorisedUser(): boolean 
+  isAuthorisedUser(): boolean
   {
     return (this.profileUser.username == this.authorizedUser);
   }
  
-  
   constructor(private profileInfoService: DataService,
               private route: ActivatedRoute) { }
 
 
   ngOnInit() {
-
+    
+    //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get('username');
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
     ( userInfo => {this.profileUser = userInfo; } )
