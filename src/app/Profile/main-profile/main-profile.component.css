@@ -95,6 +95,17 @@
     position: absolute;
     right: 10%;
     Top: 18%;
+
+}
+
+.btn-outline-primary:hover
+{
+    background-color: rgb(228, 240, 255); 
+}
+
+.btn-outline-primary:active
+{
+    outline: none !important;
 }
 
 .following-button
@@ -104,14 +115,55 @@
     box-shadow: none;
     font-size: 14px;
     font-weight: bold;
-    line-height: 20px;
-    padding: 6px 16px;;
+    padding: 6px 16px;
     background-color: #1B95E0;
     color: #fff;
     width: 100px;
     position: absolute;
     right: 10%;
     Top: 18%;
+}
+
+.btn-primary:hover
+{
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12);  
+}
+
+.btn-light
+{
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.btn-light:active
+{
+  
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-light:hover
+{
+    background-color: #fff;
+    border-color: #fff;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-primary:active
+{
+    outline: none !important;
+}
+
+.btn-primary:hover span
+{
+    display: none;
+}
+
+.btn-primary:hover::before
+{
+    content: "Unfollow"
 }
 
 .Dots-Icon

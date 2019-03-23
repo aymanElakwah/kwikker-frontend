@@ -73,6 +73,17 @@
     
 }
 
+.btn-outline-primary:hover
+{
+    background-color: rgb(228, 240, 255); 
+}
+
+.btn-outline-primary:active
+{
+    outline: none !important;
+}
+
+
 .Following
 {
 
@@ -90,6 +101,28 @@
     min-width: 89px;
     position: absolute;
 }
+
+.btn-primary:hover
+{
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12); 
+}
+
+.btn-primary:active
+{
+    outline: none !important;
+}
+
+.btn-primary:hover span
+{
+    display: none;
+}
+
+.btn-primary:hover::before
+{
+    content: "Unfollow"
+}
+
 
 .Dots-Icon
 {

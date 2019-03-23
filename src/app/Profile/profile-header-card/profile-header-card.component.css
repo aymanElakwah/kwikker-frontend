@@ -70,3 +70,16 @@
     margin-top: 20px
 }
 
+.btn-primary:hover
+{
+    background-color: rgb(7, 116, 184);
+}
+
+
+.btn-primary:active
+{
+    outline: none !important;
+    box-shadow: rgb(7, 116, 184) 0 0 100px;
+}
+
+
