@@ -7,6 +7,10 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './trends.component.html',
   styleUrls: ['./trends.component.css']
 })
+
+/**
+ * Trends Components is Used To Show Trends Bar in The whole Website "Shared Component"
+ */
 export class TrendsComponent implements OnInit {
   
   /* Array of Tredns */

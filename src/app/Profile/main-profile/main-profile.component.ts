@@ -9,6 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './main-profile.component.html',
   styleUrls: ['./main-profile.component.css']
 })
+
+/**
+ * The Main Component For The Profile Page
+ * which Tags any other Components Included
+ * In The Profile Page
+ */
 export class MainProfileComponent implements OnInit {
  
         /* All Info for the profile user */

@@ -8,6 +8,11 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './mini-profile.component.html',
   styleUrls: ['./mini-profile.component.css']
 })
+
+/**
+ * MiniProfile Component is used For all Mini profile cards
+ * in The Profile page for Followers or Followings
+ */
 export class MiniProfileComponent implements OnInit {
 
   /* Array of MiniUsers To get some of the following and followers Info */
