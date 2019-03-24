@@ -21,8 +21,19 @@ export class KweekComponent implements OnInit {
   startTagClose = '\'>';
   endTag: String = '</a>';
 
+  /*
+   * constructor called when component is made
+   * @param kweekService to use DataService functions and deal with backend
+   * @param route to use snapshot from the url to know which URL you are in
+   * No @return
+  */
   constructor(private kweekService: DataService, private route: ActivatedRoute) {}
 
+   /**
+   * function called after all intialization in constuctor used here to determine which kweeks to retreive
+   * No Parameters
+   * No reurn
+  */
   ngOnInit() {
 
    /* this.kweekService.getKweeks('', '').subscribe(lists => {

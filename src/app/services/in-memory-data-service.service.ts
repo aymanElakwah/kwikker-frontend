@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 
-
+/**
+ * mocking backend server
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class InMemoryDataService {
-
+  /**
+   * no dependcy injection needed
+   */
   constructor() { }
   createDb() {
 
@@ -289,8 +293,7 @@ export class InMemoryDataService {
           'rekweeked_by_user': true
         },
     ];
-    //return {ARR, trendsTest, profileUserTest, KWK, Message};
+    // return {ARR, trendsTest, profileUserTest, KWK, Message};
     return {ARR, KWK, Message};
  }
- 
 }

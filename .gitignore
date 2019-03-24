@@ -44,3 +44,6 @@ Thumbs.db
 
 #assets
 /src/assets
+
+#documentation
+/documentation

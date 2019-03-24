@@ -18,10 +18,14 @@ import { MiniUser } from '../model/mini-user';
   providedIn: 'root'
 })
 export class DataService {
-  private base: String = 'http://faa34478.ngrok.io';
-  constructor(private http: HttpClient) {}
+  // private base: String = 'http://faa34478.ngrok.io';
+  // constructor(private http: HttpClient) {}
 
-  /**
+  
+  private base: String = 'http://8978be66.ngrok.io/';
+  constructor(private http: HttpClient) { }
+
+   /**
    * get request to get All information about certain user
    * @param userName {string} the user that we want to get his Information
    * @returns User Model
@@ -130,14 +134,9 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  // example for using get with jason file
-  getNumber(name: string): Observable<number> {
-    const options = name ? { params: new HttpParams().set('name', name) } : {};
-    return this.http
-      .get<number>('api/test', options)
-      .pipe(catchError(this.handleError));
-  }
-
+  /**
+   * get all conversation for user
+   */
   getConverstations(): Observable<Conversation[]> {
     return this.http
       .get<Conversation[]>('api/Message')
@@ -169,6 +168,10 @@ export class DataService {
       );
   }
 
+  /**
+   *  handle any error code returned from backend server
+   * @param error this paramter cathces any error response returned
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -199,16 +202,13 @@ export class DataService {
    * token after it and also could be null
    * @returns string
    */
-  logInUser(user: any): Observable<any> {
-    // console.log(user);
+   logInUser(user: any): Observable <any> {
     const body = JSON.stringify(user);
-    console.log(body);
-    const headers = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    return this.http.post<any>(this.base + 'account/login', body, headers).pipe(
-      map(res => res),
-      catchError(this.handleError)
-    );
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.post<any>(this.base + 'account/login', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
   }
 }

@@ -20,8 +20,10 @@ import { SettingsModule } from './settings/settings.module';
 import { InMemoryDataService } from '../app/services/in-memory-data-service.service';
 import { ChatModule } from './chat/chat.module';
 import { ProfileModule } from './Profile/profile.module';
-import { LogInModule } from './log-in/log-in.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -30,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     LogInComponent,
     HomeComponent,
+    SignUpComponent,
   ],
   imports: [
     SharedModule,
@@ -41,12 +44,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ChatModule,
     SearchModule,
     SettingsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService,
-    ),
-    LogInModule,
+    // HttpClientInMemoryWebApiModule.forRoot(
+    // InMemoryDataService,
+    // ),
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
