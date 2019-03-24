@@ -1,4 +1,4 @@
-
+/* Main Containers For The Profile Page */
 .container-fluid
 {
     height: 100%;
@@ -38,6 +38,7 @@
 
 }
 
+/* Secondry NavBar in The Profile Page */
 #Profile-NavBar
 {
     width:100%;
@@ -48,7 +49,41 @@
     line-height: 1.375;
 }
 
+/* Taps In The Secondry NavBar */
+#Taps
+{
+    list-style-type: none;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
+    position: relative;
+    color: #657786;
+    font-size: 12px;
+    text-align: center;
+}
 
+.active
+{
+    color:#1B95E0;
+    border-color: #1B95E0;
+    border-bottom: 2px solid;
+    transition: width 0.2s;
+}
+
+li>a:hover
+{
+    color:#1B95E0 !important;
+}
+
+a {
+    float: left;
+    font-weight: bold;
+    font-size:14px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color:#657786;
+    padding:10px;
+    text-decoration: none;
+}
+
+/* Profile Picture */
 .Profile-Picture
 {
     background-color:#fff;
@@ -62,7 +97,7 @@
     z-index: 999 !important;
 }
 
-
+/* Edit, Follow & Following Buttons */
 .edit-button
 {
     border-radius: 100px;
@@ -173,6 +208,7 @@
     Top: 0;
 }
 
+/* DropDownMenu */
 #dropdownMenuButton
 {
     position: absolute;
@@ -207,40 +243,7 @@
     text-align: left;
 }
 
-#Taps
-{
-    list-style-type: none;
-    box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
-    position: relative;
-    color: #657786;
-    font-size: 12px;
-    text-align: center;
-}
-
-.active
-{
-    color:#1B95E0;
-    border-color: #1B95E0;
-    border-bottom: 2px solid;
-    transition: border-width 0.1s linear;
-}
-
-li>a:hover
-{
-    color:#1B95E0 !important;
-}
-
-a {
-    float: left;
-    font-weight: bold;
-    font-size:14px;
-    font-family: "Segoe UI",Arial,sans-serif;
-    color:#657786;
-    padding:10px;
-    text-decoration: none;
-}
-
-
+/* Trends Bar In The Left */
 #Left-Profile-Trends
 {
     position: relative;
@@ -249,7 +252,7 @@ a {
      display: none; 
 }
 
-
+/* ProfileInfoCard In The Left */
 .Header-Card
 {
     padding-top: 30px;
@@ -262,6 +265,7 @@ a {
     padding-left: 6%;
 }
 
+/* Kweeks Or MiniUsers Part */
 .outlet-side
 {
     margin-top: 12px;

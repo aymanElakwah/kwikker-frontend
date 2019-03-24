@@ -8,12 +8,13 @@ import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.compo
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 
 
+
 @NgModule({
   declarations: [
-    MainProfileComponent,
-    ProfileHeaderCardComponent,
-    MiniProfileComponent,
-    ProfileKweeksTabComponent,
+    MainProfileComponent,                //The main architecture for the profile page
+    ProfileHeaderCardComponent,          //Profile User Information Card
+    MiniProfileComponent,                //Small card for any other user Information
+    ProfileKweeksTabComponent,           //All Kweeks that written or liked By The profile user + Trends Tab 
   ],
 
   imports: [
@@ -22,7 +23,7 @@ import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [
-        {path: '', component: ProfileKweeksTabComponent } ,
+        {path: '', component: ProfileKweeksTabComponent } ,   
         {path: 'kweeks', component: ProfileKweeksTabComponent},
         {path: 'following', component: MiniProfileComponent },
         {path: 'followers', component: MiniProfileComponent },

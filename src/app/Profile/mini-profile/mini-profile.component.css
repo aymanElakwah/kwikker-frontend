@@ -10,22 +10,23 @@
     margin-top: 0;
 }
 
+/* As Bootstrap Rows and Colums generate default margins and Paddings */
 .nopadding
 {
     padding: 0 0 !important;
     margin: 0 0 !important;
 }
 
-
+/* First Part [Banner] */
 .banner
 {
     background-color: #1B95E0;
     height:90px;
     width: 290px;
     margin: 0 0;
-    
 }
 
+/* Second Part [UserActon, ProfilePicture, ProfileInfo] */
 .profile-content
 {
     height: 191px;
@@ -57,6 +58,7 @@
     align-items:center
 }
 
+/* Follow and Following Buttons */
 .Follow
 {
     border-radius: 100px;
@@ -123,7 +125,7 @@
     content: "Unfollow"
 }
 
-
+/* DropDownMenu Animations */
 .Dots-Icon
 {
     position: absolute;
@@ -157,6 +159,7 @@
     text-align: left;
 }
 
+/* Profiel Picture */
 .profile-pic
 {
     display: block;

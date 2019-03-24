@@ -1,3 +1,8 @@
+
+
+/**
+ * The Main Model for All Website Users
+ */
 export interface User {
     username: string;
     screen_name: string;

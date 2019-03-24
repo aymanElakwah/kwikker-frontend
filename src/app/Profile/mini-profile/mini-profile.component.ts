@@ -8,11 +8,107 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './mini-profile.component.html',
   styleUrls: ['./mini-profile.component.css']
 })
+
+/**
+ * MiniProfile Component is used For all Mini profile cards
+ * in The Profile page for Followers or Followings
+ */
 export class MiniProfileComponent implements OnInit {
 
-  /* All Info for the profile user */
+  /* Array of MiniUsers To get some of the following and followers Info */
+           /* Initialised with Dummy Data To Show Template */
   public miniCardProfileUsers: MiniUser[] =
   [
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
+    {
+      username: '',
+      screen_name: '',
+      profile_image_url: '',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+    },
     {
       username: '',
       screen_name: '',
@@ -51,13 +147,14 @@ export class MiniProfileComponent implements OnInit {
     }
   ];
    
-
-  /* route children name which based on it, The right request will be sent */
+          /* route children name which based on it, 
+  The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;
 
   constructor(private miniProfileInfoService: DataService,
                private route: ActivatedRoute) { }
 
+               
   //This part will be updated
   FollowersOrFollowings(): void
   {
