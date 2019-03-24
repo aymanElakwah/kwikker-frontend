@@ -7,7 +7,9 @@ import { User } from '../../model/user';
   styleUrls: ['./profile-header-card.component.css']
 })
 
-/* This component takes User Info from main one and show it  */
+/** 
+ * This component takes User Info from main one and show it 
+ */
 export class ProfileHeaderCardComponent implements OnInit {
  
   /* All Info for the profile user: Input from MainProfileComponent */
