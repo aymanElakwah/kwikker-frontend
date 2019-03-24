@@ -8,7 +8,9 @@ import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.compo
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 
 
-
+/**
+ * The Module That is resposible for The Profile Page
+ */
 @NgModule({
   declarations: [
     MainProfileComponent,                //The main architecture for the profile page

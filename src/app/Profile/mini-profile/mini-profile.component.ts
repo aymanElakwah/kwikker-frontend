@@ -3,16 +3,16 @@ import { MiniUser } from '../../model/mini-user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
+/**
+ * MiniProfile Component is used For all Mini profile cards
+ * in The Profile page for Followers or Followings
+ */
 @Component({
   selector: 'app-mini-profile',
   templateUrl: './mini-profile.component.html',
   styleUrls: ['./mini-profile.component.css']
 })
 
-/**
- * MiniProfile Component is used For all Mini profile cards
- * in The Profile page for Followers or Followings
- */
 export class MiniProfileComponent implements OnInit {
 
   /* Array of MiniUsers To get some of the following and followers Info */
@@ -151,6 +151,12 @@ export class MiniProfileComponent implements OnInit {
   The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;
 
+   /**
+   *
+   * @param route to Know which Url is Activated To send The appropiate request
+   * @param miniProfileInfoService DataService Parameter To Send Request getting
+   * all followers or following information
+   */
   constructor(private miniProfileInfoService: DataService,
                private route: ActivatedRoute) { }
 
@@ -164,6 +170,10 @@ export class MiniProfileComponent implements OnInit {
     }
   }
 
+   /**
+   * ngOnInit is used to start the process of knowing which Url is Activated
+   * and Based On It, Send the appropiate request
+   */
   ngOnInit() {
 
      //This part will be updated
