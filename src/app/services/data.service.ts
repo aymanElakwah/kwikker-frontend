@@ -15,7 +15,8 @@ import { MiniUser } from '../model/mini-user';
 })
 export class DataService {
 
-  private base: String = 'http://0d977716.ngrok.io/';
+  
+  private base: String = 'http://8978be66.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**
@@ -193,9 +194,7 @@ export class DataService {
    * @returns string
    */
    logInUser(user: any): Observable <any> {
-    // console.log(user);
     const body = JSON.stringify(user);
-    console.log(body);
     const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
     return this.http.post<any>(this.base + 'account/login', body, headers)
                               .pipe(
