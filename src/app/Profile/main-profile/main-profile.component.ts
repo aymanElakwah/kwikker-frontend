@@ -17,8 +17,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class MainProfileComponent implements OnInit {
  
-        /* All Info for the profile user */
-/* Initialised With Dummy Data To test Template */
+        /**
+         * All Info for the profile user 
+         * Initialised With Dummy Data To test Template 
+         * */
   profileUser: User =
   {
       username: 'ahmed',
