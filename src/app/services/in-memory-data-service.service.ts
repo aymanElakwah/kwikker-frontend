@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 
-
+/**
+ * mocking backend server
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class InMemoryDataService {
-
+  /**
+   * no dependcy injection needed
+   */
   constructor() { }
   createDb() {
 
@@ -70,7 +74,7 @@ export class InMemoryDataService {
       profie_pic_URL: 'https://www.w3schools.com/images/w3schools_green.jpg',
     }];
 
-    const profileUserTest = {
+    /*const profileUserTest = {
       userName: 'Ahmed Mahmoud',
       screenName: 'Ahmed_Mahmoud14',
       Bio: 'Play the best of EA for $4.99 a month! an evolving collection of EA games for Xbox One!',
@@ -138,7 +142,7 @@ export class InMemoryDataService {
         Id: 10,
         Text: '#Avengers',
         NumberOfKweeks: 458
-      } ];
+      } ];*/
 
      const Message = [
        {
@@ -158,6 +162,7 @@ export class InMemoryDataService {
           }
         }
      ];
+
     const KWK = [ {
           'id': '1',
           'created_at': '2011-04-11T10:20:30Z',
@@ -288,6 +293,7 @@ export class InMemoryDataService {
           'rekweeked_by_user': true
         },
     ];
-    return {ARR, trendsTest, profileUserTest, KWK, Message};
+    // return {ARR, trendsTest, profileUserTest, KWK, Message};
+    return {ARR, KWK, Message};
  }
 }

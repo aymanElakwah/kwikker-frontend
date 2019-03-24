@@ -4,11 +4,21 @@ import { Observable , of } from 'rxjs';
 import {tap } from 'rxjs/operators';
 
 import {CacheService} from '../services/cache.service';
-
+/**
+ * calls cacheing service to cache data as much as it can
+ */
 @Injectable( )
 export class CacheInterceptor implements HttpInterceptor {
+    /**
+     *
+     * @param HttpCacheService inject cache service where actual work is done
+     */
     constructor (private HttpCacheService: CacheService) { }
-
+    /**
+     * to intercept all requests
+     * @param req out request
+     * @param next modifed request
+     */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if ( req.method !== 'GET' ) {
        return next.handle(req);

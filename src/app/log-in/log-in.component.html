@@ -1,31 +1,34 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs Titles -->
-
     <!-- Icon -->
     <div class="fadeIn first">
       <img src="../../assets/main/twitter.png" id="icon" alt="User Icon" />
     </div>
-    <!-- login -->
+
+    <!-- login text-->
     <div>
       <h4>Sign in to Kwikker</h4>
     </div>
+    
     <!-- Login Form -->
     <form  #loginForm = "ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
-    <div class="has-error">
-      <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="100" placeholder="User Name" required>
-      <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
-        <p class="alertMsg">User name is required.</p>
+      <!-- UserName -->  
+      <div>
+          <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="100" placeholder="User Name" required>
+          <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
+            <p class="alertMsg">User name is required to log in.</p>
+          </div>
       </div>
-    </div>
-      <input #password="ngModel" [(ngModel)]="pass" type="password" id="password" class="fadeIn third " name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+    <!-- Password -->
+      <input #password="ngModel" [(ngModel)]="pass" type="password" id="password" class="fadeIn third " name="password" placeholder="Password"  required>
       <div  *ngIf="password.invalid && password.touched" class="msg alert alert-danger " role="alert">
-          <p class="alertMsg">Password must be at least 8 characters.</p>
-     </div>
-      <button class="btn btn-success fadeIn fourth"  type="submit" [disabled]="email.invalid || password.invalid ">Log in</button>
+          <p class="alertMsg">Password is required to log in.</p>
+      </div>
+     <!-- Submission Button -->
+      <button class="btn btn-primary fadeIn fourth"  type="submit" [disabled]="email.invalid || password.invalid ">Log in</button>
     </form>
     
-    <!-- Remind Passowrd -->
+    <!-- Remind Passowrd and Sign Up -->
     <div id="formFooter">
       <a  class="underlineHover" href="#">Forgot Password?</a>
       <a style="float:right;" class="underlineHover" href="#">Sign Up</a>

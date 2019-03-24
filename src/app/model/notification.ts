@@ -1,3 +1,7 @@
+/**
+ * Notification Model, All users should have their own notifications
+ * To tell them if someone rekweek their kweeks or send them a message
+ */
 export interface Notification{
     id?: string;
     created_at?: Date;

@@ -1,13 +1,13 @@
 
 /* BASIC */
-  
+  /* coloring and removing decoration from the <a> links */
   a {
     color: #92badd;
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
   }
-  
+   /*styling any h2 text */
   h2 {
     text-align: center;
     font-size: 16px;
@@ -21,21 +21,27 @@
   
   
   /* STRUCTURE */
+  /* The box containing alert messages */
   .msg{
-    border: none;
-    padding: 6px 70px;
+    padding: 15px 32px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    width: 80%;
+    border:none;
     text-decoration: none;
     display: inline-block;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
    }
+   /* The alert message itself */
   .alertMsg{
-    text-align: left;
-    margin: 5px 5px;
     text-align: left;
     font-size: 15px;
   }
   
+  /* A wrapper that holds the scene, middling it and centering it */
   .wrapper {
     display: flex;
     align-items: center;
@@ -46,12 +52,12 @@
     padding: 20px;
   }
   
+  /* An ID for the content inside the box */
   #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
-    padding: 30px;
-    width: 90%;
+    width: 100%;
     max-width: 450px;
     position: relative;
     padding: 0px;
@@ -59,10 +65,11 @@
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
   }
-  
+
+  /* An ID for the content in the footer of the box */
   #formFooter {
     background-color: #f6f6f677;
-    border-top: 1px solid #dce8f1;
+    border-top: 2px solid #dce8f1;
     padding: 25px;
     text-align: left;
     -webkit-border-radius: 0 0 10px 10px;
@@ -72,7 +79,7 @@
   
   
   /* TABS */
-  
+  /* These two styling for the 'forget password' and 'sign up' tabs */
   h2.inactive {
     color: #cccccc;
   }
@@ -85,8 +92,8 @@
   
   
   /* FORM TYPOGRAPHY*/
-  
-  input[type=button],button[type=submit], input[type=submit], input[type=reset] {
+  /* This one for styling the LOG IN button */
+  button[type=submit] {
     background-color: #56baed;
     border: none;
     color: white;
@@ -95,13 +102,12 @@
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 15px;
     -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 10px 20px 15px 20px;
-    
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -109,22 +115,14 @@
     transition: all 0.3s ease-in-out;
     
   }
-  
-  input[type=button]:hover,button[type=submit]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  /* This one when hovering above the log in button */
+ button[type=submit]:hover{
     background-color: #39ace7;
   }
   
-  input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
-    -moz-transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-    -o-transform: scale(0.95);
-    -ms-transform: scale(0.95);
-    transform: scale(0.95);
-  }
-  
+/* This is the two inputs stylling, username and password */
   input[type=text] ,input[type=password]{
     background-color: #f6f6f6;
-    border: none;
     color: #0d0d0d;
     padding: 15px 32px;
     text-align: left;
@@ -145,12 +143,12 @@
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
   }
-  
+  /* This one when focusing on the inputs boxes */
   input[type=text]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
-  
+  /* this one for the placeholder text */
   input[type=text]:placeholder {
     color: #cccccc;
   }
@@ -159,16 +157,18 @@
   
   /* ANIMATIONS */
   
-  /* Simple CSS3 Fade-in-down Animation */
+  /* A simple CSS animation to fade-in-down the container and its content */
   .fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
+    /* For the content fadding */
     -webkit-animation-duration: 1s;
+    /* for The box's fading */
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
-  
+  /* initializing some built in functions  */
   @-webkit-keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -181,7 +181,7 @@
       transform: none;
     }
   }
-  
+    /* initializing some built in functions */
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -200,6 +200,7 @@
   @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
   @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
   
+  /* this is the main fade-in style, used in order to render the whole box together */
   .fadeIn {
     opacity:0;
     -webkit-animation:fadeIn ease-in 1;
@@ -214,32 +215,32 @@
     -moz-animation-duration:1s;
     animation-duration:1s;
   }
-  
+  /* this allows the icon to show up first */
   .fadeIn.first {
     -webkit-animation-delay: 0.4s;
     -moz-animation-delay: 0.4s;
     animation-delay: 0.4s;
   }
-  
+    /* this allows the first two boxes to show up together secondly*/
   .fadeIn.second {
     -webkit-animation-delay: 0.6s;
     -moz-animation-delay: 0.6s;
     animation-delay: 0.6s;
   }
-  
+  /* the submit button */
   .fadeIn.third {
     -webkit-animation-delay: 0.8s;
     -moz-animation-delay: 0.8s;
     animation-delay: 0.8s;
   }
-  
+  /* and lastly for the footer */
   .fadeIn.fourth {
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
     animation-delay: 1s;
   }
 
-  /* Simple CSS3 Fade-in Animation */
+ /* this to add a Line under reset-password and sign-uo lines */
   .underlineHover:after {
     display: block;
     left: 0;
@@ -262,11 +263,11 @@
   
   
   /* OTHERS */
-  
+  /* When focusing on any box or something */
   *:focus {
       outline: none;
   } 
-  
+  /* for the icon style */
   #icon {
     margin: 10px;
     width:10%;

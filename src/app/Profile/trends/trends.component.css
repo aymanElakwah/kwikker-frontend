@@ -7,15 +7,7 @@
 
 }
 
-#Trends-Text
-{
-    width: 258px;
-    height: 433px;
-    display: inline-block;
-    position: relative;
-    Top: 17px;
-}
-
+/* Trends For You. */
 #Trends-header
 {
     line-height: 20px;
@@ -26,6 +18,16 @@
     font-weight: bold;
 }
 
+#Trends-Text
+{
+    width: 258px;
+    height: 433px;
+    display: inline-block;
+    position: relative;
+    Top: 17px;
+}
+
+/* 10 Items in Trend Bar */
 #Trends-Item
 {
     line-height: 5px;
@@ -38,6 +40,7 @@
     font-family: "Segoe UI",Arial,sans-serif;
 }
 
+/* Hashtag Part */
 #Trends-Item>h1
 {
     font-size: 14px;
@@ -48,6 +51,7 @@
 
 }
 
+/* Number Of Kweeks Part */
 #Trends-Item>p
 {
     font-size: 13px;

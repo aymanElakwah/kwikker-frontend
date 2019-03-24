@@ -18,6 +18,7 @@
 .arabic {
     direction: rtl;
     padding-right: 200px;
+    float: right;
 }
 
 #second {

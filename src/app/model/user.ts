@@ -1,17 +1,22 @@
+
+
+/**
+ * The Main Model for All Website Users
+ */
 export interface User {
-    userName: string;
-    screenName: string;
-    Bio: string;
-    birthDate: Date;
-    joinedDate: Date;
-    profilePicUrl: string;
-    bannerUrl: string;
+    username: string;
+    screen_name: string;
+    bio: string;
+    birth_date: Date;
+    created_at: Date;
+    profile_image_url: string;
+    profile_banner_url: string;
     following: boolean;
-    followsYou: boolean;
-    followersCount: number;
-    followingCount: number;
-    kweeksCount: number;
-    likesCount: number;
+    follows_you: boolean;
+    followers_count: number;
+    following_count: number;
+    kweeks_count: number;
+    likes_count: number;
     blocked: boolean;
     muted: boolean;
 }

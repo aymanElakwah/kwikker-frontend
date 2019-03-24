@@ -1,43 +1,94 @@
-               <!-- Page-Container: Center The Page while Zooming -->
-               <div class = "Page-Container" *ngIf="profileUser" >
-                    <app-nav-bar> </app-nav-bar>
-                    
-                    <!--ProfilePic and Banner Images-->
-                    <div class = "Banner"> </div>
-                    <div class = "Profile-Picture"> </div>
-                     
-                    <!--Profile Page Secondry NavBar => Nested Taps -->
-                    <div class = "Profile-NavBar">
-                        <div class="Taps-Container">
-                            <ul id="Taps">
-                                <li>
-                                <a routerLinkActive="active" > Tweets <br> {{profileUser?.kweeksCount}} </a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Following  <br> {{profileUser?.followingCount}}</a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Followers <br> {{profileUser?.followersCount}} </a>
-                                </li>
-                                <li> 
-                                <a routerLinkActive="active">  Likes <br> {{profileUser?.likesCount}} </a>
-                                </li>
-                            </ul>
+            <app-nav-bar> </app-nav-bar>
+            <!-- Page-Container: Center The Page while Zooming -->
+            <div class = "container-fluid" >
+                <!-- The Page Is divided into 2 main Parts [Header, Body] -->
+                <div class ="page-container" >
+
+                    <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
+                    <div class="row" id="header">
+
+                        <!--Banner Image-->
+                        <div class="row" id = "Banner"> 
+                            <div class="App-Container">
+                                <!--ProfilePicture Image-->
+                                <div class="Profile-Picture"> </div>
+                            </div>
                         </div>
-  
-                        <!--Edit Button on the secondry Navbar -->
-                        <button class="Edit-Button"> 
-                            Edit profile
-                        </button>
+                         
+                        <!--Profile Page Secondry NavBar [Taps, Follow & Following Buttons, DropDownMenu -->
+                        <div class="row" id ="Profile-NavBar">
+                            <div class = "row justify-content-center App-Container">
+                                <!-- The First Column has No Data -->
+                                <div class="col-3 nopadding">  </div>
+                                <!-- The Second Column contains Taps, UserAction -->
+                                <div class="col-9 nopadding">
+                                    
+                                    <ul id="Taps">
+                                        <li> <a routerLinkActive="active" 
+                                                [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>  </li>
+                                        <li> <a routerLinkActive="active" 
+                                                [routerLink]="['following']">  Following  <br> {{profileUser?.following_count}}</a>  </li>
+                                        <li> <a routerLinkActive="active"
+                                                [routerLink]="['followers']">   Followers <br> {{profileUser?.followers_count}} </a>  </li>
+                                        <li> <a routerLinkActive="active"
+                                                [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a> </li>  
+                                    </ul>
+
+                                     <!--The 2nd part which contains Edit, Follow and Following Buttons 
+                                               & DropDownMenu on the secondry Navbar -->
+                                    <button type="button" class="btn btn-outline-primary edit-button" 
+                                            *ngIf="isAuthorisedUser()"> <span> Edit Profile </span> </button>
+                                    <button type="button" class="btn btn-outline-primary follow-button"  
+                                            *ngIf="!profileUser?.following && !isAuthorisedUser()"> <span> Follow </span></button>
+                                    <button type="button" class="btn btn-primary following-button" 
+                                            *ngIf="profileUser?.following && !isAuthorisedUser() "><span> Following </span></button>
+                                    
+                                    <!--User Setting Dropdown Menu -->
+                                    <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser()">
+                                        <button class="btn  btn-light"  id="dropdownMenuButton" data-toggle="dropdown">
+                                            
+                                            <!-- 3 Dots Icon => Font-Awesome -->  
+                                            <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
+                                              <i class="fas fa-ellipsis-v"></i>
+                                            </span>
+
+                                        </button>
+
+                                        <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                                        <div class="dropdown-menu dropdown-menu-right" id="main" aria-labelledby="dropdownMenuButton">
+                                            <li class="dropdown-item"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                            <li class="dropdown-item"> <P> Mute @{{profileUser?.screen_name}} </P></li>
+                                            <li class="dropdown-item"> <P> Block @{{profileUser?.screen_name}} </P></li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
-                    
-                    <!-- Header Card on the left side of the page -->
-                    <app-profile-header-card class="Profile-Headercard"
-                                            [profileHeaderInfo] = 'profileUser'> </app-profile-header-card>
-                
-                    <!-- Trends Card on the right side of the page -->
-                    <app-trends class="Profile-Trends" *ngIf="trends"
-                                [trends] = 'trends'> </app-trends>
-                </div>
+
+                    <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
+                    <div class="row justify-content-center App-Container">          
+                        
+                        <!-- Header Card & Trends on the left side of the page -->
+                        <div class="col-3 left-side">
+                           <!--  HeaderCard -->
+                            <div class = "row Header-Card">
+                            <app-profile-header-card 
+                                [profileHeaderInfo] = 'profileUser'
+                                [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card>
+                             </div>
+                             <!-- TrendCard -->
+                             <div class = "row">
+                            <app-trends id="Left-Profile-Trends"> </app-trends> 
+                             </div>   
+                        </div>
+
+                      <!--  Kweeks OR MiniUsers Tab -->
+                        <div class="col-9 outlet-side">
+                            <router-outlet> </router-outlet>
+                        </div>
+                   </div> 
+                </div>       
+            </div>
 
 

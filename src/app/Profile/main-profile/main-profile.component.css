@@ -1,97 +1,60 @@
-.Page-Container
+/* Main Containers For The Profile Page */
+.container-fluid
 {
-    width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    margin:0 auto;
+    margin: 0 0;
+    padding: 0 0;
+    overflow: visible;
 }
 
-.Banner
+.App-Container
 {
-    display: block;
-    content: "";
-    position: absolute;
-    margin:0 auto;
+    margin: 0 auto;
+    max-width: 1290px;
+    height:100%;
+    width: 97%;
+
+}
+
+.nopadding
+{
+    padding:0 0 !important;
+    margin:0 0 !important;
+}
+
+
+#header
+{
+   height:235px;
+   position:relative;
+}
+
+#Banner
+{
+    width:100%;
     box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.25);
-    z-index: 1;
-    background-color: #91D2FA;
-    height: 175px;
-    width: 1360px;
+    background-color: #1B95E0;
+    height: 74.5%;   
+
 }
 
-.Profile-Picture
+/* Secondry NavBar in The Profile Page */
+#Profile-NavBar
 {
-    background-color:#fff;
-    border: 5px solid #fff;
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    bottom: -48px;
-    margin-left: 86.5px;
-    position: relative;
-    z-index: 3;
-}
-
-.Profile-NavBar
-{
+    width:100%;
     background-color: #fff;
     box-sizing: border-box;
     height: 60px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
     line-height: 1.375;
-    z-index: 2;
-    position: relative;
-    bottom: 25px;
 }
 
-.Profile-Headercard
-{
-    position: relative;
-    left: 90px;
-    Top: 5px;
-}
-
-.Edit-Button
-{
-    border-radius: 100px;
-    box-shadow: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    left: 1120px;
-    Top: -48px;
-    align-self: center;
-    text-align: center;
-    white-space: nowrap;
-    background: transparent;
-    transition: box-shadow .15s ease-in-out; 
-    background-color: #fff;
-    border: 1px solid #66757f;
-    color: #66757f;
-}
-
-.Taps-Container
-{
-    background-color: white;
-    overflow: hidden;
-    height: 60px;
-    width: 50%;
-    position: relative;
-    left: 370px;
-    
-}
-
+/* Taps In The Secondry NavBar */
 #Taps
 {
     list-style-type: none;
-    margin:0px;
     box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
-    padding-left: 200px;
     position: relative;
-    right: 200px;
     color: #657786;
     font-size: 12px;
     text-align: center;
@@ -102,6 +65,7 @@
     color:#1B95E0;
     border-color: #1B95E0;
     border-bottom: 2px solid;
+    transition: width 0.2s;
 }
 
 li>a:hover
@@ -115,15 +79,225 @@ a {
     font-size:14px;
     font-family: "Segoe UI",Arial,sans-serif;
     color:#657786;
-    padding:13px;
+    padding:10px;
     text-decoration: none;
 }
 
-.Profile-Trends
+/* Profile Picture */
+.Profile-Picture
 {
+    background-color:#fff;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
     position: relative;
-    left: 970px;
-    bottom: 210px;
+    left: 6%;
+    Top: 35%;
+    z-index: 999 !important;
+}
+
+/* Edit, Follow & Following Buttons */
+.edit-button
+{
+    border-radius: 100px;
+    border: 1px solid #66757f;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color: #66757f;
+    min-width: 89px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+}
+
+.follow-button
+{
+    border-radius: 100px;
+    border: 1px solid #1B95E0;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color:#1B95E0;;
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+
+}
+
+.btn-outline-primary:hover
+{
+    background-color: rgb(228, 240, 255); 
+}
+
+.btn-outline-primary:active
+{
+    outline: none !important;
+}
+
+.following-button
+{
+    border-radius: 100px;
+    border: 1px solid #1B95E0;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 16px;
+    background-color: #1B95E0;
+    color: #fff;
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+}
+
+.btn-primary:hover
+{
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12);  
+}
+
+.btn-light
+{
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.btn-light:active
+{
+  
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-light:hover
+{
+    background-color: #fff;
+    border-color: #fff;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-primary:active
+{
+    outline: none !important;
+}
+
+.btn-primary:hover span
+{
+    display: none;
+}
+
+.btn-primary:hover::before
+{
+    content: "Unfollow"
+}
+
+.Dots-Icon
+{
+    position: absolute;
+    right: 30%;
+    Top: 0;
+}
+
+/* DropDownMenu */
+#dropdownMenuButton
+{
+    position: absolute;
+    right: 5%;
+    Top: 28%;
+    height: 30px;
 }
 
 
+.dropdown-menu li:hover
+{
+    background-color: #1B95E0  !important;
+}
+
+.dropdown-menu p:hover
+{
+    color: #fff !important;
+}
+
+.dropdown-item>p
+{
+    color: #66757f;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    float: none;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 5px;
+    position: relative;
+    min-width: 100%;
+    text-align: left;
+}
+
+/* Trends Bar In The Left */
+#Left-Profile-Trends
+{
+    position: relative;
+    right: 8%;
+    margin-top:12px;
+     display: none; 
+}
+
+/* ProfileInfoCard In The Left */
+.Header-Card
+{
+    padding-top: 30px;
+    margin-bottom: 80px;
+}
+
+.left-side
+{
+    margin-top: 12px;
+    padding-left: 6%;
+}
+
+/* Kweeks Or MiniUsers Part */
+.outlet-side
+{
+    margin-top: 12px;
+    padding-left: 1.8%;
+}
+
+@media (max-width: 1300px) { 
+    .App-Container
+    {
+        min-width:1300px;
+        margin-left:20px;
+    }
+    #Right-Profile-Trends 
+    {
+        display: none !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: inline;
+    }
+ }
+
+ @media (min-width: 1200px) { 
+
+    #Right-Profile-Trends 
+    {
+        display: inline !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: none;
+    }
+}

@@ -8,7 +8,7 @@
         <div class="media border p-3">
           <img
             [src]="kweek.user.profile_image_url"
-            alt="https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png"
+            alt="../../assets/avatar/default.png"
             class="mr-3 rounded-circle"
             id="kweek-img"
           />
@@ -16,17 +16,17 @@
           <div class="media-body">
             <div class="container">
               <p>
-                <a href="">{{ kweek.user.screen_name }}</a> .
+                <a href="/profile/{{ kweek.user.username }}">{{ kweek.user.screen_name }}</a> .
                 <small id="kweek-meta"
-                  >@{{ kweek.user.username }} . {{ kweek.created_at }}</small
+                  >@{{ kweek.user.username }} . {{ kweek.created_at | date:'h:mm a - d MMM y' }}</small
                 >
               </p>
             </div>
             <div class="container">
-              <p [innerHtml] = "kweek.text"></p>
+              <p [innerHTML] = "kweek.text"></p>
             </div>
             <div class="container" *ngIf="kweek.media_url">
-              <img id="media" [src]="kweek.media_url" />
+              <img id="media" [src]="kweek.media_url" alt="Can't load the image"/>
             </div>
             <div class="container-fluid" style="margin-top:12px;">
               <div class="row">
@@ -46,6 +46,7 @@
                     }}</span>
                   </span>
                 </div>
+                <!-- Rest lines to know if the user liked or rekweeked this kweek -->
                 <div class="col-2" *ngIf="kweek.rekweeked_by_user">
                   <span id="rekweeked">
                     <span

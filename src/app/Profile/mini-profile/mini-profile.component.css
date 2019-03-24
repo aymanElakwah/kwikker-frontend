@@ -1,0 +1,218 @@
+.container
+{
+    height:281px;
+    width:290px;
+    background-color: #FFF;
+    padding: 0 0;
+    margin-left: 0;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+
+/* As Bootstrap Rows and Colums generate default margins and Paddings */
+.nopadding
+{
+    padding: 0 0 !important;
+    margin: 0 0 !important;
+}
+
+/* First Part [Banner] */
+.banner
+{
+    background-color: #1B95E0;
+    height:90px;
+    width: 290px;
+    margin: 0 0;
+}
+
+/* Second Part [UserActon, ProfilePicture, ProfileInfo] */
+.profile-content
+{
+    height: 191px;
+    width: 288px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0 0;
+}
+
+.content
+{
+    height: 170px;
+    width: 255px;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+}
+
+.user-action
+{
+    height: 37px;
+    width: 127px;
+    position: relative;
+    left:130px;
+    top: 10px;
+    text-align: left;
+    display:flex;
+    align-items:center
+}
+
+/* Follow and Following Buttons */
+.Follow
+{
+    border-radius: 100px;
+    border: 1px solid  #1B95E0;
+    box-shadow: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    padding: 4px 12px;
+    background-color: #fff;
+    color:  #1B95E0;
+    min-width: 89px;
+    position: absolute;
+    
+}
+
+.btn-outline-primary:hover
+{
+    background-color: rgb(228, 240, 255); 
+}
+
+.btn-outline-primary:active
+{
+    outline: none !important;
+}
+
+
+.Following
+{
+
+    border-radius: 100px;
+    box-shadow: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    padding: 4px 12px;
+    white-space: nowrap;
+    background: transparent;
+    background-color: #1B95E0;
+    border: 1px solid  #1B95E0;
+    color:  #fff;
+    min-width: 89px;
+    position: absolute;
+}
+
+.btn-primary:hover
+{
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12); 
+}
+
+.btn-primary:active
+{
+    outline: none !important;
+}
+
+.btn-primary:hover span
+{
+    display: none;
+}
+
+.btn-primary:hover::before
+{
+    content: "Unfollow"
+}
+
+/* DropDownMenu Animations */
+.Dots-Icon
+{
+    position: absolute;
+    right: 12px;
+    Top: 10px;
+}
+
+
+.dropdown-menu li:hover
+{
+    background-color: #1B95E0  !important;
+}
+
+.dropdown-menu p:hover
+{
+    color: #fff !important;
+}
+
+.dropdown-item>p
+{
+    color: #66757f;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    float: none;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 5px;
+    position: relative;
+    min-width: 100%;
+    text-align: left;
+}
+
+/* Profiel Picture */
+.profile-pic
+{
+    display: block;
+    height: 70px;
+    width: 70px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin: -65px 2px 0 -3px;
+    padding: 3px;
+    position: absolute;
+    background-color:  white;
+    border-width: 1px;
+    border-color: #1B95E0;
+    left: 0;
+}
+
+.profile-data
+{
+    height: 126px;
+    width:  259px;
+    background-color: #FFF;
+    margin-top: 10px;
+}
+
+.username
+{
+    color: #14171a;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    padding-right: 2px;
+}
+
+.screen-name
+{
+    color: #66757f;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    text-align: left;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+.bio
+{
+    direction: ltr!important;
+    text-align: left!important;
+    color: #14171a;
+    font-weight: normal;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.375em;
+    margin-top: 8px;
+}
