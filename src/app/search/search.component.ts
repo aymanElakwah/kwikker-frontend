@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
   search: string ;
   arabic = /[\u0600-\u06FF]/; // arabic range of unicode
    ltr: boolean;
+   isHashed: string;
   constructor(private route: ActivatedRoute, private router: Router, private tabService: TitleService) { }
   ngOnInit() {
     this.ltr = true;
@@ -19,10 +20,14 @@ export class SearchComponent implements OnInit {
   }
   testSearchingParams(): void {
     this.search = this.route.snapshot.queryParamMap.get('filterBy');
+    this.isHashed = this.route.snapshot.queryParamMap.get('src');
     if ( this.search === '' || this.search === null ) {
       this.router.navigate(['/home']);
     } else if (this.arabic.test(this.search)) {
       this.ltr = false;
+    }
+    if (this.isHashed === 'hash') {
+      this.search = '#' + this.search;
     }
   }
 }
