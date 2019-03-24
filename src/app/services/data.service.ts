@@ -130,14 +130,9 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  // example for using get with jason file
-  getNumber(name: string): Observable<number> {
-    const options = name ? { params: new HttpParams().set('name', name) } : {};
-    return this.http
-      .get<number>('api/test', options)
-      .pipe(catchError(this.handleError));
-  }
-
+  /**
+   * get all conversation for user
+   */
   getConverstations(): Observable<Conversation[]> {
     return this.http
       .get<Conversation[]>('api/Message')
@@ -169,6 +164,10 @@ export class DataService {
       );
   }
 
+  /**
+   *  handle any error code returned from backend server
+   * @param error this paramter cathces any error response returned
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
