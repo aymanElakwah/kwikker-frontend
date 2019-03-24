@@ -31,9 +31,7 @@ export class LogInComponent implements OnInit {
    */
   submitForm(form: NgForm) {
     this.isLoggedIn = false;
-    
     const user = form.value;
-    console.log("user's data", form.value)
     this.data.logInUser(user)
       .subscribe(
        res => {
