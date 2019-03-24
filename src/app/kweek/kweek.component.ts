@@ -29,6 +29,11 @@ export class KweekComponent implements OnInit {
   */
   constructor(private kweekService: DataService, private route: ActivatedRoute) {}
 
+   /**
+   * function called after all intialization in constuctor used here to determine which kweeks to retreive
+   * No Parameters
+   * No reurn
+  */
   ngOnInit() {
 
    /* this.kweekService.getKweeks('', '').subscribe(lists => {
