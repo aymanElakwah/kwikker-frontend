@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
+/**
+ * title service is injected in app module as all component are using it
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class TitleService {
-
+  /**
+   * service constructor
+   * @param titleService built in service for configuering the title
+   */
   constructor(private titleService: Title) { }
   /**
    * set the title for general pages
