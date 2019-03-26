@@ -23,8 +23,8 @@ export class MainProfileComponent implements OnInit {
          * */
   profileUser: User =
   {
-      username: 'ahmed',
-      screen_name: 'ahmed',
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed Mahmoud',
       bio: '',
       birth_date: new Date,
       created_at: new Date,

@@ -65,15 +65,16 @@
                             </div>
                         </div>  
                     </div>
-
+                     
+                    <div class ="App-Container">
                     <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
-                    <div class="row justify-content-center App-Container">          
-                        
+                    <div class="row justify-content-center">          
                         <!-- Header Card & Trends on the left side of the page -->
                         <div class="col-3 left-side">
                            <!--  HeaderCard -->
-                            <div class = "row Header-Card">
+                            <div class = "row">
                             <app-profile-header-card 
+                                class='Header-Card'
                                 [profileHeaderInfo] = 'profileUser'
                                 [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card>
                              </div>
@@ -87,8 +88,9 @@
                         <div class="col-9 outlet-side">
                             <router-outlet> </router-outlet>
                         </div>
-                   </div> 
-                </div>       
-            </div>
+                   </div>
+                </div>   
+            </div>    
+        </div>
 
 

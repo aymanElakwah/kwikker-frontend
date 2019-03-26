@@ -4,16 +4,31 @@
     height: 100%;
     margin: 0 0;
     padding: 0 0;
-    overflow: visible;
+   /*  overflow: visible; */
+   overflow-x: hidden;
 }
 
 .App-Container
 {
-    margin: 0 auto;
-    max-width: 1290px;
+    margin: 0 6.8%;
     height:100%;
-    width: 97%;
+    width: 88%;
+}
 
+/* Kweeks Or MiniUsers Part */
+.outlet-side
+{
+    margin-top: 12px;
+    padding-left: 4%;
+}
+
+
+/* ProfileInfoCard In The Left */
+.Header-Card
+{
+    padding-top: 30px;
+    margin-bottom: 80px;
+    margin-left: 2.5%;
 }
 
 .nopadding
@@ -92,7 +107,7 @@ a {
     height: 200px;
     width: 200px;
     position: relative;
-    left: 6%;
+    left:2.8%;
     Top: 35%;
     z-index: 999 !important;
 }
@@ -252,31 +267,23 @@ a {
      display: none; 
 }
 
-/* ProfileInfoCard In The Left */
-.Header-Card
-{
-    padding-top: 30px;
-    margin-bottom: 80px;
-}
-
 .left-side
 {
     margin-top: 12px;
-    padding-left: 6%;
+    padding: 0;
+    padding-left: 3.5%;
+    padding-right:  0%;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 
-/* Kweeks Or MiniUsers Part */
-.outlet-side
-{
-    margin-top: 12px;
-    padding-left: 1.8%;
-}
 
-@media (max-width: 1300px) { 
+@media (max-width: 1350px) { 
     .App-Container
     {
-        min-width:1300px;
-        margin-left:20px;
+        max-width:1200px;
+        min-width: 1200px;
+        
     }
     #Right-Profile-Trends 
     {
@@ -301,3 +308,21 @@ a {
         display: none;
     }
 }
+
+
+@media (min-width: 400px) { 
+
+    .App-Container{
+        min-width: 400;
+    }
+    #Right-Profile-Trends 
+    {
+        display: inline !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: none;
+    }
+}
+
