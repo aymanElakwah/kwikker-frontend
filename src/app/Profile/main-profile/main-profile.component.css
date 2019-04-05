@@ -10,25 +10,24 @@
 
 .App-Container
 {
-    margin: 0 6.8%;
+    margin: 0 6.3%;
     height:100%;
-    width: 88%;
+    width: 89%;
 }
 
 /* Kweeks Or MiniUsers Part */
 .outlet-side
 {
     margin-top: 12px;
-    padding-left: 4%;
 }
 
 
 /* ProfileInfoCard In The Left */
 .Header-Card
 {
-    padding-top: 30px;
+    padding-top: 8%;
     margin-bottom: 80px;
-    margin-left: 2.5%;
+    
 }
 
 .nopadding
@@ -279,12 +278,7 @@ a {
 
 
 @media (max-width: 1350px) { 
-    .App-Container
-    {
-        max-width:1200px;
-        min-width: 1200px;
-        
-    }
+    
     #Right-Profile-Trends 
     {
         display: none !important;
@@ -292,12 +286,13 @@ a {
 
     #Left-Profile-Trends
     {
-        display: inline;
+        display: block;
     }
  }
 
- @media (min-width: 1200px) { 
+ @media (max-width: 1200px) { 
 
+    
     #Right-Profile-Trends 
     {
         display: inline !important;
@@ -305,16 +300,13 @@ a {
 
     #Left-Profile-Trends
     {
-        display: none;
+        display: block !important;
     }
 }
 
 
-@media (min-width: 400px) { 
+@media (max-width: 400px) { 
 
-    .App-Container{
-        min-width: 400;
-    }
     #Right-Profile-Trends 
     {
         display: inline !important;
