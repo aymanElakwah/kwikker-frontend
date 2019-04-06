@@ -1,16 +1,26 @@
-    <app-nav-bar> </app-nav-bar>
+<div [ngClass] = "{'message-sticky':isEditingMode}">
+<p class = "NoNameMsg" *ngIf='isEditingMode'> Name can't be blank </p>    
+</div>
+
+<app-nav-bar> </app-nav-bar>
+  
     <!-- Page-Container: Center The Page while Zooming -->
     <div [ngClass] = "{'container-fluid':!isEditingMode, 'container-fluid-Editing':isEditingMode}" >
         <!-- The Page Is divided into 2 main Parts [Header, Body] -->
         <div class ="page-container" >
-
+            
             <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
             <div class="row" id="header">
-
+                
                  <!--ProfilePicture Image-->
                  <div  [ngClass] = "{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">  <!--User Setting Dropdown Menu -->
                          
-                    
+                        <img
+                        [ngClass] = "{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
+                        src = "../../../assets/main/Premier League.jpg"
+                        alt="Profile Picture"
+                        id="ProfileImage"/>
+
                        <div class="user-setting-dropdown" *ngIf="isEditingMode">
                             <button class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
                             <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
@@ -21,23 +31,29 @@
                             </div>
                        </div>
 
-                        <span class= "Image-Icon" style="color:#000" *ngIf="isEditingMode">
+                        <span class= "Image-Icon" style="color:#fff" *ngIf="isEditingMode">
                                 <i class="far fa-images fa-4x"></i>
                         </span> 
                         <p class ="editProfilePicText" *ngIf="isEditingMode"> Change your profile photo </p>
                  </div>
 
-                
-
                 <!--Banner Image-->
                 <div class="row" [ngClass] = "{'Banner':!isEditingMode, 'Banner-Editing':isEditingMode}"> 
+                     
+                    <img
+                    [ngClass] = "{'BannerImage':!isEditingMode, 'BannerImage-Editing':isEditingMode}"
+                    src = "../../../assets/main/green.jpg"
+                    alt="Profile Picture"
+                    id="BannerImage"/>
+
                     <div class="App-Container">           
                     </div>
+
                 </div>
                 <span class= "Camera-Icon" style="color:#ffff" *ngIf="isEditingMode">
                         <i class="fas fa-camera fa-4x"></i>
                 </span> 
-                <p class ="editBannerText" *ngIf="isEditingMode"> Add a header photo</p>
+                <p class ="editBannerText" *ngIf="isEditingMode"> Change your profile photo </p>
                 <div class="user-setting-dropdown" *ngIf="isEditingMode">
                         <button class="btn  btn-light"  id="BannerDropdownMenuButton" data-toggle="dropdown"> </button>
                         <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->

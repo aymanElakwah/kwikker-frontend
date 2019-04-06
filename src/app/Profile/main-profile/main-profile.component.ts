@@ -64,6 +64,12 @@ export class MainProfileComponent implements OnInit {
   {
     this.isEditingMode = false;
   }
+
+  FollowUnFollowRequest(FollowOrUnFollow: boolean): void
+  {
+
+
+  }
  
    /**
    *
