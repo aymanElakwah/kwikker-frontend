@@ -24,13 +24,13 @@ export class MainProfileComponent implements OnInit {
   profileUser: User =
   {
       username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed Mahmoud',
-      bio: '',
+      screen_name: 'Ahmed_Mahmoud14',
+      bio: 'My default Bio',
       birth_date: new Date,
       created_at: new Date,
       profile_image_url: '',
       profile_banner_url: '',
-      following: true,
+      following: false,
       follows_you: false,
       followers_count: 0,
       following_count: 0,
@@ -43,6 +43,8 @@ export class MainProfileComponent implements OnInit {
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem('username');
 
+  isEditingMode: boolean = false;
+
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
    * No Parameters
@@ -50,7 +52,17 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username == this.authorizedUser);
+    return (this.profileUser.username != this.authorizedUser);
+  }
+
+  activateEditingMode(): void
+  {
+    this.isEditingMode = true;
+  }
+
+  deactivateEditingMode(): void
+  {
+    this.isEditingMode = false;
   }
  
    /**

@@ -1,7 +1,7 @@
 .card-container
 {
     width: 260px;
-    height: 196px;
+    height: auto;
 }
 /* Profile Username */
 .Profile-Name

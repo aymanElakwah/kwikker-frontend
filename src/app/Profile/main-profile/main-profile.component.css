@@ -4,8 +4,7 @@
     height: 100%;
     margin: 0 0;
     padding: 0 0;
-   /*  overflow: visible; */
-   overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .App-Container
@@ -13,21 +12,14 @@
     margin: 0 6.3%;
     height:100%;
     width: 89%;
+    overflow:hidden;  
 }
 
 /* Kweeks Or MiniUsers Part */
 .outlet-side
 {
     margin-top: 12px;
-}
-
-
-/* ProfileInfoCard In The Left */
-.Header-Card
-{
-    padding-top: 8%;
-    margin-bottom: 80px;
-    
+    overflow: hidden;
 }
 
 .nopadding
@@ -43,17 +35,15 @@
    position:relative;
 }
 
-#Banner
+.Banner
 {
     width:100%;
-    box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.25);
     background-color: #1B95E0;
-    height: 74.5%;   
-
+    height: 74.5%;       
 }
 
 /* Secondry NavBar in The Profile Page */
-#Profile-NavBar
+.Profile-NavBar
 {
     width:100%;
     background-color: #fff;
@@ -105,11 +95,106 @@ a {
     border-radius: 50%;
     height: 200px;
     width: 200px;
-    position: relative;
-    left:2.8%;
-    Top: 35%;
+    position: absolute;
+    Left: 8%;
+    Top:26%;
+    z-index: 998 !important;
+}
+
+#profilePicdropdownMenuButton
+{
+    background-color:#fff;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    left: -2%;
+    Top:-2%;
+    background: #000;
+    opacity: 0;
     z-index: 999 !important;
 }
+
+#profilePicDropDownMenu
+{
+    Top:68%;
+    Left:14%;
+    text-align: center;
+}
+
+#profilePicDropDownMenu p
+{
+    text-align: center;
+}
+
+#BannerDropdownMenuButton
+{
+    width:100%;
+    height: 130%;   
+    background: #000;
+    position: absolute;
+    left: -2%;
+    Top:-2%;
+    background: #000;
+    opacity: 0;
+}
+
+
+#BannerDropDownMenu
+{
+    Top:105%;
+    Left:45%;
+    text-align: center;
+}
+
+#BannerDropDownMenu p
+{
+    text-align: center;
+}
+
+
+.Camera-Icon
+{
+    position: absolute;
+    Top: 85%;
+    left: 48%;
+}
+
+.editBannerText
+{
+    position: absolute;
+    Top: 107%;
+    left: 43.7%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+}
+
+
+
+.editProfilePicText
+{
+    position: relative;
+    Top: 55%;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: center;
+}
+
+
+
+.Image-Icon
+{
+    position: absolute;
+    Top: 30%;
+    left: 38%;
+}
+
 
 /* Edit, Follow & Following Buttons */
 .edit-button
@@ -128,6 +213,8 @@ a {
     right: 10%;
     Top: 18%;
 }
+
+
 
 .follow-button
 {
@@ -173,26 +260,26 @@ a {
     Top: 18%;
 }
 
-.btn-primary:hover
+.following-button:hover
 {
     background-color: rgb(158, 4, 12); 
     border-color:   rgb(158, 4, 12);  
 }
 
-.btn-light
+.DIcon
 {
     background-color: #fff;
     border-color: #fff;
 }
 
-.btn-light:active
+.DIcon:active
 {
   
     outline: none !important;
     box-shadow: none;
 }
 
-.btn-light:hover
+.DIcon:hover
 {
     background-color: #fff;
     border-color: #fff;
@@ -200,17 +287,17 @@ a {
     box-shadow: none;
 }
 
-.btn-primary:active
+.following-button:active
 {
     outline: none !important;
 }
 
-.btn-primary:hover span
+.following-button:hover span
 {
     display: none;
 }
 
-.btn-primary:hover::before
+.following-button:hover::before 
 {
     content: "Unfollow"
 }
@@ -222,8 +309,10 @@ a {
     Top: 0;
 }
 
+
+
 /* DropDownMenu */
-#dropdownMenuButton
+#userActionDropdownMenuButton
 {
     position: absolute;
     right: 5%;
@@ -274,6 +363,22 @@ a {
     padding-right:  0%;
     margin-left: 0%;
     margin-right: 0%;
+    overflow-x:hidden;
+}
+
+/* ProfileInfoCard In The Left */
+.Header-Card
+{
+    padding-top: 8%;
+    margin-bottom: 80px;
+}
+
+
+.Header-Card-Editing
+{
+    padding-top: 8%;
+    margin-bottom: 80px;
+    right: 5%;
 }
 
 
@@ -317,4 +422,134 @@ a {
         display: none;
     }
 }
+
+/* ///////////////////////////////////////////////////////////////////////////////// */
+
+
+.Banner-Editing{
+    width:100%;
+    height: 74.5%;   
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transform: scale(1,2.6);
+    transform: scale(1,2.6);
+    background: rgb(3, 59, 94);
+    opacity: 0.9;
+}  
+
+.Banner-Editing:hover {
+    cursor: pointer;
+    border-left: 36px solid #1B95E0;
+    border-Top: 56px solid #1B95E0;
+    border-bottom: 3px solid #1B95E0;
+    border-right: 5px solid #1B95E0;
+    box-sizing: border-box; 
+}
+
+
+.Profile-NavBar-Editing{
+    width:100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    height: 60px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    line-height: 1.375;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transform: translate(0,138px);
+    transform: translate(0,138px);
+}
+
+.Profile-NavBar-Editing:not(:first-child)
+{
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.Content-Editing
+{
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transform: translate(0,138px);
+    transform: translate(0,138px);
+    overflow: hidden;
+} 
+
+
+.Profile-Picture-Editing{
+    background-color:#fff;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    Left: 8%;
+    Top:26%;
+    z-index: 998 !important;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-transform: translate(0,138px);
+    transform: translate(0,138px);
+}
+
+.Profile-Picture-Editing:hover
+{
+    border: 5px solid #1B95E0;
+    cursor: pointer;
+
+}
+
+.container-fluid-Editing
+{
+    height: 100%;
+    margin: 0 0;
+    padding: 0 0;
+    overflow-x: hidden;
+}
+
+.outlet-side-Editing
+{
+    margin-top: 12px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.3; 
+}
+
+.cancel-button
+{
+    background-color: #fff;
+    border: 1px solid #66757f;
+    color: #66757f;
+    border-radius: 100px;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: absolute;
+    right: 14%;
+    Top: 18%;
+    pointer-events: visible;
+  
+}
+
+.saveChanges-button
+{
+    border-radius: 100px;
+    border: 1px solid #1B95E0;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color:#1B95E0;
+    position: absolute;
+    right: 0%;
+    Top: 18%;
+    pointer-events: visible;
+    opacity: 10;
+}
+
+
 

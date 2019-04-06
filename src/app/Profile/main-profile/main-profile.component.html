@@ -1,96 +1,136 @@
-            <app-nav-bar> </app-nav-bar>
-            <!-- Page-Container: Center The Page while Zooming -->
-            <div class = "container-fluid" >
-                <!-- The Page Is divided into 2 main Parts [Header, Body] -->
-                <div class ="page-container" >
+    <app-nav-bar> </app-nav-bar>
+    <!-- Page-Container: Center The Page while Zooming -->
+    <div [ngClass] = "{'container-fluid':!isEditingMode, 'container-fluid-Editing':isEditingMode}" >
+        <!-- The Page Is divided into 2 main Parts [Header, Body] -->
+        <div class ="page-container" >
 
-                    <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
-                    <div class="row" id="header">
+            <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
+            <div class="row" id="header">
 
-                        <!--Banner Image-->
-                        <div class="row" id = "Banner"> 
-                            <div class="App-Container">
-                                <!--ProfilePicture Image-->
-                                <div class="Profile-Picture"> </div>
-                            </div>
-                        </div>
+                 <!--ProfilePicture Image-->
+                 <div  [ngClass] = "{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">  <!--User Setting Dropdown Menu -->
                          
-                        <!--Profile Page Secondry NavBar [Taps, Follow & Following Buttons, DropDownMenu -->
-                        <div class="row" id ="Profile-NavBar">
-                            <div class = "row justify-content-center App-Container">
-                                <!-- The First Column has No Data -->
-                                <div class="col-3 nopadding">  </div>
-                                <!-- The Second Column contains Taps, UserAction -->
-                                <div class="col-9 nopadding">
-                                    
-                                    <ul id="Taps">
-                                        <li> <a routerLinkActive="active" 
-                                                [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>  </li>
-                                        <li> <a routerLinkActive="active" 
-                                                [routerLink]="['following']">  Following  <br> {{profileUser?.following_count}}</a>  </li>
-                                        <li> <a routerLinkActive="active"
-                                                [routerLink]="['followers']">   Followers <br> {{profileUser?.followers_count}} </a>  </li>
-                                        <li> <a routerLinkActive="active"
-                                                [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a> </li>  
-                                    </ul>
-
-                                     <!--The 2nd part which contains Edit, Follow and Following Buttons 
-                                               & DropDownMenu on the secondry Navbar -->
-                                    <button type="button" class="btn btn-outline-primary edit-button" 
-                                            *ngIf="isAuthorisedUser()"> <span> Edit Profile </span> </button>
-                                    <button type="button" class="btn btn-outline-primary follow-button"  
-                                            *ngIf="!profileUser?.following && !isAuthorisedUser()"> <span> Follow </span></button>
-                                    <button type="button" class="btn btn-primary following-button" 
-                                            *ngIf="profileUser?.following && !isAuthorisedUser() "><span> Following </span></button>
-                                    
-                                    <!--User Setting Dropdown Menu -->
-                                    <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser()">
-                                        <button class="btn  btn-light"  id="dropdownMenuButton" data-toggle="dropdown">
-                                            
-                                            <!-- 3 Dots Icon => Font-Awesome -->  
-                                            <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
-                                              <i class="fas fa-ellipsis-v"></i>
-                                            </span>
-
-                                        </button>
-
-                                        <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
-                                        <div class="dropdown-menu dropdown-menu-right" id="main" aria-labelledby="dropdownMenuButton">
-                                            <li class="dropdown-item"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
-                                            <li class="dropdown-item"> <P> Mute @{{profileUser?.screen_name}} </P></li>
-                                            <li class="dropdown-item"> <P> Block @{{profileUser?.screen_name}} </P></li>
-                                        </div>
-                                    </div>
-                                </div>
+                    
+                       <div class="user-setting-dropdown" *ngIf="isEditingMode">
+                            <button class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
+                            <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                             <div class="dropdown-menu" id="profilePicDropDownMenu" aria-labelledby="profilePicdropdownMenuButton">
+                                <li class="dropdown-item"> <P> Upload photo</P></li>
+                                <li class="dropdown-item"> <P> Remove </P></li>
+                                <li class="dropdown-item"> <P> Cancel </P></li>
                             </div>
-                        </div>  
-                    </div>
-                     
-                    <div class ="App-Container">
-                    <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
-                    <div class="row justify-content-center">          
-                        <!-- Header Card & Trends on the left side of the page -->
-                        <div class="col-3 left-side">
-                           <!--  HeaderCard -->
-                            <div class = "row">
-                            <app-profile-header-card 
-                                class='Header-Card'
-                                [profileHeaderInfo] = 'profileUser'
-                                [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card>
-                             </div>
-                             <!-- TrendCard -->
-                             <div class = "row">
-                            <app-trends id="Left-Profile-Trends"> </app-trends> 
-                             </div>   
-                        </div>
+                       </div>
 
-                      <!--  Kweeks OR MiniUsers Tab -->
-                        <div class="col-9 outlet-side">
-                            <router-outlet> </router-outlet>
+                        <span class= "Image-Icon" style="color:#000" *ngIf="isEditingMode">
+                                <i class="far fa-images fa-4x"></i>
+                        </span> 
+                        <p class ="editProfilePicText" *ngIf="isEditingMode"> Change your profile photo </p>
+                 </div>
+
+                
+
+                <!--Banner Image-->
+                <div class="row" [ngClass] = "{'Banner':!isEditingMode, 'Banner-Editing':isEditingMode}"> 
+                    <div class="App-Container">           
+                    </div>
+                </div>
+                <span class= "Camera-Icon" style="color:#ffff" *ngIf="isEditingMode">
+                        <i class="fas fa-camera fa-4x"></i>
+                </span> 
+                <p class ="editBannerText" *ngIf="isEditingMode"> Add a header photo</p>
+                <div class="user-setting-dropdown" *ngIf="isEditingMode">
+                        <button class="btn  btn-light"  id="BannerDropdownMenuButton" data-toggle="dropdown"> </button>
+                        <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                         <div class="dropdown-menu" id="BannerDropDownMenu" aria-labelledby="BannerDropdownMenuButton">
+                            <li class="dropdown-item"> <P> Upload photo</P></li>
+                            <li class="dropdown-item"> <P> Remove </P></li>
+                            <li class="dropdown-item"> <P> Cancel </P></li>
                         </div>
                    </div>
-                </div>   
-            </div>    
-        </div>
+                    
+                <!--Profile Page Secondry NavBar [Taps, Follow & Following Buttons, DropDownMenu -->
+                <div class="row" [ngClass] = "{'Profile-NavBar':!isEditingMode, 'Profile-NavBar-Editing':isEditingMode}">
+                    <div class = "row justify-content-center App-Container">
+                        <!-- The First Column has No Data -->
+                        <div class="col-3 nopadding">  </div>
+                        <!-- The Second Column contains Taps, UserAction -->
+                        <div class="col-9 nopadding">
+                            
+                            <ul id="Taps">
+                                <li> <a routerLinkActive="active" 
+                                        [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>  </li>
+                                <li> <a routerLinkActive="active" 
+                                        [routerLink]="['following']">  Following  <br> {{profileUser?.following_count}}</a>  </li>
+                                <li> <a routerLinkActive="active"
+                                        [routerLink]="['followers']">   Followers <br> {{profileUser?.followers_count}} </a>  </li>
+                                <li> <a routerLinkActive="active"
+                                        [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a> </li>  
+                            </ul>
+
+                                <!--The 2nd part which contains Edit, Follow and Following Buttons 
+                                        & DropDownMenu on the secondry Navbar -->
+                             <button type="button" class="btn btn-outline-primary edit-button" (click)='activateEditingMode()' 
+                                    *ngIf="isAuthorisedUser() && !isEditingMode"> <span> Edit Profile </span> </button>
+                            <button type="button" class="btn btn-outline-primary follow-button"  
+                                    *ngIf="!profileUser?.following && !isAuthorisedUser() && !isEditingMode"> <span> Follow </span></button>
+                            <button type="button" class="btn btn-primary following-button" 
+                                    *ngIf="profileUser?.following && !isAuthorisedUser() && !isEditingMode"><span> Following </span></button>
+                    
+                            <button type="button" class="btn btn-primary saveChanges-button"
+                                    *ngIf="isEditingMode"><span> Save changes </span></button>
+                            <button type="button" class="btn btn-primary cancel-button"  (click)='deactivateEditingMode()'
+                                    *ngIf="isEditingMode"><span> Cancel </span></button>
+                            
+                            <!--User Setting Dropdown Menu -->
+                            <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser() && !isEditingMode">
+                                <button class="btn  btn-light DIcon"  id="userActionDropdownMenuButton" data-toggle="dropdown"> 
+                                    <!-- 3 Dots Icon => Font-Awesome -->  
+                                    <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </span>
+                                </button>
+
+                                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                                <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
+                                    <li class="dropdown-item"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                    <li class="dropdown-item"> <P> Mute @{{profileUser?.screen_name}} </P></li>
+                                    <li class="dropdown-item"> <P> Block @{{profileUser?.screen_name}} </P></li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+                
+            <div class ="App-Container">
+            <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
+            <div class="row justify-content-center" [ngClass] = "{'Content':!isEditingMode, 'Content-Editing':isEditingMode}">          
+                <!-- Header Card & Trends on the left side of the page -->
+                <div class="col-3 left-side">
+                    <!--  HeaderCard -->
+                    <div class = "row">
+                    <app-profile-header-card *ngIf="!isEditingMode"
+                        class='Header-Card'
+                        [profileHeaderInfo] = 'profileUser'
+                        [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card>
+                    <app-profile-header-card-editing *ngIf="isEditingMode"
+                        class='Header-Card-Editing'
+                        [profileHeaderInfo] = 'profileUser'
+                        [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card-editing>
+                        </div>
+                        <!-- TrendCard -->
+                        <div class = "row">
+                    <app-trends id="Left-Profile-Trends"> </app-trends> 
+                        </div>   
+                </div>
+
+                <!--  Kweeks OR MiniUsers Tab -->
+                <div class="col-9" [ngClass] = "{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
+                    <router-outlet> </router-outlet>
+                </div>
+            </div>
+        </div>   
+    </div>    
+</div>
 
 
