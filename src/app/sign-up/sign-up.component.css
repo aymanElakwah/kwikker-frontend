@@ -8,7 +8,7 @@ html {
 	
 	/*background = gradient + image pattern combo*/
 	background: 
-		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+		linear-gradient(rgba(31, 93, 165, 0.6), rgba(155, 89, 182, 0.6));
 }
 
 body {
@@ -35,7 +35,7 @@ body {
 	/*stacking fieldsets above each other*/
 	position: relative;
 }
-/*Hide all except first fieldset*/
+/* Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
 	display: none;
 }
@@ -59,7 +59,6 @@ body {
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	cursor: pointer;
     background-color: #56baed;
     border: none;
     color: white;
@@ -73,9 +72,13 @@ body {
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 10px 5px;
-    
+	
+	
    
 }
+
+
+
 #msform .action-button:hover, #msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #39ace7;
 }
@@ -146,5 +149,3 @@ body {
     width:10%;
   }
   
-
-
