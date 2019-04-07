@@ -28,6 +28,12 @@
     margin: 0 0;
 }
 
+.BannerImage
+{
+    height:90px;
+    width: 290px;
+}
+
 /* Second Part [UserActon, ProfilePicture, ProfileInfo] */
 .profile-content
 {
@@ -164,19 +170,26 @@
 /* Profiel Picture */
 .profile-pic
 {
-    display: block;
     height: 70px;
     width: 70px;
     border: 2px solid #fff;
     border-radius: 50%;
-    display: inline-block;
     margin: -65px 2px 0 -3px;
     padding: 3px;
     position: absolute;
     background-color:  white;
     border-width: 1px;
-    border-color: #1B95E0;
     left: 0;
+}
+
+.ProfileImage
+{
+    position: absolute;
+    Left: 3%;
+    Top:1%;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
 }
 
 .profile-data
@@ -204,6 +217,22 @@
     line-height: 1;
     text-align: left;
     font-family: "Segoe UI",Arial,sans-serif;
+   
+}
+
+.FollowsYou
+{
+    position: absolute;
+    Top: 41%;
+    right: 4%;
+    background-color: #e6ecf0;
+    border-radius: 4px;
+    color: #657786;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 2px;
+    padding: 2px 4px;
+    max-width: 74px;
 }
 
 .bio
@@ -216,5 +245,5 @@
     overflow: hidden;
     font-size: 14px;
     line-height: 1.375em;
-    margin-top: 8px;
+    margin-top: 12px;
 }

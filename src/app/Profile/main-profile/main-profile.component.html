@@ -1,5 +1,6 @@
-<div [ngClass] = "{'message-sticky':isEditingMode}">
-<p class = "NoNameMsg" *ngIf='isEditingMode'> Name can't be blank </p>    
+<div id="message-sticky">
+<span class="closebtn" onclick="this.parentElement.style.display='none';"> &times; </span>
+<p class = "Msg"> </p>  
 </div>
 
 <app-nav-bar> </app-nav-bar>
@@ -43,7 +44,7 @@
                     <img
                     [ngClass] = "{'BannerImage':!isEditingMode, 'BannerImage-Editing':isEditingMode}"
                     src = "../../../assets/main/green.jpg"
-                    alt="Profile Picture"
+                    alt="Profile Banner"
                     id="BannerImage"/>
 
                     <div class="App-Container">           
@@ -72,7 +73,7 @@
                         <!-- The Second Column contains Taps, UserAction -->
                         <div class="col-9 nopadding">
                             
-                            <ul id="Taps">
+                            <ul id="Taps" *ngIf = '!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'>
                                 <li> <a routerLinkActive="active" 
                                         [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>  </li>
                                 <li> <a routerLinkActive="active" 
@@ -82,18 +83,40 @@
                                 <li> <a routerLinkActive="active"
                                         [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a> </li>  
                             </ul>
-
+ 
                                 <!--The 2nd part which contains Edit, Follow and Following Buttons 
                                         & DropDownMenu on the secondry Navbar -->
-                             <button type="button" class="btn btn-outline-primary edit-button" (click)='activateEditingMode()' 
-                                    *ngIf="isAuthorisedUser() && !isEditingMode"> <span> Edit Profile </span> </button>
+                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!profileUser?.following && !isAuthorisedUser() && (muteMode || profileUser?.muted) && !profileUser?.blocked ">
+                                    <i class="fas fa-volume-mute" 
+                                       [style.opacity]= "(profileUser?.muted)? '1' : '0.5'"
+                                       [style.color]= "(profileUser?.muted)? '#9e0909e3' : '#939c99'"
+                                       (click)='toggleMute()'> </i>
+                            </span>
+
+                             <button type="button" class="btn btn-outline-primary edit-button" 
+                                    *ngIf="isAuthorisedUser() && !isEditingMode"
+                                    (click)='activateEditingMode()' > 
+                                    <span> Edit Profile </span> 
+                                </button>
                             <button type="button" class="btn btn-outline-primary follow-button"  
-                                    *ngIf="!profileUser?.following && !isAuthorisedUser() && !isEditingMode"> <span> Follow </span></button>
+                                    *ngIf="!profileUser?.following && !isAuthorisedUser() && !isEditingMode && !profileUser?.blocked"
+                                    (click)='toggleFollow()'> 
+                                    <span> Follow </span>
+                                </button>
                             <button type="button" class="btn btn-primary following-button" 
-                                    *ngIf="profileUser?.following && !isAuthorisedUser() && !isEditingMode"><span> Following </span></button>
+                                    *ngIf="profileUser?.following && !isAuthorisedUser() && !isEditingMode && !profileUser?.blocked"
+                                    (click)='toggleFollow()'>  
+                                    <span> Following </span>
+                                </button>
+                            <button type="button" class="btn btn-primary Blocked-button" 
+                                    *ngIf="!isAuthorisedUser() && profileUser?.blocked" 
+                                    (click)='toggleBlock()'> 
+                                    <span> Blocked </span>
+                                </button>
                     
                             <button type="button" class="btn btn-primary saveChanges-button"
-                                    *ngIf="isEditingMode"><span> Save changes </span></button>
+                                    *ngIf="isEditingMode"
+                                    (click)='updateProfile()' ><span> Save changes </span></button>
                             <button type="button" class="btn btn-primary cancel-button"  (click)='deactivateEditingMode()'
                                     *ngIf="isEditingMode"><span> Cancel </span></button>
                             
@@ -108,9 +131,16 @@
 
                                 <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                                 <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
-                                    <li class="dropdown-item"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
-                                    <li class="dropdown-item"> <P> Mute @{{profileUser?.screen_name}} </P></li>
-                                    <li class="dropdown-item"> <P> Block @{{profileUser?.screen_name}} </P></li>
+                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Send a Direct Message</P></li>
+                                    <li class="dropdown-item" (click)='toggleMute()' *ngIf="!profileUser?.blocked"> 
+                                        <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.screen_name}} </P>
+                                        <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.screen_name}} </P>
+                                    </li>
+                                    <li class="dropdown-item" (click)='toggleBlock()'> 
+                                        <P *ngIf="!profileUser?.blocked"> Block @{{profileUser?.screen_name}} </P>
+                                        <P *ngIf="profileUser?.blocked"> Unblock @{{profileUser?.screen_name}} </P>
+                                    </li>
                                 </div>
                             </div>
                         </div>
@@ -128,11 +158,16 @@
                     <app-profile-header-card *ngIf="!isEditingMode"
                         class='Header-Card'
                         [profileHeaderInfo] = 'profileUser'
-                        [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card>
+                        [isAuthorisedUser] = 'isAuthorisedUser()'
+                        [semiBlockedMode] = 'semiBlockedMode'> </app-profile-header-card>
                     <app-profile-header-card-editing *ngIf="isEditingMode"
                         class='Header-Card-Editing'
                         [profileHeaderInfo] = 'profileUser'
-                        [isAuthorisedUser] = 'isAuthorisedUser()'> </app-profile-header-card-editing>
+                        [isAuthorisedUser] = 'isAuthorisedUser()'
+                        (editedScreenName) = "editedScreenName=$event"
+                        (editedBio) = "editedBio=$event"> 
+                    </app-profile-header-card-editing>
+
                         </div>
                         <!-- TrendCard -->
                         <div class = "row">
@@ -141,8 +176,19 @@
                 </div>
 
                 <!--  Kweeks OR MiniUsers Tab -->
-                <div class="col-9" [ngClass] = "{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
-                    <router-outlet> </router-outlet>
+                <div class="col-9" 
+                     [ngClass] = "{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
+                    <router-outlet 
+                    *ngIf = '!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'> 
+                    </router-outlet>
+
+                    <div class ="BlockMsg" *ngIf="profileUser?.blocked && !semiBlockedMode">
+                        <h2 class ="BlockMsgHeader"> You blocked @<b style="font-weight: normal;">{{profileUser?.screen_name}}</b> </h2>
+                        <p class ="BlockMsgBody"> Are you sure you want to view these Tweets? Viewing Tweets won't unblock <br>@{{profileUser?.screen_name}} <br> </p>
+                        <button type="button" class="btn btn-outline-primary semiBlocked-button" (click)='activatesemiBlockedMode()'> 
+                            <span> Yes, view profile </span> 
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>   

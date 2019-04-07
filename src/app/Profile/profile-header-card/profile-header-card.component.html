@@ -5,9 +5,9 @@
               <!-- All Card Info -->
               <h1 class = "Profile-Name"> {{profileHeaderInfo?.username}} </h1>
               <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.screen_name}} </h1>
-              <p class = "Profile-Bio"> {{profileHeaderInfo?.bio}} </p>
+              <p class = "Profile-Bio" *ngIf = '!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'> {{profileHeaderInfo?.bio}} </p>
 
-              <div class = "Profile-Joindate">
+              <div class = "Profile-Joindate" *ngIf = '!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'>
                 <!-- JoinDate Icon => Font-Awesome -->
                 <span style="font-size: 2ex; color:#657786;">
                     <i class="fas fa-calendar-alt"></i>
@@ -17,7 +17,7 @@
                 </span>
               </div>
 
-              <div class = "Profile-Birthdate">
+              <div class = "Profile-Birthdate" *ngIf = '!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'>
                 <!-- BirthDate Icon => Font-Awesome -->
                 <span style="font-size: 2ex; color:#657786;">
                     <i class="fas fa-birthday-cake"></i>
@@ -27,7 +27,9 @@
                 </span>
               </div>
               
-              <!-- Button Used To make a KweeeK To The Profile User , **Hidden if Same user -->
-              <button type ="button" class="btn btn-primary Tweet-Button"  *ngIf="!isAuthorisedUser"> Tweet To {{profileHeaderInfo.username}} </button>
-              
-            </div>
+              <div class="Buttons">
+                <!-- Button Used To make a KweeeK To The Profile User , **Hidden if Same user -->
+                <button type ="button" class="btn btn-primary Kweek-Button"  *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"> Tweet To </button>
+                <button type ="button" class="btn btn-primary Msg-Button"  *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"> Message </button>
+              </div>
+          </div>

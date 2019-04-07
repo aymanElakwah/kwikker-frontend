@@ -8,7 +8,7 @@
     opacity: 0.8;
 }
 
-.EditName
+#EditName
 {
     position: relative;
     border: 1px solid #1B95E0  !important;
@@ -38,7 +38,7 @@
     font-family: "Segoe UI",Arial,sans-serif;
 }
 
-.EditBio
+#EditBio
 {
 
     position: relative;

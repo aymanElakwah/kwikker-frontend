@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'q';
 
 /**
  * The Main Component For The Profile Page
@@ -25,7 +26,7 @@ export class MainProfileComponent implements OnInit {
   {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      bio: 'My default Bio',
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
       profile_image_url: '',
@@ -42,8 +43,14 @@ export class MainProfileComponent implements OnInit {
 
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem('username');
-
   isEditingMode: boolean = false;
+  muteMode: boolean = false;
+  semiBlockedMode: boolean = false;
+  editedScreenName: string;
+  editedBio: string;
+
+
+
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
@@ -60,15 +67,76 @@ export class MainProfileComponent implements OnInit {
     this.isEditingMode = true;
   }
 
+  activatesemiBlockedMode(): void
+  {
+    this.semiBlockedMode = true;
+  }
+
   deactivateEditingMode(): void
   {
     this.isEditingMode = false;
   }
 
-  FollowUnFollowRequest(FollowOrUnFollow: boolean): void
+  toggleFollow()
   {
+    this.profileUser.following = !this.profileUser.following;
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async ShowMessage(Msg: string)
+  {
+    document.querySelector('.Msg').textContent = Msg;
+    const messageBox = document.getElementById('message-sticky');
+    messageBox.style.display = "block";
+    messageBox.style.visibility = "visible";
+    messageBox.style.transform ="translate( 0px,40px)";
+    await delay(5000);
+    messageBox.style.transform ="translate( 0px,-40px)";
+    messageBox.style.visibility = "hidden";
+  }
 
 
+  toggleMute(): void
+  {
+      this.profileUser.muted = !this.profileUser.muted;
+      this.muteMode = true;
+      if(!this.profileUser.muted)
+      {
+          this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
+      }
+      else
+      {
+         this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
+      }
+  }
+
+  toggleBlock(): void
+  {
+      this.profileUser.blocked = !this.profileUser.blocked;
+      this.semiBlockedMode = false;
+      if(this.profileUser.blocked)
+      {
+         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
+      }
+      else
+      {
+         this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
+      }
+  }
+
+  updateProfile()
+  {
+    if(this.editedScreenName == '')
+    {
+      this.ShowMessage("Name can't be blank");
+      return;
+    }
+    this.profileUser.username = this.editedScreenName;
+    this.profileUser.bio = this.editedBio;
+    this.isEditingMode = false;
   }
  
    /**

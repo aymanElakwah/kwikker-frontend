@@ -53,8 +53,8 @@
     text-align: left;
 }
 
-/* Button to be able to Kweek to that User */
-.Tweet-Button
+/* Button to be able to Kweek and Message that User */
+.Kweek-Button
 {
     background-color: #48AAE6;
     border-color: transparent;
@@ -64,13 +64,31 @@
     font-weight: bold;
     color: #fff;
     line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
+    padding: 6px 16px;  
     text-align: center;
     box-sizing: border-box;
-    display: block;
-    width: 100%;
-    margin-top: 20px
+    width: 48%;
+    margin-top: 20px;
+    margin-right: 3px; 
+}
+
+.Msg-Button
+{
+    background-color: #48AAE6;
+    border-color: transparent;
+    border-radius: 100px;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 20px;
+    padding: 6px 16px;  
+    text-align: center;
+    box-sizing: border-box;
+    width: 48%;
+    margin-top: 20px;
+    margin-left: 3px; 
+
 }
 
 .btn-primary:hover

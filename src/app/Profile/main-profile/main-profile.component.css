@@ -578,35 +578,136 @@ a {
     opacity: 10;
 }
 
-
-.message-sticky
+#message-sticky
 {
     position: absolute;
     Top:0.3%;
     Left:26.8%;
     width: 46.7%;
-    height: 9%;
-    padding: 20px;
+    height: 10%;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 0 0 6px 6px;
-    z-index:99999 !important;
-    -webkit-transition: 0.5s;
-     transition: 0.5s;
-    -webkit-transform: translate(0,40px);
-    transform: translate(0,40px);
+    z-index:9999999 !important;
+    text-align: center;
+    visibility: hidden;
+    transition: 1s;
 }
 
-.NoNameMsg
+.Msg
 {
     position: relative;
     margin: 0 20px;
+    padding: 20px 0;
     color: #66757f;
     font-size: 14px;
-    line-height: 20px;
-    text-align: center;
+    line-height: 20px;    
     word-wrap: break-word;
+    
 }
+
+
+.closebtn {
+    position: relative;
+    right: 2%;
+    Top:12%;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 15px;
+    cursor: pointer;
+    color: #66757f;
+  }
+  
+
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+
+  .MuteIcon
+  {
+      position: absolute;
+      right: 23%;
+      Top:25%;
+      cursor: pointer;
+  }
+
+  .Blocked-button
+  {
+    border-radius: 100px;
+    border: 1px solid rgb(224, 27, 27);
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color:rgb(224, 27, 27);
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    Top: 18%;
+  }
+
+  .Blocked-button:hover
+  {
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12); 
+  
+  }
+
+  .Blocked-button:hover span
+{
+    display: none;
+    
+}
+
+  .Blocked-button:hover::before
+  {
+    content: "Unblock";
+    color:#fff;
+  }
+
+  .BlockMsgBody
+  {
+    color: #66757f;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 15px;
+    transform: translate(-4px,0);
+   
+
+  }
+
+  .BlockMsgHeader
+  {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    line-height: 22px;
+    transform: translate(-4px,0);
+  }
+
+  .semiBlocked-button
+  {
+    border-radius: 100px;
+    border: 1px solid #66757f;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;;
+    background-color: #fff;
+    color: #66757f;
+    min-width: 89px;
+  }
+
+  .BlockMsg
+  {
+      margin-top: 20px;
+  }
+
 
 
 

@@ -8,7 +8,13 @@
     <div class="profile-card">
       
      <!--  The Upper Part for the banner -->
-      <div class="row banner"> </div>    
+      <div class="row banner"> 
+          <img
+            class = 'BannerImage'
+            src = "../../../assets/main/green.jpg"
+            alt="miniProfileBanner"
+            id="BannerImage"/>
+      </div>    
   
       <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
       <div class=" row profile-content">
@@ -30,18 +36,26 @@
               <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                   <li class="dropdown-item"> <P>Tweet To @{{user.screen_name}}</P></li>
+                  <li class="dropdown-item"> <P> Send a Direct Message </P></li>
                   <li class="dropdown-item"> <P> Mute @{{user.screen_name}} </P></li>
                   <li class="dropdown-item"> <P> Block @{{user.screen_name}} </P></li>
               </div>
           </div>
 
           <!-- Profile Picture Part -->
-          <div class="profile-pic">  </div>
+          <div class="profile-pic">  
+              <img
+              class = 'ProfileImage'
+              src = "../../../assets/main/Premier League.jpg"
+              alt="miniProfile Picture"
+              id="ProfileImage"/>
+          </div>
             
           <!-- Profile Info Part [Username, Screen Name, Bio] -->
           <div class="profile-data">
             <div class="username"> {{user.username}} </div>
-            <div class="screen-name">  {{user.screen_name}} </div>
+            <div class="screen-name">  @{{user.screen_name}} </div>
+            <p class="FollowsYou" *ngIf ="user.follows_you"> Follows You </p>
             <p class="bio"> {{user.bio}} </p>  
           </div>
         </div>
