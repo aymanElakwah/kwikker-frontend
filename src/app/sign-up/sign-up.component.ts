@@ -16,6 +16,8 @@ public bar3: any;
 public fs1: any;
 public fs2: any;
 public fs3: any;
+public email: string;
+public counter: number;
 constructor(private data: DataService , private router: Router) { 
    
 }
@@ -37,12 +39,25 @@ ngOnInit() {
    this.fs1=  document.querySelector('.fs1');
    this.fs2=  document.querySelector('.fs2');
    this.fs3 =  document.querySelector('.fs3');
-  
+   this.counter = 0;
 }
 /**
  * secondStep
  */
-public secondStep() {
+public secondStep(form: NgForm) {
+  if( this.counter === 0){
+    //for the first time
+  this.email = form.value.email;
+  //send
+  this.counter = 1;
+  }else{
+    //now user is toggling between pages, if he entered the same email, I wont resend a new code
+    //if he entered a new email, then I'll send him another code
+    if (form.value.email != this.email){
+      this.email = form.value.email;
+      //send
+    }
+  }
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  

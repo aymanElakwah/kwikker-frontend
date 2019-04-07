@@ -3,7 +3,7 @@
     <!-- progressbar -->
     <ul id="progressbar">
       <li class="active">Account Setup</li>
-      <li class="secondProgress">Social Profiles</li>
+      <li class="secondProgress">Email Verification</li>
       <li class="thirdProgress">Personal Details</li>
     </ul>
 
@@ -15,19 +15,18 @@
       </div>
       <h2 class="fs-title">Create your account</h2>
       <h3 class="fs-subtitle">This is step 1</h3>
-      
-      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required/>
-      <input type="password" name="pass" placeholder="Password" #password="ngModel" [(ngModel)]="pass" required/>
-      <input type="password" name="cpass" placeholder="Confirm Password" #confirm_password="ngModel" [(ngModel)]="confirm_pass" required />
-      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep()"  [disabled]="email.invalid || password.invalid ||confirm_password.invalid">Next</button>
+      <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName"  maxlength="100" required/>
+      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep(submitForm)"  [disabled]="email.invalid || username.invalid">Next</button>
+  
     </fieldset>
-
+    
+    
     <fieldset class="fs2">
-      <h2 class="fs-title">Social Profiles</h2>
-      <h3 class="fs-subtitle">Your presence on the social network</h3>
-      <input type="text" name="twitter" placeholder="Twitter" />
-      <input type="text" name="facebook" placeholder="Facebook" />
-      <input type="text" name="gplus" placeholder="Google Plus" />
+      <h2 class="fs-title">Code Confirmation</h2>
+      <h3 class="fs-subtitle">We've sent you a code at your mail, please enter it here.</h3>
+      <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
+      <input type="text" name="code" placeholder="Code" />
       <button type="submit" name="previous1" class="btn btn-primary action-button"  (click)="previousOne()" >Previous</button>
       <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="thirdStep()" >Next</button>
     </fieldset>
