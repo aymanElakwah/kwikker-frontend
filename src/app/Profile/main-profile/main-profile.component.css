@@ -482,7 +482,7 @@ a {
 
 .Profile-NavBar-Editing{
     width:100%;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.425);
     box-sizing: border-box;
     height: 60px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
@@ -491,12 +491,8 @@ a {
     transition: 0.5s;
     -webkit-transform: translate(0,138px);
     transform: translate(0,138px);
-}
-
-.Profile-NavBar-Editing
-{
     pointer-events: none;
-    opacity: 0.3;
+    
 }
 
 .Content-Editing
@@ -611,7 +607,6 @@ a {
     position: relative;
     right: 2%;
     Top:12%;
-    color: white;
     font-weight: bold;
     float: right;
     font-size: 15px;
