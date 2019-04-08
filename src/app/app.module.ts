@@ -24,6 +24,7 @@ import { ProfileModule } from './Profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
+import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
 
 
 
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     LogInComponent,
     HomeComponent,
     SignUpComponent,
+    ErrorPageComponent,
   ],
   imports: [
     SharedModule,
