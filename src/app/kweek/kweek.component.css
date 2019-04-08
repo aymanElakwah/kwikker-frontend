@@ -87,3 +87,7 @@ a, a:hover {
 #kweeks .date {
   color: #666;
 }
+
+.tooltip-style {
+  /* your own custom styles here */ 
+}

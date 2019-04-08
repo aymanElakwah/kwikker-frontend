@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,8 @@ import {FormControl} from '@angular/forms';
 @Component({
   selector: 'app-kweek',
   templateUrl: './kweek.component.html',
-  styleUrls: ['./kweek.component.css']
+  styleUrls: ['./kweek.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class KweekComponent implements OnInit {
   positionOption: TooltipPosition = 'above';
