@@ -24,6 +24,7 @@ import { ProfileModule } from './Profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
+import { ReplyComponent } from './reply/reply.component';
 
 
 
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     LogInComponent,
     HomeComponent,
     SignUpComponent,
+    ReplyComponent,
   ],
   imports: [
     SharedModule,
@@ -44,9 +46,9 @@ import { CommonModule } from '@angular/common';
     ChatModule,
     SearchModule,
     SettingsModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    // InMemoryDataService,
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+    InMemoryDataService,
+    ),
     FormsModule,
     BrowserAnimationsModule,
     CommonModule
