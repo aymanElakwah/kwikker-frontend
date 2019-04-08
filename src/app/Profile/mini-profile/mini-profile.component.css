@@ -96,7 +96,6 @@
 
 .Following
 {
-
     border-radius: 100px;
     box-shadow: none;
     font-size: 12px;
@@ -112,26 +111,62 @@
     position: absolute;
 }
 
-.btn-primary:hover
+.Following:hover
 {
     background-color: rgb(158, 4, 12); 
     border-color:   rgb(158, 4, 12); 
 }
 
-.btn-primary:active
+.Following:active
 {
     outline: none !important;
 }
 
-.btn-primary:hover span
+.Following:hover span
 {
     display: none;
 }
 
-.btn-primary:hover::before
+.Following:hover::before
 {
     content: "Unfollow"
 }
+
+.Blocked-button
+  {
+    border-radius: 100px;
+    border: 1px solid rgb(224, 27, 27);
+    box-shadow: none;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 4px 12px;
+    background-color: #fff;
+    color:rgb(224, 27, 27);
+    min-width: 89px;
+    position: absolute;
+    Top:14%;
+    Left: 1%;
+  }
+
+  .Blocked-button:hover
+  {
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12); 
+  
+  }
+
+  .Blocked-button:hover span
+{
+    display: none;
+    
+}
+
+  .Blocked-button:hover::before
+  {
+    content: "Unblock";
+    color:#fff;
+  }
 
 /* DropDownMenu Animations */
 .Dots-Icon
@@ -246,4 +281,13 @@
     font-size: 14px;
     line-height: 1.375em;
     margin-top: 12px;
+}
+
+
+.MuteIcon
+{
+    position: absolute;
+    left: -30%;
+    Top: 8%;
+    cursor: pointer;
 }

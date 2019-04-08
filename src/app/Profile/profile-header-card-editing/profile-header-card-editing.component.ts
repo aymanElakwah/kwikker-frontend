@@ -16,23 +16,27 @@ export class ProfileHeaderCardEditingComponent implements OnInit {
   /*Is The Profile for The Authorized User (The one who made Log in): Input from MainProfileComponent */
   @Input() isAuthorisedUser: boolean;
 
-  @Output() editedScreenName: EventEmitter<string> = new EventEmitter<string>();
+  @Output() editedUsername: EventEmitter<string> = new EventEmitter<string>();
   @Output() editedBio: EventEmitter<string> = new EventEmitter<string>();
   @Output() editedDate: EventEmitter<string> = new EventEmitter<string>();
 
   changeProfileData()
   {
-    this.editedScreenName.emit((document.getElementById("EditName") as HTMLInputElement).value);
+    this.editedUsername.emit((document.getElementById("EditName") as HTMLInputElement).value);
     this.editedBio.emit((document.getElementById("EditBio") as HTMLInputElement).value);
   }
   /**
    * Empty Constructor => May be used later
    */
-  constructor() { }
+  constructor() { 
+    
+  }
 
   /**
    * Empty ngOnInit => May be used later
    */
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
 }

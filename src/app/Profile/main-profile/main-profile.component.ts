@@ -42,14 +42,12 @@ export class MainProfileComponent implements OnInit {
   };
 
   /* The Authorized User (The one who made Log in) */
-  authorizedUser: string = localStorage.getItem('username');
+  authorizedUser: string = localStorage.getItem('screen-name');
   isEditingMode: boolean = false;
   muteMode: boolean = false;
   semiBlockedMode: boolean = false;
-  editedScreenName: string;
-  editedBio: string;
-
-
+  editedUsername: string = this.profileUser.username;
+  editedBio: string = this.profileUser.bio;
 
 
   /**
@@ -59,7 +57,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username != this.authorizedUser);
+    return (this.profileUser.screen_name == this.authorizedUser);
   }
 
   activateEditingMode(): void
@@ -129,12 +127,13 @@ export class MainProfileComponent implements OnInit {
 
   updateProfile()
   {
-    if(this.editedScreenName == '')
+    if(this.editedUsername === "")
     {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileUser.username = this.editedScreenName;
+
+    this.profileUser.username = this.editedUsername;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
   }

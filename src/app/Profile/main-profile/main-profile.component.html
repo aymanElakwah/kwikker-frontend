@@ -132,7 +132,7 @@
                                 <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                                 <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
                                     <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
-                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Send a Direct Message</P></li>
+                                    <li class="dropdown-item"> <P> Send a Direct Message</P></li>
                                     <li class="dropdown-item" (click)='toggleMute()' *ngIf="!profileUser?.blocked"> 
                                         <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.screen_name}} </P>
                                         <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.screen_name}} </P>
@@ -164,7 +164,7 @@
                         class='Header-Card-Editing'
                         [profileHeaderInfo] = 'profileUser'
                         [isAuthorisedUser] = 'isAuthorisedUser()'
-                        (editedScreenName) = "editedScreenName=$event"
+                        (editedUsername) = "editedUsername=$event"
                         (editedBio) = "editedBio=$event"> 
                     </app-profile-header-card-editing>
 

@@ -23,8 +23,8 @@ export class MiniProfileComponent implements OnInit {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
       profile_image_url: '',
-      following: false,
-      follows_you: false,
+      following: true,
+      follows_you: true,
       blocked: false,
       muted: false,
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
@@ -160,6 +160,12 @@ export class MiniProfileComponent implements OnInit {
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
     }
   ];
+
+  public muteModes: boolean[] =
+  [
+    false,false,false,false,false,false,false,false,false,false,false,false,false,false 
+  ]
+  
    
           /* route children name which based on it, 
   The right request will be sent  [Followers OR Followings] */
@@ -174,7 +180,22 @@ export class MiniProfileComponent implements OnInit {
   constructor(private miniProfileInfoService: DataService,
                private route: ActivatedRoute) { }
 
-               
+  toggleFollow(index: number)
+  {
+    this.miniCardProfileUsers[index].following = !this.miniCardProfileUsers[index].following;
+  }
+
+  toggleMute(index: number): void
+  {
+      this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
+      this.muteModes[index] = true;
+  }
+
+  toggleBlock(index: number): void
+  {
+      this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
+  }
+             
   //This part will be updated
   FollowersOrFollowings(): void
   {
