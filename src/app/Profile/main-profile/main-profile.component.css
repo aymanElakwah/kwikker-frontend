@@ -5,6 +5,7 @@
     margin: 0 0;
     padding: 0 0;
     overflow-x: hidden;
+    
 }
 
 .App-Container
@@ -12,7 +13,7 @@
     margin: 0 6.3%;
     height:100%;
     width: 89%;
-    overflow:hidden;  
+    overflow: visible;
 }
 
 /* Kweeks Or MiniUsers Part */
@@ -20,12 +21,14 @@
 {
     margin-top: 12px;
     overflow: hidden;
+
 }
 
 .nopadding
 {
     padding:0 0 !important;
     margin:0 0 !important;
+    overflow: visible;
 }
 
 
@@ -33,6 +36,7 @@
 {
    height:235px;
    position:relative;
+   overflow: visible;
 }
 
 .Banner
@@ -61,6 +65,7 @@
     box-sizing: border-box;
     height: 60px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    overflow-y: visible;
     line-height: 1.375;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -77,6 +82,7 @@
     color: #657786;
     font-size: 12px;
     text-align: center;
+    
 }
 
 .active
@@ -340,11 +346,18 @@ a {
 #userActionDropdownMenuButton
 {
     position: absolute;
-    right: 5%;
-    Top: 28%;
+    right: 10%;
+    Top: 80%;
     height: 30px;
+    z-index: 9999 !important;
 }
 
+#userActionDropDownMenu
+{
+    position: absolute;
+    right: 10%;
+    Top: 98%;
+}
 
 .dropdown-menu li:hover
 {
@@ -377,7 +390,7 @@ a {
     position: relative;
     right: 8%;
     margin-top:12px;
-     display: none; 
+    display: none; 
 }
 
 .left-side

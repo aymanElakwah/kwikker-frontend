@@ -65,6 +65,30 @@
                             <li class="dropdown-item"> <P> Cancel </P></li>
                         </div>
                    </div>
+
+                                             <!--User Setting Dropdown Menu -->
+                                             <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser() && !isEditingMode">
+                                                <button class="btn  btn-light DIcon"  id="userActionDropdownMenuButton" data-toggle="dropdown"> 
+                                                    <!-- 3 Dots Icon => Font-Awesome -->  
+                                                    <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </span>
+                                                </button>
+                
+                                                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                                                <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
+                                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                                    <li class="dropdown-item"> <P> Send a Direct Message</P></li>
+                                                    <li class="dropdown-item" (click)='toggleMute()' *ngIf="!profileUser?.blocked"> 
+                                                        <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.screen_name}} </P>
+                                                        <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.screen_name}} </P>
+                                                    </li>
+                                                    <li class="dropdown-item" (click)='toggleBlock()'> 
+                                                        <P *ngIf="!profileUser?.blocked"> Block @{{profileUser?.screen_name}} </P>
+                                                        <P *ngIf="profileUser?.blocked"> Unblock @{{profileUser?.screen_name}} </P>
+                                                    </li>
+                                                </div>
+                                            </div>
                     
                 <!--Profile Page Secondry NavBar [Taps, Follow & Following Buttons, DropDownMenu -->
                 <div class="row" [ngClass] = "{'Profile-NavBar':!isEditingMode, 'Profile-NavBar-Editing':isEditingMode}">
@@ -87,7 +111,7 @@
  
                                 <!--The 2nd part which contains Edit, Follow and Following Buttons 
                                         & DropDownMenu on the secondry Navbar -->
-                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!profileUser?.following && !isAuthorisedUser() && (muteMode || profileUser?.muted) && !profileUser?.blocked ">
+                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!profileUser?.following && !isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)  ">
                                     <i class="fas fa-volume-mute" 
                                        [style.opacity]= "(profileUser?.muted)? '1' : '0.5'"
                                        [style.color]= "(profileUser?.muted)? '#9e0909e3' : '#939c99'"
@@ -121,29 +145,7 @@
                             <button type="button" class="btn btn-primary cancel-button"  (click)='deactivateEditingMode()'
                                     *ngIf="isEditingMode"><span> Cancel </span></button>
                             
-                            <!--User Setting Dropdown Menu -->
-                            <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser() && !isEditingMode">
-                                <button class="btn  btn-light DIcon"  id="userActionDropdownMenuButton" data-toggle="dropdown"> 
-                                    <!-- 3 Dots Icon => Font-Awesome -->  
-                                    <span class= "Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                </button>
-
-                                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
-                                <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
-                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
-                                    <li class="dropdown-item"> <P> Send a Direct Message</P></li>
-                                    <li class="dropdown-item" (click)='toggleMute()' *ngIf="!profileUser?.blocked"> 
-                                        <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.screen_name}} </P>
-                                        <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.screen_name}} </P>
-                                    </li>
-                                    <li class="dropdown-item" (click)='toggleBlock()'> 
-                                        <P *ngIf="!profileUser?.blocked"> Block @{{profileUser?.screen_name}} </P>
-                                        <P *ngIf="profileUser?.blocked"> Unblock @{{profileUser?.screen_name}} </P>
-                                    </li>
-                                </div>
-                            </div>
+  v
                         </div>
                     </div>
                 </div>  
@@ -177,7 +179,7 @@
                 </div>
 
                 <!--  Kweeks OR MiniUsers Tab -->
-                <div class="col-9" 
+                <div class="col-9"  
                      [ngClass] = "{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
                     <router-outlet 
                     *ngIf = '!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'> 
