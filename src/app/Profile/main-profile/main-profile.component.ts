@@ -57,7 +57,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.screen_name == this.authorizedUser);
+    return (this.profileUser.screen_name != this.authorizedUser);
   }
 
   activateEditingMode(): void
