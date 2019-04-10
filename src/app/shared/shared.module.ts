@@ -7,6 +7,7 @@ import { TrendsComponent } from '../Profile/trends/trends.component';
 import { MatDialogModule, MatTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReplyComponent } from '../reply/reply.component';
+import { ImgFallbackModule } from 'ngx-img-fallback';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReplyComponent } from '../reply/reply.component';
     CommonModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ImgFallbackModule
   ],
   entryComponents: [
     ReplyComponent

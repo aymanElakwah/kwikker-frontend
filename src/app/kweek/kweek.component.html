@@ -7,7 +7,7 @@
       <div class="media border p-3">
         <img
           [src]="kweek.user.profile_image_url"
-          alt="../../assets/avatar/default.png"
+          src-fallback="../../assets/kweeks/default.png"
           class="mr-3 rounded-circle"
           id="kweek-img"
         />
@@ -33,7 +33,7 @@
               <img
                 id="media"
                 [src]="kweek.media_url"
-                alt="Can't load the image"
+                src-fallback="../../assets/kweeks/loading.png"
               />
             </div>
           </div>
