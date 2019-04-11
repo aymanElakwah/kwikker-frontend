@@ -194,7 +194,7 @@ a {
     left: 48%;
 }
 
-.editBannerText
+#editBannerText
 {
     position: absolute;
     Top: 107%;
@@ -208,7 +208,7 @@ a {
 
 
 
-.editProfilePicText
+#editProfilePicText
 {
     position: absolute;
     Top: 55%;
@@ -574,6 +574,7 @@ a {
     Left: 8%;
     Top:26%;
     z-index: 998 !important;
+    text-align: center;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     -webkit-transform: translate(0,138px);
