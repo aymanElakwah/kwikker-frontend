@@ -369,6 +369,11 @@ a {
     color: #fff !important;
 }
 
+.dropdown-item
+{
+  overflow: hidden;
+}
+
 .dropdown-item>p
 {
     color: #66757f;
@@ -382,7 +387,40 @@ a {
     position: relative;
     min-width: 100%;
     text-align: left;
+    overflow: hidden;
 }
+
+[type="file"] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;  
+  }
+
+  [type="file"] + label {
+    color: #66757f;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 5px;
+    position: relative;
+    min-width: 100%;
+    text-align: left;
+  }
+   
+
+/* .banner-input
+{
+    font-size: 999;
+    opacity: 0;
+} */
 
 /* Trends Bar In The Left */
 #Left-Profile-Trends

@@ -19,7 +19,7 @@
                          
                         <img
                         [ngClass] = "{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
-                        src = "../../../assets/main/Premier League.jpg"
+                        src = {{profileUser?.profile_image_url}}
                         alt="Profile Picture"
                         id="ProfileImage"/>
 
@@ -27,7 +27,10 @@
                             <button class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
                             <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                              <div class="dropdown-menu" id="profilePicDropDownMenu" aria-labelledby="profilePicdropdownMenuButton">
-                                <li class="dropdown-item"> <P> Upload photo</P></li>
+                                <li class="dropdown-item"> 
+                                    <input type ="file" accept=".png, .jpg, .jpeg" id="file" (change)="changeProfilePicture($event)"  /> 
+                                    <label for="file"> Upload photo </label>
+                                </li>
                                 <li class="dropdown-item"> <P> Remove </P></li>
                                 <li class="dropdown-item"> <P> Cancel </P></li>
                             </div>
@@ -44,7 +47,7 @@
                      
                     <img
                     [ngClass] = "{'BannerImage':!isEditingMode, 'BannerImage-Editing':isEditingMode}"
-                    src = "../../../assets/main/green.jpg"
+                    src = {{profileUser?.profile_banner_url}} 
                     alt="Profile Banner"
                     id="BannerImage"/>
 
@@ -60,7 +63,10 @@
                         <button class="btn  btn-light"  id="BannerDropdownMenuButton" data-toggle="dropdown"> </button>
                         <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                          <div class="dropdown-menu" id="BannerDropDownMenu" aria-labelledby="BannerDropdownMenuButton">
-                            <li class="dropdown-item"> <P> Upload photo</P></li>
+                            <li class="dropdown-item">
+                                 <input type ="file" id="file" /> 
+                                 <label for="file"> Upload photo </label>
+                                </li>
                             <li class="dropdown-item"> <P> Remove </P></li>
                             <li class="dropdown-item"> <P> Cancel </P></li>
                         </div>
