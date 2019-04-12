@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 import { ReplyComponent } from './reply/reply.component';
+import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
 
 
 
@@ -35,6 +36,7 @@ import { ReplyComponent } from './reply/reply.component';
     HomeComponent,
     SignUpComponent,
     ReplyComponent,
+    ErrorPageComponent,
   ],
   imports: [
     SharedModule,

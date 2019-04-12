@@ -19,6 +19,8 @@ export class ProfileHeaderCardComponent implements OnInit {
   /*Is The Profile for The Authorized User (The one who made Log in): Input from MainProfileComponent */
   @Input() isAuthorisedUser: boolean;
 
+  @Input() semiBlockedMode: boolean;
+
   /**
    * Empty Constructor => May be used later
    */

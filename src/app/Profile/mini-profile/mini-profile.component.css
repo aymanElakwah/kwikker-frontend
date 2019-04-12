@@ -14,7 +14,7 @@
 .nopadding
 {
     padding: 0 0 !important;
-    margin: 0 0 !important;
+    margin-left: 0.2% !important;
 }
 
 /* First Part [Banner] */
@@ -24,6 +24,12 @@
     height:90px;
     width: 290px;
     margin: 0 0;
+}
+
+.BannerImage
+{
+    height:90px;
+    width: 290px;
 }
 
 /* Second Part [UserActon, ProfilePicture, ProfileInfo] */
@@ -88,7 +94,6 @@
 
 .Following
 {
-
     border-radius: 100px;
     box-shadow: none;
     font-size: 12px;
@@ -104,26 +109,62 @@
     position: absolute;
 }
 
-.btn-primary:hover
+.Following:hover
 {
     background-color: rgb(158, 4, 12); 
     border-color:   rgb(158, 4, 12); 
 }
 
-.btn-primary:active
+.Following:active
 {
     outline: none !important;
 }
 
-.btn-primary:hover span
+.Following:hover span
 {
     display: none;
 }
 
-.btn-primary:hover::before
+.Following:hover::before
 {
     content: "Unfollow"
 }
+
+.Blocked-button
+  {
+    border-radius: 100px;
+    border: 1px solid rgb(224, 27, 27);
+    box-shadow: none;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 4px 12px;
+    background-color: #fff;
+    color:rgb(224, 27, 27);
+    min-width: 89px;
+    position: absolute;
+    Top:14%;
+    Left: 1%;
+  }
+
+  .Blocked-button:hover
+  {
+    background-color: rgb(158, 4, 12); 
+    border-color:   rgb(158, 4, 12); 
+  
+  }
+
+  .Blocked-button:hover span
+{
+    display: none;
+    
+}
+
+  .Blocked-button:hover::before
+  {
+    content: "Unblock";
+    color:#fff;
+  }
 
 /* DropDownMenu Animations */
 .Dots-Icon
@@ -162,19 +203,27 @@
 /* Profiel Picture */
 .profile-pic
 {
-    display: block;
     height: 70px;
     width: 70px;
     border: 2px solid #fff;
     border-radius: 50%;
-    display: inline-block;
     margin: -65px 2px 0 -3px;
     padding: 3px;
     position: absolute;
-    background-color:  white;
+    background-color:  #1B95E0;
     border-width: 1px;
-    border-color: #1B95E0;
     left: 0;
+}
+
+.ProfileImage
+{
+    position: absolute;
+    Left: -1%;
+    Top:0%;
+    height: 70px;
+    width: 70px;
+    border: 2px solid #fff;
+    border-radius: 50%;
 }
 
 .profile-data
@@ -202,6 +251,22 @@
     line-height: 1;
     text-align: left;
     font-family: "Segoe UI",Arial,sans-serif;
+   
+}
+
+.FollowsYou
+{
+    position: absolute;
+    Top: 41%;
+    right: 4%;
+    background-color: #e6ecf0;
+    border-radius: 4px;
+    color: #657786;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 2px;
+    padding: 2px 4px;
+    max-width: 74px;
 }
 
 .bio
@@ -214,5 +279,14 @@
     overflow: hidden;
     font-size: 14px;
     line-height: 1.375em;
-    margin-top: 8px;
+    margin-top: 12px;
+}
+
+
+.MuteIcon
+{
+    position: absolute;
+    left: -30%;
+    Top: 8%;
+    cursor: pointer;
 }

@@ -211,4 +211,43 @@ export class DataService {
                               catchError(this.handleError)
                               );
   }
+
+  unfollowUser(userName: string): Observable<any> {
+    return ;
+  }
+  
+  followUser(Username: string): Observable <any> {
+    return ; 
+  }
+
+  muteUser(Username: string): Observable <any> {
+    return ; 
+  }
+
+  blockUser(Username: string): Observable <any> {
+    return ; 
+  }
+
+  updateProfile(Username: string, Bio: string): Observable <any> {
+    return ; 
+  }
+
+  updateBanner(BannerImage: string): Observable <any> {
+    return ; 
+  }
+
+  removeBanner(): Observable <any> {
+    return ; 
+  }
+
+  
+  updateProfilePicture(ProfileImage: string): Observable <any> {
+    return ; 
+  }
+
+  removeProfilePicture(): Observable <any> {
+    return ; 
+  }
+
+
 }

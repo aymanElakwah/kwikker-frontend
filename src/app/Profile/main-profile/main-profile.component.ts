@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'q';
 
 /**
  * The Main Component For The Profile Page
@@ -23,14 +24,14 @@ export class MainProfileComponent implements OnInit {
          * */
   profileUser: User =
   {
-      username: 'ahmed',
-      screen_name: 'ahmed',
-      bio: '',
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
-      profile_image_url: '',
-      profile_banner_url: '',
-      following: true,
+      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png', 
+      profile_banner_url: null,
+      following: false,
       follows_you: false,
       followers_count: 0,
       following_count: 0,
@@ -41,7 +42,14 @@ export class MainProfileComponent implements OnInit {
   };
 
   /* The Authorized User (The one who made Log in) */
-  authorizedUser: string = localStorage.getItem('username');
+  authorizedUser: string = localStorage.getItem('screen-name');
+  isEditingMode: boolean = false;
+  muteMode: boolean = false;
+  semiBlockedMode: boolean = false;
+  editedUsername: string = this.profileUser.username;
+  editedBio: string = this.profileUser.bio;
+  defaultProfilePicture: string = 'https://i.ibb.co/z2wkPKs/Default.png'
+
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
@@ -50,7 +58,127 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username == this.authorizedUser);
+    return (this.profileUser.screen_name != this.authorizedUser);
+  }
+
+  isProfilePictureDefault(): boolean
+  {
+    return (this.profileUser.profile_image_url  == 'https://i.ibb.co/z2wkPKs/Default.png');
+  }
+
+  isProfileBannerDefault(): boolean 
+  {
+    return (this.profileUser.profile_banner_url  == null);
+  }
+
+  changeProfilePicture(event)
+  {
+       
+  }
+
+  changeProfileBanner(event)
+  {
+      
+  }
+
+  removeProfilePicture()
+  {
+       this.profileUser.profile_image_url =  null;
+       this.ShowMessage("Profile image removed");
+       
+  }
+
+  removeProfileBanner()
+  {
+       this.profileUser.profile_banner_url = null;
+       this.ShowMessage("No more header for you");
+  }
+  
+
+  activateEditingMode(): void
+  {
+    this.isEditingMode = true;
+  }
+
+  activateEditingModeProfilePicture(): void
+  {
+/*     this.isEditingMode = true; */
+    const DropDown = document.getElementById('profilePicDropDownMenu');
+    
+ 
+  }
+
+  activatesemiBlockedMode(): void
+  {
+    this.semiBlockedMode = true;
+  }
+
+  deactivateEditingMode(): void
+  {
+    this.isEditingMode = false;
+  }
+
+  toggleFollow()
+  {
+    this.profileUser.following = !this.profileUser.following;
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async ShowMessage(Msg: string)
+  {
+    document.querySelector('.Msg').textContent = Msg;
+    const messageBox = document.getElementById('message-sticky');
+    messageBox.style.display = "block";
+    messageBox.style.visibility = "visible";
+    messageBox.style.transform ="translate( 0px,40px)";
+    await delay(5000);
+    messageBox.style.transform ="translate( 0px,-40px)";
+    messageBox.style.visibility = "hidden";
+  }
+
+
+  toggleMute(): void
+  {
+      this.profileUser.muted = !this.profileUser.muted;
+      this.muteMode = true;
+      if(!this.profileUser.muted)
+      {
+          this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
+      }
+      else
+      {
+         this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
+      }
+  }
+
+  toggleBlock(): void
+  {
+      this.profileUser.blocked = !this.profileUser.blocked;
+      this.semiBlockedMode = false;
+      if(this.profileUser.blocked)
+      {
+         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
+      }
+      else
+      {
+         this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
+      }
+  }
+
+  updateProfile()
+  {
+    if(this.editedUsername === "")
+    {
+      this.ShowMessage("Name can't be blank");
+      return;
+    }
+
+    this.profileUser.username = this.editedUsername;
+    this.profileUser.bio = this.editedBio;
+    this.isEditingMode = false;
   }
  
    /**

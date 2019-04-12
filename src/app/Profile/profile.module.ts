@@ -6,22 +6,29 @@ import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
+import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-card-editing/profile-header-card-editing.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ComboDatepickerModule } from 'ngx-combo-datepicker';
 
 
 /**
  * The Module That is resposible for The Profile Page
  */
+
+
 @NgModule({
   declarations: [
     MainProfileComponent,                //The main architecture for the profile page
     ProfileHeaderCardComponent,          //Profile User Information Card
     MiniProfileComponent,                //Small card for any other user Information
-    ProfileKweeksTabComponent,           //All Kweeks that written or liked By The profile user + Trends Tab 
+    ProfileKweeksTabComponent, ProfileHeaderCardEditingComponent,            //All Kweeks that written or liked By The profile user + Trends Tab 
   ],
 
   imports: [
     CommonModule,
     SharedModule,
+    ScrollingModule,
+    ComboDatepickerModule,
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [
@@ -32,7 +39,10 @@ import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile
         {path: 'likes', component: ProfileKweeksTabComponent }
       ]} 
     ])
-  ]
+  ],
 })
 
-export class ProfileModule { }
+export class ProfileModule { 
+
+
+}
