@@ -22,7 +22,7 @@
           <!-- User Action Part Includes [DropDownMenu, Follow & Following Button] -->
           <div class="user-action">
 
-              <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="muteModes[i] && !user?.blocked">
+              <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="(muteModes[i] || user?.muted) && !user?.blocked">
                   <i class="fas fa-volume-mute" 
                      [style.opacity]= "(user?.muted)? '1' : '0.5'"
                      [style.color]= "(user?.muted)? '#9e0909e3' : '#939c99'"
@@ -64,11 +64,11 @@
 
           <!-- Profile Picture Part -->
           <div class="profile-pic">  
-              <img
-              class = 'ProfileImage'
-              src = "../../../assets/main/Premier League.jpg"
-              alt="miniProfile Picture"
-              id="ProfileImage"/>
+            <img
+            class = "ProfileImage"
+            src = {{user?.profile_image_url}}  
+            id= "ProfileImage"
+            onerror="arguments[0].currentTarget.style.display='none'"/>
           </div>
             
           <!-- Profile Info Part [Username, Screen Name, Bio] -->

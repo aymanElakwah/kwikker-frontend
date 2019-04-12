@@ -17,15 +17,16 @@
                  <!--ProfilePicture Image-->
                  <div  [ngClass] = "{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">  <!--User Setting Dropdown Menu -->
                          
-                        <img
+                        <img *ngIf = "!isAuthorisedUser() || !isProfilePictureDefault()"
                         [ngClass] = "{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
                         src = {{profileUser?.profile_image_url}}
-                        alt="Profile Picture"
-                        id="ProfileImage"/>
+                        
+                        id="ProfileImage"
+                        onerror="arguments[0].currentTarget.style.display='none'"/>
                        
-                        <button class="btn  btn-light" *ngIf="!isEditingMode && isProfilePictureDefault()" 
+                        <button class="btn  btn-light" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()" 
                         id="profilePicdropdownMenuButton" (click)="activateEditingMode()"> </button>
-                        <span class= "Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isProfilePictureDefault()">
+                        <span class= "Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()">
                                 <i class="fas fa-camera fa-4x"></i>
                         </span> 
 
@@ -46,7 +47,7 @@
                         <span class= "Image-Icon" style="color:#fff" *ngIf="isEditingMode">
                                 <i class="far fa-images fa-4x"></i>
                         </span> 
-                        <p id ="editProfilePicText" *ngIf="isEditingMode"> Change your profile photo </p>
+                        <p  [ngClass] = "{'editProfilePicText':!isProfilePictureDefault() , 'editProfilePicText-default':isProfilePictureDefault()}"  *ngIf="isEditingMode"> </p>
                  </div>
 
                 <!--Banner Image-->
@@ -55,9 +56,9 @@
                     <img
                     [ngClass] = "{'BannerImage':!isEditingMode, 'BannerImage-Editing':isEditingMode}"
                     src = {{profileUser?.profile_banner_url}} 
-                    alt="Profile Banner"
+                    onerror="arguments[0].currentTarget.style.display='none'"
                     id="BannerImage"/>
-
+                   
                     <div class="App-Container">           
                     </div>
 
@@ -65,7 +66,8 @@
                 <span class= "Camera-Icon" style="color:#ffff" *ngIf="isEditingMode">
                         <i class="fas fa-camera fa-4x"></i>
                 </span> 
-                <p id ="editBannerText" *ngIf="isEditingMode"> Change your header photo </p>
+                <p  [ngClass] = "{'editBannerText':!isProfileBannerDefault() , 'editBannerText-default':isProfileBannerDefault()}" 
+                    *ngIf="isEditingMode"> </p>
                 <div class="user-setting-dropdown" *ngIf="isEditingMode">
                         <button class="btn  btn-light"  id="BannerDropdownMenuButton" data-toggle="dropdown"> </button>
                         <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
@@ -124,7 +126,7 @@
  
                                 <!--The 2nd part which contains Edit, Follow and Following Buttons 
                                         & DropDownMenu on the secondry Navbar -->
-                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!profileUser?.following && !isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)  ">
+                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)  ">
                                     <i class="fas fa-volume-mute" 
                                        [style.opacity]= "(profileUser?.muted)? '1' : '0.5'"
                                        [style.color]= "(profileUser?.muted)? '#9e0909e3' : '#939c99'"

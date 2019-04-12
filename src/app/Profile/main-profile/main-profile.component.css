@@ -13,7 +13,7 @@
     margin: 0 6.3%;
     height:100%;
     width: 89%;
-    overflow: visible;
+    overflow: hidden;
 }
 
 /* Kweeks Or MiniUsers Part */
@@ -111,7 +111,7 @@ a {
 /* Profile Picture */
 .Profile-Picture
 {
-    background-color:#fff;
+    background-color:#1B95E0;
     border: 5px solid #fff;
     border-radius: 50%;
     height: 200px;
@@ -194,7 +194,7 @@ a {
     left: 48%;
 }
 
-#editBannerText
+.editBannerText
 {
     position: absolute;
     Top: 107%;
@@ -206,9 +206,33 @@ a {
     text-align: center;
 }
 
+.editBannerText::after
+{
+    content: "Change your header photo";
+}
 
 
-#editProfilePicText
+
+.editBannerText-default
+{
+    position: absolute;
+    Top: 107%;
+    left: 43.5%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 32px;
+    text-align: center;
+}
+
+.editBannerText-default::after
+{
+    content: "Add a header photo";
+}
+
+
+
+.editProfilePicText
 {
     position: absolute;
     Top: 55%;
@@ -219,11 +243,42 @@ a {
     text-align: center;
 }
 
+
+.editProfilePicText::after
+{
+    content: "Change your profile photo";
+}
+
+.editProfilePicText-default
+{
+    position: absolute;
+    Top: 55%;
+    left:7%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: center;
+}
+
+
+.editProfilePicText-default::after
+{
+    content: "Add a profile photo";
+}
+
 .Image-Icon
 {
     position: absolute;
     Top: 30%;
     left: 38%;
+}
+
+.Default-Image-Icon
+{
+    position: absolute;
+    Top: 40%;
+    left: 40%;
 }
 
 

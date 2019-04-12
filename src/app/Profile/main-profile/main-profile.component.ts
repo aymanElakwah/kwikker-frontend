@@ -29,8 +29,8 @@ export class MainProfileComponent implements OnInit {
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
-      profile_image_url: 'https://i.ibb.co/KDgqxnH/green.jpg',
-      profile_banner_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png', 
+      profile_banner_url: 'https://i.ibb.co/KDgqxnH/green.jpg',
       following: false,
       follows_you: false,
       followers_count: 0,
@@ -48,9 +48,8 @@ export class MainProfileComponent implements OnInit {
   semiBlockedMode: boolean = false;
   editedUsername: string = this.profileUser.username;
   editedBio: string = this.profileUser.bio;
-  defaultProfilePicture: string = 'https://i.ibb.co/X74ncSm/Premier-League.jpg';
-  defaultProfileBanner: string = 'https://i.ibb.co/KDgqxnH/green.jpg';
-  
+  defaultProfilePicture: string = 'https://i.ibb.co/z2wkPKs/Default.png'
+
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
@@ -64,12 +63,12 @@ export class MainProfileComponent implements OnInit {
 
   isProfilePictureDefault(): boolean
   {
-    return (this.profileUser.profile_image_url  == this.defaultProfilePicture);
+    return (this.profileUser.profile_image_url  == 'https://i.ibb.co/z2wkPKs/Default.png');
   }
 
   isProfileBannerDefault(): boolean 
   {
-    return (this.profileUser.profile_banner_url  == this.defaultProfileBanner);
+    return (this.profileUser.profile_banner_url  == null);
   }
 
   changeProfilePicture(event)
@@ -84,20 +83,14 @@ export class MainProfileComponent implements OnInit {
 
   removeProfilePicture()
   {
-       this.profileUser.profile_image_url =  this.defaultProfilePicture;
-       var ProfilePicText = document.getElementById('editProfilePicText');
-       ProfilePicText.textContent =  "Add a profile photo";
-       ProfilePicText.style.transform ="translate( 10px,0px)";
+       this.profileUser.profile_image_url =  null;
        this.ShowMessage("Profile image removed");
        
   }
 
   removeProfileBanner()
   {
-       this.profileUser.profile_banner_url = this.defaultProfileBanner;
-       var BannerText = document.getElementById('editBannerText');
-       BannerText.textContent =  "Add a header photo";
-       BannerText.style.transform ="translate( 27px,0px)";
+       this.profileUser.profile_banner_url = null;
        this.ShowMessage("No more header for you");
   }
   
@@ -105,21 +98,6 @@ export class MainProfileComponent implements OnInit {
   activateEditingMode(): void
   {
     this.isEditingMode = true;
-
-    if(this.isProfilePictureDefault())
-    {
-       var ProfilePicText = document.getElementById('editProfilePicText');
-       ProfilePicText.textContent =  "Add a profile photo";
-       ProfilePicText.style.transform ="translate( 10px,0px)";
-    }
-
-    if(this.isProfileBannerDefault())
-    {
-       var BannerText = document.getElementById('editBannerText');
-       BannerText.textContent =  "Add a header photo";
-       BannerText.style.transform ="translate( 27px,0px)";
-    }
-  
   }
 
   activatesemiBlockedMode(): void

@@ -22,7 +22,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
       following: true,
       follows_you: true,
       blocked: false,
@@ -32,7 +32,17 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: true,
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
+    },
+    {
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -42,7 +52,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -52,7 +62,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -62,7 +72,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -72,7 +82,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -82,7 +92,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -92,7 +102,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -102,7 +112,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -112,7 +122,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -122,7 +132,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -132,7 +142,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
@@ -142,17 +152,7 @@ export class MiniProfileComponent implements OnInit {
     {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: '',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
       following: false,
       follows_you: false,
       blocked: false,
