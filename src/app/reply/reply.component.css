@@ -19,6 +19,6 @@
 
 .mat-dialog-content {
     padding: 0;
-    border-radius: 8px;
-    overflow-y: scroll;
+    border-radius: 20px;
+    background-color: #412521;
 }
