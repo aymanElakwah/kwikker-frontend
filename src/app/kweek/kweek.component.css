@@ -61,6 +61,10 @@ a, a:hover {
   color: #1da1f2;
 }
 
+.kweeks {
+  width: 100%;
+}
+
 .kweeks .kweek-user .screen_name {
   color: #222;
   font-weight: bold;

@@ -12,7 +12,7 @@ export class KweeksService {
    * No Parameters
    * @returns void
    */
-  injectTagsInText(kweeks: Kweek): void {
+  injectTagsInText(kweeks: Kweek[]): void {
     const hashtagStartTagOpen = '<a href=\'';
     const mentionStartTagOpen = '<a href=\'';
     const startTagClose = '\'>';

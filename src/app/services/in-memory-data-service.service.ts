@@ -205,7 +205,7 @@ export class InMemoryDataService {
           'rekweeked_by_user': true
         },
         {
-          'id': '1',
+          'id': '2',
           'created_at': '2011-04-11T10:20:30Z',
           'text': '@a @b #c d d #e @f abdulrahman',
           'media_url': '',
@@ -264,7 +264,7 @@ export class InMemoryDataService {
           'rekweeked_by_user': false
         },
         {
-          'id': '1',
+          'id': '3',
           'created_at': '2011-04-11T10:20:30Z',
           'text': 'hello world',
           'media_url': 'https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png',
@@ -295,7 +295,7 @@ export class InMemoryDataService {
     ];
 
     const REPLY1 = [ {
-      'id': '1',
+      'id': '4',
       'created_at': '2011-04-11T10:20:30Z',
       'text': 'hello world #abdulrahman_khalid abdulrahman @abdulrahman',
       'media_url': 'https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png',

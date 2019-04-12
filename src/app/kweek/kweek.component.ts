@@ -49,6 +49,7 @@ export class KweekComponent implements OnInit {
     // } else {
       this.kweekService.getKweeks().subscribe(lists => {
         this.kweeks = lists;
+        this.kweekFunc.injectTagsInText(this.kweeks);
       });
     // }
 
