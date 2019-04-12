@@ -42,6 +42,7 @@ export class ReplyComponent implements OnInit {
     this.roots.push(kweek);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
+    dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
     this.dialogRef.close();
