@@ -5,7 +5,10 @@ import { Kweek } from '../model/kweek';
   providedIn: 'root'
 })
 export class KweeksService {
-
+  /**
+   * No Params
+   * No Return
+   */
   constructor() { }
     /**
    * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
@@ -133,5 +136,15 @@ export class KweeksService {
       }
       kweek.text = str; // finally make the kweek text equals the injected str
     });
+  }
+
+  like(kweek: Kweek): void {
+    kweek.liked_by_user = !kweek.liked_by_user;
+    kweek.liked_by_user ?  kweek.number_of_likes++ : kweek.number_of_likes--;
+  }
+
+  rekweek(kweek: Kweek): void {
+    kweek.rekweeked_by_user = !kweek.rekweeked_by_user;
+    kweek.rekweeked_by_user ?  kweek.number_of_rekweeks++ : kweek.number_of_rekweeks--;
   }
 }

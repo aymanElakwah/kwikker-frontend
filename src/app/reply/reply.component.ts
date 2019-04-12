@@ -49,4 +49,12 @@ export class ReplyComponent implements OnInit {
       this.roots = [];
     });
   }
+
+  likeOrUnlike(kweek: Kweek): void {
+    this.kweekFunc.like(kweek);
+  }
+
+  rekweekOrUnRekweek(kweek: Kweek): void {
+    this.kweekFunc.rekweek(kweek);
+  }
 }

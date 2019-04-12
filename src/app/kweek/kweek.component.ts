@@ -98,4 +98,12 @@ export class KweekComponent implements OnInit {
       this.roots = [];
     });
   }
+
+  likeOrUnlike(kweek: Kweek): void {
+    this.kweekFunc.like(kweek);
+  }
+
+  RekweekOrUnRekweek(kweek: Kweek): void {
+    this.kweekFunc.rekweek(kweek);
+  }
 }

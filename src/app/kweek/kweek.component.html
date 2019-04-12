@@ -58,7 +58,7 @@
               </div>
               <!-- Rest lines to know if the user liked or rekweeked this kweek -->
               <div class="col-2" *ngIf="kweek.rekweeked_by_user">
-                <span class="rekweeked">
+                <span class="rekweeked" (click)="rekweekOrUnRekweek(kweek)">
                   <span
                     matTooltip="Undo Rekweek"
                     matTooltipClass="tooltip-style"
@@ -76,7 +76,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="!kweek.rekweeked_by_user">
-                <span class="rekweek">
+                <span class="rekweek" (click)="rekweekOrUnRekweek(kweek)">
                   <span
                     matTooltip="Rekweek"
                     matTooltipClass="tooltip-style"
@@ -94,7 +94,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="kweek.liked_by_user">
-                <span class="liked">
+                <span class="liked" (click)="likeOrUnlike(kweek)">
                   <span
                   matTooltip="Undo Like"
                   matTooltipClass="tooltip-style"
@@ -110,7 +110,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="!kweek.liked_by_user">
-                <span class="like">
+                <span class="like" (click)="likeOrUnlike(kweek)">
                   <span
                     matTooltip="Like"
                     matTooltipClass="tooltip-style"
