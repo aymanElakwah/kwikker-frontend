@@ -79,10 +79,12 @@ a, a:hover {
   text-decoration: none;
 }
 
-.kweeks .kweek-user:hover .screen_name {
+.kweeks .kweek-user:hover .screen_name, 
+#rekweeked-screen_name:hover {
   text-decoration: underline;
   color: #1da1f2;
 }
+
 .kweeks .date {
   color: #666;
 }
@@ -96,4 +98,19 @@ a, a:hover {
 
 .pointer:hover {
   background-color: #e6ecf0;
+}
+
+#rekweeked-info {
+  color: #657786;
+  font-size: 14px;
+  margin: 3px 30px;
+}
+
+.media {
+  padding: 9px 12px;
+}
+
+#rekweeked-screen_name {
+  color: #657786;
+  text-decoration: none;
 }
