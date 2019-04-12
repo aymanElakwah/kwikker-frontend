@@ -21,7 +21,6 @@ export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
-  
   private base: String = 'http://8978be66.ngrok.io/';
   constructor(private http: HttpClient) { }
 
@@ -120,6 +119,28 @@ export class DataService {
     return this.http
       .get<Kweek[]>('api/KWK')
       .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * get replies from in memory data service to test the replies
+   * No Parameters
+   * @returns array of replies
+  */
+  getReplies1(): Observable<Kweek[]> {
+  return this.http
+    .get<Kweek[]>('api/REPLY1')
+    .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * get replies from in memory data service to test the replies
+   * No Parameters
+   * @returns array of replies
+  */
+  getReplies2(): Observable<Kweek[]> {
+  return this.http
+    .get<Kweek[]>('api/REPLY2')
+    .pipe(catchError(this.handleError));
   }
 
   /**
