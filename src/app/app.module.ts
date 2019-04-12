@@ -24,8 +24,6 @@ import { ProfileModule } from './Profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
-import { ReplyComponent } from './reply/reply.component';
-
 
 
 @NgModule({
@@ -34,7 +32,6 @@ import { ReplyComponent } from './reply/reply.component';
     LogInComponent,
     HomeComponent,
     SignUpComponent,
-    ReplyComponent,
   ],
   imports: [
     SharedModule,

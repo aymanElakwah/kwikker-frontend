@@ -7,6 +7,7 @@ import { MiniUser } from './mini-user';
  * The Main Model for the Kweeks In The Website
  */
 export interface Kweek {
+  forEach(arg0: (kweek: any) => void);
     /** Each Kweekd has a unique ID */
     id: string;
      /** The Date that this Kweeks Written at */

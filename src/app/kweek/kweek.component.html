@@ -1,15 +1,14 @@
 <div *ngIf="kweeks && kweeks.length">
   <!-- check if kweeks exists -->
-  <div *ngFor="let kweek of kweeks" id="kweeks">
+  <div *ngFor="let kweek of kweeks" class="kweeks">
     <!-- loop the kweeks as every kweek has the name kweek -->
     <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-    <div class="container p-0" *ngIf="!kweek.user.muted" id="kweek-style">
+    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
       <div class="media border p-3">
         <img
           [src]="kweek.user.profile_image_url"
           src-fallback="../../assets/kweeks/default.png"
-          class="mr-3 rounded-circle"
-          id="kweek-img"
+          class="mr-3 rounded-circle kweek-img"
         />
         <!-- alt could be a pic in our files -->
         <div class="media-body">
@@ -25,7 +24,7 @@
               >
             </div>
           </div>
-          <div (click)="openDialog()">
+          <div (click)="openDialog(kweek)">
             <div>
               <p [innerHTML]="kweek.text"></p>
             </div>
@@ -40,7 +39,7 @@
           <div class="container-fluid" style="margin-top:12px;">
             <div class="row">
               <div class="col-2">
-                <span id="reply">
+                <span class="reply">
                   <span  
                   matTooltip="Reply"
                   matTooltipClass="tooltip-style"
@@ -59,7 +58,7 @@
               </div>
               <!-- Rest lines to know if the user liked or rekweeked this kweek -->
               <div class="col-2" *ngIf="kweek.rekweeked_by_user">
-                <span id="rekweeked">
+                <span class="rekweeked">
                   <span
                     matTooltip="Undo Rekweek"
                     matTooltipClass="tooltip-style"
@@ -77,7 +76,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="!kweek.rekweeked_by_user">
-                <span id="rekweek">
+                <span class="rekweek">
                   <span
                     matTooltip="Rekweek"
                     matTooltipClass="tooltip-style"
@@ -95,7 +94,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="kweek.liked_by_user">
-                <span id="liked">
+                <span class="liked">
                   <span
                   matTooltip="Undo Like"
                   matTooltipClass="tooltip-style"
@@ -111,7 +110,7 @@
                 </span>
               </div>
               <div class="col-2" *ngIf="!kweek.liked_by_user">
-                <span id="like">
+                <span class="like">
                   <span
                     matTooltip="Like"
                     matTooltipClass="tooltip-style"
