@@ -158,15 +158,54 @@ export class MiniProfileComponent implements OnInit {
       blocked: false,
       muted: false,
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
+    },
+    {
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
+    },
+    {
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
+    },
+    {
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
+    },
+    {
+      username: 'Ahmed Mahmoud',
+      screen_name: 'Ahmed_Mahmoud14',
+      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
+      following: false,
+      follows_you: false,
+      blocked: false,
+      muted: false,
+      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
     }
   ];
 
   public muteModes: boolean[] =
   [
     false,false,false,false,false,false,false,false,false,false,false,false,false,false 
-  ]
+  ];
   
-   
           /* route children name which based on it, 
   The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;

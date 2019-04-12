@@ -7,11 +7,15 @@ import { ProfileHeaderCardComponent } from './profile-header-card/profile-header
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-card-editing/profile-header-card-editing.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ComboDatepickerModule } from 'ngx-combo-datepicker';
 
 
 /**
  * The Module That is resposible for The Profile Page
  */
+
+
 @NgModule({
   declarations: [
     MainProfileComponent,                //The main architecture for the profile page
@@ -23,6 +27,8 @@ import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-car
   imports: [
     CommonModule,
     SharedModule,
+    ScrollingModule,
+    ComboDatepickerModule,
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [
@@ -33,7 +39,10 @@ import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-car
         {path: 'likes', component: ProfileKweeksTabComponent }
       ]} 
     ])
-  ]
+  ],
 })
 
-export class ProfileModule { }
+export class ProfileModule { 
+
+
+}

@@ -3,6 +3,7 @@ import { User } from '../../model/user';
 
 
 
+
 @Component({
   selector: 'app-profile-header-card-editing',
   templateUrl: './profile-header-card-editing.component.html',
@@ -19,6 +20,8 @@ export class ProfileHeaderCardEditingComponent implements OnInit {
   @Output() editedUsername: EventEmitter<string> = new EventEmitter<string>();
   @Output() editedBio: EventEmitter<string> = new EventEmitter<string>();
   @Output() editedDate: EventEmitter<string> = new EventEmitter<string>();
+
+  Years: number[] = []
 
   changeProfileData()
   {

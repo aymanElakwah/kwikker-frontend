@@ -23,16 +23,14 @@
                         
                         id="ProfileImage"
                         onerror="arguments[0].currentTarget.style.display='none'"/>
-                       
-                        <button class="btn  btn-light" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()" 
-                        id="profilePicdropdownMenuButton" (click)="activateEditingMode()"> </button>
+               
                         <span class= "Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()">
                                 <i class="fas fa-camera fa-4x"></i>
                         </span> 
 
 
-                       <div class="user-setting-dropdown" *ngIf="isEditingMode">
-                            <button class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
+                       <div class="user-setting-dropdown" *ngIf="isProfilePictureDefault() && isAuthorisedUser()" >
+                            <button (click)="isEditingMode = true" class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
                             <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                              <div class="dropdown-menu" id="profilePicDropDownMenu" aria-labelledby="profilePicdropdownMenuButton">
                                 <li class="dropdown-item"> 

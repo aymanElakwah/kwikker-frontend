@@ -30,7 +30,7 @@ export class MainProfileComponent implements OnInit {
       birth_date: new Date,
       created_at: new Date,
       profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png', 
-      profile_banner_url: 'https://i.ibb.co/KDgqxnH/green.jpg',
+      profile_banner_url: null,
       following: false,
       follows_you: false,
       followers_count: 0,
@@ -98,6 +98,14 @@ export class MainProfileComponent implements OnInit {
   activateEditingMode(): void
   {
     this.isEditingMode = true;
+  }
+
+  activateEditingModeProfilePicture(): void
+  {
+/*     this.isEditingMode = true; */
+    const DropDown = document.getElementById('profilePicDropDownMenu');
+    
+ 
   }
 
   activatesemiBlockedMode(): void
