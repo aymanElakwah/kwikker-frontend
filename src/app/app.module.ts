@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
 import { ReplyComponent } from './reply/reply.component';
 import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
 import { MaterialModule } from './material.module';
+import { confirmCode } from './sign-up/confirmCode.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MaterialModule } from './material.module';
     HomeComponent,
     SignUpComponent,
     ReplyComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    confirmCode
     ],
   imports: [
     SharedModule,
@@ -54,7 +56,8 @@ import { MaterialModule } from './material.module';
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,
-    MaterialModule
+    MaterialModule,
+
   ],
   
   // to do move this services in needed modules

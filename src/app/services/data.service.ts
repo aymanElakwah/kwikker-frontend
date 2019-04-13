@@ -224,7 +224,21 @@ public signUpUSer(user: any): Observable <any> {
                               catchError(this.handleError)
                               );  
 }
+/**
+ * signUpConfirm
+ */
+public signUpConfirm(code: any): Observable <any> {
+  const body = JSON.stringify(code);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + '/account/registration', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
 
+  
+}
   unfollowUser(userName: string): Observable<any> {
     return ;
   }

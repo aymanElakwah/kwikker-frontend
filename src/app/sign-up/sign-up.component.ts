@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form } from '@angular/forms';
-import { NgStyle } from '@angular/common';
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
@@ -62,7 +61,7 @@ public secondStep() {
   const user = form.value;
   user.datepicker = this.redesignDateFormat(form.value.datepicker);
   var toSend = { 
-    username:user.username , 
+    username:user.username, 
     email:user.email ,
     password:user.pass,
     screen_name: user.screenname,
