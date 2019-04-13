@@ -22,7 +22,7 @@ export class DataService {
   // constructor(private http: HttpClient) {}
 
   
-  private base: String = 'http://5d72f606.ngrok.io/';
+  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
   constructor(private http: HttpClient) { }
 
   /**
@@ -439,7 +439,7 @@ public signUpUser(user: any): Observable <any> {
   const body = JSON.stringify(user);
   console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + '/account/registration', body, headers)
+  return this.http.post<any>(this.base + 'account/registration', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -453,7 +453,7 @@ public sendEmail(user: any): Observable <any> {
   const body = JSON.stringify(user);
   console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + '/account/forget_password', body, headers)
+  return this.http.post<any>(this.base + 'account/forget_password', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -478,7 +478,7 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
 
   }
   //else, confirming email
-  return this.http.post<any>(this.base + '/account/registration/confirmtation', body, headers)
+  return this.http.post<any>(this.base + 'account/registration/confirmtation', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
