@@ -19,7 +19,6 @@ import { KweekComponent } from '../kweek/kweek.component';
   declarations: [
   NavBarComponent,
   ProfilesListComponent,
-  KweekComponent,
   TrendsComponent,
   NewKweekComponent,
   TrendsComponent
