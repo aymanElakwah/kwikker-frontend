@@ -12,15 +12,18 @@ export class LogInComponent implements OnInit {
   public mail: string;
   public pass: string;
   public isLoggedIn: boolean;
+  public msg: any;
+
   constructor(private data: DataService , private router: Router) {
 
    }
    ngOnInit() {
      //if the user is already registered, no need to show him the log in page
-    if(!isNull( localStorage.getItem('TOKEN')))
-      {
-        this.router.navigate(['/home']);
-      }
+    // if(!isNull( localStorage.getItem('TOKEN')))
+    //   {
+    //     this.router.navigate(['/home']);
+    //   }
+      this.msg =  document.querySelector('.progress');
     }
 /**
    *
@@ -32,20 +35,27 @@ export class LogInComponent implements OnInit {
   submitForm(form: NgForm) {
     this.isLoggedIn = false;
     const user = form.value;
-    this.mail = form.value.mail;
     var ev: (err: any) => void;
     this.data.logInUser(user)
       .subscribe(
        res => {
          console.log(res);
          localStorage.setItem('TOKEN', res.token);
-         localStorage.setItem('username', res.email);
+         localStorage.setItem('username', this.mail);
          this.router.navigate(['/home']);
        },
-        err => console.log('error: ', err)
+        err => {
+          console.log('error: ', err);
+          this.showErrorMSg();
+        }
     );
     this.isLoggedIn = true;
   }
-  
+  /**
+   * showErrorMSg
+   */
+  public showErrorMSg() {
+   this.msg.className = 'show';
+  }
 
 }

@@ -16,7 +16,10 @@ export class confirmCode implements OnInit {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
         //send to the service
         //redirect to home as if he was logged in, save token and email
-        this.data.signUpConfirm(this.confirmCode,1)
+        var toSend = { 
+          confirmation_code:this.confirmCode
+       };
+        this.data.signUpConfirm(toSend)
         .subscribe(
          res => {
            console.log(res);

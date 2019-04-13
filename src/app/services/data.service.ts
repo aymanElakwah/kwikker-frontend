@@ -22,7 +22,7 @@ export class DataService {
   // constructor(private http: HttpClient) {}
 
   
-  private base: String = 'http://01fb0908.ngrok.io/';
+  private base: String = 'http://28c1584e.ngrok.io/';
   constructor(private http: HttpClient) { }
 
   /**
@@ -463,22 +463,13 @@ public sendEmail(user: any): Observable <any> {
 /**
  * signUpConfirm
  */
-public signUpConfirm(code: any, whichone: number): Observable <any> {
+public signUpConfirm(code: any): Observable <any> {
   const body = JSON.stringify(code);
+  console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
   
-  if (whichone == 0)
-  {
-    //resetting password
-    return this.http.post<any>(this.base + 'account/forget-password/confirmation', body, headers)
-                                  .pipe(
-                                  map(res => res),
-                                  catchError(this.handleError)
-                                  );  
-
-  }
   //else, confirming email
-  return this.http.post<any>(this.base + 'account/registration/confirmtation', body, headers)
+  return this.http.post<any>(this.base + 'account/registration/confirmation', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -504,5 +495,31 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
                                   catchError(this.handleError)
                                 );
   }
+
+  
+/**
+ * sendPass
+ */
+public sendPass(pass: any): Observable <any> {
+  const body = JSON.stringify(pass);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + 'user/password', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+ 
+}
+
+
+
+
+
+
+
+
+
+
 
 }

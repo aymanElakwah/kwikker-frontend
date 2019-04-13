@@ -18,6 +18,8 @@ public bar3: any;
 public fs1: any;
 public fs2: any;
 public fs3: any;
+public cool: any;
+public errorOccured: any;
 public email: string;
 public counter: number;
 constructor(private data: DataService , private router: Router) { 
@@ -45,6 +47,8 @@ ngOnInit() {
    this.fs1=  document.querySelector('.fs1');
    this.fs2=  document.querySelector('.fs2');
    this.fs3 =  document.querySelector('.fs3');
+   this.cool =  document.querySelector('.progress');
+   this.errorOccured =  document.querySelector('.errorOccured');
    this.counter = 0;
 }
 
@@ -70,15 +74,35 @@ public secondStep() {
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
-  
+ console.log (toSend);
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
          console.log(res);
+         this.whatToShow(0);
        },
-        err => console.log('error: ', err)
+        err => {
+          console.log('error: ', err);
+          this.whatToShow(1);
+        }
     ); 
     
+}
+/**
+ * whatToShow
+ */
+public whatToShow(id: number) {
+  if(id == 0)
+  {
+    //no error
+    this.cool.className = 'show';
+    this.errorOccured.className = 'hide';
+  }
+  else{
+    //error
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'show';
+  }
 }
  public previousOne (){
    this.bar2.className = 'disabled';
@@ -147,6 +171,7 @@ redesignDateFormat(date: string): string {
  monthNum = monthNum -1;
   const day = Number(dataArray2[2]);
   const year = Number(dataArray2[3]);
+  
  return (new Date(year, monthNum, day)).toLocaleDateString();
 }
 
