@@ -16,7 +16,6 @@ import { DataService } from 'src/app/services/data.service';
 export class MiniProfileComponent implements OnInit {
 
   /* Array of MiniUsers To get some of the following and followers Info */
-           /* Initialised with Dummy Data To Show Template */
   public miniCardProfileUsers: MiniUser[] =
   [
     {
@@ -201,6 +200,7 @@ export class MiniProfileComponent implements OnInit {
     }
   ];
 
+   /* Array of MuteModes for each MiniUsers */
   public muteModes: boolean[] =
   [
     false,false,false,false,false,false,false,false,false,false,false,false,false,false 
@@ -219,20 +219,65 @@ export class MiniProfileComponent implements OnInit {
   constructor(private miniProfileInfoService: DataService,
                private route: ActivatedRoute) { }
 
+  /**
+   * Change Between Follow And Unfollow Buttons, And Send their requests
+   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   * No return 
+   */             
   toggleFollow(index: number)
   {
+    if( this.miniCardProfileUsers[index].following )
+    {
+      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username);
+    }
+    else
+    {
+      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username);
+    }
     this.miniCardProfileUsers[index].following = !this.miniCardProfileUsers[index].following;
   }
 
+  /**
+   * Change Between Mute And Unmute Buttons, And Send their requests
+   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   * No return 
+   */
   toggleMute(index: number): void
   {
-      this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
-      this.muteModes[index] = true;
+    if( this.miniCardProfileUsers[index].muted )
+    {
+      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username);
+    }
+    else
+    {
+      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username);
+    }
+
+    this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
+    this.muteModes[index] = true;
   }
 
+   
+  /**
+   * Change Between Block And UnBlock Buttons, And Send their requests
+   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   * No return 
+   */
   toggleBlock(index: number): void
   {
-      this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
+    if( this.miniCardProfileUsers[index].blocked )
+    {
+      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username);
+    }
+    else
+    {
+      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username);
+    }
+
+    this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
              
   //This part will be updated

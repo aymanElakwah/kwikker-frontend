@@ -21,7 +21,7 @@ export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
-  private base: String = 'http://8978be66.ngrok.io/';
+  private base: String = 'http://6d5bcddc.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**
@@ -171,22 +171,195 @@ export class DataService {
    * newer notifications after it and also could be null
    * @returns array of notifications
    */
-  getNotificationsList(
-    last_notifications_retrieved_id: string
-  ): Observable<Notification[]> {
-    const options = last_notifications_retrieved_id
-      ? {
-          params: new HttpParams().set(
-            'last_notifications_retrieved_id',
-            last_notifications_retrieved_id
-          )
-        }
+  getNotificationsList( last_notifications_retrieved_id: string): Observable<Notification[]> {
+    const options = last_notifications_retrieved_id ? {
+        params: new HttpParams().set( 'last_notifications_retrieved_id', last_notifications_retrieved_id)
+      }
       : {};
     return this.http
       .get<Notification[]>(this.base + 'notifications', options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
+  }
+
+
+  /**
+   *
+   * to post user's name and user's password
+   * @param user {object} sends the user information to get
+   * token after it and also could be null
+   * @returns string
+   */
+  logInUser(user: any): Observable <any> {
+    const body = JSON.stringify(user);
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.post<any>(this.base + 'account/login', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+   /**
+   * Post request make the authorised user follow Some user 
+   * @param userName {string} The userName that will be followed
+   * @returns Request Response
+   */
+  followUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }  
+    return this.http.post<any>(this.base + 'interactions/follow', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              ); 
+  }
+
+   /**
+   * Delete request make the authorised user unfollow Some user 
+   * @param userName {string} The userName that will be unfollowed
+   * @returns Request Response
+   */
+  unfollowUser(userName: string): Observable<any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/follow', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+  
+   /**
+   * Post request make the authorised user mute Some user 
+   * @param userName {string} The userName that will be muted
+   * @returns Request Response
+   */
+  muteUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.post<any>(this.base + 'interactions/mutes', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+   /**
+   * Delete request make the authorised user unmute Some user 
+   * @param userName {string} The userName that will be unmuted
+   * @returns Request Response
+   */
+  unmuteUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/mutes', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+  /**
+   * Post request make the authorised user block Some user 
+   * @param userName {string} The userName that will be blocked
+   * @returns Request Response
+   */
+  blockUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.post<any>(this.base + 'interactions/blocks', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+   /**
+   * Delete request make the authorised user unblock Some user 
+   * @param userName {string} The userName that will be unblocked
+   * @returns Request Response
+   */
+  unblockUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/blocks', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+  /**
+   * Patch request To Edit The authorised user Bio or ScreenName 
+   * @param screenName {string} The Edited Screen Name
+   * @param Bio {string} The Edited Bio
+   * @returns Request Response
+   */
+  updateProfile(screenName: string, Bio: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('bio',Bio) }
+    paramsSent.params.append('screen_name',screenName);
+
+    return this.http.patch<any>(this.base + 'user/profile', paramsSent)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           ); 
+  }
+
+  /**
+   * Put request To Edit The authorised user Banner
+   * @param image_file {File} The Uploaded Image
+   * @returns Request Response (Image Url);
+   */
+  updateBanner(image_file: File): Observable <string> {
+    const body = new FormData();
+    body.append('file', image_file, 'file');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           ); 
+  }
+
+   /**
+   * Delete request To remove The authorised user Banner
+   * No Parametes  
+   * @returns Request Response (Image Url);
+   */
+  removeBanner(): Observable <any> {
+    return this.http.delete<any>(this.base + 'user/profile_banner')
+                            .pipe(
+                            map(res => res),
+                            catchError(this.handleError)
+                            ); 
+  }
+
+  /**
+   * Put request To Edit The authorised user Banner
+   * @param image_file {File} The Uploaded Image
+   * @returns Request Response (Image Url);
+   */
+  updateProfilePicture(image_file: File): Observable<string> {
+    const body = new FormData();
+    body.append('file', image_file, 'file');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           );
+  }
+
+  
+   /**
+   * Delete request To remove The authorised user Profile Picture
+   * No Parametes  
+   * @returns Request Response (Image Url);
+   */
+  removeProfilePicture(): Observable <any> {
+    return this.http.delete<any>(this.base + 'user/profile_picture')
+                          .pipe(
+                          map(res => res),
+                          catchError(this.handleError)
+                          );  
   }
 
   /**
@@ -215,60 +388,4 @@ export class DataService {
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
   }
-
-  /**
-   *
-   * to post user's name and user's password
-   * @param user {object} sends the user information to get
-   * token after it and also could be null
-   * @returns string
-   */
-   logInUser(user: any): Observable <any> {
-    const body = JSON.stringify(user);
-    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-    return this.http.post<any>(this.base + 'account/login', body, headers)
-                              .pipe(
-                              map(res => res),
-                              catchError(this.handleError)
-                              );
-  }
-
-  unfollowUser(userName: string): Observable<any> {
-    return ;
-  }
-  
-  followUser(Username: string): Observable <any> {
-    return ; 
-  }
-
-  muteUser(Username: string): Observable <any> {
-    return ; 
-  }
-
-  blockUser(Username: string): Observable <any> {
-    return ; 
-  }
-
-  updateProfile(Username: string, Bio: string): Observable <any> {
-    return ; 
-  }
-
-  updateBanner(BannerImage: string): Observable <any> {
-    return ; 
-  }
-
-  removeBanner(): Observable <any> {
-    return ; 
-  }
-
-  
-  updateProfilePicture(ProfileImage: string): Observable <any> {
-    return ; 
-  }
-
-  removeProfilePicture(): Observable <any> {
-    return ; 
-  }
-
-
 }

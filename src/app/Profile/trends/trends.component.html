@@ -1,19 +1,19 @@
-            <!-- Card Container: To control card dimension regardless its page -->
-            <div class="Trends-Container">
-              <div id="Trends-Text">
-                <!-- Card Header -->
-                <div id="Trends-header">
-                  Trends for you .
-                </div>
-                <!-- Card Body -->
-                <div id="Trends-body">
-                  <!-- Trend Body => Text(Hashtag) & Number of Kweeks -->
-                    <ul id="Trends-Items">
-                      <li id="Trends-Item" *ngFor="let trend of trends"> 
-                        <h1> {{trend?.Text}} </h1>
-                        <p> {{trend?.NumberOfKweeks}} Kweeks </p>
-                      </li>
-                    </ul> 
-                </div>
-              </div>
-            </div>
+<!-- Card Container: To control card dimension regardless its page -->
+<div class="Trends-Container">
+  <div id="Trends-Text">
+     <!-- Card Header -->
+     <div id="Trends-header">
+        Trends for you .
+     </div>
+     <!-- Card Body -->
+     <div id="Trends-body">
+        <!-- Trend Body => Text(Hashtag) & Number of Kweeks -->
+        <ul id="Trends-Items">
+           <li id="Trends-Item" *ngFor="let trend of trends">
+              <h1> {{trend?.Text}} </h1>
+              <p> {{trend?.NumberOfKweeks}} Kweeks </p>
+           </li>
+        </ul>
+     </div>
+  </div>
+</div>

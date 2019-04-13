@@ -8,7 +8,6 @@ import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.compo
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-card-editing/profile-header-card-editing.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ComboDatepickerModule } from 'ngx-combo-datepicker';
 
 
 /**
@@ -28,7 +27,6 @@ import { ComboDatepickerModule } from 'ngx-combo-datepicker';
     CommonModule,
     SharedModule,
     ScrollingModule,
-    ComboDatepickerModule,
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [

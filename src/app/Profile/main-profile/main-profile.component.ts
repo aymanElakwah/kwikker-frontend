@@ -3,6 +3,8 @@ import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'q';
+import * as $ from "jquery";
+
 
 /**
  * The Main Component For The Profile Page
@@ -24,12 +26,12 @@ export class MainProfileComponent implements OnInit {
          * */
   profileUser: User =
   {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
+      username: 'Ahmed_Mahmoud14',
+      screen_name: 'Ahmed Mahmoud',
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
-      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png', 
+      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
       profile_banner_url: null,
       following: false,
       follows_you: false,
@@ -42,13 +44,20 @@ export class MainProfileComponent implements OnInit {
   };
 
   /* The Authorized User (The one who made Log in) */
-  authorizedUser: string = localStorage.getItem('screen-name');
+  authorizedUser: string = localStorage.getItem('username');
+
+  /* Some Modes that helping control UI */
   isEditingMode: boolean = false;
   muteMode: boolean = false;
   semiBlockedMode: boolean = false;
-  editedUsername: string = this.profileUser.username;
+
+   /* User Edited Data */
+  editedScreenName: string = this.profileUser.username;
   editedBio: string = this.profileUser.bio;
-  defaultProfilePicture: string = 'https://i.ibb.co/z2wkPKs/Default.png'
+
+   /* Default Profile Picture */
+  defaultProfilePicture: string ='https://i.ibb.co/z2wkPKs/Default.png';
+
 
 
   /**
@@ -58,75 +67,198 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.screen_name != this.authorizedUser);
+    return (this.profileUser.username != this.authorizedUser);
   }
 
+   /**
+   * Check If User has No profile Picture 
+   * No Parameters
+   * @returns {boolean} 
+   */
   isProfilePictureDefault(): boolean
   {
-    return (this.profileUser.profile_image_url  == 'https://i.ibb.co/z2wkPKs/Default.png');
+    return (this.profileUser.profile_image_url  == this. defaultProfilePicture);
   }
 
+  /**
+   * Check If User has No Banner 
+   * No Parameters
+   * @returns {boolean} 
+   */
   isProfileBannerDefault(): boolean 
   {
     return (this.profileUser.profile_banner_url  == null);
   }
 
+
+   /**
+   * Change User Profile Picture
+   * @param event Event from the browser with the selected new profile photo 
+   * No return 
+   */
   changeProfilePicture(event)
   {
-       
+    this.profileInfoService.updateProfilePicture(event.target.files[0]).subscribe
+    ( newProfilePictureUrl => {this.profileUser.profile_image_url =  newProfilePictureUrl; } )
   }
 
+
+
+   /**
+   * Change User Profile Banner
+   * @param event Event from the browser with the selected new banner photo 
+   * No return 
+   */
   changeProfileBanner(event)
   {
-      
+    this.profileInfoService.updateBanner(event.target.files[0]).subscribe
+    ( newProfileBanner => {this.profileUser.profile_banner_url =  newProfileBanner; } )
   }
 
-  removeProfilePicture()
+  
+   /**
+   * Remove User Profile Photo
+   * No Parameters  
+   * No return 
+   */
+  removeProfilePicture(): void
   {
        this.profileUser.profile_image_url =  null;
        this.ShowMessage("Profile image removed");
-       
+       this.profileInfoService.removeProfilePicture();
   }
 
-  removeProfileBanner()
+   /**
+   * Remove User Profile Banner
+   * No Parameters  
+   * No return 
+   */
+  removeProfileBanner(): void
   {
        this.profileUser.profile_banner_url = null;
        this.ShowMessage("No more header for you");
+       this.profileInfoService.removeBanner();
   }
   
-
-  activateEditingMode(): void
+  /**
+   * Change Between Editing Mode and Default Mode
+   * No Parameters  
+   * No return 
+   */
+  toggleEditingMode(): void
   {
-    this.isEditingMode = true;
+    this.isEditingMode = ! this.isEditingMode;
   }
 
-  activateEditingModeProfilePicture(): void
+  /**
+   * Change Between Blocked Mode(User can't see Kweeks, Followers Or Followings)
+   * and Semi-Blocked Mode (Still Blocked But Kweeks, Followers And Followings are available)
+   * No Parameters  
+   * No return 
+   */
+  togglesemiBlockedMode(): void
   {
-/*     this.isEditingMode = true; */
-    const DropDown = document.getElementById('profilePicDropDownMenu');
-    
- 
+    this.semiBlockedMode = !this.semiBlockedMode;
   }
 
-  activatesemiBlockedMode(): void
-  {
-    this.semiBlockedMode = true;
-  }
-
-  deactivateEditingMode(): void
-  {
-    this.isEditingMode = false;
-  }
-
+  /**
+   * Change Between Follow And Unfollow Buttons, And Send their requests
+   * No Parameters  
+   * No return 
+   */
   toggleFollow()
   {
+    if( this.profileUser.following )
+    {
+      this.profileInfoService.unfollowUser(this.profileUser.username);
+    }
+    else
+    {
+      this.profileInfoService.followUser(this.profileUser.username);
+    }
     this.profileUser.following = !this.profileUser.following;
   }
 
+  /**
+   * Change Between Mute And Unmute Buttons, And Send their requests
+   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * No Parameters  
+   * No return 
+   */
+  toggleMute(): void
+  {
+      if(this.profileUser.muted)
+      {
+          this.profileInfoService.unmuteUser(this.profileUser.username);
+          this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
+      }
+      else
+      {
+        this.profileInfoService.muteUser(this.profileUser.username);
+        this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
+        
+      }
+      this.profileUser.muted = !this.profileUser.muted;
+      this.muteMode = true;
+  }
+
+  
+  /**
+   * Change Between Block And UnBlock Buttons, And Send their requests
+   * No Parameters  
+   * No return 
+   */
+  toggleBlock(): void
+  {
+      if(this.profileUser.blocked)
+      {
+        this.profileInfoService.unblockUser(this.profileUser.username);
+        this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
+      }
+      else
+      {
+        this.profileInfoService.blockUser(this.profileUser.username);
+        this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
+      }
+      this.profileUser.blocked = !this.profileUser.blocked;
+      this.semiBlockedMode = false; 
+  }
+
+  /**
+   * Check The Edited Data are Valid and Send The request to change it
+   * No Parameters  
+   * No return 
+   */
+  updateProfile(): void
+  {
+    if(this.editedScreenName === "")
+    {
+      this.ShowMessage("Name can't be blank");
+      return;
+    }
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio)
+    this.profileUser.screen_name = this.editedScreenName;
+    this.profileUser.bio = this.editedBio;
+    this.isEditingMode = false;
+  }
+
+
+  
+  /**
+   * Generate Delay
+   * No Parameters  
+   * No return 
+   */
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
+    
+  /**
+   * Make the Notification bar visible with a message for some time
+   * @param Msg {string} The Message that would appear in the notification bar  
+   * No return 
+   */
   async ShowMessage(Msg: string)
   {
     document.querySelector('.Msg').textContent = Msg;
@@ -139,48 +271,6 @@ export class MainProfileComponent implements OnInit {
     messageBox.style.visibility = "hidden";
   }
 
-
-  toggleMute(): void
-  {
-      this.profileUser.muted = !this.profileUser.muted;
-      this.muteMode = true;
-      if(!this.profileUser.muted)
-      {
-          this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
-      }
-      else
-      {
-         this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
-      }
-  }
-
-  toggleBlock(): void
-  {
-      this.profileUser.blocked = !this.profileUser.blocked;
-      this.semiBlockedMode = false;
-      if(this.profileUser.blocked)
-      {
-         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
-      }
-      else
-      {
-         this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
-      }
-  }
-
-  updateProfile()
-  {
-    if(this.editedUsername === "")
-    {
-      this.ShowMessage("Name can't be blank");
-      return;
-    }
-
-    this.profileUser.username = this.editedUsername;
-    this.profileUser.bio = this.editedBio;
-    this.isEditingMode = false;
-  }
- 
    /**
    *
    * @param route is used to Know which Parameter is sent To The Profile Url 
@@ -206,7 +296,6 @@ export class MainProfileComponent implements OnInit {
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
     ( userInfo => {this.profileUser = userInfo; } )
-
 
   }
 
