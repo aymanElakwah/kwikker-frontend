@@ -33,6 +33,7 @@ export class LogInComponent implements OnInit {
     this.isLoggedIn = false;
     const user = form.value;
     this.mail = form.value.mail;
+    var ev: (err: any) => void;
     this.data.logInUser(user)
       .subscribe(
        res => {

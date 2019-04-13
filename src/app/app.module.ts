@@ -28,6 +28,8 @@ import { ReplyComponent } from './reply/reply.component';
 import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
 import { MaterialModule } from './material.module';
 import { confirmCode } from './sign-up/confirmCode.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { confirmPassword } from './reset-password/reset-password-confirm.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { confirmCode } from './sign-up/confirmCode.component';
     SignUpComponent,
     ReplyComponent,
     ErrorPageComponent,
-    confirmCode
+    confirmCode,
+    ResetPasswordComponent,
+    confirmPassword
     ],
   imports: [
     SharedModule,

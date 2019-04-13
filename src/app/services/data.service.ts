@@ -214,7 +214,7 @@ export class DataService {
 /**
  * signUpUSer
  */
-public signUpUSer(user: any): Observable <any> {
+public signUpUser(user: any): Observable <any> {
   const body = JSON.stringify(user);
   console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
@@ -224,14 +224,40 @@ public signUpUSer(user: any): Observable <any> {
                               catchError(this.handleError)
                               );  
 }
+
+/**
+ * sendEmail
+ */
+public sendEmail(user: any): Observable <any> {
+  const body = JSON.stringify(user);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + '/account/forget_password', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+  
+}
 /**
  * signUpConfirm
  */
-public signUpConfirm(code: any): Observable <any> {
+public signUpConfirm(code: any, whichone: number): Observable <any> {
   const body = JSON.stringify(code);
-  console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + '/account/registration', body, headers)
+  
+  if (whichone == 0)
+  {
+    //resetting password
+    return this.http.post<any>(this.base + 'account/forget-password/confirmation', body, headers)
+                                  .pipe(
+                                  map(res => res),
+                                  catchError(this.handleError)
+                                  );  
+
+  }
+  //else, confirming email
+  return this.http.post<any>(this.base + '/account/registration/confirmtation', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)

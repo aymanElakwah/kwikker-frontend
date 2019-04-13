@@ -68,7 +68,7 @@ public secondStep() {
     birth_date: user.datepicker
  }; 
   
-  this.data.signUpUSer(toSend)
+  this.data.signUpUser(toSend)
       .subscribe(
        res => {
          console.log(res);

@@ -4,11 +4,11 @@ import { DataService } from '../services/data.service';
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-    selector: 'app-confirm-signUp',
-    templateUrl: './confirm-signUp.component.html',
-    styleUrls: ['./sign-up.component.css']
+    selector: 'app-confirm-password',
+    templateUrl: './confirm-password.component.html',
+    styleUrls: ['./reset-password.component.css']
 })
-export class confirmCode implements OnInit {
+export class confirmPassword implements OnInit {
     public confirmCode: string;
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
