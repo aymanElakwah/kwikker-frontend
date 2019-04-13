@@ -7,47 +7,62 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  // it('should display welcome message', () => {
-  //   page.navigateTo();
-  //   expect(page.getTitleText()).toEqual('Welcome to kwikker!');
-  // });
+  it('Sign up', () =>{
+    page.navigateToSignUp();
+    page.browserPause(100);
+
+    page.getUsernameLoginField().sendKeys("e2");
+    page.getEmailSignupField().sendKeys("e2@yahoo.com");
+    page.getPasswordSignupField().sendKeys("Ee222222");
+    page.getPasswordConfirmationSignupField().sendKeys("Ee222222");
+    page.getNext1SignupField().click();
+
+    page.browserPause(10);
+    page.getScreenNameSignupField().sendKeys("ee2");
+    page.getDatePickerSignupBoard().click();
+    page.getDateDaySignupBoard().click();
+    page.getNext2SignupField().click();
+
+    page.browserPause(10);
+    expect(page.getSignupConfirmation().getText()).toEqual('Thank you for using our app.');
+  });
 
   it('Login', () =>{
     page.navigateToLogin();
     page.browserPause(1000);
-    page.getUsernameLoginField().sendKeys("doda");
-    page.getPasswordLoginField().sendKeys("Pp111111");
+    page.getUsernameLoginField().sendKeys("e2");
+    page.getPasswordLoginField().sendKeys("Ee222222");
     page.getLoginButton().click();
-    expect(page.getHomeText().getText()).toEqual('home works!');
+    expect(page.getLogoutButton().getText()).toEqual('Log Out');
   });
 
   it('Open profile', function() {
-    page.navigateToProfile('doda');
+    page.navigateToProfile('e2');
     page.browserPause(1000);
-    expect(page.getTweetToButton().getText()).toEqual('Tweet To doda');
+    expect(page.getTweetToButton().getText()).toEqual('Tweet To e2');
   });
 
 
   it('Open profile, view my kweeks', function() {
-    page.navigateToKweeks('doda');
+    page.navigateToKweeks('e2');
     page.browserPause(1000);
-    expect(page.getTweetToButton().getText()).toEqual('Tweet To doda');
+    expect(page.getTweetToButton().getText()).toEqual('Tweet To e2');
   });
 
   it('Open profile, view my followers', function() {
-    page.navigateToFollowers('doda');
+    page.navigateToFollowers('e2');
     page.browserPause(1000);
-    expect(page.getTweetToButton().getText()).toEqual('Tweet To doda');
+    expect(page.getTweetToButton().getText()).toEqual('Tweet To e2');
   });
 
   it('Open profile, view my following', function() {
-    page.navigateToFollowing('doda');
+    page.navigateToFollowing('e2');
     page.browserPause(1000);
-    expect(page.getTweetToButton().getText()).toEqual('Tweet To doda');
+    expect(page.getTweetToButton().getText()).toEqual('Tweet To e2');
   });
 
   it('Open profile, view my likes', function() {
-    page.navigateToLikes('doda');
+    page.navigateToLikes('e2');
     page.browserPause(1000);
 
   });
@@ -88,6 +103,4 @@ describe('workspace-project App', () => {
       expect(text.length).not.toEqual(0)
     });
   });
-
-
 });
