@@ -517,8 +517,7 @@ public signUpConfirm(code: any): Observable <any> {
 public sendPass(pass: any): Observable <any> {
   const body = JSON.stringify(pass);
   console.log(body);
-  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + 'user/password', body, headers)
+    return this.http.post<any>(this.base + 'user/password', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
