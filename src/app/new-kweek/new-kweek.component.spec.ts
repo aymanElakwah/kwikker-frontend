@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewKweekComponent } from './new-kweek.component';
+import { MatDialogRef } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+import { DataService } from '../services/data.service';
 
 describe('NewKweekComponent', () => {
   let component: NewKweekComponent;
-  let fixture: ComponentFixture<NewKweekComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NewKweekComponent ]
-    })
-    .compileComponents();
-  }));
+  let thisDialogRef: MatDialogRef<NewKweekComponent>; 
+  let http: HttpClient; 
+  let newKweekService: DataService;
+  
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewKweekComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new NewKweekComponent( thisDialogRef, http, newKweekService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  
+
+  it('should delete image', () => {
+    component.removeImage();
+    expect(component.selectedImage).toBeNull()
   });
 });
