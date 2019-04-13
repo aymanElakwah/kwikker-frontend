@@ -3,8 +3,7 @@ import {
   HttpErrorResponse,
   HttpClient,
   HttpParams,
-  HttpHeaders
-} from "@angular/common/http";
+  HttpHeaders} from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Conversation } from "../model/inbox";
@@ -18,11 +17,14 @@ import { MiniUser } from "../model/mini-user";
   providedIn: "root"
 })
 export class DataService {
-  // private base: String = 'http://faa34478.ngrok.io';
-  // constructor(private http: HttpClient) {}
-
-  
-  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+  /**
+   * Backend server base
+   */
+  private base: String = 'http://5d72f606.ngrok.io/';
+  /**
+   *
+   * @param http component to send requests
+   */
   constructor(private http: HttpClient) { }
 
   /**
@@ -189,7 +191,7 @@ export class DataService {
    */
   getConverstations(): Observable<Conversation[]> {
     return this.http
-      .get<Conversation[]>("api/Message")
+      .get<Conversation[]>('`${this.base}direct_message/conversations`')
       .pipe(catchError(this.handleError));
   }
 
@@ -217,7 +219,31 @@ export class DataService {
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
   }
-
+  /**
+   * get first 20 users that contain filter by substring
+   * @param filterBy used to filter search
+   */
+  searchUsers(filterBy: string ): Observable<MiniUser[]> {
+    const options = filterBy
+      ? {
+          params: new HttpParams().set(
+            'search_text',
+            filterBy
+          )
+        }
+      : {};
+   return this.http.get<MiniUser[]>(`${this.base}search/users`, options);
+  }
+  /**
+   * send messages and photos in chat
+   * @param message written message by user
+   */
+  createMessage(message) {
+    return this.http.post(`${this.base}direct_message/`, message);
+  }
+    getRecentConversations(): Observable<MiniUser[]> {
+      return this.http.get<MiniUser[]>(`${this.base}direct_message/recent_conversationers`);
+    }
   /**
    *
    * to post user's name and user's password
