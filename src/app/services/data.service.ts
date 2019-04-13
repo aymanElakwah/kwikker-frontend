@@ -1,28 +1,36 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpErrorResponse,
   HttpClient,
   HttpParams,
-  HttpHeaders
-} from "@angular/common/http";
-import { throwError, Observable } from "rxjs";
-import { catchError, map } from "rxjs/operators";
-import { Conversation } from "../model/inbox";
-import { Notification } from "../model/notification";
-import { User } from "../model/user";
-import { Trend } from "../model/Trend";
-import { Kweek } from "../model/kweek";
-import { MiniUser } from "../model/mini-user";
+  HttpHeaders} from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Conversation } from '../model/inbox';
+import { Notification } from '../model/notification';
+import { User } from '../model/user';
+import { Trend } from '../model/Trend';
+import { Kweek } from '../model/kweek';
+import { MiniUser } from '../model/mini-user';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
   
-  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+  private base: String = 'http://28c1584e.ngrok.io/';
+   /**
+   * Backend server base
+   */
+  // private base: String = 'http://8c8a6673.ngrok.io/';
+ 
+  /**
+   *
+   * @param http component to send requests
+   */
   constructor(private http: HttpClient) { }
 
   /**
@@ -32,7 +40,7 @@ export class DataService {
    */
   getProfileInfo(userName: string): Observable<User> {
     const userNameSent = userName
-      ? { params: new HttpParams().set("username", userName) }
+      ? { params: new HttpParams().set('username', userName) }
       : {};
     return this.http
       .get<User>(`${this.base}user/profile`, userNameSent)
@@ -47,19 +55,7 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = lastRetrivedId
-      ? {
-          params: new HttpParams().set(
-            "last_retrieved_trend_id",
-            lastRetrivedId
-          )
-        }
-      : {};
-
-    if (userName) {
-      parametersSent.params.append("username", userName);
-    }
-
+    const parametersSent = {params: new HttpParams().set('last_retrieved_kweek_id', lastRetrivedId).set('username', userName)};
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -73,7 +69,7 @@ export class DataService {
   getKweekReplies(kweekId: string): Observable<Kweek[]> {
     const parametersSent = kweekId
       ? {
-          params: new HttpParams().set("reply_to", kweekId)
+          params: new HttpParams().set('reply_to', kweekId)
         }
       : {};
     return this.http
@@ -107,11 +103,11 @@ export class DataService {
     lastRetrivedId: string
   ): Observable<Kweek[]> {
     const parametersSent = userName
-      ? { params: new HttpParams().set("username", userName) }
+      ? { params: new HttpParams().set('username', userName) }
       : {};
 
     if (lastRetrivedId) {
-      parametersSent.params.append("last_retrieved_trend_id", lastRetrivedId);
+      parametersSent.params.append('last_retrieved_trend_id', lastRetrivedId);
     }
 
     return this.http
@@ -147,7 +143,7 @@ export class DataService {
    * @returns array of kweeks
    */
   getKweeks(): Observable<Kweek[]> {
-    return this.http.get<Kweek[]>("api/KWK").pipe(catchError(this.handleError));
+    return this.http.get<Kweek[]>('api/KWK').pipe(catchError(this.handleError));
   }
 
   /**
@@ -157,7 +153,7 @@ export class DataService {
    */
   getReplies1(): Observable<Kweek[]> {
     return this.http
-      .get<Kweek[]>("api/REPLY1")
+      .get<Kweek[]>('api/REPLY1')
       .pipe(catchError(this.handleError));
   }
 
@@ -168,7 +164,7 @@ export class DataService {
    */
   getReplies2(): Observable<Kweek[]> {
     return this.http
-      .get<Kweek[]>("api/REPLY2")
+      .get<Kweek[]>('api/REPLY2')
       .pipe(catchError(this.handleError));
   }
 
@@ -178,7 +174,7 @@ export class DataService {
    * @returns array of Trends
    */
   getTrends(): Observable<Trend[]> {
-    params: new HttpParams().set("last_retrieved_trend_id", null);
+    params: new HttpParams().set('last_retrieved_trend_id', null);
     return this.http
       .get<Trend[]>(`${this.base}trends/`)
       .pipe(catchError(this.handleError));
@@ -189,7 +185,7 @@ export class DataService {
    */
   getConverstations(): Observable<Conversation[]> {
     return this.http
-      .get<Conversation[]>("api/Message")
+      .get<Conversation[]>('`${this.base}direct_message/conversations`')
       .pipe(catchError(this.handleError));
   }
 
@@ -206,18 +202,42 @@ export class DataService {
     const options = last_notifications_retrieved_id
       ? {
           params: new HttpParams().set(
-            "last_notifications_retrieved_id",
+            'last_notifications_retrieved_id',
             last_notifications_retrieved_id
           )
         }
       : {};
     return this.http
-      .get<Notification[]>(this.base + "notifications", options)
+      .get<Notification[]>(this.base + 'notifications', options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
   }
-
+  /**
+   * get first 20 users that contain filter by substring
+   * @param filterBy used to filter search
+   */
+  searchUsers(filterBy: string ): Observable<MiniUser[]> {
+    const options = filterBy
+      ? {
+          params: new HttpParams().set(
+            'search_text',
+            filterBy
+          )
+        }
+      : {};
+   return this.http.get<MiniUser[]>(`${this.base}search/users`, options);
+  }
+  /**
+   * send messages and photos in chat
+   * @param message written message by user
+   */
+  createMessage(message) {
+    return this.http.post(`${this.base}direct_message/`, message);
+  }
+    getRecentConversations(): Observable<MiniUser[]> {
+      return this.http.get<MiniUser[]>(`${this.base}direct_message/recent_conversationers`);
+    }
   /**
    *
    * to post user's name and user's password
@@ -228,9 +248,9 @@ export class DataService {
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
     const headers = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.post<any>(this.base + "account/login", body, headers).pipe(
+    return this.http.post<any>(this.base + 'account/login', body, headers).pipe(
       map(res => res),
       catchError(this.handleError)
     );
@@ -241,9 +261,9 @@ export class DataService {
    * @returns Request Response
    */
   followUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .post<any>(this.base + "interactions/follow", paramsSent)
+      .post<any>(this.base + 'interactions/follow', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -257,9 +277,9 @@ export class DataService {
    */
 
   unfollowUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .delete<any>(this.base + "interactions/follow", paramsSent)
+      .delete<any>(this.base + 'interactions/follow', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -272,9 +292,9 @@ export class DataService {
    * @returns Request Response
    */
   muteUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .post<any>(this.base + "interactions/mutes", paramsSent)
+      .post<any>(this.base + 'interactions/mutes', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -287,9 +307,9 @@ export class DataService {
    * @returns Request Response
    */
   unmuteUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .delete<any>(this.base + "interactions/mutes", paramsSent)
+      .delete<any>(this.base + 'interactions/mutes', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -302,9 +322,9 @@ export class DataService {
    * @returns Request Response
    */
   blockUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .post<any>(this.base + "interactions/blocks", paramsSent)
+      .post<any>(this.base + 'interactions/blocks', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -317,9 +337,9 @@ export class DataService {
    * @returns Request Response
    */
   unblockUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("username", userName) };
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http
-      .delete<any>(this.base + "interactions/blocks", paramsSent)
+      .delete<any>(this.base + 'interactions/blocks', paramsSent)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -332,14 +352,12 @@ export class DataService {
    * @param Bio {string} The Edited Bio
    * @returns Request Response
    */
-  updateProfile(screenName: string, Bio: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set("bio", Bio) };
-    paramsSent.params.append("screen_name", screenName);
-
-    return this.http.patch<any>(this.base + "user/profile", paramsSent).pipe(
-      map(res => res),
-      catchError(this.handleError)
-    );
+  updateProfile(screenName: string, Bio: string){
+    const paramsSent = JSON.stringify({bio:Bio , screen_name:screenName}, null , '');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.patch(`${this.base}user/profile`, paramsSent, headers)
+                          .pipe(catchError(this.handleError))
+                          .subscribe(); 
   }
 
   /**
@@ -347,18 +365,15 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (Image Url);
    */
-  updateBanner(image_file: File): Observable<string> {
-    const body = new FormData();
-    body.append("file", image_file, "file");
-    const headers = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
-    };
-    return this.http
-      .put<string>(this.base + "user/profile_picture", body, headers)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
+  updateBanner(image_file: File) {
+    let body = new FormData();
+    body.append('file', image_file, 'file');
+    return this.http.post(this.base + 'user/profile_banner', body)
+                        .pipe(catchError(this.handleError))
+                        .subscribe(
+                        (res) => console.log(res),
+                        (err) => console.log(err)); 
+                        
   }
 
   /**
@@ -366,11 +381,13 @@ export class DataService {
    * No Parametes
    * @returns Request Response (Image Url);
    */
-  removeBanner(): Observable<any> {
-    return this.http.delete<any>(this.base + "user/profile_banner").pipe(
-      map(res => res),
-      catchError(this.handleError)
-    );
+  removeBanner() {
+    return this.http.delete<any>(this.base + 'user/profile_banner')
+                            .pipe(catchError(this.handleError))
+                             .subscribe(
+                              (res) => console.log(res),
+                              (err) => console.log(err)); 
+                            
   }
 
   /**
@@ -380,16 +397,12 @@ export class DataService {
    */
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
-    body.append("file", image_file, "file");
-    const headers = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
-    };
-    return this.http
-      .put<string>(this.base + "user/profile_picture", body, headers)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
+    body.append('file', image_file, 'file');
+    return this.http.put<string>(this.base + 'user/profile_picture', body)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           );
   }
 
   /**
@@ -397,13 +410,14 @@ export class DataService {
    * No Parametes
    * @returns Request Response (Image Url);
    */
-  removeProfilePicture(): Observable<any> {
-    return this.http.delete<any>(this.base + "user/profile_picture").pipe(
-      map(res => res),
-      catchError(this.handleError)
-    );
+  removeProfilePicture() {
+    return this.http.delete<any>(this.base + 'user/profile_picture')
+              .pipe(catchError(this.handleError))
+              .subscribe(
+                (res) => console.log(res),
+                (err) => console.log(err));   
   }
-  
+
 
   /**
    *  handle any error code returned from backend server
@@ -412,16 +426,16 @@ export class DataService {
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       switch (error.status) {
         case 404:
-          console.error("not found");
+          console.error('not found');
           break;
         case 401:
-          console.error("unauthorized");
+          console.error('unauthorized');
           break;
       }
       console.error(
@@ -429,7 +443,7 @@ export class DataService {
       );
     }
     // return an observable with a user-facing error message
-    return throwError("Something bad happened; please try again later.");
+    return throwError('Something bad happened; please try again later.');
   }
 
   /**
@@ -443,7 +457,7 @@ public signUpUser(user: any): Observable <any> {
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
-                              );  
+                              );
 }
 
 /**
@@ -457,45 +471,36 @@ public sendEmail(user: any): Observable <any> {
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
-                              );  
-  
+                              );
+
 }
 /**
  * signUpConfirm
  */
-public signUpConfirm(code: any, whichone: number): Observable <any> {
+public signUpConfirm(code: any): Observable <any> {
   const body = JSON.stringify(code);
+  console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
   
-  if (whichone == 0)
-  {
-    //resetting password
-    return this.http.post<any>(this.base + 'account/forget-password/confirmation', body, headers)
-                                  .pipe(
-                                  map(res => res),
-                                  catchError(this.handleError)
-                                  );  
-
-  }
   //else, confirming email
-  return this.http.post<any>(this.base + 'account/registration/confirmtation', body, headers)
+  return this.http.post<any>(this.base + 'account/registration/confirmation', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
-                              );  
+                              );
 
-  
+
 }
 /**
- * post request To add a new kweek  
+ * post request To add a new kweek
  * @param text {string} the kweek data
  * @returns Request Response
  */
-  addNewKweek(text:string):Observable <any> {
+  addNewKweek(text: string): Observable <any> {
 
     const obj = { text: String(), reply_to: String()  };
-    obj.text=text;
-    obj.reply_to=null;
+    obj.text = text;
+    obj.reply_to = null;
 
 
     return this.http.post<any>(this.base + 'kweeks/', obj)
@@ -504,5 +509,31 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
                                   catchError(this.handleError)
                                 );
   }
+
+  
+/**
+ * sendPass
+ */
+public sendPass(pass: any): Observable <any> {
+  const body = JSON.stringify(pass);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + 'user/password', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+ 
+}
+
+
+
+
+
+
+
+
+
+
 
 }
