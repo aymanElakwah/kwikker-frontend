@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef, TooltipPosition } from '@angu
 import { FormControl } from '@angular/forms';
 import { ReplyComponent } from '../reply/reply.component';
 import { KweeksService } from '../services/kweeks.service';
+import { Overlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-kweek',
   templateUrl: './kweek.component.html',
@@ -13,7 +14,7 @@ import { KweeksService } from '../services/kweeks.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class KweekComponent implements OnInit {
-  roots: Kweek[] = [];
+  clickedKweek: Kweek;
   positionOption: TooltipPosition = 'above';
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
@@ -37,6 +38,7 @@ export class KweekComponent implements OnInit {
     private kweekFunc: KweeksService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private overlay: Overlay
   ) {}
 
   /**
@@ -88,14 +90,14 @@ export class KweekComponent implements OnInit {
  * @returns void
  */
   openDialog(kweek: Kweek): void {
-    this.roots.push(kweek);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
     dialogConfig.autoFocus = false;
+    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-    dialogRef.componentInstance.roots = this.roots;
+    dialogRef.componentInstance.clickedKweek = kweek;
     dialogRef.afterClosed().subscribe(result => {
-      this.roots = [];
+      this.clickedKweek = null;
     });
   }
 

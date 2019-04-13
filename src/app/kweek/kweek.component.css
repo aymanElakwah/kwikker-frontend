@@ -107,10 +107,18 @@ a, a:hover {
 }
 
 .media {
-  padding: 3px 12px;
+  padding: 3px 12px 11px 12px;
 }
 
 #rekweeked-screen_name {
   color: #657786;
   text-decoration: none;
+}
+
+.kweek-text {
+  color: #14171a;
+}
+
+.icons {
+  font-size: 16px;
 }
