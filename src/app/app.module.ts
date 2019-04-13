@@ -26,7 +26,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,16 +43,17 @@ import { CommonModule } from '@angular/common';
     ChatModule,
     SearchModule,
     SettingsModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    // InMemoryDataService,
-    // ),
+      //  HttpClientInMemoryWebApiModule.forRoot(
+      //  InMemoryDataService,
+      //  ),
     FormsModule,
     BrowserAnimationsModule,
     CommonModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }],
+              // {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
