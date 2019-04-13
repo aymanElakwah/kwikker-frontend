@@ -43,7 +43,7 @@
 {
     width:100%;
     background-color: #1B95E0;
-    height: 74.5%; 
+    height: 100%; 
     -webkit-transition: 0.5s;
     transition: 0.5s;
     -webkit-transform: scale(1,1);
@@ -122,8 +122,8 @@ a {
     z-index: 998 !important;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    -webkit-transform: translate(0,0);
-    transform: translate(0,0);
+    -webkit-transform: translate(0,65px);
+    transform: translate(0,65px);
 }
 
 #ProfileImage
@@ -470,13 +470,6 @@ a {
     text-align: left;
   }
    
-
-/* .banner-input
-{
-    font-size: 999;
-    opacity: 0;
-} */
-
 /* Trends Bar In The Left */
 #Left-Profile-Trends
 {
@@ -614,8 +607,8 @@ a {
     overflow: hidden;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    -webkit-transform: translate(0,0);
-    transform: translate(0,0);
+    -webkit-transform: translate(0,60px);
+    transform: translate(0,60px);
 }
 
 
