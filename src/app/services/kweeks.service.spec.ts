@@ -4,7 +4,8 @@ import { KweeksService } from './kweeks.service';
 
 
 describe('kweekS', () => {
-  const kweekS: KweeksService = new KweeksService();
+  const mockDataService = jasmine.createSpyObj(['getKweeks']);
+  const kweekS: KweeksService = new KweeksService(mockDataService);
   let KWEEKS;
   const hashtagStartTagOpen: String = '<a href=\'';
   const mentionStartTagOpen: String = '<a href=\'';
@@ -66,8 +67,8 @@ describe('kweekS', () => {
           'screen_name': 'Abdulrahman Khalid',
           'profile_image_url': 'https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg',
           'following': true,
-          'follows_you': true,
           'blocked': false,
+          'follows_you': true,
           'muted': false
         },
         'mentions': [
@@ -145,8 +146,6 @@ describe('kweekS', () => {
         'rekweeked_by_user': true
       }
     ];
-
-    // mockDataService = jasmine.createSpyObj(['getKweeks']);
     // mockActivatedRoute = jasmine.createSpyObj(['snapshot']);
 
   });
