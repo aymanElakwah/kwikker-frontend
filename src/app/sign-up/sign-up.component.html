@@ -32,7 +32,7 @@
         <div  *ngIf="(password.value != confirm_password.value) && confirm_password.touched" class="msg alert alert-danger " role="alert">
           <p class="alertMsg">Not identical passwords!</p>
         </div>    
-      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep(submitForm)"  [disabled]="username.invalid ||
+      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep()"  [disabled]="username.invalid ||
                                                                                                                                     email.invalid ||
                                                                                                                                     password.invalid ||
                                                                                                                                     (confirm_password.value != password.value)">Next</button>
@@ -53,13 +53,13 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
   <!-- it ends here -->
+  
      <div  *ngIf="birth_date.invalid && birth_date.touched" class="msg alert alert-danger " role="alert">
       <p class="alertMsg">Not a valid Date Pattern!</p>
     </div>
       <button type="submit" name="previous1" class="btn btn-primary action-button"  (click)="previousOne()" >Previous</button>
-      <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="thirdStep()" [disabled]="screenname.invalid ||
-                                                                                                                  birth_date.invalid ">Submit</button>
-     
+      <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="Submit(submitForm)" [disabled]="screenname.invalid ||
+                                                                                                                  birth_date.invalid ">Submit</button>                                                                                                       
     </fieldset>
     
     <fieldset class="fs3">

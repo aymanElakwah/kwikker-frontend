@@ -45,54 +45,107 @@ ngOnInit() {
    this.fs3 =  document.querySelector('.fs3');
    this.counter = 0;
 }
+
 /**
  * secondStep
  */
-public secondStep(form: NgForm) {
-  if( this.counter === 0){
-    //for the first time
-  this.email = form.value.email;
-  //send
-  this.counter = 1;
-  }else{
-    //now user is toggling between pages, if he entered the same email, I wont resend a new code
-    //if he entered a new email, then I'll send him another code
-    if (form.value.email != this.email){
-      this.email = form.value.email;
-      //send
-    }
-  }
+public secondStep() {
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
  }
- public thirdStep() {
+ public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
   this.fs3.className = 'show';
- }
+  //Send data to service
+  const user = form.value;
+  user.datepicker = this.redesignDateFormat(form.value.datepicker);
+  var toSend = { 
+    username:user.username , 
+    email:user.email ,
+    password:user.pass,
+    screen_name: user.screenname,
+    birth_date: user.datepicker
+ }; 
+  
+  this.data.signUpUSer(toSend)
+      .subscribe(
+       res => {
+         console.log(res);
+       },
+        err => console.log('error: ', err)
+    ); 
+    
+}
  public previousOne (){
    this.bar2.className = 'disabled';
    this.fs2.className = 'hide';
    this.fs1.className = 'show';  
  }
- public previousTwo (){
-  this.bar3.className = 'disabled';
-  this.fs3.className = 'hide';
-  this.fs2.className = 'show';  
-}
-
+ 
 redesignDateFormat(date: string): string {
-  console.log("this is it" , date)
   if (!date) {
     return null;
   }
-
-  const dataArray = date.split('/');
-  const month = Number(dataArray[0]) - 1;
-  const day = Number(dataArray[1]);
-  const year = Number(dataArray[2]);
-  return (new Date(year, month, day)).toISOString();
+  const dataArray = date.toString();  
+  const dataArray2 = dataArray.split(" ",4);
+  const month = (dataArray2[1]);
+  var monthNum = 0;
+  switch(month) { 
+    case "Jan": { 
+      monthNum = 1;
+       break; 
+    } 
+    case "Feb": { 
+      monthNum = 2;
+       break; 
+    } 
+    case "Mar": { 
+      monthNum = 3;
+       break; 
+    } 
+    case "Apr": { 
+      monthNum = 4;
+       break; 
+    } 
+    case "May": { 
+      monthNum = 5;
+       break; 
+    } 
+    case "Jun": { 
+      monthNum = 6;
+       break; 
+    } 
+    case "Jul": { 
+      monthNum = 7;
+       break; 
+    } 
+    case "Aug": { 
+      monthNum = 8;
+       break; 
+    } 
+    case "Sep": { 
+      monthNum = 9;
+       break; 
+    } 
+    case "Oct": { 
+      monthNum = 10;
+       break; 
+    } 
+    case "Nov": { 
+      monthNum = 11;
+       break; 
+    }  
+    default: { 
+      monthNum = 12;
+      break; 
+   } 
+ } 
+ monthNum = monthNum -1;
+  const day = Number(dataArray2[2]);
+  const year = Number(dataArray2[3]);
+ return (new Date(year, monthNum, day)).toLocaleDateString();
 }
 
 
