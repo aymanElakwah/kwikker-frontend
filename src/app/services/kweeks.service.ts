@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Kweek } from '../model/kweek';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class KweeksService {
    * No Params
    * No Return
    */
-  constructor() { }
+  constructor(private kweekService: DataService) { }
     /**
    * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
    * No Parameters
@@ -141,10 +142,12 @@ export class KweeksService {
   like(kweek: Kweek): void {
     kweek.liked_by_user = !kweek.liked_by_user;
     kweek.liked_by_user ?  kweek.number_of_likes++ : kweek.number_of_likes--;
+    this.kweekService.likeOrUnlikeKweek(kweek.id);
   }
 
   rekweek(kweek: Kweek): void {
     kweek.rekweeked_by_user = !kweek.rekweeked_by_user;
     kweek.rekweeked_by_user ?  kweek.number_of_rekweeks++ : kweek.number_of_rekweeks--;
+    this.kweekService.rekweekOrUnrekweekKweek(kweek.id);
   }
 }

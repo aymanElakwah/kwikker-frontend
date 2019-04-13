@@ -2,19 +2,25 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig, MatDialogRef, TooltipPosition } from '@angular/material';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  TooltipPosition
+} from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { ReplyComponent } from '../reply/reply.component';
 import { KweeksService } from '../services/kweeks.service';
+import { Overlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-kweek',
   templateUrl: './kweek.component.html',
   styleUrls: ['./kweek.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 
 export class KweekComponent implements OnInit {
-  roots: Kweek[] = [];
+  clickedKweek: Kweek;
   positionOption: TooltipPosition = 'above';
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
@@ -23,8 +29,6 @@ export class KweekComponent implements OnInit {
 
   /* route children name which based on it, The right request will be sent */
   public routeChildName: string;
-
-
 
   /*
    * constructor called when component is made
@@ -37,6 +41,7 @@ export class KweekComponent implements OnInit {
     private kweekFunc: KweeksService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private overlay: Overlay
   ) {}
 
   /**
@@ -53,26 +58,36 @@ export class KweekComponent implements OnInit {
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     // }
+    // mock service
+    // this.kweekService.getKweeks().subscribe(lists => {
+    //   this.kweeks = lists;
+    //   this.kweekFunc.injectTagsInText(this.kweeks);
+    // });
 
-    // This part will be updated
-    // this.KweeksType();
-    // const userName = this.route.snapshot.params['username'];
-    // if (this.routeChildName === 'kweeks' || this.routeChildName === '' ) {
-    //   this.kweekService.getUserKweeks(userName , null).subscribe
-    //   ( usersInfo => {
+    /* // This part will be updated
+    this.KweeksType();
+    const userName = this.route.snapshot.params.username;
+    this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+      this.kweeks = usersInfo;
+      this.kweekFunc.injectTagsInText(this.kweeks);
+    }); */
+    // if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
+    //   this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
     //     this.kweeks = usersInfo;
-    //   } );
-    //     this.injectTagsInText();
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
+    //   });
     // } else if (this.routeChildName === 'likes') {
-    //   this.kweekService.getUserLikedKweeks(userName , null).subscribe
-    //     this.kweeks = usersInfo;
-      //   ( usersInfo => {
-    //     this.injectTagsInText();
-    //   } );
-    // } else {
+    //   this.kweekService
+    //     .getUserLikedKweeks(userName, null)
+    //     .subscribe(usersInfo => {
+    //       this.kweeks = usersInfo;
+    //       this.kweekFunc.injectTagsInText(this.kweeks);
+    //     });
+    // }
+    // else {
     //   this.kweekService.getKweeks().subscribe(lists => {
     //     this.kweeks = lists;
-    //     this.injectTagsInText();
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
     //   });
     // }
   }
@@ -82,21 +97,22 @@ export class KweekComponent implements OnInit {
     if (this.route.snapshot.firstChild != null) {
       this.routeChildName = this.route.snapshot.children[0].toString();
     }
-  } */
-/**
- * open pop ups of replays
- * No parameters
- * @returns void
- */
+  }
+
+  /**
+   * open pop ups of replays
+   * No parameters
+   * @returns void
+   */
   openDialog(kweek: Kweek): void {
-    this.roots.push(kweek);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
     dialogConfig.autoFocus = false;
+    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-    dialogRef.componentInstance.roots = this.roots;
+    dialogRef.componentInstance.clickedKweek = kweek;
     dialogRef.afterClosed().subscribe(result => {
-      this.roots = [];
+      this.clickedKweek = null;
     });
   }
 

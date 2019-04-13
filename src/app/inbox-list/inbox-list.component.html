@@ -1,3 +1,4 @@
+<!-- chat header-->
 <div class="head row align-items-center">
     <div class="activity ">
         <button id="back"class=" esc " [routerLink]="['/chat/', {outlets: {body:['inbox']}}]">
@@ -17,7 +18,47 @@
       </button>
     </div>
   </div>
-
+  <!-- body-->
   <div class="list">
-    hi
+    <div class="send">
+      Send message to:
+    </div>
+    <form [formGroup]="myForm">
+        <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let user of selectedUsers" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(user)">
+                {{user}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Enter a name"
+                     formControlName="filterBy"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)"
+                     (keydown)="newSearch()">
+            </mat-chip-list>
+          </mat-form-field>
+    </form>
+    <div class="send" >
+      people  
+    </div>
+    <div class="person" *ngFor="let user of users" (click)="selectUser(user)">
+      <img [src]="user.profile_image_url">
+      <div class="username">
+        {{user.username}}
+      </div>
+      <div class="screenName">
+        @{{user.screen_name}}
+      </div> 
+    </div>
   </div>
+
+  <!--footer-->
+<div class="next">
+    <button id="new" [disabled]="!selectedUsers.length" [ngClass]="{'dis':!selectedUsers.length}">
+      Next
+    </button>
+</div>
+
