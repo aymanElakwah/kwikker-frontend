@@ -234,7 +234,6 @@ export class DataService {
       catchError(this.handleError)
     );
   }
-
   /**
    * Post request make the authorised user follow Some user
    * @param userName {string} The userName that will be followed
@@ -255,6 +254,7 @@ export class DataService {
    * @param userName {string} The userName that will be unfollowed
    * @returns Request Response
    */
+
   unfollowUser(userName: string): Observable<any> {
     const paramsSent = { params: new HttpParams().set("username", userName) };
     return this.http
@@ -429,4 +429,60 @@ export class DataService {
     // return an observable with a user-facing error message
     return throwError("Something bad happened; please try again later.");
   }
+
+  /**
+ * signUpUSer
+ */
+public signUpUser(user: any): Observable <any> {
+  const body = JSON.stringify(user);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + '/account/registration', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+}
+
+/**
+ * sendEmail
+ */
+public sendEmail(user: any): Observable <any> {
+  const body = JSON.stringify(user);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + '/account/forget_password', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+  
+}
+/**
+ * signUpConfirm
+ */
+public signUpConfirm(code: any, whichone: number): Observable <any> {
+  const body = JSON.stringify(code);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  
+  if (whichone == 0)
+  {
+    //resetting password
+    return this.http.post<any>(this.base + 'account/forget-password/confirmation', body, headers)
+                                  .pipe(
+                                  map(res => res),
+                                  catchError(this.handleError)
+                                  );  
+
+  }
+  //else, confirming email
+  return this.http.post<any>(this.base + '/account/registration/confirmtation', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+
+  
+}
+
 }

@@ -8,6 +8,9 @@ import { LogInComponent } from './log-in/log-in.component';
 //delete
 import { KweekComponent } from './kweek/kweek.component';
 import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
+import { confirmCode } from './sign-up/confirmCode.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { confirmPassword } from './reset-password/reset-password-confirm.component';
 
 
 const routes: Routes = [
@@ -15,6 +18,10 @@ const routes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
+  {path: 'confirm/:code', component: confirmCode},
+  {path: 'reset-password/:code', component: confirmPassword},
+  {path: 'forget-password', component: ResetPasswordComponent},
+  
   //delete
   {path: 'kweeks', component: KweekComponent},
   {path: '', component: SignUpComponent},
