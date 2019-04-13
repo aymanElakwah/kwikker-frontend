@@ -58,8 +58,7 @@ export class MainProfileComponent implements OnInit {
    /* Default Profile Picture */
   defaultProfilePicture: string ='https://i.ibb.co/z2wkPKs/Default.png';
 
-
-
+ 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
    * No Parameters
@@ -77,7 +76,8 @@ export class MainProfileComponent implements OnInit {
    */
   isProfilePictureDefault(): boolean
   {
-    return (this.profileUser.profile_image_url  == this. defaultProfilePicture);
+    return true;
+    /* return (this.profileUser.profile_image_url  == this.defaultProfilePicture); */
   }
 
   /**
@@ -98,8 +98,8 @@ export class MainProfileComponent implements OnInit {
    */
   changeProfilePicture(event)
   {
-    this.profileInfoService.updateProfilePicture(event.target.files[0]).subscribe
-    ( newProfilePictureUrl => {this.profileUser.profile_image_url =  newProfilePictureUrl; } )
+    const file = event.target.files[0];
+    this.profileInfoService.updateProfilePicture(file);
   }
 
    /**
@@ -109,8 +109,9 @@ export class MainProfileComponent implements OnInit {
    */
   changeProfileBanner(event)
   {
-    this.profileInfoService.updateBanner(event.target.files[0]).subscribe
-    ( newProfileBanner => {this.profileUser.profile_banner_url =  newProfileBanner; } )
+    const file = event.target.files[0];
+    console.log(file);
+    this.profileInfoService.updateBanner(file);
   }
 
   
@@ -121,7 +122,7 @@ export class MainProfileComponent implements OnInit {
    */
   removeProfilePicture(): void
   {
-       this.profileUser.profile_image_url =  null;
+       this.profileUser.profile_image_url =   this.defaultProfilePicture;
        this.ShowMessage("Profile image removed");
        this.profileInfoService.removeProfilePicture();
   }
@@ -145,7 +146,7 @@ export class MainProfileComponent implements OnInit {
    */
   toggleEditingMode(): void
   {
-    this.isEditingMode = ! this.isEditingMode;
+    this.isEditingMode = !this.isEditingMode;
   }
 
   /**
@@ -236,7 +237,7 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio)
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio);
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
@@ -288,6 +289,7 @@ export class MainProfileComponent implements OnInit {
    * To The Profile Url and Based On It, Send the request
    */
   ngOnInit() {
+
     
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get('username');

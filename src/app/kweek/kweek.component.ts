@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,13 +18,13 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./kweek.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class KweekComponent implements OnInit {
   clickedKweek: Kweek;
   positionOption: TooltipPosition = 'above';
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
   hideDelay = new FormControl(50);
-
   kweeks: Kweek[] = [];
 
   /* route children name which based on it, The right request will be sent */
@@ -50,41 +50,55 @@ export class KweekComponent implements OnInit {
    * No reurn
    */
   ngOnInit() {
+    // if (this.popUpMode) {
+    // } else {
+
+      this.kweekService.getUserKweeks(this.route.snapshot.root.children[0].params['username'], null).subscribe(lists => {
+        this.kweeks = lists;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+    // }
     // mock service
     // this.kweekService.getKweeks().subscribe(lists => {
     //   this.kweeks = lists;
     //   this.kweekFunc.injectTagsInText(this.kweeks);
     // });
 
-    // This part will be updated
+    /* // This part will be updated
     this.KweeksType();
-    const userName = this.route.snapshot.params['username'];
-    if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
-      this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-        this.kweeks = usersInfo;
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
-    } else if (this.routeChildName === 'likes') {
-      this.kweekService
-        .getUserLikedKweeks(userName, null)
-        .subscribe(usersInfo => {
-          this.kweeks = usersInfo;
-          this.kweekFunc.injectTagsInText(this.kweeks);
-        });
-    } else {
-      this.kweekService.getKweeks().subscribe(lists => {
-        this.kweeks = lists;
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
-    }
+    const userName = this.route.snapshot.params.username;
+    this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+      this.kweeks = usersInfo;
+      this.kweekFunc.injectTagsInText(this.kweeks);
+    }); */
+    // if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
+    //   this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+    //     this.kweeks = usersInfo;
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
+    //   });
+    // } else if (this.routeChildName === 'likes') {
+    //   this.kweekService
+    //     .getUserLikedKweeks(userName, null)
+    //     .subscribe(usersInfo => {
+    //       this.kweeks = usersInfo;
+    //       this.kweekFunc.injectTagsInText(this.kweeks);
+    //     });
+    // }
+    // else {
+    //   this.kweekService.getKweeks().subscribe(lists => {
+    //     this.kweeks = lists;
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
+    //   });
+    // }
   }
 
-  // will be Updated
+  /* // will be Updated
   KweeksType(): void {
     if (this.route.snapshot.firstChild != null) {
       this.routeChildName = this.route.snapshot.children[0].toString();
     }
   }
+
   /**
    * open pop ups of replays
    * No parameters
