@@ -67,7 +67,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username != this.authorizedUser);
+    return (this.profileUser.username == this.authorizedUser);
   }
 
    /**
@@ -101,8 +101,6 @@ export class MainProfileComponent implements OnInit {
     this.profileInfoService.updateProfilePicture(event.target.files[0]).subscribe
     ( newProfilePictureUrl => {this.profileUser.profile_image_url =  newProfilePictureUrl; } )
   }
-
-
 
    /**
    * Change User Profile Banner
@@ -219,6 +217,8 @@ export class MainProfileComponent implements OnInit {
       {
         this.profileInfoService.blockUser(this.profileUser.username);
         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
+        this.profileUser.following = false;
+        this.profileInfoService.unfollowUser(this.profileUser.username);
       }
       this.profileUser.blocked = !this.profileUser.blocked;
       this.semiBlockedMode = false; 

@@ -355,7 +355,7 @@ a {
 #userActionDropdownMenuButton {
 	position: absolute;
 	right: 10%;
-	Top: 80%;
+	Top: 105%;
 	height: 30px;
 	z-index: 9999 !important;
 }
@@ -363,7 +363,7 @@ a {
 #userActionDropDownMenu {
 	position: absolute;
 	right: 10%;
-	Top: 98%;
+	Top: 120%;
 }
 
 .dropdown-menu li:hover {
