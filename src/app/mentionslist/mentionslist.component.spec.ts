@@ -6,17 +6,11 @@ describe('MentionslistComponent', () => {
   let component: MentionslistComponent;
   let fixture: ComponentFixture<MentionslistComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MentionslistComponent ]
-    })
-    .compileComponents();
-  }));
+
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MentionslistComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new MentionslistComponent();
+ 
   });
 
   it('should create', () => {
