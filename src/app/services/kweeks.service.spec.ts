@@ -183,7 +183,7 @@ describe('kweekService', () => {
   });
 
   describe('like function', () => {
-    it('should like kweek when it is unliked by the user and increment the likes numbers', () => {
+    it('should like kweek when it is not liked by the user and increment the likes numbers', () => {
       // Arrange
       const likesNumber = KWEEKS[0].number_of_likes;
       const liked = KWEEKS[0].liked_by_user;
@@ -209,7 +209,7 @@ describe('kweekService', () => {
   });
 
   describe('rekweek function', () => {
-    it('should like kweek when it is unliked by the user and increment the likes numbers', () => {
+    it('should rekweek kweek when it is not rekweeked by the user and increment the rekweeks numbers', () => {
       // Arrange
       const rekweeksNumber = KWEEKS[0].number_of_rekweeks;
       const rekweeked = KWEEKS[0].rekweeked_by_user;
@@ -221,7 +221,7 @@ describe('kweekService', () => {
       expect(KWEEKS[0].rekweeked_by_user).toBe(!rekweeked);
     });
 
-    it('should unlike kweek when it is liked by the user and decrement the likes numbers', () => {
+    it('should unrekweek kweek when it is rekweeked by the user and decrement the rekweeks numbers', () => {
       // Arrange
       const rekweeksNumber = KWEEKS[1].number_of_likes;
       const rekweeked = KWEEKS[1].liked_by_user;
