@@ -3,3 +3,33 @@
     background: #fff;
     height: 46px;
 }
+
+.kweek-btn{
+    background-color: #1da1f2;
+    border: 1px solid #1da1f2;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    font-family: "Segoe UI", Arial, sans-serif;
+    border-radius: 20px;
+
+}
+
+.kweek-btn:hover{
+    background-color: #2091f9;
+    border: 1px solid #2091f9;
+}
+
+.kweek-btn:active, 
+.kweek-btn:focus 
+{
+    outline: none;   
+    
+ }
