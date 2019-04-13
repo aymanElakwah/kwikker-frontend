@@ -2,7 +2,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig, MatDialogRef, TooltipPosition } from '@angular/material';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  TooltipPosition
+} from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { ReplyComponent } from '../reply/reply.component';
 import { KweeksService } from '../services/kweeks.service';
@@ -11,7 +16,7 @@ import { Overlay } from '@angular/cdk/overlay';
   selector: 'app-kweek',
   templateUrl: './kweek.component.html',
   styleUrls: ['./kweek.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class KweekComponent implements OnInit {
   clickedKweek: Kweek;
@@ -24,8 +29,6 @@ export class KweekComponent implements OnInit {
 
   /* route children name which based on it, The right request will be sent */
   public routeChildName: string;
-
-
 
   /*
    * constructor called when component is made
@@ -47,35 +50,33 @@ export class KweekComponent implements OnInit {
    * No reurn
    */
   ngOnInit() {
-    // if (this.popUpMode) {
-    // } else {
+    // mock service
+    // this.kweekService.getKweeks().subscribe(lists => {
+    //   this.kweeks = lists;
+    //   this.kweekFunc.injectTagsInText(this.kweeks);
+    // });
+
+    // This part will be updated
+    this.KweeksType();
+    const userName = this.route.snapshot.params['username'];
+    if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
+      this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+        this.kweeks = usersInfo;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+    } else if (this.routeChildName === 'likes') {
+      this.kweekService
+        .getUserLikedKweeks(userName, null)
+        .subscribe(usersInfo => {
+          this.kweeks = usersInfo;
+          this.kweekFunc.injectTagsInText(this.kweeks);
+        });
+    } else {
       this.kweekService.getKweeks().subscribe(lists => {
         this.kweeks = lists;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
-    // }
-
-    // This part will be updated
-    // this.KweeksType();
-    // const userName = this.route.snapshot.params['username'];
-    // if (this.routeChildName === 'kweeks' || this.routeChildName === '' ) {
-    //   this.kweekService.getUserKweeks(userName , null).subscribe
-    //   ( usersInfo => {
-    //     this.kweeks = usersInfo;
-    //   } );
-    //     this.injectTagsInText();
-    // } else if (this.routeChildName === 'likes') {
-    //   this.kweekService.getUserLikedKweeks(userName , null).subscribe
-    //     this.kweeks = usersInfo;
-      //   ( usersInfo => {
-    //     this.injectTagsInText();
-    //   } );
-    // } else {
-    //   this.kweekService.getKweeks().subscribe(lists => {
-    //     this.kweeks = lists;
-    //     this.injectTagsInText();
-    //   });
-    // }
+    }
   }
 
   // will be Updated
@@ -84,11 +85,11 @@ export class KweekComponent implements OnInit {
       this.routeChildName = this.route.snapshot.children[0].toString();
     }
   }
-/**
- * open pop ups of replays
- * No parameters
- * @returns void
- */
+  /**
+   * open pop ups of replays
+   * No parameters
+   * @returns void
+   */
   openDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
