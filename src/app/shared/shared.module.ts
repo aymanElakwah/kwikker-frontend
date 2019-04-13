@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms'
 import { KweeksModule } from '../kweeks/kweeks.module';
+import { KweekComponent } from '../kweek/kweek.component';
 
 
 @NgModule({
@@ -20,14 +21,13 @@ import { KweeksModule } from '../kweeks/kweeks.module';
   ProfilesListComponent,
   KweekComponent,
   TrendsComponent,
-  NewKweekComponent
-],
+  NewKweekComponent,
   TrendsComponent
   ],
 
   imports: [
     CommonModule,
-    KweeksModule
+    KweeksModule,
     MatDialogModule,
     BrowserAnimationsModule,
     MatTooltipModule,
@@ -45,8 +45,7 @@ import { KweeksModule } from '../kweeks/kweeks.module';
   NavBarComponent,
   ProfilesListComponent,
   TrendsComponent,
-  KweeksModule
-  ]
+  KweeksModule,
   KweekComponent,
   TrendsComponent,
   NewKweekComponent

@@ -403,11 +403,7 @@ export class DataService {
       catchError(this.handleError)
     );
   }
-  /**
-   * post request To add a new kweek  
-   * @param text {string} the kweek data
-   * @returns Request Response
-   */
+  
 
   /**
    *  handle any error code returned from backend server
@@ -435,6 +431,12 @@ export class DataService {
     // return an observable with a user-facing error message
     return throwError("Something bad happened; please try again later.");
   }
+
+  /**
+   * post request To add a new kweek  
+   * @param text {string} the kweek data
+   * @returns Request Response
+   */
   addNewKweek(text:string):Observable <any> {
 
     const obj = { text: String(), reply_to: String()  };
