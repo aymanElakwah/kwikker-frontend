@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Kweek } from '../model/kweek';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +12,13 @@ import { KweeksService } from '../services/kweeks.service';
   styleUrls: ['./kweek.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class KweekComponent implements OnInit {
   roots: Kweek[] = [];
   positionOption: TooltipPosition = 'above';
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
   hideDelay = new FormControl(50);
-
   kweeks: Kweek[] = [];
 
   /* route children name which based on it, The right request will be sent */
@@ -47,7 +47,8 @@ export class KweekComponent implements OnInit {
   ngOnInit() {
     // if (this.popUpMode) {
     // } else {
-      this.kweekService.getKweeks().subscribe(lists => {
+
+      this.kweekService.getUserKweeks(this.route.snapshot.root.children[0].params['username'], null).subscribe(lists => {
         this.kweeks = lists;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
@@ -76,12 +77,12 @@ export class KweekComponent implements OnInit {
     // }
   }
 
-  // will be Updated
+  /* // will be Updated
   KweeksType(): void {
     if (this.route.snapshot.firstChild != null) {
       this.routeChildName = this.route.snapshot.children[0].toString();
     }
-  }
+  } */
 /**
  * open pop ups of replays
  * No parameters

@@ -21,7 +21,7 @@ export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
-  private base: String = 'http://6d5bcddc.ngrok.io/';
+  private base: String = 'http://8c8a6673.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**
@@ -46,19 +46,8 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = lastRetrivedId
-      ? {
-          params: new HttpParams().set(
-            'last_retrieved_trend_id',
-            lastRetrivedId
-          )
-        }
-      : {};
-
-    if (userName) {
-      parametersSent.params.append('username', userName);
-    }
-
+    const parametersSent = {params: new HttpParams().set('last_retrieved_kweek_id', lastRetrivedId).set('username', userName)};
+       
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -292,15 +281,12 @@ export class DataService {
    * @param Bio {string} The Edited Bio
    * @returns Request Response
    */
-  updateProfile(screenName: string, Bio: string): Observable <any> {
-    const paramsSent = { params: new HttpParams().set('bio',Bio) }
-    paramsSent.params.append('screen_name',screenName);
-
-    return this.http.patch<any>(this.base + 'user/profile', paramsSent)
-                          .pipe(
-                           map(res => res),
-                           catchError(this.handleError)
-                           ); 
+  updateProfile(screenName: string, Bio: string){
+    const paramsSent = JSON.stringify({bio:Bio , screen_name:screenName}, null , '');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.patch(`${this.base}user/profile`, paramsSent, headers)
+                          .pipe(catchError(this.handleError))
+                          .subscribe(); 
   }
 
   /**
@@ -308,15 +294,15 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (Image Url);
    */
-  updateBanner(image_file: File): Observable <string> {
-    const body = new FormData();
+  updateBanner(image_file: File) {
+    let body = new FormData();
     body.append('file', image_file, 'file');
-    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
-                          .pipe(
-                           map(res => res),
-                           catchError(this.handleError)
-                           ); 
+    return this.http.post(this.base + 'user/profile_banner', body)
+                        .pipe(catchError(this.handleError))
+                        .subscribe(
+                        (res) => console.log(res),
+                        (err) => console.log(err)); 
+                        
   }
 
    /**
@@ -324,12 +310,13 @@ export class DataService {
    * No Parametes  
    * @returns Request Response (Image Url);
    */
-  removeBanner(): Observable <any> {
+  removeBanner() {
     return this.http.delete<any>(this.base + 'user/profile_banner')
-                            .pipe(
-                            map(res => res),
-                            catchError(this.handleError)
-                            ); 
+                            .pipe(catchError(this.handleError))
+                             .subscribe(
+                              (res) => console.log(res),
+                              (err) => console.log(err)); 
+                            
   }
 
   /**
@@ -340,8 +327,7 @@ export class DataService {
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
     body.append('file', image_file, 'file');
-    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
+    return this.http.put<string>(this.base + 'user/profile_picture', body)
                           .pipe(
                            map(res => res),
                            catchError(this.handleError)
@@ -354,12 +340,12 @@ export class DataService {
    * No Parametes  
    * @returns Request Response (Image Url);
    */
-  removeProfilePicture(): Observable <any> {
+  removeProfilePicture() {
     return this.http.delete<any>(this.base + 'user/profile_picture')
-                          .pipe(
-                          map(res => res),
-                          catchError(this.handleError)
-                          );  
+              .pipe(catchError(this.handleError))
+              .subscribe(
+                (res) => console.log(res),
+                (err) => console.log(err));   
   }
 
   /**
