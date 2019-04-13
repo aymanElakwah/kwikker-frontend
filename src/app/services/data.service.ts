@@ -22,7 +22,7 @@ export class DataService {
   // constructor(private http: HttpClient) {}
 
   
-  private base: String = 'http://d413dec8.ngrok.io/';
+  private base: String = 'http://5d72f606.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**
@@ -249,11 +249,20 @@ export class DataService {
     return ; 
   }
 
-  addNewKweek(text:string):Observable <any> {
-    const paramsSent = { params: new HttpParams().set('text',text) }
-    paramsSent.params.append('reply_to','');
+  /**
+   * post request To add a new kweek  
+   * @param text {string} the kweek data
+   * @returns Request Response
+   */
 
-    return this.http.post<any>(this.base + 'kweeks/', paramsSent)
+  addNewKweek(text:string):Observable <any> {
+
+    const obj = { text: String(), reply_to: String()  };
+    obj.text=text;
+    obj.reply_to=null;
+
+
+    return this.http.post<any>(this.base + 'kweeks/', obj)
                                 .pipe(
                                   map(res => res),
                                   catchError(this.handleError)

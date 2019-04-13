@@ -14,8 +14,21 @@ export class NewKweekComponent  {
   selectedImage: File=null;
   imageUrl:any = null;
   res:string = null;
+
+  /**
+   * Constructor 
+   * @param thisDialogRef to close the dialog
+   * @param Httpclient test purposes parameter 
+   * @param newKweekService used for http requests
+   */
+
   constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, 
     private http: HttpClient, private newKweekService: DataService) {}
+
+    /**
+   * Function to close the dialog by a button 
+   *
+   */
 
   onClose(){
     this.thisDialogRef.close()
@@ -23,9 +36,19 @@ export class NewKweekComponent  {
 
   }
 
+  /**
+   * function for the uploded image (file) 
+   * @param event {file(image)} to get the uploded image and add it
+   * to selected image param then add it as a url to imageUrl param to 
+   * preview it 
+   * 
+   */
+
   onFileSelected(event){
     console.log(event); 
+    // read image as binary
     this.selectedImage = <File>event.target.files[0];
+    //another way to save the image
     const fd = new FormData();
     fd.append('image',this.selectedImage, this.selectedImage.name);
     console.log(fd);
@@ -36,7 +59,7 @@ export class NewKweekComponent  {
     //   console.log(response);
     // });
 
-    // preview image
+    // save image as url in imageUrl to preview it
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedImage); 
     reader.onload = (_event) => { 
@@ -45,14 +68,31 @@ export class NewKweekComponent  {
 
     }
 
+    /**
+   * addkweek function to post the kweek through http post request
+   * 
+   * @returns Request Response
+   */
+
     addKweek(){
       console.log(this.kweekData)
       this.newKweekService.addNewKweek(this.kweekData).subscribe
       (response => {this.res = response})
 
       console.log(this.res);
+      this.thisDialogRef.close()
     }
 
+    /**
+   * removes selected photo
+   * 
+   */
+
+
+    removeImage()
+    {
+      this.selectedImage=null;
+    }
     
   
 }

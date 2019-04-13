@@ -29,6 +29,16 @@
       </div>
 
     </div>
+    <div class="row" style="padding:0; margin: 0; margin-bottom: 10px; margin-left:25%; " 
+    *ngIf="selectedImage">
+        <div class="container" style="text-align:centre">
+            <img [src]="imageUrl" 
+            style=" border-radius: 8px; border: 1px solid  #1da1f2;
+            border-radius: 8px; max-height: 170px; max-width:410px ;" 
+            alt="imageUrl">
+            <button type="button" class="close" (click)="removeImage()">&times;</button>
+        </div>
+      </div>
     <div class="row" style="padding:0; margin: 0">
         <div class="col-md-1" style="padding:0">
           </div>
@@ -52,13 +62,4 @@
     </div>
     </div>
   </div>
-  <div class="row" style="padding:0; margin: 0" *ngIf="selectedImage">
-    <div>
-        <img [src]="imageUrl" height="170px" width="410px" 
-        style="margin-left:25%; border-radius: 8px; border: 1px solid  #1da1f2;
-        border-radius: 8px;" 
-        alt="imageUrl">
-    </div>
   
-</div>
- 

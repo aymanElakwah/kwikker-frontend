@@ -15,12 +15,21 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Function to open kweek dialog 
+   * paneClass -> attach the dialog to specific css class
+   */
+
   openKweekComponent(){
     console.log("working")
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: 'kweekBox'
     });
   
+  /**
+   * Function for closing the dialog and displaying a msg 
+   * 
+   */
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
