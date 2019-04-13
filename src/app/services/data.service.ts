@@ -21,8 +21,9 @@ export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
-  private base: String = "http://6d5bcddc.ngrok.io/";
-  constructor(private http: HttpClient) {}
+  
+  private base: String = 'http://5d72f606.ngrok.io/';
+  constructor(private http: HttpClient) { }
 
   /**
    * get request to get All information about certain user
@@ -402,6 +403,11 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+  /**
+   * post request To add a new kweek  
+   * @param text {string} the kweek data
+   * @returns Request Response
+   */
 
   /**
    *  handle any error code returned from backend server
@@ -429,4 +435,18 @@ export class DataService {
     // return an observable with a user-facing error message
     return throwError("Something bad happened; please try again later.");
   }
+  addNewKweek(text:string):Observable <any> {
+
+    const obj = { text: String(), reply_to: String()  };
+    obj.text=text;
+    obj.reply_to=null;
+
+
+    return this.http.post<any>(this.base + 'kweeks/', obj)
+                                .pipe(
+                                  map(res => res),
+                                  catchError(this.handleError)
+                                );
+  }
+
 }
