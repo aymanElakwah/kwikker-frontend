@@ -22,7 +22,7 @@ export class DataService {
   // constructor(private http: HttpClient) {}
 
   
-  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+  private base: String = 'http://01fb0908.ngrok.io/';
   constructor(private http: HttpClient) { }
 
   /**

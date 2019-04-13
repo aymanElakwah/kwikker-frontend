@@ -39,7 +39,7 @@ export class LogInComponent implements OnInit {
        res => {
          console.log(res);
          localStorage.setItem('TOKEN', res.token);
-         localStorage.setItem('username', this.mail);
+         localStorage.setItem('username', res.email);
          this.router.navigate(['/home']);
        },
         err => console.log('error: ', err)
