@@ -14,29 +14,15 @@ export class ResetPasswordComponent implements OnInit {
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {
-      //   this.confirmCode  = this.route.snapshot.paramMap.get("code");
-      //   //send to the service
-      //   //redirect to home as if he was logged in, save token and email
-      //   this.data.signUpConfirm(this.confirmCode,0)
-      //   .subscribe(
-      //    res => {
-      //      console.log(res);
-      //      localStorage.setItem('TOKEN', res.token);
-      //      this.router.navigate(['/home']);
-      //    },
-      //     err => console.log('error: ', err)
-      // );
-
-      
+           
     }
-    sendEmail(form: NgForm) {
+    emailSent(form: NgForm) {
       const email = form.value;
-     // var ev: (err: any) => void;
-      this.data.logInUser(email)
+      this.data.sendEmail(email)
         .subscribe(
          res => {
            console.log(res);
-           this.router.navigate(['/home']);
+           this.router.navigate(['/login']);
          },
           err => console.log('error: ', err)
       );

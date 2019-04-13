@@ -8,55 +8,54 @@ describe('MainProfileComponent', () => {
   let fixture: ComponentFixture<MainProfileComponent>;
   let debugElement: DebugElement;
 
-  beforeEach(async(() => 
-  {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MainProfileComponent]
     }).compileComponents();
   }));
 
-  beforeEach(()=> {
+  beforeEach(() => {
     fixture = TestBed.createComponent(MainProfileComponent);
     component = fixture.componentInstance;
   });
 
   it('should toggle(EditingMode)', () => {
-    expect( component.isEditingMode).toBeFalsy();
+    const editMode = component.isEditingMode;
     component.toggleEditingMode();
-    expect( component.isEditingMode).toBeTruthy();
+    expect( component.isEditingMode).toBe(!editMode);
   });
 
   it('should toggle(Follow)', () => {
-    expect( component.profileUser.following ).toBeFalsy();
-    component.toggleFollow();
-    expect( component.profileUser.following ).toBeTruthy();
+    const following = component.profileUser.following;
+    component.toggleEditingMode();
+    expect( component.profileUser.following ).toBe(!following);
   });
 
   it('should toggle(Mute)', () => {
-    expect( component.profileUser.muted ).toBeFalsy();
-    component.toggleMute();
-    expect( component.profileUser.muted ).toBeTruthy();
+    const muted = component.profileUser.muted;
+    component.toggleEditingMode();
+    expect( component.profileUser.muted ).toBe(!muted);
     expect( debugElement.query(By.css('.Msg')).nativeElement.innerText)
-    .toBe("You will no longer receive notification from @" + this.profileUser.screen_name);
+    .toBe('You will no longer receive notification from @' + this.profileUser.screen_name);
   });
 
   it('should toggle(Block)', () => {
-    expect( component.profileUser.blocked ).toBeFalsy();
-    component.toggleBlock();
-    expect( component.profileUser.blocked ).toBeTruthy();
+    const blocked = component.profileUser.blocked;
+    component.toggleEditingMode();
+    expect( component.profileUser.blocked ).toBe(!blocked);
     expect( debugElement.query(By.css('.Msg')).nativeElement.innerText)
-    .toBe("@" + this.profileUser.screen_name + " has been blocked");
+    .toBe('@' + this.profileUser.screen_name + ' has been blocked');
   });
 
   it('should toggle(semi-blocked Mode)', () => {
-    expect( component.semiBlockedMode ).toBeFalsy();
-    component.togglesemiBlockedMode();
-    expect( component.semiBlockedMode ).toBeTruthy();
+    const semiBlockedMode = component.semiBlockedMode;
+    component.toggleEditingMode();
+    expect( component.semiBlockedMode ).toBe(!semiBlockedMode);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-})
+});
 

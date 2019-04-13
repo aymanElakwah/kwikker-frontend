@@ -19,12 +19,11 @@ import { MiniUser } from '../model/mini-user';
 export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
-
    /**
    * Backend server base
    */
   private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
- 
+
   /**
    *
    * @param http component to send requests
@@ -54,7 +53,6 @@ export class DataService {
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
     const parametersSent = {params: new HttpParams().set('last_retrieved_kweek_id', lastRetrivedId).set('username', userName)};
-       
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -476,21 +474,13 @@ public sendEmail(user: any): Observable <any> {
 /**
  * signUpConfirm
  */
-public signUpConfirm(code: any, whichone: number): Observable <any> {
+public signUpConfirm(code: any): Observable <any> {
   const body = JSON.stringify(code);
+  console.log(body);
   const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-
-  if (whichone === 0) {
-    // resetting password
-    return this.http.post<any>(this.base + 'account/forget-password/confirmation', body, headers)
-                                  .pipe(
-                                  map(res => res),
-                                  catchError(this.handleError)
-                                  );
-
-  }
-  // else, confirming email
-  return this.http.post<any>(this.base + 'account/registration/confirmtation', body, headers)
+  
+  //else, confirming email
+  return this.http.post<any>(this.base + 'account/registration/confirmation', body, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -516,5 +506,31 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
                                   catchError(this.handleError)
                                 );
   }
+
+  
+/**
+ * sendPass
+ */
+public sendPass(pass: any): Observable <any> {
+  const body = JSON.stringify(pass);
+  console.log(body);
+  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+  return this.http.post<any>(this.base + 'user/password', body, headers)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );  
+ 
+}
+
+
+
+
+
+
+
+
+
+
 
 }

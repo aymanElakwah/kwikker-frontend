@@ -64,7 +64,15 @@
     
     <fieldset class="fs3">
       <h2 class="fs-title">Thank you for using our app.</h2>
-      <h3 class="fs-subtitle">Please check your email for the verification link.</h3>
-      <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
+      <div class="errorOccured hide">
+          <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+              <p class="alertMsg">An error occured will sign up, there may be an invalid or repeated email, please re-signup.</p>
+          </div>
+          <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
+      </div>
+      <div class="progress hide">
+        <h3 class="fs-subtitle">Please check your email for the verification link.</h3>
+        <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
+     </div>
      </fieldset>
   </form>
