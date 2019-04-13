@@ -21,7 +21,7 @@
 {
     margin-top: 12px;
     overflow: hidden;
-
+    margin-bottom: 5% !important;
 }
 
 .nopadding
@@ -632,6 +632,7 @@ a {
 
 .outlet-side-Editing
 {
+    margin-bottom: 5% !important;
     margin-top: 12px;
     overflow: hidden;
     pointer-events: none;
