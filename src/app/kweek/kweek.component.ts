@@ -58,25 +58,30 @@ export class KweekComponent implements OnInit {
 
     // This part will be updated
     this.KweeksType();
-    const userName = this.route.snapshot.params['username'];
-    if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
-      this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-        this.kweeks = usersInfo;
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
-    } else if (this.routeChildName === 'likes') {
-      this.kweekService
-        .getUserLikedKweeks(userName, null)
-        .subscribe(usersInfo => {
-          this.kweeks = usersInfo;
-          this.kweekFunc.injectTagsInText(this.kweeks);
-        });
-    } else {
-      this.kweekService.getKweeks().subscribe(lists => {
-        this.kweeks = lists;
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
-    }
+    const userName = this.route.snapshot.params.username;
+    this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+      this.kweeks = usersInfo;
+      this.kweekFunc.injectTagsInText(this.kweeks);
+    });
+    // if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
+    //   this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
+    //     this.kweeks = usersInfo;
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
+    //   });
+    // } else if (this.routeChildName === 'likes') {
+    //   this.kweekService
+    //     .getUserLikedKweeks(userName, null)
+    //     .subscribe(usersInfo => {
+    //       this.kweeks = usersInfo;
+    //       this.kweekFunc.injectTagsInText(this.kweeks);
+    //     });
+    // }
+    // else {
+    //   this.kweekService.getKweeks().subscribe(lists => {
+    //     this.kweeks = lists;
+    //     this.kweekFunc.injectTagsInText(this.kweeks);
+    //   });
+    // }
   }
 
   // will be Updated
