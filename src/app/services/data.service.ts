@@ -23,7 +23,7 @@ export class DataService {
    /**
    * Backend server base
    */
-  private base: String = 'http://8c8a6673.ngrok.io/';
+  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
  
   /**
    *
