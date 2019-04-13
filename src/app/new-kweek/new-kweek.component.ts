@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogRef} from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-new-kweek',
@@ -9,10 +10,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./new-kweek.component.css']
 })
 export class NewKweekComponent  {
-  closeResult: string;
+  kweekData:string="";
   selectedImage: File=null;
   imageUrl:any = null;
-  constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, private http: HttpClient) {}
+  res:string = null;
+  constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, 
+    private http: HttpClient, private newKweekService: DataService) {}
 
   onClose(){
     this.thisDialogRef.close()
@@ -32,14 +35,24 @@ export class NewKweekComponent  {
     // .subscribe(response=>{
     //   console.log(response);
     // });
+
+    // preview image
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedImage); 
     reader.onload = (_event) => { 
       this.imageUrl = reader.result; 
     }
 
-
     }
 
+    addKweek(){
+      console.log(this.kweekData)
+      this.newKweekService.addNewKweek(this.kweekData).subscribe
+      (response => {this.res = response})
+
+      console.log(this.res);
+    }
+
+    
   
 }

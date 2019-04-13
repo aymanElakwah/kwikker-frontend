@@ -21,7 +21,8 @@
           <div class="tweet-box-content">
               <div class="tweet-content">
                   <div class="form-group">
-                      <textarea class="form-control" rows="5" cols="90" id="kweekData"></textarea>
+                      <textarea class="form-control" rows="5"cols="90" 
+                      id="kweek" name="kweekData" [(ngModel)]="kweekData"></textarea>
                     </div>
               </div>
             </div>
@@ -42,9 +43,12 @@
                 <i class="fas fa-image"  (click)="imageInput.click()"></i></button>
           </span>
       </span>
-      <span style=" float: right; margin-right:6%">
-        <button class="btn btn-primary kweek-btn">Kweek</button>
+      <span style=" float: right; margin-right:2.5%">
+        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260" 
+          (click)="addKweek()">Kweek</button>
+          <span style="padding-left:4px">{{260-kweekData.length}}</span>
       </span>
+      
     </div>
     </div>
   </div>

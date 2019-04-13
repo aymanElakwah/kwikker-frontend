@@ -11,6 +11,7 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule }   from '@angular/forms'
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTooltipModule,
     ImgFallbackModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
    entryComponents: [
      ReplyComponent,

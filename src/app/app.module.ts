@@ -49,16 +49,17 @@ import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component'
     ChatModule,
     SearchModule,
     SettingsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService,
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    // InMemoryDataService,
+    // ),
     FormsModule,
     BrowserAnimationsModule,
     CommonModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }],
+              //{provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
