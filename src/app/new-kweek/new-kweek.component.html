@@ -1,0 +1,60 @@
+
+
+<div class="modal-header">
+    
+    <div class="col-md-11" style="padding:0">
+    <h2 md-dialog-title class="modal-title" style="padding-left:37%">Compose new Kweek</h2></div>
+    <div class="col-md-1" style="padding:0">
+    <div class="clearfix"   >
+        <button type="button" class="close" (click)="onClose()">&times;</button>
+      </div></div>
+      
+  </div>
+  <div class="modal-body">
+    <div class="row" style="padding:0; margin: 0">
+      <div class="col-md-1" style="padding:0">
+          <div class="tweet-box-avatar">
+              <img src="https://www.w3schools.com/images/w3schools_green.jpg" class="user-image" >
+            </div>
+      </div>
+      <div class="col-md-11"style="padding:0">
+          <div class="tweet-box-content">
+              <div class="tweet-content">
+                  <div class="form-group">
+                      <textarea class="form-control" rows="5" cols="90" id="kweekData"></textarea>
+                    </div>
+              </div>
+            </div>
+      </div>
+
+    </div>
+    <div class="row" style="padding:0; margin: 0">
+        <div class="col-md-1" style="padding:0">
+          </div>
+          <div class="col-md-11" style="padding:0">
+      <span>
+          <form action="/action_page.php">
+            <input style="display:none" #imageInput type="file" name="pic" accept="image/*" 
+            (change)="onFileSelected($event)">
+          </form>
+          <span style="margin-left:1.5%">
+              <button class="btn kweek-image" >
+                <i class="fas fa-image"  (click)="imageInput.click()"></i></button>
+          </span>
+      </span>
+      <span style=" float: right; margin-right:6%">
+        <button class="btn btn-primary kweek-btn">Kweek</button>
+      </span>
+    </div>
+    </div>
+  </div>
+  <div class="row" style="padding:0; margin: 0" *ngIf="selectedImage">
+    <div>
+        <img [src]="imageUrl" height="170px" width="410px" 
+        style="margin-left:25%; border-radius: 8px; border: 1px solid  #1da1f2;
+        border-radius: 8px;" 
+        alt="imageUrl">
+    </div>
+  
+</div>
+ 

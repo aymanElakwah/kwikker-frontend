@@ -8,6 +8,10 @@ import { MatDialogModule, MatTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReplyComponent } from '../reply/reply.component';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +19,7 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
   ProfilesListComponent,
   KweekComponent,
   TrendsComponent,
+  NewKweekComponent
 ],
 
   imports: [
@@ -22,16 +27,20 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     MatDialogModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    ImgFallbackModule
+    ImgFallbackModule,
+    NgbModule.forRoot(),
+    HttpClientModule
   ],
-  entryComponents: [
-    ReplyComponent
-  ],
+   entryComponents: [
+     ReplyComponent,
+     NewKweekComponent
+   ],
   exports: [
   NavBarComponent,
   ProfilesListComponent,
   KweekComponent,
-  TrendsComponent
+  TrendsComponent,
+  NewKweekComponent
 ]
 })
 export class SharedModule { }
