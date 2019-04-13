@@ -4,11 +4,11 @@
   
     <!-- All Card Info -->
     <input type="text" class="form-control" id ="EditName"
-            placeholder="Name" value="{{profileHeaderInfo?.username}}"
+            placeholder="Name" value="{{profileHeaderInfo?.screen_name}}"
             aria-label="Username" aria-describedby="basic-addon1"
             (change) ="changeProfileData()">
     
-    <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.screen_name}} </h1>
+    <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.username}} </h1>
 
     <input type="text" class="form-control" id="EditBio" 
            placeholder="Bio"  value="{{profileHeaderInfo?.bio}}" 

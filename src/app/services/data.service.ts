@@ -21,7 +21,7 @@ export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
 
-  private base: String = 'http://8978be66.ngrok.io/';
+  private base: String = 'http://6d5bcddc.ngrok.io/';
   constructor(private http: HttpClient) { }
 
    /**
@@ -171,16 +171,10 @@ export class DataService {
    * newer notifications after it and also could be null
    * @returns array of notifications
    */
-  getNotificationsList(
-    last_notifications_retrieved_id: string
-  ): Observable<Notification[]> {
-    const options = last_notifications_retrieved_id
-      ? {
-          params: new HttpParams().set(
-            'last_notifications_retrieved_id',
-            last_notifications_retrieved_id
-          )
-        }
+  getNotificationsList( last_notifications_retrieved_id: string): Observable<Notification[]> {
+    const options = last_notifications_retrieved_id ? {
+        params: new HttpParams().set( 'last_notifications_retrieved_id', last_notifications_retrieved_id)
+      }
       : {};
     return this.http
       .get<Notification[]>(this.base + 'notifications', options)
@@ -233,41 +227,111 @@ export class DataService {
                               );
   }
 
-  unfollowUser(userName: string): Observable<any> {
-    return ;
+  followUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }  
+    return this.http.post<any>(this.base + 'interactions/follow', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              ); 
   }
+
   
-  followUser(Username: string): Observable <any> {
-    return ; 
+  unfollowUser(userName: string): Observable<any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/follow', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
   }
 
-  muteUser(Username: string): Observable <any> {
-    return ; 
+  muteUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.post<any>(this.base + 'interactions/mutes', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
   }
 
-  blockUser(Username: string): Observable <any> {
-    return ; 
+    
+  unmuteUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/mutes', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
   }
 
-  updateProfile(Username: string, Bio: string): Observable <any> {
-    return ; 
+  blockUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.post<any>(this.base + 'interactions/blocks', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
   }
 
-  updateBanner(BannerImage: string): Observable <any> {
-    return ; 
+  unblockUser(userName: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('username', userName) }
+    return this.http.delete<any>(this.base + 'interactions/blocks', paramsSent)
+                              .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                              );
+  }
+
+
+
+  updateProfile(screenName: string, Bio: string): Observable <any> {
+    const paramsSent = { params: new HttpParams().set('bio',Bio) }
+    paramsSent.params.append('screen_name',screenName);
+
+    return this.http.patch<any>(this.base + 'user/profile', paramsSent)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           ); 
+  }
+
+  updateBanner(image_file: string): Observable <any> {
+    const body = new FormData();
+    body.append('file', image_file, 'file');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           ); 
   }
 
   removeBanner(): Observable <any> {
-    return ; 
+    return this.http.delete<any>(this.base + 'user/profile_banner')
+    .pipe(
+     map(res => res),
+     catchError(this.handleError)
+     ); 
   }
 
-  
-  updateProfilePicture(ProfileImage: string): Observable <any> {
-    return ; 
+  updateProfilePicture(image_file: File): Observable<string> {
+    const body = new FormData();
+    body.append('file', image_file, 'file');
+    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.http.put<string>(this.base + 'user/profile_picture', body, headers)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           );
   }
 
   removeProfilePicture(): Observable <any> {
-    return ; 
+    return this.http.delete<any>(this.base + 'user/profile_picture')
+    .pipe(
+     map(res => res),
+     catchError(this.handleError)
+     );  
   }
 
 

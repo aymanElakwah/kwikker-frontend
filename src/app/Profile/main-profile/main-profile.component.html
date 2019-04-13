@@ -15,6 +15,7 @@
             <div class="row" id="header">
                 
                  <!--ProfilePicture Image-->
+                
                  <div  [ngClass] = "{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">  <!--User Setting Dropdown Menu -->
                          
                         <img *ngIf = "!isAuthorisedUser() || !isProfilePictureDefault()"
@@ -22,7 +23,8 @@
                         src = {{profileUser?.profile_image_url}}
                         
                         id="ProfileImage"
-                        onerror="arguments[0].currentTarget.style.display='none'"/>
+                        
+                        />
                
                         <span class= "Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()">
                                 <i class="fas fa-camera fa-4x"></i>
@@ -34,7 +36,7 @@
                             <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                              <div class="dropdown-menu" id="profilePicDropDownMenu" aria-labelledby="profilePicdropdownMenuButton">
                                 <li class="dropdown-item"> 
-                                    <input type ="file" accept=".png, .jpg, .jpeg" id="file" (change)="changeProfilePicture($event)"  /> 
+                                    <input type ="file" accept=".png, .jpg, .jpeg" id="file" enctype = 'multipart/form-data' (change)="changeProfilePicture($event)"  /> 
                                     <label for="file"> Upload photo </label>
                                 </li>
                                 <li class="dropdown-item" *ngIf ="!isProfilePictureDefault()" (click) ="removeProfilePicture()"> <P> Remove </P></li>
@@ -47,6 +49,7 @@
                         </span> 
                         <p  [ngClass] = "{'editProfilePicText':!isProfilePictureDefault() , 'editProfilePicText-default':isProfilePictureDefault()}"  *ngIf="isEditingMode"> </p>
                  </div>
+                
 
                 <!--Banner Image-->
                 <div class="row" [ngClass] = "{'Banner':!isEditingMode, 'Banner-Editing':isEditingMode}"> 
@@ -54,7 +57,7 @@
                     <img
                     [ngClass] = "{'BannerImage':!isEditingMode, 'BannerImage-Editing':isEditingMode}"
                     src = {{profileUser?.profile_banner_url}} 
-                    onerror="arguments[0].currentTarget.style.display='none'"
+                    
                     id="BannerImage"/>
                    
                     <div class="App-Container">           
@@ -71,7 +74,7 @@
                         <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                          <div class="dropdown-menu" id="BannerDropDownMenu" aria-labelledby="BannerDropdownMenuButton">
                             <li class="dropdown-item">
-                                 <input type ="file"  id="file" accept=".png, .jpg, .jpeg" id="file" (change)="changeProfileBanner($event)" /> 
+                                 <input  type ="file"  id="file" accept=".png, .jpg, .jpeg" enctype = "multipart/form-data" id="file" (change)="changeProfileBanner($event)" /> 
                                  <label for="file"> Upload photo </label>
                                 </li>
                             <li class="dropdown-item"  *ngIf ="!isProfileBannerDefault()" (click) ="removeProfileBanner()"> <P> Remove </P></li>
@@ -90,15 +93,15 @@
                 
                                                 <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                                                 <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
-                                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.screen_name}}</P></li>
+                                                    <li class="dropdown-item" *ngIf="!profileUser?.blocked"> <P> Tweet To @{{profileUser?.username}}</P></li>
                                                     <li class="dropdown-item"> <P> Send a Direct Message</P></li>
                                                     <li class="dropdown-item" (click)='toggleMute()' *ngIf="!profileUser?.blocked"> 
-                                                        <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.screen_name}} </P>
-                                                        <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.screen_name}} </P>
+                                                        <P *ngIf="!profileUser?.muted "> Mute @{{profileUser?.username}} </P>
+                                                        <P *ngIf=" profileUser?.muted "> Unmute @{{profileUser?.username}} </P>
                                                     </li>
                                                     <li class="dropdown-item" (click)='toggleBlock()'> 
-                                                        <P *ngIf="!profileUser?.blocked"> Block @{{profileUser?.screen_name}} </P>
-                                                        <P *ngIf="profileUser?.blocked"> Unblock @{{profileUser?.screen_name}} </P>
+                                                        <P *ngIf="!profileUser?.blocked"> Block @{{profileUser?.username}} </P>
+                                                        <P *ngIf="profileUser?.blocked"> Unblock @{{profileUser?.username}} </P>
                                                     </li>
                                                 </div>
                                             </div>
@@ -112,19 +115,32 @@
                         <div class="col-9 nopadding">
                             
                             <ul id="Taps" *ngIf = '!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'>
+                               
                                 <li> <a routerLinkActive="active" 
-                                        [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} </a>  </li>
+                                        [routerLink]="['kweeks']" > Tweets <br> {{profileUser?.kweeks_count}} 
+                                    </a>  </li>  
+                                
+                                
                                 <li> <a routerLinkActive="active" 
-                                        [routerLink]="['following']">  Following  <br> {{profileUser?.following_count}}</a>  </li>
+                                        [routerLink]="['following']">  Following  <br> {{profileUser?.following_count}}
+                                    </a>  </li> 
+                                   
+                                
                                 <li> <a routerLinkActive="active"
-                                        [routerLink]="['followers']">   Followers <br> {{profileUser?.followers_count}} </a>  </li>
+                                        [routerLink]="['followers']">   Followers <br> {{profileUser?.followers_count}}
+                                    </a>  </li> 
+                                    
+                                
                                 <li> <a routerLinkActive="active"
-                                        [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} </a> </li>  
+                                        [routerLink]="['likes']">  Likes <br> {{profileUser?.likes_count}} 
+                                    </a>  </li> 
                             </ul>
  
                                 <!--The 2nd part which contains Edit, Follow and Following Buttons 
                                         & DropDownMenu on the secondry Navbar -->
-                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="!isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)  ">
+                            <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" 
+                                 *ngIf="!isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)">
+                                 
                                     <i class="fas fa-volume-mute" 
                                        [style.opacity]= "(profileUser?.muted)? '1' : '0.5'"
                                        [style.color]= "(profileUser?.muted)? '#9e0909e3' : '#939c99'"
@@ -133,7 +149,8 @@
 
                              <button type="button" class="btn btn-outline-primary edit-button" 
                                     *ngIf="isAuthorisedUser() && !isEditingMode"
-                                    (click)='activateEditingMode()' > 
+                                    (click)='toggleEditingMode()'> 
+                                    
                                     <span> Edit Profile </span> 
                                 </button>
                             <button type="button" class="btn btn-outline-primary follow-button"  
@@ -155,7 +172,7 @@
                             <button type="button" class="btn btn-primary saveChanges-button"
                                     *ngIf="isEditingMode"
                                     (click)='updateProfile()' ><span> Save changes </span></button>
-                            <button type="button" class="btn btn-primary cancel-button"  (click)='deactivateEditingMode()'
+                            <button type="button" class="btn btn-primary cancel-button"  (click)='toggleEditingMode()'
                                     *ngIf="isEditingMode"><span> Cancel </span></button>
                         </div>
                     </div>
@@ -178,7 +195,7 @@
                         class='Header-Card-Editing'
                         [profileHeaderInfo] = 'profileUser'
                         [isAuthorisedUser] = 'isAuthorisedUser()'
-                        (editedUsername) = "editedUsername=$event"
+                        (editedScreenName) = "editedScreenName=$event"
                         (editedBio) = "editedBio=$event"> 
                     </app-profile-header-card-editing>
 
@@ -195,11 +212,11 @@
                     <router-outlet 
                     *ngIf = '!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'> 
                     </router-outlet>
-
+                    
                     <div class ="BlockMsg" *ngIf="profileUser?.blocked && !semiBlockedMode">
-                        <h2 class ="BlockMsgHeader"> You blocked @<b style="font-weight: normal;">{{profileUser?.screen_name}}</b> </h2>
+                        <h2 class ="BlockMsgHeader"> You blocked @<b style="font-weight: normal;">{{profileUser?.username}}</b> </h2>
                         <p class ="BlockMsgBody"> Are you sure you want to view these Tweets? Viewing Tweets won't unblock <br>@{{profileUser?.screen_name}} <br> </p>
-                        <button type="button" class="btn btn-outline-primary semiBlocked-button" (click)='activatesemiBlockedMode()'> 
+                        <button type="button" class="btn btn-outline-primary semiBlocked-button" (click)='togglesemiBlockedMode()'> 
                             <span> Yes, view profile </span> 
                         </button>
                     </div>

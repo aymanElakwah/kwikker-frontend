@@ -3,8 +3,8 @@
             <div class = "card-container" *ngIf="profileHeaderInfo">
               
               <!-- All Card Info -->
-              <h1 class = "Profile-Name"> {{profileHeaderInfo?.username}} </h1>
-              <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.screen_name}} </h1>
+              <h1 class = "Profile-Name"> {{profileHeaderInfo?.screen_name}} </h1>
+              <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.username}} </h1>
               <p class = "Profile-Bio" *ngIf = '!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'> {{profileHeaderInfo?.bio}} </p>
 
               <div class = "Profile-Joindate" *ngIf = '!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'>

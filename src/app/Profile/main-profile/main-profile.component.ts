@@ -3,6 +3,8 @@ import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'q';
+import * as $ from "jquery";
+
 
 /**
  * The Main Component For The Profile Page
@@ -24,13 +26,13 @@ export class MainProfileComponent implements OnInit {
          * */
   profileUser: User =
   {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
+      username: 'Ahmed_Mahmoud14',
+      screen_name: 'Ahmed Mahmoud',
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
-      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png', 
-      profile_banner_url: null,
+      profile_image_url: '', 
+      profile_banner_url: '',
       following: false,
       follows_you: false,
       followers_count: 0,
@@ -42,13 +44,14 @@ export class MainProfileComponent implements OnInit {
   };
 
   /* The Authorized User (The one who made Log in) */
-  authorizedUser: string = localStorage.getItem('screen-name');
+  authorizedUser: string = localStorage.getItem('username');
   isEditingMode: boolean = false;
   muteMode: boolean = false;
   semiBlockedMode: boolean = false;
-  editedUsername: string = this.profileUser.username;
+  editedScreenName: string = this.profileUser.username;
   editedBio: string = this.profileUser.bio;
-  defaultProfilePicture: string = 'https://i.ibb.co/z2wkPKs/Default.png'
+  defaultProfilePicture: string = ''
+
 
 
   /**
@@ -58,12 +61,13 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.screen_name != this.authorizedUser);
+    return (this.profileUser.username == this.authorizedUser);
+    
   }
 
   isProfilePictureDefault(): boolean
   {
-    return (this.profileUser.profile_image_url  == 'https://i.ibb.co/z2wkPKs/Default.png');
+    return (this.profileUser.profile_image_url  == '');
   }
 
   isProfileBannerDefault(): boolean 
@@ -73,53 +77,52 @@ export class MainProfileComponent implements OnInit {
 
   changeProfilePicture(event)
   {
-       
+    this.profileInfoService.updateProfilePicture(event.target.files[0]).subscribe
+    ( newProfilePictureUrl => {this.profileUser.profile_image_url =  newProfilePictureUrl; } )
   }
 
   changeProfileBanner(event)
   {
-      
+    this.profileInfoService.updateBanner(event.target.files[0]).subscribe
+    ( newProfileBanner => {this.profileUser.profile_banner_url =  newProfileBanner; } )
   }
 
   removeProfilePicture()
   {
        this.profileUser.profile_image_url =  null;
        this.ShowMessage("Profile image removed");
-       
+       this.profileInfoService.removeProfilePicture();
   }
 
   removeProfileBanner()
   {
        this.profileUser.profile_banner_url = null;
        this.ShowMessage("No more header for you");
+       this.profileInfoService.removeBanner();
   }
   
 
-  activateEditingMode(): void
+  toggleEditingMode(): void
   {
-    this.isEditingMode = true;
+    this.isEditingMode = ! this.isEditingMode;
   }
 
-  activateEditingModeProfilePicture(): void
+  togglesemiBlockedMode(): void
   {
-/*     this.isEditingMode = true; */
-    const DropDown = document.getElementById('profilePicDropDownMenu');
-    
- 
+    this.semiBlockedMode = !this.semiBlockedMode;
   }
 
-  activatesemiBlockedMode(): void
-  {
-    this.semiBlockedMode = true;
-  }
-
-  deactivateEditingMode(): void
-  {
-    this.isEditingMode = false;
-  }
 
   toggleFollow()
   {
+    if( this.profileUser.following )
+    {
+      this.profileInfoService.unfollowUser(this.profileUser.username);
+    }
+    else
+    {
+      this.profileInfoService.followUser(this.profileUser.username);
+    }
     this.profileUser.following = !this.profileUser.following;
   }
 
@@ -142,41 +145,47 @@ export class MainProfileComponent implements OnInit {
 
   toggleMute(): void
   {
-      this.profileUser.muted = !this.profileUser.muted;
-      this.muteMode = true;
-      if(!this.profileUser.muted)
+      if(this.profileUser.muted)
       {
+          this.profileInfoService.unmuteUser(this.profileUser.username);
           this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
       }
       else
       {
-         this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
+        this.profileInfoService.muteUser(this.profileUser.username);
+        this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
+        
       }
+      this.profileUser.muted = !this.profileUser.muted;
+      this.muteMode = true;
   }
 
   toggleBlock(): void
   {
-      this.profileUser.blocked = !this.profileUser.blocked;
-      this.semiBlockedMode = false;
       if(this.profileUser.blocked)
       {
-         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
+        this.profileInfoService.unblockUser(this.profileUser.username);
+        this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
       }
       else
       {
-         this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
+        this.profileInfoService.blockUser(this.profileUser.username);
+        this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
       }
+      this.profileUser.blocked = !this.profileUser.blocked;
+      this.semiBlockedMode = false;
+      
   }
 
   updateProfile()
   {
-    if(this.editedUsername === "")
+    if(this.editedScreenName === "")
     {
       this.ShowMessage("Name can't be blank");
       return;
     }
-
-    this.profileUser.username = this.editedUsername;
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio)
+    this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
   }
@@ -206,7 +215,6 @@ export class MainProfileComponent implements OnInit {
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
     ( userInfo => {this.profileUser = userInfo; } )
-
 
   }
 
