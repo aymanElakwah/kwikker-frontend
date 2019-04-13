@@ -433,7 +433,6 @@ export class DataService {
   }
 
   /**
-<<<<<<< HEAD
  * signUpUSer
  */
 public signUpUser(user: any): Observable <any> {
@@ -487,11 +486,11 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
 
   
 }
-=======
-   * post request To add a new kweek  
-   * @param text {string} the kweek data
-   * @returns Request Response
-   */
+/**
+ * post request To add a new kweek  
+ * @param text {string} the kweek data
+ * @returns Request Response
+ */
   addNewKweek(text:string):Observable <any> {
 
     const obj = { text: String(), reply_to: String()  };
@@ -505,6 +504,5 @@ public signUpConfirm(code: any, whichone: number): Observable <any> {
                                   catchError(this.handleError)
                                 );
   }
->>>>>>> 6589673faf037c729252a2543fc7743a94b845f8
 
 }
