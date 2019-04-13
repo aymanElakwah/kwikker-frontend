@@ -26,7 +26,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 import { ReplyComponent } from './reply/reply.component';
 import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
-
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -36,8 +36,8 @@ import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component'
     HomeComponent,
     SignUpComponent,
     ReplyComponent,
-    ErrorPageComponent,
-  ],
+    ErrorPageComponent
+    ],
   imports: [
     SharedModule,
     BrowserModule,
@@ -49,12 +49,14 @@ import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component'
     SearchModule,
     SettingsModule,
     HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService,
+     InMemoryDataService
     ),
     FormsModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
+  
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
               {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }],
