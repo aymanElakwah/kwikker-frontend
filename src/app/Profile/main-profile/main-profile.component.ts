@@ -31,7 +31,7 @@ export class MainProfileComponent implements OnInit {
       bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
       birth_date: new Date,
       created_at: new Date,
-      profile_image_url: '', 
+      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
       profile_banner_url: '',
       following: false,
       follows_you: false,
@@ -50,7 +50,7 @@ export class MainProfileComponent implements OnInit {
   semiBlockedMode: boolean = false;
   editedScreenName: string = this.profileUser.username;
   editedBio: string = this.profileUser.bio;
-  defaultProfilePicture: string = ''
+  defaultProfilePicture: string ='https://i.ibb.co/z2wkPKs/Default.png';
 
 
 

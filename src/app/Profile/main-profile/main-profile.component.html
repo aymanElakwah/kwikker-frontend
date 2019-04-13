@@ -21,15 +21,12 @@
                         <img *ngIf = "!isAuthorisedUser() || !isProfilePictureDefault()"
                         [ngClass] = "{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
                         src = {{profileUser?.profile_image_url}}
+                        alt = 'https://i.ibb.co/z2wkPKs/Default.png' 
+                        id="ProfileImage"/>
                         
-                        id="ProfileImage"
-                        
-                        />
-               
                         <span class= "Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isProfilePictureDefault() && isAuthorisedUser()">
                                 <i class="fas fa-camera fa-4x"></i>
                         </span> 
-
 
                        <div class="user-setting-dropdown" *ngIf="isProfilePictureDefault() && isAuthorisedUser()" >
                             <button (click)="isEditingMode = true" class="btn  btn-light"  id="profilePicdropdownMenuButton" data-toggle="dropdown"> </button>
