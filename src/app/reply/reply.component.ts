@@ -28,7 +28,11 @@ export class ReplyComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.kweekService.getReplies1().subscribe(lists => {
+    // this.kweekService.getReplies1().subscribe(lists => {
+    //   this.replies = lists;
+    //   this.kweekFunc.injectTagsInText(this.replies);
+    // });
+    this.kweekService.getKweekReplies(this.clickedKweek.id).subscribe(lists => {
       this.replies = lists;
       this.kweekFunc.injectTagsInText(this.replies);
     });
