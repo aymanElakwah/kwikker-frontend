@@ -63,7 +63,7 @@ export class DataService {
    * get request to get All Replies of a kweek
    * @param kweekId {string} the kweek that we want to get its replies
    * @returns array of Kweeks
-   */
+  */
   getKweekReplies(kweekId: string): Observable<Kweek[]> {
     const parametersSent = kweekId
       ? {
@@ -75,6 +75,11 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * like or unlike tweet depend on the user if he liked or not like this kweek
+   * @param id {string} of kweek that we want to like or unlike
+   * @returns observable
+  */
   likeOrUnlikeKweek(id: string): Observable<any> {
     return this.http.post<any>(`${this.base}kweeks/like`, id).pipe(
       map(res => res),
@@ -82,6 +87,11 @@ export class DataService {
     );
   }
 
+  /**
+   * rekweek or unrekweek tweet depend on the user if he rekweeked or not rekweeked this kweek
+   * @param id {string} of kweek that we want to rekweek or unrekweek
+   * @returns observable
+  */
   rekweekOrUnrekweekKweek(id: string): Observable<any> {
     return this.http.post<any>(`${this.base}kweeks/rekweek`, id).pipe(
       map(res => res),
