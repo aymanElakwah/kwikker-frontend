@@ -30,17 +30,20 @@ constructor(private data: DataService , private router: Router) {
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
 
-
-
+/**
+   *On initiallizing the sign-up component, a set of parameters are initalized too.
+   *these parameters must be initialized only once
+   *If user is already signed up, this page will direct him to home
+   *@param void
+   * @returns void
+   */
 ngOnInit() {
-  //check if this is a regestered user, navigate him to the home page
-  //if not, show him the signup page
   if(!isNull(localStorage.getItem('TOKEN')))
     {
       this.router.navigate(['/home']);
     }
     else 
-    this.router.navigate(['signup']);
+    {this.router.navigate(['signup']);}
 
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
@@ -53,13 +56,40 @@ ngOnInit() {
 }
 
 /**
- * secondStep
- */
-public secondStep() {
+   *A simple CSS manipulator function to show/hide/active parameters of the view
+   *@param void
+   * @returns void
+   */
+public previousOne (){
+  this.bar2.className = 'disabled';
+  this.fs2.className = 'hide';
+  this.fs1.className = 'show';  
+}
+
+/**
+   *A simple CSS manipulator function to show/hide/active parameters of the view
+   *@param void
+   * @returns void
+   */
+  public secondStep() {
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
  }
+ 
+/**
+   *Submit function, first it redesign the view.
+   *Then wrap some form values in an object 'toSend'.
+   *Calls 'redesignDateFormat()' to change the date format.
+   *Sends the object to the DataServices
+   *@param form {NgForm} 
+   *If error does exist or not, the 'whatToShow()' function is called.
+   *If no errors does exist, it sends 0 to it
+   *If there's an error it sends 1
+   *and function 'whatToShow()' handels the situation
+   * @returns void
+   */
+
  public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
@@ -74,7 +104,7 @@ public secondStep() {
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
- console.log (toSend);
+ 
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
@@ -89,8 +119,11 @@ public secondStep() {
     
 }
 /**
- * whatToShow
- */
+   *Takes either 0/1 to show an error/success message at the front view.
+   *@param id {number} 
+   * @returns void
+   */
+
 public whatToShow(id: number) {
   if(id == 0)
   {
@@ -104,11 +137,13 @@ public whatToShow(id: number) {
     this.errorOccured.className = 'show';
   }
 }
- public previousOne (){
-   this.bar2.className = 'disabled';
-   this.fs2.className = 'hide';
-   this.fs1.className = 'show';  
- }
+/**
+   *This function takes a date in a time zone format.
+   *Specify the month.
+   *then rearrange the date in a suitable string format.
+   *@param date {string} 
+   * @returns string
+   */
  
 redesignDateFormat(date: string): string {
   if (!date) {

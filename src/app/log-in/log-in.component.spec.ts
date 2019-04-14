@@ -4,7 +4,6 @@ import { LogInComponent } from './log-in.component';
 import { HttpClient } from '@angular/common/http';
 
 describe("LogInComponent", () => {
-  console.log('ev');
     let logInComponent: DataService;
     let http: HttpClient;
     it("should call #logInUser in the constructor", () => {

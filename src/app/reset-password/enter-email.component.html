@@ -10,7 +10,13 @@
                     <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
                     <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
                     <p class="alertMsg">Not a valid Email!</p>
-                    </div>    
+                    </div> 
+                <div class="errorBox hide">
+                        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+                                <p class="alertMsg">Someting went wrong, you may have entered a wrong email.</p>
+                        </div>
+                </div>
+                   
                  <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="emailSent(submitForm)"  [disabled]="email.invalid">Send</button>
         </fieldset>
         

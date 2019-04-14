@@ -15,16 +15,17 @@ export class confirmPassword implements OnInit {
     }
     ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
-       
-       // this.confirmCode = JSON.stringify(this.confirmCode);
-      //  console.log(this.confirmCode);
-       //save token at header
         localStorage.setItem('TOKEN', this.confirmCode);
 
     }
 /**
- * sendPassword
- */
+   *This function is called when updating the password.
+   * It takes the submitForm values and wrap the password in an object.
+   * Then send it to sendPass() function, that pushes it to the backend server.
+   * @param form {NgForm} 
+   * stores new token if success mission, otherwise returns an error
+   * @returns void
+   */
 public sendPassword(form: NgForm) {
   var toSend = { 
     password: form.value.pass
