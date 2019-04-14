@@ -38,6 +38,10 @@ export class AppPage {
     return browser.get('/notifications');
   }
 
+  navigateToHome() {
+    return browser.get('/home');
+  }
+
   //---------Get-----------
 
   //---------Field-----------
@@ -74,24 +78,9 @@ export class AppPage {
   }
 
   //---------Button-----------
-  getTweetToButton(){
-    return element(by.className('btn btn-primary Tweet-Button'));
-  }
-
-  getFollowButton(){
-    return element(by.className('follow-button'));
-  }
-
-  getDropDownButton(){
-    return element(by.id('dropdownMenuButton'));
-  }
   
   getTweetToDropDown(){
     return element(by.tagName('p'));
-  }
-
-  getAllButton(){
-    return element(by.className('btn btn-outline-primary'));
   }
 
   getLoginButton(){
@@ -110,10 +99,6 @@ export class AppPage {
     return element(by.cssContainingText('.fs-title', 'Thank you for using our app.'));
   }
   //---------Card-----------
-  getNotificationCard(){
-    return element(by.className('card-body'));
-  }
-
   getDatePickerSignupBoard(){
     return element(by.xpath('//*[local-name() = "svg"]'));
   }
@@ -124,5 +109,81 @@ export class AppPage {
   //---------Utility-----------
   browserPause(x) {
     return browser.sleep(x);
+  }
+
+  //---------Dawood Edits-----------
+  getProfileName(){
+    return element(by.className('Profile-Name'));
+  }
+
+  getTweetToButton(){
+    return element(by.className('btn btn-primary Kweek-Button'));
+  }
+
+  getMessageButton(){
+    return element(by.className('btn btn-primary Msg-Button'));
+  }
+
+
+  getFollowButton(){
+    return element(by.className('btn btn-outline-primary follow-button'));
+  }
+
+  getFollowingButton(){
+    return element(by.className('btn btn-primary following-button'));
+  }
+
+  getDropDownButton(){
+    return element(by.id('userActionDropdownMenuButton'));
+  }
+
+  getMuteButton(){
+    return element.all(by.className('dropdown-item')).get(2);
+  }
+
+  getBlockButton(){
+    return element.all(by.className('dropdown-item')).get(3);
+  }
+
+  getSignUpTitle(){
+    return element(by.className('active'));
+  }
+
+
+  getBlockedButton(){
+    return element(by.className('btn btn-primary Blocked-button'));
+  }
+
+  getEditButton(){
+    return element(by.css('btn btn-outline-primary edit-button'));
+  }
+
+  getSaveChangesButton(){
+    return element(by.className('btn btn-primary saveChanges-button'));
+  }
+
+  getCancelChangesButton(){
+    return element(by.className('btn btn-primary cancel-button'));
+  }
+
+
+  getScreenName(){
+    return element(by.id('EditName'));
+  }
+
+  getBio(){
+    return element(by.id('EditBio'));
+  }
+
+  getProfileBio(){
+    return element(by.className('Profile-Bio'));
+  }
+
+  getAllButton(){
+    return element(by.className('btn btn-outline-primary'));
+  }
+
+  getNotificationCard(){
+    return element.all(by.className('card-body'));
   }
 }
