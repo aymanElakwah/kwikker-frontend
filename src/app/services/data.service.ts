@@ -80,7 +80,8 @@ export class DataService {
    * @returns observable
   */
   likeOrUnlikeKweek(id: string): Observable<any> {
-    return this.http.post<any>(`${this.base}kweeks/like`, id).pipe(
+    const paramsSent = { params: new HttpParams().set('id', id) };
+    return this.http.post<any>(`${this.base}kweeks/like`, paramsSent).pipe(
       map(res => res),
       catchError(this.handleError)
     );
@@ -92,7 +93,8 @@ export class DataService {
    * @returns observable
   */
   rekweekOrUnrekweekKweek(id: string): Observable<any> {
-    return this.http.post<any>(`${this.base}kweeks/rekweek`, id).pipe(
+    const paramsSent = { params: new HttpParams().set('id', id) };
+    return this.http.post<any>(`${this.base}kweeks/rekweek`, paramsSent).pipe(
       map(res => res),
       catchError(this.handleError)
     );
