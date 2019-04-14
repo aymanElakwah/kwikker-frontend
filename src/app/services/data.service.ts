@@ -19,6 +19,12 @@ import { MiniUser } from '../model/mini-user';
 export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
+<<<<<<< HEAD
+
+  
+  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+=======
+>>>>>>> db00582673389f6811eb921744d08eb1f1b8c0d1
    /**
    * Backend server base
    */
