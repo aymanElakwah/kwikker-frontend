@@ -17,7 +17,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SearchModule } from './search/search.module';
 import { HomeComponent } from './home/home.component';
 import { SettingsModule } from './settings/settings.module';
-//import { InMemoryDataService } from '../app/services/in-memory-data-service.service';
+// import { InMemoryDataService } from '../app/services/in-memory-data-service.service';
 import { ChatModule } from './chat/chat.module';
 import { ProfileModule } from './Profile/profile.module';
 
@@ -52,9 +52,9 @@ import { confirmPassword } from './reset-password/reset-password-confirm.compone
     ChatModule,
     SearchModule,
     SettingsModule,
-   /*  HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService,
-    ), */
+    // HttpClientInMemoryWebApiModule.forRoot(
+    // InMemoryDataService,
+    // ),
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,

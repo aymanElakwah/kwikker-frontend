@@ -197,10 +197,7 @@
 //           'number_of_rekweeks': 2,
 //           'number_of_replies': 3,
 //           'reply_to': 'string',
-//           'rekweek_info': {
-//             'rekweeker_name': 'string',
-//             'rekweeker_username': 'string'
-//           },
+//           'rekweek_info': null,
 //           'liked_by_user': true,
 //           'rekweeked_by_user': true
 //         },

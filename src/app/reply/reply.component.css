@@ -55,10 +55,11 @@
 }
 
 #last-clicked-kweek {
-    padding: 30px 40px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 20px;
     line-height: 20px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 30px 40px;
+    color: #14171a;
 }
 
 #last-clicked-kweek #user-name {

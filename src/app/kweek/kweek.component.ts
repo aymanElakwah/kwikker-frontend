@@ -48,16 +48,12 @@ export class KweekComponent implements OnInit {
    * function called after all intialization in constuctor used here to determine which kweeks to retreive
    * No Parameters
    * No reurn
-   */
+  */
   ngOnInit() {
-    // if (this.popUpMode) {
-    // } else {
-
-      this.kweekService.getUserKweeks(this.route.snapshot.root.children[0].params['username'], null).subscribe(lists => {
-        this.kweeks = lists;
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
-    // }
+    this.kweekService.getUserKweeks(this.route.snapshot.root.children[0].params['username'], null).subscribe(lists => {
+      this.kweeks = lists;
+      this.kweekFunc.injectTagsInText(this.kweeks);
+    });
     // mock service
     // this.kweekService.getKweeks().subscribe(lists => {
     //   this.kweeks = lists;
@@ -103,7 +99,7 @@ export class KweekComponent implements OnInit {
    * open pop ups of replays
    * No parameters
    * @returns void
-   */
+  */
   openDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
