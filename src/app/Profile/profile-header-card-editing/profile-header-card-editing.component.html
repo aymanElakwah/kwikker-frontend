@@ -1,0 +1,33 @@
+<!-- Card Container: To control card dimension regardless the page -->
+<div class = "card-container" *ngIf="profileHeaderInfo">
+    <!-- All Card Info -->
+    <input type="text" class="form-control" id ="EditName"
+       placeholder="Name" value="{{profileHeaderInfo?.screen_name}}"
+       aria-label="Username" aria-describedby="basic-addon1"
+       (change) ="changeProfileData()">
+    <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.username}} </h1>
+    <input type="text" class="form-control" id="EditBio" 
+       placeholder="Bio"  value="{{profileHeaderInfo?.bio}}" 
+       aria-label="Username" aria-describedby="basic-addon1"
+       (change) ="changeProfileData()">
+    <h1 class = "Birthday">  Birthday </h1>
+    <p class= "BirthdayQuote"> This should be your date of birth, whether this account is for your business, event, or even your cat. </p>
+    <select class="custom-select" id="Year">
+       <option selected> Year </option>
+       <option value="1"> One </option>
+       <option value="2"> Two </option>
+       <option value="3"> Three </option>
+    </select>
+    <select class="custom-select" id="Month">
+       <option selected> Month </option>
+       <option value="1"> One </option>
+       <option value="2"> Two </option>
+       <option value="3"> Three </option>
+    </select>
+    <select class="custom-select" id="Day">
+       <option selected> Day </option>
+       <option value="1"> One </option>
+       <option value="2"> Two </option>
+       <option value="3"> Three </option>
+    </select>
+ </div>

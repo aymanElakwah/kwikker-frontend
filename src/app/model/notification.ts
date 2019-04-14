@@ -2,7 +2,7 @@
  * Notification Model, All users should have their own notifications
  * To tell them if someone rekweek their kweeks or send them a message
  */
-export interface Notification{
+export interface Notification {
     /** Each Notification has a Unique ID */
     id?: string;
      /** The Date that This Notification happened */

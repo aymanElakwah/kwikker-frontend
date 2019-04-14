@@ -18,4 +18,6 @@ export interface MiniUser {
     blocked: boolean;
      /** If The Authorised User Muted That User */
     muted: boolean;
+
+    bio: string;
 }

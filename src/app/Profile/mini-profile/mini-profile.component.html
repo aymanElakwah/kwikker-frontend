@@ -1,55 +1,80 @@
-
-<div class="row nopadding" >
-
+<div class ="row nopadding">
   <!-- The main Part For each Card , For Loop to show all of them -->
-  <div class="container" *ngFor='let user of miniCardProfileUsers'>
-
+  <div class="container" *ngFor='let user of miniCardProfileUsers; let i = index'>
      <!-- Profile Card is divided into two main Rows [Banner, Info] -->
-    <div class="profile-card">
-      
-     <!--  The Upper Part for the banner -->
-      <div class="row banner"> </div>    
-  
-      <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
-      <div class=" row profile-content">
-        <div class="content">
-           
-          <!-- User Action Part Includes [DropDownMenu, Follow & Following Button] -->
-          <div class="user-action">
-              <button type="button" class="btn btn-outline-primary Follow">  Follow </button>
-              <button class="btn btn-primary Following"> <span>Following </span>  </button>
-              <button class="btn"  id="dropdownMenuButton" data-toggle="dropdown">
-                
-                  <!-- 3 Dots Icon => Font-Awesome -->  
-                <span class= "Dots-Icon" id="dots" style="font-size: 3ex; color:#657786;">
-                  <i class="fas fa-ellipsis-v"></i>
-                </span>
-
-              </button>
-
-              <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <li class="dropdown-item"> <P>Tweet To @{{user.screen_name}}</P></li>
-                  <li class="dropdown-item"> <P> Mute @{{user.screen_name}} </P></li>
-                  <li class="dropdown-item"> <P> Block @{{user.screen_name}} </P></li>
-              </div>
-          </div>
-
-          <!-- Profile Picture Part -->
-          <div class="profile-pic">  </div>
-            
-          <!-- Profile Info Part [Username, Screen Name, Bio] -->
-          <div class="profile-data">
-            <div class="username"> {{user.username}} </div>
-            <div class="screen-name">  {{user.screen_name}} </div>
-            <p class="bio"> {{user.bio}} </p>  
-          </div>
+     <div class="profile-card">
+        <!--  The Upper Part for the banner -->
+        <div class="row banner"> 
+           <img
+              class = 'BannerImage'
+              src = "../../../assets/main/green.jpg"
+              alt="miniProfileBanner"
+              id="BannerImage"/>
         </div>
-      </div>
-    </div>
+        <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
+        <div class=" row profile-content">
+           <div class="content">
+              <!-- User Action Part Includes [DropDownMenu, Follow & Following Button] -->
+              <div class="user-action">
+                 <span class= "MuteIcon" style="font-size: 4ex; color:#939c99;" *ngIf="(muteModes[i] || user?.muted) && !user?.blocked">
+                 <i class="fas fa-volume-mute" 
+                 [style.opacity]= "(user?.muted)? '1' : '0.5'"
+                 [style.color]= "(user?.muted)? '#9e0909e3' : '#939c99'"
+                 (click)='toggleMute(i)'> </i>
+                 </span>
+                 <button type="button" class="btn btn-outline-primary Follow" *ngIf="!user.following && !user?.blocked" (click)='toggleFollow(i)'>  Follow </button>
+                 <button class="btn btn-primary Following" *ngIf="user.following && !user?.blocked" (click)='toggleFollow(i)'> <span>Following </span>  </button>
+                 <button type="button" class="btn btn-primary Blocked-button" 
+                 *ngIf="user?.blocked"
+                 (click)='toggleBlock(i)'> 
+                 <span> Blocked </span>
+                 </button>
+                 <button class="btn"  id="dropdownMenuButton" data-toggle="dropdown">
+                    <!-- 3 Dots Icon => Font-Awesome -->  
+                    <span class= "Dots-Icon" id="dots" style="font-size: 3ex; color:#657786;">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                 </button>
+                 <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
+                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <li class="dropdown-item" *ngIf="!user?.blocked">
+                       <P> Tweet To @{{user.screen_name}}</P>
+                    </li>
+                    <li class="dropdown-item">
+                       <P> Send a Direct Message</P>
+                    </li>
+                    <li class="dropdown-item" *ngIf="!user?.blocked"> 
+                       <P *ngIf="!user?.muted" 
+                       (click)='toggleMute(i)'> Mute @{{user.screen_name}} </P>
+                       <P *ngIf="user?.muted"
+                       (click)='toggleMute(i)'> Unmute @{{user.screen_name}} </P>
+                    </li>
+                    <li class="dropdown-item"> 
+                       <P *ngIf="!user?.blocked"
+                       (click)='toggleBlock(i)'> Block @{{user.screen_name}} </P>
+                       <P *ngIf=" user?.blocked"
+                       (click)='toggleBlock(i)'> Unblock @{{user.screen_name}} </P>
+                    </li>
+                 </div>
+              </div>
+              <!-- Profile Picture Part -->
+              <div class="profile-pic">  
+                 <img
+                    class = "ProfileImage"
+                    src = {{user?.profile_image_url}}  
+                    alt = 'https://i.ibb.co/z2wkPKs/Default.png'
+                    id= "ProfileImage"
+                    onerror="arguments[0].currentTarget.style.display='none'"/>
+              </div>
+              <!-- Profile Info Part [Username, Screen Name, Bio] -->
+              <div class="profile-data">
+                 <div class="username"> {{user.username}} </div>
+                 <div class="screen-name">  @{{user.screen_name}} </div>
+                 <p class="FollowsYou" *ngIf ="user.follows_you"> Follows You </p>
+                 <p class="bio"> {{user.bio}} </p>
+              </div>
+           </div>
+        </div>
+     </div>
   </div>
 </div>
-
-
-
-

@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 
-/** 
+/**
  * This component just merge two other components [Kweeks , Trends] So => No Logic
  *  */
 @Component({
@@ -11,7 +11,6 @@ import { Component, OnInit} from '@angular/core';
 
 
 export class ProfileKweeksTabComponent implements OnInit {
- 
    /**
    * Empty Constructor => May be used later
    */

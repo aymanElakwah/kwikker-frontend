@@ -1,0 +1,83 @@
+.card-container {
+	width: 100%;
+	height: auto;
+	padding-top: 10px;
+	padding-bottom: 12px;
+	background-color: rgba(140, 199, 236, 0.336);
+	opacity: 0.8;
+}
+
+#EditName {
+	position: relative;
+	border: 1px solid #1B95E0 !important;
+	Top: 0.8%;
+	color: #14171a;
+	font-weight: bold;
+	font-size: 21px;
+	line-height: 28px;
+	border-radius: 4px;
+	overflow-y: scroll;
+	min-height: 20px;
+	width: 90%;
+	margin-left: 7px;
+	margin-bottom: 12px;
+}
+
+
+/* Profile Screen name */
+
+.Profile-ScreenName {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 20px;
+	margin-bottom: 10.2px;
+	margin-left: 11px;
+	color: #1B95E0 !important;
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+
+#EditBio {
+	position: relative;
+	border: 1px solid #1B95E0 !important;
+	color: #14171a;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 20px;
+	border-radius: 4px;
+	overflow-y: scroll;
+	min-height: 20px;
+	width: 90%;
+	margin-left: 7px;
+	margin-bottom: 18px;
+}
+
+.Birthday {
+	margin-left: 11px;
+	margin-bottom: 12px;
+	font-size: 15px;
+}
+
+.BirthdayQuote {
+	margin-left: 11px;
+	font-size: 14px;
+	line-height: 1.375;
+}
+
+.custom-select {
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 20px;
+	margin-left: 7px;
+}
+
+#Year {
+	width: 80px;
+}
+
+#Month {
+	width: 90px;
+}
+
+#Day {
+	width: 70px;
+}

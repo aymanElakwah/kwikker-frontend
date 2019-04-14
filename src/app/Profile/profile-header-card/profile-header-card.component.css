@@ -1,88 +1,104 @@
-.card-container
-{
-    width: 260px;
-    height: 196px;
+.card-container {
+	width: 260px;
+	height: auto;
 }
+
+
 /* Profile Username */
-.Profile-Name
-{
-    font-size: 21px;
-    font-weight: bold;
-    line-height: 28px;
-    margin-right: 2px;
-    word-wrap: break-word;
+
+.Profile-Name {
+	font-size: 21px;
+	font-weight: bold;
+	line-height: 28px;
+	margin-right: 2px;
+	word-wrap: break-word;
 }
+
 
 /* Profile Screen name */
-.Profile-ScreenName
-{
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 12px;
-    position: relative;
-    bottom: 6px;
-    color: rgb(102, 117, 127);
+
+.Profile-ScreenName {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 12px;
+	position: relative;
+	bottom: 6px;
+	color: rgb(102, 117, 127);
 }
+
 
 /* Profile Bio */
-.Profile-Bio
-{
-    color: #14171a;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 20px;
-    margin-bottom: 12px;
-    word-wrap: break-word;
+
+.Profile-Bio {
+	color: #14171a;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 20px;
+	margin-bottom: 12px;
+	word-wrap: break-word;
 }
+
 
 /* JoinDate and BirthDate */
-.Date-Text
-{
-    vertical-align: middle;
-    line-height: 1;
-    padding-left: 3px;
+
+.Date-Text {
+	vertical-align: middle;
+	line-height: 1;
+	padding-left: 3px;
 }
 
-.Profile-Joindate ,.Profile-Birthdate
-{
-    color: #657786;
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 8px;
-    position: relative;
-    text-align: left;
-}
-
-/* Button to be able to Kweek to that User */
-.Tweet-Button
-{
-    background-color: #48AAE6;
-    border-color: transparent;
-    border-radius: 100px;
-    box-shadow: none;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    margin-top: 20px
-}
-
-.btn-primary:hover
-{
-    background-color: rgb(7, 116, 184);
+.Profile-Joindate,
+.Profile-Birthdate {
+	color: #657786;
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 8px;
+	position: relative;
+	text-align: left;
 }
 
 
-.btn-primary:active
-{
-    outline: none !important;
-    box-shadow: rgb(7, 116, 184) 0 0 100px;
+/* Button to be able to Kweek and Message that User */
+
+.Kweek-Button {
+	background-color: #48AAE6;
+	border-color: transparent;
+	border-radius: 100px;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 20px;
+	padding: 6px 16px;
+	text-align: center;
+	box-sizing: border-box;
+	width: 48%;
+	margin-top: 20px;
+	margin-right: 3px;
 }
 
+.Msg-Button {
+	background-color: #48AAE6;
+	border-color: transparent;
+	border-radius: 100px;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 20px;
+	padding: 6px 16px;
+	text-align: center;
+	box-sizing: border-box;
+	width: 48%;
+	margin-top: 20px;
+	margin-left: 3px;
+}
 
+.btn-primary:hover {
+	background-color: rgb(7, 116, 184);
+}
+
+.btn-primary:active {
+	outline: none !important;
+	box-shadow: rgb(7, 116, 184) 0 0 100px;
+}

@@ -4,7 +4,6 @@ import { LogInComponent } from './log-in.component';
 import { HttpClient } from '@angular/common/http';
 
 describe("LogInComponent", () => {
-  console.log('ev');
     let logInComponent: DataService;
     let http: HttpClient;
     it("should call #logInUser in the constructor", () => {
@@ -16,24 +15,24 @@ describe("LogInComponent", () => {
     });
 
 });
-// describe('LogInComponent', () => {
-//   let component: LogInComponent;
-//   let fixture: ComponentFixture<LogInComponent>;
+describe('LogInComponent', () => {
+  let component: LogInComponent;
+  let fixture: ComponentFixture<LogInComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ LogInComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ LogInComponent ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(LogInComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LogInComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

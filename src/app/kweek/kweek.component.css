@@ -1,85 +1,124 @@
-  #kweek-img {
-    width: 48px;
-  }
-  
-  #kweek-style {
-    background: white;
-    color: black;
-    cursor: pointer;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  
-  #kweek-style:hover {
-      background-color: #E6ECF0; 
-  }
-  
-  #kweek-meta {
-    color: #657786;
-  }
-  
-  #kweek-body {
-    font-size: 14px;
-    line-height: 20px;
-  }
-  
-  a {
-    font-weight: bold;
-  }
-  
-  a:link,
-  a:visited {
-    text-decoration: none;
-    color: black;
-  }
-  
-  a:hover,
-  a:active {
-    text-decoration: underline;
-    color: #1da1f2;
-  }
-  
-  #reply,
-  #rekweek,
-  #like {
-    font-size: 24;
-    color: #657786;
-  }
-  
-  #liked,
-  #like:hover {
-    color: #e0245e;
-  }
-  
-  #rekweeked,
-  #rekweek:hover {
-    color: #17bf63;
-  }
-  
-  #reply:hover {
-    color: #1da1f2;
-  }
-  
-  #kweek-body {
-      margin-top: 12px;
-      margin-bottom: 12px;
-  }
-  
-  #media {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    border-radius: 10px;
-  }
+.kweek-img {
+  width: 48px;
+}
 
-  .Mention,
-  .Hashtag {
-    color: #1da1f2;
-  }
+.kweek-style {
+  background: white;
+  color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.4em;
+}
 
-  .Mention:hover,
-  .Mention:active,
-  .Hashtag:hover,
-  .Hashtag:active {
-    text-decoration: underline;
-  }
+#kweek-meta {
+  color: #657786;
+}
+
+:host ::ng-deep a, a:visited {
+  text-decoration: none;
+  color: #1da1f2;
+}
+
+:host ::ng-deep a:hover, a:active  {
+  text-decoration: underline;
+  color: #1da1f2;
+}
+
+.reply,
+.rekweek,
+.like {
+  font-size: 24;
+  color: #657786;
+}
+
+.liked,
+.like:hover {
+  color: #e0245e;
+}
+
+.rekweeked,
+.rekweek:hover {
+  color: #17bf63;
+}
+
+.reply:hover {
+  color: #1da1f2;
+}
+
+.kweek-body {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#media {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  border-radius: 10px;
+}
+
+a, a:hover {
+  color: #1da1f2;
+}
+
+.kweeks {
+  width: 100%;
+}
+
+.kweeks .kweek-user .screen_name {
+  color: #222;
+  font-weight: bold;
+}
+
+.kweeks .username {
+  color: #666;
+  font-weight: normal;
+}
+
+.kweeks .kweek-user:hover {
+  text-decoration: none;
+}
+
+.kweeks .kweek-user:hover .screen_name, 
+#rekweeked-screen_name:hover {
+  text-decoration: underline;
+  color: #1da1f2;
+}
+
+.kweeks .date {
+  color: #666;
+}
+
+.tooltip-style {
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  background-color: #e6ecf0;
+}
+
+#rekweeked-info {
+  color: #657786;
+  font-size: 14px;  
+  margin: 3px 45px;
+}
+
+.media {
+  padding: 3px 12px 11px 12px;
+}
+
+#rekweeked-screen_name {
+  color: #657786;
+  text-decoration: none;
+}
+
+.kweek-text {
+  color: #14171a;
+}
+
+.icons {
+  font-size: 16px;
+}
