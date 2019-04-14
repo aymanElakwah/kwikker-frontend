@@ -517,7 +517,7 @@ public signUpConfirm(code: any): Observable <any> {
 public sendPass(pass: any): Observable <any> {
   const body = JSON.stringify(pass);
   console.log(body);
-    return this.http.post<any>(this.base + 'user/password', body)
+    return this.http.put<any>(this.base + 'user/password', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
