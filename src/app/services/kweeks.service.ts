@@ -142,12 +142,12 @@ export class KweeksService {
   like(kweek: Kweek): void {
     kweek.liked_by_user = !kweek.liked_by_user;
     kweek.liked_by_user ?  kweek.number_of_likes++ : kweek.number_of_likes--;
-    this.kweekService.likeOrUnlikeKweek(kweek.id);
+    this.kweekService.likeOrUnlikeKweek(kweek.id).subscribe();
   }
 
   rekweek(kweek: Kweek): void {
     kweek.rekweeked_by_user = !kweek.rekweeked_by_user;
     kweek.rekweeked_by_user ?  kweek.number_of_rekweeks++ : kweek.number_of_rekweeks--;
-    this.kweekService.rekweekOrUnrekweekKweek(kweek.id);
+    this.kweekService.rekweekOrUnrekweekKweek(kweek.id).subscribe();
   }
 }
