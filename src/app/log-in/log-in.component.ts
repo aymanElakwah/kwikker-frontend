@@ -52,7 +52,10 @@ export class LogInComponent implements OnInit {
     this.isLoggedIn = true;
   }
   /**
-   * showErrorMSg
+   * Function to change the error box status from hide, to show
+   * called when an error logging in exists.
+   * @param void
+   * @returns void
    */
   public showErrorMSg() {
    this.msg.className = 'show';

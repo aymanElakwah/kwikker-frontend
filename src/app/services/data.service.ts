@@ -246,7 +246,6 @@ export class DataService {
       return this.http.get<MiniUser[]>(`${this.base}direct_message/recent_conversationers`);
     }
   /**
-   *
    * to post user's name and user's password
    * @param user {object} sends the user information to get
    * token after it and also could be null
@@ -453,14 +452,15 @@ export class DataService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  /**
- * signUpUSer
- */
+/**
+* A post method function to send user's information to be signed up.
+* @param user {any} takes object of user's information.
+* Returns either success/error message
+* @returns any
+*/
 public signUpUser(user: any): Observable <any> {
   const body = JSON.stringify(user);
-  console.log(body);
-  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + 'account/registration', body, headers)
+  return this.http.post<any>(this.base + 'account/registration', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -468,13 +468,14 @@ public signUpUser(user: any): Observable <any> {
 }
 
 /**
- * sendEmail
- */
-public sendEmail(user: any): Observable <any> {
-  const body = JSON.stringify(user);
-  console.log(body);
-  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + 'account/forget_password', body, headers)
+* A post method function to send Email to the back-service to give it a confirmation link.
+* @param code {any} sends confirmation code
+* Returns either success/error message
+* @returns any
+*/
+public sendEmail(email: any): Observable <any> {
+  const body = JSON.stringify(email);
+  return this.http.post<any>(this.base + 'account/forget_password', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -482,15 +483,16 @@ public sendEmail(user: any): Observable <any> {
 
 }
 /**
- * signUpConfirm
- */
+* A post method function to send confirmation code to the back-service to verify it.
+* @param code {any} sends confirmation code
+* Token is given with a success response
+* otherwise an  error message is returned
+* @returns any
+*/
 public signUpConfirm(code: any): Observable <any> {
   const body = JSON.stringify(code);
   console.log(body);
-  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  
-  //else, confirming email
-  return this.http.post<any>(this.base + 'account/registration/confirmation', body, headers)
+  return this.http.post<any>(this.base + 'account/registration/confirmation', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -519,8 +521,12 @@ public signUpConfirm(code: any): Observable <any> {
 
   
 /**
- * sendPass
- */
+* A put method function to send New reset password to the back-service to be stored
+* @param pass {any} sends New password
+* Token is given with a success response
+*otherwise an  error message is returned
+* @returns any
+*/
 public sendPass(pass: any): Observable <any> {
   const body = JSON.stringify(pass);
   console.log(body);

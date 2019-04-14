@@ -30,11 +30,26 @@ describe('SignUpComponent', () => {
     expect(result2).toContain("2011");    
     expect(result3).toContain("2011");    
 
+
+  });
+ it('should redesign the view', () => {
+    component.whatToShow(0);
+    expect( this.cool.className).toEqual("show");
+    expect(this.errorOccured.className).toEqual('hide');
+    component.whatToShow(1);
+    expect( this.cool.className).toEqual("hide");
+    expect(this.errorOccured.className).toEqual('show');
+    component.whatToShow(NaN);
+    expect( this.cool.className).toEqual("hide");
+    expect(this.errorOccured.className).toEqual('hide');
   });
  
  
   
 });
+
+
+
 
 describe("LogInComponent", () => {
   let dataServices: DataService;

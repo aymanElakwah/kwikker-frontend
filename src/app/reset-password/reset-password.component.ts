@@ -11,11 +11,20 @@ import { NgForm } from '@angular/forms';
 })
 export class ResetPasswordComponent implements OnInit {
   public confirmCode: string;
+  public msg: any;
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {
-           
+      this.msg =  document.querySelector('.errorBox');  
     }
+    /**
+   *This function is called when sending new email to take a reset-password link.
+   * It takes the submitForm values and wrap the email in an object.
+   * Then send it to sendEmail() function, that pushes it to the backend server
+   * @param form {NgForm} 
+   * returns either success or error messages in the consule.
+   * @returns void
+   */
     emailSent(form: NgForm) {
       const email = form.value;
       this.data.sendEmail(email)
@@ -24,9 +33,20 @@ export class ResetPasswordComponent implements OnInit {
            console.log(res);
            this.router.navigate(['/login']);
          },
-          err => console.log('error: ', err)
+          err => {
+            console.log('error: ', err);
+            this.appearError();
+             }
       );
     }
-    
+    /**
+   * Function to change the error box status from hide, to show
+   * called when an error sending email exists.
+   * @param void
+   * @returns void
+   */
+    public appearError() {
+      this.msg.className = 'show';
+    }
 
 }

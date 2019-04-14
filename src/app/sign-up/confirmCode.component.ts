@@ -12,10 +12,16 @@ export class confirmCode implements OnInit {
     public confirmCode: string;
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
+   /**
+   *On initiallizing confirmCode component, 'TOKEN' is realized from the url.
+   *Then sent to teh back-service to verify it.
+   *Finally it redirects the user to home page if success, ohterwise, consule reports an error.
+   * @param void
+   * returns either success or error messages in the consule.
+   * @returns void
+   */
     ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
-        //send to the service
-        //redirect to home as if he was logged in, save token and email
         var toSend = { 
           confirmation_code:this.confirmCode
        };
