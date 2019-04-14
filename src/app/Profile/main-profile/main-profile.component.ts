@@ -236,7 +236,7 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio)
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio);
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;

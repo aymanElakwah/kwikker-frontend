@@ -207,7 +207,7 @@ export class DataService {
    * @returns Request Response
    */
   followUser(userName: string): Observable <any> {
-    const paramsSent = { params: new HttpParams().set('username', userName) }  
+    const paramsSent = { params: new HttpParams().set('username', userName) };
     return this.http.post<any>(this.base + 'interactions/follow', paramsSent)
                               .pipe(
                               map(res => res),
