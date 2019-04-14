@@ -52,7 +52,7 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = {params: new HttpParams().set('last_retrieved_kweek_id', lastRetrivedId).set('username', userName)};
+    const parametersSent = {params: new HttpParams().set('username', userName)};
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -192,7 +192,7 @@ export class DataService {
    */
   getConverstations(): Observable<Conversation[]> {
     return this.http
-      .get<Conversation[]>('`${this.base}direct_message/conversations`')
+      .get<Conversation[]>(`${this.base}direct_message/conversations`)
       .pipe(catchError(this.handleError));
   }
 
