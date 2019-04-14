@@ -12,15 +12,18 @@ export class LogInComponent implements OnInit {
   public mail: string;
   public pass: string;
   public isLoggedIn: boolean;
+  public msg: any;
+
   constructor(private data: DataService , private router: Router) {
 
    }
    ngOnInit() {
      //if the user is already registered, no need to show him the log in page
-    if(!isNull( localStorage.getItem('TOKEN')))
-      {
-        this.router.navigate(['/home']);
-      }
+    // if(!isNull( localStorage.getItem('TOKEN')))
+    //   {
+    //     this.router.navigate(['/home']);
+    //   }
+      this.msg =  document.querySelector('.progress');
     }
 /**
    *
@@ -32,6 +35,7 @@ export class LogInComponent implements OnInit {
   submitForm(form: NgForm) {
     this.isLoggedIn = false;
     const user = form.value;
+    var ev: (err: any) => void;
     this.data.logInUser(user)
       .subscribe(
        res => {
@@ -40,10 +44,21 @@ export class LogInComponent implements OnInit {
          localStorage.setItem('username', this.mail);
          this.router.navigate(['/home']);
        },
-        err => console.log('error: ', err)
+        err => {
+          console.log('error: ', err);
+          this.showErrorMSg();
+        }
     );
     this.isLoggedIn = true;
   }
-  
+  /**
+   * Function to change the error box status from hide, to show
+   * called when an error logging in exists.
+   * @param void
+   * @returns void
+   */
+  public showErrorMSg() {
+   this.msg.className = 'show';
+  }
 
 }

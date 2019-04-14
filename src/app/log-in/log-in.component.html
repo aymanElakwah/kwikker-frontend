@@ -14,9 +14,9 @@
     <form  #loginForm = "ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
       <!-- UserName -->  
       <div>
-          <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="100" placeholder="User Name" required>
+          <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="50" placeholder="Username" required>
           <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
-            <p class="alertMsg">User name is required to log in.</p>
+            <p class="alertMsg">Username is required to log in.</p>
           </div>
       </div>
     <!-- Password -->
@@ -24,14 +24,19 @@
       <div  *ngIf="password.invalid && password.touched" class="msg alert alert-danger " role="alert">
           <p class="alertMsg">Password is required to log in.</p>
       </div>
+      <div class="progress hide">
+        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+            <p class="alertMsg">Incorrect Username or Password, please Log in again.</p>
+        </div>
+      </div>
      <!-- Submission Button -->
       <button class="btn btn-primary fadeIn fourth"  type="submit" [disabled]="email.invalid || password.invalid ">Log in</button>
     </form>
     
     <!-- Remind Passowrd and Sign Up -->
     <div id="formFooter">
-      <a  class="underlineHover" href="#">Forgot Password?</a>
-      <a style="float:right;" class="underlineHover" href="#">Sign Up</a>
+      <a  class="underlineHover" href="forget_password">Forgot Password?</a>
+      <a style="float:right;" class="underlineHover" href="signup">Sign Up</a>
     </div>
 
   </div>

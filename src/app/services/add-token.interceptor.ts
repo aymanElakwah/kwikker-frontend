@@ -14,7 +14,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         this.token = localStorage.getItem('TOKEN');
-        if ( req.url === 'http://0d977716.ngrok.io/account/login') {
+        if ( req.url === 'http://28c1584e.ngrok.io/account/login') {
             return next.handle(req);
         }
         const jsonReq: HttpRequest<any> = req.clone({

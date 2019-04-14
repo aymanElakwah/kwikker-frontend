@@ -17,7 +17,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SearchModule } from './search/search.module';
 import { HomeComponent } from './home/home.component';
 import { SettingsModule } from './settings/settings.module';
-import { InMemoryDataService } from '../app/services/in-memory-data-service.service';
+// import { InMemoryDataService } from '../app/services/in-memory-data-service.service';
 import { ChatModule } from './chat/chat.module';
 import { ProfileModule } from './Profile/profile.module';
 
@@ -25,7 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component';
-
+import { MaterialModule } from './material.module';
+import { confirmCode } from './sign-up/confirmCode.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { confirmPassword } from './reset-password/reset-password-confirm.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component'
     HomeComponent,
     SignUpComponent,
     ErrorPageComponent,
-  ],
+    confirmCode,
+    ResetPasswordComponent,
+    confirmPassword
+    ],
   imports: [
     SharedModule,
     BrowserModule,
@@ -46,16 +52,18 @@ import { ErrorPageComponent } from './ErrorPage/error-page/error-page.component'
     ChatModule,
     SearchModule,
     SettingsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService,
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    // InMemoryDataService,
+    // ),
     FormsModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    MaterialModule,
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true }],
+              /* {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true } */
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

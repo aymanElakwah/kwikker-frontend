@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form } from '@angular/forms';
-import { NgStyle } from '@angular/common';
+
+// npm install --save @angular/material @angular/animations @angular/cdk
+
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
@@ -16,6 +18,8 @@ public bar3: any;
 public fs1: any;
 public fs2: any;
 public fs3: any;
+public cool: any;
+public errorOccured: any;
 public email: string;
 public counter: number;
 constructor(private data: DataService , private router: Router) { 
@@ -23,178 +27,188 @@ constructor(private data: DataService , private router: Router) {
 }
 
 
+minDate = new Date(1900, 0, 1);
+maxDate = new Date(2012, 0, 1);
 
+/**
+   *On initiallizing the sign-up component, a set of parameters are initalized too.
+   *these parameters must be initialized only once
+   *If user is already signed up, this page will direct him to home
+   *@param void
+   * @returns void
+   */
 ngOnInit() {
-  //check if this is a regestered user, navigate him to the home page
-  //if not, show him the signup page
   if(!isNull(localStorage.getItem('TOKEN')))
     {
       this.router.navigate(['/home']);
     }
     else 
-    this.router.navigate(['signup']);
+    {this.router.navigate(['signup']);}
 
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
    this.fs1=  document.querySelector('.fs1');
    this.fs2=  document.querySelector('.fs2');
    this.fs3 =  document.querySelector('.fs3');
+   this.cool =  document.querySelector('.progress');
+   this.errorOccured =  document.querySelector('.errorOccured');
    this.counter = 0;
 }
+
 /**
- * secondStep
- */
-public secondStep(form: NgForm) {
-  if( this.counter === 0){
-    //for the first time
-  this.email = form.value.email;
-  //send
-  this.counter = 1;
-  }else{
-    //now user is toggling between pages, if he entered the same email, I wont resend a new code
-    //if he entered a new email, then I'll send him another code
-    if (form.value.email != this.email){
-      this.email = form.value.email;
-      //send
-    }
-  }
+   *A simple CSS manipulator function to show/hide/active parameters of the view
+   *@param void
+   * @returns void
+   */
+public previousOne (){
+  this.bar2.className = 'disabled';
+  this.fs2.className = 'hide';
+  this.fs1.className = 'show';  
+}
+
+/**
+   *A simple CSS manipulator function to show/hide/active parameters of the view
+   *@param void
+   * @returns void
+   */
+  public secondStep() {
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
  }
- public thirdStep() {
+ 
+/**
+   *Submit function, first it redesign the view.
+   *Then wrap some form values in an object 'toSend'.
+   *Calls 'redesignDateFormat()' to change the date format.
+   *Sends the object to the DataServices
+   *@param form {NgForm} 
+   *If error does exist or not, the 'whatToShow()' function is called.
+   *If no errors does exist, it sends 0 to it
+   *If there's an error it sends 1
+   *and function 'whatToShow()' handels the situation
+   * @returns void
+   */
+
+ public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
   this.fs3.className = 'show';
- }
- public previousOne (){
-   this.bar2.className = 'disabled';
-   this.fs2.className = 'hide';
-   this.fs1.className = 'show';  
- }
- public previousTwo (){
-  this.bar3.className = 'disabled';
-  this.fs3.className = 'hide';
-  this.fs2.className = 'show';  
-}
-//  public secondStepAgain() {
-//   var bar1 =  document.querySelector('.secondProgress');
-//   bar1.className = 'active';
-//   var element =  document.querySelector('.fs1');
-//   element.className = 'hide';
-//   var element2 =  document.querySelector('.fs2');
-//   element2.className = 'show';  
-//  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Next1(form:NgForm){
-//  const user = form.value;
-//  if (isNull(user.email) ||isNull(user.pass)||isNull(user.cpass)  )
-//  return;
+  //Send data to service
+  const user = form.value;
+  user.datepicker = this.redesignDateFormat(form.value.datepicker);
+  var toSend = { 
+    username:user.username, 
+    email:user.email ,
+    password:user.pass,
+    screen_name: user.screenname,
+    birth_date: user.datepicker
+ }; 
  
-// console.log (form.value.email);
-//   if(this.animating) return false;
-//   this.animating  = true;
-  
-  
-//  // this.current_fs = parent();
-// }
+  this.data.signUpUser(toSend)
+      .subscribe(
+       res => {
+         console.log(res);
+         this.whatToShow(0);
+       },
+        err => {
+          console.log('error: ', err);
+          this.whatToShow(1);
+        }
+    ); 
+    
 }
-//jQuery time
-//var current_fs, next_fs, previous_fs; //fieldsets
-//var left, opacity, scale; //fieldset properties which we will animate
-//var animating; //flag to prevent quick multi-click glitches
+/**
+   *Takes either 0/1 to show an error/success message at the front view.
+   *@param id {number} 
+   * @returns void
+   */
 
-  // $(".next").click(function(){
-  //   if(animating) return false;
-  //   animating = true;
-    
-  //   current_fs = $(this).parent();
-  //   next_fs = $(this).parent().next();
-    
-  //   //activate next step on progressbar using the index of next_fs
-  //   $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-    
-  //   //show the next fieldset
-  //   next_fs.show(); 
-  //   //hide the current fieldset with style
-  //   current_fs.animate({opacity: 0}, {
-  //     step: function(now, mx) {
-  //       //as the opacity of current_fs reduces to 0 - stored in "now"
-  //       //1. scale current_fs down to 80%
-  //       scale = 1 - (1 - now) * 0.2;
-  //       //2. bring next_fs from the right(50%)
-  //       left = (now * 50)+"%";
-  //       //3. increase opacity of next_fs to 1 as it moves in
-  //       opacity = 1 - now;
-  //       current_fs.css({
-  //         'transform': 'scale('+scale+')',
-  //         'position': 'absolute'
-  //       });
-  //       next_fs.css({'left': left, 'opacity': opacity});
-  //     }, 
-  //     duration: 800, 
-  //     complete: function(){
-  //       current_fs.hide();
-  //       animating = false;
-  //     }, 
-  //     //this comes from the custom easing plugin
-  //     easing: 'easeInOutBack'
-  //   });
-  // });
+public whatToShow(id: number) {
+  if(id == 0)
+  {
+    //no error
+    this.cool.className = 'show';
+    this.errorOccured.className = 'hide';
+  }
+  else{
+    //error
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'show';
+  }
+}
+/**
+   *This function takes a date in a time zone format.
+   *Specify the month.
+   *then rearrange the date in a suitable string format.
+   *@param date {string} 
+   * @returns string
+   */
+ 
+redesignDateFormat(date: string): string {
+  if (!date) {
+    return null;
+  }
+  const dataArray = date.toString();  
+  const dataArray2 = dataArray.split(" ",4);
+  const month = (dataArray2[1]);
+  var monthNum = 0;
+  switch(month) { 
+    case "Jan": { 
+      monthNum = 1;
+       break; 
+    } 
+    case "Feb": { 
+      monthNum = 2;
+       break; 
+    } 
+    case "Mar": { 
+      monthNum = 3;
+       break; 
+    } 
+    case "Apr": { 
+      monthNum = 4;
+       break; 
+    } 
+    case "May": { 
+      monthNum = 5;
+       break; 
+    } 
+    case "Jun": { 
+      monthNum = 6;
+       break; 
+    } 
+    case "Jul": { 
+      monthNum = 7;
+       break; 
+    } 
+    case "Aug": { 
+      monthNum = 8;
+       break; 
+    } 
+    case "Sep": { 
+      monthNum = 9;
+       break; 
+    } 
+    case "Oct": { 
+      monthNum = 10;
+       break; 
+    } 
+    case "Nov": { 
+      monthNum = 11;
+       break; 
+    }  
+    default: { 
+      monthNum = 12;
+      break; 
+   } 
+ } 
+ monthNum = monthNum -1;
+  const day = Number(dataArray2[2]);
+  const year = Number(dataArray2[3]);
+  
+ return (new Date(year, monthNum, day)).toLocaleDateString();
+}
 
-  // $(".previous").click(function(){
-  //   if(animating) return false;
-  //   animating = true;
-    
-  //   current_fs = $(this).parent();
-  //   previous_fs = $(this).parent().prev();
-    
-  //   //de-activate current step on progressbar
-  //   $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-    
-  //   //show the previous fieldset
-  //   previous_fs.show(); 
-  //   //hide the current fieldset with style
-  //   current_fs.animate({opacity: 0}, {
-  //     step: function(now, mx) {
-  //       //as the opacity of current_fs reduces to 0 - stored in "now"
-  //       //1. scale previous_fs from 80% to 100%
-  //       scale = 0.8 + (1 - now) * 0.2;
-  //       //2. take current_fs to the right(50%) - from 0%
-  //       left = ((1-now) * 50)+"%";
-  //       //3. increase opacity of previous_fs to 1 as it moves in
-  //       opacity = 1 - now;
-  //       current_fs.css({'left': left});
-  //       previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-  //     }, 
-  //     duration: 800, 
-  //     complete: function(){
-  //       current_fs.hide();
-  //       animating = false;
-  //     }, 
-  //     //this comes from the custom easing plugin
-  //     easing: 'easeInOutBack'
-  //   });
-  // });
 
-  // $(".submit").click(function(){
-  //   return false;
-  // })
-
+}

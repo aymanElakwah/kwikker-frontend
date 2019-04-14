@@ -6,6 +6,7 @@ import { MatDialogModule, MatTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { KweeksService } from '../services/kweeks.service';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { KweeksService } from '../services/kweeks.service';
     MatDialogModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    ImgFallbackModule
+    ImgFallbackModule,
+    OverlayModule
   ],
   entryComponents: [
     ReplyComponent

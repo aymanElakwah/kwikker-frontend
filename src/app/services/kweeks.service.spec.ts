@@ -3,8 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { KweeksService } from './kweeks.service';
 
 
-describe('kweekS', () => {
-  const kweekS: KweeksService = new KweeksService();
+describe('kweekService', () => {
+  const mockDataService = jasmine.createSpyObj(['getKweeks']);
+  // const KWEEKS = mockDataService.getKweeks();
+  const kweekS: KweeksService = new KweeksService(mockDataService);
   let KWEEKS;
   const hashtagStartTagOpen: String = '<a href=\'';
   const mentionStartTagOpen: String = '<a href=\'';
@@ -53,7 +55,7 @@ describe('kweekS', () => {
           'rekweeker_name': 'string',
           'rekweeker_username': 'string'
         },
-        'liked_by_user': true,
+        'liked_by_user': false,
         'rekweeked_by_user': true
       },
       {
@@ -66,8 +68,8 @@ describe('kweekS', () => {
           'screen_name': 'Abdulrahman Khalid',
           'profile_image_url': 'https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg',
           'following': true,
-          'follows_you': true,
           'blocked': false,
+          'follows_you': true,
           'muted': false
         },
         'mentions': [
@@ -145,14 +147,12 @@ describe('kweekS', () => {
         'rekweeked_by_user': true
       }
     ];
-
-    // mockDataService = jasmine.createSpyObj(['getKweeks']);
     // mockActivatedRoute = jasmine.createSpyObj(['snapshot']);
 
   });
 
   describe('injectTagsInText', () => {
-    it('should return inject the tags correctly', () => {
+    it('should inject the tags correctly', () => {
       // Arrange
       // Act
       kweekS.injectTagsInText(KWEEKS);
@@ -179,6 +179,58 @@ describe('kweekS', () => {
       // Text before injection: 'hello world'
       toBeStr = 'hello world';
       expect(KWEEKS[2].text).toBe(toBeStr); // expect the output to be as toBeStr argument
+    });
+  });
+
+  describe('like function', () => {
+    it('should like kweek when it is not liked by the user and increment the likes numbers', () => {
+      // Arrange
+      const likesNumber = KWEEKS[0].number_of_likes;
+      const liked = KWEEKS[0].liked_by_user;
+      // Act
+      kweekS.like(KWEEKS[0]);
+      // Assert
+      // expect the output to be likesNumber + 1 and the liked_by_user changed
+      expect(KWEEKS[0].number_of_likes).toBe(likesNumber + 1);
+      expect(KWEEKS[0].liked_by_user).toBe(!liked);
+    });
+
+    it('should unlike kweek when it is liked by the user and decrement the likes numbers', () => {
+      // Arrange
+      const likesNumber = KWEEKS[1].number_of_likes;
+      const liked = KWEEKS[1].liked_by_user;
+      // Act
+      kweekS.like(KWEEKS[1]);
+      // Assert
+      // expect the output to be likesNumber - 1 and the liked_by_user changed
+      expect(KWEEKS[1].number_of_likes).toBe(likesNumber - 1);
+      expect(KWEEKS[1].liked_by_user).toBe(!liked);
+    });
+  });
+
+  describe('rekweek function', () => {
+    it('should rekweek kweek when it is not rekweeked by the user and increment the rekweeks numbers', () => {
+      // Arrange
+      const rekweeksNumber = KWEEKS[0].number_of_rekweeks;
+      const rekweeked = KWEEKS[0].rekweeked_by_user;
+      // Act
+      kweekS.rekweek(KWEEKS[0]);
+      // Assert
+      // expect the output to be rekweeksNumber + 1 and the rekweeked_by_user changed
+      expect(KWEEKS[0].number_of_rekweeks).toBe(rekweeksNumber + 1);
+      expect(KWEEKS[0].rekweeked_by_user).toBe(!rekweeked);
+    });
+
+    it('should unrekweek kweek when it is rekweeked by the user and decrement the rekweeks numbers', () => {
+      // Arrange
+      const rekweeksNumber = KWEEKS[1].number_of_likes;
+      const rekweeked = KWEEKS[1].liked_by_user;
+      // Act
+      kweekS.rekweek(KWEEKS[1]);
+      // Assert
+      // expect the output to be rekweeksNumber - 1 and the rekweeked_by_user changed
+      expect(KWEEKS[1].number_of_rekweeks).toBe(rekweeksNumber - 1);
+      expect(KWEEKS[1].rekweeked_by_user).toBe(!rekweeked);
     });
   });
 });
