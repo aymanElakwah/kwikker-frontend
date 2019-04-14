@@ -53,6 +53,15 @@ ngOnInit() {
 }
 
 /**
+ * previousOne
+ */
+public previousOne (){
+  this.bar2.className = 'disabled';
+  this.fs2.className = 'hide';
+  this.fs1.className = 'show';  
+}
+
+/**
  * secondStep
  */
 public secondStep() {
@@ -60,6 +69,10 @@ public secondStep() {
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
  }
+ 
+/**
+ * Submit
+ */
  public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
@@ -74,7 +87,7 @@ public secondStep() {
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
- console.log (toSend);
+ 
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
@@ -104,11 +117,7 @@ public whatToShow(id: number) {
     this.errorOccured.className = 'show';
   }
 }
- public previousOne (){
-   this.bar2.className = 'disabled';
-   this.fs2.className = 'hide';
-   this.fs1.className = 'show';  
- }
+
  
 redesignDateFormat(date: string): string {
   if (!date) {

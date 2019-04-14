@@ -31,12 +31,15 @@
       <input type="password" name="cpass" placeholder="Confirm Password" #confirm_password="ngModel" [(ngModel)]="confirm_pass" required />
         <div  *ngIf="(password.value != confirm_password.value) && confirm_password.touched" class="msg alert alert-danger " role="alert">
           <p class="alertMsg">Not identical passwords!</p>
-        </div>    
+        </div>  
+      <button  name="login" class="btn btn-primary action-button"> <a href="login">Back to Login</a></button>  
       <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep()"  [disabled]="username.invalid ||
                                                                                                                                     email.invalid ||
                                                                                                                                     password.invalid ||
                                                                                                                                     (confirm_password.value != password.value)">Next</button>
-    </fieldset>
+    
+        
+        </fieldset>
     
   
     <fieldset class="fs2">
