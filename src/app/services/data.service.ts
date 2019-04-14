@@ -80,7 +80,7 @@ export class DataService {
    * @returns observable
   */
   likeOrUnlikeKweek(id: string): Observable<any> {
-    return this.http.post<any>(`${this.base}kweeks/like`, id).pipe(
+    return this.http.post<any>(`${this.base}kweeks/like`, { "id" : id }).pipe(
       map(res => res),
       catchError(this.handleError)
     );
@@ -92,7 +92,7 @@ export class DataService {
    * @returns observable
   */
   rekweekOrUnrekweekKweek(id: string): Observable<any> {
-    return this.http.post<any>(`${this.base}kweeks/rekweek`, id).pipe(
+    return this.http.post<any>(`${this.base}kweeks/rekweek`, { "id" : id}).pipe(
       map(res => res),
       catchError(this.handleError)
     );
