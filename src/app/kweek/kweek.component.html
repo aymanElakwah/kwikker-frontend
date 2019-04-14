@@ -7,9 +7,9 @@
       <div id="rekweeked-info" *ngIf="!kweek.rekweek_info">
         <i class="fas fa-retweet m-1"></i
         ><a
-          href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
+          href="/profile/{{ kweek.rekweek_info?.rekweeker_username }}"
           id="rekweeked-screen_name"
-          >{{ kweek.rekweek_info.rekweeker_name }}</a
+          >{{ kweek.rekweek_info?.rekweeker_name }}</a
         >
         Rekweeked
       </div>
