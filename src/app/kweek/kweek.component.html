@@ -3,16 +3,17 @@
   <div *ngFor="let kweek of kweeks" class="kweeks">
     <!-- loop the kweeks as every kweek has the name kweek -->
     <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
-      <div id="rekweeked-info" *ngIf="!kweek.rekweek_info">
+    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">      
+      <div id="rekweeked-info" *ngIf="!(kweek.rekweek_info === null)">
         <i class="fas fa-retweet m-1"></i
         ><a
-          href="/profile/{{ kweek.rekweek_info?.rekweeker_username }}"
+          href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
           id="rekweeked-screen_name"
-          >{{ kweek.rekweek_info?.rekweeker_name }}</a
+          >{{ kweek.rekweek_info.rekweeker_name }}</a
         >
         Rekweeked
       </div>
+      <div *ngIf="(kweek.rekweek_info === null)" style="margin-top: 9px"></div>
       <div class="media border-bottom m-0">
         <img
           [src]="kweek.user.profile_image_url"

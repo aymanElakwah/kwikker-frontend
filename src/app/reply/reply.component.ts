@@ -28,6 +28,7 @@ export class ReplyComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    // mockService
     // this.kweekService.getReplies1().subscribe(lists => {
     //   this.replies = lists;
     //   this.kweekFunc.injectTagsInText(this.replies);
@@ -43,7 +44,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '640px';
     dialogConfig.autoFocus = false;
-    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
     dialogRef.componentInstance.clickedKweek = kweek;
