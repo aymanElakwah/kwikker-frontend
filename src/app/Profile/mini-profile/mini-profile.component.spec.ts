@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../../shared/shared.module';
+import { ProfileModule } from '../profile.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MiniProfileComponent } from './mini-profile.component';
 
 describe('MiniProfileComponent', () => {
@@ -8,7 +10,9 @@ describe('MiniProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MiniProfileComponent ]
+      imports: [SharedModule,ProfileModule, RouterTestingModule.withRoutes([
+        { path: 'profile/:username/followers', component:  MiniProfileComponent }])],
+      declarations: []
     })
     .compileComponents();
   }));

@@ -21,7 +21,6 @@ import { KweekComponent } from '../kweek/kweek.component';
   ProfilesListComponent,
   TrendsComponent,
   NewKweekComponent,
-  TrendsComponent
   ],
 
   imports: [

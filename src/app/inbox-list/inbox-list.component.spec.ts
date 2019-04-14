@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../shared/shared.module';
+import { ChatModule } from '../chat/chat.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { InboxListComponent } from './inbox-list.component';
 
 describe('InboxListComponent', () => {
@@ -8,7 +10,8 @@ describe('InboxListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InboxListComponent ]
+      imports: [ChatModule,SharedModule,RouterTestingModule],
+      declarations: []
     })
     .compileComponents();
   }));

@@ -1,7 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { MainProfileComponent } from './main-profile.component';
+import { SharedModule } from '../../shared/shared.module';
+import { ProfileModule } from '../profile.module';
+import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainProfileComponent', () => {
   let component: MainProfileComponent;
@@ -10,7 +15,17 @@ describe('MainProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainProfileComponent]
+      imports: [SharedModule, ProfileModule, RouterTestingModule.withRoutes([
+        { path: 'profile/:username', component:  MainProfileComponent}
+/*         children: [
+          {path: '', component: ProfileKweeksTabComponent } ,   
+          {path: 'kweeks', component: ProfileKweeksTabComponent},
+          {path: 'following', component: MiniProfileComponent },
+          {path: 'followers', component: MiniProfileComponent },
+          {path: 'likes', component: ProfileKweeksTabComponent },
+        ]} */ ])],
+      declarations: [],
+      providers: [ ]
     }).compileComponents();
   }));
 
@@ -25,31 +40,21 @@ describe('MainProfileComponent', () => {
     expect( component.isEditingMode).toBe(!editMode);
   });
 
-  it('should toggle(Follow)', () => {
-    const following = component.profileUser.following;
-    component.toggleEditingMode();
-    expect( component.profileUser.following ).toBe(!following);
-  });
-
   it('should toggle(Mute)', () => {
     const muted = component.profileUser.muted;
-    component.toggleEditingMode();
+    component.toggleMute();
     expect( component.profileUser.muted ).toBe(!muted);
-    expect( debugElement.query(By.css('.Msg')).nativeElement.innerText)
-    .toBe('You will no longer receive notification from @' + this.profileUser.screen_name);
   });
 
   it('should toggle(Block)', () => {
     const blocked = component.profileUser.blocked;
-    component.toggleEditingMode();
+    component.toggleBlock();
     expect( component.profileUser.blocked ).toBe(!blocked);
-    expect( debugElement.query(By.css('.Msg')).nativeElement.innerText)
-    .toBe('@' + this.profileUser.screen_name + ' has been blocked');
   });
 
   it('should toggle(semi-blocked Mode)', () => {
     const semiBlockedMode = component.semiBlockedMode;
-    component.toggleEditingMode();
+    component.togglesemiBlockedMode();
     expect( component.semiBlockedMode ).toBe(!semiBlockedMode);
   });
 
