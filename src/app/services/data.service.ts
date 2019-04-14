@@ -19,14 +19,17 @@ import { MiniUser } from '../model/mini-user';
 export class DataService {
   // private base: String = 'http://faa34478.ngrok.io';
   // constructor(private http: HttpClient) {}
+<<<<<<< HEAD
 
   
   private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+=======
+>>>>>>> db00582673389f6811eb921744d08eb1f1b8c0d1
    /**
    * Backend server base
    */
-  // private base: String = 'http://8c8a6673.ngrok.io/';
- 
+  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+
   /**
    *
    * @param http component to send requests
@@ -55,7 +58,7 @@ export class DataService {
    * @returns array of Kweeks
    */
   getUserKweeks(userName: string, lastRetrivedId: string): Observable<Kweek[]> {
-    const parametersSent = {params: new HttpParams().set('last_retrieved_kweek_id', lastRetrivedId).set('username', userName)};
+    const parametersSent = {params: new HttpParams().set('username', userName)};
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -65,7 +68,7 @@ export class DataService {
    * get request to get All Replies of a kweek
    * @param kweekId {string} the kweek that we want to get its replies
    * @returns array of Kweeks
-   */
+  */
   getKweekReplies(kweekId: string): Observable<Kweek[]> {
     const parametersSent = kweekId
       ? {
@@ -77,6 +80,11 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * like or unlike tweet depend on the user if he liked or not like this kweek
+   * @param id {string} of kweek that we want to like or unlike
+   * @returns observable
+  */
   likeOrUnlikeKweek(id: string): Observable<any> {
     return this.http.post<any>(`${this.base}kweeks/like`, id).pipe(
       map(res => res),
@@ -84,6 +92,11 @@ export class DataService {
     );
   }
 
+  /**
+   * rekweek or unrekweek tweet depend on the user if he rekweeked or not rekweeked this kweek
+   * @param id {string} of kweek that we want to rekweek or unrekweek
+   * @returns observable
+  */
   rekweekOrUnrekweekKweek(id: string): Observable<any> {
     return this.http.post<any>(`${this.base}kweeks/rekweek`, id).pipe(
       map(res => res),
@@ -185,7 +198,7 @@ export class DataService {
    */
   getConverstations(): Observable<Conversation[]> {
     return this.http
-      .get<Conversation[]>('`${this.base}direct_message/conversations`')
+      .get<Conversation[]>(`${this.base}direct_message/conversations`)
       .pipe(catchError(this.handleError));
   }
 
@@ -517,8 +530,7 @@ public signUpConfirm(code: any): Observable <any> {
 public sendPass(pass: any): Observable <any> {
   const body = JSON.stringify(pass);
   console.log(body);
-  const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
-  return this.http.post<any>(this.base + 'user/password', body, headers)
+    return this.http.put<any>(this.base + 'user/password', body)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)

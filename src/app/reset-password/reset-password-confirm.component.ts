@@ -10,11 +10,14 @@ import { NgForm } from '@angular/forms';
     styleUrls: ['./reset-password.component.css']
 })
 export class confirmPassword implements OnInit {
-    public confirmCode: string;
+    public confirmCode: any;
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
+       
+       // this.confirmCode = JSON.stringify(this.confirmCode);
+      //  console.log(this.confirmCode);
        //save token at header
         localStorage.setItem('TOKEN', this.confirmCode);
 
@@ -31,6 +34,7 @@ public sendPassword(form: NgForm) {
     .subscribe(
       res => {
         console.log(res);
+        localStorage.setItem('TOKEN', res.token);
         this.router.navigate(['/']);
       },
       err => console.log('error: ', err)

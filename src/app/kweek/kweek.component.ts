@@ -120,7 +120,7 @@ export class KweekComponent implements OnInit {
     this.kweekFunc.like(kweek);
   }
 
-  RekweekOrUnRekweek(kweek: Kweek): void {
+  rekweekOrUnRekweek(kweek: Kweek): void {
     this.kweekFunc.rekweek(kweek);
   }
 }
