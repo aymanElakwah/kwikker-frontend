@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../shared/shared.module';
+import { ChatModule } from '../chat/chat.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { DirectMessagesComponent } from './direct-messages.component';
 
 describe('DirctMessagesComponent', () => {
@@ -8,7 +10,8 @@ describe('DirctMessagesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DirectMessagesComponent ]
+      imports: [ChatModule,SharedModule,RouterTestingModule],
+      declarations: []
     })
     .compileComponents();
   }));

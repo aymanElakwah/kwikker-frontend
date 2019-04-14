@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../../shared/shared.module';
+import { ProfileModule } from '../profile.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TrendsComponent } from './trends.component';
 
 describe('TrendsComponent', () => {
@@ -8,7 +10,8 @@ describe('TrendsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrendsComponent ]
+      imports: [SharedModule,ProfileModule],
+      declarations: []
     })
     .compileComponents();
   }));
