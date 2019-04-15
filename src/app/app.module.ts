@@ -62,7 +62,7 @@ import { confirmPassword } from './reset-password/reset-password-confirm.compone
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              /* {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true } */
+               {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true } 
             ],
   bootstrap: [AppComponent]
 })
