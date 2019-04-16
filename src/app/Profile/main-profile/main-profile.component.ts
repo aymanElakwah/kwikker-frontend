@@ -66,7 +66,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username == this.authorizedUser);
+    return (this.profileUser.username != this.authorizedUser);
   }
 
    /**

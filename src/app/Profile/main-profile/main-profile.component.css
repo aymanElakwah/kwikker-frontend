@@ -700,7 +700,6 @@ a {
 	font-weight: bold;
 	line-height: 20px;
 	padding: 6px 16px;
-	;
 	background-color: #fff;
 	color: #66757f;
 	min-width: 89px;
@@ -709,3 +708,4 @@ a {
 .BlockMsg {
 	margin-top: 20px;
 }
+
