@@ -15,7 +15,9 @@
     
     <mat-form-field class="datepicker">
       <label class="labelForBD">Please select your Birthdate  </label>
-      <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" #birth_date="ngModel" [(ngModel)]="birthdate" name="datepicker">
+      <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" 
+             #birth_date="ngModel" [(ngModel)]="birthdate" name="datepicker"
+             value="{{profileHeaderInfo?.birth_date}}" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

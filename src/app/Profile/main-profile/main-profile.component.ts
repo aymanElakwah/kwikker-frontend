@@ -99,6 +99,7 @@ export class MainProfileComponent implements OnInit {
   changeProfilePicture(event)
   {
     const file = event.target.files[0];
+    console.log(file);
     this.profileInfoService.updateProfilePicture(file);
   }
 

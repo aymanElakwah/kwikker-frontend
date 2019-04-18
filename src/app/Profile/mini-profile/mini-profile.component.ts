@@ -289,6 +289,11 @@ export class MiniProfileComponent implements OnInit {
     }
   }
 
+
+  onScroll() {
+    console.log('scrolled!!');
+}
+
    /**
    * ngOnInit is used to start the process of knowing which Url is Activated
    * and Based On It, Send the appropiate request
