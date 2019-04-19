@@ -24,7 +24,11 @@
     </div>
     <div class="Buttons">
        <!-- Button Used To make a KweeeK To The Profile User , **Hidden if Same user -->
-       <button type ="button" class="btn btn-primary Kweek-Button"  *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"> Tweet To </button>
-       <button type ="button" class="btn btn-primary Msg-Button"  *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"> Message </button>
+       <button type ="button" class="btn btn-primary Kweek-Button"  
+               *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"
+               (click)='openKweekDialog()' > Tweet To </button>
+       <button type ="button" class="btn btn-primary Msg-Button" 
+              *ngIf="!isAuthorisedUser && (!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode))"
+              (click)='openInboxDialog()'> Message </button>
     </div>
  </div>

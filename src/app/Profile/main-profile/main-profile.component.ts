@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { EditImagesComponent } from '../edit-images/edit-images.component';
 
 
+
 /**
  * The Main Component For The Profile Page
  * which Tags any other Components Included
@@ -62,7 +63,7 @@ export class MainProfileComponent implements OnInit {
 
   openEditImagesDialog()
   {
-    let dialogRef = this.EditImageDialog.open(EditImagesComponent, {
+    let dialogRef = this.dialog.open(EditImagesComponent, {
       height: '700px',
       width: '700px',
     });
@@ -71,7 +72,8 @@ export class MainProfileComponent implements OnInit {
       profilePictureURL => { this.profileUser.profile_image_url = profilePictureURL } );
       this.profileUser.profile_image_url += '?99999';
   }
- 
+
+
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
    * No Parameters
@@ -79,7 +81,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username != this.authorizedUser);
+    return (this.profileUser.username == this.authorizedUser);
   }
 
    /**
@@ -305,12 +307,7 @@ export class MainProfileComponent implements OnInit {
   constructor(private profileInfoService: DataService,
               private route: ActivatedRoute,
               private router: Router,
-              private EditImageDialog: MatDialog) { }
-
-  NavigateToErrorPage()
-  {
-     
-  }
+              private dialog: MatDialog) { }
 
   /**
    * ngOnInit is used to start the process of knowing which Parameter is sent 
@@ -327,7 +324,7 @@ export class MainProfileComponent implements OnInit {
     ( userInfo => {this.profileUser = userInfo; 
                    this.editedScreenName = this.profileUser.screen_name; 
                    this.editedBio = this.profileUser.bio ; },
-                   err => {  this.router.navigateByUrl('/error'); });
+                   err => {  /* this.router.navigateByUrl('/error'); */ });
   }
 
 }
