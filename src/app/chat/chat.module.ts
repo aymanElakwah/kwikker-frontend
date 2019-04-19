@@ -14,7 +14,7 @@ import { ChatService } from './chat.service';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
   ChatComponent,
@@ -32,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatChipsModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    InfiniteScrollModule
   ],
   providers: [
     ChatService

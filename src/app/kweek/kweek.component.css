@@ -63,6 +63,8 @@ a, a:hover {
 
 .kweeks {
   width: 100%;
+  position: relative;
+  cursor: default;
 }
 
 .kweeks .kweek-user .screen_name {
@@ -121,4 +123,18 @@ a, a:hover {
 
 .icons {
   font-size: 16px;
+}
+
+mat-icon.close {
+  font-size:16px;
+  position: absolute;
+  top: 12px;
+  right: 6px;
+  display: inline-block;
+}
+
+mat-icon.close:hover {
+  color: red;
+  font-size: 17px;
+  cursor: pointer;
 }

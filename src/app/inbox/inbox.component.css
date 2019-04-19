@@ -15,6 +15,11 @@
     margin-right: 0px;
 }
 
+.body{
+    height: 570px;    
+    overflow:auto;
+}
+
 .all:hover
 {
     background-color:#f5f8fa!important;

@@ -12,8 +12,8 @@ export class CacheInterceptor implements HttpInterceptor {
     /**
      * all cached requests in the website
      */
-    requestsUrl:[
-
+    requestsUrl = [
+        'example@yahoo.com'
     ];
     cachedRequest = false;
     /**

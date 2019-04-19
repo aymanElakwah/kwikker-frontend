@@ -1,4 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
   .kweekBox .mat-dialog-container{
     top: 5%;
