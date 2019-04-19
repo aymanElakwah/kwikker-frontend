@@ -18,7 +18,7 @@ import { MiniUser } from "../model/mini-user";
   providedIn: "root"
 })
 export class DataService {
-  // private base: String = 'http://faa34478.ngrok.io';
+  // private base: String = 'http://84e18283.ngrok.io/';
   // constructor(private http: HttpClient) {}
 
   /**
@@ -224,9 +224,12 @@ export class DataService {
   /**
    * get all conversation for user
    */
-  getConverstations(): Observable<Conversation[]> {
+  getConverstations(username:string): Observable<Conversation[]> {
+    const parametersSent = username
+    ? { params: new HttpParams().set('last_conversationers_retrieved_username', username) }
+    : {};
     return this.http
-      .get<Conversation[]>(`${this.base}direct_message/conversations`)
+      .get<Conversation[]>(`${this.base}direct_message/conversations`,parametersSent)
       .pipe(catchError(this.handleError));
   }
 

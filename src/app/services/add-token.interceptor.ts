@@ -20,13 +20,13 @@ export class AddTokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         this.token = localStorage.getItem('TOKEN');
         let jsonReq: HttpRequest<any>;
-        if(this.formDataRequests[req.url] != undefined ) {
+        if(this.formDataRequests[req.url] == undefined ) {
         jsonReq= req.clone({
             setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
         });
         } else {
             jsonReq= req.clone({
-                setHeaders: {'Content-Type': 'formData' , 'TOKEN': `${this.token}` }
+                setHeaders: { 'TOKEN': `${this.token}` }
             });
         }
         return next.handle(jsonReq);
