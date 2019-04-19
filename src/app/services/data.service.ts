@@ -5,7 +5,7 @@ import {
   HttpParams,
   HttpHeaders
 } from "@angular/common/http";
-import { throwError, Observable } from "rxjs";
+import { throwError, Observable, observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Conversation } from "../model/inbox";
 import { Notification } from "../model/notification";
@@ -13,6 +13,7 @@ import { User } from "../model/user";
 import { Trend } from "../model/Trend";
 import { Kweek } from "../model/kweek";
 import { MiniUser } from "../model/mini-user";
+import { BlockedMutedUser } from '../model/bloked-muted-users';
 
 @Injectable({
   providedIn: "root"
@@ -24,7 +25,7 @@ export class DataService {
   /**
    * Backend server base
    */
-   private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+   private base: String = 'http://8005769c.ngrok.io/';
 
 
   /**
@@ -591,4 +592,25 @@ export class DataService {
       .get<Kweek[]>("api/REPLY2")
       .pipe(catchError(this.handleError));
   }
+  /**
+   *get request to get user's muted accounts
+   * @returns array of muted users
+   */
+ getMutedAccounts(): Observable<BlockedMutedUser[]>{
+  return this.http
+  .get<BlockedMutedUser[]>(`${this.base}interactions/mutes`)
+  .pipe(catchError(this.handleError));
 }
+
+/**
+   *get request to get user's muted accounts
+   * @returns array of muted users
+   */
+  getBlockedAccounts(): Observable<BlockedMutedUser[]>{
+    return this.http
+    .get<BlockedMutedUser[]>(`${this.base}interactions/blocks`)
+    .pipe(catchError(this.handleError));
+  }
+}
+
+

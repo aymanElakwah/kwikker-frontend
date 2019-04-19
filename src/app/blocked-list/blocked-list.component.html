@@ -3,29 +3,18 @@
         <h3 class="card-title">Accounts you're blocking</h3>
       </div>
 </div>
-<div class="card mute-list-card" >
+<div class="card mute-list-card" *ngFor="let b of blocked_accounts">
     <div class="card-body" >
         <span class="notificationPics">
-            <img src="http://www.hyperlinkcode.com/images/sample-image.jpg" 
+            <img [src]="b.profile_image_url"
             class=" rounded-circle float-left notificationPics" >
         </span>
-        <strong class="fullname">adn gamed fdh5</strong>
-        <span class="usernamee">@fdflkdsj</span>
+        <strong class="fullname">{{b.username}}</strong>
+        <span class="usernamee">@{{b.screen_name}}</span>
         <button class="btn btn-primary kweek-btn" style="float:right; margin-right:2%; margin-top:4%"
-    (click)="openKweekComponent()">Unblock</button>
+    (click)="unBlockUser(b.username)">Unblock</button>
       </div>
 </div>
-<div class="card mute-list-card" >
-    <div class="card-body" >
-        <span class="notificationPics">
-            <img src="http://www.hyperlinkcode.com/images/sample-image.jpg" 
-            class=" rounded-circle float-left notificationPics" >
-        </span>
-        <strong class="fullname">adn gamed fdh5</strong>
-        <span class="usernamee">@fdflkdsj</span>
-        <button class="btn btn-primary kweek-btn" style="float:right; margin-right:2%; margin-top:4%"
-    (click)="openKweekComponent()">Unblock</button>
-      </div>
-</div>
+
 
 
