@@ -20,7 +20,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatTooltipModule,
     ImgFallbackModule,
     OverlayModule,
-    MatIconModule
+    MatIconModule,
   ],
   entryComponents: [
     ReplyComponent
