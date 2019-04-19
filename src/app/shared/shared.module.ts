@@ -14,6 +14,7 @@ import { FormsModule }   from '@angular/forms'
 import { KweeksModule } from '../kweeks/kweeks.module';
 import { KweekComponent } from '../kweek/kweek.component';
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
     ImgFallbackModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
 
    entryComponents: [

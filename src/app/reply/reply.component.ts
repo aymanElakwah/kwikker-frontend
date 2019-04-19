@@ -1,31 +1,41 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { DataService } from '../services/data.service';
-import { Kweek } from '../model/kweek';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig, MatDialogRef, TooltipPosition } from '@angular/material';
-import { FormControl } from '@angular/forms';
-import { KweeksService } from '../services/kweeks.service'  ;
-import { Overlay } from '@angular/cdk/overlay';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { DataService } from "../services/data.service";
+import { Kweek } from "../model/kweek";
+import { ActivatedRoute, Router } from "@angular/router";
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  TooltipPosition
+} from "@angular/material";
+import { FormControl } from "@angular/forms";
+import { KweeksService } from "../services/kweeks.service";
+import { Overlay } from "@angular/cdk/overlay";
 @Component({
-  selector: 'app-reply',
-  templateUrl: './reply.component.html',
-  styleUrls: ['./reply.component.css', '../kweek/kweek.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  selector: "app-reply",
+  templateUrl: "./reply.component.html",
+  styleUrls: ["./reply.component.css", "../kweek/kweek.component.css"],
+  encapsulation: ViewEncapsulation.None
 })
 export class ReplyComponent implements OnInit {
   roots: Kweek[] = [];
   clickedKweek: Kweek;
   replies: Kweek[] = [];
-  positionOption: TooltipPosition = 'above';
+  positionOption: TooltipPosition = "above";
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
   hideDelay = new FormControl(50);
-  constructor(public dialogRef: MatDialogRef<ReplyComponent>,
+
+  /* The Authorized User (The one who made Log in) */
+  authorizedUser: string = localStorage.getItem("username");
+
+  constructor(
+    public dialogRef: MatDialogRef<ReplyComponent>,
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     private dialog: MatDialog,
     private overlay: Overlay
-    ) { }
+  ) {}
 
   ngOnInit() {
     // mockService
@@ -42,7 +52,7 @@ export class ReplyComponent implements OnInit {
   nestedDialog(kweek: Kweek): void {
     this.roots.push(this.clickedKweek);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '640px';
+    dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
     dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
@@ -55,11 +65,54 @@ export class ReplyComponent implements OnInit {
     });
   }
 
-  likeOrUnlike(kweek: Kweek): void {
+  /**
+   * calling function to like kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  like(kweek: Kweek): void {
     this.kweekFunc.like(kweek);
   }
 
-  rekweekOrUnRekweek(kweek: Kweek): void {
-    this.kweekFunc.rekweek(kweek);
+  /**
+   * calling function to unlike kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  unlike(kweek: Kweek): void {
+    this.kweekFunc.unlike(kweek);
+  }
+
+  /**
+   * call the function rekweek the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
+  rekweek(kweek: Kweek): void {
+    this.kweekService.rekweekKweek(kweek.id).subscribe(Response => {
+      kweek.rekweeked_by_user = true;
+      kweek.number_of_rekweeks++;
+    });
+  }
+
+  /**
+   * call the function unrekweek the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
+  unrekweek(kweek: Kweek): void {
+    this.kweekService.unrekweekKweek(kweek.id).subscribe(Response => {
+      kweek.rekweeked_by_user = false;
+      kweek.number_of_rekweeks--;
+    });
+  }
+
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  delete(kweek: Kweek): void {
+    this.kweekFunc.delete(kweek);
   }
 }

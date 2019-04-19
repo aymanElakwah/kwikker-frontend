@@ -1,5 +1,50 @@
-<div class ="Nav"> 
+<!-- <div class ="Nav"> 
         <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
 
-</div>
-
+</div> -->
+<nav class="navbar">
+                <span class="navbar-toggle" id="js-navbar-toggle">
+                         <i class="fas fa-bars"></i>
+                </span>
+              
+                <ul class="main-nav" id="js-menu">
+                        <li>
+                                <img src="../../assets/navbar/home.png" id="icon2" alt="Home icon" />
+                                <a href="home" class="nav-links"> Home</a>
+                        </li>
+                        <li>
+                                <img src="../../assets/navbar/moment.png" id="icon2" alt="moment icon" />
+                                <a href="" class="nav-links"> Moments</a>
+                        </li>
+                        <li>
+                                <img src="../../assets/navbar/notification.png" id="icon2" alt="Notification icon" />
+                                <a href="notifications" class="nav-links"> Notifications</a>
+                        </li>
+                        <li>
+                                <img src="../../assets/navbar/message.png" id="icon2" alt="Message icon" />
+                                <a href="#" class="nav-links"> Messages</a>
+                        </li>
+                        <li>
+                           <img src="../../assets/main/twitter.png" id="icon" alt="User Icon" />
+                        </li>
+                        <li >
+                                <img src="../../assets/navbar/setting.png" id="icon2" alt="Setting icon" />
+                                <a href="settings" class="nav-links"> Settings</a>
+                        </li>
+                        
+                        <li>
+                                <img src="../../assets/navbar/profile.png"  id="icon2" alt="Profile icon" />
+                                <a [routerLink]="['profile',userName]" class="nav-links"> Profile</a>
+                        </li>
+                         
+                        <li>
+                           <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
+                        </li>
+                        <li>
+                          <button class="btn btn-info kweek-btn"  type="submit" >Log Out</button>
+                        </li>
+                </ul>
+                
+              
+        </nav>
+       

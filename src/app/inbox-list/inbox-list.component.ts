@@ -1,6 +1,6 @@
 // angular componetns
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 // service
 import { DataService } from '../services/data.service';
@@ -8,15 +8,33 @@ import { DataService } from '../services/data.service';
 import { MiniUser } from '../model/mini-user';
 // angular material
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Router } from '@angular/router';
 /**
  * search freinds to send message
  */
 @Component({
   selector: 'app-inbox-list',
   templateUrl: './inbox-list.component.html',
-  styleUrls: ['./inbox-list.component.css']
+  styleUrls: ['./inbox-list.component.css',
+              '../direct-messages/direct-messages.component.css']
 })
 export class InboxListComponent implements OnInit {
+  /**
+   * addressed person
+   */
+  addressee: MiniUser;
+  /**
+   * creating message form
+   */
+  myForm2: FormGroup;
+  /**
+   * if message conatin image add div
+   */
+  uploadImg = false;
+  /**
+   * image url if uploaded
+   */
+  imgURL: any;
   /**
    * filtered list of users
    */
@@ -29,22 +47,36 @@ export class InboxListComponent implements OnInit {
    * reactive form
    */
   myForm: FormGroup;
+  /**
+   * user selected addresses
+   */
+  secondStep=false;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   /**
-   * empty constructor
+   * 
+   * @param data data service to connect with backend
+   * @param fb component has 2 reactive forms
    */
   constructor(private data: DataService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private router:Router) {
+               }
   ngOnInit(): void {
     this.myForm = this.fb.group({
       filterBy: ['']
     });
+    this.myForm2 = this.fb.group({
+      message: ['', [
+        Validators.required
+      ]],
+      file : [null]
+      });
     this.data.getRecentConversations().subscribe(users => {
-      this.users = users; }
+      this.users = users.slice(0,7); }
       );
   }
   /**
@@ -107,5 +139,56 @@ add(event: MatChipInputEvent): void {
       return;
     }
     this.selectedUsers.push(user.username);
+  }
+
+
+  /**
+   * click input tag on button click
+   */
+  upload() {
+    const element: HTMLElement = document.getElementById('fileInput') as HTMLElement;
+    element.click();
+  }
+  /**
+   * preview images after uploading it
+   * @param files uploaded images
+   */
+  uploadIamge(files) {
+    this.uploadImg = true;
+    const reader = new FileReader();
+    const imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
+  /**
+   * remove image from uploading it
+   */
+  removeImg() {
+    this.uploadImg = false;
+    this.myForm2.patchValue({
+      file: null
+    });
+  }
+  /**
+   * send current message
+   */
+  send() {
+    const message = {
+      text: '',
+      username: '',
+      media_url: ''
+    };
+    message.text = this.myForm2.controls.message.value;
+    message.media_url = '' ;
+    this.selectedUsers.forEach(element => {
+      message.username = element;
+      this.data.createMessage(message).subscribe();
+    });
+    this.router.navigate(['/chat/', {outlets : {body: ['inbox']} }]);
+  }
+  next(){
+    this.secondStep = true;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,10 +10,15 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
+  public userName: string;
   constructor(private modalService: NgbModal,private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.userName =  localStorage.getItem('username');
+    if (isNull(this.userName))
+    {
+      this.userName = 'user'; 
+    }
   }
 
   /**

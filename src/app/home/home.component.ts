@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     //when initializing the HomeComponent, check if the user is already logged-in and navigates him to the appropriate page.
     if(isNull( localStorage.getItem('TOKEN')))
       {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
       else 
       this.router.navigate(['/home']);
