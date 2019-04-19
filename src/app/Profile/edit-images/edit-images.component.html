@@ -25,6 +25,7 @@
   <ly-img-cropper [withClass]="classes.cropping" #cropping 
   [config]="myConfig"
   [(scale)]="scale"
+  (change)="onCropped($event)"
   (cropped)="onCropped($event)"
   (loaded)="onloaded($event)"
   (error)="onerror($event)">

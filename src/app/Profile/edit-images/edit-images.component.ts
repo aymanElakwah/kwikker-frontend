@@ -171,12 +171,11 @@ const styles = (theme: ThemeVariables) => ({
   
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
-      this.finalImageFile = (e as File);
-      console.log(this.finalImageFile);
       console.log('cropped img: ', e);
     }
     onloaded(e: ImgCropperEvent) {
       console.log('img loaded', e);
+      this.finalImageFile = (e as File);
     }
     onerror(e: ImgCropperErrorEvent) {
       console.warn(`'${e.name}' is not a valid image`, e);

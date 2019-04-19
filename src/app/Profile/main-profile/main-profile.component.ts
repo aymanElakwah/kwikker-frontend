@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'q';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { EditImagesComponent } from '../edit-images/edit-images.component';
-import { MAT_DIALOG_DATA} from '@angular/material';
-
 
 
 /**
@@ -81,7 +79,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username == this.authorizedUser);
+    return (this.profileUser.username != this.authorizedUser);
   }
 
    /**
@@ -322,8 +320,9 @@ export class MainProfileComponent implements OnInit {
     //To be Added: If The Username doesn't Exist [Not Signed Up]
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
-    ( userInfo => {this.profileUser = userInfo; } )
-
+    ( userInfo => {this.profileUser = userInfo; 
+                   this.editedScreenName = this.profileUser.screen_name; 
+                   this.editedBio = this.profileUser.bio ; })
   }
 
 }

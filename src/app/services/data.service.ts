@@ -106,10 +106,7 @@ export class DataService {
    * newer kweeks after it and also could be null
    * @returns array of Kweeks
    */
-  getUserLikedKweeks(
-    userName: string,
-    lastRetrivedId: string
-  ): Observable<Kweek[]> {
+  getUserLikedKweeks( userName: string, lastRetrivedId: string): Observable<Kweek[]> {
     const parametersSent = userName
       ? { params: new HttpParams().set('username', userName) }
       : {};
@@ -128,10 +125,27 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowers(): Observable<MiniUser[]> {
+  getUserFollowers(userName: string, last_follower_username: string): Observable<User[]> {
+   
+
+    if (last_follower_username )
+    {
+      const parametersSent = userName
+    ? { params: new HttpParams().set('username', userName).append('last_retrieved_username', last_follower_username) } : {};
     return this.http
-      .get<MiniUser[]>(`${this.base}interactions/followers`)
+      .get<User[]>(`${this.base}interactions/followers`,parametersSent)
       .pipe(catchError(this.handleError));
+    }
+    else
+    {
+      const parametersSent = userName
+    ? { params: new HttpParams().set('username', userName)} : {};
+    return this.http
+      .get<User[]>(`${this.base}interactions/followers`,parametersSent)
+      .pipe(catchError(this.handleError));
+    }
+
+    
   }
 
   /**
@@ -139,11 +153,26 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowings(): Observable<MiniUser[]> {
+  getUserFollowings(userName: string, last_following_username: string): Observable<User[]> {
+   
+    if (last_following_username )
+    {
+      const parametersSent = userName
+    ? { params: new HttpParams().set('username', userName).append('last_retrieved_username', last_following_username) } : {};
     return this.http
-      .get<MiniUser[]>(`${this.base}interactions/following`)
+      .get<User[]>(`${this.base}interactions/following`,parametersSent)
       .pipe(catchError(this.handleError));
+    }
+    else
+    {
+      const parametersSent = userName
+    ? { params: new HttpParams().set('username', userName)} : {};
+    return this.http
+      .get<User[]>(`${this.base}interactions/following`,parametersSent)
+      .pipe(catchError(this.handleError));
+    }
   }
+
 
   /**
    * get kweeks from in memory data service to test the kweeks
@@ -182,7 +211,6 @@ export class DataService {
    * @returns array of Trends
    */
   getTrends(): Observable<Trend[]> {
-    params: new HttpParams().set('last_retrieved_trend_id', null);
     return this.http
       .get<Trend[]>(`${this.base}trends/`)
       .pipe(catchError(this.handleError));
@@ -549,14 +577,16 @@ public sendPass(pass: any): Observable <any> {
  
 }
 
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
