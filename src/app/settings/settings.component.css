@@ -1,0 +1,60 @@
+#settings-menu{
+    font-family: "Segoe UI",Arial,sans-serif;
+    line-height: 20px;
+    list-style-position: outside;
+    margin: 0;
+    list-style-type: none;
+    list-style-position: initial;
+    list-style-image: initial;
+}
+.link-settings{
+    border-top: 1px solid #e6ecf0;
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    background-color: #fff;
+    color: #66757f;
+    border: 1px solid #e6ecf0;
+    border-top: 0;
+}
+a, .btn-link, .btn-link:focus, .icon-btn, .pretty-link b, .pretty-link:hover s, .pretty-link:hover b, .pretty-link:focus s, .pretty-link:focus b, .metadata a:hover, .metadata a:focus, a.account-group:hover .fullname, a.account-group:focus .fullname, .account-summary:focus .fullname, .message .message-text a, .message .message-text button, .stats a strong, .plain-btn:hover, .plain-btn:focus, .dropdown.open .user-dropdown.plain-btn, .open > .plain-btn, #global-actions .new:before, .module .list-link:hover, .module .list-link:focus, .stats a:hover, .stats a:hover strong, .stats a:focus, .stats a:focus strong, .find-friends-sources li:hover .source, .stream-item a:hover .fullname, .stream-item a:focus .fullname, .stream-item .view-all-supplements:hover, .stream-item .view-all-supplements:focus, .tweet .time a:hover, .tweet .time a:focus, .tweet .details.with-icn b, .tweet .details.with-icn .Icon, .stream-item:hover .original-tweet .details b, .stream-item .original-tweet.focus .details b, .stream-item.open .original-tweet .details b, .client-and-actions a:hover, .client-and-actions a:focus, .dismiss-btn:hover b, .tweet .context .pretty-link:hover s, .tweet .context .pretty-link:hover b, .tweet .context .pretty-link:focus s, .tweet .context .pretty-link:focus b, .list .username a:hover, .list .username a:focus, .list-membership-container .create-a-list, .list-membership-container .create-a-list:hover, .new-tweets-bar, .card .list-details a:hover, .card .list-details a:focus, .card .card-body:hover .attribution, .card .card-body .attribution:focus {
+    color: #1DA1F2;
+}
+a, a:hover, a:focus, a:active {
+    color: #1DA1F2;
+}
+a {
+    color: #1c94e0;
+    text-decoration: none;
+    background: transparent;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    
+}
+a:link,
+a:visited {
+    color: #66757f;
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #e6ecf0;
+    border-top: 0;
+    
+  }
+
+a:active,
+a:focus {
+   
+    font-weight: bold;
+    color: #1DA1F2;
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #e6ecf0;
+    border-top: 0;
+    
+}
+
+
