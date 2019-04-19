@@ -41,7 +41,7 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [
-        {path: '', component: ProfileKweeksTabComponent } ,   
+        {path: '', component: ProfileKweeksTabComponent},
         {path: 'kweeks', component: ProfileKweeksTabComponent},
         {path: 'following', component: MiniProfileComponent },
         {path: 'followers', component: MiniProfileComponent },
