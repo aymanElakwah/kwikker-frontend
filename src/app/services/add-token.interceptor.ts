@@ -18,7 +18,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
         const jsonReq: HttpRequest<any> = req.clone({
-            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
+            setHeaders: {'TOKEN': `${this.token}` }
         });
         return next.handle(jsonReq);
     }

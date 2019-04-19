@@ -29,8 +29,7 @@
                 <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                 <div class="dropdown-menu" id="profilePicDropDownMenu" aria-labelledby="profilePicdropdownMenuButton">
                    <li class="dropdown-item"> 
-                      <input type ="file" accept=".png, .jpg, .jpeg" id="file" enctype = 'multipart/form-data' (change)="changeProfilePicture($event)"  /> 
-                      <label for="file"> Upload photo </label>
+                      <p for="file" (click) = "openEditImagesDialog()"> Upload photo </p>
                    </li>
                    <li class="dropdown-item" *ngIf ="!isProfilePictureDefault()" (click) ="removeProfilePicture()"> 
                    <P> Remove </P>

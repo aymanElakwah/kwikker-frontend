@@ -17,13 +17,13 @@ import { MiniUser } from '../model/mini-user';
   providedIn: 'root'
 })
 export class DataService {
-  // private base: String = 'http://faa34478.ngrok.io';
+   private base: String = 'http://84e18283.ngrok.io/';
   // constructor(private http: HttpClient) {}
 
    /**
    * Backend server base
    */
-  private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
+ // private base: String = 'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/';
 
   /**
    *
@@ -268,8 +268,11 @@ export class DataService {
    * @returns Request Response
    */
   followUser(userName: string): Observable <any> {
-    const paramsSent = { params: new HttpParams().set('username', userName) };
-    return this.http.post<any>(this.base + 'interactions/follow', paramsSent)
+    const paramsSent = JSON.stringify({username:userName});
+    const headers = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<any>(this.base + 'interactions/follow', paramsSent, headers)
                               .pipe(
                               map(res => res),
                               catchError(this.handleError)
@@ -298,9 +301,12 @@ export class DataService {
    * @returns Request Response
    */
   muteUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set('username', userName) };
+    const paramsSent = JSON.stringify({username:userName});
+    const headers = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.http
-      .post<any>(this.base + 'interactions/mutes', paramsSent)
+      .post<any>(this.base + 'interactions/mutes', paramsSent, headers)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -328,9 +334,12 @@ export class DataService {
    * @returns Request Response
    */
   blockUser(userName: string): Observable<any> {
-    const paramsSent = { params: new HttpParams().set('username', userName) };
+    const paramsSent = JSON.stringify({username:userName});
+    const headers = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.http
-      .post<any>(this.base + 'interactions/blocks', paramsSent)
+      .post<any>(this.base + 'interactions/blocks', paramsSent, headers)
       .pipe(
         map(res => res),
         catchError(this.handleError)
@@ -360,10 +369,14 @@ export class DataService {
    */
   updateProfile(screenName: string, Bio: string){
     const paramsSent = JSON.stringify({bio:Bio , screen_name:screenName}, null , '');
-    const headers = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    const headers = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.http.patch(`${this.base}user/profile`, paramsSent, headers)
-                          .pipe(catchError(this.handleError))
-                          .subscribe(); 
+                          .pipe(
+                            map(res => res),
+                            catchError(this.handleError)
+                            );
   }
 
   /**
@@ -371,15 +384,14 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (Image Url);
    */
-  updateBanner(image_file: File) {
+  updateBanner(image_file: File): Observable<string> { 
     let body = new FormData();
-    body.append('file', image_file, 'file');
-    return this.http.post(this.base + 'user/profile_banner', body)
-                        .pipe(catchError(this.handleError))
-                        .subscribe(
-                        (res) => console.log(res),
-                        (err) => console.log(err)); 
-                        
+    body.append('file', image_file);
+    return this.http.post<string>(this.base + 'user/profile_banner', body)
+                       .pipe(
+                        map(res => res),
+                        catchError(this.handleError)
+                        );             
   }
 
   /**
@@ -389,11 +401,10 @@ export class DataService {
    */
   removeBanner() {
     return this.http.delete<any>(this.base + 'user/profile_banner')
-                            .pipe(catchError(this.handleError))
-                             .subscribe(
-                              (res) => console.log(res),
-                              (err) => console.log(err)); 
-                            
+                            .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                            );               
   }
 
   /**
@@ -403,8 +414,8 @@ export class DataService {
    */
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
-    body.append('file', image_file, 'file');
-    return this.http.put<string>(this.base + 'user/profile_picture', body)
+    body.append('file', image_file);
+    return this.http.post<string>(this.base + 'user/profile_picture', body)
                           .pipe(
                            map(res => res),
                            catchError(this.handleError)
@@ -418,10 +429,10 @@ export class DataService {
    */
   removeProfilePicture() {
     return this.http.delete<any>(this.base + 'user/profile_picture')
-              .pipe(catchError(this.handleError))
-              .subscribe(
-                (res) => console.log(res),
-                (err) => console.log(err));   
+                            .pipe(
+                              map(res => res),
+                              catchError(this.handleError)
+                            );    
   }
 
 
