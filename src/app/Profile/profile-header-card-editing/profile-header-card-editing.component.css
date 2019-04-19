@@ -5,6 +5,7 @@
 	padding-bottom: 12px;
 	background-color: rgba(140, 199, 236, 0.336);
 	opacity: 0.8;
+	
 }
 
 #EditName {
@@ -55,6 +56,7 @@
 	margin-left: 11px;
 	margin-bottom: 12px;
 	font-size: 15px;
+	
 }
 
 .BirthdayQuote {
@@ -63,21 +65,15 @@
 	line-height: 1.375;
 }
 
-.custom-select {
-	font-weight: bold;
-	font-size: 16px;
-	line-height: 20px;
-	margin-left: 7px;
+
+.datepicker{
+	width : 70%;
+	margin-left: 4%;
 }
 
-#Year {
-	width: 80px;
-}
-
-#Month {
-	width: 90px;
-}
-
-#Day {
-	width: 70px;
+.labelForBD{
+	font-weight: normal;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
 }

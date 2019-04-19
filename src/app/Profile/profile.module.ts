@@ -15,6 +15,8 @@ import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-car
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component'
 
+import { MaterialModule } from '../material.module';
+
 
 /**
  * The Module That is resposible for The Profile Page
@@ -34,6 +36,7 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
     CommonModule,
     SharedModule,
     ScrollingModule,
+    MaterialModule,
     FormsModule,
     LyResizingCroppingImageModule,
     LyButtonModule,
