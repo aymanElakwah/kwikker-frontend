@@ -41,8 +41,8 @@ export class DataService {
       ? { params: new HttpParams().set('username', userName) }
       : {};
     return this.http
-      .get<User>(`${this.base}user/profile`, userNameSent)
-      .pipe(catchError(this.handleError));
+      .get<User>(`${this.base}user/profile`, userNameSent);
+      
   }
 
   /**

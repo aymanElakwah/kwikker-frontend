@@ -304,8 +304,13 @@ export class MainProfileComponent implements OnInit {
    */
   constructor(private profileInfoService: DataService,
               private route: ActivatedRoute,
+              private router: Router,
               private EditImageDialog: MatDialog) { }
 
+  NavigateToErrorPage()
+  {
+     
+  }
 
   /**
    * ngOnInit is used to start the process of knowing which Parameter is sent 
@@ -313,7 +318,6 @@ export class MainProfileComponent implements OnInit {
    */
   ngOnInit() {
 
-    
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get('username');
     
@@ -322,7 +326,8 @@ export class MainProfileComponent implements OnInit {
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
     ( userInfo => {this.profileUser = userInfo; 
                    this.editedScreenName = this.profileUser.screen_name; 
-                   this.editedBio = this.profileUser.bio ; })
+                   this.editedBio = this.profileUser.bio ; },
+                   err => {  this.router.navigateByUrl('/error'); });
   }
 
 }
