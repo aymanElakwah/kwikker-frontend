@@ -28,6 +28,7 @@ const routes: Routes = [
   {path:'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
   {path: 'error', component: ErrorPageComponent}
+ 
 ];
 
 @NgModule({
