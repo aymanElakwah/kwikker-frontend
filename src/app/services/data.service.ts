@@ -26,7 +26,6 @@ export class DataService {
    */
   private base: String =
     "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
-
   /**
    *
    * @param http component to send requests
@@ -149,12 +148,10 @@ export class DataService {
    */
   deleteKweek(id: string): Observable<any> {
     const paramsSent = { params: new HttpParams().set("id", id) };
-    return this.http
-      .delete<any>(`${this.base}kweeks/`, paramsSent)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
+    return this.http.delete<any>(`${this.base}kweeks/`, paramsSent).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
   }
 
   /**
@@ -572,9 +569,9 @@ export class DataService {
    * No Parameters
    * @returns array of replies
    */
-  getReplies1(): Observable<Kweek[]> {
+  getReplies(): Observable<Kweek[]> {
     return this.http
-      .get<Kweek[]>("api/REPLY1")
+      .get<Kweek[]>("api/REPLY")
       .pipe(catchError(this.handleError));
   }
 
@@ -583,9 +580,9 @@ export class DataService {
    * No Parameters
    * @returns array of replies
    */
-  getReplies2(): Observable<Kweek[]> {
+  getLiked(): Observable<Kweek[]> {
     return this.http
-      .get<Kweek[]>("api/REPLY2")
+      .get<Kweek[]>("api/LIKED")
       .pipe(catchError(this.handleError));
   }
 }

@@ -55,24 +55,43 @@ export class KweekComponent implements OnInit {
    * No reurn
    */
   ngOnInit() {
+    // console.log(this.route.parent);
     if (
-      this.route.snapshot.root.children[0].params["username"] ===
-      this.authorizedUser
+      this.route.snapshot.root.children[0].params["username"].children ===
+        this.authorizedUser &&
+      (this.route.snapshot.parent.firstChild.routeConfig.path === "" ||
+        this.route.snapshot.parent.firstChild.routeConfig.path === "kweeks")
     ) {
       this.callCommonFunc = false;
     }
 
-    this.kweekService
-      .getUserKweeks(
-        this.route.snapshot.root.children[0].params["username"],
-        null
-      )
-      .subscribe(lists => {
-        this.kweeks = lists;
-        // const str = JSON.stringify(this.kweeks[0], null, 4);
-        // console.log(str);
-        this.kweekFunc.injectTagsInText(this.kweeks);
-      });
+    switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
+      case "" || "kweeks":
+        this.kweekService
+          .getUserKweeks(
+            this.route.snapshot.root.children[0].params["username"],
+            null
+          )
+          .subscribe(lists => {
+            this.kweeks = lists;
+            // const str = JSON.stringify(this.kweeks[0], null, 4);
+            // console.log(str);
+            this.kweekFunc.injectTagsInText(this.kweeks);
+          });
+        break;
+      case "likes":
+        this.kweekService
+          .getUserLikedKweeks(
+            this.route.snapshot.root.children[0].params["username"],
+            null
+          )
+          .subscribe(usersInfo => {
+            this.kweeks = usersInfo;
+            this.kweekFunc.injectTagsInText(this.kweeks);
+          });
+        break;
+    }
+
     // mock service
     // this.kweekService.getKweeks().subscribe(lists => {
     //   this.kweeks = lists;

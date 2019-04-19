@@ -320,7 +320,7 @@
 //         },
 //     ];
 
-//     const REPLY1 = [ {
+//     const REPLY = [ {
 //       'id': '4',
 //       'created_at': '2011-04-11T10:20:30Z',
 //       'text': 'hello world #abdulrahman_khalid abdulrahman @abdulrahman',
@@ -451,7 +451,7 @@
 //     },
 // ];
 
-// const REPLY2 = [ {
+// const LIKED = [ {
 //   'id': '1',
 //   'created_at': '2011-04-11T10:20:30Z',
 //   'text': 'hello world #abdulrahman_khalid abdulrahman @abdulrahman',
@@ -548,11 +548,11 @@
 //     'rekweeker_name': 'string',
 //     'rekweeker_username': 'string'
 //   },
-//   'liked_by_user': false,
+//   'liked_by_user': true,
 //   'rekweeked_by_user': false
 // },
 // ];
 //     // return {ARR, trendsTest, profileUserTest, KWK, Message};
-//     return {ARR, KWK, Message, REPLY1, REPLY2};
+//     return {ARR, KWK, Message, REPLY, LIKED};
 //  }
 // }

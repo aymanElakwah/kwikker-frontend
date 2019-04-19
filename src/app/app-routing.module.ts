@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'reset_password/:code', component: confirmPassword},
   {path: 'forget_password', component: ResetPasswordComponent},
   
-  {path: 'home', component: KweekComponent},
+  {path: 'kweeks', component: KweekComponent},
   {path: '', component: SignUpComponent},
   {path:'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
