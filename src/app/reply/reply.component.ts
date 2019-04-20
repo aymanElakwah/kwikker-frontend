@@ -115,8 +115,6 @@ export class ReplyComponent implements OnInit {
   deleteRoot_ClickedKweek(kweek: Kweek): void {
     this.kweekService.deleteKweek(kweek.id).subscribe(() => {
       this.dialogRef.close();
-      const indexToDelete = this.replies.indexOf(kweek);
-      this.roots.splice(indexToDelete, 1);
     });
   }
 

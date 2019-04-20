@@ -13,12 +13,14 @@
   color: #657786;
 }
 
-:host ::ng-deep a, a:visited {
+:host ::ng-deep a,
+a:visited {
   text-decoration: none;
   color: #1da1f2;
 }
 
-:host ::ng-deep a:hover, a:active  {
+:host ::ng-deep a:hover,
+a:active {
   text-decoration: underline;
   color: #1da1f2;
 }
@@ -57,7 +59,8 @@
   border-radius: 10px;
 }
 
-a, a:hover {
+a,
+a:hover {
   color: #1da1f2;
 }
 
@@ -81,7 +84,7 @@ a, a:hover {
   text-decoration: none;
 }
 
-.kweeks .kweek-user:hover .screen_name, 
+.kweeks .kweek-user:hover .screen_name,
 #rekweeked-screen_name:hover {
   text-decoration: underline;
   color: #1da1f2;
@@ -104,7 +107,7 @@ a, a:hover {
 
 #rekweeked-info {
   color: #657786;
-  font-size: 14px;  
+  font-size: 14px;
   margin: 3px 45px;
 }
 
@@ -126,7 +129,7 @@ a, a:hover {
 }
 
 mat-icon.close {
-  font-size:16px;
+  font-size: 16px;
   position: absolute;
   top: 12px;
   right: 6px;

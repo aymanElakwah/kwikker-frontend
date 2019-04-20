@@ -11,7 +11,7 @@ import {
 import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
-import { Overlay } from "@angular/cdk/overlay";
+import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
 import { splitClasses } from "@angular/compiler";
 @Component({
   selector: "app-kweek",
@@ -165,6 +165,20 @@ export class KweekComponent implements OnInit {
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.clickedKweek = kweek;
+    
+    // let config = new OverlayConfig({
+    //   hasBackdrop: true,
+    //   backdropClass: 'cdk-overlay-transparent-backdrop',
+    //   positionStrategy: this.overlay.position().global().centerHorizontally()
+    // });
+
+    // let overlayRef = this.overlay.create(config);
+    // overlayRef.attach(dialogRef);
+    // overlayRef.backdropClick().subscribe(() => {
+    // overlayRef.detach(); 
+    // dialogRef.close();
+    // });
+
     dialogRef.afterClosed().subscribe(result => {
       this.clickedKweek = null;
     });

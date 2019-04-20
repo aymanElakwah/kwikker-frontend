@@ -22,9 +22,7 @@
 
       <!-- delete button -->
       <div
-        *ngIf="
-        (authorizedUser === kweek.user.username) && !(kweek.rekweek_info)
-        "
+        *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
       >
         <div (click)="openDialog(kweek)"></div>
         <div>
