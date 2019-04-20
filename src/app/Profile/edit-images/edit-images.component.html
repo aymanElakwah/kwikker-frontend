@@ -25,13 +25,13 @@
   <ly-img-cropper [withClass]="classes.cropping" #cropping 
   [config]="myConfig"
   [(scale)]="scale"
-  (change)="onCropped($event)"
   (cropped)="onCropped($event)"
   (loaded)="onloaded($event)"
   (error)="onerror($event)">
     <span style= "transform: translate(115px,100px); font-size: 18px;">Drag and drop image</span>
   </ly-img-cropper>
 
+  
   <div *ngIf="cropping.isLoaded" [className]="classes.range" >
     <input type="range" [className]="classes.rangeInput" [attr.min]="cropping.minScale" max="1" [(ngModel)]="scale" step="any">
   </div>

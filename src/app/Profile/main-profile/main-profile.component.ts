@@ -131,9 +131,9 @@ export class MainProfileComponent implements OnInit {
     reader.readAsDataURL(file); 
     reader.onload = (_event) => { this.profileUser.profile_banner_url = reader.result.toString(); }
 
-
+    console.log(file);
     this.profileInfoService.updateBanner(file).subscribe(
-      userInfo => {this.profileUser.profile_banner_url = userInfo; }
+      BannerURL => {this.profileUser.profile_banner_url = BannerURL; }
     );
 
   }
@@ -324,7 +324,7 @@ export class MainProfileComponent implements OnInit {
     ( userInfo => {this.profileUser = userInfo; 
                    this.editedScreenName = this.profileUser.screen_name; 
                    this.editedBio = this.profileUser.bio ; },
-                   err => {  /* this.router.navigateByUrl('/error'); */ });
+                   err => {   this.router.navigateByUrl('/error');  });
   }
 
 }

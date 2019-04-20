@@ -1,8 +1,10 @@
 import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit} from '@angular/core';
 import { LyTheme2, ThemeVariables, Platform } from '@alyle/ui';
-import { ImgCropperConfig, ImgCropperEvent, LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
+import { ImgCropperConfig, ImgCropperEvent, 
+         LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
 import { DataService } from 'src/app/services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { saveAs } from 'file-saver';
 
 const styles = (theme: ThemeVariables) => ({
   actions: {
@@ -126,10 +128,11 @@ const styles = (theme: ThemeVariables) => ({
 
     classes = this.theme.addStyleSheet(styles);
     croppedImage?: string;
-    finalImageFile: File;
-    finalImageURL: string = '';
+    fileToUpload: ImgCropperEvent = null;
+    ImageUrl: string;
     result: string;
     scale: number;
+    img: LyResizingCroppingImages;
     @ViewChild(LyResizingCroppingImages) cropper: LyResizingCroppingImages;
     myConfig: ImgCropperConfig = {
       autoCrop: true,
@@ -168,29 +171,51 @@ const styles = (theme: ThemeVariables) => ({
       }
   
     }
+    
   
+  
+
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
       console.log('cropped img: ', e);
+      this.fileToUpload = e as File;
+      console.log(this.fileToUpload);
     }
+
     onloaded(e: ImgCropperEvent) {
       console.log('img loaded', e);
-      this.finalImageFile = (e as File);
     }
+
     onerror(e: ImgCropperErrorEvent) {
       console.warn(`'${e.name}' is not a valid image`, e);
     }
 
     changeImage()
     {
-      console.log(this.finalImageFile);
-      
-      this.EditImageService.updateProfilePicture(this.finalImageFile).subscribe 
-      ( serInfo => {this. finalImageURL = serInfo; }  );
 
-       this.dialogRef.close({ profilePictureURL : this.finalImageURL });
+      let image = this.dataURItoBlob(this.fileToUpload.dataURL);
+     /*  let reader = new FileReader();
+      reader.readAsDataURL(image as file); 
+    reader.onload = (_event) => { this.ImageUrl = reader.result.toString();}*/
+
+      this.EditImageService.updateProfilePicture(image as File).subscribe 
+      ( serInfo => { this.ImageUrl = serInfo; }  );
+
+       this.dialogRef.close({ profilePictureURL : this.ImageUrl });
+    } 
+
+    dataURItoBlob(dataURI): Blob {
+      const binary = atob(dataURI.split(',')[1]);
+      const array = [];
+
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+
+      return new Blob([new Uint8Array(array)], {
+        type: 'image/png'
+      });
     }
-  
   }
 
    
