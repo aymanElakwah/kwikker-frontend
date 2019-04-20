@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit} from '@angular/core';
 import { LyTheme2, ThemeVariables, Platform } from '@alyle/ui';
 import { ImgCropperConfig, ImgCropperEvent, LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
-
+import { DataService } from 'src/app/services/data.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 const styles = (theme: ThemeVariables) => ({
   actions: {
@@ -125,19 +126,24 @@ const styles = (theme: ThemeVariables) => ({
 
     classes = this.theme.addStyleSheet(styles);
     croppedImage?: string;
+    finalImageFile: File;
+    finalImageURL: string = '';
     result: string;
     scale: number;
     @ViewChild(LyResizingCroppingImages) cropper: LyResizingCroppingImages;
     myConfig: ImgCropperConfig = {
       autoCrop: true,
-      width: 150, // Default `250`
-      height: 150, // Default `200`
+      width: 200, // Default `250`
+      height: 200, // Default `200`
       fill: '#ff2997', // Default transparent if type = png else #000,
       type: 'image/jpeg'
     };
   
     constructor(
-      private theme: LyTheme2
+      private theme: LyTheme2,
+      private EditImageService: DataService,
+      private dialogRef: MatDialogRef<EditImagesComponent>,
+      
     ) { }
   
     ngAfterViewInit() {
@@ -152,13 +158,11 @@ const styles = (theme: ThemeVariables) => ({
             y: 236.26357452128866
           }
         };
-        this.cropper.setImageUrl(
-          'https://firebasestorage.googleapis.com/v0/b/alyle-ui.appspot.com/o/img%2Flarm-rmah-47685-unsplash-1.png?alt=media&token=96a29be5-e3ef-4f71-8437-76ac8013372c',
-          () => {
+        this.cropper.setImageUrl('',() => {
             this.cropper.setScale(config.scale, true);
             this.cropper.updatePosition(config.position.x, config.position.y);
             // You can also rotate the image
-            // this.cropper.rotate(90);
+             this.cropper.rotate(90);
           }
         );
       }
@@ -171,9 +175,20 @@ const styles = (theme: ThemeVariables) => ({
     }
     onloaded(e: ImgCropperEvent) {
       console.log('img loaded', e);
+      this.finalImageFile = (e as File);
     }
     onerror(e: ImgCropperErrorEvent) {
       console.warn(`'${e.name}' is not a valid image`, e);
+    }
+
+    changeImage()
+    {
+      console.log(this.finalImageFile);
+      
+      this.EditImageService.updateProfilePicture(this.finalImageFile).subscribe 
+      ( serInfo => {this. finalImageURL = serInfo; }  );
+
+       this.dialogRef.close({ profilePictureURL : this.finalImageURL });
     }
   
   }

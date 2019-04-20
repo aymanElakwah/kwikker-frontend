@@ -30,6 +30,10 @@ import { confirmCode } from './sign-up/confirmCode.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { confirmPassword } from './reset-password/reset-password-confirm.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { LyThemeModule, LY_THEME } from '@alyle/ui';
+import { MinimaLight } from '@alyle/ui/themes/minima';
+
+
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 @NgModule({
@@ -61,10 +65,12 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     BrowserAnimationsModule,
     CommonModule,
     MaterialModule,
+    LyThemeModule.setTheme('minima-light'),
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-               {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true } 
+              // {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
+               { provide: LY_THEME, useClass: MinimaLight, multi: true } 
             ],
   bootstrap: [AppComponent]
 })

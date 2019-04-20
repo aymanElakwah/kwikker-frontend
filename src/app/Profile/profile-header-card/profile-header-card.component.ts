@@ -1,5 +1,8 @@
 import { Component, Input , OnInit } from '@angular/core';
 import { User } from '../../model/user';
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { ChatComponent } from 'src/app/chat/chat.component';
 
 /** 
  * This component takes User Info from main one and show it 
@@ -21,10 +24,21 @@ export class ProfileHeaderCardComponent implements OnInit {
 
   @Input() semiBlockedMode: boolean;
 
+  openKweekDialog()
+  {
+    const dialogRef = this.dialog.open(NewKweekComponent,
+       { panelClass: 'kweekBox'});
+  }
+
+  openInboxDialog()
+  {
+    const dialogRef = this.dialog.open(ChatComponent);
+  }
+ 
   /**
    * Empty Constructor => May be used later
    */
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   /**
    * Empty ngOnInit => May be used later
