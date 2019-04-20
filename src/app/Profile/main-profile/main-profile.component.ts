@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { User } from '../../model/user';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'q';
-import * as $ from "jquery";
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { EditImagesComponent } from '../edit-images/edit-images.component';
+
 
 
 /**
@@ -58,7 +60,20 @@ export class MainProfileComponent implements OnInit {
    /* Default Profile Picture */
   defaultProfilePicture: string ='https://i.ibb.co/z2wkPKs/Default.png';
 
- 
+
+  openEditImagesDialog()
+  {
+    let dialogRef = this.dialog.open(EditImagesComponent, {
+      height: '700px',
+      width: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe(
+      profilePictureURL => { this.profileUser.profile_image_url = profilePictureURL } );
+      this.profileUser.profile_image_url += '?99999';
+  }
+
+
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in) 
    * No Parameters
@@ -66,7 +81,7 @@ export class MainProfileComponent implements OnInit {
    */
   isAuthorisedUser(): boolean
   {
-    return (this.profileUser.username != this.authorizedUser);
+    return (this.profileUser.username == this.authorizedUser);
   }
 
    /**
@@ -99,7 +114,8 @@ export class MainProfileComponent implements OnInit {
   changeProfilePicture(event)
   {
     const file = event.target.files[0];
-    this.profileInfoService.updateProfilePicture(file);
+    console.log(file);
+    this.profileInfoService.updateProfilePicture(file).subscribe();
   }
 
    /**
@@ -110,8 +126,16 @@ export class MainProfileComponent implements OnInit {
   changeProfileBanner(event)
   {
     const file = event.target.files[0];
-    console.log(file);
-    this.profileInfoService.updateBanner(file);
+    var reader = new FileReader();
+    var imagePath = event.target.files;
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => { this.profileUser.profile_banner_url = reader.result.toString(); }
+
+
+    this.profileInfoService.updateBanner(file).subscribe(
+      userInfo => {this.profileUser.profile_banner_url = userInfo; }
+    );
+
   }
 
   
@@ -169,11 +193,11 @@ export class MainProfileComponent implements OnInit {
   {
     if( this.profileUser.following )
     {
-      this.profileInfoService.unfollowUser(this.profileUser.username);
+      this.profileInfoService.unfollowUser(this.profileUser.username).subscribe();
     }
     else
     {
-      this.profileInfoService.followUser(this.profileUser.username);
+      this.profileInfoService.followUser(this.profileUser.username).subscribe();
     }
     this.profileUser.following = !this.profileUser.following;
   }
@@ -188,12 +212,12 @@ export class MainProfileComponent implements OnInit {
   {
       if(this.profileUser.muted)
       {
-          this.profileInfoService.unmuteUser(this.profileUser.username);
+          this.profileInfoService.unmuteUser(this.profileUser.username).subscribe();
           this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
       }
       else
       {
-        this.profileInfoService.muteUser(this.profileUser.username);
+        this.profileInfoService.muteUser(this.profileUser.username).subscribe();
         this.ShowMessage("You will no longer receive notification from @" + this.profileUser.screen_name);
         
       }
@@ -211,15 +235,14 @@ export class MainProfileComponent implements OnInit {
   {
       if(this.profileUser.blocked)
       {
-        this.profileInfoService.unblockUser(this.profileUser.username);
+        this.profileInfoService.unblockUser(this.profileUser.username).subscribe();
         this.ShowMessage("@" + this.profileUser.screen_name + " will now be able to follow you and read your Kweeks");
       }
       else
       {
-        this.profileInfoService.blockUser(this.profileUser.username);
+        this.profileInfoService.blockUser(this.profileUser.username).subscribe();
         this.ShowMessage("@" + this.profileUser.screen_name + " has been blocked");
         this.profileUser.following = false;
-        this.profileInfoService.unfollowUser(this.profileUser.username);
       }
       this.profileUser.blocked = !this.profileUser.blocked;
       this.semiBlockedMode = false; 
@@ -237,7 +260,8 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio);
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio)
+    .subscribe ( (res) => console.log(res) );
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
@@ -281,8 +305,9 @@ export class MainProfileComponent implements OnInit {
    * 
    */
   constructor(private profileInfoService: DataService,
-              private route: ActivatedRoute) { }
-
+              private route: ActivatedRoute,
+              private router: Router,
+              private dialog: MatDialog) { }
 
   /**
    * ngOnInit is used to start the process of knowing which Parameter is sent 
@@ -290,15 +315,16 @@ export class MainProfileComponent implements OnInit {
    */
   ngOnInit() {
 
-    
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get('username');
     
     //To be Added: If The Username doesn't Exist [Not Signed Up]
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe
-    ( userInfo => {this.profileUser = userInfo; } )
-
+    ( userInfo => {this.profileUser = userInfo; 
+                   this.editedScreenName = this.profileUser.screen_name; 
+                   this.editedBio = this.profileUser.bio ; },
+                   err => {  /* this.router.navigateByUrl('/error'); */ });
   }
 
 }

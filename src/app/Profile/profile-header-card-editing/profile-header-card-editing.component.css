@@ -69,11 +69,9 @@
 .datepicker{
 	width : 70%;
 	margin-left: 4%;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+	border-radius: 4px;
 }
 
-.labelForBD{
-	font-weight: normal;
-	font-size: 14px;
-	color: #666;
-	margin-bottom: 20px;
-}
