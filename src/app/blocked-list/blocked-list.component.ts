@@ -8,11 +8,18 @@ import { BlockedMutedUser } from '../model/bloked-muted-users';
   styleUrls: ['./blocked-list.component.css']
 })
 export class BlockedListComponent implements OnInit {
+  /** array of muted users */
   blocked_accounts: BlockedMutedUser[];
   res:any;
-
+  /**
+   * 
+   * @param blockedAccounts_service empty constructor
+   */
   constructor(private blockedAccounts_service: DataService) { }
 
+  /**
+   * initialize the blocked users array via get request
+   */
   ngOnInit() {
     this.blockedAccounts_service.getMutedAccounts().subscribe(
       list=>{this.blocked_accounts = list;}
@@ -21,16 +28,16 @@ export class BlockedListComponent implements OnInit {
     console.log(this.blocked_accounts);
   }
 
+    /**
+   * unBlockUser function to unblock a blocked user
+   * @param username(string) used in the request to unblock user
+   */
   unBlockUser(username:string){
     console.log(username)
-    this.blockedAccounts_service.unmuteUser(username).subscribe(
+    this.blockedAccounts_service.unblockUser(username).subscribe(
       response => {this.res = response})
 
-      console.log(this.res);
-      this.blockedAccounts_service.getMutedAccounts().subscribe(
-        list=>{this.blocked_accounts = list;}
-      )
-      console.log("testing");  
+      this.ngOnInit();
   }
 
 }

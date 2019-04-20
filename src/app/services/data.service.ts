@@ -25,7 +25,7 @@ export class DataService {
   /**
    * Backend server base
    */
-   private base: String = 'http://8005769c.ngrok.io/';
+   private base: String = 'http://ebc58851.ngrok.io/';
 
 
   /**
@@ -603,13 +603,58 @@ export class DataService {
 }
 
 /**
-   *get request to get user's muted accounts
-   * @returns array of muted users
+   *get request to get user's blocked accounts
+   * @returns array of blocked users
    */
   getBlockedAccounts(): Observable<BlockedMutedUser[]>{
     return this.http
     .get<BlockedMutedUser[]>(`${this.base}interactions/blocks`)
     .pipe(catchError(this.handleError));
+  }
+
+  /**
+   *put request to change user's email
+   *@param email(string) the new mail
+   * @returns response
+   */
+  updateEmail(newEmail:string): Observable<any>{
+    const obj = { email: String() };
+    obj.email = newEmail;
+
+    return this.http.put<any>(this.base + "user/email", obj).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   *put request to change user's username
+   *@param username(string) the new username
+   * @returns response
+   */
+  updateUserName(userName:string): Observable<any>{
+    const obj = { username: String() };
+    obj.username = userName;
+
+    return this.http.put<any>(this.base + "user/username", obj).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
+  }
+
+   /**
+   *put request to change user's password
+   *@param username(string) the new password
+   * @returns response
+   */
+  updatePassword(password:string): Observable<any>{
+    const obj = { password: String() };
+    obj.password = password;
+
+    return this.http.put<any>(this.base + "user/password", obj).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
   }
 }
 
