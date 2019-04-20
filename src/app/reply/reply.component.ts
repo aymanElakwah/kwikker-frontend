@@ -112,7 +112,23 @@ export class ReplyComponent implements OnInit {
    * @param kweek
    * No @returns
    */
-  delete(kweek: Kweek): void {
-    this.kweekFunc.delete(kweek);
+  deleteRoot_ClickedKweek(kweek: Kweek): void {
+    this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+      this.dialogRef.close();
+      const indexToDelete = this.replies.indexOf(kweek);
+      this.roots.splice(indexToDelete, 1);
+    });
+  }
+
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteReply(kweek: Kweek): void {
+    this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+      const indexToDelete = this.replies.indexOf(kweek);
+      this.replies.splice(indexToDelete, 1);
+    });
   }
 }

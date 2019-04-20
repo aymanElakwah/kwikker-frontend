@@ -11,7 +11,7 @@
             <!-- delete button -->
             <div *ngIf="authorizedUser === root.user.username">
               <div>
-                <mat-icon class="close" (click)="delete(root)">close</mat-icon>
+                <mat-icon class="close" (click)="deleteRoot_ClickedKweek(root)">close</mat-icon>
               </div>
             </div>
             <div class="avatarWrap">
@@ -69,7 +69,7 @@
       <!-- delete button -->
       <div *ngIf="authorizedUser === clickedKweek.user.username">
         <div>
-          <mat-icon class="close" (click)="delete(clickedKweek)"
+          <mat-icon class="close" (click)="deleteRoot_ClickedKweek(clickedKweek)"
             >close</mat-icon
           >
         </div>
@@ -240,7 +240,7 @@
         <div *ngIf="authorizedUser === reply.user.username">
           <div (click)="openDialog(reply)"></div>
           <div>
-            <mat-icon class="close" (click)="delete(reply)">close</mat-icon>
+            <mat-icon class="close" (click)="deleteReply(reply)">close</mat-icon>
           </div>
         </div>
         <div class="media border-bottom popup-kweek-style">

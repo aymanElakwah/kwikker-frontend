@@ -12,6 +12,7 @@ import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
+import { splitClasses } from "@angular/compiler";
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -55,41 +56,60 @@ export class KweekComponent implements OnInit {
    * No reurn
    */
   ngOnInit() {
-    // console.log(this.route.parent);
     if (
-      this.route.snapshot.root.children[0].params["username"].children ===
+      this.route.snapshot.root.children[0].params["username"] ===
         this.authorizedUser &&
       (this.route.snapshot.parent.firstChild.routeConfig.path === "" ||
         this.route.snapshot.parent.firstChild.routeConfig.path === "kweeks")
     ) {
       this.callCommonFunc = false;
     }
-
-    switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
-      case "" || "kweeks":
-        this.kweekService
-          .getUserKweeks(
-            this.route.snapshot.root.children[0].params["username"],
-            null
-          )
-          .subscribe(lists => {
-            this.kweeks = lists;
-            // const str = JSON.stringify(this.kweeks[0], null, 4);
-            // console.log(str);
-            this.kweekFunc.injectTagsInText(this.kweeks);
-          });
-        break;
-      case "likes":
-        this.kweekService
-          .getUserLikedKweeks(
-            this.route.snapshot.root.children[0].params["username"],
-            null
-          )
-          .subscribe(usersInfo => {
-            this.kweeks = usersInfo;
-            this.kweekFunc.injectTagsInText(this.kweeks);
-          });
-        break;
+    const mainRoute = this.route.snapshot.parent.routeConfig.path;
+    if (mainRoute === "profile/:username") {
+      switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
+        case "":
+          this.kweekService
+            .getUserKweeks(
+              this.route.snapshot.root.children[0].params["username"],
+              null
+            )
+            .subscribe(lists => {
+              this.kweeks = lists;
+              // const str = JSON.stringify(this.kweeks[0], null, 4);
+              // console.log(str);
+              this.kweekFunc.injectTagsInText(this.kweeks);
+            });
+          break;
+        case "kweeks":
+          this.kweekService
+            .getUserKweeks(
+              this.route.snapshot.root.children[0].params["username"],
+              null
+            )
+            .subscribe(lists => {
+              this.kweeks = lists;
+              // const str = JSON.stringify(this.kweeks[0], null, 4);
+              // console.log(str);
+              this.kweekFunc.injectTagsInText(this.kweeks);
+            });
+          break;
+        case "likes":
+          this.kweekService
+            .getUserLikedKweeks(
+              this.route.snapshot.root.children[0].params["username"],
+              null
+            )
+            .subscribe(usersInfo => {
+              this.kweeks = usersInfo;
+              this.kweekFunc.injectTagsInText(this.kweeks);
+            });
+          break;
+      }
+    } else if (mainRoute === "home") {
+      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+        this.kweeks = homeKweeks;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
     }
 
     // mock service
@@ -198,7 +218,7 @@ export class KweekComponent implements OnInit {
   rekweekDecision(kweek: Kweek): void {
     // not in my profile
     if (this.callCommonFunc) {
-      this.kweekFunc.unrekweek(kweek);
+      this.kweekFunc.rekweek(kweek);
       return;
     }
     // in my profile
@@ -258,6 +278,9 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   delete(kweek: Kweek): void {
-    this.kweekFunc.delete(kweek);
+    this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+      const indexToDelete = this.kweeks.indexOf(kweek);
+      this.kweeks.splice(indexToDelete, 1);
+    });
   }
 }

@@ -159,7 +159,7 @@ export class KweeksService {
    * No @returns
    */
   unlike(kweek: Kweek): void {
-    this.kweekService.unlikeKweek(kweek.id).subscribe(()=> {
+    this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
       kweek.liked_by_user = false;
       kweek.number_of_likes--;
     });
@@ -171,7 +171,7 @@ export class KweeksService {
    * No @returns
    */
   rekweek(kweek: Kweek): void {
-    this.kweekService.rekweekKweek(kweek.id).subscribe(Response => {
+    this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
       kweek.rekweeked_by_user = true;
       kweek.number_of_rekweeks++;
     });
@@ -183,18 +183,9 @@ export class KweeksService {
    * No @returns
    */
   unrekweek(kweek: Kweek): void {
-    this.kweekService.unrekweekKweek(kweek.id).subscribe(Response => {
+    this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
       kweek.rekweeked_by_user = false;
       kweek.number_of_rekweeks--;
     });
-  }
-
-  /**
-   * call the function that delete the kweek from data service which deal with backend
-   * @param kweek that will be deleted
-   * No @returns
-   */
-  delete(kweek: Kweek): void {
-    this.kweekService.deleteKweek(kweek.id).subscribe();
   }
 }
