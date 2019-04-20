@@ -1,3 +1,20 @@
-<p>
-  blocked-list works!
-</p>
+<div class="card" >
+    <div class="card-body" style="border-bottom: 1px solid rgba(0,0,0,.125);">
+        <h3 class="card-title">Accounts you're blocking</h3>
+      </div>
+</div>
+<div class="card mute-list-card" *ngFor="let b of blocked_accounts">
+    <div class="card-body" >
+        <span class="notificationPics">
+            <img [src]="b.profile_image_url"
+            class=" rounded-circle float-left notificationPics" >
+        </span>
+        <strong class="fullname">{{b.username}}</strong>
+        <span class="usernamee">@{{b.screen_name}}</span>
+        <button class="btn btn-primary kweek-btn" style="float:right; margin-right:2%; margin-top:4%"
+    (click)="unBlockUser(b.username)">Unblock</button>
+      </div>
+</div>
+
+
+

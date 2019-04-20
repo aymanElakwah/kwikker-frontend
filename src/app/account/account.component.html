@@ -1,3 +1,55 @@
-<p>
-  account works!
-</p>
+<div class="card" >
+    <div class="card-body" >
+        <h3 class="card-title">Account</h3>
+      </div>
+      
+<form style="padding-left:8%">
+  <div class="form-inline" style="padding-left:5%">
+    <label for="username"><h5>Username</h5></label>
+    <div class="form-group" style="padding-left:5%;padding-top: 5.5%">
+    <input type="email" class="form-control" id="username"  [(ngModel)]="userName" name="username"  >
+  </div>
+</div>
+<div class="form-inline" style="padding-left:10%; margin-bottom:2%">
+    <label for="email"><h5>Email</h5></label>
+    <div class="form-group" style="padding-left:5%;padding-top: 8%">
+    <input type="email" class="form-control" id="email"  
+    [(ngModel)]="email" name="email"  >
+    <small id="emailHelp" class="form-text text-muted">Email will not be publicly displayed.</small>
+  </div>
+</div>
+<div>
+    <button class="btn btn-primary kweek-btn" style="float:right; margin-right: 10%"
+    (click)="SaveChanges()" 
+    [disabled]="oldEmail == email && userName == oldUserName">Save Changes</button>
+  </div>
+
+<div class="form-inline"  style="margin-top:3%; padding-left:.5%">
+    <label for="currentpassword"><h5>Current Password</h5></label>
+    <div class="form-group" style="padding-left:5%;padding-top: 5.5%">
+    <input type="password" class="form-control" id="currentpassword"  >
+    
+  </div>
+</div>
+<div class="form-inline" style="padding-left:1.8%" >
+    <label for="newpassword"><h5>New Password</h5></label>
+    <div class="form-group" style="padding-left:5%;padding-top: 5.5%">
+    <input type="password" class="form-control" id="newpassword" [(ngModel)]="newPassword" 
+    name="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
+    title="Password must be at least 8 characters and contains capital letters, small letters and numbers.">
+    
+  </div>
+</div>
+<div class="form-inline" style="padding-left:.8%" >
+    <label for="verfpassword"><h5>Verify Password</h5></label>
+    <div class="form-group" style="padding-left:5%;padding-top: 5.5%">
+    <input type="password" class="form-control" id="verfpassword" [(ngModel)]="verifyNewPassword" 
+    name="verifyNewPassword" >
+    
+  </div>
+</div>
+<div>
+    <button type="submit" class="btn btn-primary kweek-btn" style="float:right; margin-right: 7.5%;margin-bottom:2%"
+    (click)="ChangePassword()" [disabled]="!newPassword || newPassword != verifyNewPassword ">Change Password</button>
+  </div>
+</form>

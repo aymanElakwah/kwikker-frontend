@@ -7,7 +7,7 @@ import { AccountComponent } from '../account/account.component';
 import { PasswordsComponent } from '../passwords/passwords.component';
 import { MutedListComponent } from '../muted-list/muted-list.component';
 import { BlockedListComponent } from '../blocked-list/blocked-list.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [SettingsComponent,
   AccountComponent,
@@ -17,6 +17,7 @@ import { BlockedListComponent } from '../blocked-list/blocked-list.component';
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild([
       {path: 'settings', component: SettingsComponent ,
       children: [
