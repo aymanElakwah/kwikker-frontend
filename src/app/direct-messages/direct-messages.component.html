@@ -31,7 +31,16 @@
 
 <!-- main body-->
 <div class="body" [ngClass]="{'body2':uploadImg}">
-
+  <div class="msg" *ngFor="let message of messageList">
+    <div class="row">
+    <div class="frame" [ngClass]="{'right':message.to_user === addressee}">
+      <img class="avatar" src="../../assets/kweeks/default.png">
+      </div>
+      <div class="msgText">
+        hello wanna chat?
+      </div>
+      </div>
+  </div>
 </div>
 
 <!-- create message-->
