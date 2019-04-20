@@ -117,33 +117,6 @@ export class KweekComponent implements OnInit {
     //   this.kweeks = lists;
     //   this.kweekFunc.injectTagsInText(this.kweeks);
     // });
-
-    /* // This part will be updated
-    this.KweeksType();
-    const userName = this.route.snapshot.params.username;
-    this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-      this.kweeks = usersInfo;
-      this.kweekFunc.injectTagsInText(this.kweeks);
-    }); */
-    // if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
-    //   this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-    //     this.kweeks = usersInfo;
-    //     this.kweekFunc.injectTagsInText(this.kweeks);
-    //   });
-    // } else if (this.routeChildName === 'likes') {
-    //   this.kweekService
-    //     .getUserLikedKweeks(userName, null)
-    //     .subscribe(usersInfo => {
-    //       this.kweeks = usersInfo;
-    //       this.kweekFunc.injectTagsInText(this.kweeks);
-    //     });
-    // }
-    // else {
-    //   this.kweekService.getKweeks().subscribe(lists => {
-    //     this.kweeks = lists;
-    //     this.kweekFunc.injectTagsInText(this.kweeks);
-    //   });
-    // }
   }
 
   /* // will be Updated
@@ -165,7 +138,7 @@ export class KweekComponent implements OnInit {
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.clickedKweek = kweek;
-    
+
     // let config = new OverlayConfig({
     //   hasBackdrop: true,
     //   backdropClass: 'cdk-overlay-transparent-backdrop',
@@ -175,7 +148,7 @@ export class KweekComponent implements OnInit {
     // let overlayRef = this.overlay.create(config);
     // overlayRef.attach(dialogRef);
     // overlayRef.backdropClick().subscribe(() => {
-    // overlayRef.detach(); 
+    // overlayRef.detach();
     // dialogRef.close();
     // });
 
