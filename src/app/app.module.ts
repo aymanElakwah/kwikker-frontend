@@ -29,8 +29,9 @@ import { MaterialModule } from './material.module';
 import { confirmCode } from './sign-up/confirmCode.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { confirmPassword } from './reset-password/reset-password-confirm.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { confirmPassword } from './reset-password/reset-password-confirm.compone
     confirmPassword
     ],
   imports: [
+    SocketIoModule.forRoot(config),
     SharedModule,
     BrowserModule,
     ProfileModule,
