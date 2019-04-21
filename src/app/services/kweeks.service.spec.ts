@@ -1,13 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
 import { KweeksService } from './kweeks.service';
+import { DataService } from './data.service';
+import { Observable, empty } from 'rxjs';
+import { exec } from 'child_process';
 
 
 describe('kweekService', () => {
   const mockDataService = jasmine.createSpyObj(['getKweeks']);
   // const KWEEKS = mockDataService.getKweeks();
-  const kweekS: KweeksService = new KweeksService(mockDataService);
+  let kweekS: KweeksService;
   let KWEEKS;
+  let dataService;
   const hashtagStartTagOpen: String = '<a href=\'';
   const mentionStartTagOpen: String = '<a href=\'';
   const startTagClose: String = '\'>';
@@ -15,6 +19,8 @@ describe('kweekService', () => {
   // let mockDataService;
   // let mockActivatedRoute;
   beforeEach(() => {
+    dataService = new DataService(null);
+    kweekS = new KweeksService(dataService);
     // Test objects to unit test kweeks before each unit test
     KWEEKS = [
       {
@@ -183,54 +189,91 @@ describe('kweekService', () => {
   });
 
   describe('like function', () => {
-    it('should like kweek when it is not liked by the user and increment the likes numbers', () => {
+    it('should call likeKweek from data service and like kweek',()=>{
       // Arrange
-      const likesNumber = KWEEKS[0].number_of_likes;
-      const liked = KWEEKS[0].liked_by_user;
-      // Act
-      kweekS.like(KWEEKS[0]);
-      // Assert
-      // expect the output to be likesNumber + 1 and the liked_by_user changed
-      expect(KWEEKS[0].number_of_likes).toBe(likesNumber + 1);
-      expect(KWEEKS[0].liked_by_user).toBe(!liked);
-    });
+      let kWK_ARR: any[] = [
+        { id: 1, liked_by_user: false, number_of_likes: 3 },
+        { id: 2, liked_by_user: false, number_of_likes: 3 }
+      ];
+      let spy = spyOn(dataService, 'likeKweek').and.callFake(() => {
+        kWK_ARR[0].liked_by_user = true;
+        kWK_ARR[0].number_of_likes++;      
+        return empty();
+      });
 
-    it('should unlike kweek when it is liked by the user and decrement the likes numbers', () => {
+      //Act
+      kweekS.like(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].liked_by_user).toBeTruthy();
+      expect(kWK_ARR[0].number_of_likes).toBe(4);
+    });
+  });
+
+  describe('unlike function', () => {
+    it('should call unlikeKweek from data service and unlike kweek',()=>{
       // Arrange
-      const likesNumber = KWEEKS[1].number_of_likes;
-      const liked = KWEEKS[1].liked_by_user;
-      // Act
-      kweekS.like(KWEEKS[1]);
-      // Assert
-      // expect the output to be likesNumber - 1 and the liked_by_user changed
-      expect(KWEEKS[1].number_of_likes).toBe(likesNumber - 1);
-      expect(KWEEKS[1].liked_by_user).toBe(!liked);
+      let kWK_ARR: any[] = [
+        { id: 1, liked_by_user: true, number_of_likes: 3 },
+        { id: 2, liked_by_user: false, number_of_likes: 3 }
+      ];
+      let spy = spyOn(dataService, 'unlikeKweek').and.callFake(() => {
+        kWK_ARR[0].liked_by_user = false;
+        kWK_ARR[0].number_of_likes--;      
+        return empty();
+      });
+
+      //Act
+      kweekS.unlike(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].liked_by_user).toBeFalsy();
+      expect(kWK_ARR[0].number_of_likes).toBe(2);
     });
   });
 
   describe('rekweek function', () => {
-    it('should rekweek kweek when it is not rekweeked by the user and increment the rekweeks numbers', () => {
+    it('should call rekweekKweek from data service and rekweek kweek', () => {
       // Arrange
-      const rekweeksNumber = KWEEKS[0].number_of_rekweeks;
-      const rekweeked = KWEEKS[0].rekweeked_by_user;
-      // Act
-      kweekS.rekweek(KWEEKS[0]);
-      // Assert
-      // expect the output to be rekweeksNumber + 1 and the rekweeked_by_user changed
-      expect(KWEEKS[0].number_of_rekweeks).toBe(rekweeksNumber + 1);
-      expect(KWEEKS[0].rekweeked_by_user).toBe(!rekweeked);
-    });
+      let kWK_ARR: any[] = [
+        { id: 1, rekweeked_by_user: false, number_of_rekweeks: 3 },
+        { id: 2, rekweeked_by_user: false, number_of_rekweeks: 3 }
+      ];
+      let spy = spyOn(dataService, "rekweekKweek").and.callFake(() => {
+        kWK_ARR[0].rekweeked_by_user = true;
+        kWK_ARR[0].number_of_rekweeks++;      
+        return empty();
+      });
 
-    it('should unrekweek kweek when it is rekweeked by the user and decrement the rekweeks numbers', () => {
-      // Arrange
-      const rekweeksNumber = KWEEKS[1].number_of_likes;
-      const rekweeked = KWEEKS[1].liked_by_user;
-      // Act
-      kweekS.rekweek(KWEEKS[1]);
-      // Assert
-      // expect the output to be rekweeksNumber - 1 and the rekweeked_by_user changed
-      expect(KWEEKS[1].number_of_rekweeks).toBe(rekweeksNumber - 1);
-      expect(KWEEKS[1].rekweeked_by_user).toBe(!rekweeked);
+      //Act
+      kweekS.rekweek(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].rekweeked_by_user).toBeTruthy();
+      expect(kWK_ARR[0].number_of_rekweeks).toBe(4);  
     });
   });
+
+  describe('unrekweek function', () => {
+    it('should call unrekweekKweek from data service and unrekweek kweek', () => {
+      // Arrange
+      let kWK_ARR: any[] = [
+        { id: 1, rekweeked_by_user: true, number_of_rekweeks: 3 },
+        { id: 2, rekweeked_by_user: false, number_of_rekweeks: 3 }
+      ];
+      let spy = spyOn(dataService, "unrekweekKweek").and.callFake(() => {
+        kWK_ARR[0].rekweeked_by_user = false;
+        kWK_ARR[0].number_of_rekweeks--;      
+        return empty();
+      });
+
+      //Act
+      kweekS.unrekweek(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].rekweeked_by_user).toBeFalsy();
+      expect(kWK_ARR[0].number_of_rekweeks).toBe(2);  
+    });
+  });
+
 });

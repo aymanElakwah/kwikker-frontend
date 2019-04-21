@@ -12,7 +12,6 @@ import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
-import { splitClasses } from "@angular/compiler";
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -45,7 +44,7 @@ export class KweekComponent implements OnInit {
   constructor(
     private kweekService: DataService,
     private kweekFunc: KweeksService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private dialog: MatDialog,
     private overlay: Overlay
   ) {}
@@ -125,33 +124,6 @@ export class KweekComponent implements OnInit {
     //   this.kweeks = lists;
     //   this.kweekFunc.injectTagsInText(this.kweeks);
     // });
-
-    /* // This part will be updated
-    this.KweeksType();
-    const userName = this.route.snapshot.params.username;
-    this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-      this.kweeks = usersInfo;
-      this.kweekFunc.injectTagsInText(this.kweeks);
-    }); */
-    // if (this.routeChildName === 'kweeks' || this.routeChildName === '') {
-    //   this.kweekService.getUserKweeks(userName, null).subscribe(usersInfo => {
-    //     this.kweeks = usersInfo;
-    //     this.kweekFunc.injectTagsInText(this.kweeks);
-    //   });
-    // } else if (this.routeChildName === 'likes') {
-    //   this.kweekService
-    //     .getUserLikedKweeks(userName, null)
-    //     .subscribe(usersInfo => {
-    //       this.kweeks = usersInfo;
-    //       this.kweekFunc.injectTagsInText(this.kweeks);
-    //     });
-    // }
-    // else {
-    //   this.kweekService.getKweeks().subscribe(lists => {
-    //     this.kweeks = lists;
-    //     this.kweekFunc.injectTagsInText(this.kweeks);
-    //   });
-    // }
   }
 
   /* // will be Updated
@@ -173,7 +145,7 @@ export class KweekComponent implements OnInit {
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.clickedKweek = kweek;
-    
+
     // let config = new OverlayConfig({
     //   hasBackdrop: true,
     //   backdropClass: 'cdk-overlay-transparent-backdrop',
@@ -183,7 +155,7 @@ export class KweekComponent implements OnInit {
     // let overlayRef = this.overlay.create(config);
     // overlayRef.attach(dialogRef);
     // overlayRef.backdropClick().subscribe(() => {
-    // overlayRef.detach(); 
+    // overlayRef.detach();
     // dialogRef.close();
     // });
 
@@ -204,6 +176,12 @@ export class KweekComponent implements OnInit {
       return;
     }
     // in my profile
+    this.kweekService.likeKweek(kweek.id).subscribe(() => {
+      this.likeCallBack(kweek);
+    });
+  }
+
+  likeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
       if (loopKweek.id === kweek.id) {
         loopKweek.liked_by_user = true;
@@ -211,7 +189,6 @@ export class KweekComponent implements OnInit {
       }
     });
   }
-
   /**
    * calling function to unlike kweek from service which has the common replies and kweeks functions
    * @param kweek
@@ -224,6 +201,12 @@ export class KweekComponent implements OnInit {
       return;
     }
     // in my profile
+    this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+      this.unlikeCallBack(kweek);
+    });
+  }
+
+  unlikeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
       if (loopKweek.id === kweek.id) {
         loopKweek.liked_by_user = false;
@@ -231,7 +214,6 @@ export class KweekComponent implements OnInit {
       }
     });
   }
-
   /**
    * call the function rekweek the kweek from data service which deal with backend
    * @param kweek
@@ -244,19 +226,22 @@ export class KweekComponent implements OnInit {
       return;
     }
     // in my profile
-    this.kweekService.rekweekKweek(kweek.id).subscribe(Response => {
-      kweek.rekweeked_by_user = true;
-      kweek.number_of_rekweeks++;
-      let retweetedKweek = JSON.parse(JSON.stringify(kweek));
-
-      this.kweeks.unshift(retweetedKweek);
-      retweetedKweek.rekweek_info = {
-        rekweeker_name: "You",
-        rekweeker_username: this.authorizedUser
-      };
+    this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+      this.rekweekCallBack(kweek);
     });
   }
 
+  rekweekCallBack(kweek: Kweek): void {
+    kweek.rekweeked_by_user = true;
+    kweek.number_of_rekweeks++;
+    let retweetedKweek = JSON.parse(JSON.stringify(kweek));
+
+    this.kweeks.unshift(retweetedKweek);
+    retweetedKweek.rekweek_info = {
+      rekweeker_name: "You",
+      rekweeker_username: this.authorizedUser
+    };
+  }
   /**
    * call the function unrekweek the kweek from data service which deal with backend
    * @param kweek
@@ -269,40 +254,66 @@ export class KweekComponent implements OnInit {
       return;
     }
     // in my profile
-    this.kweekService.unrekweekKweek(kweek.id).subscribe(Response => {
-      const id = kweek.id;
-      let counter = 0; // can't exceed 2
-      if (kweek.rekweek_info) {
-        const index = this.kweeks.indexOf(kweek);
-        this.kweeks.splice(index, 1);
-      } else {
-        kweek.number_of_rekweeks--;
-        kweek.rekweeked_by_user = false;
-      }
-      this.kweeks.forEach(loopKweek => {
-        if (loopKweek.id === id) {
-          if (loopKweek.rekweek_info) {
-            const index = this.kweeks.indexOf(loopKweek);
-            this.kweeks.splice(index, 1);
-          } else {
-            loopKweek.number_of_rekweeks--;
-            loopKweek.rekweeked_by_user = false;
-          }
-          return;
-        }
-      });
+    this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+      this.unrekweekCallBack(kweek);
     });
   }
 
+  unrekweekCallBack(kweek: Kweek): void {
+    const id = kweek.id;
+    if (kweek.rekweek_info) {
+      const index = this.kweeks.indexOf(kweek);
+      this.kweeks.splice(index, 1);
+    } else {
+      kweek.number_of_rekweeks--;
+      kweek.rekweeked_by_user = false;
+    }
+    this.kweeks.forEach(loopKweek => {
+      if (loopKweek.id === id) {
+        if (loopKweek.rekweek_info) {
+          const index = this.kweeks.indexOf(loopKweek);
+          this.kweeks.splice(index, 1);
+        } else {
+          loopKweek.number_of_rekweeks--;
+          loopKweek.rekweeked_by_user = false;
+        }
+        return;
+      }
+    });
+  }
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
    * @param kweek
    * No @returns
    */
   delete(kweek: Kweek): void {
-    this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-      const indexToDelete = this.kweeks.indexOf(kweek);
-      this.kweeks.splice(indexToDelete, 1);
+    if (this.callCommonFunc) {
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        this.deleteCallBack(kweek);
+      });
+    } else {
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        this.deleteProfileCallBack(kweek);
+      });
+    }
+  }
+
+  deleteCallBack(kweek: Kweek): void {
+    const indexToDelete = this.kweeks.indexOf(kweek);
+    this.kweeks.splice(indexToDelete, 1);
+  }
+
+  deleteProfileCallBack(kweek: Kweek): void {
+    const id = kweek.id;
+    let indexToDelete = this.kweeks.indexOf(kweek);
+    this.kweeks.splice(indexToDelete, 1);
+
+    this.kweeks.forEach(loopKweek => {
+      if (loopKweek.id === id) {
+        indexToDelete = this.kweeks.indexOf(loopKweek);
+        this.kweeks.splice(indexToDelete, 1);
+        return;
+      }
     });
   }
 }
