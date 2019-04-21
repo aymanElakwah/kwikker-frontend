@@ -23,13 +23,10 @@ export class NavBarComponent implements OnInit {
 
 
 
-  constructor(private modalService: NgbModal,
-              private dialog: MatDialog,
+  constructor(private dialog: MatDialog,
               private data: DataService, 
-              private route: ActivatedRoute,
-              private router: Router, 
-              private tabService: TitleService,
-              private fb: FormBuilder)
+              private router: Router
+             )
 
               {
 
@@ -106,7 +103,7 @@ export class NavBarComponent implements OnInit {
   newSearch(event) {
     if(event.key === "Enter") {
       // navigate to search
-      this.router.navigate(['/search']);
+      this.router.navigate(['/search',this.filterBy]);
     }
     this.data.searchUsers(this.filterBy).subscribe(
       list => { this.users = list; }
