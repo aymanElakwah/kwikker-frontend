@@ -44,15 +44,15 @@
 .navbar {
   font-size: 15px;
   font-weight: 500;
-  background-color: white;
+  background-color: red;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 5px;
   padding-top: 5px;
   width: 100%;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
- z-index: 999 ;
+  /* position: -webkit-sticky;
+  position: sticky; */
+  /* top: 0; */
+ /* z-index: 999 ; */
  /* height: 65px; */
 }
 
@@ -89,25 +89,6 @@ opacity: 1;
 .nav-link:hover:after{
   width: 100%;
 }
-/*                   
-.main-nav{
-  text-align: center;
- 
-} */
-/* 
-
-.navbar-toggle {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 24px;
-}
-
-.active {
-  display: block;
-} */
 
 
 .nav-item{
