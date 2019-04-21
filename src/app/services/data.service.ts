@@ -539,6 +539,12 @@ export class DataService {
     );
   }
 
+  searchKweeks(filterBy:string):Observable<Kweek[]> {
+    const params = filterBy
+      ? { params: new HttpParams().set("search_text", filterBy) }
+      : {};
+    return this.http.get<Kweek[]>(this.base+'search/kweeks',params);
+  }
   /**
    * A post method function to send Email to the back-service to give it a confirmation link.
    * @param code {any} sends confirmation code
