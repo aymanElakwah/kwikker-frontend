@@ -10,7 +10,7 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms'
+import { FormsModule , FormGroup}   from '@angular/forms'
 import { KweeksModule } from '../kweeks/kweeks.module';
 import { KweekComponent } from '../kweek/kweek.component';
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component';
@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
   ProfilesListComponent,
   TrendsComponent,
   NewKweekComponent,
+  
   ],
 
   imports: [
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
     NgbModule.forRoot(),
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    
   ],
 
    entryComponents: [

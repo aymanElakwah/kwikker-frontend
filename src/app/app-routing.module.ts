@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'forget_password', component: ResetPasswordComponent},
   
   {path: 'kweeks', component: KweekComponent},
-  {path: '', component: SignUpComponent},
+  {path: '', component: HomeComponent},
   {path:'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
   {path: 'error', component: ErrorPageComponent}
