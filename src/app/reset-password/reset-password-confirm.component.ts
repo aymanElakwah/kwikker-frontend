@@ -11,6 +11,10 @@ import { NgForm } from '@angular/forms';
 })
 export class confirmPassword implements OnInit {
     public confirmCode: any;
+    public pass: string;
+    public mail: string;
+    public confirm_pass: string;
+    
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {

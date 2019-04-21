@@ -20,7 +20,18 @@ export class HomeComponent implements OnInit {
     } else {
       this.router.navigate(["/home"]);
     }
-    localStorage.setItem("TOKEN","123");
+    //localStorage.setItem("TOKEN","123");
   }
- 
+  /**
+   *
+   *Log out function, removes the Token and username saved in localStorage
+   * @param form {NgForm} the Form parameter, which has all the 'log-out' form information
+   * @returns void
+   * it navigates to the main page 'welcome page'.
+   */
+  logOutUser() {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("username");
+    this.router.navigate(["/"]);
+  }
 }

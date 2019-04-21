@@ -92,7 +92,7 @@ export class NavBarComponent implements OnInit {
    * @returns void
    * it navigates to the main page 'welcome page'.
    */
-  logOutUser(form: NgForm) {
+  logOutUser() {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
     this.router.navigate(["/"]);

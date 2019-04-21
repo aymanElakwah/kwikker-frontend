@@ -4,7 +4,7 @@ import {HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // interceptor
 import {HttpClientModule} from '@angular/common/http';
@@ -61,10 +61,12 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     // HttpClientInMemoryWebApiModule.forRoot(
     // InMemoryDataService,
     // ),
-    FormsModule,
+   
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
     MaterialModule,
+    FormsModule,
     LyThemeModule.setTheme('minima-light'),
   ],
   // to do move this services in needed modules
