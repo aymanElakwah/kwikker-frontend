@@ -82,6 +82,7 @@ describe("KweekComponent", () => {
     let arrHome: any = [1, 2];
     let arrProfileKweeks: any = [4, 5, 6];
     let arrProfileLikes: any = [7, 8, 9, 10];
+    let arrSearch: any = [11, 12, 13, 14];
 
     it("should get home kweeks if route path was home", () => {
       let spy = spyOn(dataService, "getHomeKweeks").and.callFake(() => {
@@ -94,6 +95,19 @@ describe("KweekComponent", () => {
 
       expect(spy).toHaveBeenCalled();
       expect(component.kweeks).toBe(arrHome);
+    });
+
+    it("should get search kweeks if route path was search", () => {
+      let spy = spyOn(dataService, "searchKweeks").and.callFake(() => {
+        return from([arrSearch]);
+      });
+
+      component.route.snapshot.parent.routeConfig.path = "search";
+
+      component.ngOnInit();
+
+      expect(spy).toHaveBeenCalled();
+      expect(component.kweeks).toBe(arrSearch);
     });
 
     it("should get home kweeks if route path was profile/:username/kweeks", () => {

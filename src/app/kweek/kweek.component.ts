@@ -109,14 +109,14 @@ export class KweekComponent implements OnInit {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
-    }
-    else if(mainRoute==="search")
-    {
-      const filterBy:string = this.route.snapshot.queryParamMap.get('filterBy');
+    } else if (mainRoute === "search") {
+      const filterBy: string = this.route.snapshot.queryParamMap.get(
+        "filterBy"
+      );
       this.kweekService.searchKweeks(filterBy).subscribe(searchKweeks => {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
-      })
+      });
     }
 
     // mock service
