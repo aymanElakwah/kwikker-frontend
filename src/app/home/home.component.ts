@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.router.navigate(["/home"]);
     }
+    localStorage.setItem("TOKEN","123");
   }
  
 }

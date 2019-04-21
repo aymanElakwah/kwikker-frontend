@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
     this.userName =  localStorage.getItem('username');
     if (isNull(this.userName))
     {
-      this.userName = 'user'; 
+      this.userName = "user"; 
     }
   }
 

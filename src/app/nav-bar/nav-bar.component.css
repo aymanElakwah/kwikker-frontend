@@ -10,9 +10,9 @@
 }
 
 .kweek-btn{
-  background-color: #1da1f2;
-  border: 1px solid #1da1f2;
-  color: #fff;
+  /* background-color: #1da1f2;
+  border: 1px solid #1da1f2; */
+  color: rgb(255, 255, 255);
   font-size: 15px;
   line-height: 20px;
   padding: 6px 16px;
@@ -28,11 +28,11 @@
   margin-left: 10px;
 
 }
-
+/* 
 .kweek-btn:hover{
   background-color: #2091f9;
   border: 1px solid #2091f9;
-}
+} */
 
 .kweek-btn:active, 
 .kweek-btn:focus 
@@ -40,7 +40,10 @@
   outline: none;   
 } 
 
-
+.hiddenButton{
+  background-color: white;
+  
+}
 .navbar {
   font-size: 15px;
   font-weight: 500;

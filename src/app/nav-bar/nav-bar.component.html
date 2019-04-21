@@ -13,18 +13,18 @@
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
+                           <button class="btn btn-link kweek-btn nav-link" style="margin-top: 8px;" (click)="openInboxComponent()">Messages</button>
+                          </li> 
+                        <li class="nav-item">
                             <a class="nav-link" href="notification">Notifications</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="#">Messages</a>
-                        </li>
-                        
                         <li class="nav-item">
                                         <a class="nav-link" href="settings">Settings</a>
                                       </li>
                         <li class="nav-item">
                                 <a class="nav-link" [routerLink]="['profile',userName]">Profile</a>
                         </li> 
+                       
                               
 
 
@@ -36,6 +36,7 @@
                         <button class="btn btn-primary small my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
-                        <button class="btn btn-info kweek-btn"  type="submit" (click)="logOutUser()" >Log Out</button>
+                        
+                        <button class="btn-info btn kweek-btn"  type="submit" (click)="logOutUser()" >Log out</button>
      
               </nav>
