@@ -206,6 +206,11 @@ export class KweekComponent implements OnInit {
     });
   }
 
+  /**
+   * callback function in subscribe if the user is in his profile
+   * @param kweek
+   * No @returns
+   */
   unlikeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
       if (loopKweek.id === kweek.id) {
@@ -214,6 +219,7 @@ export class KweekComponent implements OnInit {
       }
     });
   }
+
   /**
    * call the function rekweek the kweek from data service which deal with backend
    * @param kweek
@@ -231,6 +237,11 @@ export class KweekComponent implements OnInit {
     });
   }
 
+  /**
+   * callback function in subscribe if the user is in his profile
+   * @param kweek
+   * No @returns
+   */
   rekweekCallBack(kweek: Kweek): void {
     kweek.rekweeked_by_user = true;
     kweek.number_of_rekweeks++;
@@ -242,6 +253,7 @@ export class KweekComponent implements OnInit {
       rekweeker_username: this.authorizedUser
     };
   }
+
   /**
    * call the function unrekweek the kweek from data service which deal with backend
    * @param kweek
@@ -259,28 +271,37 @@ export class KweekComponent implements OnInit {
     });
   }
 
+  /**
+   * callback function in subscribe if the user is in his profile
+   * @param kweek
+   * No @returns
+   */
   unrekweekCallBack(kweek: Kweek): void {
     const id = kweek.id;
     if (kweek.rekweek_info) {
       const index = this.kweeks.indexOf(kweek);
       this.kweeks.splice(index, 1);
+      console.log("here");
     } else {
       kweek.number_of_rekweeks--;
       kweek.rekweeked_by_user = false;
     }
     this.kweeks.forEach(loopKweek => {
       if (loopKweek.id === id) {
-        if (loopKweek.rekweek_info) {
+        if (loopKweek.rekweek_info && loopKweek.rekweeked_by_user) {
           const index = this.kweeks.indexOf(loopKweek);
           this.kweeks.splice(index, 1);
-        } else {
+          return;
+        } else if (loopKweek.rekweeked_by_user) {
           loopKweek.number_of_rekweeks--;
-          loopKweek.rekweeked_by_user = false;
+          loopKweek.rekweeked_by_user = !loopKweek.rekweeked_by_user;
+          console.log("here2");
+          return;
         }
-        return;
       }
     });
   }
+
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
    * @param kweek
@@ -298,11 +319,21 @@ export class KweekComponent implements OnInit {
     }
   }
 
+  /**
+   * callback function in subscribe if the user is not in his profile
+   * @param kweek
+   * No @returns
+   */
   deleteCallBack(kweek: Kweek): void {
     const indexToDelete = this.kweeks.indexOf(kweek);
     this.kweeks.splice(indexToDelete, 1);
   }
 
+  /**
+   * callback function in subscribe if the user is in his profile
+   * @param kweek
+   * No @returns
+   */
   deleteProfileCallBack(kweek: Kweek): void {
     const id = kweek.id;
     let indexToDelete = this.kweeks.indexOf(kweek);
@@ -315,5 +346,14 @@ export class KweekComponent implements OnInit {
         return;
       }
     });
+  }
+  
+  /**
+   * set a delay by await delay(300); 300 ms
+   * @param ms
+   * @returns promise
+   */
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
