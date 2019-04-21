@@ -21,6 +21,7 @@ describe("ReplyComponent", () => {
       null,
       null
     );
+    component.busyRequest = false;
   });
 
   describe("ngOnInit function", () => {
@@ -47,6 +48,7 @@ describe("ReplyComponent", () => {
         { id: 2, liked_by_user: false, number_of_likes: 23 },
         { id: 3, liked_by_user: false, number_of_likes: 15 }
       ];
+      component.busyRequest = false;
     });
 
     it("should call like from kweekService and like reply", () => {
@@ -103,6 +105,7 @@ describe("ReplyComponent", () => {
         { id: 2, liked_by_user: false, number_of_likes: 23 },
         { id: 3, liked_by_user: true, number_of_likes: 15 }
       ];
+      component.busyRequest = false;
     });
 
     it("should call unlike from kweekService and unlike reply", () => {
@@ -159,6 +162,7 @@ describe("ReplyComponent", () => {
         { id: 2, rekweeked_by_user: false, number_of_rekweeks: 23 },
         { id: 3, rekweeked_by_user: false, number_of_rekweeks: 15 }
       ];
+      component.busyRequest = false;
     });
 
     it("should call rekweek from kweekService and rekweek reply", () => {
@@ -215,6 +219,7 @@ describe("ReplyComponent", () => {
         { id: 2, rekweeked_by_user: false, number_of_rekweeks: 23 },
         { id: 3, rekweeked_by_user: true, number_of_rekweeks: 15 }
       ];
+      component.busyRequest = false;
     });
 
     it("should call unrekweek from kweekService and unrekweek reply", () => {
@@ -267,6 +272,7 @@ describe("ReplyComponent", () => {
     let KWK_ARR: any[];
     beforeEach(() => {
       KWK_ARR = [{ id: 1 }, { id: 2 }, { id: 3 }];
+      component.busyRequest = false;
     });
 
     it("should call deletekweek from dataService, delete clickedKweek and close dialog", () => {
@@ -300,6 +306,7 @@ describe("ReplyComponent", () => {
     let KWK_ARR: any[];
     beforeEach(() => {
       KWK_ARR = [{ id: 1 }, { id: 2 }, { id: 3 }];
+      component.busyRequest = false;
     });
 
     it("should call deletekweek from dataService, delete reply kweek", () => {

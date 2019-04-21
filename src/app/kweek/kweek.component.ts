@@ -35,6 +35,7 @@ export class KweekComponent implements OnInit {
 
   callCommonFunc = true; // to call common like-unlike-rekweek-unrekweek functions from kweek service
 
+  busyRequest: Boolean = false;
   /*
    * constructor called when component is made
    * @param kweekService to use DataService functions and deal with backend
@@ -125,14 +126,7 @@ export class KweekComponent implements OnInit {
     //   this.kweekFunc.injectTagsInText(this.kweeks);
     // });
   }
-
-  /* // will be Updated
-  KweeksType(): void {
-    if (this.route.snapshot.firstChild != null) {
-      this.routeChildName = this.route.snapshot.children[0].toString();
-    }
-  }
-
+  
   /**
    * open pop ups of replays
    * @params kweek to open the dialog with
@@ -170,17 +164,27 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   likeDecision(kweek: Kweek): void {
-    // not in my profile
-    if (this.callCommonFunc) {
-      this.kweekFunc.like(kweek);
-      return;
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      // not in my profile
+      if (this.callCommonFunc) {
+        this.kweekFunc.like(kweek);
+        this.busyRequest = false;
+        return;
+      }
+      // in my profile
+      this.kweekService.likeKweek(kweek.id).subscribe(() => {
+        this.likeCallBack(kweek);
+        this.busyRequest = false;
+      });
     }
-    // in my profile
-    this.kweekService.likeKweek(kweek.id).subscribe(() => {
-      this.likeCallBack(kweek);
-    });
   }
 
+  /**
+   * callback function in subscribe if the user is in his profile
+   * @param kweek
+   * No @returns
+   */
   likeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
       if (loopKweek.id === kweek.id) {
@@ -189,21 +193,27 @@ export class KweekComponent implements OnInit {
       }
     });
   }
+
   /**
    * calling function to unlike kweek from service which has the common replies and kweeks functions
    * @param kweek
    * No @returns
    */
   unlikeDecision(kweek: Kweek): void {
-    // not in my profile
-    if (this.callCommonFunc) {
-      this.kweekFunc.unlike(kweek);
-      return;
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      // not in my profile
+      if (this.callCommonFunc) {
+        this.kweekFunc.unlike(kweek);
+        this.busyRequest = false;
+        return;
+      }
+      // in my profile
+      this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+        this.unlikeCallBack(kweek);
+        this.busyRequest = false;
+      });
     }
-    // in my profile
-    this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
-      this.unlikeCallBack(kweek);
-    });
   }
 
   /**
@@ -226,15 +236,20 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   rekweekDecision(kweek: Kweek): void {
-    // not in my profile
-    if (this.callCommonFunc) {
-      this.kweekFunc.rekweek(kweek);
-      return;
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      // not in my profile
+      if (this.callCommonFunc) {
+        this.kweekFunc.rekweek(kweek);
+        this.busyRequest = false;
+        return;
+      }
+      // in my profile
+      this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+        this.rekweekCallBack(kweek);
+        this.busyRequest = false;
+      });
     }
-    // in my profile
-    this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
-      this.rekweekCallBack(kweek);
-    });
   }
 
   /**
@@ -243,8 +258,8 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   rekweekCallBack(kweek: Kweek): void {
-    kweek.rekweeked_by_user = true;
     kweek.number_of_rekweeks++;
+    kweek.rekweeked_by_user = true;
     let retweetedKweek = JSON.parse(JSON.stringify(kweek));
 
     this.kweeks.unshift(retweetedKweek);
@@ -260,15 +275,20 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   unrekweekDecision(kweek: Kweek): void {
-    // not in my profile
-    if (this.callCommonFunc) {
-      this.kweekFunc.unrekweek(kweek);
-      return;
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      // not in my profile
+      if (this.callCommonFunc) {
+        this.kweekFunc.unrekweek(kweek);
+        this.busyRequest = false;
+        return;
+      }
+      // in my profile
+      this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+        this.unrekweekCallBack(kweek);
+        this.busyRequest = false;
+      });
     }
-    // in my profile
-    this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
-      this.unrekweekCallBack(kweek);
-    });
   }
 
   /**
@@ -308,14 +328,19 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   delete(kweek: Kweek): void {
-    if (this.callCommonFunc) {
-      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-        this.deleteCallBack(kweek);
-      });
-    } else {
-      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-        this.deleteProfileCallBack(kweek);
-      });
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      if (this.callCommonFunc) {
+        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+          this.deleteCallBack(kweek);
+          this.busyRequest = false;
+        });
+      } else {
+        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+          this.deleteProfileCallBack(kweek);
+          this.busyRequest = false;
+        });
+      }
     }
   }
 
@@ -347,7 +372,7 @@ export class KweekComponent implements OnInit {
       }
     });
   }
-  
+
   /**
    * set a delay by await delay(300); 300 ms
    * @param ms

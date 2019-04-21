@@ -44,6 +44,7 @@ describe("KweekComponent", () => {
       null
     );
     component.route = route;
+    component.busyRequest = false;
   });
 
   describe("ngOnInit", () => {
@@ -97,19 +98,6 @@ describe("KweekComponent", () => {
       expect(component.kweeks).toBe(arrHome);
     });
 
-    it("should get search kweeks if route path was search", () => {
-      let spy = spyOn(dataService, "searchKweeks").and.callFake(() => {
-        return from([arrSearch]);
-      });
-
-      component.route.snapshot.parent.routeConfig.path = "search";
-
-      component.ngOnInit();
-
-      expect(spy).toHaveBeenCalled();
-      expect(component.kweeks).toBe(arrSearch);
-    });
-
     it("should get home kweeks if route path was profile/:username/kweeks", () => {
       component.route.snapshot.parent.routeConfig.path = "profile/:username";
       component.route.snapshot.parent.firstChild.routeConfig.path = "";
@@ -153,6 +141,7 @@ describe("KweekComponent", () => {
         { id: 1, liked_by_user: false, number_of_likes: 3 }
       ];
       component.kweeks = kWK_ARR;
+      component.busyRequest = false;
     });
 
     it("should call like kweek from kweeksService if callCommonFunc is true", () => {
@@ -199,6 +188,7 @@ describe("KweekComponent", () => {
         { id: 1, liked_by_user: true, number_of_likes: 3 }
       ];
       component.kweeks = kWK_ARR;
+      component.busyRequest = false;
     });
 
     it("should call unlike kweek from kweeksService if callCommonFunc is true", () => {
@@ -242,6 +232,7 @@ describe("KweekComponent", () => {
         { id: 2, rekweeked_by_user: false, number_of_rekweeks: 3 }
       ];
       component.kweeks = kWK_ARR;
+      component.busyRequest = false;
     });
 
     it("should call rekweek kweek from kweeksService if callCommonFunc is true", () => {
@@ -302,6 +293,7 @@ describe("KweekComponent", () => {
       ];
 
       component.kweeks = kWK_ARR;
+      component.busyRequest = false;
     });
 
     it("should call unrekweek kweek from kweeksService if callCommonFunc is true", () => {
@@ -344,6 +336,7 @@ describe("KweekComponent", () => {
     beforeEach(() => {
       kWK_ARR = [{ id: 1 }, { id: 2 }, { id: 1 }];
       component.kweeks = kWK_ARR;
+      component.busyRequest = false;
     });
 
     it("should call deleteKweek from dataService", () => {

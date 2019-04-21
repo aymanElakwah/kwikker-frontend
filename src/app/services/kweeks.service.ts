@@ -146,7 +146,6 @@ export class KweeksService {
    * No @returns
    */
   like(kweek: Kweek): void {
-    console.log(kweek.id);
     this.kweekService.likeKweek(kweek.id).subscribe(()=> {
       kweek.liked_by_user = true;
       kweek.number_of_likes++;
