@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { isNull } from 'util';
 import { InboxComponent } from '../inbox/inbox.component';
+import { NgForm } from '@angular/forms';
+import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +15,7 @@ import { InboxComponent } from '../inbox/inbox.component';
 })
 export class NavBarComponent implements OnInit {
   public userName: string;
-  constructor(private modalService: NgbModal,private dialog: MatDialog) {}
+  constructor(private modalService: NgbModal,private dialog: MatDialog,private data: DataService, private router: Router) {}
 
   ngOnInit() {
     this.userName =  localStorage.getItem('username');
@@ -67,5 +70,16 @@ export class NavBarComponent implements OnInit {
 
     console.log("modal should show");
   }
-  
+   /**
+   *
+   *Log out function, removes the Token and username saved in localStorage
+   * @param form {NgForm} the Form parameter, which has all the 'log-out' form information
+   * @returns void
+   * it navigates to the main page 'welcome page'.
+   */
+  logOutUser(form: NgForm) {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("username");
+    this.router.navigate(["/"]);
+  }
 }
