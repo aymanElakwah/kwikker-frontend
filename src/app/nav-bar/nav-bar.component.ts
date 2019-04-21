@@ -106,11 +106,12 @@ export class NavBarComponent implements OnInit {
   newSearch(event) {
     if(event.key === "Enter") {
       // navigate to search
+      this.router.navigate(['/search']);
     }
     this.data.searchUsers(this.filterBy).subscribe(
       list => { this.users = list; }
     );
   }
-
+  
 }
 
