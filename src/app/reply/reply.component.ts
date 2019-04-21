@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Kweek } from "../model/kweek";
-import { ActivatedRoute, Router } from "@angular/router";
+
 import {
   MatDialog,
   MatDialogConfig,
@@ -37,6 +37,11 @@ export class ReplyComponent implements OnInit {
     private overlay: Overlay
   ) {}
 
+  /**
+   * load replies of a certian kweek with specific kweek id
+   * No @params
+   * No @returns
+   */
   ngOnInit() {
     // mockService
     // this.kweekService.getReplies1().subscribe(lists => {
@@ -49,6 +54,11 @@ export class ReplyComponent implements OnInit {
     });
   }
 
+  /**
+   * close popup when another nested popup appear and open the new popup
+   * @param kweek 
+   * No @returns
+   */
   nestedDialog(kweek: Kweek): void {
     this.roots.push(this.clickedKweek);
     const dialogConfig = new MatDialogConfig();
@@ -89,10 +99,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   rekweek(kweek: Kweek): void {
-    this.kweekService.rekweekKweek(kweek.id).subscribe(Response => {
-      kweek.rekweeked_by_user = true;
-      kweek.number_of_rekweeks++;
-    });
+    this.kweekFunc.rekweek(kweek);
   }
 
   /**
@@ -101,10 +108,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   unrekweek(kweek: Kweek): void {
-    this.kweekService.unrekweekKweek(kweek.id).subscribe(Response => {
-      kweek.rekweeked_by_user = false;
-      kweek.number_of_rekweeks--;
-    });
+    this.kweekFunc.unrekweek(kweek);
   }
 
   /**
