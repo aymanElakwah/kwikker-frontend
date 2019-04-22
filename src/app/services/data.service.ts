@@ -14,6 +14,7 @@ import { Trend } from "../model/Trend";
 import { Kweek } from "../model/kweek";
 import { MiniUser } from "../model/mini-user";
 import { BlockedMutedUser } from '../model/bloked-muted-users';
+import { $ } from 'protractor';
 
 @Injectable({
   providedIn: "root"
@@ -319,7 +320,9 @@ export class DataService {
     const body = JSON.stringify(user);
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
+
     };
+
     return this.http.post<any>(this.base + "account/login", body, headers).pipe(
       map(res => res),
       catchError(this.handleError)
@@ -553,6 +556,7 @@ export class DataService {
    */
   public sendEmail(email: any): Observable<any> {
     const body = JSON.stringify(email);
+    
     return this.http
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
@@ -568,12 +572,22 @@ export class DataService {
    * @returns any
    */
   public signUpConfirm(code: any): Observable<any> {
-    const body = JSON.stringify(code);
-    console.log(body);
+    // const body = JSON.stringify(code);
+
+    // console.log(body);
+    const CODE = code.confirmation_code;
+
+    const headers = {
+      headers: new HttpHeaders({ "Content-Type": "application/json",
+                                  "CODE": CODE
+    })
+    };
+
+   
     return this.http
-      .post<any>(this.base + "account/registration/confirmation", body)
+      .post<any>(this.base + "account/registration/confirmation",headers)
       .pipe(
-        map(res => res),
+        map(res => res),  
         catchError(this.handleError)
       );
   }
@@ -600,10 +614,19 @@ export class DataService {
    *otherwise an  error message is returned
    * @returns any
    */
-  public sendPass(pass: any): Observable<any> {
+  public sendPass(pass: any, code: any): Observable<any> {
     const body = JSON.stringify(pass);
-    console.log(body);
-    return this.http.put<any>(this.base + "user/password", body).pipe(
+    
+    let val: string;
+    val = code;
+    //console.log("value:" ,val );
+    const headers = {
+      headers: new HttpHeaders({ "Content-Type": "application/json",
+                                  "CODE": val})
+    };
+   
+    console.log(headers );
+    return this.http.put<any>(this.base + "user/password", body,headers).pipe(
       map(res => res),
       catchError(this.handleError)
     );
