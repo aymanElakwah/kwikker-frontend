@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TitleService } from '../services/title.service';
 import { MiniUser } from '../model/mini-user';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ChatComponent } from '../chat/chat.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -69,10 +70,7 @@ export class NavBarComponent implements OnInit {
 
   openInboxComponent(){
     console.log("working")
-    const dialogRef = this.dialog.open(InboxComponent, {
-      height: '600px',
-      width: '1000px',
-    });
+    const dialogRef = this.dialog.open(ChatComponent,  { panelClass: 'custom-dialog-container' });
   
   /**
    * Function for closing the dialog and displaying a msg 
