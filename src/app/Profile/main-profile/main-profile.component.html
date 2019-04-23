@@ -17,15 +17,15 @@
                <!--User Setting Dropdown Menu -->
                <img *ngIf="!isAuthorisedUser() || !isProfilePictureDefault()"
                   [ngClass]="{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
-                  src={{profileUser?.profile_image_url}} alt='../../../assets/default.jpeg' id="ProfileImage" />
+                  src={{profileUser?.profile_image_url}} id="ProfileImage" />
 
-               <span class="Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isAuthorisedUser()">
+               <span class="Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isAuthorisedUser() && isProfilePictureDefault()">
                   <i class="fas fa-camera fa-4x"></i>
                </span>
 
                <div class="user-setting-dropdown" *ngIf="isAuthorisedUser()">
                   <button (click)="isEditingMode = true" class="btn  btn-light" id="profilePicdropdownMenuButton"
-                     data-toggle="dropdown"> </button>
+                     data-toggle="dropdown" > </button>
                   <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                   <div class="dropdown-menu dropdown-menu-right" id="profilePicDropDownMenu"
                      aria-labelledby="profilePicdropdownMenuButton">
@@ -190,7 +190,7 @@
                      <h2 class="BlockMsgHeader"> You blocked @<b
                            style="font-weight: normal;">{{profileUser?.username}}</b> </h2>
                      <p class="BlockMsgBody"> Are you sure you want to view these Tweets? Viewing Tweets won't unblock
-                        <br>@{{profileUser?.screen_name}} <br> </p>
+                        <br>@{{profileUser?.user_name}} <br> </p>
                      <button type="button" class="btn btn-outline-primary semiBlocked-button"
                         (click)='togglesemiBlockedMode()'>
                         <span> Yes, view profile </span>

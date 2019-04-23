@@ -56,8 +56,8 @@
                </div>
                <!-- Profile Info Part [Username, Screen Name, Bio] -->
                <div class="profile-data">
-                  <div class="username"> {{user.username}} </div>
-                  <div class="screen-name"> @{{user.screen_name}} </div>
+                  <div class="username"> <a id="usernameref" href="./profile/{{user.screen_name}}"> {{user.screen_name}} </a>  </div>
+                  <div class="screen-name">  <a id="usernameref" href="./profile/{{user.screen_name}}"> @{{user.username}} </a> </div>
                   <p class="FollowsYou" *ngIf="user.follows_you"> Follows You </p>
                   <p class="bio"> {{user.bio}} </p>
                </div>

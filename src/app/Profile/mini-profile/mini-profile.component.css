@@ -231,6 +231,11 @@
 	padding-right: 2px;
 }
 
+#usernameref
+{
+	color: #14171a !important;
+}
+
 .screen-name {
 	color: #66757f;
 	font-size: 14px;
