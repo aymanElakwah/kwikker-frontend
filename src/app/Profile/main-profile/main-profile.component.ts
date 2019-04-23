@@ -52,9 +52,16 @@ export class MainProfileComponent implements OnInit {
   editedScreenName: string = this.profileUser.username;
   editedBio: string = this.profileUser.bio;
 
-  /* Default Profile Picture */
-  defaultProfilePicture: string = "https://i.ibb.co/z2wkPKs/Default.png";
+  /* Default Profile Picture and Banner */
+  defaultProfilePicture: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg";
+  defaultProfileBanner: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/banner/banner.png";
 
+
+   /**
+   * Open Resize, Scale and Crop Profile Image
+   * No Parameters
+   * No return
+   */
   openEditImagesDialog() {
     let dialogRef = this.dialog.open(EditImagesComponent, {
       height: "700px",
@@ -63,8 +70,8 @@ export class MainProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(profilePictureURL => {
       this.profileUser.profile_image_url = profilePictureURL;
+      console.log(this.profileUser.profile_image_url);
     });
-    this.profileUser.profile_image_url += "?99999";
   }
 
   /**
@@ -73,7 +80,7 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isAuthorisedUser(): boolean {
-    return this.profileUser.username == this.authorizedUser;
+    return (this.profileUser.username == this.authorizedUser);
   }
 
   /**
@@ -82,8 +89,7 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfilePictureDefault(): boolean {
-    return true;
-    /* return (this.profileUser.profile_image_url  == this.defaultProfilePicture); */
+    return (this.profileUser.profile_image_url  == this.defaultProfilePicture);
   }
 
   /**
@@ -92,7 +98,7 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
-    return this.profileUser.profile_banner_url == null;
+    return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
   }
 
   /**
@@ -122,6 +128,8 @@ export class MainProfileComponent implements OnInit {
 
     this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
+      this.profileUser.profile_banner_url += "?dummy=";
+      console.log(this.profileUser.profile_banner_url);
     });
   }
 
@@ -180,6 +188,7 @@ export class MainProfileComponent implements OnInit {
       this.profileInfoService.followUser(this.profileUser.username).subscribe();
     }
     this.profileUser.following = !this.profileUser.following;
+ 
   }
 
   /**
@@ -245,6 +254,7 @@ export class MainProfileComponent implements OnInit {
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
+    this.profileInfoService.searchKweeks("#trend").subscribe();
   }
 
   /**
@@ -266,9 +276,11 @@ export class MainProfileComponent implements OnInit {
     const messageBox = document.getElementById("message-sticky");
     messageBox.style.display = "block";
     messageBox.style.visibility = "visible";
-    messageBox.style.transform = "translate( 0px,40px)";
+    messageBox.style.transform = "translate( 0px,48px)";
+    messageBox.style.borderTopWidth = "2px";
+    messageBox.style.borderTopColor = "black";
     await delay(5000);
-    messageBox.style.transform = "translate( 0px,-40px)";
+    messageBox.style.transform = "translate( 0px,-48px)";
     messageBox.style.visibility = "hidden";
   }
 
@@ -302,9 +314,11 @@ export class MainProfileComponent implements OnInit {
         this.profileUser = userInfo;
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
+        console.log(this.profileUser.profile_banner_url);
+        console.log(this.profileUser.profile_image_url);
       },
       err => {
-        this.router.navigateByUrl("/error");
+       /*  this.router.navigateByUrl("/error");  */
       }
     );
   }

@@ -22,12 +22,13 @@ export class AddTokenInterceptor implements HttpInterceptor {
         let jsonReq: HttpRequest<any>;
         if(this.formDataRequests[req.url] == undefined ) {
         jsonReq= req.clone({
-            setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
+            setHeaders: { 'TOKEN': `${this.token}` }
         });
         } else {
             jsonReq= req.clone({
                 setHeaders: { 'TOKEN': `${this.token}` }
             });
+   
         }
         return next.handle(jsonReq);
     }

@@ -193,10 +193,13 @@ const styles = (theme: ThemeVariables) => ({
     changeImage()
     {
 
+      console.log(this.fileToUpload);
       let image = this.dataURItoBlob(this.fileToUpload.dataURL);
-     /*  let reader = new FileReader();
-      reader.readAsDataURL(image as file); 
-    reader.onload = (_event) => { this.ImageUrl = reader.result.toString();}*/
+      image
+      console.log(image);
+      let reader = new FileReader();
+      reader.readAsDataURL(image as File); 
+      reader.onload = (_event) => { this.ImageUrl = reader.result.toString();}
 
       this.EditImageService.updateProfilePicture(image as File).subscribe 
       ( serInfo => { this.ImageUrl = serInfo; }  );
@@ -207,6 +210,7 @@ const styles = (theme: ThemeVariables) => ({
     dataURItoBlob(dataURI): Blob {
       const binary = atob(dataURI.split(',')[1]);
       const array = [];
+      console.log(binary);
 
       for (let i = 0; i < binary.length; i++) {
         array.push(binary.charCodeAt(i));

@@ -22,7 +22,7 @@ export class MiniProfileComponent implements OnInit {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
       profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+      profile_banner_url: '',
       following: true,
       follows_you: true,
       blocked: false,
@@ -39,7 +39,7 @@ export class MiniProfileComponent implements OnInit {
       username: 'Ahmed Mahmoud',
       screen_name: 'Ahmed_Mahmoud14',
       profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+      profile_banner_url: '',
       following: true,
       follows_you: true,
       blocked: false,
@@ -57,7 +57,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -74,7 +74,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -91,7 +91,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -108,7 +108,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -125,7 +125,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -142,7 +142,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -159,7 +159,7 @@ export class MiniProfileComponent implements OnInit {
         username: 'Ahmed Mahmoud',
         screen_name: 'Ahmed_Mahmoud14',
         profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
+        profile_banner_url: '',
         following: true,
         follows_you: true,
         blocked: false,
@@ -256,17 +256,19 @@ export class MiniProfileComponent implements OnInit {
              
 
   onScroll() {
-    console.log(this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username);
-    if(this.route.snapshot.url[0].path == 'followers')
-    {
-      this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ).subscribe
-      ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
-    }
-    else if (this.route.snapshot.url[0].path == 'following')
-    {
-      this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username).subscribe
-      ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
-    }
+   if(this.miniCardProfileUsers.length != 0)
+   {
+      if(this.route.snapshot.url[0].path == 'followers')
+      {
+        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+      }
+      else if (this.route.snapshot.url[0].path == 'following')
+      {
+        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+      }
+  }
 }
 
    /**

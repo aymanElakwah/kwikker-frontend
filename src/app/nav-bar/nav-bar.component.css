@@ -42,13 +42,20 @@
   
 }
 .navbar {
+  
   font-size: 15px;
   font-weight: 500;
-  background-color: red;
+  background-color: white !important;
+  
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 5px;
-  padding-top: 5px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.671);
+  /* padding-bottom: 5px;
+  padding-top: 5px; */
+  padding: 0;
   width: 100%;
+  margin: 0%;
+  height: 46px !important;
+  text-align: center;
   /* position: -webkit-sticky;
   position: sticky; */
   /* top: 0; */

@@ -25,7 +25,7 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+         "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
   /**
    *
    * @param http component to send requests
@@ -43,7 +43,7 @@ export class DataService {
       : {};
     return this.http
       .get<User>(`${this.base}user/profile`, userNameSent);
-      
+      ``
   }
 
   /**
@@ -477,7 +477,8 @@ export class DataService {
    */
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
-    body.append('file', image_file);
+    body.append('file', image_file, "Image.png");
+    
     return this.http.post<string>(this.base + 'user/profile_picture', body)
                           .pipe(
                            map(res => res),
