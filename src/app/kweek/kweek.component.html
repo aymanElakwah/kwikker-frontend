@@ -3,17 +3,33 @@
   <div *ngFor="let kweek of kweeks" class="kweeks">
     <!-- loop the kweeks as every kweek has the name kweek -->
     <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">      
-      <div id="rekweeked-info" *ngIf="!(kweek.rekweek_info === null)">
+    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
+      <div id="rekweeked-info" *ngIf="kweek.rekweek_info !== null">
         <i class="fas fa-retweet m-1"></i
         ><a
           href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
           id="rekweeked-screen_name"
-          >{{ kweek.rekweek_info.rekweeker_name }}</a
+          >{{
+            kweek.rekweek_info.rekweeker_username !== this.authorizedUser
+              ? kweek.rekweek_info.rekweeker_name
+              : "You"
+          }}</a
         >
         Rekweeked
       </div>
-      <div *ngIf="(kweek.rekweek_info === null)" style="margin-top: 9px"></div>
+
+      <div *ngIf="kweek.rekweek_info === null" style="margin-top: 9px"></div>
+
+      <!-- delete button -->
+      <div
+        *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
+      >
+        <div (click)="openDialog(kweek)"></div>
+        <div>
+          <mat-icon class="close" (click)="delete(kweek)">close</mat-icon>
+        </div>
+      </div>
+
       <div class="media border-bottom m-0">
         <img
           [src]="kweek.user.profile_image_url"
@@ -23,7 +39,7 @@
         <!-- alt could be a pic in our files -->
         <div class="media-body">
           <div>
-            <div>
+            <div class="d-inline-block">
               <a href="/profile/{{ kweek.user.username }}" class="kweek-user"
                 ><span class="screen_name">{{ kweek.user.screen_name }}</span>
                 .
@@ -34,6 +50,7 @@
               >
             </div>
           </div>
+          <div class="d-inline" (click)="openDialog(kweek)"></div>
           <div (click)="openDialog(kweek)">
             <div class="kweek-text">
               <p [innerHTML]="kweek.text"></p>
@@ -71,7 +88,7 @@
                 *ngIf="kweek.rekweeked_by_user; else elseNotRekweeked"
               >
                 <div class="col-2">
-                  <span class="rekweeked" (click)="rekweekOrUnRekweek(kweek)">
+                  <span class="rekweeked" (click)="unrekweekDecision(kweek)">
                     <span
                       matTooltip="Undo Rekweek"
                       matTooltipClass="tooltip-style"
@@ -91,7 +108,7 @@
               </ng-container>
               <ng-template #elseNotRekweeked>
                 <div class="col-2">
-                  <span class="rekweek" (click)="rekweekOrUnRekweek(kweek)">
+                  <span class="rekweek" (click)="rekweekDecision(kweek)">
                     <span
                       matTooltip="Rekweek"
                       matTooltipClass="tooltip-style"
@@ -111,7 +128,7 @@
               </ng-template>
               <ng-container *ngIf="kweek.liked_by_user; else elseNotLiked">
                 <div class="col-2">
-                  <span class="liked" (click)="likeOrUnlike(kweek)">
+                  <span class="liked" (click)="unlikeDecision(kweek)">
                     <span
                       matTooltip="Undo Like"
                       matTooltipClass="tooltip-style"
@@ -129,7 +146,7 @@
               </ng-container>
               <ng-template #elseNotLiked>
                 <div class="col-2">
-                  <span class="like" (click)="likeOrUnlike(kweek)">
+                  <span class="like" (click)="likeDecision(kweek)">
                     <span
                       matTooltip="Like"
                       matTooltipClass="tooltip-style"

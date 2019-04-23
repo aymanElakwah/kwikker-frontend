@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfilesListComponent } from '../profiles-list/profiles-list.component';
 import { TrendsComponent } from '../Profile/trends/trends.component';
-import { MatDialogModule, MatTooltipModule } from '@angular/material';
+import { MatDialogModule, MatTooltipModule, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReplyComponent } from '../reply/reply.component';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms'
+import { FormsModule , FormGroup}   from '@angular/forms'
 import { KweeksModule } from '../kweeks/kweeks.module';
 import { KweekComponent } from '../kweek/kweek.component';
+import { EditImagesComponent } from '../Profile/edit-images/edit-images.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { KweekComponent } from '../kweek/kweek.component';
   ProfilesListComponent,
   TrendsComponent,
   NewKweekComponent,
+  
   ],
 
   imports: [
@@ -32,12 +35,15 @@ import { KweekComponent } from '../kweek/kweek.component';
     ImgFallbackModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
+    
   ],
 
    entryComponents: [
      ReplyComponent,
-     NewKweekComponent
+     NewKweekComponent,
+     EditImagesComponent,
    ],
   exports: [
   NavBarComponent,

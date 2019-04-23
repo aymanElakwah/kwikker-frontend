@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module'
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images';
 import { LyButtonModule } from '@alyle/ui/button';
 import { LyIconModule } from '@alyle/ui/icon';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-card-editing/profile-header-card-editing.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component'
+
+import { MaterialModule } from '../material.module';
 
 
 /**
@@ -31,9 +35,11 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
   ],
 
   imports: [
+    BrowserModule,
     CommonModule,
     SharedModule,
-    ScrollingModule,
+    InfiniteScrollModule,
+    MaterialModule,
     FormsModule,
     LyResizingCroppingImageModule,
     LyButtonModule,
@@ -41,17 +47,15 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,
       children: [
-        {path: '', component: ProfileKweeksTabComponent } ,   
+        {path: '', component: ProfileKweeksTabComponent},
         {path: 'kweeks', component: ProfileKweeksTabComponent},
         {path: 'following', component: MiniProfileComponent },
         {path: 'followers', component: MiniProfileComponent },
         {path: 'likes', component: ProfileKweeksTabComponent },
       ]} 
     ])
-  ],
+  ]
 })
 
 export class ProfileModule { 
-
-
 }

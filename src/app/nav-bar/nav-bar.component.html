@@ -1,5 +1,55 @@
-<div class ="Nav"> 
-        <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
 
-</div>
+<nav class="navbar navbar-expand-lg  navbar-light bg-light">
+                
+                <img src="../../assets/main/twitter.png" id="icon"  alt="User Icon" />
+                               
+              
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                 </button>
+                
+                <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                           <button class="btn btn-link  nav-link" style="margin-top: 8px;" (click)="openInboxComponent()">Messages</button>
+                          </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="notification">Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                                        <a class="nav-link" href="settings">Settings</a>
+                                      </li>
+                        <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['profile',userName]">Profile</a>
+                        </li> 
+                        <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0 searchForm">
+                                 <input (keydown)="newSearch($event)" name="ngModel" #searchBar [(ngModel)]="filterBy" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <div *ngIf="searchBar.dirty">
+                                 <ul class="heroes">
+                                <li *ngFor="let user of users"
+                                        [routerLink]="['profile',user.username]">
+                                        <span class="badge">{{user.username}}</span>
+                                </li>
+                                </ul>
+                        </div>
+                                               
+                          </form>    
+                        </li> 
+                        <li class="nav-item">             
+                        <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
+                                </li> 
+                        <li class="nav-item">
+                                <button class=" kweek-btn btn-info btn "  type="submit" (click)="logOutUser()" >Log out</button>
+                        </li> 
 
+
+                        </ul>
+
+                                </div>
+                       
+     
+              </nav>

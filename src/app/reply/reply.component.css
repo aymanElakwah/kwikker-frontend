@@ -22,7 +22,7 @@
 }
 
 .cdk-global-overlay-wrapper {
-  pointer-events: auto;
+  pointer-events: none;
   display: block;
   position: relative;
   overflow: auto;
@@ -30,7 +30,7 @@
 }
 
 .cdk-global-overlay-wrapper::before {
-  content: "";
+  /* content: ""; */
   display: inline-block;
   height: 100%;
   white-space: nowrap;
@@ -48,41 +48,43 @@
   padding: 0;
   border-radius: 8px;
   border: 1px solid #e6ecf0;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 .popup-kweek-style {
-    padding: 9px 40px;
+  padding: 9px 40px;
 }
 
 #last-clicked-kweek {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 20px;
-    line-height: 20px;
-    padding: 30px 40px;
-    color: #14171a;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 30px 40px;
+  color: #14171a;
 }
 
 #last-clicked-kweek #user-name {
-    font-size: 14px;
-}
+  font-size: 14px;
+} 
 
 #last-clicked-kweek #name-block {
-    margin-bottom: 15px;
-    display: inline-block;
+  margin-bottom: 15px;
+  display: inline-block;
 }
 
 #last-clicked-kweek #replying-to {
-    padding-bottom: 8px;
-    padding-top: 4px;
+  padding-bottom: 8px;
+  padding-top: 4px;
 }
 
 #last-clicked-kweek #date {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #last-clicked-kweek .counter {
-    font-size: 14px;
-    font-weight: bold;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /* .vertical-line {
@@ -90,4 +92,67 @@
     border-top-left-radius: 2px;
     border-color: #1da1f2;
     border-style: solid;
+} */
+
+/* ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+} */
+
+/* li {
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  padding: 0px 40px;
+} */
+
+/* li:hover {
+  background-color: #e6ecf0;
+} */
+
+/* .avatarWrap {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* .avatarWrap .circle {
+  display: block;
+  flex-shrink: 0;
+  position: relative;
+} */
+
+/* .line {
+  background-color: #1DA1F2;
+  border-radius: 3px 3px 0 0;
+  content: '';
+  display: block;
+  flex: 1;
+  height: 100%;  
+  margin-left: 22px;
+  margin-top: 3px;
+  margin-bottom: 0;
+  width: 5px;
+} */
+
+/* .content {
+  font-size: 20px;
+  margin-top: 18px;
+} */
+
+/* div {
+  display: block;
+} */
+/* 
+.avatarWrap .upper-line {
+    margin-bottom: 2px;
+    margin-top: 0;
+    border-radius: 0 0 3px 3px;
+    height: 16px;
+    position: relative;
+    width: 5px;
+    margin-left: 22px;
+    margin-top:0;
+    background-color: #1DA1F2;
+
 } */

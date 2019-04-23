@@ -10,17 +10,31 @@ import {CacheService} from '../services/cache.service';
 @Injectable( )
 export class CacheInterceptor implements HttpInterceptor {
     /**
+     * all cached requests in the website
+     */
+    requestsUrl = [
+        'example@yahoo.com'
+    ];
+    cachedRequest = false;
+    /**
      *
      * @param HttpCacheService inject cache service where actual work is done
      */
-    constructor (private HttpCacheService: CacheService) { }
+    constructor (private HttpCacheService: CacheService) {
+
+     }
     /**
      * to intercept all requests
      * @param req out request
      * @param next modifed request
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if ( req.method !== 'GET' ) {
+        this.requestsUrl.forEach(element => {
+            if(element === req.url) {
+                this.cachedRequest = true;
+            }
+        });
+        if ( req.method !== 'GET' || !this.cachedRequest ) {
        return next.handle(req);
     }
     const cachedResponse: HttpResponse<any> = this.HttpCacheService.get(req.url);

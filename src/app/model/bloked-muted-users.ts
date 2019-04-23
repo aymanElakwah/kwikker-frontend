@@ -3,7 +3,7 @@
  * about any user, It's used In MiniProfileCard Components 
  * and It's used also in Kweeks Component
  */
-export interface MiniUser {
+export interface BlockedMutedUser {
     /** Username */
     username: string;
     /** User Screen Name => Must be unique */
@@ -18,6 +18,5 @@ export interface MiniUser {
     blocked: boolean;
      /** If The Authorised User Muted That User */
     muted: boolean;
-    /** Bio: Description Added By The User */
-    bio: string;
+
 }

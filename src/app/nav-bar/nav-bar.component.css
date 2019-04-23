@@ -1,35 +1,268 @@
-.Nav
-{
-    background: #fff;
-    height: 46px;
+#icon {
+  width:25px;
+  float:center ;
+  size: 10px;
+  margin: 10px;
 }
 
+
 .kweek-btn{
-    background-color: #1da1f2;
-    border: 1px solid #1da1f2;
-    color: #fff;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 6px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    white-space: nowrap;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    font-family: "Segoe UI", Arial, sans-serif;
-    border-radius: 20px;
+  background-color: #1da1f2;
+  border: 1px solid #1da1f2;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  line-height: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  font-family: "Segoe UI", Arial, sans-serif;
+  border-radius: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
 
 }
 
 .kweek-btn:hover{
-    background-color: #2091f9;
-    border: 1px solid #2091f9;
+  background-color: #2091f9;
+  border: 1px solid #2091f9;
 }
 
 .kweek-btn:active, 
 .kweek-btn:focus 
 {
-    outline: none;   
-    
+  outline: none;   
+} 
+
+.hiddenButton{
+  background-color: white;
+  
+}
+.navbar {
+  font-size: 15px;
+  font-weight: 500;
+  background-color: red;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+  padding-top: 5px;
+  width: 100%;
+  /* position: -webkit-sticky;
+  position: sticky; */
+  /* top: 0; */
+ /* z-index: 999 ; */
+ /* height: 65px; */
+}
+
+.main-nav {
+  list-style-type: none;
+  display: none;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: rgb(8, 8, 8);
+  opacity: 0.6;
+ 
+  font-size: 15px;
+ 
+}
+.nav-link:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 3px;
+  margin-top: 8px;
+  background-color: #000000;
+  content: "";
+  transition: width 0.2s;
+}
+
+.nav-link:hover {
+opacity: 1;
+  color: #000000;      
+}
+
+.nav-link:hover:after{
+  width: 100%;
+}
+
+
+.nav-item{
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+#title{
+  color: #14171a;
+  font-size: 18px;
+  font-weight: bold;
+ 
+}
+.title
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+.activity{
+  padding-right: 0px;
+}
+
+.esc
+ {
+     background-color: transparent;
+     font-size: 18px;
+     display: inline-block;
+     vertical-align: baseline;
+     color: #657786;
+     border:0;
+     margin-left: 15px;
  }
+
+ #back
+ {
+     margin-left: 0px;
+ }
+ 
+ .esc:hover
+ {
+     color:#1B95E0;
+ }
+ .list{
+  background-color: white;
+  height: 500px;
+  margin-left:0px;
+  margin-right: 0px;
+}
+
+.list2{
+  height: 518px;
+}
+
+.list3 {
+ height: 418px;
+}
+
+.send
+{
+  color: #14171a;
+  display: block;
+  font-weight: bold;
+  padding: 5px 15px;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.search
+{
+  box-sizing: border-box;
+  height: 24px;
+  outline: 0;
+  margin: 2px 0;
+  padding: 2px;
+  resize: none;
+  vertical-align: top;
+}
+.form-control:focus
+{
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.25);;
+}
+.input2
+{
+    border-left: none !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    margin-left:0px;
+}
+.tags
+{
+    border:1px solid rgba(0,132,180,0.5);
+    border-right: none;
+    height: 30.5px;
+    margin-top:5px;
+}
+
+.person
+{
+    display: flex;
+    cursor: pointer;
+}
+.person:hover {
+    background-color: #e6ecf0;
+}
+.username
+{
+    line-height: 40px;
+    color: #14171a;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+    margin-left:3px;
+}
+.screenName 
+{
+    line-height: 40px;
+    margin-left:3px;
+    font-size: 14px;
+    color: #657786;
+}
+
+img 
+{
+    margin-left:10px;
+    border-radius: 100%;
+    max-height: 40px;
+}
+/* HeroesComponent's private CSS styles */
+.selected {
+  background-color: #CFD8DC !important;
+  color: white;
+}
+.heroes {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+.heroes li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.heroes li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+.heroes li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.heroes .text {
+  position: relative;
+  top: -3px;
+}
+.heroes .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}

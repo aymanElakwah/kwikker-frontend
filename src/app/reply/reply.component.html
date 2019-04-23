@@ -1,3 +1,4 @@
+<mat-dialog-content>
 <div>
   <div *ngIf="roots && roots.length">
     <div style="padding-top: 5px;"></div>
@@ -6,6 +7,22 @@
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
       <div class="container p-0 kweek-style" *ngIf="!root.user.muted">
+        <!-- delete button -->
+        <div *ngIf="authorizedUser === root.user.username">
+            <div>
+              <mat-icon class="close" (click)="deleteRoot_ClickedKweek(root)">close</mat-icon>
+            </div>
+          </div>
+          <div class="avatarWrap">
+            <span class="upper-line"></span>
+            <img
+              [src]="root.user.profile_image_url"
+              src-fallback="../../assets/kweeks/default.png"
+              class="mr-3 rounded-circle circle kweek-img"
+            />
+            <span class="line"></span>
+          </div>
+          
         <div class="media popup-kweek-style">
           <img
             [src]="root.user.profile_image_url"
@@ -66,7 +83,7 @@
                   <div class="col-2">
                     <span
                       class="rekweeked icon-pointer"
-                      (click)="rekweekOrUnRekweek(root)"
+                      (click)="unrekweek(root)"
                     >
                       <span
                         matTooltip="Undo Rekweek"
@@ -89,7 +106,7 @@
                   <div class="col-2">
                     <span
                       class="rekweek icon-pointer"
-                      (click)="rekweekOrUnRekweek(root)"
+                      (click)="rekweek(root)"
                     >
                       <span
                         matTooltip="Rekweek"
@@ -112,7 +129,7 @@
                   <div class="col-2">
                     <span
                       class="liked icon-pointer"
-                      (click)="likeOrUnlike(root)"
+                      (click)="unlike(root)"
                     >
                       <span
                         matTooltip="Undo Like"
@@ -133,7 +150,7 @@
                   <div class="col-2">
                     <span
                       class="like icon-pointer"
-                      (click)="likeOrUnlike(root)"
+                      (click)="like(root)"
                     >
                       <span
                         matTooltip="Like"
@@ -163,6 +180,14 @@
     <!-- loop the kweeks as every kweek has the name kweek -->
     <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
     <div class="container p-0 kweek-style" *ngIf="!clickedKweek.user.muted">
+       <!-- delete button -->
+       <div *ngIf="authorizedUser === clickedKweek.user.username">
+          <div>
+            <mat-icon class="close" (click)="deleteRoot_ClickedKweek(clickedKweek)"
+              >close</mat-icon
+            >
+          </div>
+        </div>
       <div class="media" id="last-clicked-kweek">
         <img
           [src]="clickedKweek.user.profile_image_url"
@@ -224,7 +249,7 @@
                 <div class="col-2">
                   <span
                     class="rekweeked icon-pointer"
-                    (click)="rekweekOrUnRekweek(clickedKweek)"
+                    (click)="unrekweek(clickedKweek)"
                   >
                     <span
                       matTooltip="Undo Rekweek"
@@ -247,7 +272,7 @@
                 <div class="col-2">
                   <span
                     class="rekweek icon-pointer"
-                    (click)="rekweekOrUnRekweek(clickedKweek)"
+                    (click)="rekweek(clickedKweek)"
                   >
                     <span
                       matTooltip="Rekweek"
@@ -272,7 +297,7 @@
                 <div class="col-2">
                   <span
                     class="liked icon-pointer"
-                    (click)="likeOrUnlike(clickedKweek)"
+                    (click)="unlike(clickedKweek)"
                   >
                     <span
                       matTooltip="Undo Like"
@@ -295,7 +320,7 @@
                 <div class="col-2">
                   <span
                     class="like icon-pointer"
-                    (click)="likeOrUnlike(clickedKweek)"
+                    (click)="like(clickedKweek)"
                   >
                     <span
                       matTooltip="Like"
@@ -328,6 +353,13 @@
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
       <div class="container p-0 kweek-style pointer" *ngIf="!reply.user.muted">
+        <!-- delete button -->
+        <div *ngIf="authorizedUser === reply.user.username">
+            <div (click)="openDialog(reply)"></div>
+            <div>
+              <mat-icon class="close" (click)="deleteReply(reply)">close</mat-icon>
+            </div>
+          </div>
         <div class="media border-bottom popup-kweek-style">
           <img
             [src]="reply.user.profile_image_url"
@@ -387,7 +419,7 @@
                   <div class="col-2">
                     <span
                       class="rekweeked icon-pointer"
-                      (click)="rekweekOrUnRekweek(reply)"
+                      (click)="unrekweek(reply)"
                     >
                       <span
                         matTooltip="Undo Rekweek"
@@ -410,7 +442,7 @@
                   <div class="col-2">
                     <span
                       class="rekweek icon-pointer"
-                      (click)="rekweekOrUnRekweek(reply)"
+                      (click)="rekweek(reply)"
                     >
                       <span
                         matTooltip="Rekweek"
@@ -433,7 +465,7 @@
                   <div class="col-2">
                     <span
                       class="liked icon-pointer"
-                      (click)="likeOrUnlike(reply)"
+                      (click)="unlike(reply)"
                     >
                       <span
                         matTooltip="Undo Like"
@@ -456,7 +488,7 @@
                   <div class="col-2">
                     <span
                       class="like icon-pointer"
-                      (click)="likeOrUnlike(reply)"
+                      (click)="like(reply)"
                     >
                       <span
                         matTooltip="Like"
@@ -485,3 +517,4 @@
   </div>
   <div id="popUpEnd"><i class="fab fa-twitter" id="twitter"></i></div>
 </div>
+</mat-dialog-content>

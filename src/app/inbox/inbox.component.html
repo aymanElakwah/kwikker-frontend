@@ -21,7 +21,8 @@
 </div>
 
 <!--inbox body-->
-<div *ngFor="let conversation of conversations " class="row all" (click)="toDirectMessage(conversation)" >
+<div class="body">
+<div *ngFor="let conversation of conversations2 | async " class="row all" (click)="toDirectMessage(conversation)" >
   <div class="frame">
     <img class="avatar" [src]="conversation.user?.profile_image_url" [title]="conversation.user?.screen_name">
   </div>
@@ -51,4 +52,17 @@
       <img *ngIf="conversation.last_message?.media_url !== null" [src]="conversation.last_message?.media_url" style="max-height: 20px;">
     </div>
   </div>
+</div>
+</div>
+
+<div  infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="onscroll()"
+    >
+
+</div>
+
+<div class="notification is-warning" *ngIf="finished">
+  End
 </div>

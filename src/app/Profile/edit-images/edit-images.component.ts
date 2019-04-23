@@ -1,7 +1,10 @@
 import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit} from '@angular/core';
 import { LyTheme2, ThemeVariables, Platform } from '@alyle/ui';
-import { ImgCropperConfig, ImgCropperEvent, LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
-
+import { ImgCropperConfig, ImgCropperEvent, 
+         LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
+import { DataService } from 'src/app/services/data.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { saveAs } from 'file-saver';
 
 const styles = (theme: ThemeVariables) => ({
   actions: {
@@ -125,19 +128,25 @@ const styles = (theme: ThemeVariables) => ({
 
     classes = this.theme.addStyleSheet(styles);
     croppedImage?: string;
+    fileToUpload: ImgCropperEvent = null;
+    ImageUrl: string;
     result: string;
     scale: number;
+    img: LyResizingCroppingImages;
     @ViewChild(LyResizingCroppingImages) cropper: LyResizingCroppingImages;
     myConfig: ImgCropperConfig = {
       autoCrop: true,
-      width: 150, // Default `250`
-      height: 150, // Default `200`
+      width: 200, // Default `250`
+      height: 200, // Default `200`
       fill: '#ff2997', // Default transparent if type = png else #000,
       type: 'image/jpeg'
     };
   
     constructor(
-      private theme: LyTheme2
+      private theme: LyTheme2,
+      private EditImageService: DataService,
+      private dialogRef: MatDialogRef<EditImagesComponent>,
+      
     ) { }
   
     ngAfterViewInit() {
@@ -152,30 +161,61 @@ const styles = (theme: ThemeVariables) => ({
             y: 236.26357452128866
           }
         };
-        this.cropper.setImageUrl(
-          'https://firebasestorage.googleapis.com/v0/b/alyle-ui.appspot.com/o/img%2Flarm-rmah-47685-unsplash-1.png?alt=media&token=96a29be5-e3ef-4f71-8437-76ac8013372c',
-          () => {
+        this.cropper.setImageUrl('',() => {
             this.cropper.setScale(config.scale, true);
             this.cropper.updatePosition(config.position.x, config.position.y);
             // You can also rotate the image
-            // this.cropper.rotate(90);
+             this.cropper.rotate(90);
           }
         );
       }
   
     }
+    
   
+  
+
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
       console.log('cropped img: ', e);
+      this.fileToUpload = e as File;
+      console.log(this.fileToUpload);
     }
+
     onloaded(e: ImgCropperEvent) {
       console.log('img loaded', e);
     }
+
     onerror(e: ImgCropperErrorEvent) {
       console.warn(`'${e.name}' is not a valid image`, e);
     }
-  
+
+    changeImage()
+    {
+
+      let image = this.dataURItoBlob(this.fileToUpload.dataURL);
+     /*  let reader = new FileReader();
+      reader.readAsDataURL(image as file); 
+    reader.onload = (_event) => { this.ImageUrl = reader.result.toString();}*/
+
+      this.EditImageService.updateProfilePicture(image as File).subscribe 
+      ( serInfo => { this.ImageUrl = serInfo; }  );
+
+       this.dialogRef.close({ profilePictureURL : this.ImageUrl });
+    } 
+
+    dataURItoBlob(dataURI): Blob {
+      const binary = atob(dataURI.split(',')[1]);
+      const array = [];
+
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+
+      return new Blob([new Uint8Array(array)], {
+        type: 'image/png'
+      });
+    }
   }
 
    

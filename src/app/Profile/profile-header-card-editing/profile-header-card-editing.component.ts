@@ -24,6 +24,9 @@ export class ProfileHeaderCardEditingComponent implements OnInit {
                     /* The Edited Date */
   @Output() editedDate: EventEmitter<string> = new EventEmitter<string>();
 
+  minDate = new Date(1912, 0, 1);
+  maxDate = new Date();
+
  
   /**
    * Send the edited data to The Main Component

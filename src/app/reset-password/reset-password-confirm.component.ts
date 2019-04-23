@@ -11,11 +11,16 @@ import { NgForm } from '@angular/forms';
 })
 export class confirmPassword implements OnInit {
     public confirmCode: any;
+    public pass: string;
+    public mail: string;
+    public confirm_pass: string;
+    
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
-        localStorage.setItem('TOKEN', this.confirmCode);
+        //console.log( this.confirmCode );
+       // localStorage.setItem('TOKEN', this.confirmCode);
 
     }
 /**
@@ -28,15 +33,14 @@ export class confirmPassword implements OnInit {
    */
 public sendPassword(form: NgForm) {
   var toSend = { 
-    password: form.value.pass
+    password: form.value.pass,
+  
  }; 
  
-  this.data.sendPass(toSend)
+  this.data.sendPass(toSend, this.confirmCode )
     .subscribe(
       res => {
-        console.log(res);
-        localStorage.setItem('TOKEN', res.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       },
       err => console.log('error: ', err)
   );

@@ -1,22 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlockedListComponent } from './blocked-list.component';
-
+import { DataService } from '../services/data.service';
 describe('BlockedListComponent', () => {
   let component: BlockedListComponent;
-  let fixture: ComponentFixture<BlockedListComponent>;
+  let blocked_service:DataService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BlockedListComponent ]
-    })
-    .compileComponents();
-  }));
+  
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlockedListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    
+    component = new BlockedListComponent(blocked_service)
+    
   });
 
   it('should create', () => {

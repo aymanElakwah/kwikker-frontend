@@ -1,4 +1,4 @@
-<div class ="row nopadding">
+<div class ="row nopadding" infiniteScroll  (scrolled)="onScroll()">
   <!-- The main Part For each Card , For Loop to show all of them -->
   <div class="container" *ngFor='let user of miniCardProfileUsers; let i = index'>
      <!-- Profile Card is divided into two main Rows [Banner, Info] -->
@@ -7,7 +7,7 @@
         <div class="row banner"> 
            <img
               class = 'BannerImage'
-              src = "../../../assets/main/green.jpg"
+              src =  {{user?.profile_banner_url}}  
               alt="miniProfileBanner"
               id="BannerImage"/>
         </div>
@@ -62,9 +62,8 @@
                  <img
                     class = "ProfileImage"
                     src = {{user?.profile_image_url}}  
-                    alt = 'https://i.ibb.co/z2wkPKs/Default.png'
-                    id= "ProfileImage"
-                    onerror="arguments[0].currentTarget.style.display='none'"/>
+                    alt = "miniProfilePicture"
+                    id= "ProfileImage"/>
               </div>
               <!-- Profile Info Part [Username, Screen Name, Bio] -->
               <div class="profile-data">
