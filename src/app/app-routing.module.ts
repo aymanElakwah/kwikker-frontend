@@ -18,7 +18,9 @@ const routes: Routes = [
   {path: 'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
   {path: 'confirm/:code', component: confirmCode},
-  {path: 'reset_password/:code', component: confirmPassword},
+  //{path: 'reset_password/:code', component: confirmPassword},
+  {path: 'account/reset_password/:code', component: confirmPassword},
+  
   {path: 'forget_password', component: ResetPasswordComponent},
   
   {path: 'kweeks', component: KweekComponent},

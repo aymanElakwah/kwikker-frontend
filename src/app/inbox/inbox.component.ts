@@ -62,7 +62,7 @@ export class InboxComponent implements OnInit {
    */
   toDirectMessage(selected: Conversation): void {
     this.chatService.setAddressee(selected.user);
-    this.router.navigate(['/chat/', {outlets : {body: ['dm']} }]);
+    this.chatService.setSection(3);
   }
   /**
    * add prefix before recent last messages
@@ -106,5 +106,8 @@ export class InboxComponent implements OnInit {
               this.conversations2.next(_.contact(currentConversation , newConversation)) ;
           }
      );
+  }
+  composeMsg(){
+    this.chatService.setSection(2);
   }
 }
