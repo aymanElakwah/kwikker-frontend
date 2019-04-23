@@ -105,4 +105,7 @@ export class DirectMessagesComponent implements OnInit {
     this.data.createMessage(message).subscribe();
     this.myForm.reset();
   }
+  toInbox() {
+    this.chatService.setSection(1);
+  }
 }
