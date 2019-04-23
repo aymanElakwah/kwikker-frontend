@@ -21,26 +21,8 @@ import * as $ from 'jquery/dist/jquery.min.js';
 export class MainProfileComponent implements OnInit {
   /**
    * All Info for the profile user
-   * Initialised With Dummy Data To test Template
    * */
-  profileUser: User = {
-    username: "Ahmed_Mahmoud14",
-    screen_name: "Ahmed Mahmoud",
-    bio:
-      "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
-    birth_date: new Date(),
-    created_at: new Date(),
-    profile_image_url: null,
-    profile_banner_url: null,
-    following: false,
-    follows_you: false,
-    followers_count: 0,
-    following_count: 0,
-    kweeks_count: 0,
-    likes_count: 0,
-    blocked: false,
-    muted: false
-  };
+  profileUser: User;
 
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
@@ -296,6 +278,9 @@ export class MainProfileComponent implements OnInit {
    * and Based on It request Its Information
    * @param profileInfoService DataService Parameter To Send Request getting
    * all Information about the profile user
+   * @param dialog  Dialog Service which is used to open Pop up windows
+   * 
+   * @param router Service used to Navigate To The Error Page
    *
    */
   constructor(
