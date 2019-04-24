@@ -36,10 +36,14 @@
 
 .mynav{
   background-color: white;
+  
 }
 #icon{
   width:35px;
   height:35px;
   border:0;
   margin-top: -8px;
+}
+.navbarMsg{
+  cursor: pointer;
 }

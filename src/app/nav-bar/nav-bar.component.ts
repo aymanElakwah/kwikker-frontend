@@ -20,9 +20,9 @@ import { ChatComponent } from '../chat/chat.component';
 export class NavBarComponent implements OnInit {
   public userName: string;
   users:MiniUser[];
- filterBy:string;
-
-
+  filterBy:string;
+  public nav: any;
+  public toShow: boolean;
 
   constructor(private dialog: MatDialog,
               private data: DataService, 
@@ -39,6 +39,10 @@ export class NavBarComponent implements OnInit {
     {
       this.userName = "User"; 
     }
+    this.nav =  document.querySelector('.myNavBar');
+    this.toShow = false;
+   
+    
   }
 
   /**
@@ -105,8 +109,24 @@ export class NavBarComponent implements OnInit {
     }
     this.data.searchUsers(this.filterBy).subscribe(
       list => { this.users = list; }
+
     );
   }
-  
+  /**
+   * toggleNav
+   */
+  public toggleNav() {
+    if (this.toShow == true)
+    {
+       this.nav.className = 'hide';
+       this.toShow = false;
+       return;
+    }
+    else {
+       this.nav.className = 'show';
+       this.toShow = true;
+      return;
+    }
+  }
 }
 

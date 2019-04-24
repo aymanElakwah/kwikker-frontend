@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path:'notifications', component: NotificationsComponent},
   {path: 'login', component: LogInComponent},
-  //{path: 'error', component: ErrorPageComponent}
+  {path: 'error', component: ErrorPageComponent}
  
 ];
 
