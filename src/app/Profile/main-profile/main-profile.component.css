@@ -1,5 +1,4 @@
 /* Main Containers For The Profile Page */
-
 .container-fluid {
 	height: 100%;
 	margin: 0 0;
@@ -14,8 +13,33 @@
 	overflow: hidden;
 }
 
+#Left-Profile-Trends {
+	position: relative;
+	right: 8%;
+	margin-top: 12px;
+	display: none;
+}
 
-/* Kweeks Or MiniUsers Part */
+.left-side {
+	margin-top: 12px;
+	padding: 0;
+	padding-left: 3.5%;
+	padding-right: 0%;
+	margin-left: 0%;
+	margin-right: 0%;
+	overflow-x: hidden;
+}
+
+.Header-Card {
+	padding-top: 8%;
+	margin-bottom: 80px;
+}
+
+.Header-Card-Editing {
+	padding-top: 8%;
+	margin-bottom: 80px;
+	right: 5%;
+}
 
 .outlet-side {
 	margin-top: 12px;
@@ -35,25 +59,36 @@
 	overflow: visible;
 }
 
-.Banner {
-	width: 100%;
-	background-color: #1B95E0;
-	height: 100%;
+.appNavBar
+{
+	z-index: 9999999 !important;
+}
+
+.Content-Editing {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
-	-webkit-transform: scale(1, 1);
-	transform: scale(1, 1);
+	-webkit-transform: translate(0, 138px);
+	transform: translate(0, 138px);
 	overflow: hidden;
 }
 
-.BannerImage {
-	width: 100%;
-	height: 100%;
+.Content {
+	overflow: hidden;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-transform: translate(0, 60px);
+	transform: translate(0, 60px);
 }
 
+.outlet-side-Editing {
+	margin-bottom: 5% !important;
+	margin-top: 12px;
+	overflow: hidden;
+	pointer-events: none;
+	opacity: 0.3;
+}
 
 /* Secondry NavBar in The Profile Page */
-
 .Profile-NavBar {
 	width: 100%;
 	background-color: #fff;
@@ -68,8 +103,19 @@
 	transform: translate(0, 0);
 }
 
-
-/* Taps In The Secondry NavBar */
+.Profile-NavBar-Editing {
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.425);
+	box-sizing: border-box;
+	height: 60px;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+	line-height: 1.375;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-transform: translate(0, 138px);
+	transform: translate(0, 138px);
+	pointer-events: none;
+}
 
 #Taps {
 	list-style-type: none;
@@ -102,8 +148,7 @@ a {
 }
 
 
-/* Profile Picture */
-
+/* Profile Picture and Banner */
 .Profile-Picture {
 	background-color: #1B95E0;
 	border: 5px solid #fff;
@@ -120,63 +165,102 @@ a {
 	transform: translate(0, 65px);
 }
 
+
+.Profile-Picture-Editing {
+	background: rgb(3, 59, 94);
+	border: 5px solid #fff;
+	border-radius: 50%;
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	Left: 8%;
+	Top: 26%;
+	z-index: 998 !important;
+	text-align: center;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-transform: translate(0, 138px);
+	transform: translate(0, 138px);
+	cursor: pointer;
+}
+
+.Banner {
+	width: 100%;
+	background-color: #1B95E0;
+	height: 100%;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-transform: scale(1, 1);
+	transform: scale(1, 1);
+	overflow: hidden;
+}
+
+.Banner-Editing {
+	width: 100%;
+	height: 74.5%;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	-webkit-transform: translate(0, 66px) scale(1, 1.8);
+	transform: translate(0, 66px) scale(1, 1.8);
+	background: rgb(3, 59, 94);
+}
+
+.ProfileImage-Editing {
+	border-radius: 50%;
+	height: 190px;
+	width: 190px;
+	opacity: 0.4;
+}
+
+
 #ProfileImage {
 	border-radius: 50%;
 	height: 190px;
 	width: 190px;
 }
 
-#profilePicdropdownMenuButton {
-	background-color: #fff;
-	border: 5px solid #fff;
-	border-radius: 50%;
-	height: 200px;
-	width: 200px;
-	position: absolute;
-	left: -2%;
-	Top: -2%;
-	background: #000;
-	opacity: 0;
-	z-index: 999 !important;
-}
-
-#profilePicDropDownMenu {
-	Top: 68%;
-	Left: 14%;
-	text-align: center;
-}
-
-#profilePicDropDownMenu p {
-	text-align: center;
-}
-
-#BannerDropdownMenuButton {
+.BannerImage {
 	width: 100%;
-	height: 130%;
-	background: #000;
-	position: absolute;
-	left: -2%;
-	Top: -2%;
-	background: #000;
-	opacity: 0;
+	height: 100%;
+}
+
+.BannerImage-Editing {
+	width: 100%;
+	height: 100%;
+	opacity: 0.4;
+}
+
+/* DropDown Menus */
+#profilePicDropDownMenu 
+{
+	position:absolute;
+	top : -30% !important;
+	left: -18% !important;
 }
 
 #BannerDropDownMenu {
-	Top: 105%;
-	Left: 45%;
-	text-align: center;
+	position:absolute;
+	top : -4% !important;
+	left: 43% !important;
 }
 
-#BannerDropDownMenu p {
-	text-align: center;
-}
-
-.Camera-Icon {
+#userActionDropdownMenuButton {
 	position: absolute;
-	Top: 85%;
-	left: 48%;
+	right: 10%;
+	Top: 105%;
+	height: 30px;
+	z-index: 9999 !important;
 }
 
+.dropdown-menu li:hover {
+	background-color: #1B95E0 !important;
+}
+
+.dropdown-item {
+	overflow: hidden;
+}
+
+/* Text */
 .editBannerText {
 	position: absolute;
 	Top: 107%;
@@ -236,20 +320,54 @@ a {
 	content: "Add a profile photo";
 }
 
-.Image-Icon {
-	position: absolute;
-	Top: 30%;
-	left: 38%;
+.dropdown-menu p:hover {
+	color: #fff !important;
 }
 
-.Default-Image-Icon {
-	position: absolute;
-	Top: 40%;
-	left: 40%;
+#profilePicDropDownMenu p {
+	text-align: center;
 }
 
+#BannerDropDownMenu p {
+	text-align: center;
+}
 
-/* Edit, Follow & Following Buttons */
+.dropdown-item>p {
+	color: #66757f;
+	display: block;
+	font-size: 14px;
+	font-weight: normal;
+	float: none;
+	line-height: 16px;
+	margin: 0;
+	padding: 5px 5px;
+	position: relative;
+	min-width: 100%;
+	text-align: left;
+	overflow: hidden;
+}
+
+.BlockMsgBody {
+	color: #66757f;
+	font-size: 14px;
+	text-align: left;
+	margin-bottom: 15px;
+	transform: translate(-4px, 0);
+}
+
+.BlockMsgHeader {
+	font-size: 21px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	line-height: 22px;
+	transform: translate(-4px, 0);
+}
+
+.BlockMsg {
+	margin-top: 20px;
+}
+
+/* Buttons */
 
 .edit-button {
 	border-radius: 100px;
@@ -259,7 +377,6 @@ a {
 	font-weight: bold;
 	line-height: 20px;
 	padding: 6px 16px;
-	;
 	background-color: #fff;
 	color: #66757f;
 	min-width: 89px;
@@ -276,22 +393,12 @@ a {
 	font-weight: bold;
 	line-height: 20px;
 	padding: 6px 16px;
-	;
 	background-color: #fff;
 	color: #1B95E0;
-	;
 	width: 100px;
 	position: absolute;
 	right: 10%;
 	Top: 18%;
-}
-
-.btn-outline-primary:hover {
-	background-color: rgb(228, 240, 255);
-}
-
-.btn-outline-primary:active {
-	outline: none !important;
 }
 
 .following-button {
@@ -309,9 +416,177 @@ a {
 	Top: 18%;
 }
 
+.cancel-button {
+	background-color: #fff;
+	border: 1px solid #66757f;
+	color: #66757f;
+	border-radius: 100px;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	position: absolute;
+	right: 14%;
+	Top: 18%;
+	pointer-events: visible;
+}
+
+.saveChanges-button {
+	border-radius: 100px;
+	border: 1px solid #1B95E0;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	background-color: #fff;
+	color: #1B95E0;
+	position: absolute;
+	right: 0%;
+	Top: 18%;
+	pointer-events: visible;
+	opacity: 10;
+}
+
+.Blocked-button {
+	border-radius: 100px;
+	border: 1px solid rgb(224, 27, 27);
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	background-color: #fff;
+	color: rgb(224, 27, 27);
+	width: 100px;
+	position: absolute;
+	right: 10%;
+	Top: 18%;
+}
+
+.close-button {
+	position: relative;
+	right: 2%;
+	Top: 12%;
+	font-weight: bold;
+	float: right;
+	font-size: 15px;
+	cursor: pointer;
+	color: #66757f;
+}
+
+.semiBlocked-button {
+	border-radius: 100px;
+	border: 1px solid #66757f;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	background-color: #fff;
+	color: #66757f;
+	min-width: 89px;
+}
+
+#profilePicdropdownMenuButton {
+	background-color: #fff;
+	border: 5px solid #fff;
+	border-radius: 50%;
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	left: -2%;
+	Top: -2%;
+	background: #000;
+	opacity: 0;
+	z-index: 999 !important;
+}
+
+#BannerDropdownMenuButton {
+	width: 100%;
+	height: 130%;
+	background: #000;
+	position: absolute;
+	left: -2%;
+	Top: -2%;
+	background: #000;
+	opacity: 0;
+}
+
+.btn-outline-primary:hover {
+	background-color: rgb(228, 240, 255);
+}
+
+.btn-outline-primary:active {
+	outline: none !important;
+}
+
 .following-button:hover {
 	background-color: rgb(158, 4, 12);
 	border-color: rgb(158, 4, 12);
+}
+
+.following-button:active {
+	outline: none !important;
+}
+
+.following-button:hover span {
+	display: none;
+}
+
+.following-button:hover::before {
+	content: "Unfollow"
+}
+
+.close-button:hover {
+	color: black;
+}
+
+.Blocked-button:hover {
+	background-color: rgb(158, 4, 12);
+	border-color: rgb(158, 4, 12);
+}
+
+.Blocked-button:hover span {
+	display: none;
+}
+
+.Blocked-button:hover::before {
+	content: "Unblock";
+	color: #fff;
+}
+
+/* ICONS */
+.Image-Icon {
+	position: absolute;
+	Top: 30%;
+	left: 38%;
+}
+
+.Default-Image-Icon {
+	position: absolute;
+	Top: 40%;
+	left: 40%;
+}
+
+.Camera-Icon {
+	position: absolute;
+	Top: 85%;
+	left: 48%;
+}
+
+.Dots-Icon {
+	position: absolute;
+	right: 30%;
+	Top: 0;
+}
+
+.MuteIcon {
+	position: absolute;
+	right: 23%;
+	Top: 25%;
+	cursor: pointer;
 }
 
 .DIcon {
@@ -331,68 +606,8 @@ a {
 	box-shadow: none;
 }
 
-.following-button:active {
-	outline: none !important;
-}
 
-.following-button:hover span {
-	display: none;
-}
-
-.following-button:hover::before {
-	content: "Unfollow"
-}
-
-.Dots-Icon {
-	position: absolute;
-	right: 30%;
-	Top: 0;
-}
-
-
-/* DropDownMenu */
-
-#userActionDropdownMenuButton {
-	position: absolute;
-	right: 10%;
-	Top: 105%;
-	height: 30px;
-	z-index: 9999 !important;
-}
-
-#userActionDropDownMenu {
-	position: absolute;
-	right: 10%;
-	Top: 120%;
-}
-
-.dropdown-menu li:hover {
-	background-color: #1B95E0 !important;
-}
-
-.dropdown-menu p:hover {
-	color: #fff !important;
-}
-
-.dropdown-item {
-	overflow: hidden;
-}
-
-.dropdown-item>p {
-	color: #66757f;
-	display: block;
-	font-size: 14px;
-	font-weight: normal;
-	float: none;
-	line-height: 16px;
-	margin: 0;
-	padding: 5px 5px;
-	position: relative;
-	min-width: 100%;
-	text-align: left;
-	overflow: hidden;
-}
-
+/* Upload Image Input */
 [type="file"] {
 	border: 0;
 	clip: rect(0, 0, 0, 0);
@@ -419,38 +634,34 @@ a {
 }
 
 
-/* Trends Bar In The Left */
+/* Message Box */
 
-#Left-Profile-Trends {
+#message-sticky {
+	position: absolute;
+	Top: 0.3%;
+	Left: 26.8%;
+	width: 46.7%;
+	height: 10%;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 0 0 6px 6px;
+	z-index: 9999999 !important;
+	text-align: center;
+	visibility: hidden;
+	transition: 1s;
+}
+
+.Msg {
 	position: relative;
-	right: 8%;
-	margin-top: 12px;
-	display: none;
+	margin: 0 20px;
+	padding: 20px 0;
+	color: #66757f;
+	font-size: 14px;
+	line-height: 20px;
+	word-wrap: break-word;
 }
 
-.left-side {
-	margin-top: 12px;
-	padding: 0;
-	padding-left: 3.5%;
-	padding-right: 0%;
-	margin-left: 0%;
-	margin-right: 0%;
-	overflow-x: hidden;
-}
-
-
-/* ProfileInfoCard In The Left */
-
-.Header-Card {
-	padding-top: 8%;
-	margin-bottom: 80px;
-}
-
-.Header-Card-Editing {
-	padding-top: 8%;
-	margin-bottom: 80px;
-	right: 5%;
-}
+/* Media Queries */
 
 @media (max-width: 1350px) {
 	#Right-Profile-Trends {
@@ -480,232 +691,15 @@ a {
 }
 
 
-/* ///////////////////////////////////////////////////////////////////////////////// */
-
-.Banner-Editing {
-	width: 100%;
-	height: 74.5%;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	-webkit-transform: translate(0, 66px) scale(1, 1.8);
-	transform: translate(0, 66px) scale(1, 1.8);
-	background: rgb(3, 59, 94);
-}
-
-.BannerImage-Editing {
-	width: 100%;
-	height: 100%;
-	opacity: 0.4;
-}
-
-.ProfileImage-Editing {
-	border-radius: 50%;
-	height: 190px;
-	width: 190px;
-	opacity: 0.4;
-}
-
-.Profile-NavBar-Editing {
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.425);
-	box-sizing: border-box;
-	height: 60px;
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
-	line-height: 1.375;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	-webkit-transform: translate(0, 138px);
-	transform: translate(0, 138px);
-	pointer-events: none;
-}
-
-.Content-Editing {
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	-webkit-transform: translate(0, 138px);
-	transform: translate(0, 138px);
-	overflow: hidden;
-}
-
-.Content {
-	overflow: hidden;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	-webkit-transform: translate(0, 60px);
-	transform: translate(0, 60px);
-}
-
-.Profile-Picture-Editing {
-	background: rgb(3, 59, 94);
-	border: 5px solid #fff;
-	border-radius: 50%;
-	height: 200px;
-	width: 200px;
-	position: absolute;
-	Left: 8%;
-	Top: 26%;
-	z-index: 998 !important;
-	text-align: center;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	-webkit-transform: translate(0, 138px);
-	transform: translate(0, 138px);
-	cursor: pointer;
-}
-
-.outlet-side-Editing {
-	margin-bottom: 5% !important;
-	margin-top: 12px;
-	overflow: hidden;
-	pointer-events: none;
-	opacity: 0.3;
-}
-
-.cancel-button {
-	background-color: #fff;
-	border: 1px solid #66757f;
-	color: #66757f;
-	border-radius: 100px;
-	box-shadow: none;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 20px;
-	padding: 6px 16px;
-	position: absolute;
-	right: 14%;
-	Top: 18%;
-	pointer-events: visible;
-}
-
-.saveChanges-button {
-	border-radius: 100px;
-	border: 1px solid #1B95E0;
-	box-shadow: none;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 20px;
-	padding: 6px 16px;
-	;
-	background-color: #fff;
-	color: #1B95E0;
-	position: absolute;
-	right: 0%;
-	Top: 18%;
-	pointer-events: visible;
-	opacity: 10;
-}
-
-#message-sticky {
-	position: absolute;
-	Top: 0.3%;
-	Left: 26.8%;
-	width: 46.7%;
-	height: 10%;
-	margin: 0 auto;
-	background-color: #fff;
-	border-radius: 0 0 6px 6px;
-	z-index: 9999999 !important;
-	text-align: center;
-	visibility: hidden;
-	transition: 1s;
-}
-
-.Msg {
-	position: relative;
-	margin: 0 20px;
-	padding: 20px 0;
-	color: #66757f;
-	font-size: 14px;
-	line-height: 20px;
-	word-wrap: break-word;
-}
-
-.closebtn {
-	position: relative;
-	right: 2%;
-	Top: 12%;
-	font-weight: bold;
-	float: right;
-	font-size: 15px;
-	cursor: pointer;
-	color: #66757f;
-}
 
 
-/* When moving the mouse over the close button */
 
-.closebtn:hover {
-	color: black;
-}
 
-.MuteIcon {
-	position: absolute;
-	right: 23%;
-	Top: 25%;
-	cursor: pointer;
-}
 
-.Blocked-button {
-	border-radius: 100px;
-	border: 1px solid rgb(224, 27, 27);
-	box-shadow: none;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 20px;
-	padding: 6px 16px;
-	;
-	background-color: #fff;
-	color: rgb(224, 27, 27);
-	width: 100px;
-	position: absolute;
-	right: 10%;
-	Top: 18%;
-}
 
-.Blocked-button:hover {
-	background-color: rgb(158, 4, 12);
-	border-color: rgb(158, 4, 12);
-}
 
-.Blocked-button:hover span {
-	display: none;
-}
 
-.Blocked-button:hover::before {
-	content: "Unblock";
-	color: #fff;
-}
 
-.BlockMsgBody {
-	color: #66757f;
-	font-size: 14px;
-	text-align: left;
-	margin-bottom: 15px;
-	transform: translate(-4px, 0);
-}
 
-.BlockMsgHeader {
-	font-size: 21px;
-	font-weight: bold;
-	margin-bottom: 8px;
-	line-height: 22px;
-	transform: translate(-4px, 0);
-}
 
-.semiBlocked-button {
-	border-radius: 100px;
-	border: 1px solid #66757f;
-	box-shadow: none;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 20px;
-	padding: 6px 16px;
-	background-color: #fff;
-	color: #66757f;
-	min-width: 89px;
-}
-
-.BlockMsg {
-	margin-top: 20px;
-}
 

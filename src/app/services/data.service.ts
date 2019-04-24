@@ -15,23 +15,24 @@ import { Kweek } from "../model/kweek";
 import { MiniUser } from "../model/mini-user";
 import { BlockedMutedUser } from '../model/bloked-muted-users';
 import { $ } from 'protractor';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: "root"
 })
 export class DataService {
 
-  // constructor(private http: HttpClient) {}
   /**
    * Backend server base
    */
   private base: String =
-    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+         "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
   /**
    *
    * @param http component to send requests
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient ,
+              private cacheService:CacheService) {}
 
   /**
    * get request to get All information about certain user
@@ -44,7 +45,7 @@ export class DataService {
       : {};
     return this.http
       .get<User>(`${this.base}user/profile`, userNameSent);
-      
+      ``
   }
 
   /**
@@ -123,6 +124,7 @@ export class DataService {
    * @returns observable
    */
   rekweekKweek(id: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'kweeks/timelines/profile');
     return this.http.post<any>(`${this.base}kweeks/rekweek`, { id: id }).pipe(
       map(res => res),
       catchError(this.handleError)
@@ -367,6 +369,7 @@ export class DataService {
    * @returns Request Response
    */
   muteUser(userName: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'interactions/mutes');
     const paramsSent = JSON.stringify({username:userName});
     const headers = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -385,6 +388,7 @@ export class DataService {
    * @returns Request Response
    */
   unmuteUser(userName: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'interactions/mutes');
     const paramsSent = { params: new HttpParams().set("username", userName) };
     return this.http
       .delete<any>(this.base + "interactions/mutes", paramsSent)
@@ -400,6 +404,7 @@ export class DataService {
    * @returns Request Response
    */
   blockUser(userName: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'interactions/blocks');
     const paramsSent = JSON.stringify({username:userName});
     const headers = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -418,6 +423,7 @@ export class DataService {
    * @returns Request Response
    */
   unblockUser(userName: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'interactions/blocks');
     const paramsSent = { params: new HttpParams().set("username", userName) };
     return this.http
       .delete<any>(this.base + "interactions/blocks", paramsSent)
@@ -480,7 +486,8 @@ export class DataService {
    */
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
-    body.append('file', image_file);
+    body.append('file', image_file, "Image.png");
+    
     return this.http.post<string>(this.base + 'user/profile_picture', body)
                           .pipe(
                            map(res => res),
@@ -597,6 +604,7 @@ export class DataService {
    * @returns Request Response
    */
   addNewKweek(text: string): Observable<any> {
+    this.cacheService.invalidateUrl(this.base+'kweeks/timelines/profile');
     const obj = { text: String(), reply_to: String() };
     obj.text = text;
     obj.reply_to = null;

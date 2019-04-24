@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, Inject} from '@angular/core';
 import { LyTheme2, ThemeVariables, Platform } from '@alyle/ui';
 import { ImgCropperConfig, ImgCropperEvent, 
          LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
 import { DataService } from 'src/app/services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { saveAs } from 'file-saver';
+
 
 const styles = (theme: ThemeVariables) => ({
   actions: {
@@ -146,7 +146,7 @@ const styles = (theme: ThemeVariables) => ({
       private theme: LyTheme2,
       private EditImageService: DataService,
       private dialogRef: MatDialogRef<EditImagesComponent>,
-      
+      @Inject(MAT_DIALOG_DATA) public data: any,
     ) { }
   
     ngAfterViewInit() {
@@ -164,17 +164,12 @@ const styles = (theme: ThemeVariables) => ({
         this.cropper.setImageUrl('',() => {
             this.cropper.setScale(config.scale, true);
             this.cropper.updatePosition(config.position.x, config.position.y);
-            // You can also rotate the image
-             this.cropper.rotate(90);
+            this.cropper.rotate(90);
           }
         );
       }
-  
     }
-    
   
-  
-
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
       console.log('cropped img: ', e);
@@ -194,19 +189,13 @@ const styles = (theme: ThemeVariables) => ({
     {
 
       let image = this.dataURItoBlob(this.fileToUpload.dataURL);
-     /*  let reader = new FileReader();
-      reader.readAsDataURL(image as file); 
-    reader.onload = (_event) => { this.ImageUrl = reader.result.toString();}*/
-
-      this.EditImageService.updateProfilePicture(image as File).subscribe 
-      ( serInfo => { this.ImageUrl = serInfo; }  );
-
-       this.dialogRef.close({ profilePictureURL : this.ImageUrl });
+       this.dialogRef.close( image );
     } 
 
     dataURItoBlob(dataURI): Blob {
       const binary = atob(dataURI.split(',')[1]);
       const array = [];
+      console.log(binary);
 
       for (let i = 0; i < binary.length; i++) {
         array.push(binary.charCodeAt(i));
