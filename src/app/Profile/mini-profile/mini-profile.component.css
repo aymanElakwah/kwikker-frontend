@@ -101,7 +101,6 @@
 	border: 1px solid #1B95E0;
 	color: #fff;
 	min-width: 89px;
-	position: absolute;
 }
 
 .Following:hover {
@@ -156,8 +155,8 @@
 
 .Dots-Icon {
 	position: absolute;
-	right: 12px;
-	Top: 10px;
+	Top: -2px;
+	right: 5px;
 }
 
 .dropdown-menu li:hover {
@@ -166,6 +165,15 @@
 
 .dropdown-menu p:hover {
 	color: #fff !important;
+}
+
+#dropdownMenuButton
+{
+	position: absolute;
+	right: 5px;
+	Top: 10px;
+	height: 22px;
+	width: 2px;
 }
 
 .dropdown-item>p {
@@ -221,6 +229,11 @@
 	font-size: 18px;
 	font-weight: bold;
 	padding-right: 2px;
+}
+
+#usernameref
+{
+	color: #14171a !important;
 }
 
 .screen-name {
