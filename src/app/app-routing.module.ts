@@ -19,7 +19,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
  
 @Injectable()
-class CanActivateTeam implements CanActivate {
+export class CanActivateTeam implements CanActivate {
   constructor(private router: Router){};
   
    canActivate(
@@ -42,7 +42,7 @@ class CanActivateTeam implements CanActivate {
    
 }
 @Injectable()
-class CanDeactivateTeam implements CanActivate {
+export class CanDeactivateTeam implements CanActivate {
   constructor(private router: Router){};
   
    canActivate(
@@ -89,3 +89,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
