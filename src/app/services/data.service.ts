@@ -336,6 +336,7 @@ export class DataService {
    * @returns Request Response
    */
   followUser(userName: string): Observable <any> {
+    this.cacheService.invalidateUrl(this.base+'interactions/following');
     const paramsSent = JSON.stringify({username:userName});
     const headers = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
