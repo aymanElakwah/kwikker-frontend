@@ -626,7 +626,7 @@ export class DataService {
     };
    
     console.log(headers );
-    return this.http.put<any>(this.base + "user/password", body,headers).pipe(
+    return this.http.put<any>(this.base + "account/reset_password", body,headers).pipe(
       map(res => res),
       catchError(this.handleError)
     );
