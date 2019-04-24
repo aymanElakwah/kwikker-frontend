@@ -586,8 +586,7 @@ export class DataService {
 
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json",
-                                  "CODE": CODE
-    })
+                                  "CODE":  `${CODE}`})
     };
 
    
@@ -630,7 +629,9 @@ export class DataService {
     //console.log("value:" ,val );
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json",
-                                  "CODE": val})
+                                  "CODE":  `${val}` })
+
+                                  
     };
    
     console.log(headers );
