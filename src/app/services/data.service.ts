@@ -587,8 +587,7 @@ export class DataService {
 
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json",
-                                  "CODE": CODE
-    })
+                                  "CODE":  `${CODE}`})
     };
 
    
@@ -631,11 +630,13 @@ export class DataService {
     //console.log("value:" ,val );
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json",
-                                  "CODE": val})
+                                  "CODE":  `${val}` })
+
+                                  
     };
    
     console.log(headers );
-    return this.http.put<any>(this.base + "user/password", body,headers).pipe(
+    return this.http.put<any>(this.base + "account/reset_password", body,headers).pipe(
       map(res => res),
       catchError(this.handleError)
     );

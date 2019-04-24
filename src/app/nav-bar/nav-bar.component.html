@@ -1,5 +1,5 @@
-
-<nav class="navbar navbar-expand-lg  navbar-light bg-light">
+<!-- bg-light
+<nav class="navbar navbar-inverse navbar-expand-lg  navbar-light ">
                 
                 <img src="../../assets/main/twitter.png" id="icon"  alt="User Icon" />
                                
@@ -52,4 +52,71 @@
                                 </div>
                        
      
-              </nav>
+              </nav> -->
+
+<!-- NEW NAVBAR :D -->
+<nav class=" mynav navbar navbar-default navbar-expand-md  navbar-fixed-top">
+        <div class="container-fluid">
+                <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  aria-expanded="false" (click)="toggleNav()">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        
+                        <a href="home" class="navbar-brand">
+                                <img src="../../assets/main/twitter.png" alt="Main icon" id="icon">
+                        </a>
+                </div>
+                        <div class="collapse navbar-collapse myNavBar hide" >
+                                <ul class="nav navbar-nav navbar-lef">
+                                        <li class="active"> <a href="#"><span class=" glyphicon glyphicon-home"></span>&nbsp; Home</a></li>
+                                        <li> <a href="notification"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notification</a></li>
+                                        <li class="navbarMsg"> <a (click)="openInboxComponent()" (click)="toggleNav()"> <span class="glyphicon glyphicon-envelope"></span>&nbsp; Message</a></li>
+                                        
+                                         
+                                </ul>
+                               
+                                <ul class="nav navbar-nav navbar-right">
+                                        <li>
+                                                <form class="navbar-form searchBar">
+                                                        <div class="form-group">
+                                                                <input class="form-control" (keydown)="newSearch($event)" #searchBar [(ngModel)]="filterBy" type="search" aria-label="Search" name="ngModel" placeholder="Search...">
+                                                                <div class="list-group  " [hidden]="!searchBar.value">
+                                                                     
+                                                                <a class="list-group-item list-group-item-action" *ngFor="let user of users"  [routerLink]="['profile',user.username]">
+                                                                        {{user.username}}
+                                                                </a>
+                                                                       
+                                                                </div>
+                                                              
+                                                        </div>
+                                                </form>
+                                        </li>
+                                        <li class="dropdown">
+                                              
+                                                <a class="dropdown-toggle" data-toggle="dropdown" href="home">
+                                                        <span class="glyphicon glyphicon-list"></span>&nbsp; {{userName}}
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                <li> <a  [routerLink]="['profile',userName]"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</a></li>
+                                                <li> <a href="settings"><span class="glyphicon glyphicon-cog"></span>&nbsp; Settings</a></li>
+                                                <li class="navbarMsg"> <a (click)="logOutUser()"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Logout</a></li>
+                                                </ul>
+                                                       
+                                        </li>
+                                        <li>
+                                                <form class="navbar-form ">
+                                                        <div class="form-group">
+                                                                <button type="button" class="btn btn-primary kweek-btn" (click)="openKweekComponent()" (click)="toggleNav()">Kweek</button>
+                                                        </div>
+                                                </form>
+                                        </li>
+                                </ul>
+                         </div>
+        </div>      
+</nav>
+
+
+
+
