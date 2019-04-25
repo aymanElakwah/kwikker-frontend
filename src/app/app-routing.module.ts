@@ -11,9 +11,6 @@ import { confirmCode } from './sign-up/confirmCode.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { confirmPassword } from './reset-password/reset-password-confirm.component';
 import { Observable } from 'rxjs';
-import { ElementSchemaRegistry } from '@angular/compiler';
-import { isNull } from '@angular/compiler/src/output/output_ast';
-import { isEmpty } from 'rxjs/operators';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 
@@ -57,7 +54,7 @@ export class CanDeactivateTeam implements CanActivate {
     else
     {
       window.alert("You are already signed in");
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
       return false;
      
     }
@@ -68,9 +65,9 @@ export class CanDeactivateTeam implements CanActivate {
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent },
-  {path: 'home', component: HomeComponent,canActivate: [CanActivateTeam] },
+  {path: 'home', component: HomeComponent,canActivate:[CanActivateTeam] },
   {path: 'signup', component: SignUpComponent, canActivate: [CanDeactivateTeam]},
-  {path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateTeam]},
+ // {path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateTeam]},
   {path: 'login', component: LogInComponent,canActivate: [CanDeactivateTeam] },
   {path: 'confirm/:code', component: confirmCode,canActivate: [CanDeactivateTeam]},
   {path: 'reset_password/:code', component: confirmPassword,canActivate: [CanDeactivateTeam]},
