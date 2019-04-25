@@ -44,11 +44,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].following )
     {
-      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     this.miniCardProfileUsers[index].following = !this.miniCardProfileUsers[index].following;
   }
@@ -63,11 +63,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].muted )
     {
-      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
@@ -85,11 +85,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].blocked )
     {
-      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
