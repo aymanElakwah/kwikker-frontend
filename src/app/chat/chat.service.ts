@@ -7,7 +7,9 @@ export class ChatService {
   currentAddresse = this.addressee.asObservable();
   private section = new BehaviorSubject<any>('') ;
   currentSection = this.section.asObservable();
-  constructor() { }
+  constructor() {
+    this.setSection(1);
+   }
   setAddressee(addressee: any) {
     this.addressee.next(addressee);
   }
