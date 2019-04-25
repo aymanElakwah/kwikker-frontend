@@ -14,7 +14,8 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
   declarations: [
     KweekComponent,
     ReplyComponent,
-    NewKweekComponent
+    NewKweekComponent,
+    LikesRekweeksListComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,8 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
   entryComponents: [
     ReplyComponent,
     LikesRekweeksListComponent,
-    NewKweekComponent
+    NewKweekComponent,
+    LikesRekweeksListComponent
   ],
   exports: [
     KweekComponent,
