@@ -190,7 +190,7 @@ export class ReplyComponent implements OnInit {
 
   reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
-      panelClass: 'KweekBox'
+      panelClass: 'kweekBox'
     });
     dialogRef.componentInstance.kweek = kweek;
     dialogRef.componentInstance.reply = true;
