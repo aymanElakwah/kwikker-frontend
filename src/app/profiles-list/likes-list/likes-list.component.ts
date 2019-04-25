@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { DataService } from "../services/data.service";
-import { Kweek } from "../model/kweek";
+import { DataService } from "../../services/data.service";
+import { Kweek } from "../../model/kweek";
 
 import {
   MatDialog,
@@ -9,7 +9,7 @@ import {
   TooltipPosition
 } from "@angular/material";
 import { FormControl } from "@angular/forms";
-import { KweeksService } from "../services/kweeks.service";
+import { KweeksService } from "../../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
 @Component({
   selector: "app-reply",
