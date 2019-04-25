@@ -11,7 +11,6 @@ import {
 import { FormControl } from "@angular/forms";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
-import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -82,12 +81,12 @@ export class ReplyComponent implements OnInit {
    * @param kweek
    * No @returns
    */
-  likersDialog(kweek: Kweek): void {
+  likesDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
-    const dialogRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = this.clickedKweek;
-    dialogRef.componentInstance.likers = true;
+    const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+    dialogRef.componentInstance.roots = this.roots;
+    dialogRef.componentInstance.popUpType = kweek;
     this.dialogRef.close();
   }
 
@@ -96,13 +95,20 @@ export class ReplyComponent implements OnInit {
    * @param kweek
    * No @returns
    */
-  rekweekersDialog(kweek: Kweek): void {
+  rekweeksDialog(kweek: Kweek): void {
+    this.roots.push(this.clickedKweek);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
-    const dialogRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = this.clickedKweek;
-    dialogRef.componentInstance.likers = false;
+    dialogConfig.width = "640px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+    dialogRef.componentInstance.roots = this.roots;
+    dialogRef.componentInstance.clickedKweek = kweek;
     this.dialogRef.close();
+    dialogRef.afterClosed().subscribe(result => {
+      this.roots = [];
+      this.clickedKweek = null;
+    });
   }
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions

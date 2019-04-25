@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { KweeksService } from '../services/kweeks.service';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatIconModule,
   ],
   entryComponents: [
-    ReplyComponent
+    ReplyComponent,
+    LikesRekweeksListComponent
   ],
   exports: [
     KweekComponent,
