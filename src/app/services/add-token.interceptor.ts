@@ -14,7 +14,8 @@ export class AddTokenInterceptor implements HttpInterceptor {
     /** */
     formDataRequests=[
         environment.base+'user/profile_banner',
-        environment.base+'user/profile_picture'
+        environment.base+'user/profile_picture',
+        environment.base+'media/'
     ];
     /**
      * form data request
