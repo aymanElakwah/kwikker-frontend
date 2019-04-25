@@ -22,6 +22,8 @@ export class AccountComponent implements OnInit {
   newPassword:string="";
   /** to verify the new password (make sure it is the same) */
   verifyNewPassword:string="";
+  /** old password */
+  oldPassword: string = "";
 
   /**
    * empty constructor
@@ -44,7 +46,7 @@ export class AccountComponent implements OnInit {
   SaveChanges(){
     if(this.userName != this.oldUserName)
     {
-      this.account_service.updateUserName(this.userName).subscribe
+      this.account_service.updateUserName(this.userName, this.oldPassword).subscribe
       (response =>{
         this.res = response
         localStorage.setItem('TOKEN', response.token);
@@ -74,7 +76,7 @@ export class AccountComponent implements OnInit {
    * function ChangePassword to update the new password
    */
   ChangePassword(){
-    this.account_service.updatePassword(this.newPassword).subscribe(
+    this.account_service.updatePassword(this.newPassword, this.oldPassword).subscribe(
       response =>{
         this.newPassword = "";
         this.verifyNewPassword = "";
