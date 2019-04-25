@@ -10,13 +10,17 @@ import { Kweek } from '../model/kweek';
   templateUrl: './new-kweek.component.html',
   styleUrls: ['./new-kweek.component.css']
 })
-export class NewKweekComponent  {
+export class NewKweekComponent implements OnInit {
   kweekData:string="";
   selectedImage: File=null;
   imageUrl:any = null;
   res:string = null;
-  reply: boolean;
+  reply: boolean ;
   kweek:Kweek;
+  image_id:string = null;
+  username:string = "7amada";
+  screenname:string = "7amda ggamda";
+
   
 
   /**
@@ -27,7 +31,15 @@ export class NewKweekComponent  {
    */
 
   constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, 
-    private http: HttpClient, private newKweekService: DataService) {}
+    private http: HttpClient, private newKweekService: DataService) {
+    }
+
+    ngOnInit(): void {
+      if(this.reply == true){
+        this.username = this.kweek.user.username;
+        this.screenname = this.kweek.user.screen_name;
+      }
+    }
 
     /**
    * Function to close the dialog by a button 
@@ -52,11 +64,8 @@ export class NewKweekComponent  {
     console.log(event); 
     // read image as binary
     this.selectedImage = <File>event.target.files[0];
-    //another way to save the image
-    const fd = new FormData();
-    fd.append('image',this.selectedImage, this.selectedImage.name);
-    console.log(fd);
-    console.log(this.selectedImage);
+    console.log(this.kweek);
+
     
     // this.http.post('gs://testing-8daff.appspot.com/',fd)
     // .subscribe(response=>{
@@ -80,9 +89,22 @@ export class NewKweekComponent  {
 
     addKweek(){
       console.log(this.kweekData)
-      this.newKweekService.addNewKweek(this.kweekData).subscribe
+      if(this.selectedImage){
+        console.log("there is an image")
+      }
+      /** this.newKweekService.postMedia(this.selectedImage).subscribe
+      (Response=>{
+        this.image_id = Response;
+        console.log(this.image_id);
+      })*/
+      if(this.reply == true){
+        this.newKweekService.addNewKweek(this.kweekData, this.kweek.id).subscribe
+        (response => {this.res = response})
+      }
+      else{
+      this.newKweekService.addNewKweek(this.kweekData, null).subscribe
       (response => {this.res = response})
-
+    }
       console.log(this.res);
       this.thisDialogRef.close()
     }

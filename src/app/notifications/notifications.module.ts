@@ -8,6 +8,7 @@ import { NotificationsComponent } from './notifications.component';
 import { MentionslistComponent } from '../mentionslist/mentionslist.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
+import { KweeksModule } from '../kweeks/kweeks.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
   imports: [
     CommonModule,
     SharedModule,
+    KweeksModule,
     NgbModule.forRoot(),
     RouterModule.forChild([
       {path: 'notifications', component: NotificationsComponent,

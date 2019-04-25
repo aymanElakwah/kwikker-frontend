@@ -2,9 +2,10 @@
          <div class="card"  style="border-color:#e6ecf0">
               <div class="card-header "  id="notificatioCard" *ngFor="let n of notificatons_array" >
                   <div class="row" style="padding-left:4%">
-                    <span class="notificationPics">
-                        <img [src]='n.profie_pic_URL' class=" rounded-circle float-left notificationPics" >
-                    </span>
+                      <span class="notificationPics">
+                          <a [routerLink] = "['/profile',n.username]"><img [src]='n.profie_pic_URL'  class=" rounded-circle float-left notificationPics" ></a> 
+                        </span>
+    
                     <span class="userName">
                       <h6>{{n.screen_name}}<small>@{{n.username}}</small></h6>
                     </span>

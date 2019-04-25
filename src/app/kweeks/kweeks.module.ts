@@ -10,6 +10,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     ImgFallbackModule,
     OverlayModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   entryComponents: [
     ReplyComponent,

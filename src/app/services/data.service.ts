@@ -655,15 +655,16 @@ export class DataService {
       );
   }
   /**
-   * post request To add a new kweek
+   * post request To add a new kweek/reply as a new kweek
    * @param text {string} the kweek data
+   * @param reply_to {string} the id of kweek that was replyed to
    * @returns Request Response
    */
-  addNewKweek(text: string): Observable<any> {
+  addNewKweek(text: string, reply_to:string): Observable<any> {
     this.cacheService.invalidateUrl(this.base+'kweeks/timelines/profile');
     const obj = { text: String(), reply_to: String() };
     obj.text = text;
-    obj.reply_to = null;
+    obj.reply_to = reply_to;
 
     return this.http.post<any>(this.base + "kweeks/", obj).pipe(
       map(res => res),
@@ -786,4 +787,55 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+
+  /**
+   * post request To upload photo
+   * @param image_file {File} The Uploaded Image
+   * @returns Request Response (media id);
+   */
+  postMedia(image_file: File): Observable<string> {
+    const body = new FormData();
+    body.append('file', image_file, "Image.png");
+    
+    return this.http.post<string>(this.base + 'media/', body)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           );
+  }
+
+  /**
+   *get request to get user's email
+   * @returns user's email
+   */
+  getEmail(): Observable<string> {
+    return this.http
+      .get<string>(`${this.base}user/email`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getUserMentions(last_retrieved_kweek_id: string): Observable<any> {
+    const obj = { last_retrieved_kweek_id: String() };
+    obj.last_retrieved_kweek_id = last_retrieved_kweek_id;
+    const parametersSent = {
+      params: new HttpParams().set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+    };
+    if(last_retrieved_kweek_id === null){
+      return this.http.get<any>(this.base + "kweeks/timelines/mentions").pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
+  
+    }
+    else{
+    return this.http.get<any>(this.base + "kweeks/timelines/mentions",parametersSent).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
+  }
+  }
 }
+
+
+
+
