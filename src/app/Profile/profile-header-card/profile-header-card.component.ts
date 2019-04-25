@@ -3,6 +3,7 @@ import { User } from '../../model/user';
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ChatComponent } from 'src/app/chat/chat.component';
+import { ChatService } from 'src/app/chat/chat.service';
 
 /** 
  * This component takes User Info from main one and show it 
@@ -43,14 +44,19 @@ export class ProfileHeaderCardComponent implements OnInit {
      */
   openInboxDialog()
   {
+    this.ChatService.setAddressee(this.profileHeaderInfo);
+    this.ChatService.setSection(3);
     const dialogRef = this.dialog.open(ChatComponent);
+    
   }
  
   /**
    * Empty Constructor 
    * @param dialog Dialog Service which is used to open Pop up windows
+   * @param ChatService to send DM
    */
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+              private ChatService:ChatService) { }
 
   /**
    * Empty ngOnInit 
