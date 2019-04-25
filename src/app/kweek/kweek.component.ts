@@ -59,13 +59,16 @@ export class KweekComponent implements OnInit {
   ngOnInit() {
     if (
       this.route.snapshot.root.children[0].params["username"] ===
-        this.authorizedUser &&
+        this.authorizedUser && 
       (this.route.snapshot.parent.firstChild.routeConfig.path === "" ||
         this.route.snapshot.parent.firstChild.routeConfig.path === "kweeks")
     ) {
       this.callCommonFunc = false;
     }
-    const mainRoute = this.route.snapshot.parent.routeConfig.path;
+    let mainRoute;
+    if(this.route.snapshot.parent.routeConfig){
+     mainRoute = this.route.snapshot.parent.routeConfig.path;
+    }
     if (mainRoute === "profile/:username") {
       switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
         case "":
@@ -124,7 +127,9 @@ export class KweekComponent implements OnInit {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
-    } 
+    } else {
+      //add home kweeks timeline
+    }
 
     // mock service
     // this.kweekService.getKweeks().subscribe(lists => {
