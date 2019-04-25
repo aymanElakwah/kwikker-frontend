@@ -6,7 +6,7 @@
    </div>
    <app-nav-bar class="appNavBar"> </app-nav-bar>
    <!-- Page-Container: Center The Page while Zooming -->
-   <div [ngClass]="{'container-fluid':!isEditingMode, 'container-fluid-Editing':isEditingMode}">
+   <div style="margin-top:58px;" [ngClass]="{'container-fluid':!isEditingMode, 'container-fluid-Editing':isEditingMode}">
       <!-- The Page Is divided into 2 main Parts [Header, Body] -->
       <div class="page-container">
          <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
