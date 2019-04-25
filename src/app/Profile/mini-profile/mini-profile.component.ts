@@ -125,9 +125,6 @@ export class MiniProfileComponent implements OnInit {
    * and Based On It, Send the appropiate request
    */
   ngOnInit() {
-
-     console.log(this.route.snapshot.root.children[0].params['username']);
-
     if(this.route.snapshot.url[0].path == 'followers')
     {
       this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], null).subscribe
@@ -138,7 +135,11 @@ export class MiniProfileComponent implements OnInit {
       this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
     }
-
+    else 
+    {
+      this.miniProfileInfoService.searchUsers(this.route.snapshot.queryParams["filterBy"]).subscribe(
+        usersInfo => { this.miniCardProfileUsers = usersInfo;} );
+    }
     for (var i = 0; i<this.miniCardProfileUsers.length; i++) {
       this.miniCardProfileUsers[i].profile_image_url += "?dummy=" + Math.random();
       this.miniCardProfileUsers[i].profile_banner_url += "?dummy=" + Math.random();
