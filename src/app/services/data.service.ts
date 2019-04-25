@@ -645,15 +645,16 @@ export class DataService {
       );
   }
   /**
-   * post request To add a new kweek
+   * post request To add a new kweek/reply as a new kweek
    * @param text {string} the kweek data
+   * @param reply_to {string} the id of kweek that was replyed to
    * @returns Request Response
    */
-  addNewKweek(text: string): Observable<any> {
+  addNewKweek(text: string, reply_to:string): Observable<any> {
     this.cacheService.invalidateUrl(this.base+'kweeks/timelines/profile');
     const obj = { text: String(), reply_to: String() };
     obj.text = text;
-    obj.reply_to = null;
+    obj.reply_to = reply_to;
 
     return this.http.post<any>(this.base + "kweeks/", obj).pipe(
       map(res => res),
@@ -792,6 +793,17 @@ export class DataService {
                            catchError(this.handleError)
                            );
   }
+
+  /**
+   *get request to get user's email
+   * @returns user's email
+   */
+  getEmail(): Observable<string> {
+    return this.http
+      .get<string>(`${this.base}user/email`)
+      .pipe(catchError(this.handleError));
+  }
+
 }
 
 

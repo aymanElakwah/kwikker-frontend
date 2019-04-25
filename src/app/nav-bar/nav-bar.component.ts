@@ -58,7 +58,7 @@ export class NavBarComponent implements OnInit {
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: 'kweekBox'
     });
-  
+  dialogRef.componentInstance.reply = false;
   /**
    * Function for closing the dialog and displaying a msg 
    * 

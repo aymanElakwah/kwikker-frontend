@@ -12,11 +12,11 @@ export class AccountComponent implements OnInit {
   /** usernmae of current user */
   userName:string = localStorage.getItem('username');
   /** emial of the user  */
-  email:string = "blahblah@gmail.commm";
+  email:string;
   /** saving current username to cross refrence it with the new one */
-  oldUserName:string = this.userName
+  oldUserName:string = this.userName;
   /** saving current email to cross refrence it with the new one */
-  oldEmail:string = this.email; 
+  oldEmail:string;
   res:any;
   /** new password */
   newPassword:string="";
@@ -24,6 +24,7 @@ export class AccountComponent implements OnInit {
   verifyNewPassword:string="";
   /** old password */
   oldPassword: string = "";
+  emialResponseObject:any;
 
   /**
    * empty constructor
@@ -37,6 +38,13 @@ export class AccountComponent implements OnInit {
    * empty ngOnInit
    */
   ngOnInit() {
+    this.account_service.getEmail().subscribe
+    (res => {
+      this.emialResponseObject = res;
+      this.email = this.emialResponseObject.email;
+      this.oldEmail = this.email;
+      console.log(this.oldEmail);
+    })
     
   }
 
@@ -70,6 +78,7 @@ export class AccountComponent implements OnInit {
         }
       })
     }
+    this.ngOnInit();
   }
 
   /**

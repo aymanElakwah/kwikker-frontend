@@ -10,12 +10,12 @@ import { Kweek } from '../model/kweek';
   templateUrl: './new-kweek.component.html',
   styleUrls: ['./new-kweek.component.css']
 })
-export class NewKweekComponent  {
+export class NewKweekComponent implements OnInit {
   kweekData:string="";
   selectedImage: File=null;
   imageUrl:any = null;
   res:string = null;
-  reply: boolean = true;
+  reply: boolean ;
   kweek:Kweek;
   image_id:string = null;
   username:string = "7amada";
@@ -31,7 +31,15 @@ export class NewKweekComponent  {
    */
 
   constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, 
-    private http: HttpClient, private newKweekService: DataService) {}
+    private http: HttpClient, private newKweekService: DataService) {
+    }
+
+    ngOnInit(): void {
+      if(this.reply == true){
+        this.username = this.kweek.user.username;
+        this.screenname = this.kweek.user.screen_name;
+      }
+    }
 
     /**
    * Function to close the dialog by a button 
@@ -56,6 +64,7 @@ export class NewKweekComponent  {
     console.log(event); 
     // read image as binary
     this.selectedImage = <File>event.target.files[0];
+    console.log(this.kweek);
 
     
     // this.http.post('gs://testing-8daff.appspot.com/',fd)
@@ -83,14 +92,19 @@ export class NewKweekComponent  {
       if(this.selectedImage){
         console.log("there is an image")
       }
-      this.newKweekService.postMedia(this.selectedImage).subscribe
+      /** this.newKweekService.postMedia(this.selectedImage).subscribe
       (Response=>{
         this.image_id = Response;
         console.log(this.image_id);
-      })
-      this.newKweekService.addNewKweek(this.kweekData).subscribe
+      })*/
+      if(this.reply == true){
+        this.newKweekService.addNewKweek(this.kweekData, this.kweek.id).subscribe
+        (response => {this.res = response})
+      }
+      else{
+      this.newKweekService.addNewKweek(this.kweekData, null).subscribe
       (response => {this.res = response})
-
+    }
       console.log(this.res);
       this.thisDialogRef.close()
     }
