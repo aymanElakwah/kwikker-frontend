@@ -23,7 +23,6 @@ export class ChatComponent  {
 
    }
    ngOnInit(): void {
-    this.chatService.setSection(1);
     this.chatService.currentSection.subscribe(section => this.section = section);
    }
 
