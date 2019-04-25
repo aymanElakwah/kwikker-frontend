@@ -140,7 +140,7 @@ export class MainProfileComponent implements OnInit {
   removeProfileBanner(): void {
     this.profileUser.profile_banner_url = null;
     this.ShowMessage("No more header for you");
-    /* this.profileInfoService.removeBanner().subscribe(); */
+    this.profileInfoService.removeBanner().subscribe(); 
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
     console.log(this.defaultProfileBanner);
     console.log(this.profileUser.profile_banner_url);
