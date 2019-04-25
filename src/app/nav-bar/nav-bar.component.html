@@ -82,9 +82,9 @@
                                                 <form class="navbar-form searchBar">
                                                         <div class="form-group">
                                                                 <input class="form-control" (keydown)="newSearch($event)" #searchBar [(ngModel)]="filterBy" type="search" aria-label="Search" name="ngModel" placeholder="Search...">
-                                                                <div class="list-group  " [hidden]="!searchBar.value">
+                                                                <div class="list-group  " [hidden]="!searchBar.value" *ngFor="let user of users"  >
                                                                      
-                                                                <a class="list-group-item list-group-item-action" *ngFor="let user of users"  [routerLink]="['profile',user.username]">
+                                                                <a class="list-group-item list-group-item-action" [routerLink]="['profile',user.username]">
                                                                         {{user.username}}
                                                                 </a>
                                                                        
