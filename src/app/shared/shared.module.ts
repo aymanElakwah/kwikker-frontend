@@ -17,7 +17,7 @@ import { KweeksModule } from "../kweeks/kweeks.module";
 import { KweekComponent } from "../kweek/kweek.component";
 import { EditImagesComponent } from "../Profile/edit-images/edit-images.component";
 import { RouterModule } from "@angular/router";
-import { ReplyComponent } from '../profiles-list/likes-list/likes-list.component';
+import { ReplyComponent } from '../reply/reply.component';
 
 @NgModule({
   declarations: [NavBarComponent, TrendsComponent],
@@ -41,8 +41,8 @@ import { ReplyComponent } from '../profiles-list/likes-list/likes-list.component
     TrendsComponent,
     KweeksModule,
     KweekComponent,
-    TrendsComponent,
     ReplyComponent,
+    TrendsComponent,
     NewKweekComponent
   ]
 })

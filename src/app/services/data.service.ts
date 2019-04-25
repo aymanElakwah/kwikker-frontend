@@ -21,7 +21,10 @@ import { CacheService } from './cache.service';
   providedIn: "root"
 })
 export class DataService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91efa56fff35ccf470196fd35413a4f4e27fa92e
   /**
    * Backend server base
    */
@@ -45,6 +48,10 @@ export class DataService {
       : {};
     return this.http
       .get<User>(`${this.base}user/profile`, userNameSent);
+<<<<<<< HEAD
+=======
+      ``
+>>>>>>> 91efa56fff35ccf470196fd35413a4f4e27fa92e
   }
 
   /**
@@ -379,7 +386,10 @@ export class DataService {
    * @param userName {string} The userName that will be followed
    * @returns Request Response
    */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91efa56fff35ccf470196fd35413a4f4e27fa92e
   followUser(userName: string): Observable <any> {
     this.cacheService.invalidateUrl(this.base+'interactions/following');
     const paramsSent = JSON.stringify({username:userName});
@@ -752,7 +762,10 @@ export class DataService {
    *@param username(string) the new username
    * @returns response
    */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91efa56fff35ccf470196fd35413a4f4e27fa92e
   updateUserName(userName:string, password:string): Observable<any>{
     const obj = { username: String(), password: String() };
     obj.username = userName;
