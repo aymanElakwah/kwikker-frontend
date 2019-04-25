@@ -68,7 +68,7 @@ export class CanDeactivateTeam implements CanActivate {
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent },
-  {path: 'home', component: HomeComponent,canActivate: [CanActivateTeam] },
+  {path: 'home', component: HomeComponent },
   {path: 'signup', component: SignUpComponent, canActivate: [CanDeactivateTeam]},
   {path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateTeam]},
   {path: 'login', component: LogInComponent,canActivate: [CanDeactivateTeam] },
