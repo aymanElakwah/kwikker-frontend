@@ -15,9 +15,12 @@ export class NewKweekComponent  {
   selectedImage: File=null;
   imageUrl:any = null;
   res:string = null;
-  reply: boolean;
+  reply: boolean = true;
   kweek:Kweek;
   image_id:string = null;
+  username:string = "7amada";
+  screenname:string = "7amda ggamda";
+
   
 
   /**
@@ -53,11 +56,7 @@ export class NewKweekComponent  {
     console.log(event); 
     // read image as binary
     this.selectedImage = <File>event.target.files[0];
-    //another way to save the image
-    const fd = new FormData();
-    fd.append('image',this.selectedImage, this.selectedImage.name);
-    console.log(fd);
-    console.log(this.selectedImage);
+
     
     // this.http.post('gs://testing-8daff.appspot.com/',fd)
     // .subscribe(response=>{
