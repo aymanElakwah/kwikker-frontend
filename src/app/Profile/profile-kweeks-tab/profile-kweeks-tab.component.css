@@ -12,13 +12,9 @@
 	margin: 0 0;
 }
 
- @media (max-width: 1270px) {
-	/*  .my-sidebar {
-		max-width: 1200px;
-		margin-left: 20px;
-	}  */
+ @media (max-width: 1400px) {
 	/*  Trends Bar will disappear From right In small Devices */
- 	#Right-Profile-Trends {
+ 	.Trend {
 		display: none !important;
 	} 
 } 
@@ -34,5 +30,5 @@
 
 .col-fixed
 {
-	width: 550px;
+	width: 640px;
 }

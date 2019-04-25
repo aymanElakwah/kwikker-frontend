@@ -22,24 +22,7 @@ export class MainProfileComponent implements OnInit {
   /**
    * All Info for the profile user
    * */
-  profileUser: User = {
-    username: "Ahmed_Mahmoud14",
-    screen_name: "Ahmed Mahmoud",
-    bio:
-      "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
-    birth_date: new Date(),
-    created_at: new Date(),
-    profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
-    profile_banner_url: null,
-    following: false,
-    follows_you: false,
-    followers_count: 0,
-    following_count: 0,
-    kweeks_count: 0,
-    likes_count: 0,
-    blocked: false,
-    muted: false
-};
+  profileUser: User;
 
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
@@ -81,7 +64,7 @@ export class MainProfileComponent implements OnInit {
       var S:string;
       this.profileInfoService.updateProfilePicture(image as File).subscribe 
       ( serInfo => { S = serInfo; }  );
-      /* this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); */
+       this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
       
   
     });
@@ -93,7 +76,10 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isAuthorisedUser(): boolean {
-    return (this.profileUser.username == this.authorizedUser);
+    if(this.profileUser != null )
+    {
+       return (this.profileUser.username == this.authorizedUser);
+    }
   }
 
   /**
@@ -333,7 +319,7 @@ export class MainProfileComponent implements OnInit {
         }
       },
       err => {
-         this.router.navigateByUrl("/error");  
+         /* this.router.navigateByUrl("/error");   */
       }
     );
   }
