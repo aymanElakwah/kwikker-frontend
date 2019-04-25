@@ -35,9 +35,11 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.userName =  localStorage.getItem('username');
+    console.log(this.userName);
     if (isNull(this.userName))
     {
-      this.userName = "User"; 
+      
+      this.userName = "username"; 
     }
     this.nav =  document.querySelector('.myNavBar');
     this.toShow = false;
@@ -98,6 +100,10 @@ export class NavBarComponent implements OnInit {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
     this.router.navigate(["/"]);
+    //For testing purposes
+    // localStorage.setItem("TOKEN","123");
+    // localStorage.setItem("username","ev");
+    // this.router.navigate(["home"]);
   }
   /**
    * after each char send new request or navigate

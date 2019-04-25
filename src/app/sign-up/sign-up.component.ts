@@ -77,6 +77,7 @@ public previousOne (){
    * @returns void
    */
   public secondStep() {
+    
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
