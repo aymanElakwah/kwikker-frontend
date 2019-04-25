@@ -292,13 +292,13 @@ export class DataService {
    * get first 20 users that contain filter by substring
    * @param filterBy used to filter search
    */
-  searchUsers(filterBy: string): Observable<MiniUser[]> {
+  searchUsers(filterBy: string): Observable<User[]> {
     const options = filterBy
       ? {
           params: new HttpParams().set("search_text", filterBy)
         }
       : {};
-    return this.http.get<MiniUser[]>(`${this.base}search/users`, options);
+    return this.http.get<User[]>(`${this.base}search/users`, options);
   }
   /**
    * send messages and photos in chat
@@ -307,8 +307,8 @@ export class DataService {
   createMessage(message) {
     return this.http.post(`${this.base}direct_message/`, message);
   }
-  getRecentConversations(): Observable<MiniUser[]> {
-    return this.http.get<MiniUser[]>(
+  getRecentConversations(): Observable<User[]> {
+    return this.http.get<User[]>(
       `${this.base}direct_message/recent_conversationers`
     );
   }
