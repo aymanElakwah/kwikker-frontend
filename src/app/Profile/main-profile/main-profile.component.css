@@ -4,6 +4,7 @@
 	margin: 0 0;
 	padding: 0 0;
 	overflow-x: hidden;
+	background-color: #e6ecf0;
 }
 
 .App-Container {
@@ -59,10 +60,6 @@
 	overflow: visible;
 }
 
-.appNavBar
-{
-	z-index: 9999999 !important;
-}
 
 .Content-Editing {
 	-webkit-transition: 0.5s;
@@ -663,36 +660,35 @@ a {
 
 /* Media Queries */
 
-@media (max-width: 1350px) {
-	#Right-Profile-Trends {
-		display: none !important;
+ @media (max-width: 1270px) { 
+    .App-Container
+    {
+		max-width:1000px;
+		margin: 0 auto;
 	}
-	#Left-Profile-Trends {
-		display: block;
+	#Taps 
+	{
+		margin: 0 auto;
 	}
+    #Left-Profile-Trends
+    {
+        display: inline;
+    }
+ }
+
+ @media (min-width: 1200px) { 
+
+    #Right-Profile-Trends 
+    {
+        display: inline !important;
+     }
+
+    #Left-Profile-Trends
+    {
+        display: none;
+    }
 }
-
-@media (max-width: 1200px) {
-	#Right-Profile-Trends {
-		display: inline !important;
-	}
-	#Left-Profile-Trends {
-		display: block !important;
-	}
-}
-
-@media (max-width: 400px) {
-	#Right-Profile-Trends {
-		display: inline !important;
-	}
-	#Left-Profile-Trends {
-		display: none;
-	}
-}
-
-
-
-
+ 
 
 
 

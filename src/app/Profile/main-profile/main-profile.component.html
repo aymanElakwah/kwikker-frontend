@@ -161,12 +161,12 @@
                </div>
             </div>
          </div>
-         <div class="App-Container">
+         <div class="App-Container ">
             <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
             <div class="row justify-content-center"
                [ngClass]="{'Content':!isEditingMode, 'Content-Editing':isEditingMode}">
                <!-- Header Card & Trends on the left side of the page -->
-               <div class="col-3 left-side">
+               <div class="col-xlg-3 col-lg-4 left-side">
                   <!--  HeaderCard -->
                   <div class="row">
                      <app-profile-header-card *ngIf="!isEditingMode" class='Header-Card'
@@ -183,14 +183,14 @@
                   </div>
                </div>
                <!--  Kweeks OR MiniUsers Tab -->
-               <div class="col-9" [ngClass]="{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
+               <div class="col-xlg-9  col-lg-8"  [ngClass]="{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
                   <router-outlet *ngIf='!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'>
                   </router-outlet>
                   <div class="BlockMsg" *ngIf="profileUser?.blocked && !semiBlockedMode">
                      <h2 class="BlockMsgHeader"> You blocked @<b
                            style="font-weight: normal;">{{profileUser?.username}}</b> </h2>
                      <p class="BlockMsgBody"> Are you sure you want to view these Tweets? Viewing Tweets won't unblock
-                        <br>@{{profileUser?.user_name}} <br> </p>
+                        <br>@{{profileUser?.username}} <br> </p>
                      <button type="button" class="btn btn-outline-primary semiBlocked-button"
                         (click)='togglesemiBlockedMode()'>
                         <span> Yes, view profile </span>
