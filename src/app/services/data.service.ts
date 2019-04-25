@@ -16,6 +16,7 @@ import { MiniUser } from "../model/mini-user";
 import { BlockedMutedUser } from '../model/bloked-muted-users';
 import { $ } from 'protractor';
 import { CacheService } from './cache.service';
+import { Message } from '../model/message';
 
 @Injectable({
   providedIn: "root"
@@ -317,6 +318,22 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getDirectMessages(username:string):Observable<Message[]>{
+    const parametersSent = username
+    ? {
+        params: new HttpParams().set(
+          "username",
+          username
+        )
+      }
+    : {};
+  return this.http
+    .get<Message[]>(
+      `${this.base}direct_message/`,
+      parametersSent
+    )
+    .pipe(catchError(this.handleError));
+  }
   /**
    *
    * to get request to get the latest notification
