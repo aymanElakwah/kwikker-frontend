@@ -1,5 +1,5 @@
 <!-- multistep form -->
-<form id="msform" #submitForm ="ngForm" name="submit-form" (submit)="Submit(submitForm)" ngmodel>
+<form id="msform" #submitForm ="ngForm" name="submit-form"  ngmodel>
  
     <!-- progressbar -->
     <ul id="progressbar">
@@ -17,11 +17,11 @@
       
       <h2 class="fs-title">Create your Email</h2>
       <h3 class="fs-subtitle">This is step 1</h3>
-      <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName" maxlength="50" pattern="[a-z0-9._%+-]{2,50}" required/>
+      <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName" maxlength="50" pattern="[A-Za-z0-9._%+-]{2,50}" required/>
           <div  *ngIf="username.invalid && username.touched" class="msg alert alert-danger " style="width: 95%" role="alert">
             <p class="alertMsg">Username must be entered for registeration, it should contain more than one character and has no spaces.</p>
           </div>
-      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
             <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
               <p class="alertMsg">Email is required for Registeration.</p>
             </div>    
