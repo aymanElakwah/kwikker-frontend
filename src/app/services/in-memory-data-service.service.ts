@@ -451,6 +451,228 @@
 //     },
 // ];
 
+/* const Followings = [
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+];
+
+const Followers = [
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+    {
+        username: "Ahmed_Mahmoud14",
+        screen_name: "Ahmed Mahmoud",
+        bio:
+          "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
+        birth_date: new Date(),
+        created_at: new Date(),
+        profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
+        profile_banner_url: null,
+        following: false,
+        follows_you: false,
+        followers_count: 0,
+        following_count: 0,
+        kweeks_count: 0,
+        likes_count: 0,
+        blocked: false,
+        muted: false
+    },
+]; */
+
 // const LIKED = [ {
 //   'id': '1',
 //   'created_at': '2011-04-11T10:20:30Z',

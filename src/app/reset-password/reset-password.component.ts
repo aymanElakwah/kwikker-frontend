@@ -12,6 +12,9 @@ import { NgForm } from '@angular/forms';
 export class ResetPasswordComponent implements OnInit {
   public confirmCode: string;
   public msg: any;
+  public pass: string;
+  public confirm_pass: string;
+  public mail: string;
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {

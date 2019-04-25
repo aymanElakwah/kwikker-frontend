@@ -4,7 +4,7 @@ import { SearchComponent } from './search.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { KweekComponent } from '../kweek/kweek.component';
-import { ProfilesListComponent } from '../profiles-list/profiles-list.component';
+import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 @NgModule({
   declarations: [SearchComponent],
   imports: [
@@ -15,7 +15,7 @@ import { ProfilesListComponent } from '../profiles-list/profiles-list.component'
     children: [
       {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
       {path: 'kweeks', component: KweekComponent },
-      {path: 'people', component: ProfilesListComponent}
+      {path: 'people', component: MiniProfileComponent}
     ]}
     ])
   ]

@@ -15,6 +15,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { CanActivateTeam } from '../app-routing.module';
 @NgModule({
   declarations: [
   ChatComponent,
@@ -24,11 +26,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: 'chat' , component: ChatComponent, children: [
-      {path: 'inbox', component: InboxComponent, outlet: 'body'},
-      {path: 'new', component: InboxListComponent, outlet: 'body'},
-      {path: 'dm', component: DirectMessagesComponent, outlet: 'body'}
-    ]} ]),
+      {path: 'chat' , component: ChatComponent, canActivate: [CanActivateTeam]}]),
     ReactiveFormsModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -36,7 +34,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     InfiniteScrollModule
   ],
   providers: [
-    ChatService
+    ChatService,
+    CanActivateTeam
   ]
 })
 export class ChatModule { }

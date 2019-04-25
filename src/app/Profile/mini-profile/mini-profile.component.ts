@@ -16,169 +16,10 @@ import { DataService } from 'src/app/services/data.service';
 export class MiniProfileComponent implements OnInit {
 
   /* Array of MiniUsers To get some of the following and followers Info */
-  public miniCardProfileUsers: User[] =
-  [
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      following: true,
-      follows_you: true,
-      blocked: false,
-      muted: false,
-      followers_count: 0,
-      following_count: 0,
-      kweeks_count: 0,
-      likes_count: 0,
-      created_at: new Date,
-      birth_date: new Date,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      following: true,
-      follows_you: true,
-      blocked: false,
-      muted: false,
-      followers_count: 0,
-      following_count: 0,
-      kweeks_count: 0,
-      likes_count: 0,
-      created_at: new Date,
-      birth_date: new Date,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-      {
-        username: 'Ahmed Mahmoud',
-        screen_name: 'Ahmed_Mahmoud14',
-        profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        profile_banner_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-        following: true,
-        follows_you: true,
-        blocked: false,
-        muted: false,
-        followers_count: 0,
-        following_count: 0,
-        kweeks_count: 0,
-        likes_count: 0,
-        created_at: new Date,
-        birth_date: new Date,
-        bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-      },
-  ];
+  public miniCardProfileUsers: User[] = [];
 
    /* Array of MuteModes for each MiniUsers */
-  public muteModes: boolean[] =
-  [
-    false,false,false,false,false,false,false,false,false,false,false,false,false,false 
-  ];
+  public muteModes: boolean[] = [];
   
           /* route children name which based on it, 
   The right request will be sent  [Followers OR Followings] */
@@ -203,11 +44,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].following )
     {
-      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     this.miniCardProfileUsers[index].following = !this.miniCardProfileUsers[index].following;
   }
@@ -222,11 +63,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].muted )
     {
-      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
@@ -244,29 +85,39 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].blocked )
     {
-      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
              
-
+/**
+   * Scroll Event Which is used to get more data for the followers and the followings
+   * while the user scrolling 
+   */
   onScroll() {
-    console.log(this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username);
-    if(this.route.snapshot.url[0].path == 'followers')
-    {
-      this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ).subscribe
-      ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
-    }
-    else if (this.route.snapshot.url[0].path == 'following')
-    {
-      this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username).subscribe
-      ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
-    }
+   if(this.miniCardProfileUsers.length != 0)
+   {
+      if(this.route.snapshot.url[0].path == 'followers')
+      {
+        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+      }
+      else if (this.route.snapshot.url[0].path == 'following')
+      {
+        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+      }
+      for (var i = 0; i<this.miniCardProfileUsers.length; i++) {
+        this.miniCardProfileUsers[i].profile_image_url += "?dummy=" + Math.random();
+        this.miniCardProfileUsers[i].profile_banner_url += "?dummy=" + Math.random();
+        this.muteModes.push(false);
+     }
+  }
 }
 
    /**
@@ -274,9 +125,6 @@ export class MiniProfileComponent implements OnInit {
    * and Based On It, Send the appropiate request
    */
   ngOnInit() {
-
-     console.log(this.route.snapshot.root.children[0].params['username']);
-
     if(this.route.snapshot.url[0].path == 'followers')
     {
       this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], null).subscribe
@@ -287,6 +135,16 @@ export class MiniProfileComponent implements OnInit {
       this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
     }
+    else 
+    {
+      this.miniProfileInfoService.searchUsers(this.route.snapshot.queryParams["filterBy"]).subscribe(
+        usersInfo => { this.miniCardProfileUsers = usersInfo;} );
+    }
+    for (var i = 0; i<this.miniCardProfileUsers.length; i++) {
+      this.miniCardProfileUsers[i].profile_image_url += "?dummy=" + Math.random();
+      this.miniCardProfileUsers[i].profile_banner_url += "?dummy=" + Math.random();
+      this.muteModes.push(false);
+   }
   }
 
 }

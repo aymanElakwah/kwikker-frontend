@@ -17,3 +17,6 @@ body{
     background-color: #e6ecf0;
 }
 
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px;
+}

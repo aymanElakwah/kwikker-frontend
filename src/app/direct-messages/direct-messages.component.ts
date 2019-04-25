@@ -9,6 +9,8 @@ import { MiniUser } from '../model/mini-user';
 import { DataService } from '../services/data.service';
 import {Message} from '../model/message';
 import { BehaviorSubject } from 'rxjs';
+import { MatDialogRef } from '@angular/material';
+import { ChatComponent } from '../chat/chat.component';
 @Component({
   selector: 'app-direct-messages',
   templateUrl: './direct-messages.component.html',
@@ -46,7 +48,8 @@ export class DirectMessagesComponent implements OnInit {
   constructor(private chatService: ChatService,
               private fb: FormBuilder,
               private data: DataService,
-              private socket:DirectMessagesService) {
+              private socket:DirectMessagesService,
+              public DialogRef: MatDialogRef<ChatComponent>) {
                 this.socket.ReciveMessage().subscribe(list => {
                   this.messageList.push(list);
                 });
@@ -104,5 +107,14 @@ export class DirectMessagesComponent implements OnInit {
     message.media_url = '' ;
     this.data.createMessage(message).subscribe();
     this.myForm.reset();
+  }
+  toInbox() {
+    this.chatService.setSection(1);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

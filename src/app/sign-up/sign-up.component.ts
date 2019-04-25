@@ -2,9 +2,7 @@ import { Component, OnInit ,      Directive, ElementRef, HostListener, Input } f
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
-import { NgForm, Form } from '@angular/forms';
-
-// npm install --save @angular/material @angular/animations @angular/cdk
+import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up' ,
@@ -22,8 +20,15 @@ public cool: any;
 public errorOccured: any;
 public email: string;
 public counter: number;
+public userName: string;
+public mail: string;
+public pass: string;
+public confirm_pass: string;
+public screenName: string;
+public birthdate: string;
+
 constructor(private data: DataService , private router: Router) { 
-   
+  
 }
 
 
@@ -40,7 +45,7 @@ maxDate = new Date(2012, 0, 1);
 ngOnInit() {
   if(!isNull(localStorage.getItem('TOKEN')))
     {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     }
     else 
     {this.router.navigate(['signup']);}

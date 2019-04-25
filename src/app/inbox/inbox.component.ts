@@ -8,6 +8,8 @@ import { DataService } from '../services/data.service';
 import { Conversation } from '../model/inbox';
 import { BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash'; 
+import { MatDialogRef } from '@angular/material';
+import { ChatComponent } from '../chat/chat.component';
 /**
  * latest conversations
  */
@@ -49,7 +51,7 @@ export class InboxComponent implements OnInit {
    */
   constructor(private data: DataService,
               private chatService: ChatService,
-              private router: Router) { }
+              public DialogRef: MatDialogRef<ChatComponent>) { }
   /**
    * get all conversations
    */
@@ -62,7 +64,7 @@ export class InboxComponent implements OnInit {
    */
   toDirectMessage(selected: Conversation): void {
     this.chatService.setAddressee(selected.user);
-    this.router.navigate(['/chat/', {outlets : {body: ['dm']} }]);
+    this.chatService.setSection(3);
   }
   /**
    * add prefix before recent last messages
@@ -103,8 +105,17 @@ export class InboxComponent implements OnInit {
                 this.finished = true;
               }
     
-              this.conversations2.next(_.contact(currentConversation , newConversation)) ;
+              this.conversations2.next(_.concat(currentConversation , newConversation)) ;
           }
      );
+  }
+  composeMsg(){
+    this.chatService.setSection(2);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

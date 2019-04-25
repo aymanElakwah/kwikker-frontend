@@ -4,7 +4,7 @@ import {HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // interceptor
 import {HttpClientModule} from '@angular/common/http';
@@ -32,6 +32,7 @@ import { confirmPassword } from './reset-password/reset-password-confirm.compone
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -45,7 +46,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     ErrorPageComponent,
     confirmCode,
     ResetPasswordComponent,
-    confirmPassword
+    confirmPassword,
+    WelcomeComponent
     ],
   imports: [
     SocketIoModule.forRoot(config),
@@ -61,15 +63,17 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     // HttpClientInMemoryWebApiModule.forRoot(
     // InMemoryDataService,
     // ),
-    FormsModule,
+   
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
     MaterialModule,
+    FormsModule,
     LyThemeModule.setTheme('minima-light'),
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              // {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
+               {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
                { provide: LY_THEME, useClass: MinimaLight, multi: true } 
             ],
   bootstrap: [AppComponent]
