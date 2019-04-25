@@ -9,12 +9,12 @@
 <div id="filters">
   <ul id="second">
     <li>
-      <a routerLinkActive="active" [routerLink]="['kweeks']" [queryParams]= "{ filterBy:search } ">
+      <a routerLinkActive="active" [routerLink]="['kweeks']" [queryParams]= "{ filterBy:search ,src:isHashed,ID :hashId } ">
         latest
         </a>
     </li>
     <li>
-      <a routerLinkActive="active" [routerLink]="['people']" [queryParams]= "{ filterBy:search }">
+      <a routerLinkActive="active" [routerLink]="['people']" [queryParams]= "{ filterBy:search ,src:isHashed,ID:hashId }">
         people
         </a>
     </li>

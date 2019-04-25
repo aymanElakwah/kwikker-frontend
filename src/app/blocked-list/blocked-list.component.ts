@@ -21,7 +21,7 @@ export class BlockedListComponent implements OnInit {
    * initialize the blocked users array via get request
    */
   ngOnInit() {
-    this.blockedAccounts_service.getMutedAccounts().subscribe(
+    this.blockedAccounts_service.getBlockedAccounts().subscribe(
       list=>{this.blocked_accounts = list;}
     )
     console.log("testing");  

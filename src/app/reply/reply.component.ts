@@ -11,6 +11,8 @@ import {
 import { FormControl } from "@angular/forms";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
+import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -77,12 +79,39 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
+   * close popup when another nested popup appear and open the new popup
+   * @param kweek
+   * No @returns
+   */
+  likersDialog(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "640px";
+    const dialogRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
+    dialogRef.componentInstance.clickedKweek = this.clickedKweek;
+    dialogRef.componentInstance.likers = true;
+    this.dialogRef.close();
+  }
+
+  /**
+   * close popup when another nested popup appear and open the new popup
+   * @param kweek
+   * No @returns
+   */
+  rekweekersDialog(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    const dialogRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
+    dialogRef.componentInstance.clickedKweek = this.clickedKweek;
+    dialogRef.componentInstance.likers = false;
+    this.dialogRef.close();
+  }
+  /**
    * calling function to like kweek from service which has the common replies and kweeks functions
    * @param kweek
    * No @returns
    */
   like(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.like(kweek);
       this.busyRequest = false;
@@ -95,7 +124,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   unlike(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.unlike(kweek);
       this.busyRequest = false;
@@ -108,7 +137,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   rekweek(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.rekweek(kweek);
       this.busyRequest = false;
@@ -158,4 +187,13 @@ export class ReplyComponent implements OnInit {
       });
     }
   }
+
+  reply(kweek: Kweek): void {
+    const dialogRef = this.dialog.open(NewKweekComponent, {
+      panelClass: 'kweekBox'
+    });
+    dialogRef.componentInstance.kweek = kweek;
+    dialogRef.componentInstance.reply = true;
+  }
+
 }

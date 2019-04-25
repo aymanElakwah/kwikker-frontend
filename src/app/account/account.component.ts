@@ -12,16 +12,19 @@ export class AccountComponent implements OnInit {
   /** usernmae of current user */
   userName:string = localStorage.getItem('username');
   /** emial of the user  */
-  email:string = "blahblah@gmail.commm";
+  email:string;
   /** saving current username to cross refrence it with the new one */
-  oldUserName:string = this.userName
+  oldUserName:string = this.userName;
   /** saving current email to cross refrence it with the new one */
-  oldEmail:string = this.email; 
+  oldEmail:string;
   res:any;
   /** new password */
   newPassword:string="";
   /** to verify the new password (make sure it is the same) */
   verifyNewPassword:string="";
+  /** old password */
+  oldPassword: string = "";
+  emialResponseObject:any;
 
   /**
    * empty constructor
@@ -35,6 +38,13 @@ export class AccountComponent implements OnInit {
    * empty ngOnInit
    */
   ngOnInit() {
+    this.account_service.getEmail().subscribe
+    (res => {
+      this.emialResponseObject = res;
+      this.email = this.emialResponseObject.email;
+      this.oldEmail = this.email;
+      console.log(this.oldEmail);
+    })
     
   }
 
@@ -44,7 +54,7 @@ export class AccountComponent implements OnInit {
   SaveChanges(){
     if(this.userName != this.oldUserName)
     {
-      this.account_service.updateUserName(this.userName).subscribe
+      this.account_service.updateUserName(this.userName, this.oldPassword).subscribe
       (response =>{
         this.res = response
         localStorage.setItem('TOKEN', response.token);
@@ -68,13 +78,14 @@ export class AccountComponent implements OnInit {
         }
       })
     }
+    this.ngOnInit();
   }
 
   /**
    * function ChangePassword to update the new password
    */
   ChangePassword(){
-    this.account_service.updatePassword(this.newPassword).subscribe(
+    this.account_service.updatePassword(this.newPassword, this.oldPassword).subscribe(
       response =>{
         this.newPassword = "";
         this.verifyNewPassword = "";

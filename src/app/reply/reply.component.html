@@ -59,7 +59,7 @@
             <div class="container-fluid" style="margin-top:12px;">
               <div class="row">
                 <div class="col-2">
-                  <span class="reply icon-pointer">
+                  <span class="reply icon-pointer" (click)="reply(root)">
                     <span
                       matTooltip="Reply"
                       matTooltipClass="tooltip-style"
@@ -225,7 +225,7 @@
           <div class="container-fluid" style="margin-top:12px;">
             <div class="row">
               <div class="col-2">
-                <span class="reply icon-pointer">
+                <span class="reply icon-pointer" (click)="reply(clickedKweek)">
                   <span
                     matTooltip="Reply"
                     matTooltipClass="tooltip-style"
@@ -395,7 +395,7 @@
             <div class="container-fluid" style="margin-top:12px;">
               <div class="row">
                 <div class="col-2">
-                  <span class="reply">
+                  <span class="reply" (click)="reply(reply)">
                     <span
                       matTooltip="Reply"
                       matTooltipClass="tooltip-style"

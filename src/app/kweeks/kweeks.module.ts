@@ -7,11 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { KweeksService } from '../services/kweeks.service';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     KweekComponent,
-    ReplyComponent
+    ReplyComponent,
+    NewKweekComponent,
+    LikesRekweeksListComponent
   ],
   imports: [
     CommonModule,
@@ -21,13 +27,19 @@ import { OverlayModule } from '@angular/cdk/overlay';
     ImgFallbackModule,
     OverlayModule,
     MatIconModule,
+    FormsModule,
+    RouterModule
   ],
   entryComponents: [
-    ReplyComponent
+    ReplyComponent,
+    LikesRekweeksListComponent,
+    NewKweekComponent,
+    LikesRekweeksListComponent
   ],
   exports: [
     KweekComponent,
-    ReplyComponent
+    ReplyComponent,
+    NewKweekComponent
   ],
   providers: [
     KweeksService

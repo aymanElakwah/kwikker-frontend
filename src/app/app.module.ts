@@ -33,6 +33,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { KweeksModule } from './kweeks/kweeks.module';
 
 
 
@@ -63,7 +64,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     // HttpClientInMemoryWebApiModule.forRoot(
     // InMemoryDataService,
     // ),
-   
+    KweeksModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,

@@ -3,7 +3,11 @@
 <div class="modal-header">
     
     <div class="col-md-11" style="padding:0">
-    <h2 md-dialog-title class="modal-title" style="padding-left:37%">Compose new Kweek</h2></div>
+    <h2 md-dialog-title class="modal-title" *ngIf="!reply" 
+    style="padding-left: 28%">Compose new Kweek</h2>
+    <h2 md-dialog-title class="modal-title" *ngIf="reply" 
+    style="padding-left: 28%">Reply to {{screenname}}</h2>
+  </div>
     <div class="col-md-1" style="padding:0">
     <div class="clearfix"   >
         <button type="button" class="close" (click)="onClose()">&times;</button>
@@ -20,6 +24,7 @@
       <div class="col-md-11"style="padding:0">
           <div class="tweet-box-content">
               <div class="tweet-content">
+                  <a [routerLink] = "['/profile',username]" *ngIf="reply">@{{username}}</a>
                   <div class="form-group">
                       <textarea class="form-control" rows="5"cols="90" 
                       id="kweek" name="kweekData" [(ngModel)]="kweekData"></textarea>

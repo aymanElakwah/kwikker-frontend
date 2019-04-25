@@ -12,6 +12,7 @@ import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -26,7 +27,7 @@ export class KweekComponent implements OnInit {
   hideDelay = new FormControl(50);
   functionToCall: String = "";
   kweeks: Kweek[] = [];
-
+  mentionsResponse:any;
   /* route children name which based on it, The right request will be sent */
   public routeChildName: string;
 
@@ -58,13 +59,16 @@ export class KweekComponent implements OnInit {
   ngOnInit() {
     if (
       this.route.snapshot.root.children[0].params["username"] ===
-        this.authorizedUser &&
+        this.authorizedUser && 
       (this.route.snapshot.parent.firstChild.routeConfig.path === "" ||
         this.route.snapshot.parent.firstChild.routeConfig.path === "kweeks")
     ) {
       this.callCommonFunc = false;
     }
-    const mainRoute = this.route.snapshot.parent.routeConfig.path;
+    let mainRoute;
+    if(this.route.snapshot.parent.routeConfig){
+     mainRoute = this.route.snapshot.parent.routeConfig.path;
+    }
     if (mainRoute === "profile/:username") {
       switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
         case "":
@@ -110,14 +114,34 @@ export class KweekComponent implements OnInit {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
-    } else if (mainRoute === "search") {
-      const filterBy: string = this.route.snapshot.queryParamMap.get(
-        "filterBy"
-      );
+    } else if (mainRoute === "search" && this.route.snapshot.queryParamMap.get("ID") != undefined) {
+      const filterBy: string = this.route.snapshot.queryParamMap.get("filterBy");
+      const ID:string = this.route.snapshot.queryParamMap.get("ID");
+      this.kweekService.getTrendsKweeks(ID).subscribe(trendsKweeks => {
+        this.kweeks = trendsKweeks;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+    } else if (mainRoute === "search" ) {
+      const filterBy: string = this.route.snapshot.queryParamMap.get("filterBy");
       this.kweekService.searchKweeks(filterBy).subscribe(searchKweeks => {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
+    } else if (mainRoute === "notifications") {
+      
+      console.log("mentions");
+      this.kweekService.getUserMentions(null).subscribe(mentions => {
+        this.mentionsResponse = mentions
+        this.kweeks = this.mentionsResponse.replies_and_mentions;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+    }
+    else{
+      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+        this.kweeks = homeKweeks;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+
     }
 
     // mock service
@@ -381,4 +405,13 @@ export class KweekComponent implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  reply(kweek: Kweek): void {
+    const dialogRef = this.dialog.open(NewKweekComponent, {
+      panelClass: 'kweekBox'
+    });
+    dialogRef.componentInstance.kweek = kweek;
+    dialogRef.componentInstance.reply = true;
+  }
+  
 }
