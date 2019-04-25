@@ -118,7 +118,7 @@ export class KweeksService {
                 str +=
                   hashtagStartTagOpen +
                   "/search/people?filterBy=" +
-                  sliceStr.slice(1,sliceStr.length) +
+                  sliceStr +
                   "&src=hash" +
                   startTagClose +
                   sliceStr +
