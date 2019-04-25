@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TitleService } from '../services/title.service';
 import { MiniUser } from '../model/mini-user';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ChatComponent } from '../chat/chat.component';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,10 +20,10 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 })
 export class NavBarComponent implements OnInit {
   public userName: string;
-  users:MiniUser[];
- filterBy:string;
-
-
+  users:User[];
+  filterBy:string;
+  public nav: any;
+  public toShow: boolean;
 
   constructor(private dialog: MatDialog,
               private data: DataService, 
@@ -36,8 +38,12 @@ export class NavBarComponent implements OnInit {
     this.userName =  localStorage.getItem('username');
     if (isNull(this.userName))
     {
-      this.userName = "user"; 
+      this.userName = "User"; 
     }
+    this.nav =  document.querySelector('.myNavBar');
+    this.toShow = false;
+   
+    
   }
 
   /**
@@ -69,10 +75,7 @@ export class NavBarComponent implements OnInit {
 
   openInboxComponent(){
     console.log("working")
-    const dialogRef = this.dialog.open(InboxComponent, {
-      height: '600px',
-      width: '1000px',
-    });
+    const dialogRef = this.dialog.open(ChatComponent,  { panelClass: 'custom-dialog-container' });
   
   /**
    * Function for closing the dialog and displaying a msg 
@@ -102,13 +105,28 @@ export class NavBarComponent implements OnInit {
    */
   newSearch(event) {
     if(event.key === "Enter") {
-      // navigate to search
-      this.router.navigate(['/search',this.filterBy]);
+      this.router.navigate(['/search'] , { queryParams: { filterBy: this.filterBy } });
     }
     this.data.searchUsers(this.filterBy).subscribe(
       list => { this.users = list; }
+
     );
   }
-  
+  /**
+   * toggleNav
+   */
+  public toggleNav() {
+    if (this.toShow == true)
+    {
+       this.nav.className = 'hide';
+       this.toShow = false;
+       return;
+    }
+    else {
+       this.nav.className = 'show';
+       this.toShow = true;
+      return;
+    }
+  }
 }
 

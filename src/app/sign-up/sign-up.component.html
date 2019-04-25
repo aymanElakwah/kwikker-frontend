@@ -33,7 +33,7 @@
         <div  *ngIf="(password.value != confirm_password.value) && confirm_password.touched" class="msg alert alert-danger " role="alert">
           <p class="alertMsg">Not identical passwords!</p>
         </div>  
-      <button  name="login" class="btn btn-primary action-button"> <a href="login">Back to Login</a></button>  
+      <button  name="login"  [routerLink]="[ '/login']" class="btn btn-primary action-button">Back to Login</button>  
       <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep()"  [disabled]="username.invalid ||
                                                                                                                                     email.invalid ||
                                                                                                                                     password.invalid ||

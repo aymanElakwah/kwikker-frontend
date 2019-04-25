@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpInterceptor , HttpRequest , HttpHandler , HttpEvent} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 /**
  * intercept all requests to add tokens
  */
@@ -11,7 +12,14 @@ export class AddTokenInterceptor implements HttpInterceptor {
      */
     token: string;
     /** */
-    formDataRequests=[];
+    formDataRequests=[
+        environment.base+'user/profile_banner',
+        environment.base+'user/profile_picture'
+    ];
+    /**
+     * form data request
+     */
+    found:boolean=false;
     /**
      * add tokens for all requests except log in and sign up
      * @param req out request
@@ -20,7 +28,11 @@ export class AddTokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
         this.token = localStorage.getItem('TOKEN');
         let jsonReq: HttpRequest<any>;
-        if(this.formDataRequests[req.url] == undefined ) {
+        this.formDataRequests.forEach(element => {
+            if(element === req.url)
+                this.found =true;
+        });
+        if(!this.found) {
         jsonReq= req.clone({
             setHeaders: {'Content-Type': 'application/json' , 'TOKEN': `${this.token}` }
         });
@@ -28,6 +40,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
             jsonReq= req.clone({
                 setHeaders: { 'TOKEN': `${this.token}` }
             });
+            this.found = false;
         }
         return next.handle(jsonReq);
     }

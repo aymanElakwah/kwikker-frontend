@@ -12,6 +12,7 @@ import { FormControl } from "@angular/forms";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
 import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -186,4 +187,13 @@ export class ReplyComponent implements OnInit {
       });
     }
   }
+
+  reply(kweek: Kweek): void {
+    const dialogRef = this.dialog.open(NewKweekComponent, {
+      panelClass: 'KweekBox'
+    });
+    dialogRef.componentInstance.kweek = kweek;
+    dialogRef.componentInstance.reply = true;
+  }
+
 }

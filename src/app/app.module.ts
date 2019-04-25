@@ -32,6 +32,7 @@ import { confirmPassword } from './reset-password/reset-password-confirm.compone
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -45,7 +46,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     ErrorPageComponent,
     confirmCode,
     ResetPasswordComponent,
-    confirmPassword
+    confirmPassword,
+    WelcomeComponent
     ],
   imports: [
     SocketIoModule.forRoot(config),
@@ -71,7 +73,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
-              // {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
+               {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
                { provide: LY_THEME, useClass: MinimaLight, multi: true } 
             ],
   bootstrap: [AppComponent]

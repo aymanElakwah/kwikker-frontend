@@ -1,6 +1,5 @@
 <div class="test container">
-
-<router-outlet name="body"></router-outlet>
-
+<app-inbox *ngIf="section == '1'"></app-inbox>
+<app-inbox-list *ngIf="section == 2"> </app-inbox-list>
+<app-direct-messages *ngIf="section == 3"></app-direct-messages>
 </div>
-

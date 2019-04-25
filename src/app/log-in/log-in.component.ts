@@ -42,7 +42,8 @@ export class LogInComponent implements OnInit {
          console.log(res);
          localStorage.setItem('TOKEN', res.token);
          localStorage.setItem('username', this.mail);
-         this.router.navigate(['/home']);
+         //when a regular user loggs out, he shold be redirected to the login page
+         this.router.navigate(['/login']);
        },
         err => {
           console.log('error: ', err);

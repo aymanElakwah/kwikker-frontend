@@ -3,6 +3,7 @@ import {  NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng
 import {MatDialogRef} from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
+import { Kweek } from '../model/kweek';
 
 @Component({
   selector: 'app-new-kweek',
@@ -14,6 +15,9 @@ export class NewKweekComponent  {
   selectedImage: File=null;
   imageUrl:any = null;
   res:string = null;
+  reply: boolean;
+  kweek:Kweek;
+  
 
   /**
    * Constructor 

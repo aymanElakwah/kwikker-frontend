@@ -1,24 +1,10 @@
 <!-- Card Container: To control card dimension regardless the page -->
-<div class = "card-container" *ngIf="profileHeaderInfo">
-    <!-- All Card Info -->
-    <input type="text" class="form-control" id ="EditName"
-       placeholder="Name" value="{{profileHeaderInfo?.screen_name}}"
-       aria-label="Username" aria-describedby="basic-addon1"
-       (change) ="changeProfileData()">
-    <h1 class = "Profile-ScreenName">  @{{profileHeaderInfo?.username}} </h1>
-    <input type="text" class="form-control" id="EditBio" 
-       placeholder="Bio"  value="{{profileHeaderInfo?.bio}}" 
-       aria-label="Username" aria-describedby="basic-addon1"
-       (change) ="changeProfileData()">
-    <h1 class = "Birthday">  Birthday </h1>
-    <p class= "BirthdayQuote"> This should be your date of birth, whether this account is for your business, event, or even your cat. </p>
-    
-    <mat-form-field class="datepicker">
-      <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" 
-             #birth_date="ngModel" [(ngModel)]="birthdate" name="datepicker"
-             placeholder = "Choose Date" >
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    
- </div>
+<div class="card-container" *ngIf="profileHeaderInfo">
+   <!-- All Card Info -->
+   <input type="text" class="form-control" id="EditName" placeholder="Name" value="{{profileHeaderInfo?.screen_name}}"
+      aria-label="Username" aria-describedby="basic-addon1" (change)="changeProfileData()">
+   <h1 class="Profile-ScreenName"> @{{profileHeaderInfo?.username}} </h1>
+   <input type="text" class="form-control" id="EditBio" placeholder="Bio" value="{{profileHeaderInfo?.bio}}"
+      aria-label="Username" aria-describedby="basic-addon1" (change)="changeProfileData()">
+
+</div>

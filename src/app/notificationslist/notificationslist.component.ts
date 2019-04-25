@@ -18,7 +18,9 @@ export class NotificationslistComponent implements OnInit {
 
   ngOnInit() {
     this.notification_service.getNotificationsList("").subscribe(
-      list=>{this.notificatons_array = list;}
+      list=>{this.notificatons_array = list;
+      console.log(list);
+      }
     )
   }
   

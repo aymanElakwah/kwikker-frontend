@@ -8,6 +8,9 @@ import { Message } from '../model/message';
 export class DirectMessagesService {
   private socket = io('http//example.com');
   constructor() { }
+  joinRoom(token:string,username:string){
+    this.socket.emit('join room',token,username);
+  }
   ReciveMessage(){
     let observable = new Observable<Message>(observer=>{
     this.socket.on('new message', (data)=>{

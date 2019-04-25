@@ -12,6 +12,7 @@ import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
+import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -381,4 +382,13 @@ export class KweekComponent implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  reply(kweek: Kweek): void {
+    const dialogRef = this.dialog.open(NewKweekComponent, {
+      panelClass: 'KweekBox'
+    });
+    dialogRef.componentInstance.kweek = kweek;
+    dialogRef.componentInstance.reply = true;
+  }
+  
 }

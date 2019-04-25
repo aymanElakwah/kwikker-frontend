@@ -3,7 +3,7 @@
   <div *ngFor="let kweek of kweeks" class="kweeks">
     <!-- loop the kweeks as every kweek has the name kweek -->
     <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-    <div class="container p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
+    <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
       <div id="rekweeked-info" *ngIf="kweek.rekweek_info !== null">
         <i class="fas fa-retweet m-1"></i
         ><a
@@ -66,7 +66,7 @@
           <div class="container-fluid" style="margin-top:12px;">
             <div class="row">
               <div class="col-2">
-                <span class="reply">
+                <span class="reply" (click)="reply(kweek)">
                   <span
                     matTooltip="Reply"
                     matTooltipClass="tooltip-style"

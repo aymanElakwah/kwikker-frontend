@@ -4,6 +4,7 @@ import { Observable , of } from 'rxjs';
 import {tap } from 'rxjs/operators';
 
 import {CacheService} from '../services/cache.service';
+import { environment } from 'src/environments/environment';
 /**
  * calls cacheing service to cache data as much as it can
  */
@@ -13,7 +14,24 @@ export class CacheInterceptor implements HttpInterceptor {
      * all cached requests in the website
      */
     requestsUrl = [
-        'example@yahoo.com'
+      //  environment.base+'interactions/blocks',
+      //  environment.base+'interactions/mutes'
+
+    ];
+    requestsUrlWithParams = [
+       /* { 
+            url:environment.base+'kweeks/timelines/profile',
+            params: localStorage.getItem('username')   
+        },
+        {
+            url:environment.base+'interactions/following',
+            params: localStorage.getItem('username')   
+        },
+        {
+            url:environment.base+'user/profile',
+            params: localStorage.getItem('username') 
+        }
+        */
     ];
     cachedRequest = false;
     /**
@@ -31,6 +49,11 @@ export class CacheInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.requestsUrl.forEach(element => {
             if(element === req.url) {
+                this.cachedRequest = true;
+            }
+        });
+        this.requestsUrlWithParams.forEach(element => {
+            if(element.url === req.url && element.params === req.params.get('username')) {
                 this.cachedRequest = true;
             }
         });
