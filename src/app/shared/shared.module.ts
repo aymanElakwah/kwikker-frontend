@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
-import { ProfilesListComponent } from '../profiles-list/profiles-list.component';
 import { TrendsComponent } from '../Profile/trends/trends.component';
 import { MatDialogModule, MatTooltipModule, MAT_DIALOG_DATA } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +19,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
   NavBarComponent,
-  ProfilesListComponent,
   TrendsComponent,
   NewKweekComponent,
   
@@ -47,7 +45,6 @@ import { RouterModule } from '@angular/router';
    ],
   exports: [
   NavBarComponent,
-  ProfilesListComponent,
   TrendsComponent,
   KweeksModule,
   KweekComponent,
