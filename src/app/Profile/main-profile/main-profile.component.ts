@@ -319,7 +319,7 @@ export class MainProfileComponent implements OnInit {
         }
       },
       err => {
-         /* this.router.navigateByUrl("/error");   */
+          this.router.navigateByUrl("/error");   
       }
     );
   }
