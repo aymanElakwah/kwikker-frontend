@@ -9,6 +9,7 @@ import { KweeksService } from '../services/kweeks.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweeks-list.component';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
     ImgFallbackModule,
     OverlayModule,
     MatIconModule,
+    FormsModule
   ],
   entryComponents: [
     ReplyComponent,
