@@ -13,23 +13,15 @@ import { User } from "../model/user";
 import { Trend } from "../model/Trend";
 import { Kweek } from "../model/kweek";
 import { MiniUser } from "../model/mini-user";
-<<<<<<< HEAD
-import { BlockedMutedUser } from "../model/bloked-muted-users";
-=======
 import { BlockedMutedUser } from '../model/bloked-muted-users';
 import { $ } from 'protractor';
 import { CacheService } from './cache.service';
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
 
 @Injectable({
   providedIn: "root"
 })
 export class DataService {
-<<<<<<< HEAD
-  // constructor(private http: HttpClient) {}
-=======
 
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
   /**
    * Backend server base
    */
@@ -51,13 +43,8 @@ export class DataService {
     const userNameSent = userName
       ? { params: new HttpParams().set("username", userName) }
       : {};
-<<<<<<< HEAD
-    return this.http.get<User>(`${this.base}user/profile`, userNameSent);
-=======
     return this.http
       .get<User>(`${this.base}user/profile`, userNameSent);
-      ``
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
   }
 
   /**
@@ -392,14 +379,10 @@ export class DataService {
    * @param userName {string} The userName that will be followed
    * @returns Request Response
    */
-<<<<<<< HEAD
-  followUser(userName: string): Observable<any> {
-    const paramsSent = JSON.stringify({ username: userName });
-=======
+
   followUser(userName: string): Observable <any> {
     this.cacheService.invalidateUrl(this.base+'interactions/following');
     const paramsSent = JSON.stringify({username:userName});
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
@@ -433,12 +416,8 @@ export class DataService {
    * @returns Request Response
    */
   muteUser(userName: string): Observable<any> {
-<<<<<<< HEAD
-    const paramsSent = JSON.stringify({ username: userName });
-=======
     this.cacheService.invalidateUrl(this.base+'interactions/mutes');
     const paramsSent = JSON.stringify({username:userName});
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
@@ -472,12 +451,8 @@ export class DataService {
    * @returns Request Response
    */
   blockUser(userName: string): Observable<any> {
-<<<<<<< HEAD
-    const paramsSent = JSON.stringify({ username: userName });
-=======
     this.cacheService.invalidateUrl(this.base+'interactions/blocks');
     const paramsSent = JSON.stringify({username:userName});
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
     const headers = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
@@ -561,15 +536,6 @@ export class DataService {
    */
   updateProfilePicture(image_file: File): Observable<string> {
     const body = new FormData();
-<<<<<<< HEAD
-    body.append("file", image_file);
-    return this.http
-      .post<string>(this.base + "user/profile_picture", body)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
-=======
     body.append('file', image_file, "Image.png");
     
     return this.http.post<string>(this.base + 'user/profile_picture', body)
@@ -577,7 +543,6 @@ export class DataService {
                            map(res => res),
                            catchError(this.handleError)
                            );
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
   }
 
   /**
@@ -787,13 +752,9 @@ export class DataService {
    *@param username(string) the new username
    * @returns response
    */
-<<<<<<< HEAD
-  updateUserName(userName: string): Observable<any> {
-    const obj = { username: String() };
-=======
+
   updateUserName(userName:string, password:string): Observable<any>{
     const obj = { username: String(), password: String() };
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
     obj.username = userName;
     obj.password = password;
 
@@ -808,13 +769,8 @@ export class DataService {
    *@param username(string) the new password
    * @returns response
    */
-<<<<<<< HEAD
-  updatePassword(password: string): Observable<any> {
-    const obj = { password: String() };
-=======
   updatePassword(password:string, old_password: string): Observable<any>{
     const obj = { password: String(), old_password: String() };
->>>>>>> 44ab9ce6d3afded7edde7ac0afc5eeca27c6bbc4
     obj.password = password;
     obj.old_password = old_password;
 
