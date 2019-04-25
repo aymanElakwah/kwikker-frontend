@@ -6,10 +6,14 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { DataService } from '../services/data.service';
 // models
 import { MiniUser } from '../model/mini-user';
+import { User } from '../model/user';
 // angular material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { ChatService } from '../chat/chat.service';
+import { ChatComponent } from '../chat/chat.component';
+import { MatDialogRef } from '@angular/material';
+
 /**
  * search freinds to send message
  */
@@ -39,7 +43,7 @@ export class InboxListComponent implements OnInit {
   /**
    * filtered list of users
    */
-  users: MiniUser[];
+  users: User[];
   /**
    * selected users list to send message
    */
@@ -64,7 +68,8 @@ export class InboxListComponent implements OnInit {
    */
   constructor(private data: DataService,
               private fb: FormBuilder,
-              private chatService:ChatService) {
+              private chatService:ChatService,
+              public DialogRef: MatDialogRef<ChatComponent>) {
                }
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -127,7 +132,7 @@ add(event: MatChipInputEvent): void {
  * select user by click
  * @param user user that get clicked on
  */
-  selectUser(user: MiniUser) {
+  selectUser(user: User) {
     let flag = false;
     // tslint:disable-next-line:no-shadowed-variable
     this.selectedUsers.forEach(element => {
@@ -194,5 +199,11 @@ add(event: MatChipInputEvent): void {
   }
   toInbox(){
     this.chatService.setSection(1);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

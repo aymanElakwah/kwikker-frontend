@@ -9,7 +9,7 @@
   <div class="title">
     <div class="row">
       <div class="frame">
-        <img class="avatar" [src]="addressee?.profile_image_url" [title]="addressee?.screen_name">
+        <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/' + addressee?.profile_image_url" [title]="addressee?.screen_name">
       </div>
       <div>
         <p class="screenName">
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="activity ">
-    <button class="esc">
+    <button class="esc" (click)="exit()">
       <i class="fas fa-times">
       </i>
     </button>

@@ -50,8 +50,8 @@ export class MainProfileComponent implements OnInit {
   semiBlockedMode: boolean = false;
 
   /* User Edited Data */
-  editedScreenName: string = this.profileUser.username;
-  editedBio: string = this.profileUser.bio;
+  editedScreenName: string ;
+  editedBio: string ;
 
   /* Default Profile Picture and Banner */
   defaultProfilePicture: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg";

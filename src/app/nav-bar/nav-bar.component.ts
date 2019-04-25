@@ -11,6 +11,7 @@ import { TitleService } from '../services/title.service';
 import { MiniUser } from '../model/mini-user';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ChatComponent } from '../chat/chat.component';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,7 +20,7 @@ import { ChatComponent } from '../chat/chat.component';
 })
 export class NavBarComponent implements OnInit {
   public userName: string;
-  users:MiniUser[];
+  users:User[];
   filterBy:string;
   public nav: any;
   public toShow: boolean;
@@ -104,8 +105,7 @@ export class NavBarComponent implements OnInit {
    */
   newSearch(event) {
     if(event.key === "Enter") {
-      // navigate to search
-      this.router.navigate(['/search',this.filterBy]);
+      this.router.navigate(['/search'] , { queryParams: { filterBy: this.filterBy } });
     }
     this.data.searchUsers(this.filterBy).subscribe(
       list => { this.users = list; }

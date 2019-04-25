@@ -14,12 +14,12 @@ export class CacheInterceptor implements HttpInterceptor {
      * all cached requests in the website
      */
     requestsUrl = [
-        environment.base+'interactions/blocks',
-        environment.base+'interactions/mutes'
+      //  environment.base+'interactions/blocks',
+      //  environment.base+'interactions/mutes'
 
     ];
     requestsUrlWithParams = [
-        { 
+       /* { 
             url:environment.base+'kweeks/timelines/profile',
             params: localStorage.getItem('username')   
         },
@@ -27,7 +27,7 @@ export class CacheInterceptor implements HttpInterceptor {
             url:environment.base+'interactions/following',
             params: localStorage.getItem('username')   
         },
-        /*{
+        {
             url:environment.base+'user/profile',
             params: localStorage.getItem('username') 
         }
