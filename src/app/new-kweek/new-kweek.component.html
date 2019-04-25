@@ -24,7 +24,7 @@
       <div class="col-md-11"style="padding:0">
           <div class="tweet-box-content">
               <div class="tweet-content">
-                  <a href="" *ngIf="reply">@{{username}}</a>
+                  <a [routerLink] = "['/profile',username]" *ngIf="reply">@{{username}}</a>
                   <div class="form-group">
                       <textarea class="form-control" rows="5"cols="90" 
                       id="kweek" name="kweekData" [(ngModel)]="kweekData"></textarea>

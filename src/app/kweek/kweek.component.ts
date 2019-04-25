@@ -27,7 +27,7 @@ export class KweekComponent implements OnInit {
   hideDelay = new FormControl(50);
   functionToCall: String = "";
   kweeks: Kweek[] = [];
-
+  mentionsResponse:any;
   /* route children name which based on it, The right request will be sent */
   public routeChildName: string;
 
@@ -65,7 +65,10 @@ export class KweekComponent implements OnInit {
     ) {
       this.callCommonFunc = false;
     }
-    const mainRoute = this.route.snapshot.parent.routeConfig.path;
+    let mainRoute;
+    if(this.route.snapshot.parent.routeConfig){
+     mainRoute = this.route.snapshot.parent.routeConfig.path;
+    }
     if (mainRoute === "profile/:username") {
       switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
         case "":
@@ -119,6 +122,21 @@ export class KweekComponent implements OnInit {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
+    } else if (mainRoute === "notifications") {
+      
+      console.log("mentions");
+      this.kweekService.getUserMentions(null).subscribe(mentions => {
+        this.mentionsResponse = mentions
+        this.kweeks = this.mentionsResponse.replies_and_mentions;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+    }
+    else{
+      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+        this.kweeks = homeKweeks;
+        this.kweekFunc.injectTagsInText(this.kweeks);
+      });
+
     }
 
     // mock service

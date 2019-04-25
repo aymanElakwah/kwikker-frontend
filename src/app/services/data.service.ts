@@ -804,6 +804,26 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getUserMentions(last_retrieved_kweek_id: string): Observable<any> {
+    const obj = { last_retrieved_kweek_id: String() };
+    obj.last_retrieved_kweek_id = last_retrieved_kweek_id;
+    const parametersSent = {
+      params: new HttpParams().set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+    };
+    if(last_retrieved_kweek_id === null){
+      return this.http.get<any>(this.base + "kweeks/timelines/mentions").pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
+  
+    }
+    else{
+    return this.http.get<any>(this.base + "kweeks/timelines/mentions",parametersSent).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
+  }
+  }
 }
 
 
