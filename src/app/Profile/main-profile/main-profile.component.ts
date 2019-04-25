@@ -52,9 +52,7 @@ export class MainProfileComponent implements OnInit {
       height: "700px",
       width: "700px",
     });
-    console.log(this.profileUser.profile_image_url);
     dialogRef.afterClosed().subscribe(image => {
-
       var reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = _event => {
@@ -142,8 +140,6 @@ export class MainProfileComponent implements OnInit {
     this.ShowMessage("No more header for you");
     this.profileInfoService.removeBanner().subscribe(); 
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
-    console.log(this.defaultProfileBanner);
-    console.log(this.profileUser.profile_banner_url);
   }
 
   /**
@@ -239,9 +235,7 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService
-      .updateProfile(this.editedScreenName, this.editedBio)
-      .subscribe(res => console.log(res));
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio).subscribe();
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
