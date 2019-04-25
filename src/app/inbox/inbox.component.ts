@@ -8,6 +8,8 @@ import { DataService } from '../services/data.service';
 import { Conversation } from '../model/inbox';
 import { BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash'; 
+import { MatDialogRef } from '@angular/material';
+import { ChatComponent } from '../chat/chat.component';
 /**
  * latest conversations
  */
@@ -49,7 +51,7 @@ export class InboxComponent implements OnInit {
    */
   constructor(private data: DataService,
               private chatService: ChatService,
-              private router: Router) { }
+              public DialogRef: MatDialogRef<ChatComponent>) { }
   /**
    * get all conversations
    */
@@ -109,5 +111,11 @@ export class InboxComponent implements OnInit {
   }
   composeMsg(){
     this.chatService.setSection(2);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

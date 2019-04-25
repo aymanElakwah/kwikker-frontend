@@ -10,6 +10,8 @@ import { MiniUser } from '../model/mini-user';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { ChatService } from '../chat/chat.service';
+import { ChatComponent } from '../chat/chat.component';
+import { MatDialogRef } from '@angular/material';
 /**
  * search freinds to send message
  */
@@ -64,7 +66,8 @@ export class InboxListComponent implements OnInit {
    */
   constructor(private data: DataService,
               private fb: FormBuilder,
-              private chatService:ChatService) {
+              private chatService:ChatService,
+              public DialogRef: MatDialogRef<ChatComponent>) {
                }
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -194,5 +197,11 @@ add(event: MatChipInputEvent): void {
   }
   toInbox(){
     this.chatService.setSection(1);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }
