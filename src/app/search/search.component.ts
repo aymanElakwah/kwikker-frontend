@@ -58,7 +58,9 @@ export class SearchComponent implements OnInit {
       this.ltr = false;
     }
     if (this.isHashed === 'hash') {
-      this.search = '#' + this.search;
+      if(this.search[0]!='#'){
+        this.search = '#' + this.search;
+      }
     }
   }
 }
