@@ -17,6 +17,7 @@ export class NewKweekComponent  {
   res:string = null;
   reply: boolean;
   kweek:Kweek;
+  image_id:string = null;
   
 
   /**
@@ -80,6 +81,14 @@ export class NewKweekComponent  {
 
     addKweek(){
       console.log(this.kweekData)
+      if(this.selectedImage){
+        console.log("there is an image")
+      }
+      this.newKweekService.postMedia(this.selectedImage).subscribe
+      (Response=>{
+        this.image_id = Response;
+        console.log(this.image_id);
+      })
       this.newKweekService.addNewKweek(this.kweekData).subscribe
       (response => {this.res = response})
 

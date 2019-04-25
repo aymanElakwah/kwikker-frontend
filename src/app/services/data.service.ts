@@ -730,6 +730,24 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+
+  /**
+   * post request To upload photo
+   * @param image_file {File} The Uploaded Image
+   * @returns Request Response (media id);
+   */
+  postMedia(image_file: File): Observable<string> {
+    const body = new FormData();
+    body.append('file', image_file, "Image.png");
+    
+    return this.http.post<string>(this.base + 'media/', body)
+                          .pipe(
+                           map(res => res),
+                           catchError(this.handleError)
+                           );
+  }
 }
+
+
 
 
