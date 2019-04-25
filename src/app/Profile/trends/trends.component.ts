@@ -37,8 +37,9 @@ export class TrendsComponent implements OnInit {
     ( trendsInfo => {this.trends = trendsInfo; } )
   }
 
-  searchForTrend(filterBy){
-    filterBy = filterBy.slice(1,filterBy.length)
-    this.router.navigate(['/search'], { queryParams: { filterBy: filterBy , src:'hash'}, })
+  searchForTrend(trend:Trend){
+    const filterBy = trend.text.slice(1,trend.text.length);
+    const id = trend.id;
+    this.router.navigate(['/search'], { queryParams: { filterBy: filterBy , src:'hash' , ID:id}, })
   }
 }
