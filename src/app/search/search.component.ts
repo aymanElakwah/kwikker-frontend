@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
   arabic = /[\u0600-\u06FF]/; // arabic range of unicode
    ltr: boolean;
    isHashed: string;
+   hashId:string;
    /**
     *
     * @param route activated route to get filter by paramter
@@ -34,8 +35,10 @@ export class SearchComponent implements OnInit {
    * testing search paramters to check if it is arabic or null
    */
   testSearchingParams(): void {
+    //subscribe to activated route
     this.search = this.route.snapshot.queryParamMap.get('filterBy');
     this.isHashed = this.route.snapshot.queryParamMap.get('src');
+    this.hashId = this.route.snapshot.queryParamMap.get('ID'); 
     if ( this.search === '' || this.search === null ) {
       this.router.navigate(['/home']);
     } else if (this.arabic.test(this.search)) {
