@@ -19,4 +19,5 @@ body{
 
 .custom-dialog-container .mat-dialog-container {
   padding: 0px;
+  margin-top: 100px;
 }
