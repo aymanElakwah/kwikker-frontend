@@ -103,7 +103,7 @@ export class InboxComponent implements OnInit {
                 this.finished = true;
               }
     
-              this.conversations2.next(_.contact(currentConversation , newConversation)) ;
+              this.conversations2.next(_.concat(currentConversation , newConversation)) ;
           }
      );
   }
