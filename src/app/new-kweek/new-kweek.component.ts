@@ -18,9 +18,10 @@ export class NewKweekComponent implements OnInit {
   reply: boolean ;
   kweek:Kweek;
   image_id:string = null;
-  username:string = "7amada";
-  screenname:string = "7amda ggamda";
+  username:string ;
+  screenname:string ;
 
+  replyData:string = "@";
   
 
   /**
@@ -98,8 +99,13 @@ export class NewKweekComponent implements OnInit {
         console.log(this.image_id);
       })*/
       if(this.reply == true){
-        this.newKweekService.addNewKweek(this.kweekData, this.kweek.id).subscribe
+        
+        this.replyData = this.replyData+this.username+" "+this.kweekData;
+        console.log(this.replyData)
+
+        this.newKweekService.addNewKweek(this.replyData, this.kweek.id).subscribe
         (response => {this.res = response})
+
       }
       else{
       this.newKweekService.addNewKweek(this.kweekData, null).subscribe
