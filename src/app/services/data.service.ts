@@ -58,7 +58,17 @@ export class DataService {
       .get<Kweek[]>(`${this.base}kweeks/timelines/home`, parametersSent)
       .pipe(catchError(this.handleError));
   }
-
+  /**
+   * to get hashtag kweeks
+   * @param trendID every hashtag has ID
+   */
+  getTrendsKweeks(trendID:string):Observable<Kweek[]> {
+    const Trend = trendID
+      ? { params: new HttpParams().set("trend_id", trendID) }
+      : {};
+    return this.http.get<Kweek[]>(`${this.base}trends/kweeks`,Trend)
+    .pipe(catchError(this.handleError));
+  }
   /**
    * get request to get All Kweeks made by a certain user
    * @param userName {string} the user that we want to get his kweeks

@@ -9,7 +9,7 @@
       <div id="Trends-body" >
          <!-- Trend Body => Text(Hashtag) & Number of Kweeks -->
          <ul id="Trends-Items">
-            <li id="Trends-Item" *ngFor="let trend of trends" (click)="searchForTrend(trend.text)">
+            <li id="Trends-Item" *ngFor="let trend of trends" (click)="searchForTrend(trend)">
                <h1 style="cursor:pointer;"> {{trend?.text}} </h1>
                <p> {{trend?.number_of_kweeks}} Kweeks </p>
             </li>
