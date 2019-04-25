@@ -704,9 +704,10 @@ export class DataService {
    *@param username(string) the new username
    * @returns response
    */
-  updateUserName(userName:string): Observable<any>{
-    const obj = { username: String() };
+  updateUserName(userName:string, password:string): Observable<any>{
+    const obj = { username: String(), password: String() };
     obj.username = userName;
+    obj.password = password;
 
     return this.http.put<any>(this.base + "user/username", obj).pipe(
       map(res => res),
@@ -719,9 +720,10 @@ export class DataService {
    *@param username(string) the new password
    * @returns response
    */
-  updatePassword(password:string): Observable<any>{
-    const obj = { password: String() };
+  updatePassword(password:string, old_password: string): Observable<any>{
+    const obj = { password: String(), old_password: String() };
     obj.password = password;
+    obj.old_password = old_password;
 
     return this.http.put<any>(this.base + "user/password", obj).pipe(
       map(res => res),
