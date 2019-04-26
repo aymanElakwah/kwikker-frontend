@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 
- 
+
 @Injectable()
 export class CanActivateTeam implements CanActivate {
   constructor(private router: Router){};
@@ -38,6 +38,7 @@ export class CanActivateTeam implements CanActivate {
   }
    
 }
+
 @Injectable()
 export class CanDeactivateTeam implements CanActivate {
   constructor(private router: Router){};
@@ -67,21 +68,19 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent },
   {path: 'home', component: HomeComponent,canActivate:[CanActivateTeam] },
   {path: 'signup', component: SignUpComponent, canActivate: [CanDeactivateTeam]},
- // {path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateTeam]},
   {path: 'login', component: LogInComponent,canActivate: [CanDeactivateTeam] },
   {path: 'confirm/:code', component: confirmCode,canActivate: [CanDeactivateTeam]},
   {path: 'reset_password/:code', component: confirmPassword,canActivate: [CanDeactivateTeam]},
   {path: 'forget_password', component: ResetPasswordComponent,canActivate: [CanDeactivateTeam]},
   {path: 'kweeks', component: KweekComponent,canActivate: [CanActivateTeam]}, 
-  {path: 'error', component: ErrorPageComponent}
+  {path: 'error', component: ErrorPageComponent},
+  {path: '**', component: ErrorPageComponent},
  
 ];
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes),
-    NotificationsModule
-  ],
+  imports: [RouterModule.forRoot(routes)],
   providers: [CanActivateTeam,CanDeactivateTeam],
   exports: [RouterModule]
 })

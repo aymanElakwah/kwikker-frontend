@@ -3,10 +3,12 @@
      <a>
     <img
       class ="logo"
+      [routerLink]="[ '/' ]"
       src = "../../../assets/main/minilogo.png"
       alt="Logo"
       id="ProfileImage"/>
     </a>
+    <button class="btn btn-primary btnStyle" [routerLink]="[ '/' ]" type="button">or, Go to Home Page</button>
   </div>
   <div class="body-background"> 
     <div class="body-content">
@@ -20,8 +22,9 @@
           <input id="search-bar" name="q" type="text" aria-label="Search query" placeholder="Search for a topic, full name, or @username">
           <input class="search-btn" id="search_submit" type="submit" value="Search">
         </form>
-
+       
     </div>
-    
+  
   </div>
+  
 </div>
