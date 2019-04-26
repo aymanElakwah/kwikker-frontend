@@ -2,6 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../model/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { ChatComponent } from '../../chat/chat.component';
+import { ChatService } from 'src/app/chat/chat.service';
 
 /**
  * MiniProfile Component is used For all Mini profile cards
@@ -52,7 +56,9 @@ export class MiniProfileComponent implements OnInit {
    * all followers or following information
    */
   constructor(private miniProfileInfoService: DataService,
-               private route: ActivatedRoute) { }
+               public route: ActivatedRoute,
+               private dialog: MatDialog,
+               private ChatService:ChatService) { }
 
   /**
    * Change Between Follow And Unfollow Buttons, And Send their requests
@@ -114,6 +120,33 @@ export class MiniProfileComponent implements OnInit {
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
+
+     /**
+     * Open Write Kweek Component Dialog
+     * No Parameters
+     * No return
+     */
+    openKweekDialog(index: number)
+    {
+      const dialogRef = this.dialog.open(NewKweekComponent,
+         { panelClass: 'kweekBox'});
+         dialogRef.componentInstance.reply = true;
+         dialogRef.componentInstance.kweekTO = true;
+         dialogRef.componentInstance.username = this.miniCardProfileUsers[index].username;
+         dialogRef.componentInstance.screenname = this.miniCardProfileUsers[index].screen_name;
+    }
+
+       /**
+     * Open Inbox Component Dialog
+     * No Parameters
+     * No return
+     */
+    openInboxDialog(index: number)
+    {
+      this.ChatService.setAddressee(this.miniCardProfileUsers[index]);
+      this.ChatService.setSection(3);
+      const dialogRef = this.dialog.open(ChatComponent);
+    }
              
 /**
    * Scroll Event Which is used to get more data for the followers and the followings
@@ -123,8 +156,7 @@ export class MiniProfileComponent implements OnInit {
   
    if(this.miniCardProfileUsers.length != 0)
    {
-      var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ;
-      var Lastindex = this.miniCardProfileUsers.length;
+      var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username;
       if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
       {
        
@@ -162,7 +194,6 @@ export class MiniProfileComponent implements OnInit {
     {
       this.miniProfileInfoService.searchUsers(this.route.snapshot.queryParams["filterBy"]).subscribe(
         usersInfo => { this.miniCardProfileUsers = usersInfo;});
-    
     }
   }
 
