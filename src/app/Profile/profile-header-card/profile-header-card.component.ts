@@ -39,10 +39,8 @@ export class ProfileHeaderCardComponent implements OnInit {
        { panelClass: 'kweekBox'});
        dialogRef.componentInstance.reply = true;
        dialogRef.componentInstance.kweekTO = true;
-       dialogRef.componentInstance.username = this.profileHeaderInfo.screen_name;
-      dialogRef.componentInstance.screenname = this.profileHeaderInfo.screen_name;
-
-       
+       dialogRef.componentInstance.username = this.profileHeaderInfo.username;
+       dialogRef.componentInstance.screenname = this.profileHeaderInfo.screen_name;
   }
 
    /**

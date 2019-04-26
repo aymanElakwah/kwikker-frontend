@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../model/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 
 /**
  * MiniProfile Component is used For all Mini profile cards
@@ -52,7 +54,8 @@ export class MiniProfileComponent implements OnInit {
    * all followers or following information
    */
   constructor(private miniProfileInfoService: DataService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               private dialog: MatDialog) { }
 
   /**
    * Change Between Follow And Unfollow Buttons, And Send their requests
@@ -114,6 +117,21 @@ export class MiniProfileComponent implements OnInit {
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
+
+     /**
+     * Open Write Kweek Component Dialog
+     * No Parameters
+     * No return
+     */
+    openKweekDialog(index: number)
+    {
+      const dialogRef = this.dialog.open(NewKweekComponent,
+         { panelClass: 'kweekBox'});
+         dialogRef.componentInstance.reply = true;
+         dialogRef.componentInstance.kweekTO = true;
+         dialogRef.componentInstance.username = this.miniCardProfileUsers[index].username;
+         dialogRef.componentInstance.screenname = this.miniCardProfileUsers[index].screen_name;
+    }
              
 /**
    * Scroll Event Which is used to get more data for the followers and the followings

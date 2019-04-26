@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { delay } from "q";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { EditImagesComponent } from "../edit-images/edit-images.component";
-import * as $ from 'jquery/dist/jquery.min.js';
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+
 
 
 /**
@@ -70,6 +71,21 @@ export class MainProfileComponent implements OnInit {
     }
     });
   }
+
+    /**
+     * Open Write Kweek Component Dialog
+     * No Parameters
+     * No return
+     */
+    openKweekDialog()
+    {
+      const dialogRef = this.dialog.open(NewKweekComponent,
+         { panelClass: 'kweekBox'});
+         dialogRef.componentInstance.reply = true;
+         dialogRef.componentInstance.kweekTO = true;
+         dialogRef.componentInstance.username = this.profileUser.username;
+         dialogRef.componentInstance.screenname = this.profileUser.screen_name;
+    }
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in)

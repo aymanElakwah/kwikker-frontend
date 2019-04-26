@@ -88,7 +88,7 @@
                </button>
                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                <div class="dropdown-menu" id="userActionDropDownMenu" aria-labelledby="userActionDropdownMenuButton">
-                  <li class="dropdown-item" *ngIf="!profileUser?.blocked">
+                  <li class="dropdown-item" (click)= 'openKweekDialog()' *ngIf="!profileUser?.blocked">
                      <P> Tweet To @{{profileUser?.username}}</P>
                   </li>
                   <li class="dropdown-item">
