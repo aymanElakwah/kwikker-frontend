@@ -24,8 +24,7 @@ export class BlockedListComponent implements OnInit {
     this.blockedAccounts_service.getBlockedAccounts().subscribe(
       list=>{this.blocked_accounts = list;}
     )
-    console.log("testing");  
-    console.log(this.blocked_accounts);
+  
   }
 
     /**
@@ -33,7 +32,7 @@ export class BlockedListComponent implements OnInit {
    * @param username(string) used in the request to unblock user
    */
   unBlockUser(username:string){
-    console.log(username)
+  
     this.blockedAccounts_service.unblockUser(username).subscribe(
       response => {this.res = response})
 

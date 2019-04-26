@@ -1,6 +1,6 @@
 
- <div class="card"  style="border-color:#e6ecf0">
-   <div class="card-header "  id="notificatioCard" infiniteScroll (scrolled)="onScroll()"
+ <div class="card"  style="border-color:#e6ecf0" *ngIf="notificatons_array">
+   <div class="card-header "  id="notificatioCard" infiniteScroll (scrolled)="onScroll()" 
    *ngFor="let n of notificatons_array; let i = index; "
    [ngStyle]="{'backgroundColor':getColor(i)}" >
       <div class="row" style="padding-left:4%">
