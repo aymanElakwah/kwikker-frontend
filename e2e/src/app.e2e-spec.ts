@@ -1,42 +1,83 @@
 import { AppPage } from './app.po';
+import { browser } from 'protractor';
+import { element } from '@angular/core/src/render3';
 
 describe('workspace-project App', () => {
   let page: AppPage;
-
   page = new AppPage();
-  // beforeEach(() => {
-  //   page = new AppPage();
-  // });
+  var user1 = "ahly";
+  var pass1 = "123456";
+  var user2 = "zamalek";
+  var pass2 = "password";
 
   it('Sign up', () =>{
     page.navigateToSignUp();
     page.browserPause(100);
 
-    page.getUsernameLoginField().sendKeys("e3");
-    page.getEmailSignupField().sendKeys("e3@yahoo.com");
-    page.getPasswordSignupField().sendKeys("Ee333333");
-    page.getPasswordConfirmationSignupField().sendKeys("Ee333333");
-    page.getNext1SignupField().click();
+    page.getUsernameLoginField().sendKeys("e8");
+    page.getEmailSignupField().sendKeys("e8@yahoo.com");
+    page.getPasswordSignupField().sendKeys("Ee888888");
+    page.getPasswordConfirmationSignupField().sendKeys("Ee888888");
+    page.getNext1SignupButton().click();
 
     page.browserPause(10);
-    page.getScreenNameSignupField().sendKeys("ee3");
+    page.getScreenNameSignupField().sendKeys("ee8");
     page.getDatePickerSignupBoard().click();
     page.getDateDaySignupBoard().click();
-    page.getNext2SignupField().click();
+    page.getNext2SignupButton().click();
 
-    page.browserPause(10);
+    page.browserPause(1000);
     expect(page.getSignupConfirmation().getText()).toEqual('Thank you for using our app.');
   });
 
-  it('Login', () =>{
+  it('Login and logout', () =>{
     page.navigateToLogin();
     page.browserPause(1000);
-    page.getUsernameLoginField().sendKeys("test_user3");
-    page.getPasswordLoginField().sendKeys("password");
+    page.getUsernameLoginField().sendKeys(user1);
+    page.getPasswordLoginField().sendKeys(pass1);
     page.getLoginButton().click();
-    expect(page.getLogoutButton().getText()).toEqual('Log Out');
+    page.browserPause(2000);
+    page.getDropDownMenuButton().click();
+    page.getLogoutButton().click();
+    page.browserPause(1000);
+    expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   });
 
+  it('Kweek', () => {
+    page.login(user1, pass1);
+    let kweek = "E2E 7";
+    page.getKweekButton().click();
+    page.getWriteKweekField().sendKeys(kweek);
+    page.browserPause(1000);
+    page.getSecondKweekButton().click();
+    page.browserPause(1000);
+    page.navigateToProfile(user1);
+    expect(page.getFirstKweekText().getText()).toEqual(kweek);
+    page.logout();
+  });
+
+  it('Rekweek', () => {
+    page.login(user2, pass2);
+    page.navigateToProfile(user1);
+    let kweek = page.getFirstKweekText().getText();
+    page.getRekweekButton().click();
+    page.browserPause(1000);
+    page.navigateToProfile(user2);
+    expect(page.getFirstKweekText().getText()).toEqual(kweek);
+    page.logout();
+  });
+
+  it('Like', () => {
+    page.login(user2, pass2);
+    page.navigateToProfile(user1);
+    let kweek = page.getFirstKweekText().getText();
+    page.getLikeButton().click();
+    page.browserPause(1000);
+    page.navigateToLikes(user2);
+    expect(page.getElementWithText('p', kweek).getText()).toEqual(kweek);
+    page.logout();
+  });
+  /*
   it('Open profile', function() {
     page.navigateToProfile('test_user3');
     page.browserPause(1000);
@@ -168,4 +209,5 @@ describe('workspace-project App', () => {
     page.getLogoutButton().click();
     expect(page.getSignUpTitle().getText()).toEqual('EMAIL SETUP');
   });
+  */
 });
