@@ -39,7 +39,7 @@ export class DirectMessagesComponent implements OnInit {
    * list of messages
    */
   messageList :Message[];
-  @ViewChild('file') sendElement: ElementRef;
+ // @ViewChild('file') sendElement: ElementRef;
   /**
    *
    * @param chatService to get data of addresse
@@ -53,7 +53,7 @@ export class DirectMessagesComponent implements OnInit {
               private socket:DirectMessagesService,
               public DialogRef: MatDialogRef<ChatComponent>) {
                 
-                this.sendElement.nativeElement.focus();
+               // this.sendElement.nativeElement.focus();
    }
    
   ngOnInit() {
