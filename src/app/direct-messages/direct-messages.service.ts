@@ -6,14 +6,29 @@ import { Message } from '../model/message';
 
 )
 export class DirectMessagesService {
-  private socket = io('http//example.com');
-  constructor() { }
-  joinRoom(token:string,username:string){
-    this.socket.emit('join room',token,username);
+  private socket = io('http://0b238fe9.ngrok.io/');
+  constructor() { 
+    this.socket.connect();
   }
-  ReciveMessage(){
+  ReciveMessage(username1:string,username2:string){
+    if(username1>username2){
+      let temp=username2;
+      username2 =username1;
+      username1 = temp;
+    }
     let observable = new Observable<Message>(observer=>{
-    this.socket.on('new message', (data)=>{
+    this.socket.on(username1+username2, (data)=>{
+      console.log(username1+username2);
+      observer.next(data);  
+    });
+   // return() => this.socket.disconnect();
+  });
+  return observable;
+  }
+  test(){
+    let observable = new Observable<Message>(observer=>{
+    this.socket.on('hello', (data)=>{
+      console.log("hello");
       observer.next(data);  
     });
    // return() => this.socket.disconnect();

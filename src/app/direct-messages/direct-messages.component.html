@@ -30,14 +30,14 @@
 </div>
 
 <!-- main body-->
-<div class="body" [ngClass]="{'body2':uploadImg}">
+<div class="body" [ngClass]="{'body2':uploadImg}" >
   <div class="msg" *ngFor="let message of messageList">
-    <div class="row">
-    <div class="frame" [ngClass]="{'right':message.to_user === addressee}">
-      <img class="avatar" src="../../assets/kweeks/default.png">
+    <div class="row" [ngClass]="{'right':message.to_username === addressee.username}">
+    <div class="frame"  >
+      <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'">
       </div>
-      <div class="msgText">
-        hello wanna chat?
+      <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username}">
+        {{message.text}}
       </div>
       </div>
   </div>
@@ -45,6 +45,7 @@
 
 <!-- create message-->
 <form [formGroup]="myForm">
+    {{test}}
   <div class="new row " [ngClass]="{'new2':uploadImg}">
     <div class="col-10 my-auto">
       <div *ngIf="uploadImg" class="space" style="background-color:white; ">
