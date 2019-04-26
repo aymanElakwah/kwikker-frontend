@@ -829,11 +829,11 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (media id);
    */
-  postMedia(image_file: File): Observable<string> {
+  postMedia(image_file: File): Observable<{media_id:string}> {
     let body = new FormData();
     body.append("file", image_file);
   
-    return this.http.post<string>(this.base + "media/", body).pipe(
+    return this.http.post<{media_id:string}>(this.base + "media/", body).pipe(
       map(res => res),
       catchError(this.handleError)
     );
