@@ -9,7 +9,7 @@
     accept="image/*" hidden>
   <button ly-button outlined color="primary" *ngIf="cropping.isCropped" (click)="changeImage()"
     style="transform: translate(-20px,0);"> Upload </button>
-  <button raised ly-button outlined *ngIf="cropping.isCropped"> Cancel </button>
+  <button raised ly-button outlined *ngIf="cropping.isCropped"  (click)="CancelChanging()"> Cancel </button>
 </div>
 <div style="text-align: center">
   <div *ngIf="cropping.isLoaded">
