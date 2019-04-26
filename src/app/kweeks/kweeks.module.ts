@@ -12,13 +12,15 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
 @NgModule({
   declarations: [
     KweekComponent,
     ReplyComponent,
     NewKweekComponent,
-    LikesRekweeksListComponent
+    LikesRekweeksListComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReplyComponent,
     LikesRekweeksListComponent,
     NewKweekComponent,
+    ConfirmDeleteComponent
   ],
   exports: [
     KweekComponent,

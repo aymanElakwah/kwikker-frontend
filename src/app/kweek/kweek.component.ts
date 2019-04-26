@@ -13,6 +13,7 @@ import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
 import { NewKweekComponent } from "../new-kweek/new-kweek.component";
+import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -356,20 +357,32 @@ export class KweekComponent implements OnInit {
    * No @returns
    */
   delete(kweek: Kweek): void {
-    if (!this.busyRequest) {
-      this.busyRequest = true;
-      if (this.callCommonFunc) {
-        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-          this.deleteCallBack(kweek);
-          this.busyRequest = false;
-        });
-      } else {
-        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-          this.deleteProfileCallBack(kweek);
-          this.busyRequest = false;
-        });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    dialogConfig.autoFocus = false;
+    const confirmDeleteRef = this.dialog.open(
+      ConfirmDeleteComponent,
+      dialogConfig
+    );
+    confirmDeleteRef.componentInstance.clickedKweek = kweek;
+    confirmDeleteRef.afterClosed().subscribe(res => {
+      if (res) {
+        if (!this.busyRequest) {
+          this.busyRequest = true;
+          if (this.callCommonFunc) {
+            this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+              this.deleteCallBack(kweek);
+              this.busyRequest = false;
+            });
+          } else {
+            this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+              this.deleteProfileCallBack(kweek);
+              this.busyRequest = false;
+            });
+          }
+        }
       }
-    }
+    });
   }
 
   /**
@@ -439,7 +452,7 @@ export class KweekComponent implements OnInit {
               )
               .subscribe(lists => {
                 this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists); 
+                this.kweeks = this.kweeks.concat(lists);
                 // const str = JSON.stringify(this.kweeks[0], null, 4);
                 // console.log(str);
               });
@@ -452,7 +465,7 @@ export class KweekComponent implements OnInit {
               )
               .subscribe(lists => {
                 this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists); 
+                this.kweeks = this.kweeks.concat(lists);
                 // const str = JSON.stringify(this.kweeks[0], null, 4);
               });
             break;
@@ -464,14 +477,14 @@ export class KweekComponent implements OnInit {
               )
               .subscribe(lists => {
                 this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists); 
+                this.kweeks = this.kweeks.concat(lists);
               });
             break;
         }
       } else if (mainRoute === "home") {
         this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
           this.kweekFunc.injectTagsInText(homeKweeks);
-          this.kweeks = this.kweeks.concat(homeKweeks); 
+          this.kweeks = this.kweeks.concat(homeKweeks);
         });
       } else if (
         mainRoute === "search" &&
@@ -502,7 +515,7 @@ export class KweekComponent implements OnInit {
       } else {
         this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
           this.kweekFunc.injectTagsInText(homeKweeks);
-          this.kweeks = this.kweeks.concat(homeKweeks); 
+          this.kweeks = this.kweeks.concat(homeKweeks);
         });
       }
     }
