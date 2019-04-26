@@ -53,18 +53,21 @@ export class MainProfileComponent implements OnInit {
       width: "700px",
     });
     dialogRef.afterClosed().subscribe(image => {
-      var reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = _event => {
-        this.profileUser.profile_image_url = reader.result.toString();
-      };
-  
-      var S:string;
-      this.profileInfoService.updateProfilePicture(image as File).subscribe 
-      ( serInfo => { S = serInfo; }  );
-       this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
-      
-  
+      if(image != null )
+      {
+          /* Preview The Image */
+          var reader = new FileReader();
+          reader.readAsDataURL(image);
+          reader.onload = _event => {
+            this.profileUser.profile_image_url = reader.result.toString();
+          };
+          
+          /* Send Change The Image Request */
+          var S:string;
+          this.profileInfoService.updateProfilePicture(image as File).subscribe 
+          ( serInfo => { S = serInfo; }  );
+          this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
+    }
     });
   }
 
@@ -104,6 +107,7 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   changeProfileBanner(event) {
+    /* Preview The Image */
     const file = event.target.files[0];
     var reader = new FileReader();
     var imagePath = event.target.files;
@@ -112,6 +116,7 @@ export class MainProfileComponent implements OnInit {
       this.profileUser.profile_banner_url = reader.result.toString();
     };
 
+    /* Send Change The Image Request */
     this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
       this.profileUser.profile_banner_url += "?dummy=" + Math.random();
@@ -214,15 +219,18 @@ export class MainProfileComponent implements OnInit {
           this.profileUser.screen_name +
           " will now be able to follow you and read your Kweeks"
       );
+  
     } else {
       this.profileInfoService.blockUser(this.profileUser.username).subscribe();
       this.ShowMessage(
         "@" + this.profileUser.screen_name + " has been blocked"
       );
+ 
       this.profileUser.following = false;
     }
     this.profileUser.blocked = !this.profileUser.blocked;
     this.semiBlockedMode = false;
+    
   }
 
   /**

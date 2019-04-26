@@ -1,8 +1,8 @@
 <!-- Card Container: To control card dimension regardless the page -->
 <div class="card-container" *ngIf="profileHeaderInfo">
    <!-- All Card Info -->
-   <h1 class="Profile-Name"> {{profileHeaderInfo?.screen_name}} </h1>
-   <h1 class="Profile-ScreenName"> @{{profileHeaderInfo?.username}} </h1>
+   <h1 class="Profile-Name"> <a id="usernameref" href="./profile/{{profileHeaderInfo?.username}}"> {{profileHeaderInfo?.screen_name}} </a> </h1>
+   <h1 class="Profile-ScreenName"> <a id="usernameref" href="./profile/{{profileHeaderInfo?.username}}"> @{{profileHeaderInfo?.username}} </a> </h1>
    <p class="Profile-Bio" *ngIf='!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'>
       {{profileHeaderInfo?.bio}} </p>
    <div class="Profile-Joindate" *ngIf='!profileHeaderInfo?.blocked || (profileHeaderInfo?.blocked && semiBlockedMode)'>

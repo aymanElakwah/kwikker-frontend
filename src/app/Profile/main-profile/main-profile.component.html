@@ -150,8 +150,9 @@
                         (click)='toggleFollow()'>
                         <span> Following </span>
                      </button>
-                     <button type="button" class="btn btn-primary Blocked-button"
-                        *ngIf="!isAuthorisedUser() && profileUser?.blocked" (click)='toggleBlock()'>
+                     <button type="button" class="btn btn-primary"
+                        *ngIf="!isAuthorisedUser() && profileUser?.blocked" (click)='toggleBlock()'
+                        [ngClass]="{'Blocked-button':!semiBlockedMode , 'Blocked-button-SemiMode': semiBlockedMode}">
                         <span> Blocked </span>
                      </button>
                      <button type="button" class="btn btn-primary saveChanges-button" *ngIf="isEditingMode"

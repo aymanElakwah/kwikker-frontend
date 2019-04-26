@@ -188,6 +188,11 @@ const styles = (theme: ThemeVariables) => ({
        this.dialogRef.close( image );
     } 
 
+    CancelChanging()
+    {
+      this.dialogRef.close();
+    }
+
     dataURItoBlob(dataURI): Blob {
       const binary = atob(dataURI.split(',')[1]);
       const array = [];
