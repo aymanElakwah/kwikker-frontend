@@ -813,7 +813,11 @@ export class DataService {
       .get<string>(`${this.base}user/email`)
       .pipe(catchError(this.handleError));
   }
-
+  /**
+   *get request to get user's mentions
+   *@param last_retrieved_kweek_id {string} send last user to get more ids
+   * @returns user's mentions
+   */
   getUserMentions(last_retrieved_kweek_id: string): Observable<any> {
     const obj = { last_retrieved_kweek_id: String() };
     obj.last_retrieved_kweek_id = last_retrieved_kweek_id;

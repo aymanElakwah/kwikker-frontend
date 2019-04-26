@@ -9,6 +9,7 @@ import { MentionslistComponent } from '../mentionslist/mentionslist.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { KweeksModule } from '../kweeks/kweeks.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { KweeksModule } from '../kweeks/kweeks.module';
     CommonModule,
     SharedModule,
     KweeksModule,
+    InfiniteScrollModule,
     NgbModule.forRoot(),
     RouterModule.forChild([
       {path: 'notifications', component: NotificationsComponent,
