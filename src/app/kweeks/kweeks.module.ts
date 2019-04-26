@@ -34,7 +34,6 @@ import { RouterModule } from '@angular/router';
     ReplyComponent,
     LikesRekweeksListComponent,
     NewKweekComponent,
-    LikesRekweeksListComponent
   ],
   exports: [
     KweekComponent,
