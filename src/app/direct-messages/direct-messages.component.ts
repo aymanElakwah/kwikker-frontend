@@ -140,4 +140,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
   exit(){
     this.DialogRef.close();
   }
+  enter(event) {
+    if(event.key === "Enter" ) {
+      this.send();
+    }
+  }
 }

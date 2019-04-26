@@ -46,7 +46,7 @@
 </div>
 
 <!-- create message-->
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (keydown)="enter($event)">
   <div class="new row " [ngClass]="{'new2':uploadImg}">
     <div class="col-10 my-auto">
       <div *ngIf="uploadImg" class="space" style="background-color:white; ">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="input-group mb-3">
-        <input  type="text" autocomplete="off" #message id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
+        <input (keydown)="enter($event)" type="text" autocomplete="off" #message id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
       </div>
     </div>
     <div style="float:right;" class="my-auto">
