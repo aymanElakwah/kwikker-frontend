@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable  } from 'rxjs';
 import { Message } from '../model/message';
+import { environment } from 'src/environments/environment.prod';
 @Injectable(
 
 )
 export class DirectMessagesService {
-  private socket = io('http://0b238fe9.ngrok.io/');
+  private socket = io(environment.base);
   constructor() { 
     this.socket.connect();
   }
