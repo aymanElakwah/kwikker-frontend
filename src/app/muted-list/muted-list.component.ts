@@ -24,15 +24,14 @@ export class MutedListComponent implements OnInit {
     this.mutedAccounts_service.getMutedAccounts().subscribe(
       list=>{this.muted_accounts = list;}
     )
-    console.log("testing");  
-    console.log(this.muted_accounts);
+    
   }
   /**
    * unMuteUser function to unmute a muted user
    * @param username(string) used in the request to un mute user
    */
   unMuteUser(username:string){
-    console.log(username)
+  
     this.mutedAccounts_service.unmuteUser(username).subscribe(
       response => {this.res = response})
 

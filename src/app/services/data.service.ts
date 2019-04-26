@@ -832,7 +832,7 @@ export class DataService {
   postMedia(image_file: File): Observable<string> {
     let body = new FormData();
     body.append("file", image_file);
-    console.log(body);
+  
     return this.http.post<string>(this.base + "media/", body).pipe(
       map(res => res),
       catchError(this.handleError)

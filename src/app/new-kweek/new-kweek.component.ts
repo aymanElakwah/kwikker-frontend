@@ -56,7 +56,6 @@ export class NewKweekComponent implements OnInit {
 
   onClose(){
     this.thisDialogRef.close()
-    console.log("exit button works");
 
   }
 
@@ -87,24 +86,23 @@ export class NewKweekComponent implements OnInit {
    * @returns Request Response
    */
     addKweek(){
-      console.log(this.kweekData)
+     
       this.disableButton = true;
       this.kweekButtonText = "Uploading";
       if(this.selectedImage){
-        console.log("there is an image")
-        console.log(this.selectedImage);
+        
         this.newKweekService.postMedia(this.selectedImage).subscribe
        (Response=>{
         this.mediaResponse = Response;
         this.media_id = this.mediaResponse.media_id;
-        console.log(this.media_id);
+        
 
         /**
        * to differ between a reply or a new kweek when sending request
        */
        if (this.reply == true) {
         this.replyData = this.replyData+this.username+" "+this.kweekData;
-        console.log(this.replyData)
+        
       }
       if(this.reply == true && this.kweekTO == false){
         
@@ -119,19 +117,19 @@ export class NewKweekComponent implements OnInit {
       this.newKweekService.addNewKweek(this.kweekData, null, this.media_id).subscribe
       (response => {this.res = response})
     }
-      console.log(this.res);
+      
       this.thisDialogRef.close()
       })
       }else{
         this.media_id = null;
-        console.log("image id = "+this.media_id);
+        
 
-         /**
+      /**
        * to differ between a reply or a new kweek when sending request
        */
        if (this.reply == true) {
         this.replyData = this.replyData+this.username+" "+this.kweekData;
-        console.log(this.replyData)
+       
       }
       if(this.reply == true && this.kweekTO == false){
         
@@ -146,7 +144,7 @@ export class NewKweekComponent implements OnInit {
       this.newKweekService.addNewKweek(this.kweekData, null, this.media_id).subscribe
       (response => {this.res = response})
     }
-      console.log(this.res);
+      
       this.thisDialogRef.close()
       }
       
@@ -156,8 +154,6 @@ export class NewKweekComponent implements OnInit {
    * removes selected photo
    * 
    */
-
-
     removeImage()
     {
       this.selectedImage=null;

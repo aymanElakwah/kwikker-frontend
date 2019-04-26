@@ -38,7 +38,7 @@ export class NotificationslistComponent implements OnInit {
       list=>{this.notificationsResponse = list;
         this.notificatons_array = this.notificationsResponse.Notifications;
         this.new_count = this.notificationsResponse.unseen_count;
-      console.log(list);
+     
       
       }
     )
@@ -59,7 +59,7 @@ export class NotificationslistComponent implements OnInit {
       list=>{this.notificationsResponse = list;
         this.notificatons_array = this.notificationsResponse.Notifications;
         this.new_count = this.notificationsResponse.unseen_count;
-      console.log(list);
+     
       })
       
   }
