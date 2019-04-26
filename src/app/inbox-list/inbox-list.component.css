@@ -113,6 +113,7 @@ input:focus {
 {
     display: flex;
     cursor: pointer;
+    margin:5px;
 }
 .person:hover {
     background-color: #e6ecf0;
