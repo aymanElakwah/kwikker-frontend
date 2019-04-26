@@ -438,10 +438,10 @@ export class KweekComponent implements OnInit {
                 lastKweekId
               )
               .subscribe(lists => {
-                this.kweeks = lists;
+                this.kweekFunc.injectTagsInText(lists);
+                this.kweeks = this.kweeks.concat(lists); 
                 // const str = JSON.stringify(this.kweeks[0], null, 4);
                 // console.log(str);
-                this.kweekFunc.injectTagsInText(this.kweeks);
               });
             break;
           case "kweeks":
@@ -451,28 +451,27 @@ export class KweekComponent implements OnInit {
                 lastKweekId
               )
               .subscribe(lists => {
-                this.kweeks = lists;
+                this.kweekFunc.injectTagsInText(lists);
+                this.kweeks = this.kweeks.concat(lists); 
                 // const str = JSON.stringify(this.kweeks[0], null, 4);
-                // console.log(str);
-                this.kweekFunc.injectTagsInText(this.kweeks);
               });
             break;
           case "likes":
             this.kweekService
               .getUserLikedKweeks(
                 this.route.snapshot.root.children[0].params["username"],
-                null
+                lastKweekId
               )
-              .subscribe(usersInfo => {
-                this.kweeks = usersInfo;
-                this.kweekFunc.injectTagsInText(this.kweeks);
+              .subscribe(lists => {
+                this.kweekFunc.injectTagsInText(lists);
+                this.kweeks = this.kweeks.concat(lists); 
               });
             break;
         }
       } else if (mainRoute === "home") {
         this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          this.kweeks = homeKweeks;
-          this.kweekFunc.injectTagsInText(this.kweeks);
+          this.kweekFunc.injectTagsInText(homeKweeks);
+          this.kweeks = this.kweeks.concat(homeKweeks); 
         });
       } else if (
         mainRoute === "search" &&
@@ -502,8 +501,8 @@ export class KweekComponent implements OnInit {
         });
       } else {
         this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          this.kweeks = homeKweeks;
-          this.kweekFunc.injectTagsInText(this.kweeks);
+          this.kweekFunc.injectTagsInText(homeKweeks);
+          this.kweeks = this.kweeks.concat(homeKweeks); 
         });
       }
     }
