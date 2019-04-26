@@ -60,6 +60,7 @@ export class InboxListComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  image:File;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   /**
    * 
@@ -167,6 +168,7 @@ add(event: MatChipInputEvent): void {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
+    this.image = files[0];
   }
   /**
    * remove image from uploading it
@@ -186,13 +188,15 @@ add(event: MatChipInputEvent): void {
       username: '',
       media_url: ''
     };
-    message.text = this.myForm2.controls.message.value;
-    message.media_url = '' ;
-    this.selectedUsers.forEach(element => {
-      message.username = element;
-      this.data.createMessage(message).subscribe();
-    });
-    this.chatService.setSection(1);
+    message.text = this.myForm.controls.message.value;
+    message.username = this.addressee.username;
+    if(this.uploadImg===true){
+       this.data.postMedia(this.image).subscribe(mediaUrl => message.media_url= mediaUrl);
+    } else {
+      message.media_url = '' ;
+    }
+    this.data.createMessage(message).subscribe();
+    this.myForm.reset();
   }
   next(){
     this.secondStep = true;

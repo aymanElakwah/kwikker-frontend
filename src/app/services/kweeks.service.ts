@@ -118,7 +118,7 @@ export class KweeksService {
                 str +=
                   hashtagStartTagOpen +
                   "/search/people?filterBy=" +
-                  sliceStr +
+                  sliceStr.slice(1,sliceStr.length) +
                   "&src=hash" +
                   startTagClose +
                   sliceStr +
@@ -137,6 +137,8 @@ export class KweeksService {
         }
       }
       kweek.text = str; // finally make the kweek text equals the injected str
+      kweek.user.profile_image_url += "?dummy=" + Math.random();
+      console.log( kweek.user.profile_image_url);
     });
   }
 

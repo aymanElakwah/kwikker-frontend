@@ -1,6 +1,6 @@
 .Trends-Container
 {
-    width: 290px;
+    width: 310px;
     height: 465px;
     background-color: white;
     text-align: center
@@ -14,7 +14,7 @@
     margin-bottom: 10px;
     text-align: left;
     font-family: "Segoe UI",Arial,sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -32,7 +32,7 @@
 {
     line-height: 5px;
     margin-bottom: 10px;
-    margin-top: 20px;
+    margin-top: 23px;
     text-align: left;
     list-style: none;
     position: relative;
@@ -41,9 +41,9 @@
 }
 
 /* Hashtag Part */
-#Trends-Item>h1
+#Trends-Item> h1
 {
-    font-size: 14px;
+    font-size: 18px;
     text-align: inherit;
     line-height: inherit;
     color: #1B95E0;
@@ -54,9 +54,9 @@
 /* Number Of Kweeks Part */
 #Trends-Item>p
 {
-    font-size: 13px;
+    font-size: 15px;
     text-align: inherit;
     line-height: inherit;
-    margin-top: 11px;
+    margin-top: 13px;
     color:#657786;
 }

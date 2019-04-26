@@ -25,6 +25,26 @@ export class MiniProfileComponent implements OnInit {
   The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;
 
+  /* The Authorized User (The one who made Log in) */
+  authorizedUser: string = localStorage.getItem("username");
+
+  /* Last UserName Sent To The Backend To retireve more */
+  LastSent: string = null;
+
+  /* Profile Username */
+  ProfileUserName: string;
+
+  DummyString: string = "?dummy=" + Math.random();
+
+      /**
+   * Check If this Profile belongs to the authorized User (The one who loged in)
+   * No Parameters
+   * @returns {boolean}
+   */
+  isAuthorisedUser(index: number): boolean {
+    return (this.miniCardProfileUsers[index].username == this.authorizedUser);
+  }
+
    /**
    *
    * @param route to Know which Url is Activated To send The appropiate request
@@ -100,23 +120,24 @@ export class MiniProfileComponent implements OnInit {
    * while the user scrolling 
    */
   onScroll() {
+  
    if(this.miniCardProfileUsers.length != 0)
    {
-      if(this.route.snapshot.url[0].path == 'followers')
+      var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ;
+      var Lastindex = this.miniCardProfileUsers.length;
+      if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
       {
-        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ).subscribe
+       
+        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
         ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.LastSent = LastUsername;
       }
-      else if (this.route.snapshot.url[0].path == 'following')
+      else if (this.route.snapshot.url[0].path == 'following' && this.LastSent != LastUsername)
       {
-        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username).subscribe
+        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
         ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.LastSent = LastUsername;
       }
-      for (var i = 0; i<this.miniCardProfileUsers.length; i++) {
-        this.miniCardProfileUsers[i].profile_image_url += "?dummy=" + Math.random();
-        this.miniCardProfileUsers[i].profile_banner_url += "?dummy=" + Math.random();
-        this.muteModes.push(false);
-     }
   }
 }
 
@@ -125,26 +146,24 @@ export class MiniProfileComponent implements OnInit {
    * and Based On It, Send the appropiate request
    */
   ngOnInit() {
+
+    this.ProfileUserName = this.route.snapshot.root.children[0].params['username'];
     if(this.route.snapshot.url[0].path == 'followers')
     {
-      this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], null).subscribe
+      this.miniProfileInfoService.getUserFollowers(this.ProfileUserName, null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
     }
     else if (this.route.snapshot.url[0].path == 'following')
     {
-      this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], null).subscribe
+      this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
     }
     else 
     {
       this.miniProfileInfoService.searchUsers(this.route.snapshot.queryParams["filterBy"]).subscribe(
-        usersInfo => { this.miniCardProfileUsers = usersInfo;} );
+        usersInfo => { this.miniCardProfileUsers = usersInfo;});
+    
     }
-    for (var i = 0; i<this.miniCardProfileUsers.length; i++) {
-      this.miniCardProfileUsers[i].profile_image_url += "?dummy=" + Math.random();
-      this.miniCardProfileUsers[i].profile_banner_url += "?dummy=" + Math.random();
-      this.muteModes.push(false);
-   }
   }
 
 }

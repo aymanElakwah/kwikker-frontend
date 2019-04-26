@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LikersListComponent } from './likers-list.component';
+import { ConfirmDeleteComponent } from './confirm-delete.component';
 
-describe('LikersListComponent', () => {
-  let component: LikersListComponent;
-  let fixture: ComponentFixture<LikersListComponent>;
+describe('ConfirmDeleteComponent', () => {
+  let component: ConfirmDeleteComponent;
+  let fixture: ComponentFixture<ConfirmDeleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LikersListComponent ]
+      declarations: [ ConfirmDeleteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LikersListComponent);
+    fixture = TestBed.createComponent(ConfirmDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

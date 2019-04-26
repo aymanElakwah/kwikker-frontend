@@ -9,7 +9,7 @@ describe("LogInComponent", () => {
     it("should call #logInUser in the constructor", () => {
         let LogIn_Spy = spyOn(DataService.prototype, 'logInUser');
 
-        logInComponent = new DataService(http);
+        logInComponent = new DataService(http, null);
 
         expect(LogIn_Spy).toHaveBeenCalled();
     });

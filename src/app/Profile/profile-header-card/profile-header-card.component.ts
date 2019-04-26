@@ -47,7 +47,6 @@ export class ProfileHeaderCardComponent implements OnInit {
     this.ChatService.setAddressee(this.profileHeaderInfo);
     this.ChatService.setSection(3);
     const dialogRef = this.dialog.open(ChatComponent);
-    
   }
  
   /**

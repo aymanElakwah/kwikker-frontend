@@ -70,8 +70,8 @@
                 </div>
                         <div class="collapse navbar-collapse myNavBar hide" >
                                 <ul class="nav navbar-nav navbar-lef">
-                                        <li class="active"> <a href="#"><span class=" glyphicon glyphicon-home"></span>&nbsp; Home</a></li>
-                                        <li> <a href="notification"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notification</a></li>
+                                        <li> <a href="home"><span class=" glyphicon glyphicon-home"></span>&nbsp; Home</a></li>
+                                        <li> <a href="notifications"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notification</a></li>
                                         <li class="navbarMsg"> <a (click)="openInboxComponent()" (click)="toggleNav()"> <span class="glyphicon glyphicon-envelope"></span>&nbsp; Message</a></li>
                                         
                                          
@@ -82,9 +82,9 @@
                                                 <form class="navbar-form searchBar">
                                                         <div class="form-group">
                                                                 <input class="form-control" (keydown)="newSearch($event)" #searchBar [(ngModel)]="filterBy" type="search" aria-label="Search" name="ngModel" placeholder="Search...">
-                                                                <div class="list-group  " [hidden]="!searchBar.value">
+                                                                <div class="list-group  " [hidden]="!searchBar.value" >
                                                                      
-                                                                <a class="list-group-item list-group-item-action" *ngFor="let user of users"  [routerLink]="['profile',user.username]">
+                                                                <a class="list-group-item list-group-item-action"  *ngFor="let user of users" (click)="testFunc(user.username)"  [routerLink]="['/profile',user.username]">
                                                                         {{user.username}}
                                                                 </a>
                                                                        
@@ -99,7 +99,7 @@
                                                         <span class="glyphicon glyphicon-list"></span>&nbsp; {{userName}}
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                <li> <a  [routerLink]="['profile',userName]"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</a></li>
+                                                <li> <a  [routerLink]="['/profile',userName]"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</a></li>
                                                 <li> <a href="settings"><span class="glyphicon glyphicon-cog"></span>&nbsp; Settings</a></li>
                                                 <li class="navbarMsg"> <a (click)="logOutUser()"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Logout</a></li>
                                                 </ul>

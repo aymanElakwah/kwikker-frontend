@@ -5,23 +5,23 @@
       <div class="profile-card">
          <!--  The Upper Part for the banner -->
          <div class="row banner">
-            <img class='BannerImage' src={{user?.profile_banner_url}} alt="miniProfileBanner" id="BannerImage" />
+            <img class='BannerImage' src={{user?.profile_banner_url}}{{DummyString}}  id="BannerImage" />
          </div>
          <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
          <div class=" row profile-content">
             <div class="content">
                <!-- User Action Part Includes [DropDownMenu, Follow & Following Button] -->
-               <div class="user-action">
+               <div class="user-action" *ngIf="!isAuthorisedUser(i)">
                   <span class="MuteIcon" style="font-size: 4ex; color:#939c99;"
                      *ngIf="(muteModes[i] || user?.muted) && !user?.blocked">
-                     <i class="fas fa-volume-mute" [style.opacity]="(user?.muted)? '1' : '0.5'"
+                     <i class="fas fa-volume-mute fa-sm" [style.opacity]="(user?.muted)? '1' : '0.5'"
                         [style.color]="(user?.muted)? '#9e0909e3' : '#939c99'" (click)='toggleMute(i)'> </i>
                   </span>
-                  <button type="button" class="btn btn-outline-primary Follow" *ngIf="!user.following && !user?.blocked"
+                  <button type="button" class="btn btn-outline-primary Follow" *ngIf="!user.following && !user?.blocked && !isAuthorisedUser(i)"
                      (click)='toggleFollow(i)'> Follow </button>
-                  <button class="btn btn-primary Following" *ngIf="user.following && !user?.blocked"
+                  <button class="btn btn-primary Following" *ngIf="user.following && !user?.blocked && !isAuthorisedUser(i)"
                      (click)='toggleFollow(i)'> <span>Following </span> </button>
-                  <button type="button" class="btn btn-primary Blocked-button" *ngIf="user?.blocked"
+                  <button type="button" class="btn btn-primary Blocked-button" *ngIf="user?.blocked && !isAuthorisedUser(i)"
                      (click)='toggleBlock(i)'>
                      <span> Blocked </span>
                   </button>
@@ -34,35 +34,37 @@
                   <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
                   <div class="dropdown-menu" id="userActionDropDownMenu" aria-labelledby="dropdownMenuButton">
                      <li class="dropdown-item" *ngIf="!user?.blocked">
-                        <P> Tweet To @{{user.screen_name}}</P>
+                        <P> Tweet To @{{user.username}}</P>
                      </li>
                      <li class="dropdown-item">
                         <P> Send a Direct Message</P>
                      </li>
                      <li class="dropdown-item" *ngIf="!user?.blocked">
-                        <P *ngIf="!user?.muted" (click)='toggleMute(i)'> Mute @{{user.screen_name}} </P>
-                        <P *ngIf="user?.muted" (click)='toggleMute(i)'> Unmute @{{user.screen_name}} </P>
+                        <P *ngIf="!user?.muted" (click)='toggleMute(i)'> Mute @{{user.username}} </P>
+                        <P *ngIf="user?.muted" (click)='toggleMute(i)'> Unmute @{{user.username}} </P>
                      </li>
                      <li class="dropdown-item">
-                        <P *ngIf="!user?.blocked" (click)='toggleBlock(i)'> Block @{{user.screen_name}} </P>
-                        <P *ngIf=" user?.blocked" (click)='toggleBlock(i)'> Unblock @{{user.screen_name}} </P>
+                        <P *ngIf="!user?.blocked" (click)='toggleBlock(i)'> Block @{{user.username}} </P>
+                        <P *ngIf=" user?.blocked" (click)='toggleBlock(i)'> Unblock @{{user.username}} </P>
                      </li>
                   </div>
                </div>
                <!-- Profile Picture Part -->
                <div class="profile-pic">
-                  <img class="ProfileImage" src={{user?.profile_image_url}} alt="miniProfilePicture"
-                     id="ProfileImage" />
+                  <img class="ProfileImage" src={{user?.profile_image_url}}{{DummyString}} id="ProfileImage" />
                </div>
                <!-- Profile Info Part [Username, Screen Name, Bio] -->
                <div class="profile-data">
-                  <div class="username"> <a id="usernameref" href="./profile/{{user.screen_name}}"> {{user.screen_name}} </a>  </div>
-                  <div class="screen-name">  <a id="usernameref" href="./profile/{{user.screen_name}}"> @{{user.username}} </a> </div>
-                  <p class="FollowsYou" *ngIf="user.follows_you"> Follows You </p>
+                  <div class="username"> <a id="usernameref" href="./profile/{{user.username}}"> {{user.screen_name}} </a>  </div>
+                  <div class="screen-name">  <a id="usernameref" href="./profile/{{user.username}}"> @{{user.username}} </a> </div>
+                  <p class="FollowsYou" *ngIf="user.follows_you && !isAuthorisedUser(i)"> Follows You </p>
                   <p class="bio"> {{user.bio}} </p>
                </div>
             </div>
          </div>
       </div>
    </div>
+</div>
+<div class="Padding">
+   <img class="Logo" src="../../../assets/main/8800.png" alt="Profile Picture" id="ProfileImage" />
 </div>

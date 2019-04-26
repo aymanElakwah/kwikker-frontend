@@ -130,7 +130,7 @@ export class AppPage {
   getDatePickerSignupBoard(){
     return element(by.xpath('//*[local-name() = "svg"]'));
   }
-  
+
   getDateDaySignupBoard(){
     return element(by.cssContainingText('.mat-calendar-body-cell-content', '1'));
   }

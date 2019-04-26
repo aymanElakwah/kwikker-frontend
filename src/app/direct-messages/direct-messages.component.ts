@@ -1,5 +1,5 @@
 // angular components
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {FormGroup , FormBuilder, Validators} from '@angular/forms';
 // used services
 import { ChatService } from '../chat/chat.service';
@@ -18,6 +18,7 @@ import { ChatComponent } from '../chat/chat.component';
   providers: [ DirectMessagesService]
 })
 export class DirectMessagesComponent implements OnInit {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   /**
    * addressed person
    */
@@ -38,6 +39,11 @@ export class DirectMessagesComponent implements OnInit {
    * list of messages
    */
   messageList :Message[];
+  /** 
+   * uploaded image
+  */
+  image:File;
+ // @ViewChild('file') sendElement: ElementRef;
   /**
    *
    * @param chatService to get data of addresse
@@ -50,18 +56,25 @@ export class DirectMessagesComponent implements OnInit {
               private data: DataService,
               private socket:DirectMessagesService,
               public DialogRef: MatDialogRef<ChatComponent>) {
-                this.socket.ReciveMessage().subscribe(list => {
-                  this.messageList.push(list);
-                });
+                
+               // this.sendElement.nativeElement.focus();
    }
+   
   ngOnInit() {
-    this.chatService.currentAddresse.subscribe(addressee => this.addressee = addressee);
+    this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
+      this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
+        this.messageList.push(list);
+      });});
     this.myForm = this.fb.group({
     message: ['', [
       Validators.required
     ]],
     file : [null]
     });
+    this.data.getDirectMessages(this.addressee.username).subscribe(list=>{
+      this.messageList = list.reverse();
+    }
+    );
   }
   /**
    * click input tag on button click
@@ -82,6 +95,7 @@ export class DirectMessagesComponent implements OnInit {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
+    this.image = files[0];
   }
   /**
    * remove image from uploading it
@@ -103,8 +117,11 @@ export class DirectMessagesComponent implements OnInit {
     };
     message.text = this.myForm.controls.message.value;
     message.username = this.addressee.username;
-    // to do
-    message.media_url = '' ;
+    if(this.uploadImg===true){
+       this.data.postMedia(this.image).subscribe(mediaUrl => message.media_url= mediaUrl);
+    } else {
+      message.media_url = '' ;
+    }
     this.data.createMessage(message).subscribe();
     this.myForm.reset();
   }

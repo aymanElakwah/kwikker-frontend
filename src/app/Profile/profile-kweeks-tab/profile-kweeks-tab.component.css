@@ -12,16 +12,12 @@
 	margin: 0 0;
 }
 
-@media (max-width: 1200px) {
-	.right-part {
-		min-width: 1200px;
-		margin-left: 20px;
-	}
+ @media (max-width: 1400px) {
 	/*  Trends Bar will disappear From right In small Devices */
-	#Right-Profile-Trends {
+ 	.Trend {
 		display: none !important;
-	}
-}
+	} 
+} 
 
 .Logo {
 	width: 40px;
@@ -30,4 +26,9 @@
 	left: 42%;
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+.col-fixed
+{
+	width: 640px;
 }

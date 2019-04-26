@@ -15,8 +15,11 @@
 body{
     margin:0;
     background-color: #e6ecf0;
+    height:100%;
 }
 
 .custom-dialog-container .mat-dialog-container {
   padding: 0px;
+  margin-top: 100px;
+  overflow-x: hidden;
 }
