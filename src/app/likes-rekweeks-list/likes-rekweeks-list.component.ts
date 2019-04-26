@@ -19,17 +19,22 @@ export class LikesRekweeksListComponent implements OnInit {
   constructor(private kweekService: DataService) {}
 
   ngOnInit() {
+    console.log(this.clickedKweek.id);
     if (this.likers) {
       this.kweekService
         .kweekLikers(this.clickedKweek.id)
         .subscribe(likersList => {
           this.users = likersList;
+          const str = JSON.stringify(this.users[0], null, 4);
+          console.log(str);
+          console.log("likers");
         });
     } else {
       this.kweekService
         .kweekRekweekers(this.clickedKweek.id)
-        .subscribe(likersList => {
-          this.users = likersList;
+        .subscribe(rekweekersList => {
+          this.users = rekweekersList;
+          console.log("rekweekers");
         });
     }
   }

@@ -57,7 +57,7 @@ describe("LogInComponent", () => {
   it("should call #signup in the constructor", () => {
     let signUp_Spy = spyOn(DataService.prototype, 'signUpUser');
 
-    dataServices = new DataService(http);
+    dataServices = new DataService(http, null);
 
     expect(signUp_Spy).toHaveBeenCalled();
   });

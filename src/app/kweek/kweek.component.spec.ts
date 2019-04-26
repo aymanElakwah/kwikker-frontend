@@ -34,7 +34,7 @@ describe("KweekComponent", () => {
   };
 
   beforeEach(() => {
-    dataService = new DataService(null);
+    dataService = new DataService(null, null);
     kweeksService = new KweeksService(dataService);
     component = new KweekComponent(
       dataService,

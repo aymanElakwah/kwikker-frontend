@@ -53,7 +53,7 @@
               <div class="container-fluid" style="margin-top:12px;">
                 <div class="row">
                   <div class="col-2">
-                    <span class="reply icon-pointer" (click)="reply(root)">
+                    <span class="reply icon-pointer" (click)="Reply(root)">
                       <span
                         matTooltip="Reply"
                         matTooltipClass="tooltip-style"
@@ -216,6 +216,9 @@
                 />
               </div>
             </div>
+            <div id="clicked-kweek-date">
+              {{ clickedKweek.created_at | date: "h:mm a - d MMM y" }}</div
+            >
             <div *ngIf="clickedKweek.number_of_rekweeks !== 0 || clickedKweek.number_of_likes !== 0">
             <div id="likers-rekweekers">
               <span *ngIf="clickedKweek.number_of_rekweeks !== 0">
@@ -235,7 +238,7 @@
                 <div class="col-2">
                   <span
                     class="reply icon-pointer"
-                    (click)="reply(clickedKweek)"
+                    (click)="Reply(clickedKweek)"
                   >
                     <span
                       matTooltip="Reply"
@@ -415,7 +418,7 @@
               <div class="container-fluid" style="margin-top:12px;">
                 <div class="row">
                   <div class="col-2">
-                    <span class="reply" (click)="reply(reply)">
+                    <span class="reply" (click)="Reply(reply)">
                       <span
                         matTooltip="Reply"
                         matTooltipClass="tooltip-style"
