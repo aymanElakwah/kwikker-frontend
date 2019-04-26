@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LikersListComponent } from '../likers-list/likers-list.component';
 import { RekweekersListComponent } from '../rekweekers-list/rekweekers-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RekweekersListComponent } from '../rekweekers-list/rekweekers-list.comp
     OverlayModule,
     MatIconModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    InfiniteScrollModule
   ],
   entryComponents: [
     ReplyComponent,

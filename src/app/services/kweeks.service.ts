@@ -138,6 +138,7 @@ export class KweeksService {
       }
       kweek.text = str; // finally make the kweek text equals the injected str
       kweek.user.profile_image_url += "?dummy=" + Math.random();
+      console.log( kweek.user.profile_image_url);
     });
   }
 
