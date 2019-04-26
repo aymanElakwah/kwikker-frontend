@@ -343,7 +343,7 @@ export class DataService {
    */
   getNotificationsList(
     last_notifications_retrieved_id: string
-  ): Observable<Notification[]> {
+  ): Observable<any> {
     const options = last_notifications_retrieved_id
       ? {
           params: new HttpParams().set(
@@ -353,7 +353,7 @@ export class DataService {
         }
       : {};
     return this.http
-      .get<Notification[]>(this.base + "notifications", options)
+      .get<any>(this.base + "notifications", options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
@@ -830,7 +830,11 @@ export class DataService {
       .get<string>(`${this.base}user/email`)
       .pipe(catchError(this.handleError));
   }
-
+  /**
+   *get request to get user's mentions
+   *@param last_retrieved_kweek_id {string} send last user to get more ids
+   * @returns user's mentions
+   */
   getUserMentions(last_retrieved_kweek_id: string): Observable<any> {
     const obj = { last_retrieved_kweek_id: String() };
     obj.last_retrieved_kweek_id = last_retrieved_kweek_id;

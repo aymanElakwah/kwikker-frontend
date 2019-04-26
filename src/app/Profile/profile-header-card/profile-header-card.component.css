@@ -7,7 +7,7 @@
 /* Profile Username */
 
 .Profile-Name {
-	font-size: 21px;
+	font-size: 23px;
 	font-weight: bold;
 	line-height: 28px;
 	margin-right: 2px;
@@ -18,11 +18,11 @@
 /* Profile Screen name */
 
 .Profile-ScreenName {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 20px;
-	margin-bottom: 12px;
+	margin-bottom: -2px;
 	position: relative;
-	bottom: 6px;
+	bottom: 18px;
 	color: rgb(102, 117, 127);
 }
 

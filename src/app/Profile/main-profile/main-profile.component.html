@@ -1,4 +1,4 @@
-<div *ngIf='profileUser'>
+<div class= "PROFILE">
    <div id="message-sticky">
       <span class="close-button" onclick=" this.parentElement.style.transform ='translate( 0px,-40px)';
        this.parentElementstyle.visibility = 'hidden';"> &times; </span>
@@ -12,7 +12,8 @@
          <!-- The Header Part which contain [banner, ProfilePicture, Secondry Navbar] -->
          <div class="row" id="header">
 
-            <!--ProfilePicture Image-->
+          <!--ProfilePicture Image-->
+   
             <div [ngClass]="{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">
                <!--User Setting Dropdown Menu -->
                <img *ngIf="!isAuthorisedUser() || !isProfilePictureDefault()"
@@ -20,7 +21,7 @@
                   src={{profileUser?.profile_image_url}} id="ProfileImage" />
 
                <span class="Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isAuthorisedUser() && isProfilePictureDefault()">
-                  <i class="fas fa-camera fa-4x"></i>
+                  <i class="fas fa-camera fa-3x"></i>
                </span>
 
                <div class="user-setting-dropdown" *ngIf="isAuthorisedUser()">
@@ -41,12 +42,12 @@
                   </div>
                </div>
                <span class="Image-Icon" style="color:#fff" *ngIf="isEditingMode">
-                  <i class="far fa-images fa-4x"></i>
+                  <i class="far fa-images fa-3x"></i>
                </span>
                <p [ngClass]="{'editProfilePicText':!isProfilePictureDefault() , 'editProfilePicText-default':isProfilePictureDefault()}"
                   *ngIf="isEditingMode"> </p>
             </div>
-
+       
 
             <!--Banner Image-->
             <div class="row" [ngClass]="{'Banner':!isEditingMode, 'Banner-Editing':isEditingMode}">
@@ -56,7 +57,7 @@
                </div>
             </div>
             <span class="Camera-Icon" style="color:#ffff" *ngIf="isEditingMode">
-               <i class="fas fa-camera fa-4x"></i>
+               <i class="fas fa-camera fa-3x"></i>
             </span>
             <p [ngClass]="{'editBannerText':!isProfileBannerDefault() , 'editBannerText-default':isProfileBannerDefault()}"
                *ngIf="isEditingMode"> </p>
@@ -78,11 +79,11 @@
                </div>
             </div>
             <!--User Setting Dropdown Menu -->
-            <div class="user-setting-dropdown" *ngIf="!isAuthorisedUser() && !isEditingMode">
+            <div class="user-setting-dropdown Nav" *ngIf="!isAuthorisedUser() && !isEditingMode">
                <button class="btn  btn-light DIcon" id="userActionDropdownMenuButton" data-toggle="dropdown">
                   <!-- 3 Dots Icon => Font-Awesome -->
                   <span class="Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
-                     <i class="fas fa-ellipsis-v"></i>
+                     <i class="fas fa-ellipsis-v fa-1x"></i>
                   </span>
                </button>
                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
@@ -105,11 +106,11 @@
             </div>
             <!--Profile Page Secondry NavBar [Taps, Follow & Following Buttons, DropDownMenu -->
             <div class="row" [ngClass]="{'Profile-NavBar':!isEditingMode, 'Profile-NavBar-Editing':isEditingMode}">
-               <div class="row justify-content-center App-Container">
+               <div class="row justify-content-center App-Container Nav">
                   <!-- The First Column has No Data -->
                   <div class="col-3 nopadding"> </div>
                   <!-- The Second Column contains Taps, UserAction -->
-                  <div class="col-9 nopadding">
+                  <div class="col-9  nopadding">
                      <ul id="Taps" *ngIf='!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'>
                         <li> <a routerLinkActive="active" [routerLink]="['kweeks']"> Tweets <br>
                               {{profileUser?.kweeks_count}}
@@ -161,7 +162,7 @@
                </div>
             </div>
          </div>
-         <div class="App-Container">
+         <div class="App-Container ">
             <!-- The Body Part which contain [ProfileInfoCard, Trends, Kweek & MiniUsers Tabs] -->
             <div class="row justify-content-center"
                [ngClass]="{'Content':!isEditingMode, 'Content-Editing':isEditingMode}">
@@ -183,18 +184,21 @@
                   </div>
                </div>
                <!--  Kweeks OR MiniUsers Tab -->
-               <div class="col-9" [ngClass]="{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
+               <div class="col-9"  [ngClass]="{'outlet-side':!isEditingMode, 'outlet-side-Editing':isEditingMode}">
                   <router-outlet *ngIf='!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)'>
                   </router-outlet>
                   <div class="BlockMsg" *ngIf="profileUser?.blocked && !semiBlockedMode">
                      <h2 class="BlockMsgHeader"> You blocked @<b
                            style="font-weight: normal;">{{profileUser?.username}}</b> </h2>
                      <p class="BlockMsgBody"> Are you sure you want to view these Tweets? Viewing Tweets won't unblock
-                        <br>@{{profileUser?.user_name}} <br> </p>
+                        <br>@{{profileUser?.username}} <br> </p>
                      <button type="button" class="btn btn-outline-primary semiBlocked-button"
                         (click)='togglesemiBlockedMode()'>
                         <span> Yes, view profile </span>
                      </button>
+                     <div class="Padding">
+                        <img class="Logo" src="../../../assets/main/8800.png" alt="Profile Picture" id="ProfileImage" />
+                     </div>
                   </div>
                </div>
             </div>

@@ -15,6 +15,7 @@
 body{
     margin:0;
     background-color: #e6ecf0;
+    height:100%;
 }
 
 .custom-dialog-container .mat-dialog-container {

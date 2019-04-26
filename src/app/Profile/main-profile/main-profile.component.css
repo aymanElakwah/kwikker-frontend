@@ -1,14 +1,15 @@
 /* Main Containers For The Profile Page */
 .container-fluid {
-	height: 100%;
+	height: auto !important;
 	margin: 0 0;
 	padding: 0 0;
 	overflow-x: hidden;
+	background-color: #e6ecf0;
 }
 
 .App-Container {
 	margin: 0 6.3%;
-	height: 100%;
+	height: auto;
 	width: 90%;
 	overflow: hidden;
 }
@@ -23,20 +24,20 @@
 .left-side {
 	margin-top: 12px;
 	padding: 0;
-	padding-left: 3.5%;
-	padding-right: 0%;
+	padding-left: 3.4%;
+	padding-right: 0px;
 	margin-left: 0%;
 	margin-right: 0%;
 	overflow-x: hidden;
 }
 
 .Header-Card {
-	padding-top: 8%;
+	padding-top: 7%;
 	margin-bottom: 80px;
 }
 
 .Header-Card-Editing {
-	padding-top: 8%;
+	padding-top: 13%;
 	margin-bottom: 80px;
 	right: 5%;
 }
@@ -59,10 +60,6 @@
 	overflow: visible;
 }
 
-.appNavBar
-{
-	z-index: 9999999 !important;
-}
 
 .Content-Editing {
 	-webkit-transition: 0.5s;
@@ -76,8 +73,8 @@
 	overflow: hidden;
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
-	-webkit-transform: translate(0, 60px);
-	transform: translate(0, 60px);
+	-webkit-transform: translate(0, 110px);
+	transform: translate(0, 110px);
 }
 
 .outlet-side-Editing {
@@ -93,7 +90,7 @@
 	width: 100%;
 	background-color: #fff;
 	box-sizing: border-box;
-	height: 60px;
+	height: 59px;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
 	overflow-y: visible;
 	line-height: 1.375;
@@ -153,16 +150,16 @@ a {
 	background-color: #1B95E0;
 	border: 5px solid #fff;
 	border-radius: 50%;
-	height: 200px;
-	width: 200px;
+	height: 220px;
+	width: 220px;
 	position: absolute;
 	Left: 8%;
 	Top: 26%;
 	z-index: 998 !important;
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
-	-webkit-transform: translate(0, 65px);
-	transform: translate(0, 65px);
+	-webkit-transform: translate(0, 90px);
+	transform: translate(0,90px);
 }
 
 
@@ -170,8 +167,8 @@ a {
 	background: rgb(3, 59, 94);
 	border: 5px solid #fff;
 	border-radius: 50%;
-	height: 200px;
-	width: 200px;
+	height: 220px;
+	width: 220px;
 	position: absolute;
 	Left: 8%;
 	Top: 26%;
@@ -187,7 +184,7 @@ a {
 .Banner {
 	width: 100%;
 	background-color: #1B95E0;
-	height: 100%;
+	height: 120%;
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 	-webkit-transform: scale(1, 1);
@@ -207,16 +204,16 @@ a {
 
 .ProfileImage-Editing {
 	border-radius: 50%;
-	height: 190px;
-	width: 190px;
+	height: 210px;
+	width: 210px;
 	opacity: 0.4;
 }
 
 
 #ProfileImage {
 	border-radius: 50%;
-	height: 190px;
-	width: 190px;
+	height: 210px;
+	width: 210px;
 }
 
 .BannerImage {
@@ -235,7 +232,7 @@ a {
 {
 	position:absolute;
 	top : -30% !important;
-	left: -18% !important;
+	left: -14.3% !important;
 }
 
 #BannerDropDownMenu {
@@ -244,10 +241,14 @@ a {
 	left: 43% !important;
 }
 
+#userActionDropdownMenu {
+	transform: translate(0,20px) !important;
+}
+
 #userActionDropdownMenuButton {
 	position: absolute;
-	right: 10%;
-	Top: 105%;
+	right: 7%;
+	Top: 125%;
 	height: 30px;
 	z-index: 9999 !important;
 }
@@ -264,7 +265,7 @@ a {
 .editBannerText {
 	position: absolute;
 	Top: 107%;
-	left: 41.5%;
+	left: 42.5%;
 	color: #fff;
 	font-size: 18px;
 	font-weight: bold;
@@ -279,7 +280,7 @@ a {
 .editBannerText-default {
 	position: absolute;
 	Top: 107%;
-	left: 43.5%;
+	left: 44.5%;
 	color: #fff;
 	font-size: 18px;
 	font-weight: bold;
@@ -302,6 +303,7 @@ a {
 }
 
 .editProfilePicText::after {
+	font-size: 20px;
 	content: "Change your profile photo";
 }
 
@@ -381,7 +383,7 @@ a {
 	color: #66757f;
 	min-width: 89px;
 	position: absolute;
-	right: 5%;
+	right: 1%;
 	Top: 18%;
 }
 
@@ -460,9 +462,9 @@ a {
 	background-color: #fff;
 	color: rgb(224, 27, 27);
 	width: 100px;
-	position: absolute;
-	right: 10%;
-	Top: 18%;
+	position: relative;
+	left: 80%;
+	top: 8%;
 }
 
 .close-button {
@@ -493,8 +495,8 @@ a {
 	background-color: #fff;
 	border: 5px solid #fff;
 	border-radius: 50%;
-	height: 200px;
-	width: 200px;
+	height: 220px;
+	width: 220px;
 	position: absolute;
 	left: -2%;
 	Top: -2%;
@@ -579,7 +581,7 @@ a {
 .Dots-Icon {
 	position: absolute;
 	right: 30%;
-	Top: 0;
+	Top: 0%;
 }
 
 .MuteIcon {
@@ -661,36 +663,72 @@ a {
 	word-wrap: break-word;
 }
 
+.Padding
+{
+	height: 220px;
+}
+
+.Logo
+{
+	width: 40px !important;
+	height: 40px !important;
+	margin-top: 20px !important;
+	margin-bottom: 20px !important;
+}
+
 /* Media Queries */
+ @media (max-width: 1350px) { 
+	
+	.App-Container
+   {
+	   max-width: 1250px;
+	   margin-left: 50px !important;
+	   margin-right: 0 !important;
+	   overflow: visible;
+	   width: 1200px;
+   }
 
-@media (max-width: 1350px) {
-	#Right-Profile-Trends {
-		display: none !important;
-	}
-	#Left-Profile-Trends {
-		display: block;
-	}
+   .Profile-Picture
+   {
+	   transform: translate(-40px,90px);
+   }
+   .follow-button
+   {
+	   transform: translate(-100px,0);
+   }
+   .edit-button
+   {
+	   transform: translate(-100px,0);
+   }
+   .following-button
+   {
+	   transform: translate(-100px,0);
+   }
+   #userActionDropdownMenuButton
+   {
+	   transform: translate(-70px,0);
+   }
+   #Left-Profile-Trends
+   {
+	   display: inline;
+   }
+   .Nav
+   {
+	  transform: translate(20px,0);
+	  min-width:500px;
+	  float: right;
+   }
 }
 
-@media (max-width: 1200px) {
-	#Right-Profile-Trends {
-		display: inline !important;
-	}
-	#Left-Profile-Trends {
-		display: block !important;
-	}
-}
-
-@media (max-width: 400px) {
-	#Right-Profile-Trends {
-		display: inline !important;
-	}
-	#Left-Profile-Trends {
-		display: none;
-	}
-}
-
-
+@media(max-width: 1100px)   {.PROFILE {	zoom: 90%; }}
+@media(max-width: 1000px)   {.PROFILE {	zoom: 85%; }}
+@media(max-width: 900px)    {.PROFILE {	zoom: 80%; }}
+@media(max-width: 800px)    {.PROFILE {	zoom: 75%; }}
+@media(max-width: 700px)    {.PROFILE {	zoom: 65%; }}
+@media(max-width: 600px)    {.PROFILE {	zoom: 55%; }}
+@media(max-width: 500px)    {.PROFILE {	zoom: 45%; }}
+@media(max-width: 400px)    {.PROFILE {	zoom: 35%; }}
+@media(max-width: 300px)    {.PROFILE {	zoom: 25%; } 	.App-Container{width: 250px;} .Nav{width: 100px;}}
 
 
 

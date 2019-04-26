@@ -172,17 +172,13 @@ const styles = (theme: ThemeVariables) => ({
   
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
-      console.log('cropped img: ', e);
       this.fileToUpload = e as File;
-      console.log(this.fileToUpload);
     }
 
     onloaded(e: ImgCropperEvent) {
-      console.log('img loaded', e);
     }
 
     onerror(e: ImgCropperErrorEvent) {
-      console.warn(`'${e.name}' is not a valid image`, e);
     }
 
     changeImage()
@@ -195,8 +191,7 @@ const styles = (theme: ThemeVariables) => ({
     dataURItoBlob(dataURI): Blob {
       const binary = atob(dataURI.split(',')[1]);
       const array = [];
-      console.log(binary);
-
+ 
       for (let i = 0; i < binary.length; i++) {
         array.push(binary.charCodeAt(i));
       }
