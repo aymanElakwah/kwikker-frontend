@@ -18,6 +18,7 @@ public fs2: any;
 public fs3: any;
 public cool: any;
 public errorOccured: any;
+public errorOccured2: any;
 public email: string;
 public counter: number;
 public userName: string;
@@ -57,6 +58,7 @@ ngOnInit() {
    this.fs3 =  document.querySelector('.fs3');
    this.cool =  document.querySelector('.progress');
    this.errorOccured =  document.querySelector('.errorOccured');
+   this.errorOccured2 =  document.querySelector('.errorOccured2');
    this.counter = 0;
 }
 
@@ -118,8 +120,15 @@ public previousOne (){
          this.whatToShow(0);
        },
         err => {
-          console.log('error: ', err);
-          this.whatToShow(1);
+          if(err.status == "403")
+          {
+            this.whatToShow(1);
+          }
+          else
+          {
+            this.whatToShow(2);  
+          }
+          
         }
     ); 
     
@@ -136,11 +145,19 @@ public whatToShow(id: number) {
     //no error
     this.cool.className = 'show';
     this.errorOccured.className = 'hide';
+    this.errorOccured2.className = 'hide';
   }
-  else{
-    //error
+  else if (id == 1){
+    //error 1
     this.cool.className = 'hide';
     this.errorOccured.className = 'show';
+    this.errorOccured2.className = 'hide';
+  }
+  else{
+    //error 2
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'hide';
+    this.errorOccured2.className = 'show';
   }
 }
 /**
