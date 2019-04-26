@@ -39,6 +39,10 @@ export class DirectMessagesComponent implements OnInit {
    * list of messages
    */
   messageList :Message[];
+  /** 
+   * uploaded image
+  */
+  image:File;
  // @ViewChild('file') sendElement: ElementRef;
   /**
    *
@@ -91,6 +95,7 @@ export class DirectMessagesComponent implements OnInit {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
+    this.image = files[0];
   }
   /**
    * remove image from uploading it
@@ -113,11 +118,10 @@ export class DirectMessagesComponent implements OnInit {
     message.text = this.myForm.controls.message.value;
     message.username = this.addressee.username;
     if(this.uploadImg===true){
-      // this.data.postMedia()
+       this.data.postMedia(this.image).subscribe(mediaUrl => message.media_url= mediaUrl);
+    } else {
+      message.media_url = '' ;
     }
-
-    // to do
-    message.media_url = '' ;
     this.data.createMessage(message).subscribe();
     this.myForm.reset();
   }

@@ -38,6 +38,8 @@
       </div>
       <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username}">
         {{message.text}}
+        <br>
+        <img *ngIf="message.media_url!=''" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/'+message.media_url" style="max-height: 200px;">
       </div>
       </div>
   </div>
