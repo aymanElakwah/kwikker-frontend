@@ -9,7 +9,7 @@
   <div class="title">
     <div class="row">
       <div class="frame">
-        <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/' + addressee?.profile_image_url" [title]="addressee?.screen_name">
+        <img class="avatar" [src]="addressee?.profile_image_url" [title]="addressee?.screen_name">
       </div>
       <div>
         <p class="screenName">
@@ -34,7 +34,7 @@
   <div class="msg" *ngFor="let message of messageList">
     <div class="row" [ngClass]="{'right':message.to_username === addressee.username}">
     <div class="frame"  >
-      <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'">
+      <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'">
       </div>
       <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username}">
         {{message.text}}

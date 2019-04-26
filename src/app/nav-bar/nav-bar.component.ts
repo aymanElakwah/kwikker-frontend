@@ -140,7 +140,7 @@ export class NavBarComponent implements OnInit {
       console.log('The dialog was closed');
     });
 
-    console.log("modal should show");
+   
   }
    /**
    * Function to open kweek dialog 

@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
       this.emialResponseObject = res;
       this.email = this.emialResponseObject.email;
       this.oldEmail = this.email;
-      console.log(this.oldEmail);
+      
     })
     
   }
@@ -67,15 +67,7 @@ export class AccountComponent implements OnInit {
       this.account_service.updateEmail(this.email).subscribe
       (response => {
         this.res = response
-        console.log(response);
-        if(response == "")
-        {
-          console.log("works")
-          this.oldEmail = this.email;
-        }
-        else{
-          console.log("dosen't work")
-        }
+
       })
     }
     this.ngOnInit();
