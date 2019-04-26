@@ -415,6 +415,7 @@ export class KweekComponent implements OnInit {
     });
     dialogRef.componentInstance.kweek = kweek;
     dialogRef.componentInstance.reply = true;
+    dialogRef.componentInstance.kweekTO = false;
   }
 
   /**

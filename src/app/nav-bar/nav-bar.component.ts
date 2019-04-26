@@ -130,6 +130,7 @@ export class NavBarComponent implements OnInit {
       panelClass: 'kweekBox'
     });
   dialogRef.componentInstance.reply = false;
+  dialogRef.componentInstance.kweekTO = false;
   /**
    * Function for closing the dialog and displaying a msg 
    * 
