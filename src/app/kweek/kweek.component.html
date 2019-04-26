@@ -1,168 +1,174 @@
-<div *ngIf="kweeks && kweeks.length">
-  <!-- check if kweeks exists -->
-  <div *ngFor="let kweek of kweeks" class="kweeks">
-    <!-- loop the kweeks as every kweek has the name kweek -->
-    <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-    <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
-      <div id="rekweeked-info" *ngIf="kweek.rekweek_info !== null">
-        <i class="fas fa-retweet m-1"></i
-        ><a
-          href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
-          id="rekweeked-screen_name"
-          >{{
-            kweek.rekweek_info.rekweeker_username !== this.authorizedUser
-              ? kweek.rekweek_info.rekweeker_name
-              : "You"
-          }}</a
-        >
-        Rekweeked
-      </div>
-
-      <div *ngIf="kweek.rekweek_info === null" style="margin-top: 9px"></div>
-
-      <!-- delete button -->
-      <div
-        *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
-      >
-        <div (click)="openDialog(kweek)"></div>
-        <div>
-          <mat-icon class="close" (click)="delete(kweek)">close</mat-icon>
+<div infiniteScroll (scrolled)="onScroll()">
+  <div *ngIf="kweeks && kweeks.length">
+    <!-- check if kweeks exists -->
+    <div *ngFor="let kweek of kweeks" class="kweeks">
+      <!-- loop the kweeks as every kweek has the name kweek -->
+      <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
+      <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
+        <div id="rekweeked-info" *ngIf="kweek.rekweek_info !== null">
+          <i class="fas fa-retweet m-1"></i
+          ><a
+            href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
+            id="rekweeked-screen_name"
+            >{{
+              kweek.rekweek_info.rekweeker_username !== this.authorizedUser
+                ? kweek.rekweek_info.rekweeker_name
+                : "You"
+            }}</a
+          >
+          Rekweeked
         </div>
-      </div>
 
-      <div class="media border-bottom m-0">
-        <img
-          [src]="kweek.user.profile_image_url"
-          src-fallback="../../assets/kweeks/default.png"
-          class="mr-3 rounded-circle kweek-img"
-        />
-        <!-- alt could be a pic in our files -->
-        <div class="media-body">
+        <div *ngIf="kweek.rekweek_info === null" style="margin-top: 9px"></div>
+
+        <!-- delete button -->
+        <div
+          *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
+        >
+          <div (click)="openDialog(kweek)"></div>
           <div>
-            <div class="d-inline-block">
-              <a href="/profile/{{ kweek.user.username }}" class="kweek-user"
-                ><span class="screen_name">{{ kweek.user.screen_name }}</span>
-                .
-                <span class="username">@{{ kweek.user.username }} </span>
-              </a>
-              <span class="username">
-                . {{ kweek.created_at | date: "h:mm a - d MMM y" }}</span
-              >
-            </div>
+            <mat-icon class="close" (click)="delete(kweek)">close</mat-icon>
           </div>
-          <div class="d-inline" (click)="openDialog(kweek)"></div>
-          <div (click)="openDialog(kweek)">
-            <div class="kweek-text">
-              <p [innerHTML]="kweek.text"></p>
-            </div>
-            <div *ngIf="kweek.media_url">
-              <img
-                id="media"
-                [src]="kweek.media_url"
-                src-fallback="../../assets/kweeks/loading.png"
-              />
-            </div>
-          </div>
-          <div class="container-fluid" style="margin-top:12px;">
-            <div class="row">
-              <div class="col-2">
-                <span class="reply" (click)="reply(kweek)">
-                  <span
-                    matTooltip="Reply"
-                    matTooltipClass="tooltip-style"
-                    [matTooltipPosition]="position.value"
-                    [matTooltipShowDelay]="showDelay.value"
-                    [matTooltipHideDelay]="hideDelay.value"
-                    ><i class="far fa-comment icons"></i
-                  ></span>
-                  <span class="p-2"></span>
-                  <span style="font-weight:bold">{{
-                    kweek.number_of_replies === 0
-                      ? " "
-                      : kweek.number_of_replies
-                  }}</span>
-                </span>
+        </div>
+
+        <div class="media border-bottom m-0">
+          <img
+            [src]="kweek.user.profile_image_url"
+            src-fallback="../../assets/kweeks/default.png"
+            class="mr-3 rounded-circle kweek-img"
+          />
+          <!-- alt could be a pic in our files -->
+          <div class="media-body">
+            <div>
+              <div class="d-inline-block">
+                <a href="/profile/{{ kweek.user.username }}" class="kweek-user"
+                  ><span class="screen_name">{{ kweek.user.screen_name }}</span>
+                  .
+                  <span class="username">@{{ kweek.user.username }} </span>
+                </a>
+                <span class="username">
+                  . {{ kweek.created_at | date: "h:mm a - d MMM y" }}</span
+                >
               </div>
-              <!-- Rest lines to know if the user liked or rekweeked this kweek -->
-              <ng-container
-                *ngIf="kweek.rekweeked_by_user; else elseNotRekweeked"
-              >
+            </div>
+            <div class="d-inline" (click)="openDialog(kweek)"></div>
+            <div (click)="openDialog(kweek)">
+              <div class="kweek-text">
+                <p [innerHTML]="kweek.text"></p>
+              </div>
+              <div *ngIf="kweek.media_url">
+                <img
+                  id="media"
+                  [src]="kweek.media_url"
+                  src-fallback="../../assets/kweeks/loading.png"
+                />
+              </div>
+            </div>
+            <div class="container-fluid" style="margin-top:12px;">
+              <div class="row">
                 <div class="col-2">
-                  <span class="rekweeked" (click)="unrekweekDecision(kweek)">
+                  <span class="reply" (click)="reply(kweek)">
                     <span
-                      matTooltip="Undo Rekweek"
+                      matTooltip="Reply"
                       matTooltipClass="tooltip-style"
                       [matTooltipPosition]="position.value"
                       [matTooltipShowDelay]="showDelay.value"
                       [matTooltipHideDelay]="hideDelay.value"
-                      ><i class="fas fa-retweet icons"></i
+                      ><i class="far fa-comment icons"></i
                     ></span>
                     <span class="p-2"></span>
                     <span style="font-weight:bold">{{
-                      kweek.number_of_rekweeks === 0
+                      kweek.number_of_replies === 0
                         ? " "
-                        : kweek.number_of_rekweeks
+                        : kweek.number_of_replies
                     }}</span>
                   </span>
                 </div>
-              </ng-container>
-              <ng-template #elseNotRekweeked>
-                <div class="col-2">
-                  <span class="rekweek" (click)="rekweekDecision(kweek)">
-                    <span
-                      matTooltip="Rekweek"
-                      matTooltipClass="tooltip-style"
-                      [matTooltipPosition]="position.value"
-                      [matTooltipShowDelay]="showDelay.value"
-                      [matTooltipHideDelay]="hideDelay.value"
-                      ><i class="fas fa-retweet icons"></i
-                    ></span>
-                    <span class="p-2"></span>
-                    <span style="font-weight:bold">{{
-                      kweek.number_of_rekweeks === 0
-                        ? " "
-                        : kweek.number_of_rekweeks
-                    }}</span>
-                  </span>
-                </div>
-              </ng-template>
-              <ng-container *ngIf="kweek.liked_by_user; else elseNotLiked">
-                <div class="col-2">
-                  <span class="liked" (click)="unlikeDecision(kweek)">
-                    <span
-                      matTooltip="Undo Like"
-                      matTooltipClass="tooltip-style"
-                      [matTooltipPosition]="position.value"
-                      [matTooltipShowDelay]="showDelay.value"
-                      [matTooltipHideDelay]="hideDelay.value"
-                      ><i class="fas fa-heart icons"></i
-                    ></span>
-                    <span class="p-2"></span>
-                    <span style="font-weight:bold">{{
-                      kweek.number_of_likes === 0 ? " " : kweek.number_of_likes
-                    }}</span>
-                  </span>
-                </div>
-              </ng-container>
-              <ng-template #elseNotLiked>
-                <div class="col-2">
-                  <span class="like" (click)="likeDecision(kweek)">
-                    <span
-                      matTooltip="Like"
-                      matTooltipClass="tooltip-style"
-                      [matTooltipPosition]="position.value"
-                      [matTooltipShowDelay]="showDelay.value"
-                      [matTooltipHideDelay]="hideDelay.value"
-                      ><i class="far fa-heart icons"></i
-                    ></span>
-                    <span class="p-2"></span>
-                    <span style="font-weight:bold">{{
-                      kweek.number_of_likes === 0 ? " " : kweek.number_of_likes
-                    }}</span>
-                  </span>
-                </div>
-              </ng-template>
-              <div class="col-8"></div>
+                <!-- Rest lines to know if the user liked or rekweeked this kweek -->
+                <ng-container
+                  *ngIf="kweek.rekweeked_by_user; else elseNotRekweeked"
+                >
+                  <div class="col-2">
+                    <span class="rekweeked" (click)="unrekweekDecision(kweek)">
+                      <span
+                        matTooltip="Undo Rekweek"
+                        matTooltipClass="tooltip-style"
+                        [matTooltipPosition]="position.value"
+                        [matTooltipShowDelay]="showDelay.value"
+                        [matTooltipHideDelay]="hideDelay.value"
+                        ><i class="fas fa-retweet icons"></i
+                      ></span>
+                      <span class="p-2"></span>
+                      <span style="font-weight:bold">{{
+                        kweek.number_of_rekweeks === 0
+                          ? " "
+                          : kweek.number_of_rekweeks
+                      }}</span>
+                    </span>
+                  </div>
+                </ng-container>
+                <ng-template #elseNotRekweeked>
+                  <div class="col-2">
+                    <span class="rekweek" (click)="rekweekDecision(kweek)">
+                      <span
+                        matTooltip="Rekweek"
+                        matTooltipClass="tooltip-style"
+                        [matTooltipPosition]="position.value"
+                        [matTooltipShowDelay]="showDelay.value"
+                        [matTooltipHideDelay]="hideDelay.value"
+                        ><i class="fas fa-retweet icons"></i
+                      ></span>
+                      <span class="p-2"></span>
+                      <span style="font-weight:bold">{{
+                        kweek.number_of_rekweeks === 0
+                          ? " "
+                          : kweek.number_of_rekweeks
+                      }}</span>
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-container *ngIf="kweek.liked_by_user; else elseNotLiked">
+                  <div class="col-2">
+                    <span class="liked" (click)="unlikeDecision(kweek)">
+                      <span
+                        matTooltip="Undo Like"
+                        matTooltipClass="tooltip-style"
+                        [matTooltipPosition]="position.value"
+                        [matTooltipShowDelay]="showDelay.value"
+                        [matTooltipHideDelay]="hideDelay.value"
+                        ><i class="fas fa-heart icons"></i
+                      ></span>
+                      <span class="p-2"></span>
+                      <span style="font-weight:bold">{{
+                        kweek.number_of_likes === 0
+                          ? " "
+                          : kweek.number_of_likes
+                      }}</span>
+                    </span>
+                  </div>
+                </ng-container>
+                <ng-template #elseNotLiked>
+                  <div class="col-2">
+                    <span class="like" (click)="likeDecision(kweek)">
+                      <span
+                        matTooltip="Like"
+                        matTooltipClass="tooltip-style"
+                        [matTooltipPosition]="position.value"
+                        [matTooltipShowDelay]="showDelay.value"
+                        [matTooltipHideDelay]="hideDelay.value"
+                        ><i class="far fa-heart icons"></i
+                      ></span>
+                      <span class="p-2"></span>
+                      <span style="font-weight:bold">{{
+                        kweek.number_of_likes === 0
+                          ? " "
+                          : kweek.number_of_likes
+                      }}</span>
+                    </span>
+                  </div>
+                </ng-template>
+                <div class="col-8"></div>
+              </div>
             </div>
           </div>
         </div>
