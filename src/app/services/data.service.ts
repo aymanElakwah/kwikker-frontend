@@ -363,7 +363,7 @@ export class DataService {
     const options = last_notifications_retrieved_id
       ? {
           params: new HttpParams().set(
-            "last_notifications_retrieved_id",
+            "last_notification_retrieved_id",
             last_notifications_retrieved_id
           )
         }
@@ -694,12 +694,12 @@ export class DataService {
    * @param reply_to {string} the id of kweek that was replyed to
    * @returns Request Response
    */
-  addNewKweek(text: string, reply_to: string): Observable<any> {
+  addNewKweek(text: string, reply_to: string, media_id:string): Observable<any> {
     this.cacheService.invalidateUrl(this.base + "kweeks/timelines/profile");
-    const obj = { text: String(), reply_to: String() };
+    const obj = { text: String(), reply_to: String(), media_id: String() };
     obj.text = text;
     obj.reply_to = reply_to;
-
+    obj.media_id = media_id;
     return this.http.post<any>(this.base + "kweeks/", obj).pipe(
       map(res => res),
       catchError(this.handleError)
@@ -830,9 +830,9 @@ export class DataService {
    * @returns Request Response (media id);
    */
   postMedia(image_file: File): Observable<string> {
-    const body = new FormData();
-    body.append("file", image_file, "Image.png");
-
+    let body = new FormData();
+    body.append("file", image_file);
+    console.log(body);
     return this.http.post<string>(this.base + "media/", body).pipe(
       map(res => res),
       catchError(this.handleError)

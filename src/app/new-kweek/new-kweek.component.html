@@ -61,8 +61,8 @@
           </span>
       </span>
       <span style=" float: right; margin-right:2.5%">
-        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260" 
-          (click)="addKweek()">Kweek</button>
+        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260 || disableButton" 
+          (click)="addKweek()">{{kweekButtonText}}</button>
           <span style="padding-left:4px">{{260-kweekData.length}}</span>
       </span>
       
