@@ -36,7 +36,7 @@
                      <li class="dropdown-item" (click)='openKweekDialog(i)' *ngIf="!user?.blocked">
                         <P> Tweet To @{{user.username}}</P>
                      </li>
-                     <li class="dropdown-item">
+                     <li class="dropdown-item" (click)='openInboxDialog(i)'>
                         <P> Send a Direct Message</P>
                      </li>
                      <li class="dropdown-item" *ngIf="!user?.blocked">

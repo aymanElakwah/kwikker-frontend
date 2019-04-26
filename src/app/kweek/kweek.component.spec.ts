@@ -43,7 +43,7 @@ describe("KweekComponent", () => {
       null,
       null
     );
-    component.route = route;
+    component.route = route; 
     component.busyRequest = false;
   });
 
