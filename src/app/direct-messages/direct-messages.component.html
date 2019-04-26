@@ -9,7 +9,7 @@
   <div class="title">
     <div class="row">
       <div class="frame">
-        <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/' + addressee?.profile_image_url" [title]="addressee?.screen_name">
+        <img class="avatar" [src]="addressee?.profile_image_url" [title]="addressee?.screen_name">
       </div>
       <div>
         <p class="screenName">
@@ -34,12 +34,12 @@
   <div class="msg" *ngFor="let message of messageList">
     <div class="row" [ngClass]="{'right':message.to_username === addressee.username}">
     <div class="frame"  >
-      <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'">
+      <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'">
       </div>
       <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username}">
         {{message.text}}
         <br>
-        <img *ngIf="message.media_url!=''" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/'+message.media_url" style="max-height: 200px;">
+        <img *ngIf="message.media_url !== null" [src]="message.media_url" style="max-height: 200px; max-width: 200px;">
       </div>
       </div>
   </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="input-group mb-3">
-        <input  type="text" autocomplete="off" id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
+        <input  type="text" autocomplete="off" #message id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
       </div>
     </div>
     <div style="float:right;" class="my-auto">

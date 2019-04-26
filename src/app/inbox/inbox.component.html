@@ -24,7 +24,7 @@
 <div class="body">
 <div *ngFor="let conversation of conversations2 | async " class="row all" (click)="toDirectMessage(conversation)" >
   <div class="frame">
-    <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+conversation.user?.profile_image_url" [title]="conversation.user?.screen_name">
+    <img class="avatar" [src]="conversation.user?.profile_image_url" [title]="conversation.user?.screen_name">
   </div>
   <div>
     <div class="row" style="margin-left: 9px;">
