@@ -11,13 +11,17 @@ import { LikesRekweeksListComponent } from '../likes-rekweeks-list/likes-rekweek
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { LikersListComponent } from '../likers-list/likers-list.component';
+import { RekweekersListComponent } from '../rekweekers-list/rekweekers-list.component';
 
 @NgModule({
   declarations: [
     KweekComponent,
     ReplyComponent,
     NewKweekComponent,
-    LikesRekweeksListComponent
+    LikesRekweeksListComponent,
+    LikersListComponent,
+    RekweekersListComponent
   ],
   imports: [
     CommonModule,
