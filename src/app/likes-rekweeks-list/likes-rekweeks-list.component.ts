@@ -6,7 +6,11 @@ import { DataService } from "../services/data.service";
 @Component({
   selector: "app-likes-rekweeks-list",
   templateUrl: "./likes-rekweeks-list.component.html",
-  styleUrls: ["./likes-rekweeks-list.component.css"]
+  styleUrls: [
+    "./likes-rekweeks-list.component.css",
+    "../reply/reply.component.css",
+    "../kweek/kweek.component.css"
+  ]
 })
 export class LikesRekweeksListComponent implements OnInit {
   likers: boolean;
@@ -30,13 +34,12 @@ export class LikesRekweeksListComponent implements OnInit {
     }
   }
 
-      // /** Username */
-      // username: string;
-      // /** User Screen Name => Must be unique */
-      // screen_name: string;
-      // /** Profile Picture URL */
-      // profile_image_url: string;
-      // /** If The Authorised User Block That User */
-      // blocked: boolean;
-
+  // /** Username */
+  // username: string;
+  // /** User Screen Name => Must be unique */
+  // screen_name: string;
+  // /** Profile Picture URL */
+  // profile_image_url: string;
+  // /** If The Authorised User Block That User */
+  // blocked: boolean;
 }

@@ -1,3 +1,78 @@
-<p>
-  likes-rekweeks-list works!
-</p>
+<!-- check if kweeks exists -->
+<div *ngIf="clickedKweek" class="kweeks" id="popup-kweek">
+  <!-- loop the kweeks as every kweek has the name kweek -->
+  <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
+  <div
+    class="container p-0 kweek-style pointer"
+    *ngIf="!clickedKweek.user.muted"
+  >
+    <div class="media border-bottom popup-kweek-style">
+      <img
+        [src]="reply.user.profile_image_url"
+        src-fallback="../../assets/kweeks/default.png"
+        class="mr-3 rounded-circle kweek-img"
+      />
+      <!-- alt could be a pic in our files -->
+      <div class="media-body">
+        <div>
+          <div>
+            <a
+              href="/profile/{{ clickedKweek.user.username }}"
+              class="kweek-user"
+              ><span class="screen_name">{{
+                clickedKweek.user.screen_name
+              }}</span>
+              .
+              <span class="username">@{{ clickedKweek.user.username }} </span>
+            </a>
+            <span class="username">
+              . {{ clickedKweek.created_at | date: "h:mm a - d MMM y" }}</span
+            >
+          </div>
+        </div>
+        <div>
+          <div class="kweek-text">
+            <p [innerHTML]="clickedKweek.text"></p>
+          </div>
+          <div *ngIf="clickedKweek.media_url">
+            <img
+              id="media"
+              [src]="clickedKweek.media_url"
+              src-fallback="../../assets/kweeks/loading.png"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <mat-dialog-content> -->
+  <!-- check if kweeks exists -->
+  <div *ngFor="let user of users" class="mini-user">
+    <div *ngIf="!user.blocked">
+      <img
+      [src]="reply.user.profile_image_url"
+      src-fallback="../../assets/kweeks/default.png"
+      class="mr-3 rounded-circle kweek-img"
+    />
+    <!-- alt could be a pic in our files -->
+    <div class="media-body">
+      <div>
+        <div>
+          <a
+            href="/profile/{{ clickedKweek.user.username }}"
+            class="kweek-user"
+            ><span class="screen_name">{{
+              clickedKweek.user.screen_name
+            }}</span>
+            .
+            <span class="username">@{{ clickedKweek.user.username }} </span>
+          </a>
+          <span class="username">
+            . {{ clickedKweek.created_at | date: "h:mm a - d MMM y" }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </mat-dialog-content> -->

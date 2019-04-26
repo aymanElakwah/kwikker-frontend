@@ -66,7 +66,7 @@
 
 #last-clicked-kweek #user-name {
   font-size: 14px;
-} 
+}
 
 #last-clicked-kweek #name-block {
   margin-bottom: 15px;
@@ -85,6 +85,21 @@
 #last-clicked-kweek .counter {
   font-size: 14px;
   font-weight: bold;
+}
+
+#likers-rekweekers {
+  border-bottom: 1px solid #e6ecf0;
+  border-top: 1px solid #e6ecf0;
+  font-size: 14px;
+  color: #666;
+}
+
+.hoverBlue {
+  margin-right: 10px;
+}
+
+.hoverBlue:hover {
+  color: #1da1f2;
 }
 
 /* .vertical-line {
