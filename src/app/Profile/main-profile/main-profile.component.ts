@@ -5,7 +5,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { delay } from "q";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { EditImagesComponent } from "../edit-images/edit-images.component";
-import * as $ from 'jquery/dist/jquery.min.js';
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+import { ChatComponent } from '../../chat/chat.component';
+import { ChatService } from 'src/app/chat/chat.service';
+
 
 
 /**
@@ -35,11 +38,11 @@ export class MainProfileComponent implements OnInit {
   /* User Edited Data */
   editedScreenName: string ;
   editedBio: string ;
+  AuthorisedIsBlocked:boolean = false;
 
   /* Default Profile Picture and Banner */
   defaultProfilePicture: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg";
   defaultProfileBanner: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/banner/banner.jpg";
-
 
    /**
    * Open Resize, Scale and Crop Profile Image
@@ -70,6 +73,33 @@ export class MainProfileComponent implements OnInit {
     }
     });
   }
+
+    /**
+     * Open Write Kweek Component Dialog
+     * No Parameters
+     * No return
+     */
+    openKweekDialog()
+    {
+      const dialogRef = this.dialog.open(NewKweekComponent,
+         { panelClass: 'kweekBox'});
+         dialogRef.componentInstance.reply = true;
+         dialogRef.componentInstance.kweekTO = true;
+         dialogRef.componentInstance.username = this.profileUser.username;
+         dialogRef.componentInstance.screenname = this.profileUser.screen_name;
+    }
+
+       /**
+     * Open Inbox Component Dialog
+     * No Parameters
+     * No return
+     */
+    openInboxDialog()
+    {
+      this.ChatService.setAddressee(this.profileUser);
+      this.ChatService.setSection(3);
+      const dialogRef = this.dialog.open(ChatComponent);
+    }
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in)
@@ -132,7 +162,6 @@ export class MainProfileComponent implements OnInit {
     this.profileUser.profile_image_url = this.defaultProfilePicture;
     this.ShowMessage("Profile image removed");
     this.profileInfoService.removeProfilePicture().subscribe();
-    this.profileUser.profile_image_url = this.defaultProfilePicture;
   }
 
   /**
@@ -253,7 +282,6 @@ export class MainProfileComponent implements OnInit {
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
-    this.profileInfoService.searchKweeks("#trend").subscribe();
   }
 
   /**
@@ -296,9 +324,10 @@ export class MainProfileComponent implements OnInit {
    */
   constructor(
     private profileInfoService: DataService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ChatService:ChatService
   ) {}
 
   /**
@@ -308,8 +337,7 @@ export class MainProfileComponent implements OnInit {
   ngOnInit() {
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
-
-    //To be Added: If The Username doesn't Exist [Not Signed Up]
+    
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
@@ -328,7 +356,16 @@ export class MainProfileComponent implements OnInit {
         }
       },
       err => {
-          this.router.navigateByUrl("/error");   
+          //If Theis Profile User Blocked The Authorised User
+          if(err.status == "403")
+          {
+            this.profileUser = err.error;
+            this.AuthorisedIsBlocked = true;
+          }
+          else
+          {
+            this.router.navigateByUrl("/error");   
+          }
       }
     );
   }
