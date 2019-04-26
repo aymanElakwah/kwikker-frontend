@@ -35,7 +35,6 @@ export class ReplyComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ReplyComponent>,
     public dialogLikersRekweekersRef: MatDialogRef<LikesRekweeksListComponent>,
-    public dialogList: MatDialog,
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     private dialog: MatDialog,
@@ -88,10 +87,10 @@ export class ReplyComponent implements OnInit {
   likersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
-    const dialogRef = this.dialogList.open(LikesRekweeksListComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = kweek;
-    dialogRef.componentInstance.likers = true;
-    this.dialogLikersRekweekersRef.close();
+    dialogConfig.autoFocus = false;
+    const dialogLikersRekweekersRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
+    dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
+    dialogLikersRekweekersRef.componentInstance.likers = true;
   }
 
   /**
@@ -102,10 +101,10 @@ export class ReplyComponent implements OnInit {
   rekweekersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
-    const dialogRef = this.dialogList.open(LikesRekweeksListComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = kweek;
-    dialogRef.componentInstance.likers = false;
-    this.dialogLikersRekweekersRef.close();
+    dialogConfig.autoFocus = false;
+    const dialogLikersRekweekersRef = this.dialog.open(LikesRekweeksListComponent, dialogConfig);
+    dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
+    dialogLikersRekweekersRef.componentInstance.likers = false;
   }
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
@@ -190,7 +189,7 @@ export class ReplyComponent implements OnInit {
     }
   }
 
-  reply(kweek: Kweek): void {
+  Reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: 'kweekBox'
     });
