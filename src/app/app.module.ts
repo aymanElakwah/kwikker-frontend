@@ -34,6 +34,7 @@ import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { KweeksModule } from './kweeks/kweeks.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 
 
@@ -59,6 +60,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     HttpClientModule,
     CoreModule,
     ChatModule,
+    NotificationsModule,
     SearchModule,
     SettingsModule,
     // HttpClientInMemoryWebApiModule.forRoot(

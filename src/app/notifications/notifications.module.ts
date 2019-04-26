@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { KweeksModule } from '../kweeks/kweeks.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { CanActivateTeam } from '../app-routing.module';
 
 
@@ -23,7 +22,7 @@ import { CanActivateTeam } from '../app-routing.module';
     InfiniteScrollModule,
     NgbModule.forRoot(),
     RouterModule.forChild([
-      {path: 'notifications', component: NotificationsComponent,
+      {path: 'notifications', component: NotificationsComponent,canActivate:[CanActivateTeam],
     children: [
       {path: '', redirectTo: 'all', pathMatch: 'full'} ,
       {path: 'all', component: NotificationslistComponent },
