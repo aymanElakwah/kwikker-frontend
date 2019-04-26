@@ -17,12 +17,13 @@ export class NotificationslistComponent implements OnInit {
    */
   notificatons_array: Notification[] ;
   
-  new_count:number= 2;
+  new_count:number;
   last_id:string = "-1";
   before_last_id:string;
   myObservable:Observable<any>;
   new_length:number;
   current_length:number;
+  notificationsResponse:any;
   /**
    * constructor
    * @param notification_service used to call requests 
@@ -36,7 +37,9 @@ export class NotificationslistComponent implements OnInit {
    */
   ngOnInit() {
     this.notification_service.getNotificationsList("").subscribe(
-      list=>{this.notificatons_array = list;
+      list=>{this.notificationsResponse = list;
+        this.notificatons_array = this.notificationsResponse.Notifications;
+        this.new_count = this.notificationsResponse.unseen_count;
       console.log(list);
       //this.before_last_id = this.notificatons_array[this.notificatons_array.length-1].id;
       this.current_length = this.notificatons_array.length;
@@ -56,7 +59,9 @@ export class NotificationslistComponent implements OnInit {
    */
   refreshNotifications(){
     this.notification_service.getNotificationsList("").subscribe(
-      list=>{this.notificatons_array = list;
+      list=>{this.notificationsResponse = list;
+        this.notificatons_array = this.notificationsResponse.Notifications;
+        this.new_count = this.notificationsResponse.unseen_count;
       console.log(list);
       })
       this.current_length = this.notificatons_array.length;
@@ -103,7 +108,9 @@ if ((window.innerHeight + window.scrollY) >=  document.body.scrollHeight) {
       this.last_id = this.notificatons_array[this.notificatons_array.length-1].id;
     this.notification_service.
     getNotificationsList(this.notificatons_array[this.notificatons_array.length-1].id).subscribe(
-      list=>{this.notificatons_array = this.notificatons_array.concat(list);
+      list=>{
+        this.notificationsResponse = list;
+        this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse.Notifications);
       console.log(this.notificatons_array.length);
       console.log("is called call");
       this.last_id = this.notificatons_array[this.notificatons_array.length-1].id;
