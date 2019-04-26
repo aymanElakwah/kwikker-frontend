@@ -172,12 +172,17 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   toggleFollow() {
-    if (this.profileUser.following) {
+    if (this.profileUser.following)
+     {
       this.profileInfoService
         .unfollowUser(this.profileUser.username)
         .subscribe();
-    } else {
+        this.profileUser.followers_count -= 1;
+    } 
+    else 
+    {
       this.profileInfoService.followUser(this.profileUser.username).subscribe();
+      this.profileUser.followers_count += 1;
     }
     this.profileUser.following = !this.profileUser.following;
  

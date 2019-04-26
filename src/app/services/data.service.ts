@@ -26,7 +26,7 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+    "http://7b81d7c5.ngrok.io/";
   /**
    *
    * @param http component to send requests
