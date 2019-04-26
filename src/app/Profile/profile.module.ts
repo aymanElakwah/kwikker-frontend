@@ -18,6 +18,7 @@ import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-car
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component'
 
 import { MaterialModule } from '../material.module';
+import { CanActivateTeam } from '../app-routing.module';
 
 
 /**
@@ -45,7 +46,7 @@ import { MaterialModule } from '../material.module';
     LyButtonModule,
     LyIconModule,
     RouterModule.forChild([
-      { path: 'profile/:username', component:  MainProfileComponent,
+      { path: 'profile/:username', component:  MainProfileComponent,canActivate:[CanActivateTeam],
       children: [
         {path: '', component: ProfileKweeksTabComponent},
         {path: 'kweeks', component: ProfileKweeksTabComponent},

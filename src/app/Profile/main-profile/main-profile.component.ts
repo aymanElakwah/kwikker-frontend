@@ -52,9 +52,7 @@ export class MainProfileComponent implements OnInit {
       height: "700px",
       width: "700px",
     });
-    console.log(this.profileUser.profile_image_url);
     dialogRef.afterClosed().subscribe(image => {
-
       var reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = _event => {
@@ -64,7 +62,7 @@ export class MainProfileComponent implements OnInit {
       var S:string;
       this.profileInfoService.updateProfilePicture(image as File).subscribe 
       ( serInfo => { S = serInfo; }  );
-      /* this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); */
+       this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
       
   
     });
@@ -76,7 +74,10 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isAuthorisedUser(): boolean {
-    return (this.profileUser.username == this.authorizedUser);
+    if(this.profileUser != null )
+    {
+       return (this.profileUser.username == this.authorizedUser);
+    }
   }
 
   /**
@@ -137,10 +138,8 @@ export class MainProfileComponent implements OnInit {
   removeProfileBanner(): void {
     this.profileUser.profile_banner_url = null;
     this.ShowMessage("No more header for you");
-    /* this.profileInfoService.removeBanner().subscribe(); */
+    this.profileInfoService.removeBanner().subscribe(); 
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
-    console.log(this.defaultProfileBanner);
-    console.log(this.profileUser.profile_banner_url);
   }
 
   /**
@@ -236,9 +235,7 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService
-      .updateProfile(this.editedScreenName, this.editedBio)
-      .subscribe(res => console.log(res));
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio).subscribe();
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
@@ -316,7 +313,7 @@ export class MainProfileComponent implements OnInit {
         }
       },
       err => {
-         this.router.navigateByUrl("/error");  
+          this.router.navigateByUrl("/error");   
       }
     );
   }

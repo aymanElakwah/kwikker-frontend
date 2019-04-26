@@ -15,6 +15,7 @@
 .nopadding {
 	padding: 0 0 !important;
 	margin-left: 0.2% !important;
+	height: auto;
 }
 
 
@@ -276,4 +277,19 @@
 	left: -30%;
 	Top: 8%;
 	cursor: pointer;
+}
+
+.Padding
+{
+	height: 300px;
+}
+
+.Logo
+{
+	width: 40px;
+	height: 40px;
+	position: relative;
+	left: 42%;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
