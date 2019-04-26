@@ -12,6 +12,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { confirmPassword } from './reset-password/reset-password-confirm.component';
 import { Observable } from 'rxjs';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SettingsComponent } from './settings/settings.component';
+import { AccountComponent } from './account/account.component';
+import { PasswordsComponent } from './passwords/passwords.component';
+import { MutedListComponent } from './muted-list/muted-list.component';
+import { BlockedListComponent } from './blocked-list/blocked-list.component';
+import { NotificationslistComponent } from './notificationslist/notificationslist.component';
+import { MentionslistComponent } from './mentionslist/mentionslist.component';
 
 
 
@@ -74,13 +81,27 @@ const routes: Routes = [
   {path: 'forget_password', component: ResetPasswordComponent,canActivate: [CanDeactivateTeam]},
   {path: 'kweeks', component: KweekComponent,canActivate: [CanActivateTeam]}, 
   {path: 'error', component: ErrorPageComponent},
+  {path: 'settings', component: SettingsComponent ,canActivate: [CanActivateTeam],
+      children: [
+        {path: '' , redirectTo: 'account' , pathMatch: 'full'},
+        {path: 'account' , component: AccountComponent },
+        {path: 'passwords', component: PasswordsComponent },
+        {path: 'muted_following', component: MutedListComponent},
+        {path: 'blocked_following', component: BlockedListComponent}
+      ]},
+  {path: 'notifications', component: NotificationsComponent,canActivate:[CanActivateTeam],
+  children: [
+    {path: '', redirectTo: 'all', pathMatch: 'full'} ,
+    {path: 'all', component: NotificationslistComponent },
+    {path: 'mentions', component: MentionslistComponent}
+  ]},
   {path: '**', component: ErrorPageComponent},
- 
+  
 ];
 
 @NgModule({
 
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes) ],
   providers: [CanActivateTeam,CanDeactivateTeam],
   exports: [RouterModule]
 })
