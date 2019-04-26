@@ -18,9 +18,10 @@ export class NewKweekComponent implements OnInit {
   reply: boolean ;
   kweek:Kweek;
   image_id:string = null;
-  username:string = "7amada";
-  screenname:string = "7amda ggamda";
+  username:string ;
+  screenname:string ;
 
+  replyData:string = "@";
   
 
   /**
@@ -33,7 +34,9 @@ export class NewKweekComponent implements OnInit {
   constructor(public thisDialogRef: MatDialogRef<NewKweekComponent>, 
     private http: HttpClient, private newKweekService: DataService) {
     }
-
+    /**
+     * to check if it's a reply then set varibales of screen name and username
+     */
     ngOnInit(): void {
       if(this.reply == true){
         this.username = this.kweek.user.username;
@@ -97,9 +100,17 @@ export class NewKweekComponent implements OnInit {
         this.image_id = Response;
         console.log(this.image_id);
       })*/
+      /**
+       * to differ between a reply or a new kweek when sending request
+       */
       if(this.reply == true){
-        this.newKweekService.addNewKweek(this.kweekData, this.kweek.id).subscribe
+        
+        this.replyData = this.replyData+this.username+" "+this.kweekData;
+        console.log(this.replyData)
+
+        this.newKweekService.addNewKweek(this.replyData, this.kweek.id).subscribe
         (response => {this.res = response})
+
       }
       else{
       this.newKweekService.addNewKweek(this.kweekData, null).subscribe
