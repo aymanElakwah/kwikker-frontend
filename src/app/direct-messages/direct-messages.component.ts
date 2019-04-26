@@ -72,6 +72,8 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     });
     this.data.getDirectMessages(this.addressee.username).subscribe(list=>{
       this.messageList = list.reverse();
+      setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
+      objDiv.scrollTop = objDiv.scrollHeight+200; }, 1000);
     }
     );
   }
