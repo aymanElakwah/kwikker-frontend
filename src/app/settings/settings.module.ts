@@ -7,7 +7,8 @@ import { AccountComponent } from '../account/account.component';
 import { PasswordsComponent } from '../passwords/passwords.component';
 import { MutedListComponent } from '../muted-list/muted-list.component';
 import { BlockedListComponent } from '../blocked-list/blocked-list.component';
-
+import { FormsModule } from '@angular/forms';
+import { CanActivateTeam } from '../app-routing.module';
 @NgModule({
   declarations: [SettingsComponent,
   AccountComponent,
@@ -17,8 +18,9 @@ import { BlockedListComponent } from '../blocked-list/blocked-list.component';
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild([
-      {path: 'settings', component: SettingsComponent ,
+      {path: 'settings', component: SettingsComponent ,canActivate: [CanActivateTeam],
       children: [
         {path: '' , redirectTo: 'account' , pathMatch: 'full'},
         {path: 'account' , component: AccountComponent },

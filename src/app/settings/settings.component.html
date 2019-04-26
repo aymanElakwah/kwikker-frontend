@@ -1,3 +1,26 @@
-<p>
-  settings works!
-</p>
+<app-nav-bar> </app-nav-bar>
+<div class="container-fluid" style="margin-top:5%">
+  <div class="row">
+    <div class="col-md-3" style="font-size:14px">
+      <div class="card" id="settings-menu">
+        <ul class="list-group list-group-flush" style="margin:0">
+          <li class="" style="list-style: none ">
+            <a class="link-settings" routerLinkActive="active" 
+                        [routerLink]="['account']" >Account</a> 
+          </li>
+          <li class="" style="list-style: none ">
+            <a class="link-settings" routerLinkActive="active" 
+                        [routerLink]="['muted_following']" >Muted List</a> 
+          </li>
+          <li class="" style="list-style: none ">
+            <a class="link-settings" routerLinkActive="active" 
+                        [routerLink]="['blocked_following']" >Blocked List</a> 
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-5 link-settings" style="padding: 0;">
+      <router-outlet ></router-outlet> 
+    </div>
+  </div>
+</div>

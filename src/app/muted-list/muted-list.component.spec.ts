@@ -2,21 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MutedListComponent } from './muted-list.component';
 
+import { DataService } from '../services/data.service';
 describe('MutedListComponent', () => {
   let component: MutedListComponent;
-  let fixture: ComponentFixture<MutedListComponent>;
+  let muted_service:DataService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MutedListComponent ]
-    })
-    .compileComponents();
-  }));
+  
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MutedListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    
+    component = new MutedListComponent(muted_service)
+    
   });
 
   it('should create', () => {

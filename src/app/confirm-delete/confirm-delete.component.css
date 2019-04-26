@@ -1,0 +1,34 @@
+#confirm-buttons {
+    padding: 12px;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: right;
+}
+
+#cancel {
+    background-color: #f5f8fa;
+    color: #66757f;
+    border: 1px solid #66757f;
+}
+
+#delete {
+    background-color: #e0245e;
+    border: 1px solid #e0245e;
+    margin-left: 12px;
+    color: #fff;
+}
+
+#delete:hover {
+    background-color: #ac002b;
+    border: 1px solid #ac002b;
+}
+
+button {
+	border-radius: 100px;
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	min-width: 89px;
+}

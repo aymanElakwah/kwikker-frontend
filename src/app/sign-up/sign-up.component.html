@@ -1,10 +1,11 @@
 <!-- multistep form -->
-<form id="msform" #submitForm ="ngForm" name="submit-form" ngmodel>
+<form id="msform" #submitForm ="ngForm" name="submit-form"  ngmodel>
+ 
     <!-- progressbar -->
     <ul id="progressbar">
-      <li class="active">Account Setup</li>
-      <li class="secondProgress">Email Verification</li>
-      <li class="thirdProgress">Personal Details</li>
+      <li class="active">Email Setup</li>
+      <li class="secondProgress">Account Setup</li>
+      <li class="thirdProgress">What Now</li>
     </ul>
 
     <!-- fieldsets -->
@@ -13,35 +14,69 @@
       <div>
         <img src="../../assets/main/twitter.png" id="icon" alt="User Icon" />
       </div>
-      <h2 class="fs-title">Create your account</h2>
+      
+      <h2 class="fs-title">Create your Email</h2>
       <h3 class="fs-subtitle">This is step 1</h3>
-      <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName"  maxlength="100" required/>
-      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
-      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep(submitForm)"  [disabled]="email.invalid || username.invalid">Next</button>
+      <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName" maxlength="50" pattern="[A-Za-z0-9._%+-]{2,50}" required/>
+          <div  *ngIf="username.invalid && username.touched" class="msg alert alert-danger " style="width: 95%" role="alert">
+            <p class="alertMsg">Username must be entered for registeration, it should contain more than one character and has no spaces.</p>
+          </div>
+      <input type="text" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="mail" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+            <div  *ngIf="email.invalid && email.touched" class="msg alert alert-danger " role="alert">
+              <p class="alertMsg">Email is required for Registeration.</p>
+            </div>    
+      <input type="password" name="pass" placeholder="Password" #password="ngModel" [(ngModel)]="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
+          <div  *ngIf="password.invalid && password.touched" class="msg alert alert-danger " role="alert">
+            <p class="alertMsg">Password must be at least 8 characters and contains capital letters, small letters and numbers.</p>
+          </div>    
+      <input type="password" name="cpass" placeholder="Confirm Password" #confirm_password="ngModel" [(ngModel)]="confirm_pass" required />
+        <div  *ngIf="(password.value != confirm_password.value) && confirm_password.touched" class="msg alert alert-danger " role="alert">
+          <p class="alertMsg">Not identical passwords!</p>
+        </div>  
+      <button  name="login"  [routerLink]="[ '/login']" class="btn btn-primary action-button">Back to Login</button>  
+      <button type="submit" name="next1" class="btn btn-primary action-button" #Next1 (click)="secondStep()"  [disabled]="username.invalid ||
+                                                                                                                                    email.invalid ||
+                                                                                                                                    password.invalid ||
+                                                                                                                                    (confirm_password.value != password.value)">Next</button>
+    
+        
+        </fieldset>
+    
   
-    </fieldset>
-    
-    
     <fieldset class="fs2">
-      <h2 class="fs-title">Code Confirmation</h2>
-      <h3 class="fs-subtitle">We've sent you a code at your mail, please enter it here.</h3>
-      <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
-      <input type="text" name="code" placeholder="Code" />
+      <h2 class="fs-title">Basic Info</h2>
+      <input type="text" name="screenname" placeholder="Screen-name" #screenname="ngModel" [(ngModel)]="screenName"  maxlength="50" pattern="[a-z0-9._%+-]{2,50}" required/>
+          <div  *ngIf="screenname.invalid && screenname.touched" class="msg alert alert-danger " role="alert">
+            <p class="alertMsg">Screen name invalid.</p>
+          </div>
+<!-- This code is copied from https://material.angular.io/components/datepicker/examples -->
+      <mat-form-field class="datepicker">
+        <label class="labelForBD">Please select your Birthdate  </label>
+        <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" #birth_date="ngModel" [(ngModel)]="birthdate" name="datepicker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  <!-- it ends here -->
+  
+     <div  *ngIf="birth_date.invalid && birth_date.touched" class="msg alert alert-danger " role="alert">
+      <p class="alertMsg">Not a valid Date Pattern!</p>
+    </div>
       <button type="submit" name="previous1" class="btn btn-primary action-button"  (click)="previousOne()" >Previous</button>
-      <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="thirdStep()" >Next</button>
+      <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="Submit(submitForm)" [disabled]="screenname.invalid ||
+                                                                                                                  birth_date.invalid ">Submit</button>                                                                                                       
     </fieldset>
-
-
+    
     <fieldset class="fs3">
-      <h2 class="fs-title">Personal Details</h2>
-      <h3 class="fs-subtitle">You can modify them whenever you want.</h3>
-      <input type="text" name="fname" placeholder="First Name" />
-      <input type="text" name="lname" placeholder="Last Name" />
-      <input type="text" name="phone" placeholder="Phone" />
-      <textarea name="address" placeholder="Address"></textarea>
-      <button type="submit" name="previous2" class="btn btn-primary action-button"  (click)="previousTwo()" >Previous</button>
-    
-    
-      <input type="submit" name="submit" class="submit action-button" value="Submit" />
-    </fieldset>
+      <h2 class="fs-title">Thank you for using our app.</h2>
+      <div class="errorOccured hide">
+          <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+              <p class="alertMsg">An error occured will sign up, there may be an invalid or repeated email, please re-signup.</p>
+          </div>
+          <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
+      </div>
+      <div class="progress hide">
+        <h3 class="fs-subtitle">Please check your email for the verification link.</h3>
+        <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
+     </div>
+     </fieldset>
   </form>

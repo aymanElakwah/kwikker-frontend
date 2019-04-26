@@ -1,8 +1,9 @@
  .test
  {
      width:750px;
-     border-style:solid;
-     height: 515px;
+     height: 635px;
+     padding-left: 0px;
+     padding-right: 0px;
  }
 @media only screen and (max-width : 600px)
 {

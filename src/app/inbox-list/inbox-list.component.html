@@ -1,6 +1,7 @@
+<!-- chat header-->
 <div class="head row align-items-center">
     <div class="activity ">
-        <button id="back"class=" esc " [routerLink]="['/chat/', {outlets: {body:['inbox']}}]">
+        <button id="back"class=" esc " (click)="toInbox()">
             <i class="fas fa-arrow-left">
             </i>
         </button>
@@ -11,13 +12,89 @@
       </h2>
     </div>
     <div class="activity ">
-      <button class="esc">
+      <button class="esc" (click)="exit()">
         <i class="fas fa-times">
         </i>
       </button>
     </div>
   </div>
 
-  <div class="list">
-    hi
+  <!-- body-->
+  <div class="list"  [ngClass]="{list2:secondStep , list3:uploadImg }">
+    <div class="send">
+      Send message to:
+    </div>
+    <form [formGroup]="myForm">
+        <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let user of selectedUsers" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(user)">
+                {{user}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Enter a name"
+                     formControlName="filterBy"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)"
+                     (keydown)="newSearch()">
+            </mat-chip-list>
+          </mat-form-field>
+    </form>
+    <div class="send" >
+      people  
+    </div>
+    <div class="person" *ngFor="let user of users" (click)="selectUser(user)">
+      <img [src]="user.profile_image_url">
+      <div class="username">
+        {{user.username}}
+      </div>
+      <div class="screenName">
+        @{{user.screen_name}}
+      </div> 
+    </div>
   </div>
+
+
+
+<!-- create message-->
+<form [formGroup]="myForm2" *ngIf="secondStep">
+  <div class="new row " [ngClass]="{'new2':uploadImg}">
+    <div class="col-10 my-auto">
+      <div *ngIf="uploadImg" class="space" style="background-color:white; ">
+        <div class="cont">
+        <img id="uploadImg" [src]="imgURL" style="max-height:100px;">
+        <button class="cancel" (click)="removeImg()">
+          <i class="fas fa-times"></i>
+        </button>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <input  type="text" autocomplete="off" id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
+      </div>
+    </div>
+    <div style="float:right;" class="my-auto">
+      <div style="height:0px;display: none">
+        <input type="file" formControlName="file" #file (change)="uploadIamge(file.files)" id="fileInput" name="fileInput" accept="image/*" />
+     </div>
+      <button id="upload" *ngIf="!uploadImg" (click)="upload()">
+        <i class="far fa-2x fa-image"></i>
+      </button>
+      <button id="send" (click)="send()" [disabled]="myForm.invalid && !uploadImg" [ngClass]="{'blocked': myForm.invalid && !uploadImg}">
+        send
+      </button>
+    </div>
+  </div>
+</form>
+
+
+
+
+  <!--footer-->
+<div class="next" *ngIf="!secondStep">
+    <button id="new" [disabled]="!selectedUsers?.length" [ngClass]="{'dis':!selectedUsers?.length}" (click)="next()">
+      Next
+    </button>
+</div>
+

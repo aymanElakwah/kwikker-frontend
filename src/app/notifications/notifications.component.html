@@ -1,26 +1,25 @@
 <app-nav-bar> </app-nav-bar>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:5%">
     <div class="row" >
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-           <div class="card"  style="border-color:#e6ecf0">
-              <div class="card-header"  id="notificationHeader">
-                  <ul class="nav nav-pills card-header-pills">
-                        <li class="nav-item" style="margin-left:1.5%">
-                            <a routerLinkActive="active" [routerLink]="['all']" >
-                                <button type="button" class="btn btn-outline-primary">All</button>  
-                             </a>
-                        </li>
-                        <li class="nav-item" style="margin-left:2%">
-                            <a routerLinkActive="active" [routerLink]="['mentions']">
-                                <button type="button" class="btn btn-outline-primary">Mentions</button> 
-                             </a>
-                        </li>
-                   </ul>
-              </div>
-              <router-outlet ></router-outlet> 
+      <div class="col-md-3 nopadding"></div>
+      <div class="col-md-6 nopadding">
+        <div class="row Profile-NavBar" style="margin:0">
+          <div class="col-md-12 nopadding" >
+            <ul id="Taps"  >
+                <li> <a routerLinkActive="active" 
+                        [routerLink]="['all']" >All</a>  </li>
+                <li> <a routerLinkActive="active" 
+                        [routerLink]="['mentions']">Mentions</a>  </li> 
+            </ul>
+            
             </div>
+      </div>         
+           
+              <router-outlet ></router-outlet> 
+            
       </div>
-      <div class="col-md-3"></div>
+      <div class="col-md-3 ">
+          <app-trends></app-trends>
+      </div>
     </div>
   </div>

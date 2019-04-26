@@ -10,10 +10,10 @@
       <i class="fas fa-envelope-open-text">
       </i>
     </button>
-    <button id="new" [routerLink]="['/chat/', {outlets : {body:['new']} }]">
+    <button id="new" (click)="composeMsg( )">
       New Message
     </button>
-    <button id="esc">
+    <button id="esc" (click)="exit()">
       <i class="fas fa-times">
       </i>
     </button>
@@ -21,14 +21,15 @@
 </div>
 
 <!--inbox body-->
-<div *ngFor="let conversation of conversations " class="row all" >
+<div class="body">
+<div *ngFor="let conversation of conversations2 | async " class="row all" (click)="toDirectMessage(conversation)" >
   <div class="frame">
-    <img class="avatar" src="../../assets/test.jpg" title="hello">
+    <img class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+conversation.user?.profile_image_url" [title]="conversation.user?.screen_name">
   </div>
   <div>
     <div class="row" style="margin-left: 9px;">
     <b class="fullname">
-      {{conversation?.user?.screen_name}}
+      {{conversation.user?.screen_name}}
     </b>
     &nbsp;
     <b class="username">
@@ -37,13 +38,31 @@
     </div> 
     <Div class="row" style="padding-left: 10px;">
         <div class="msg" style="padding-top: 3px; padding-bottom: 0px">
-          <p class="lastmsg">  you:{{ conversation?.last_message?.text }} </p>
+          <p class="lastmsg">
+            {{ conversation?.last_message?.text }} 
+          </p>
         </div>
     </Div>
   </div>
   <div class="last float-right" style="float:right;">
-    <p style="color: #657786;">
-      {{conversation?.last_message?.created_at}}
-    </p>
+    <div style="float:top;">
+      <p style="color: #657786;">
+        {{conversation?.last_message?.created_at}}
+      </p>
+      <img *ngIf="conversation.last_message?.media_url !== null" [src]="conversation.last_message?.media_url" style="max-height: 20px;">
+    </div>
   </div>
+</div>
+</div>
+
+<div  infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="onscroll()"
+    >
+
+</div>
+
+<div class="notification is-warning" *ngIf="finished">
+  End
 </div>

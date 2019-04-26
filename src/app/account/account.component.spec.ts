@@ -1,22 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountComponent } from './account.component';
+import { DataService } from '../services/data.service';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
-  let fixture: ComponentFixture<AccountComponent>;
+  let account_service:DataService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AccountComponent ]
-    })
-    .compileComponents();
-  }));
+  
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    
+    component = new AccountComponent(account_service)
+    
   });
 
   it('should create', () => {

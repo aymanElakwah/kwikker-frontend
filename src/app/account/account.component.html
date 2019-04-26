@@ -1,3 +1,60 @@
-<p>
-  account works!
-</p>
+<div class="card" >
+    <div class="card-body" >
+        <h3 class="card-title">Account</h3>
+      </div>
+    </div> 
+    <div class="row" style="margin:0">
+        <div class="col-md-1" style="padding:0">  
+          </div>
+      <div class="col-md-3" style="padding-left:0;padding-right: 2%">
+        <label for="currentpassword" style="float:right; margin-top:15%"><h5>Current Password</h5></label>
+        <label for="username"  style="float:right; margin-top:50%"><h5>Username</h5></label>
+        <label for="email" style="float:right; margin-top:110%;margin-right:-45%"><h5>Email</h5></label>
+        <label for="newpassword" style="float:right; margin-top:60%"><h5>New Password</h5></label>
+        <label for="verfpassword" style="float:right; margin-top:20%"><h5>Verify Password</h5></label>
+      </div>
+      <div class="col-md-7" style="padding:0">
+        <div class="form-group" style="padding-top: 5.5%">
+          <input type="password" class="form-control" id="currentpassword" [(ngModel)]="oldPassword" name="oldPassword"  >
+          <small id="emailHelp" class="form-text text-muted">Old password is needed to change</small>
+          <small id="emailHelp" class="form-text text-muted">your settings except for email.</small>
+        </div>
+
+        <div class="form-group" style="padding-top: 5.5%">
+            <input type="email" class="form-control" id="username"  [(ngModel)]="userName" name="username"  >
+          </div>
+
+        <div class="form-group" style="padding-top: 8%">
+            <input type="email" class="form-control" id="email"  
+            [(ngModel)]="email" name="email"  >
+            <small id="emailHelp" class="form-text text-muted">Email will not be publicly displayed.</small>
+          </div>
+
+          <div>
+              <button class="btn btn-primary kweek-btn" style="float:right; margin-right: 10%"
+              (click)="SaveChanges()" 
+              [disabled]="( oldEmail == email && userName == oldUserName ) || oldPassword.length == 0 ">Save Changes</button>
+            </div>
+
+            <div class="form-group" style="padding-top: 5.5%;margin-top: 15%">
+                <input type="password" class="form-control" id="newpassword" [(ngModel)]="newPassword" 
+                name="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
+                title="Password must be at least 8 characters and contains capital letters, small letters and numbers.">
+                
+              </div>
+
+              <div class="form-group" style="padding-top: 5.5%">
+                  <input type="password" class="form-control" id="verfpassword" [(ngModel)]="verifyNewPassword" 
+                  name="verifyNewPassword" >
+                  
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary kweek-btn" style="float:right; margin-right: 7.5%;margin-bottom:8%"
+                    (click)="ChangePassword()" 
+                    [disabled]="(!newPassword || newPassword != verifyNewPassword) || oldPassword.length == 0 ">Change Password</button>
+                  </div>
+
+      </div>
+   
+         

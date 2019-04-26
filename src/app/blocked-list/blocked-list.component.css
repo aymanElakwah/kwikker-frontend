@@ -1,0 +1,75 @@
+.mute-list-card{
+    border-bottom:1;
+    border-top:0 
+}
+
+.notificationPics{
+   margin-top: 3px;
+   width: 48px;
+   height: 48px;
+   border-top-left-radius: 50%;
+   border-top-right-radius: 50%;
+   border-bottom-left-radius: 50%;
+   border-bottom-left-radius: 50%;
+   border-image-width: 1px;
+   border-image-slice: 100%
+}
+
+.fullname{
+   word-break: break-all;
+   color: #14171a;
+   font-size: 14px;
+   font-weight: bold;
+   font-family: "Segoe UI",Arial,sans-serif;
+   padding: 0;
+   margin: 0;
+   padding-left: 10px
+}
+.usernamee{
+   font-size: 14px;
+   color: #657786;
+   max-width: 100%;
+   overflow: hidden!important;
+   text-overflow: ellipsis!important;
+   white-space: nowrap!important;
+   word-wrap: normal!important;
+   font-family: "Segoe UI",Arial,sans-serif;
+}
+
+.userName{
+   margin-left:2%
+}
+
+.userHandle{
+   margin-left: .5%;
+    
+}
+.kweek-btn{
+   background-color: #1da1f2;
+   border: 1px solid #1da1f2;
+   color: #fff;
+   font-size: 14px;
+   line-height: 20px;
+   padding: 6px 16px;
+   cursor: pointer;
+   font-weight: bold;
+   white-space: nowrap;
+   text-transform: none;
+   text-indent: 0px;
+   text-shadow: none;
+   font-family: "Segoe UI", Arial, sans-serif;
+   border-radius: 20px;
+
+}
+
+.kweek-btn:hover{
+   background-color: #2091f9;
+   border: 1px solid #2091f9;
+}
+
+.kweek-btn:active, 
+.kweek-btn:focus 
+{
+   outline: none;   
+   
+}

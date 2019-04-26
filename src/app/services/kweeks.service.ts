@@ -1,33 +1,35 @@
-import { Injectable } from '@angular/core';
-import { Kweek } from '../model/kweek';
+import { Injectable } from "@angular/core";
+import { Kweek } from "../model/kweek";
+import { DataService } from "./data.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class KweeksService {
   /**
-   * No Params
-   * No Return
+   * @param kweekService
+   * No  @returns
    */
-  constructor() { }
-    /**
+  constructor(private kweekService: DataService) {}
+
+  /**
    * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
-   * No Parameters
-   * @returns void
+   * @param kweeks that will inject the tags in
+   * No @returns
    */
   injectTagsInText(kweeks: Kweek[]): void {
-    const hashtagStartTagOpen = '<a href=\'';
-    const mentionStartTagOpen = '<a href=\'';
-    const startTagClose = '\'>';
-    const endTag = '</a>';
+    const hashtagStartTagOpen = "<a href='";
+    const mentionStartTagOpen = "<a href='";
+    const startTagClose = "'>";
+    const endTag = "</a>";
     kweeks.forEach(kweek => {
       let iMentions = 0;
       let iHashtags = 0;
-      let str = '';
+      let str = "";
       let start = 0;
       let end = 0;
       while (true) {
-      // The function is looping until the injection completion
+        // The function is looping until the injection completion
         start = end; // There is two indices jumps on the string charcters
         // both start and end is used in slice function to get string from start index to end index
         if (
@@ -50,10 +52,10 @@ export class KweeksService {
             const sliceStr = kweek.text.slice(start + 1, end);
             str +=
               mentionStartTagOpen +
-              '/profile/' +
+              "/profile/" +
               sliceStr +
               startTagClose +
-              '@' +
+              "@" +
               sliceStr +
               endTag;
           } else if (start === kweek.hashtags[iHashtags].indices[0]) {
@@ -63,9 +65,9 @@ export class KweeksService {
             const sliceStr = kweek.text.slice(start, end);
             str +=
               hashtagStartTagOpen +
-              '/search/people?filterBy=' +
+              "/search/people?filterBy=" +
               sliceStr +
-              '&src=hash' +
+              "&src=hash" +
               startTagClose +
               sliceStr +
               endTag;
@@ -93,10 +95,10 @@ export class KweeksService {
                 const sliceStr = kweek.text.slice(start + 1, end);
                 str +=
                   mentionStartTagOpen +
-                  '/profile/' +
+                  "/profile/" +
                   sliceStr +
                   startTagClose +
-                  '@' +
+                  "@" +
                   sliceStr +
                   endTag;
               } else {
@@ -110,19 +112,19 @@ export class KweeksService {
             // loop and add them respectivly
             while (iHashtags !== kweek.hashtags.length) {
               if (start === kweek.hashtags[iHashtags].indices[0]) {
-                end = kweek.mentions[iHashtags].indices[1];
+                end = kweek.hashtags[iHashtags].indices[1];
                 iHashtags += 1;
                 const sliceStr = kweek.text.slice(start, end);
                 str +=
                   hashtagStartTagOpen +
-                  '/search/people?filterBy=' +
-                  sliceStr +
-                  '&src=hash' +
+                  "/search/people?filterBy=" +
+                  sliceStr.slice(1,sliceStr.length) +
+                  "&src=hash" +
                   startTagClose +
                   sliceStr +
                   endTag;
               } else {
-                end = kweek.mentions[iHashtags].indices[0];
+                end = kweek.hashtags[iHashtags].indices[0];
                 str += kweek.text.slice(start, end);
               }
               start = end;
@@ -135,16 +137,56 @@ export class KweeksService {
         }
       }
       kweek.text = str; // finally make the kweek text equals the injected str
+      kweek.user.profile_image_url += "?dummy=" + Math.random();
+      console.log( kweek.user.profile_image_url);
     });
   }
 
+  /**
+   * call the function like the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
   like(kweek: Kweek): void {
-    kweek.liked_by_user = !kweek.liked_by_user;
-    kweek.liked_by_user ?  kweek.number_of_likes++ : kweek.number_of_likes--;
+    this.kweekService.likeKweek(kweek.id).subscribe(()=> {
+      kweek.liked_by_user = true;
+      kweek.number_of_likes++;
+    });
   }
 
+  /**
+   * call the function unlike the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
+  unlike(kweek: Kweek): void {
+    this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+      kweek.liked_by_user = false;
+      kweek.number_of_likes--;
+    });
+  }
+
+   /**
+   * call the function rekweek the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
   rekweek(kweek: Kweek): void {
-    kweek.rekweeked_by_user = !kweek.rekweeked_by_user;
-    kweek.rekweeked_by_user ?  kweek.number_of_rekweeks++ : kweek.number_of_rekweeks--;
+    this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+      kweek.rekweeked_by_user = true;
+      kweek.number_of_rekweeks++;
+    });
+  }
+
+  /**
+   * call the function unrekweek the kweek from data service which deal with backend
+   * @param kweek
+   * No @returns
+   */
+  unrekweek(kweek: Kweek): void {
+    this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+      kweek.rekweeked_by_user = false;
+      kweek.number_of_rekweeks--;
+    });
   }
 }

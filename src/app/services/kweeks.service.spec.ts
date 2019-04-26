@@ -1,11 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 
 import { KweeksService } from './kweeks.service';
+import { DataService } from './data.service';
+import { Observable, empty } from 'rxjs';
+import { exec } from 'child_process';
 
 
-describe('kweekS', () => {
-  const kweekS: KweeksService = new KweeksService();
+describe('kweekService', () => {
+  const mockDataService = jasmine.createSpyObj(['getKweeks']);
+  // const KWEEKS = mockDataService.getKweeks();
+  let kweekS: KweeksService;
   let KWEEKS;
+  let dataService;
   const hashtagStartTagOpen: String = '<a href=\'';
   const mentionStartTagOpen: String = '<a href=\'';
   const startTagClose: String = '\'>';
@@ -13,6 +19,8 @@ describe('kweekS', () => {
   // let mockDataService;
   // let mockActivatedRoute;
   beforeEach(() => {
+    dataService = new DataService(null, null);
+    kweekS = new KweeksService(dataService);
     // Test objects to unit test kweeks before each unit test
     KWEEKS = [
       {
@@ -53,7 +61,7 @@ describe('kweekS', () => {
           'rekweeker_name': 'string',
           'rekweeker_username': 'string'
         },
-        'liked_by_user': true,
+        'liked_by_user': false,
         'rekweeked_by_user': true
       },
       {
@@ -66,8 +74,8 @@ describe('kweekS', () => {
           'screen_name': 'Abdulrahman Khalid',
           'profile_image_url': 'https://pbs.twimg.com/profile_images/1030601937115381760/tYVfVdN__400x400.jpg',
           'following': true,
-          'follows_you': true,
           'blocked': false,
+          'follows_you': true,
           'muted': false
         },
         'mentions': [
@@ -145,14 +153,12 @@ describe('kweekS', () => {
         'rekweeked_by_user': true
       }
     ];
-
-    // mockDataService = jasmine.createSpyObj(['getKweeks']);
     // mockActivatedRoute = jasmine.createSpyObj(['snapshot']);
 
   });
 
   describe('injectTagsInText', () => {
-    it('should return inject the tags correctly', () => {
+    it('should inject the tags correctly', () => {
       // Arrange
       // Act
       kweekS.injectTagsInText(KWEEKS);
@@ -181,4 +187,93 @@ describe('kweekS', () => {
       expect(KWEEKS[2].text).toBe(toBeStr); // expect the output to be as toBeStr argument
     });
   });
+
+  describe('like function', () => {
+    it('should call likeKweek from data service and like kweek',()=>{
+      // Arrange
+      let kWK_ARR: any[] = [
+        { id: 1, liked_by_user: false, number_of_likes: 3 },
+        { id: 2, liked_by_user: false, number_of_likes: 3 }
+      ];
+      let spy = spyOn(dataService, 'likeKweek').and.callFake(() => {
+        kWK_ARR[0].liked_by_user = true;
+        kWK_ARR[0].number_of_likes++;      
+        return empty();
+      });
+
+      //Act
+      kweekS.like(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].liked_by_user).toBeTruthy();
+      expect(kWK_ARR[0].number_of_likes).toBe(4);
+    });
+  });
+
+  describe('unlike function', () => {
+    it('should call unlikeKweek from data service and unlike kweek',()=>{
+      // Arrange
+      let kWK_ARR: any[] = [
+        { id: 1, liked_by_user: true, number_of_likes: 3 },
+        { id: 2, liked_by_user: false, number_of_likes: 3 }
+      ];
+      let spy = spyOn(dataService, 'unlikeKweek').and.callFake(() => {
+        kWK_ARR[0].liked_by_user = false;
+        kWK_ARR[0].number_of_likes--;      
+        return empty();
+      });
+
+      //Act
+      kweekS.unlike(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].liked_by_user).toBeFalsy();
+      expect(kWK_ARR[0].number_of_likes).toBe(2);
+    });
+  });
+
+  describe('rekweek function', () => {
+    it('should call rekweekKweek from data service and rekweek kweek', () => {
+      // Arrange
+      let kWK_ARR: any[] = [
+        { id: 1, rekweeked_by_user: false, number_of_rekweeks: 3 },
+        { id: 2, rekweeked_by_user: false, number_of_rekweeks: 3 }
+      ];
+      let spy = spyOn(dataService, "rekweekKweek").and.callFake(() => {
+        kWK_ARR[0].rekweeked_by_user = true;
+        kWK_ARR[0].number_of_rekweeks++;      
+        return empty();
+      });
+
+      //Act
+      kweekS.rekweek(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].rekweeked_by_user).toBeTruthy();
+      expect(kWK_ARR[0].number_of_rekweeks).toBe(4);  
+    });
+  });
+
+  describe('unrekweek function', () => {
+    it('should call unrekweekKweek from data service and unrekweek kweek', () => {
+      // Arrange
+      let kWK_ARR: any[] = [
+        { id: 1, rekweeked_by_user: true, number_of_rekweeks: 3 },
+        { id: 2, rekweeked_by_user: false, number_of_rekweeks: 3 }
+      ];
+      let spy = spyOn(dataService, "unrekweekKweek").and.callFake(() => {
+        kWK_ARR[0].rekweeked_by_user = false;
+        kWK_ARR[0].number_of_rekweeks--;      
+        return empty();
+      });
+
+      //Act
+      kweekS.unrekweek(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[0].id);
+      expect(kWK_ARR[0].rekweeked_by_user).toBeFalsy();
+      expect(kWK_ARR[0].number_of_rekweeks).toBe(2);  
+    });
+  });
+
 });

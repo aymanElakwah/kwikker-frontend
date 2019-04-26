@@ -1,3 +1,19 @@
-<p>
-  muted-list works!
-</p>
+<div class="card" >
+    <div class="card-body" style="border-bottom: 1px solid rgba(0,0,0,.125);">
+        <h3 class="card-title">Muted List</h3>
+      </div>
+</div>
+<div class="card mute-list-card" *ngFor="let m of muted_accounts" >
+    <div class="card-body" >
+        <span class="notificationPics">
+            <img [src]="m.profile_image_url" 
+            class=" rounded-circle float-left notificationPics" >
+        </span>
+        <strong class="fullname">{{m.username}}</strong>
+        <span class="usernamee">@{{m.screen_name}}</span>
+        <button class="btn btn-primary kweek-btn" style="float:right; margin-right:2%; margin-top:4%"
+    (click)="unMuteUser(m.username)">Unmute</button>
+      </div>
+</div>
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MiniUser } from '../../model/mini-user';
+import { User } from '../../model/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
@@ -16,199 +16,34 @@ import { DataService } from 'src/app/services/data.service';
 export class MiniProfileComponent implements OnInit {
 
   /* Array of MiniUsers To get some of the following and followers Info */
-  public miniCardProfileUsers: MiniUser[] =
-  [
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/z2wkPKs/Default.png',
-      following: true,
-      follows_you: true,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: true,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    },
-    {
-      username: 'Ahmed Mahmoud',
-      screen_name: 'Ahmed_Mahmoud14',
-      profile_image_url: 'https://i.ibb.co/X74ncSm/Premier-League.jpg',
-      following: false,
-      follows_you: false,
-      blocked: false,
-      muted: false,
-      bio: 'Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!',
-    }
-  ];
+  public miniCardProfileUsers: User[] = [];
 
    /* Array of MuteModes for each MiniUsers */
-  public muteModes: boolean[] =
-  [
-    false,false,false,false,false,false,false,false,false,false,false,false,false,false 
-  ];
+  public muteModes: boolean[] = [];
   
           /* route children name which based on it, 
   The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;
+
+  /* The Authorized User (The one who made Log in) */
+  authorizedUser: string = localStorage.getItem("username");
+
+  /* Last UserName Sent To The Backend To retireve more */
+  LastSent: string = null;
+
+  /* Profile Username */
+  ProfileUserName: string;
+
+  DummyString: string = "?dummy=" + Math.random();
+
+      /**
+   * Check If this Profile belongs to the authorized User (The one who loged in)
+   * No Parameters
+   * @returns {boolean}
+   */
+  isAuthorisedUser(index: number): boolean {
+    return (this.miniCardProfileUsers[index].username == this.authorizedUser);
+  }
 
    /**
    *
@@ -229,11 +64,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].following )
     {
-      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unfollowUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.followUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     this.miniCardProfileUsers[index].following = !this.miniCardProfileUsers[index].following;
   }
@@ -248,11 +83,11 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].muted )
     {
-      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unmuteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.muteUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].muted = !this.miniCardProfileUsers[index].muted;
@@ -270,24 +105,41 @@ export class MiniProfileComponent implements OnInit {
   {
     if( this.miniCardProfileUsers[index].blocked )
     {
-      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.unblockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
     else
     {
-      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username);
+      this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username).subscribe();
     }
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
              
-  //This part will be updated
-  FollowersOrFollowings(): void
-  {
-    if (this.route.snapshot.firstChild != null)
-    {
-      this.routeChildName = this.route.snapshot.firstChild.toString();
-    }
+/**
+   * Scroll Event Which is used to get more data for the followers and the followings
+   * while the user scrolling 
+   */
+  onScroll() {
+  
+   if(this.miniCardProfileUsers.length != 0)
+   {
+      var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username ;
+      var Lastindex = this.miniCardProfileUsers.length;
+      if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
+      {
+       
+        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.LastSent = LastUsername;
+      }
+      else if (this.route.snapshot.url[0].path == 'following' && this.LastSent != LastUsername)
+      {
+        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
+        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.LastSent = LastUsername;
+      }
   }
+}
 
    /**
    * ngOnInit is used to start the process of knowing which Url is Activated
@@ -295,17 +147,22 @@ export class MiniProfileComponent implements OnInit {
    */
   ngOnInit() {
 
-     //This part will be updated
-    this.FollowersOrFollowings();
-    if(this.routeChildName == 'followers')
+    this.ProfileUserName = this.route.snapshot.root.children[0].params['username'];
+    if(this.route.snapshot.url[0].path == 'followers')
     {
-      this.miniProfileInfoService.getUserFollowers().subscribe
-      ( usersInfo => {this.miniCardProfileUsers = usersInfo; } )
+      this.miniProfileInfoService.getUserFollowers(this.ProfileUserName, null).subscribe
+      ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
     }
-    else if (this.routeChildName == 'following')
+    else if (this.route.snapshot.url[0].path == 'following')
     {
-      this.miniProfileInfoService.getUserFollowings().subscribe
-      ( usersInfo => {this.miniCardProfileUsers = usersInfo; } )
+      this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, null).subscribe
+      ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
+    }
+    else 
+    {
+      this.miniProfileInfoService.searchUsers(this.route.snapshot.queryParams["filterBy"]).subscribe(
+        usersInfo => { this.miniCardProfileUsers = usersInfo;});
+    
     }
   }
 
