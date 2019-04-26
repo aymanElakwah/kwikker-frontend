@@ -129,6 +129,7 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
       this.data.createMessage(message).subscribe();
     }
     this.myForm.reset();
+    this.removeImg();
   }
   toInbox() {
     this.chatService.setSection(1);
