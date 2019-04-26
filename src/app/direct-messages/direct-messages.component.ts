@@ -63,6 +63,8 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
       this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
         this.messageList.push(list);
+        setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
+        objDiv.scrollTop = objDiv.scrollHeight+200; }, 10);
       });});
     this.myForm = this.fb.group({
     message: ['', [
@@ -121,6 +123,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
       media_id: ''
     };
     message.text = this.myForm.controls.message.value;
+    if(message.text == ''){
+      message.text =' ';
+    }
     message.username = this.addressee.username;
     if(this.uploadImg===true){
        this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;

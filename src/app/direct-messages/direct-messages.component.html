@@ -65,7 +65,7 @@
       <div style="height:0px;display: none">
         <input type="file" formControlName="file" #file (change)="uploadIamge(file.files)" id="fileInput" name="fileInput" accept="image/*" />
      </div>
-      <button id="upload" *ngIf="!uploadImg" (click)="upload()">
+      <button id="upload" *ngIf="!uploadImg" (mouseover)="upload()">
         <i class="far fa-2x fa-image"></i>
       </button>
       <button id="send" (click)="send()" [disabled]="myForm.invalid && !uploadImg" [ngClass]="{'blocked': myForm.invalid && !uploadImg}">
