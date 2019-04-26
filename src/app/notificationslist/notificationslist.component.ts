@@ -49,7 +49,7 @@ export class NotificationslistComponent implements OnInit {
     /**
      * event to send request every 30 secinds to check for new notifications
      */
-    const source = timer(1000*30, 1000*30);
+    const source = timer(1000*300, 1000*300);
      source.subscribe(val => 
       this.refreshNotifications());
   }
@@ -111,7 +111,7 @@ if ((window.innerHeight + window.scrollY) >=  document.body.scrollHeight) {
       list=>{
         this.notificationsResponse = list;
         this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse.Notifications);
-      console.log(this.notificatons_array.length);
+      console.log(this.notificationsResponse.Notifications);
       console.log("is called call");
       this.last_id = this.notificatons_array[this.notificatons_array.length-1].id;
       this.new_length = this.notificatons_array.length;

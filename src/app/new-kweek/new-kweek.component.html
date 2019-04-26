@@ -5,8 +5,10 @@
     <div class="col-md-11" style="padding:0">
     <h2 md-dialog-title class="modal-title" *ngIf="!reply" 
     style="padding-left: 28%">Compose new Kweek</h2>
-    <h2 md-dialog-title class="modal-title" *ngIf="reply" 
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && !kweekTO" 
     style="padding-left: 28%">Reply to {{screenname}}</h2>
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && kweekTO" 
+    style="padding-left: 28%">Kweek to {{screenname}}</h2>
   </div>
     <div class="col-md-1" style="padding:0">
     <div class="clearfix"   >

@@ -4,6 +4,9 @@ import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ChatComponent } from 'src/app/chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
+import { Kweek } from "../../model/kweek";
+
+
 
 /** 
  * This component takes User Info from main one and show it 
@@ -25,7 +28,6 @@ export class ProfileHeaderCardComponent implements OnInit {
 
   /* if The user in Semi Block Mode, Some Information Must be Hidden */
   @Input() semiBlockedMode: boolean;
-
   /**
      * Open Write Kweek Component Dialog
      * No Parameters
@@ -35,6 +37,12 @@ export class ProfileHeaderCardComponent implements OnInit {
   {
     const dialogRef = this.dialog.open(NewKweekComponent,
        { panelClass: 'kweekBox'});
+       dialogRef.componentInstance.reply = true;
+       dialogRef.componentInstance.kweekTO = true;
+       dialogRef.componentInstance.username = this.profileHeaderInfo.screen_name;
+      dialogRef.componentInstance.screenname = this.profileHeaderInfo.screen_name;
+
+       
   }
 
    /**

@@ -20,7 +20,7 @@ export class NewKweekComponent implements OnInit {
   image_id:string = null;
   username:string ;
   screenname:string ;
-
+  kweekTO:boolean;
   replyData:string = "@";
   
 
@@ -38,7 +38,7 @@ export class NewKweekComponent implements OnInit {
      * to check if it's a reply then set varibales of screen name and username
      */
     ngOnInit(): void {
-      if(this.reply == true){
+      if(this.reply == true && this.kweekTO == false){
         this.username = this.kweek.user.username;
         this.screenname = this.kweek.user.screen_name;
       }
@@ -103,14 +103,18 @@ export class NewKweekComponent implements OnInit {
       /**
        * to differ between a reply or a new kweek when sending request
        */
-      if(this.reply == true){
-        
+      if (this.reply == true) {
         this.replyData = this.replyData+this.username+" "+this.kweekData;
         console.log(this.replyData)
-
+      }
+      if(this.reply == true && this.kweekTO == false){
+        
         this.newKweekService.addNewKweek(this.replyData, this.kweek.id).subscribe
         (response => {this.res = response})
 
+      }else if (this.reply == true && this.kweekTO == true) {
+        this.newKweekService.addNewKweek(this.replyData, null).subscribe
+        (response => {this.res = response})
       }
       else{
       this.newKweekService.addNewKweek(this.kweekData, null).subscribe
