@@ -227,6 +227,7 @@ export class MainProfileComponent implements OnInit {
       );
  
       this.profileUser.following = false;
+      this.profileUser.follows_you = false;
     }
     this.profileUser.blocked = !this.profileUser.blocked;
     this.semiBlockedMode = false;
