@@ -314,6 +314,7 @@ export class MainProfileComponent implements OnInit {
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
         this.profileUser = userInfo;
+        
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
         if(!this.isProfilePictureDefault())
