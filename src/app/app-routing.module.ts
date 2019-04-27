@@ -62,7 +62,7 @@ export class CanDeactivateTeam implements CanActivate {
     else
     {
       window.alert("You are already signed in");
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
       return false;
      
     }

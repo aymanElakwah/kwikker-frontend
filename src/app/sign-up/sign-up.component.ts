@@ -19,6 +19,8 @@ public fs3: any;
 public cool: any;
 public errorOccured: any;
 public errorOccured2: any;
+public errorOccured3: any;
+public errorOccured4: any;
 public email: string;
 public counter: number;
 public userName: string;
@@ -59,6 +61,8 @@ ngOnInit() {
    this.cool =  document.querySelector('.progress');
    this.errorOccured =  document.querySelector('.errorOccured');
    this.errorOccured2 =  document.querySelector('.errorOccured2');
+   this.errorOccured3 =  document.querySelector('.errorOccured3');
+   this.errorOccured4 =  document.querySelector('.errorOccured4');
    this.counter = 0;
 }
 
@@ -122,11 +126,17 @@ public previousOne (){
         err => {
           if(err.status == "403")
           {
-            this.whatToShow(1);
+            if(err.error.email_already_exists && err.error.username_already_exists)
+            this.whatToShow(3);
+            else if(err.error.email_already_exists)
+               this.whatToShow(1);
+           else if(err.error.username_already_exists)
+              this.whatToShow(2);
           }
           else
           {
-            this.whatToShow(2);  
+           // console.log("err: ", err.status)
+            this.whatToShow(4);  
           }
           
         }
@@ -146,18 +156,45 @@ public whatToShow(id: number) {
     this.cool.className = 'show';
     this.errorOccured.className = 'hide';
     this.errorOccured2.className = 'hide';
+    this.errorOccured3.className = 'hide';
+    this.errorOccured4.className = 'hide';
   }
   else if (id == 1){
     //error 1
-    this.cool.className = 'hide';
-    this.errorOccured.className = 'show';
-    this.errorOccured2.className = 'hide';
-  }
-  else{
-    //error 2
+    //repeated email
     this.cool.className = 'hide';
     this.errorOccured.className = 'hide';
     this.errorOccured2.className = 'show';
+    this.errorOccured3.className = 'hide';
+    this.errorOccured4.className = 'hide';
+  }
+  else if (id == 2){
+    //error 2
+    //repeated username
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'hide';
+    this.errorOccured2.className = 'hide';
+    this.errorOccured3.className = 'show';
+    this.errorOccured4.className = 'hide';
+  }
+  else if (id == 3){
+    //error 3
+    //repeated username and email
+
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'hide';
+    this.errorOccured2.className = 'hide';
+    this.errorOccured3.className = 'hide';
+    this.errorOccured4.className = 'show';
+  }
+  else{
+    //error 4
+    //backend error
+    this.cool.className = 'hide';
+    this.errorOccured.className = 'show';
+    this.errorOccured2.className = 'hide';
+    this.errorOccured3.className = 'hide';
+    this.errorOccured4.className = 'hide';
   }
 }
 /**
