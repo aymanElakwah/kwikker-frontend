@@ -69,7 +69,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
-    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
     dialogRef.componentInstance.clickedKweek = kweek;
@@ -250,5 +250,6 @@ export class ReplyComponent implements OnInit {
     });
     dialogRef.componentInstance.kweek = kweek;
     dialogRef.componentInstance.reply = true;
+    dialogRef.componentInstance.kweekTO = false;
   }
 }

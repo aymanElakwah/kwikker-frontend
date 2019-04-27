@@ -4,11 +4,13 @@ import { Observable, from, of, empty } from "rxjs";
 import { KweekComponent } from "./kweek.component";
 import { KweeksService } from "../services/kweeks.service";
 import { DataService } from "../services/data.service";
+import { MatDialog } from '@angular/material';
 
 describe("KweekComponent", () => {
   let dataService: DataService;
   let kweeksService: KweeksService;
   let component: KweekComponent;
+  let dialog: MatDialog;
   let mockQueryParamMap = jasmine.createSpyObj('queryParamMap', ["get"]);
   let route: any = {
     snapshot: {
@@ -42,11 +44,12 @@ describe("KweekComponent", () => {
   beforeEach(() => {
     dataService = new DataService(null, null);
     kweeksService = new KweeksService(dataService);
+    dialog = new MatDialog(null,null,null,null,null,null,null);
     component = new KweekComponent(
       dataService,
       kweeksService,
       route,
-      null,
+      dialog,
       null
     );
     component.route = route;
@@ -58,9 +61,9 @@ describe("KweekComponent", () => {
     let kWK_ARR: any[];
     beforeEach(() => {
       kWK_ARR = [
-        { id: 1, liked_by_user: false, number_of_likes: 3 },
-        { id: 2, liked_by_user: false, number_of_likes: 3 },
-        { id: 1, liked_by_user: false, number_of_likes: 3 }
+        { id: 1 },
+        { id: 2 },
+        { id: 3 }
       ];
       component.kweeks = kWK_ARR;
     });
@@ -350,7 +353,69 @@ describe("KweekComponent", () => {
     });
   });
 
+  describe("openDialog fucntion", () => {
+    it("should call open reply popUp", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0]
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.openDialog(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Reply fucntion", () => {
+    it("should call open reply panel to post reply", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          kweek: kWK_ARR[0],
+          reply: false,
+          kweekTO: true
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.reply(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+      expect(confirmDeleteRef.componentInstance.kweek).toBe(kWK_ARR[0]);
+      expect(confirmDeleteRef.componentInstance.reply).toBeTruthy();
+      expect(confirmDeleteRef.componentInstance.kweekTO).toBeFalsy();
+    });
+  });
+
   describe("delete fucntion", () => {
+    it("should call open delete popUp", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0]
+        },
+        afterClosed() {
+          return empty();
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.delete(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("deleteAction fucntion", () => {
     let kWK_ARR: any[];
     beforeEach(() => {
       kWK_ARR = [{ id: 1 }, { id: 2 }, { id: 1 }];
@@ -382,4 +447,73 @@ describe("KweekComponent", () => {
       expect(component.kweeks.length).toBe(1);
     });
   });
+
+
+  describe("onScroll", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        { id: 1 },
+        { id: 2 },
+        { id: 3 }
+      ];
+      component.kweeks = kWK_ARR;
+      component.route.snapshot.root.children[0].params["username"] = "user1";
+    });
+
+    let arrHome: any[] = [{ id: 23 }, { id: 25 }, { id: 35 }];
+    let arrProfileKweeks: any[] = [{ id: 13 }, { id: 41 }, { id: 51 }];
+    let arrProfileLikes: any[] = [{ id: 2 }, { id: 12 }];
+    let arrSearch: any[] = [{ id: 252 }];
+
+    it("should get home kweeks if route path was home", () => {
+      let spy = spyOn(dataService, "getHomeKweeks").and.callFake(() => {
+        component.kweeks = arrHome;
+        return empty();
+      });
+
+      component.route.snapshot.parent.routeConfig.path = "home";
+
+      component.onScroll();
+
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[kWK_ARR.length-1].id);
+      expect(component.kweeks).toBe(arrHome);
+    });
+
+    it("should get home kweeks if route path was profile/:username/kweeks", () => {
+      component.route.snapshot.parent.routeConfig.path = "profile/:username";
+      component.route.snapshot.parent.firstChild.routeConfig.path = "";
+      let spy = spyOn(dataService, "getUserKweeks").and.callFake(() => {
+        component.kweeks = arrProfileKweeks;
+        return empty();
+      });
+
+      component.onScroll();
+
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(component.kweeks.length).toBe(arrProfileKweeks.length);
+
+      component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
+
+      component.onScroll();
+
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(component.kweeks).toBe(arrProfileKweeks);
+    });
+
+    it("should get prfile likes if route path was profile/:username/likes", () => {
+      component.route.snapshot.parent.routeConfig.path = "profile/:username";
+      component.route.snapshot.parent.firstChild.routeConfig.path = "likes";
+      let spy = spyOn(dataService, "getUserLikedKweeks").and.callFake(() => {
+        component.kweeks = arrProfileLikes;
+        return empty();
+      });
+
+      component.onScroll();
+
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(component.kweeks).toBe(arrProfileLikes);
+    });
+  });
+
 });

@@ -2,22 +2,25 @@ import { ReplyComponent } from "./reply.component";
 import { DataService } from "../services/data.service";
 import { KweeksService } from "../services/kweeks.service";
 import { from, empty } from "rxjs";
+import { MatDialog } from '@angular/material';
 
 describe("ReplyComponent", () => {
   let dataService: DataService;
   let kweeksService: KweeksService;
   let component: ReplyComponent;
+  let dialog: MatDialog;
   let mockDialogRef = jasmine.createSpyObj(["close"]);
   let mockDialogNestedRef = jasmine.createSpyObj(["close"]);
   beforeEach(() => {
     dataService = new DataService(null, null);
     kweeksService = new KweeksService(dataService);
+    dialog = new MatDialog(null, null, null, null, null, null, null);
     component = new ReplyComponent(
       mockDialogNestedRef,
       mockDialogRef,
       dataService,
       kweeksService,
-      null,
+      dialog,
       null
     );
     component.busyRequest = false;
@@ -267,7 +270,28 @@ describe("ReplyComponent", () => {
     });
   });
 
-  describe("deleteRoot_ClickedKweek function", () => {
+  describe("deleteRoot_ClickedKweek fucntion", () => {
+    it("should call open delete popUp", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0]
+        },
+        afterClosed() {
+          return empty();
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.deleteRoot_ClickedKweek(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("deleteActionRoot_ClickedKweek function", () => {
     let KWK_ARR: any[];
     beforeEach(() => {
       KWK_ARR = [{ id: 1 }, { id: 2 }, { id: 3 }];
@@ -301,7 +325,28 @@ describe("ReplyComponent", () => {
     });
   });
 
-  describe("deleteReply function", () => {
+  describe("deleteReply fucntion", () => {
+    it("should call open delete popUp", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0]
+        },
+        afterClosed() {
+          return empty();
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.deleteReply(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("deleteActionReply function", () => {
     let KWK_ARR: any[];
     beforeEach(() => {
       KWK_ARR = [{ id: 1 }, { id: 2 }, { id: 3 }];
@@ -322,4 +367,115 @@ describe("ReplyComponent", () => {
       expect(component.replies.length).toBe(2);
     });
   });
+
+  describe("nestedDialog fucntion", () => {
+    it("should call open reply popUp", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0]
+        },
+        afterClosed() {
+          return empty();
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.nestedDialog(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Reply fucntion", () => {
+    it("should call open reply panel to post reply", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0],
+          reply: false,
+          kweekTO: true
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.Reply(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+      expect(confirmDeleteRef.componentInstance.kweek).toBe(kWK_ARR[0]);
+      expect(confirmDeleteRef.componentInstance.reply).toBeTruthy();
+      expect(confirmDeleteRef.componentInstance.kweekTO).toBeFalsy();
+    });
+  });
+
+  describe("likersDialog fucntion", () => {
+    it("should open likersDialog", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0],
+          likers: false
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.likersDialog(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+      expect(confirmDeleteRef.componentInstance.clickedKweek).toBe(kWK_ARR[0]);
+      expect(confirmDeleteRef.componentInstance.likers).toBeTruthy();
+    });
+  });
+
+
+  describe("rekweekersDialog fucntion", () => {
+    it("should open rekweekersDialog", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          clickedKweek: kWK_ARR[0],
+          likers: true
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.rekweekersDialog(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+      expect(confirmDeleteRef.componentInstance.clickedKweek).toBe(kWK_ARR[0]);
+      expect(confirmDeleteRef.componentInstance.likers).toBeFalsy();
+    });
+  });
+
+  describe("Reply fucntion", () => {
+    it("should call open reply panel to post reply", () => {
+      let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
+      let confirmDeleteRef: any = {
+        componentInstance: {
+          kweek: kWK_ARR[0],
+          reply: false,
+          kweekTO: true                                     
+        }
+      };
+      let spy = spyOn(dialog, "open").and.callFake(() => {
+        return confirmDeleteRef;
+      });
+
+      component.Reply(kWK_ARR[0]);
+
+      expect(spy).toHaveBeenCalled();
+      expect(confirmDeleteRef.componentInstance.kweek).toBe(kWK_ARR[0]);
+      expect(confirmDeleteRef.componentInstance.reply).toBeTruthy();
+      expect(confirmDeleteRef.componentInstance.kweekTO).toBeFalsy();
+    });
+  });
+
 });
