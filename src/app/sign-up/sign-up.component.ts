@@ -10,7 +10,7 @@ import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
+//In class data used in the signup component
 public bar2: any;
 public bar3: any;
 public fs1: any;
@@ -29,18 +29,24 @@ public pass: string;
 public confirm_pass: string;
 public screenName: string;
 public birthdate: string;
-
-constructor(private data: DataService , private router: Router) { 
-  
-}
-
-
+//Data to set the date picker module
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
+/**
+ * A constructor called when initialiizing logInComponent.
+ * It creates two private vairables.
+ * data and router.
+ * Data is used to call dataservices functions
+ * Router is used to navigate after successful log in.
+ * @param DataService {data}
+ * @param Router {router}
+ * @returns void
+ */
+constructor(private data: DataService , private router: Router) {}
 
 /**
    *On initiallizing the sign-up component, a set of parameters are initalized too.
-   *these parameters must be initialized only once
+   *these parameters must be initialized only once every time the component is initiallized
    *If user is already signed up, this page will direct him to home
    *@param void
    * @returns void
@@ -135,7 +141,6 @@ public previousOne (){
           }
           else
           {
-           // console.log("err: ", err.status)
             this.whatToShow(4);  
           }
           
@@ -187,7 +192,7 @@ public whatToShow(id: number) {
     this.errorOccured3.className = 'hide';
     this.errorOccured4.className = 'show';
   }
-  else{
+  else if (id == 4){
     //error 4
     //backend error
     this.cool.className = 'hide';

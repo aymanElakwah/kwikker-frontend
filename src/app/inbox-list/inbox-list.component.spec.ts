@@ -8,18 +8,8 @@ describe('InboxListComponent', () => {
   let component: InboxListComponent;
   let fixture: ComponentFixture<InboxListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ChatModule,SharedModule,RouterTestingModule],
-      declarations: []
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(InboxListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new InboxListComponent(null,null,null,null);
   });
 
   it('should create', () => {
