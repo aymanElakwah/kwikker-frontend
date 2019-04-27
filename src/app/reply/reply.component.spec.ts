@@ -1,10 +1,7 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { ReplyComponent } from "./reply.component";
 import { DataService } from "../services/data.service";
 import { KweeksService } from "../services/kweeks.service";
-import { Observable, from, empty } from "rxjs";
-import { MatDialogRef } from "@angular/material";
+import { from, empty } from "rxjs";
 
 describe("ReplyComponent", () => {
   let dataService: DataService;

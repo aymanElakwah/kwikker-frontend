@@ -1,9 +1,6 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { LikesRekweeksListComponent } from "./likes-rekweeks-list.component";
 import { from } from "rxjs";
 import { DataService } from "../services/data.service";
-import { KweeksService } from "../services/kweeks.service";
 
 describe("LikesRekweeksListComponent", () => {
   let component: LikesRekweeksListComponent;
