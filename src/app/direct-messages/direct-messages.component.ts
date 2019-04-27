@@ -63,6 +63,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
       this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
         this.messageList.push(list);
+        if(list.from_username != localStorage.getItem("username")) {
+          this.playAudio();
+        }
         setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
         objDiv.scrollTop = objDiv.scrollHeight+200; }, 10);
       });});
@@ -159,5 +162,11 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     if(event.key === "Enter" ) {
       this.send();
     }
+  }
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/sounds/beeb.mp3";
+    audio.load();
+    audio.play();
   }
 }
