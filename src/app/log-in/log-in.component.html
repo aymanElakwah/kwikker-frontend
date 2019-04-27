@@ -11,7 +11,7 @@
     </div>
     
     <!-- Login Form -->
-    <form  #loginForm = "ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
+    <form  #loginForm ="ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
       <!-- UserName -->  
       <div>
           <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="50" placeholder="Username" required>
