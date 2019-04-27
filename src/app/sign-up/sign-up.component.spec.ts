@@ -3,7 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SignUpComponent } from './sign-up.component';
 import { DataService } from '../services/data.service';
 import { HttpClient } from '@angular/common/http';
-
+/**
+ * A descripe function to test which error message to show for different data entries.
+ * and tests for date conversion function into string
+ */
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
   let fixture: ComponentFixture<SignUpComponent>;
@@ -36,12 +39,52 @@ describe('SignUpComponent', () => {
     component.whatToShow(0);
     expect( this.cool.className).toEqual("show");
     expect(this.errorOccured.className).toEqual('hide');
+    expect(this.errorOccured2.className).toEqual('hide');
+    expect(this.errorOccured3.className).toEqual('hide');
+    expect(this.errorOccured4.className).toEqual('hide');
+    
+
     component.whatToShow(1);
     expect( this.cool.className).toEqual("hide");
+    expect(this.errorOccured.className).toEqual('hide');
+    expect(this.errorOccured2.className).toEqual('show');
+    expect(this.errorOccured3.className).toEqual('hide');
+    expect(this.errorOccured4.className).toEqual('hide');
+    
+    component.whatToShow(2);
+    expect( this.cool.className).toEqual("hide");
+    expect(this.errorOccured.className).toEqual('hide');
+    expect(this.errorOccured2.className).toEqual('hide');
+    expect(this.errorOccured3.className).toEqual('show');
+    expect(this.errorOccured4.className).toEqual('hide');
+      
+
+
+    component.whatToShow(3);
+    expect( this.cool.className).toEqual("hide");
+    expect(this.errorOccured.className).toEqual('hide');
+    expect(this.errorOccured2.className).toEqual('hide');
+    expect(this.errorOccured3.className).toEqual('hide');
+    expect(this.errorOccured4.className).toEqual('show');
+    
+
+    component.whatToShow(4);
+    expect( this.cool.className).toEqual("hide");
     expect(this.errorOccured.className).toEqual('show');
+    expect(this.errorOccured2.className).toEqual('hide');
+    expect(this.errorOccured3.className).toEqual('hide');
+    expect(this.errorOccured4.className).toEqual('hide');
+
+
     component.whatToShow(NaN);
     expect( this.cool.className).toEqual("hide");
     expect(this.errorOccured.className).toEqual('hide');
+    expect(this.errorOccured2.className).toEqual('hide');
+    expect(this.errorOccured3.className).toEqual('hide');
+    expect(this.errorOccured4.className).toEqual('hide');
+    
+
+
   });
  
  
@@ -49,7 +92,9 @@ describe('SignUpComponent', () => {
 });
 
 
-
+/**
+ * Funciton to test hte creation and calling for signup function and calling of its dataservices.
+ */
 
 describe("LogInComponent", () => {
   let dataServices: DataService;
