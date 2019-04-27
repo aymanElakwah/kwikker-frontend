@@ -4,7 +4,7 @@ import { Observable  } from 'rxjs';
 import { Message } from '../model/message';
 import { environment } from 'src/environments/environment.prod';
 @Injectable(
-
+  {providedIn: 'root'}
 )
 export class DirectMessagesService {
   private socket = io(environment.base);
