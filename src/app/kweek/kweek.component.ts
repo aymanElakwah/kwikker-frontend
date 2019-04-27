@@ -21,27 +21,29 @@ import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.compone
   encapsulation: ViewEncapsulation.None
 })
 export class KweekComponent implements OnInit {
-  clickedKweek: Kweek = null;
+  //ToolTips parameters
   positionOption: TooltipPosition = "above";
   position = new FormControl(this.positionOption);
   showDelay = new FormControl(50);
   hideDelay = new FormControl(50);
-  functionToCall: String = "";
-  kweeks: Kweek[] = [];
+
+  kweeks: Kweek[] = []; // kweeks
   mentionsResponse: any;
-  /* route children name which based on it, The right request will be sent */
-  public routeChildName: string;
 
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
 
   callCommonFunc = true; // to call common like-unlike-rekweek-unrekweek functions from kweek service
 
-  busyRequest: Boolean = false;
+  busyRequest: Boolean = false; // to see if the request is done to do another request and it is checked at the beginning of some functions
+
   /*
    * constructor called when component is made
    * @param kweekService to use DataService functions and deal with backend
+   * @param kweekFunc to use kweeksService functions which has common kweeks functions
    * @param route to use snapshot from the url to know which URL you are in
+   * @param dialog to open and close dialogs
+   * @param overlay to open popup when hover on userName in the (updated comming version)
    * No @return
    */
   constructor(
@@ -172,9 +174,6 @@ export class KweekComponent implements OnInit {
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.clickedKweek = kweek;
-    dialogRef.afterClosed().subscribe(result => {
-      this.clickedKweek = null;
-    });
   }
 
   /**
@@ -342,7 +341,7 @@ export class KweekComponent implements OnInit {
   }
 
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete action
    * @param kweek
    * No @returns
    */
@@ -362,6 +361,11 @@ export class KweekComponent implements OnInit {
     });
   }
 
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
   deleteAction(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
@@ -378,6 +382,7 @@ export class KweekComponent implements OnInit {
       }
     }
   }
+
   /**
    * callback function in subscribe if the user is not in his profile
    * @param kweek
@@ -412,10 +417,15 @@ export class KweekComponent implements OnInit {
    * @param ms
    * @returns promise
    */
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  // delay(ms: number) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
 
+  /**
+   * Open Reply popUp
+   * @param kweek  kweek to reply on
+   * No Return
+   */
   reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: "kweekBox"
@@ -428,6 +438,8 @@ export class KweekComponent implements OnInit {
   /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling
+   * No Parms
+   * No Return
    */
   onScroll(): void {
     if (this.kweeks.length != 0) {
@@ -483,7 +495,9 @@ export class KweekComponent implements OnInit {
       } else if (mainRoute === "notifications") {
         this.kweekService.getUserMentions(lastKweekId).subscribe(mentions => {
           this.kweekFunc.injectTagsInText(mentions.replies_and_mentions);
-          this.mentionsResponse.replies_and_mentions = this.mentionsResponse.replies_and_mentions.concat(mentions.replies_and_mentions);
+          this.mentionsResponse.replies_and_mentions = this.mentionsResponse.replies_and_mentions.concat(
+            mentions.replies_and_mentions
+          );
           this.kweeks = this.kweeks.concat(mentions.replies_and_mentions);
         });
       } else {

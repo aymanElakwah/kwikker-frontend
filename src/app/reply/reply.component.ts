@@ -113,6 +113,7 @@ export class ReplyComponent implements OnInit {
     dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
     dialogLikersRekweekersRef.componentInstance.likers = false;
   }
+
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
    * @param kweek
@@ -166,7 +167,7 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete root or clickedKweek action function
    * @param kweek
    * No @returns
    */
@@ -182,11 +183,15 @@ export class ReplyComponent implements OnInit {
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
         this.deleteActionRoot_ClickedKweek(kweek);
-       
       }
     });
   }
 
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
   deleteActionRoot_ClickedKweek(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
@@ -196,8 +201,9 @@ export class ReplyComponent implements OnInit {
       });
     }
   }
+
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete reply action function
    * @param kweek
    * No @returns
    */
@@ -217,7 +223,12 @@ export class ReplyComponent implements OnInit {
     });
   }
 
-  deleteActionReply(kweek: Kweek):void {
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteActionReply(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekService.deleteKweek(kweek.id).subscribe(() => {
@@ -228,6 +239,11 @@ export class ReplyComponent implements OnInit {
     }
   }
 
+  /**
+   * Open Reply popUp
+   * @param kweek  kweek to reply on
+   * No Return
+   */
   Reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: "kweekBox"

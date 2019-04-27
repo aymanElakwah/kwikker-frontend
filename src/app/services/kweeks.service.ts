@@ -13,7 +13,7 @@ export class KweeksService {
   constructor(private kweekService: DataService) {}
 
   /**
-   * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
+   * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them and edit message string to appear
    * @param kweeks that will inject the tags in
    * No @returns
    */
