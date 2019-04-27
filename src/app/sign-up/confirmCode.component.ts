@@ -32,7 +32,10 @@ export class confirmCode implements OnInit {
            localStorage.setItem('TOKEN', res.token);
            this.router.navigate(['/home']);
          },
-          err => console.log('error: ', err)
+          err => {
+            
+            console.log('error: ', err)
+          }
       );
 
       
