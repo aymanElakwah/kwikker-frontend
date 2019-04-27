@@ -1,11 +1,11 @@
 
- <div class="card"  style="border-color:#e6ecf0">
-   <div class="card-header "  id="notificatioCard" infiniteScroll (scrolled)="onScroll()"
+ <div class="card"  style="border-color:#e6ecf0" *ngIf="notificatons_array">
+   <div class="card-header "  id="notificatioCard" infiniteScroll (scrolled)="onScroll()" 
    *ngFor="let n of notificatons_array; let i = index; "
    [ngStyle]="{'backgroundColor':getColor(i)}" >
       <div class="row" style="padding-left:4%">
           <span class="notificationPics">
-              <a [routerLink] = "['/profile',n.username]"><img [src]='n.profie_pic_URL'  class=" rounded-circle float-left notificationPics" ></a> 
+              <a [routerLink] = "['/profile',n.username]"><img [src]='n.profile_pic_url'  class=" rounded-circle float-left notificationPics" ></a> 
           </span>
     
           <span class="userName">

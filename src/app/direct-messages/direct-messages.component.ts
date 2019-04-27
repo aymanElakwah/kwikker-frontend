@@ -1,5 +1,5 @@
 // angular components
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {FormGroup , FormBuilder, Validators} from '@angular/forms';
 // used services
 import { ChatService } from '../chat/chat.service';
@@ -17,7 +17,7 @@ import { ChatComponent } from '../chat/chat.component';
   styleUrls: ['./direct-messages.component.css'],
   providers: [ DirectMessagesService]
 })
-export class DirectMessagesComponent implements OnInit {
+export class DirectMessagesComponent implements OnInit , AfterViewInit{
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   /**
    * addressed person
@@ -43,7 +43,7 @@ export class DirectMessagesComponent implements OnInit {
    * uploaded image
   */
   image:File;
- // @ViewChild('file') sendElement: ElementRef;
+  @ViewChild("message") sendElement: ElementRef;
   /**
    *
    * @param chatService to get data of addresse
@@ -57,13 +57,17 @@ export class DirectMessagesComponent implements OnInit {
               private socket:DirectMessagesService,
               public DialogRef: MatDialogRef<ChatComponent>) {
                 
-               // this.sendElement.nativeElement.focus();
    }
    
   ngOnInit() {
     this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
       this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
         this.messageList.push(list);
+        if(list.from_username != localStorage.getItem("username")) {
+          this.playAudio();
+        }
+        setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
+        objDiv.scrollTop = objDiv.scrollHeight+200; }, 10);
       });});
     this.myForm = this.fb.group({
     message: ['', [
@@ -73,8 +77,22 @@ export class DirectMessagesComponent implements OnInit {
     });
     this.data.getDirectMessages(this.addressee.username).subscribe(list=>{
       this.messageList = list.reverse();
+      this.messageList[0]["img"]=true;
+      for(let i =1;i<this.messageList.length;i++) {
+        if(this.messageList[i].from_username === this.messageList[i-1].from_username){
+          this.messageList[i]["img"]=false;
+        } else {
+          this.messageList[i]["img"]=true;
+        }
+      }
+      setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
+      objDiv.scrollTop = objDiv.scrollHeight+200; }, 1000);
     }
     );
+  }
+
+  ngAfterViewInit(){
+    this.sendElement.nativeElement.focus();
   }
   /**
    * click input tag on button click
@@ -113,17 +131,23 @@ export class DirectMessagesComponent implements OnInit {
     const message = {
       text: '',
       username: '',
-      media_url: ''
+      media_id: ''
     };
     message.text = this.myForm.controls.message.value;
+    if(message.text == ''){
+      message.text =' ';
+    }
     message.username = this.addressee.username;
     if(this.uploadImg===true){
-       this.data.postMedia(this.image).subscribe(mediaUrl => message.media_url= mediaUrl);
+       this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;
+        this.data.createMessage(message).subscribe();}
+        );
     } else {
-      message.media_url = '' ;
+      message.media_id = '' ;
+      this.data.createMessage(message).subscribe();
     }
-    this.data.createMessage(message).subscribe();
     this.myForm.reset();
+    this.removeImg();
   }
   toInbox() {
     this.chatService.setSection(1);
@@ -133,5 +157,16 @@ export class DirectMessagesComponent implements OnInit {
    */
   exit(){
     this.DialogRef.close();
+  }
+  enter(event) {
+    if(event.key === "Enter" ) {
+      this.send();
+    }
+  }
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/sounds/beeb.mp3";
+    audio.load();
+    audio.play();
   }
 }

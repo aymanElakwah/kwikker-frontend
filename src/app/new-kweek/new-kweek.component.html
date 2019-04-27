@@ -5,8 +5,10 @@
     <div class="col-md-11" style="padding:0">
     <h2 md-dialog-title class="modal-title" *ngIf="!reply" 
     style="padding-left: 28%">Compose new Kweek</h2>
-    <h2 md-dialog-title class="modal-title" *ngIf="reply" 
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && !kweekTO" 
     style="padding-left: 28%">Reply to {{screenname}}</h2>
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && kweekTO" 
+    style="padding-left: 28%">Kweek to {{screenname}}</h2>
   </div>
     <div class="col-md-1" style="padding:0">
     <div class="clearfix"   >
@@ -17,9 +19,7 @@
   <div class="modal-body">
     <div class="row" style="padding:0; margin: 0">
       <div class="col-md-1" style="padding:0">
-          <div class="tweet-box-avatar">
-              <img src="https://www.w3schools.com/images/w3schools_green.jpg" class="user-image" >
-            </div>
+          <!-- add profile pic line here -->
       </div>
       <div class="col-md-11"style="padding:0">
           <div class="tweet-box-content">
@@ -59,8 +59,8 @@
           </span>
       </span>
       <span style=" float: right; margin-right:2.5%">
-        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260" 
-          (click)="addKweek()">Kweek</button>
+        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260 || disableButton" 
+          (click)="addKweek()">{{kweekButtonText}}</button>
           <span style="padding-left:4px">{{260-kweekData.length}}</span>
       </span>
       

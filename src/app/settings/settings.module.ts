@@ -20,14 +20,14 @@ import { CanActivateTeam } from '../app-routing.module';
     SharedModule,
     FormsModule,
     RouterModule.forChild([
-      {path: 'settings', component: SettingsComponent ,canActivate: [CanActivateTeam],
-      children: [
-        {path: '' , redirectTo: 'account' , pathMatch: 'full'},
-        {path: 'account' , component: AccountComponent },
-        {path: 'passwords', component: PasswordsComponent },
-        {path: 'muted_following', component: MutedListComponent},
-        {path: 'blocked_following', component: BlockedListComponent}
-      ]}
+      // {path: 'settings', component: SettingsComponent ,canActivate: [CanActivateTeam],
+      // children: [
+      //   {path: '' , redirectTo: 'account' , pathMatch: 'full'},
+      //   {path: 'account' , component: AccountComponent },
+      //   {path: 'passwords', component: PasswordsComponent },
+      //   {path: 'muted_following', component: MutedListComponent},
+      //   {path: 'blocked_following', component: BlockedListComponent}
+      // ]}
     ])
   ]
 })

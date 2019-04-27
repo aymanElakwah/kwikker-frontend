@@ -102,3 +102,8 @@
 	outline: none !important;
 	box-shadow: rgb(7, 116, 184) 0 0 100px;
 }
+
+#usernameref
+{
+	color: #14171a !important;
+}

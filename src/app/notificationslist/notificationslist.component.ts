@@ -18,12 +18,10 @@ export class NotificationslistComponent implements OnInit {
   notificatons_array: Notification[] ;
   
   new_count:number;
-  last_id:string = "-1";
-  before_last_id:string;
   myObservable:Observable<any>;
-  new_length:number;
-  current_length:number;
+
   notificationsResponse:any;
+  lastSeen:string = null;
   /**
    * constructor
    * @param notification_service used to call requests 
@@ -40,9 +38,8 @@ export class NotificationslistComponent implements OnInit {
       list=>{this.notificationsResponse = list;
         this.notificatons_array = this.notificationsResponse.Notifications;
         this.new_count = this.notificationsResponse.unseen_count;
-      console.log(list);
-      //this.before_last_id = this.notificatons_array[this.notificatons_array.length-1].id;
-      this.current_length = this.notificatons_array.length;
+     
+      
       }
     )
 
@@ -62,10 +59,9 @@ export class NotificationslistComponent implements OnInit {
       list=>{this.notificationsResponse = list;
         this.notificatons_array = this.notificationsResponse.Notifications;
         this.new_count = this.notificationsResponse.unseen_count;
-      console.log(list);
+     
       })
-      this.current_length = this.notificatons_array.length;
-      this.last_id = "-1"
+      
   }
   /**
    * set a delay by await delay(300); 300 ms
@@ -88,42 +84,23 @@ export class NotificationslistComponent implements OnInit {
     }
   };
 
-  /** @HostListener("window:scroll", [])
-onScroll(): void {
-if ((window.innerHeight + window.scrollY) >=  document.body.scrollHeight) {
-        console.log("end of screeen")
-    }
-}*/
 /**
  * when nearly half screen is scrolled this function fetches more notifications
  */
   onScroll(){
-    console.log("saved one: " + this.last_id);
-    console.log("last one:" +this.notificatons_array[this.notificatons_array.length-1].id)
-    
-    if (this.last_id === this.notificatons_array[this.notificatons_array.length-1].id) {
-      console.log("won't call");
-    }
-    else{
-      this.last_id = this.notificatons_array[this.notificatons_array.length-1].id;
-    this.notification_service.
-    getNotificationsList(this.notificatons_array[this.notificatons_array.length-1].id).subscribe(
-      list=>{
-        this.notificationsResponse = list;
-        this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse.Notifications);
-      console.log(this.notificatons_array.length);
-      console.log("is called call");
-      this.last_id = this.notificatons_array[this.notificatons_array.length-1].id;
-      this.new_length = this.notificatons_array.length;
-      if (this.current_length === this.notificatons_array.length) {
-        this.last_id = "-1";
+    if (this.notificatons_array.length != 0) 
+    {
+      var last_notification_id = this.notificatons_array[this.notificatons_array.length-1].id;
+      if (this.lastSeen != last_notification_id) {
+        this.notification_service.getNotificationsList(last_notification_id).subscribe(
+          list =>{
+            this.notificationsResponse = list;
+            this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse);
+          }
+        )
+        this.lastSeen = last_notification_id;
+         
       }
-      else{
-        this.current_length = this.notificatons_array.length;
-      }
-      }
-    )
-    
     }
   }
 }

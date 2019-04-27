@@ -33,7 +33,8 @@ export class ResetPasswordComponent implements OnInit {
       this.data.sendEmail(email)
         .subscribe(
          res => {
-           console.log(res);
+           
+           window.alert("Thank you, please check your email for verification link");
            this.router.navigate(['/login']);
          },
           err => {

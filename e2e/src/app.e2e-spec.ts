@@ -171,7 +171,7 @@ it('Open profile, view my following', function() {
     expect(page.getMessageButton().getText()).toEqual('Message');
   });
 
-*/
+
 
   it('Follow someone', function() {
     page.navigateToProfile('zamalek');

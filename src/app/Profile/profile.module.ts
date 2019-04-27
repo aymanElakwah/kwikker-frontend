@@ -19,20 +19,21 @@ import { EditImagesComponent } from '../Profile/edit-images/edit-images.componen
 
 import { MaterialModule } from '../material.module';
 import { CanActivateTeam } from '../app-routing.module';
+import { ChatModule } from '../chat/chat.module';
+
+
 
 
 /**
  * The Module That is resposible for The Profile Page
  */
-
-
 @NgModule({
   declarations: [
     MainProfileComponent,                //The main architecture for the profile page
     ProfileHeaderCardComponent,          //Profile User Information Card
     MiniProfileComponent,                //Small card for any other user Information
     ProfileKweeksTabComponent, ProfileHeaderCardEditingComponent, //All Kweeks that written or liked By The profile user + Trends Tab 
-    EditImagesComponent,           
+    EditImagesComponent,         
   ],
 
   imports: [
@@ -55,7 +56,7 @@ import { CanActivateTeam } from '../app-routing.module';
         {path: 'likes', component: ProfileKweeksTabComponent },
       ]} 
     ])
-  ]
+  ],
 })
 
 export class ProfileModule { 

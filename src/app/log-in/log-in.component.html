@@ -11,7 +11,7 @@
     </div>
     
     <!-- Login Form -->
-    <form  #loginForm = "ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
+    <form  #loginForm ="ngForm" (submit)="submitForm(loginForm)" name="login-form" ngmodel>
       <!-- UserName -->  
       <div>
           <input #email = "ngModel" [(ngModel)]="mail" type="text" id="login" class="fadeIn second "  name="username" maxlength="50" placeholder="Username" required>
@@ -26,7 +26,12 @@
       </div>
       <div class="progress hide">
         <div  class="msg alert alert-danger " style="width:90%;" role="alert">
-            <p class="alertMsg">Incorrect Username or Password, please Log in again.</p>
+            <p class="alertMsg">Unmatching Username or Password, please Log in again.</p>
+        </div>
+      </div>
+      <div class="progress2 hide">
+        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+            <p class="alertMsg">An error occured while processing your request, please try again later.</p>
         </div>
       </div>
      <!-- Submission Button -->

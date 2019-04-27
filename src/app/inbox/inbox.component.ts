@@ -19,28 +19,6 @@ import { ChatComponent } from '../chat/chat.component';
   styleUrls: ['./inbox.component.css']
 })
 export class InboxComponent implements OnInit {
-  user :Conversation = {
-    user: {
-      username: 'filonabil333',
-      screen_name: 'filo nabil',
-      profile_image_url: 'string',
-      following: true,
-      follows_you: true,
-      blocked: true,
-      muted: true,
-      bio:'hello'
-    },
-    last_message: {
-      id: '123',
-      created_at: '2019-03-14T20:40:36.456Z',
-      text: 'first message in this site',
-      media_url: 'string',
-      from_username:'phella',
-      to_username: ' 7mada'
-    }
-  };
-  conversations: Conversation[] =[this.user , this.user,this.user,this.user,this.user,this.user,this.user,this.user
-           ];
   conversations2 = new BehaviorSubject([]);
   lastUsername = '';
   finished=false;
@@ -72,7 +50,7 @@ export class InboxComponent implements OnInit {
    */
   SetSenderName(list) {
     list.forEach(element => {
-      if ( element.last_message.text === '' && element.last_message.media_url !== '') {
+      if ( element.last_message.text === ' ' && element.last_message.media_url !== '') {
         if (element.last_message.from_username === localStorage.getItem('username') ) {
           element.last_message.text = 'You sent a photo' ;
         } else {

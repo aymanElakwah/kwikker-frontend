@@ -26,7 +26,7 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+        "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
   /**
    *
    * @param http component to send requests
@@ -363,7 +363,7 @@ export class DataService {
     const options = last_notifications_retrieved_id
       ? {
           params: new HttpParams().set(
-            "last_notifications_retrieved_id",
+            "last_notification_retrieved_id",
             last_notifications_retrieved_id
           )
         }
@@ -406,13 +406,13 @@ export class DataService {
    */
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
-    const headers = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
-    };
+  const headers = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" })
+  };
 
     return this.http.post<any>(this.base + "account/login", body, headers).pipe(
       map(res => res),
-      catchError(this.handleError)
+      map(err=>err)
     );
   }
   /**
@@ -635,7 +635,8 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-      catchError(this.handleError)
+      map(err=>err)
+     // catchError(this.handleError)
     );
   }
 
@@ -653,7 +654,7 @@ export class DataService {
    */
   public sendEmail(email: any): Observable<any> {
     const body = JSON.stringify(email);
-
+    
     return this.http
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
@@ -669,24 +670,17 @@ export class DataService {
    * @returns any
    */
   public signUpConfirm(code: any): Observable<any> {
-    // const body = JSON.stringify(code);
 
-    // console.log(body);
-    const CODE = code.confirmation_code;
-
-    const headers = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        CODE: `${CODE}`
-      })
-    };
-
-    return this.http
-      .post<any>(this.base + "account/registration/confirmation", headers)
+    let val = code.confirmation_code;
+    console.log("CODE here: ",val)
+    const headers = new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
+    console.log(headers);
+    return this.http.post<any>(this.base + "account/registration/confirmation", headers)
       .pipe(
         map(res => res),
-        catchError(this.handleError)
+        catchError(this.handleError)  
       );
+  
   }
   /**
    * post request To add a new kweek/reply as a new kweek
@@ -694,12 +688,12 @@ export class DataService {
    * @param reply_to {string} the id of kweek that was replyed to
    * @returns Request Response
    */
-  addNewKweek(text: string, reply_to: string): Observable<any> {
+  addNewKweek(text: string, reply_to: string, media_id:string): Observable<any> {
     this.cacheService.invalidateUrl(this.base + "kweeks/timelines/profile");
-    const obj = { text: String(), reply_to: String() };
+    const obj = { text: String(), reply_to: String(), media_id: String() };
     obj.text = text;
     obj.reply_to = reply_to;
-
+    obj.media_id = media_id;
     return this.http.post<any>(this.base + "kweeks/", obj).pipe(
       map(res => res),
       catchError(this.handleError)
@@ -714,25 +708,22 @@ export class DataService {
    * @returns any
    */
   public sendPass(pass: any, code: any): Observable<any> {
-    const body = JSON.stringify(pass);
-
+  
+  const body = JSON.stringify(pass);
+  console.log("body: ",body);
     let val: string;
     val = code;
-    //console.log("value:" ,val );
-    const headers = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        CODE: `${val}`
-      })
-    };
-
+    console.log("code: ",val);
+    const headers = new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
     console.log(headers);
     return this.http
-      .put<any>(this.base + "account/reset_password", body, headers)
+      .put<any>(this.base + "account/reset_password", body,{headers})
       .pipe(
         map(res => res),
         catchError(this.handleError)
       );
+    // return null;  
+    
   }
 
   // in memory mock data service function
@@ -829,11 +820,11 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (media id);
    */
-  postMedia(image_file: File): Observable<string> {
-    const body = new FormData();
-    body.append("file", image_file, "Image.png");
-
-    return this.http.post<string>(this.base + "media/", body).pipe(
+  postMedia(image_file: File): Observable<{media_id:string}> {
+    let body = new FormData();
+    body.append("file", image_file);
+  
+    return this.http.post<{media_id:string}>(this.base + "media/", body).pipe(
       map(res => res),
       catchError(this.handleError)
     );

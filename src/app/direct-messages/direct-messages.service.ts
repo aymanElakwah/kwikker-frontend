@@ -26,14 +26,4 @@ export class DirectMessagesService {
   });
   return observable;
   }
-  test(){
-    let observable = new Observable<Message>(observer=>{
-    this.socket.on('hello', (data)=>{
-      console.log("hello");
-      observer.next(data);  
-    });
-   // return() => this.socket.disconnect();
-  });
-  return observable;
-  }
 }

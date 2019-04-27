@@ -357,6 +357,16 @@ a {
 	transform: translate(-4px, 0);
 }
 
+.AuthorisedIsBlockedMsgBody
+{
+	color: #66757f;
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 400px;
+	margin-top: 30px;
+	transform: translate(-30px, 0);
+}
+
 .BlockMsgHeader {
 	font-size: 21px;
 	font-weight: bold;
@@ -467,6 +477,22 @@ a {
 	top: 8%;
 }
 
+.Blocked-button-SemiMode {
+	border-radius: 100px;
+	border: 1px solid rgb(224, 27, 27);
+	box-shadow: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 6px 16px;
+	background-color: #fff;
+	color: rgb(224, 27, 27);
+	width: 100px;
+	position: relative;
+	left: 50%;
+	top: 8%;
+}
+
 .close-button {
 	position: relative;
 	right: 2%;
@@ -550,11 +576,28 @@ a {
 	border-color: rgb(158, 4, 12);
 }
 
+.Blocked-button-SemiMode:hover
+{
+	background-color: rgb(158, 4, 12);
+	border-color: rgb(158, 4, 12);
+}
+
 .Blocked-button:hover span {
 	display: none;
 }
 
+.Blocked-button-SemiMode:hover span
+{
+	display: none;
+}
+
 .Blocked-button:hover::before {
+	content: "Unblock";
+	color: #fff;
+}
+
+.Blocked-button-SemiMode:hover::before
+{
 	content: "Unblock";
 	color: #fff;
 }
@@ -688,35 +731,38 @@ a {
 	   width: 1200px;
    }
 
-   .Profile-Picture
+   .Profile-Picture, .Profile-Picture-Editing
    {
 	   transform: translate(-40px,90px);
    }
-   .follow-button
+  
+   .follow-button, .cancel-button, .edit-button, .following-button, .Blocked-button
    {
-	   transform: translate(-100px,0);
+	   transform: translate(-110px,0);
    }
-   .edit-button
+    
+   .Blocked-button-SemiMode
    {
-	   transform: translate(-100px,0);
+	   transform: translate(-230px,0);
    }
-   .following-button
-   {
-	   transform: translate(-100px,0);
-   }
-   #userActionDropdownMenuButton
+   
+   .saveChanges-button
    {
 	   transform: translate(-70px,0);
+   }
+  
+   .MuteIcon 
+   {
+	   transform: translate(-130px,0);
+   }
+ 
+   #userActionDropdownMenuButton
+   {
+	transform: translate(-70px,5px);
    }
    #Left-Profile-Trends
    {
 	   display: inline;
-   }
-   .Nav
-   {
-	  transform: translate(20px,0);
-	  min-width:500px;
-	  float: right;
    }
 }
 
@@ -728,7 +774,10 @@ a {
 @media(max-width: 600px)    {.PROFILE {	zoom: 55%; }}
 @media(max-width: 500px)    {.PROFILE {	zoom: 45%; }}
 @media(max-width: 400px)    {.PROFILE {	zoom: 35%; }}
-@media(max-width: 300px)    {.PROFILE {	zoom: 25%; } 	.App-Container{width: 250px;} .Nav{width: 100px;}}
+@media(max-width: 300px)    {.PROFILE {	zoom: 25%; }}
+@media(max-width: 200px)    {.PROFILE {	zoom: 20%; }}
+@media(max-width: 100px)    {.PROFILE {	zoom: 15%; }}
+@media(max-width:  0px)     {.PROFILE {	zoom: 10%; }}
 
 
 

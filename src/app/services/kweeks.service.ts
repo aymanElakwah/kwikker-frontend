@@ -13,7 +13,7 @@ export class KweeksService {
   constructor(private kweekService: DataService) {}
 
   /**
-   * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them
+   * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them and edit message string to appear
    * @param kweeks that will inject the tags in
    * No @returns
    */
@@ -25,7 +25,7 @@ export class KweeksService {
     kweeks.forEach(kweek => {
       let iMentions = 0;
       let iHashtags = 0;
-      let str = "";
+      let str = ""; 
       let start = 0;
       let end = 0;
       while (true) {
@@ -138,7 +138,6 @@ export class KweeksService {
       }
       kweek.text = str; // finally make the kweek text equals the injected str
       kweek.user.profile_image_url += "?dummy=" + Math.random();
-      console.log( kweek.user.profile_image_url);
     });
   }
 

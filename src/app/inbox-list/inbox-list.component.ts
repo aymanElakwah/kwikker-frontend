@@ -25,10 +25,6 @@ import { MatDialogRef } from '@angular/material';
 })
 export class InboxListComponent implements OnInit {
   /**
-   * addressed person
-   */
-  addressee: MiniUser;
-  /**
    * creating message form
    */
   myForm2: FormGroup;
@@ -183,20 +179,26 @@ add(event: MatChipInputEvent): void {
    * send current message
    */
   send() {
+    for(let i=0;i<this.selectedUsers.length;i++) {
     const message = {
       text: '',
       username: '',
-      media_url: ''
+      media_id: ''
     };
-    message.text = this.myForm.controls.message.value;
-    message.username = this.addressee.username;
+    message.text = this.myForm2.controls.message.value;
+    message.username = this.selectedUsers[i];
     if(this.uploadImg===true){
-       this.data.postMedia(this.image).subscribe(mediaUrl => message.media_url= mediaUrl);
+       this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;
+        this.data.createMessage(message).subscribe();}
+        );
     } else {
-      message.media_url = '' ;
+      message.media_id = '' ;
+      this.data.createMessage(message).subscribe();
     }
-    this.data.createMessage(message).subscribe();
     this.myForm.reset();
+    this.removeImg();
+  }
+  this.chatService.setSection(1);
   }
   next(){
     this.secondStep = true;

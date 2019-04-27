@@ -18,5 +18,5 @@ export interface Notification {
     /** If The Mention was Kweek, We Need Its Text */
     kweek_text?: string;
      /** The Profile Picture URL for the user That Sent that notification */
-    profie_pic_URL?: string;
+    profile_pic_url?: string;
 }

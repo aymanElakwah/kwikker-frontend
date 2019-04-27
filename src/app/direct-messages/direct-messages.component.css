@@ -41,19 +41,24 @@
 }
 
 .msgText {
-    line-height: 4;
-    margin-left: 7px;
+    margin-top:9px;
     margin-right: 7px;
+    margin-left:7px;
     background-color: #e6ecf0;
     color:black;
     padding:3px 4px;
     border-radius: 10px;
+    max-height: 30px;
 }
 .msgText2 {
     background-color: #1da1f2;
     color:white;
+    margin-left: 7px;
 }
 
+.msgText3 {
+    max-height: 200px;
+}
 .avatar {
     width: 100%;
     height: 100%;
@@ -106,8 +111,8 @@
 
 .msg {
     vertical-align: bottom;
+    display:inline;
 }
-
 .new {
     height: 58px;
     background-color: #E8F4FB !important;
@@ -212,7 +217,15 @@ input {
         max-width: 70%;
     }
 }
-.row{
-    margin-top:10px;
+.row2{
+    margin-top:6px;
     margin-left:0px;
+    max-height: 30px;
+}
+.row3
+{
+    margin-bottom: 100px;
+}
+.no-margin{
+    margin-top:0px;
 }
