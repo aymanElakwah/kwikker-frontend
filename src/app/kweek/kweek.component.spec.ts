@@ -11,7 +11,6 @@ describe("KweekComponent", () => {
   let kweeksService: KweeksService;
   let component: KweekComponent;
   let dialog: MatDialog;
-  let mockQueryParamMap = jasmine.createSpyObj('queryParamMap', ["get"]);
   let route: any = {
     snapshot: {
       root: {
@@ -33,10 +32,9 @@ describe("KweekComponent", () => {
           path: String
         }
       },
-      queryParamMap: {
-        get(str: String): String {
-          return 'abdulrahman';
-        }
+      queryParams: {
+        ID: String,
+        filterBy: String
       }
     }
   };
@@ -73,7 +71,9 @@ describe("KweekComponent", () => {
       component.route.snapshot.root.children[0].params["username"] = "user1";
       component.authorizedUser = "user2";
       component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
-
+      component.route.snapshot.queryParams["ID"] = "12";
+      component.route.snapshot.queryParams["filterBy"] = "12";
+      
       component.ngOnInit();
 
       expect(component.callCommonFunc).toBeTruthy();
