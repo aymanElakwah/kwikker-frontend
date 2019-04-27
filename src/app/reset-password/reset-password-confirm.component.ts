@@ -36,13 +36,17 @@ public sendPassword(form: NgForm) {
     password: form.value.pass,
   
  }; 
+  
+  this.data.sendPass(toSend, this.confirmCode)
  
-  this.data.sendPass(toSend, this.confirmCode )
     .subscribe(
       res => {
+        window.alert("Password reset successfully.")
         this.router.navigate(['/login']);
       },
-      err => console.log('error: ', err)
+      err => {
+        console.log('error: ', err)
+      }
   );
   }
 

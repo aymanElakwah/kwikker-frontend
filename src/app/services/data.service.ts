@@ -406,9 +406,9 @@ export class DataService {
    */
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
-    const headers = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
-    };
+  const headers = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" })
+  };
 
     return this.http.post<any>(this.base + "account/login", body, headers).pipe(
       map(res => res),
@@ -635,7 +635,8 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-      catchError(this.handleError)
+      map(err=>err)
+     // catchError(this.handleError)
     );
   }
 
@@ -653,7 +654,7 @@ export class DataService {
    */
   public sendEmail(email: any): Observable<any> {
     const body = JSON.stringify(email);
-
+    
     return this.http
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
@@ -669,24 +670,21 @@ export class DataService {
    * @returns any
    */
   public signUpConfirm(code: any): Observable<any> {
-    // const body = JSON.stringify(code);
 
-    // console.log(body);
-    const CODE = code.confirmation_code;
+    let val = code.confirmation_code;
+    console.log("CODE here: ",val)
+   // const headers =new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
+    const headers = 
+       new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
 
-    const headers = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        CODE: `${CODE}`
-      })
-    };
-
-    return this.http
-      .post<any>(this.base + "account/registration/confirmation", headers)
+    console.log(headers);
+    return this.http    
+      .post<any>(this.base + "account/registration/confirmation", {headers})
       .pipe(
         map(res => res),
-        catchError(this.handleError)
+        catchError(this.handleError)  
       );
+  
   }
   /**
    * post request To add a new kweek/reply as a new kweek
@@ -714,25 +712,22 @@ export class DataService {
    * @returns any
    */
   public sendPass(pass: any, code: any): Observable<any> {
-    const body = JSON.stringify(pass);
-
+  
+  const body = JSON.stringify(pass);
+  console.log("body: ",body);
     let val: string;
     val = code;
-    //console.log("value:" ,val );
-    const headers = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        CODE: `${val}`
-      })
-    };
-
+    console.log("code: ",val);
+    const headers = new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
     console.log(headers);
     return this.http
-      .put<any>(this.base + "account/reset_password", body, headers)
+      .put<any>(this.base + "account/reset_password", body,{headers})
       .pipe(
         map(res => res),
         catchError(this.handleError)
       );
+    // return null;  
+    
   }
 
   // in memory mock data service function
