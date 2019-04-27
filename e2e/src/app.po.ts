@@ -88,7 +88,7 @@ export class AppPage {
   }
 
   getLogoutButton(){
-    return element(by.xpath('//button [@class = "btn btn-primary "]'));
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[3]/a'));
   }
   //---------Text-----------
   getTitleText() {
@@ -111,7 +111,21 @@ export class AppPage {
     return browser.sleep(x);
   }
 
+  browser(element) {
+    return browser.actions().mouseMove(element).click();
+  }
+
   //---------Dawood Edits-----------
+
+  getDropDownHomeToggle(){
+    return element(by.className('dropdown-toggle'));
+  }
+
+  getDropDownHomeToggleProfile(){
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
+  }
+
+
   getProfileName(){
     return element(by.className('Profile-Name'));
   }
@@ -125,17 +139,30 @@ export class AppPage {
   }
 
 
-  getFollowButton(){
+  getHisFollowButton(){
     return element(by.className('btn btn-outline-primary follow-button'));
   }
 
-  getFollowingButton(){
+  getMyFollowButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+  }
+  getHisFollowingButton(){
     return element(by.className('btn btn-primary following-button'));
   }
 
-  getDropDownButton(){
+  getMyFollowingButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+  }
+
+
+  getHisDropDownButton(){
     return element(by.id('userActionDropdownMenuButton'));
   }
+
+  getMyDropDownButton(){
+    return element(by.id('dropdownMenuButton'));
+  }
+
 
   getMuteButton(){
     return element.all(by.className('dropdown-item')).get(2);
@@ -155,7 +182,7 @@ export class AppPage {
   }
 
   getEditButton(){
-    return element(by.css('btn btn-outline-primary edit-button'));
+    return element(by.id('EDITBUTTON'));
   }
 
   getSaveChangesButton(){
