@@ -673,13 +673,9 @@ export class DataService {
 
     let val = code.confirmation_code;
     console.log("CODE here: ",val)
-   // const headers =new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
-    const headers = 
-       new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
-
+    const headers = new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
     console.log(headers);
-    return this.http    
-      .post<any>(this.base + "account/registration/confirmation", {headers})
+    return this.http.post<any>(this.base + "account/registration/confirmation", headers)
       .pipe(
         map(res => res),
         catchError(this.handleError)  
