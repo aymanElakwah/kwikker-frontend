@@ -6,16 +6,8 @@ export class AppPage {
     return browser.get('/');
   }
 
-  navigateToLogin() {
-    return browser.get('/login');
-  }
-
-  navigateToSignUp() {
-    return browser.get('/signup');
-  }
-
-  navigateToProfile(x) {
-    return browser.get('/profile/'+x);
+  navigateToProfile(x){
+    return browser.get('/profile/' + x);
   }
 
   navigateToKweeks(x) {
@@ -96,27 +88,32 @@ export class AppPage {
     return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
   }
 
-  getRekweekButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-profile-kweeks-tab/div/div[1]/app-kweek/div/div[1]/div/div[2]/div/div[4]/div/div[2]/span/span[1]/i'));
+  getRekweekButton(x){
+    return element(by.xpath('(//span [@class = "rekweek"])[' + x +']'));
   }
 
-  getLikeButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-profile-kweeks-tab/div/div[1]/app-kweek/div/div[1]/div/div[2]/div/div[4]/div/div[3]/span/span[1]/i'));
+  getLikeButton(x){
+    return element(by.xpath('(//span [@class = "like"])[' + x +']'));
+  }
+
+  getReplyButton(x){
+    return element(by.xpath('(//span [@class = "reply"])[' + x +']'));
   }
 
   getDropDownMenuButton(){
     return element(by.xpath('//a [@class = "dropdown-toggle"]'));
   }
+
+  getProfileButton(){
+    return element(by.xpath('//span [@class = "glyphicon glyphicon-user"]'));
+  }
+
   getLogoutButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-arrow-left"]'));
   }
   //---------Text-----------
   getTitleText() {
     return element(by.css('app-root h1')).getText();
-  }
-
-  getSignupConfirmation(){
-    return element(by.cssContainingText('.fs-title', 'Thank you for using our app.'));
   }
 
   getFirstKweekText(){
@@ -134,30 +131,6 @@ export class AppPage {
   getDateDaySignupBoard(){
     return element(by.cssContainingText('.mat-calendar-body-cell-content', '1'));
   }
-  //---------Utility-----------
-  browserPause(x) {
-    return browser.sleep(x);
-  }
-
-  getElementWithText(selector, text){
-    return element(by.cssContainingText(selector, text));
-  }
-
-  login(username, password){
-    this.navigateToLogin();
-    this.browserPause(1000);
-    this.getUsernameLoginField().sendKeys(username);
-    this.getPasswordLoginField().sendKeys(password);
-    this.getLoginButton().click();
-    this.browserPause(1000);
-  }
-
-  logout(){
-    this.getDropDownMenuButton().click();
-    this.browserPause(1000);
-    this.getLogoutButton().click();
-  }
-
   //---------Dawood Edits-----------
   getProfileName(){
     return element(by.className('Profile-Name'));
@@ -231,5 +204,50 @@ export class AppPage {
 
   getNotificationCard(){
     return element.all(by.className('card-body'));
+  }
+}
+
+export class utilityFunctions{
+  page: AppPage;
+  constructor(page: AppPage){
+    this.page = page;
+  }
+  browserPause(x) {
+    return browser.sleep(x);
+  }
+
+  getElementWithText(selector, text){
+    return element(by.cssContainingText(selector, text));
+  }
+
+  login(username, password){
+    this.navigateToLogin();
+    this.browserPause(1000);
+    this.page.getUsernameLoginField().sendKeys(username);
+    this.page.getPasswordLoginField().sendKeys(password);
+    this.page.getLoginButton().click();
+    this.browserPause(1000);
+  }
+
+  navigateToLogin() {
+    this.page.navigateTo();
+    element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[2]')).click();
+  }
+
+  navigateToSignUp() {
+    this.page.navigateTo();
+    element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[1]')).click();
+  }
+
+  navigateToMyProfile() {
+    this.page.getDropDownMenuButton().click();
+    this.browserPause(1000);
+    this.page.getProfileButton().click();
+  }
+
+  logout(){
+    this.page.getDropDownMenuButton().click();
+    this.browserPause(1000);
+    this.page.getLogoutButton().click();
   }
 }

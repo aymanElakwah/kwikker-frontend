@@ -1,81 +1,82 @@
 import { AppPage } from './app.po';
-import { browser } from 'protractor';
-import { element } from '@angular/core/src/render3';
+import { utilityFunctions } from './app.po';
 
 describe('workspace-project App', () => {
   let page: AppPage;
+  let utility: utilityFunctions;
   page = new AppPage();
+  utility = new utilityFunctions(page);
+
   var user1 = "ahly";
   var pass1 = "123456";
   var user2 = "zamalek";
   var pass2 = "password";
 
   it('Sign up', () =>{
-    page.navigateToSignUp();
-    page.browserPause(100);
+    utility.navigateToSignUp();
+    utility.browserPause(100);
 
-    page.getUsernameLoginField().sendKeys("e8");
-    page.getEmailSignupField().sendKeys("e8@yahoo.com");
-    page.getPasswordSignupField().sendKeys("Ee888888");
-    page.getPasswordConfirmationSignupField().sendKeys("Ee888888");
+    page.getUsernameLoginField().sendKeys("e11");
+    page.getEmailSignupField().sendKeys("e11@yahoo.com");
+    page.getPasswordSignupField().sendKeys("Ee111111");
+    page.getPasswordConfirmationSignupField().sendKeys("Ee111111");
     page.getNext1SignupButton().click();
 
-    page.browserPause(10);
-    page.getScreenNameSignupField().sendKeys("ee8");
+    utility.browserPause(10);
+    page.getScreenNameSignupField().sendKeys("ee11");
     page.getDatePickerSignupBoard().click();
     page.getDateDaySignupBoard().click();
     page.getNext2SignupButton().click();
-
-    page.browserPause(1000);
-    expect(page.getSignupConfirmation().getText()).toEqual('Thank you for using our app.');
+    utility.browserPause(1000);
+    expect(utility.getElementWithText('.fs-title', 'Thank you for using our app.').getText()).toEqual('Thank you for using our app.');
   });
 
   it('Login and logout', () =>{
-    page.navigateToLogin();
-    page.browserPause(1000);
+    utility.navigateToLogin();
+    utility.browserPause(1000);
     page.getUsernameLoginField().sendKeys(user1);
     page.getPasswordLoginField().sendKeys(pass1);
     page.getLoginButton().click();
-    page.browserPause(2000);
+    utility.browserPause(2000);
     page.getDropDownMenuButton().click();
     page.getLogoutButton().click();
-    page.browserPause(1000);
+    utility.browserPause(1000);
     expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   });
 
   it('Kweek', () => {
-    page.login(user1, pass1);
+    utility.login(user1, pass1);
     let kweek = "E2E 7";
     page.getKweekButton().click();
     page.getWriteKweekField().sendKeys(kweek);
-    page.browserPause(1000);
+    utility.browserPause(1000);
     page.getSecondKweekButton().click();
-    page.browserPause(1000);
-    page.navigateToProfile(user1);
+    utility.browserPause(1000);
+    utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
-    page.logout();
+    utility.logout();
   });
 
   it('Rekweek', () => {
-    page.login(user2, pass2);
+    utility.login(user2, pass2);
     page.navigateToProfile(user1);
     let kweek = page.getFirstKweekText().getText();
-    page.getRekweekButton().click();
-    page.browserPause(1000);
-    page.navigateToProfile(user2);
+    page.getRekweekButton(1).click();
+    utility.browserPause(1000);
+    utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
-    page.logout();
+    utility.logout();
   });
 
   it('Like', () => {
-    page.login(user2, pass2);
+    utility.login(user2, pass2);
     page.navigateToProfile(user1);
     let kweek = page.getFirstKweekText().getText();
-    page.getLikeButton().click();
-    page.browserPause(1000);
+    page.getLikeButton(1).click();
+    utility.browserPause(1000);
     page.navigateToLikes(user2);
-    expect(page.getElementWithText('p', kweek).getText()).toEqual(kweek);
-    page.logout();
+    expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
+    utility.logout();
   });
   /*
   it('Open profile', function() {
