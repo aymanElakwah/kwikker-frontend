@@ -46,7 +46,6 @@ import { ChatModule } from '../chat/chat.module';
     LyResizingCroppingImageModule,
     LyButtonModule,
     LyIconModule,
-    ChatModule,
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,canActivate:[CanActivateTeam],
       children: [
