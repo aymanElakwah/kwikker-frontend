@@ -109,7 +109,7 @@ export class AppPage {
   }
 
   getLogoutButton(){
-    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[3]/a'));
+    return element(by.xpath('//span [@class = "glyphicon glyphicon-arrow-left"]'));
   }
   //---------Text-----------
   getTitleText() {
@@ -131,114 +131,115 @@ export class AppPage {
   getDateDaySignupBoard(){
     return element(by.cssContainingText('.mat-calendar-body-cell-content', '1'));
   }
-  //---------Utility-----------
-  browserPause(x) {
-    return browser.sleep(x);
-  }
-
-  browser(element) {
-    return browser.actions().mouseMove(element).click();
-  }
-
   //---------Dawood Edits-----------
 
-  getDropDownHomeToggle(){
-    return element(by.className('dropdown-toggle'));
+    getDropDownHomeToggle(){
+      return element(by.className('dropdown-toggle'));
+    }
+
+    getDropDownHomeToggleProfile(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
+    }
+
+
+    getProfileName(){
+      return element(by.className('Profile-Name'));
+    }
+
+    getTweetToButton(){
+      return element(by.className('btn btn-primary Kweek-Button'));
+    }
+
+    getMessageButton(){
+      return element(by.className('btn btn-primary Msg-Button'));
+    }
+
+
+    getHisFollowButton(){
+      return element(by.className('btn btn-outline-primary follow-button'));
+    }
+
+    getMyFollowButton(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+    }
+    getHisFollowingButton(){
+      return element(by.className('btn btn-primary following-button'));
+    }
+
+    getMyFollowingButton(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+    }
+
+
+    getHisDropDownButton(){
+      return element(by.id('userActionDropdownMenuButton'));
+    }
+
+    getMyDropDownButton(){
+      return element(by.id('dropdownMenuButton'));
+    }
+
+
+    getMuteButton(){
+      return element.all(by.className('dropdown-item')).get(2);
+    }
+
+    getBlockButton(){
+      return element.all(by.className('dropdown-item')).get(3);
+    }
+
+    getSignUpTitle(){
+      return element(by.className('active'));
+    }
+
+
+    getBlockedButton(){
+      return element(by.className('btn btn-primary Blocked-button'));
+    }
+
+    getEditButton(){
+      return element(by.id('EDITBUTTON'));
+    }
+
+    getSaveChangesButton(){
+      return element(by.className('btn btn-primary saveChanges-button'));
+    }
+
+    getCancelChangesButton(){
+      return element(by.className('btn btn-primary cancel-button'));
+    }
+
+
+    getScreenName(){
+      return element(by.id('EditName'));
+    }
+
+    getBio(){
+      return element(by.id('EditBio'));
+    }
+
+    getProfileBio(){
+      return element(by.className('Profile-Bio'));
+    }
+
+    getAllButton(){
+      return element(by.className('btn btn-outline-primary'));
+    }
+
+    getNotificationCard(){
+      return element.all(by.className('card-body'));
+    }
+
+    browserPause(x) {
+      return browser.sleep(x);
+    }
+
+    navigateToLogin() {
+      return browser.get('/login');
+    }
+
+
   }
-
-  getDropDownHomeToggleProfile(){
-    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
-  }
-
-
-  getProfileName(){
-    return element(by.className('Profile-Name'));
-  }
-
-  getTweetToButton(){
-    return element(by.className('btn btn-primary Kweek-Button'));
-  }
-
-  getMessageButton(){
-    return element(by.className('btn btn-primary Msg-Button'));
-  }
-
-
-  getHisFollowButton(){
-    return element(by.className('btn btn-outline-primary follow-button'));
-  }
-
-  getMyFollowButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
-  }
-  getHisFollowingButton(){
-    return element(by.className('btn btn-primary following-button'));
-  }
-
-  getMyFollowingButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
-  }
-
-
-  getHisDropDownButton(){
-    return element(by.id('userActionDropdownMenuButton'));
-  }
-
-  getMyDropDownButton(){
-    return element(by.id('dropdownMenuButton'));
-  }
-
-
-  getMuteButton(){
-    return element.all(by.className('dropdown-item')).get(2);
-  }
-
-  getBlockButton(){
-    return element.all(by.className('dropdown-item')).get(3);
-  }
-
-  getSignUpTitle(){
-    return element(by.className('active'));
-  }
-
-
-  getBlockedButton(){
-    return element(by.className('btn btn-primary Blocked-button'));
-  }
-
-  getEditButton(){
-    return element(by.id('EDITBUTTON'));
-  }
-
-  getSaveChangesButton(){
-    return element(by.className('btn btn-primary saveChanges-button'));
-  }
-
-  getCancelChangesButton(){
-    return element(by.className('btn btn-primary cancel-button'));
-  }
-
-
-  getScreenName(){
-    return element(by.id('EditName'));
-  }
-
-  getBio(){
-    return element(by.id('EditBio'));
-  }
-
-  getProfileBio(){
-    return element(by.className('Profile-Bio'));
-  }
-
-  getAllButton(){
-    return element(by.className('btn btn-outline-primary'));
-  }
-
-  getNotificationCard(){
-    return element.all(by.className('card-body'));
-  }
-}
 
 export class utilityFunctions{
   page: AppPage;

@@ -1,46 +1,98 @@
 import { AppPage } from './app.po';
+import { utilityFunctions } from './app.po';
 
 describe('workspace-project App', () => {
   let page: AppPage;
-
+  let utility: utilityFunctions;
   page = new AppPage();
-  // beforeEach(() => {
-  //   page = new AppPage();
-  // });
+  utility = new utilityFunctions(page);
+
+  var user1 = "ahly";
+  var pass1 = "123456";
+  var user2 = "zamalek";
+  var pass2 = "password";
 /*
   it('Sign up', () =>{
-    page.navigateToSignUp();
-    page.browserPause(100);
+    utility.navigateToSignUp();
+    utility.browserPause(100);
 
-    page.getUsernameLoginField().sendKeys("e3");
-    page.getEmailSignupField().sendKeys("e3@yahoo.com");
-    page.getPasswordSignupField().sendKeys("Ee333333");
-    page.getPasswordConfirmationSignupField().sendKeys("Ee333333");
-    page.getNext1SignupField().click();
+    page.getUsernameLoginField().sendKeys("e11");
+    page.getEmailSignupField().sendKeys("e11@yahoo.com");
+    page.getPasswordSignupField().sendKeys("Ee111111");
+    page.getPasswordConfirmationSignupField().sendKeys("Ee111111");
+    page.getNext1SignupButton().click();
 
-    page.browserPause(10);
-    page.getScreenNameSignupField().sendKeys("ee3");
+    utility.browserPause(10);
+    page.getScreenNameSignupField().sendKeys("ee11");
     page.getDatePickerSignupBoard().click();
     page.getDateDaySignupBoard().click();
-    page.getNext2SignupField().click();
-
-    page.browserPause(10);
-    expect(page.getSignupConfirmation().getText()).toEqual('Thank you for using our app.');
+    page.getNext2SignupButton().click();
+    utility.browserPause(1000);
+    expect(utility.getElementWithText('.fs-title', 'Thank you for using our app.').getText()).toEqual('Thank you for using our app.');
   });
 
-
-  it('Login', () =>{
-    page.navigateToHome();
-    page.getDropDownHomeToggle().click();
-    page.getLogoutButton().click();
-    page.browserPause(1000);
-    page.navigateToLogin();
-    page.browserPause(1000);
-    page.getUsernameLoginField().sendKeys("ahly");
-    page.getPasswordLoginField().sendKeys("123456");
+  it('Login and logout', () =>{
+    utility.navigateToLogin();
+    utility.browserPause(1000);
+    page.getUsernameLoginField().sendKeys(user1);
+    page.getPasswordLoginField().sendKeys(pass1);
     page.getLoginButton().click();
+    utility.browserPause(2000);
+    page.getDropDownMenuButton().click();
+    page.getLogoutButton().click();
+    utility.browserPause(1000);
+    expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   });
+
+  it('Kweek', () => {
+    utility.login(user1, pass1);
+    let kweek = "E2E 7";
+    page.getKweekButton().click();
+    page.getWriteKweekField().sendKeys(kweek);
+    utility.browserPause(1000);
+    page.getSecondKweekButton().click();
+    utility.browserPause(1000);
+    utility.navigateToMyProfile();
+    expect(page.getFirstKweekText().getText()).toEqual(kweek);
+    utility.logout();
+  });
+
+  it('Rekweek', () => {
+    utility.login(user2, pass2);
+    page.navigateToProfile(user1);
+    let kweek = page.getFirstKweekText().getText();
+    page.getRekweekButton(1).click();
+    utility.browserPause(1000);
+    utility.navigateToMyProfile();
+    expect(page.getFirstKweekText().getText()).toEqual(kweek);
+    utility.logout();
+  });
+
+  it('Like', () => {
+    utility.login(user2, pass2);
+    page.navigateToProfile(user1);
+    let kweek = page.getFirstKweekText().getText();
+    page.getLikeButton(1).click();
+    utility.browserPause(1000);
+    page.navigateToLikes(user2);
+    expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
+    utility.logout();
+  });
+
 */
+
+it('Login', () =>{
+  //page.navigateToHome();
+  //page.getDropDownHomeToggle().click();
+  //page.getLogoutButton().click();
+  //page.browserPause(1000);
+  page.navigateToLogin();
+  page.browserPause(1000);
+  page.getUsernameLoginField().sendKeys("ahly");
+  page.getPasswordLoginField().sendKeys("123456");
+  page.getLoginButton().click();
+});
+
   it('Open profile', function() {
     page.navigateToHome();
     page.browserPause(1000);
@@ -50,7 +102,7 @@ describe('workspace-project App', () => {
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
   });
 
-/*
+
   it('Open profile, view my kweeks', function() {
     page.navigateToKweeks('ahly');
     page.browserPause(1000);
@@ -65,7 +117,7 @@ it('Open profile, view my following', function() {
   page.browserPause(1000);
   expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
 });
-/*
+
   it('Open profile, view my following, Unfollow someone', function() {
     page.navigateToFollowing('ahly');
     page.browserPause(1000);
@@ -78,13 +130,14 @@ it('Open profile, view my following', function() {
     expect(page.getMyFollowingButton().getText()).toEqual('Following');
   });
 
-/
+
   it('Use drop button, Mute him', function() {
     page.getMyDropDownButton().click();
     page.getMuteButton().click();
     page.getMyDropDownButton().click();
     expect(page.getMuteButton().getText()).toEqual('Unmute @deglascreenname');
   });
+
 
   it('Use drop button, Unmute him', function() {
     page.getMuteButton().click();
@@ -171,7 +224,7 @@ it('Open profile, view my following', function() {
     expect(page.getMessageButton().getText()).toEqual('Message');
   });
 
-
+*/
 
   it('Follow someone', function() {
     page.navigateToProfile('zamalek');
@@ -234,4 +287,5 @@ it('Open profile, view my following', function() {
   });
 
 */
+
 });
