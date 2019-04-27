@@ -64,42 +64,7 @@ describe("KweekComponent", () => {
         { id: 3 }
       ];
       component.kweeks = kWK_ARR;
-    });
-
-    it("should make callCommonFunc false if it isnot the user profile kweeks", () => {
-      component.route.snapshot.parent.routeConfig.path = "profile/:username";
-      component.route.snapshot.root.children[0].params["username"] = "user1";
-      component.authorizedUser = "user2";
-      component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
-      component.route.snapshot.queryParams["ID"] = "12";
-      component.route.snapshot.queryParams["filterBy"] = "12";
-      
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeTruthy();
-
-      component.route.snapshot.parent.firstChild.routeConfig.path = "";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeTruthy();
-    });
-
-    it("should make callCommonFunc false if it is the user profile kweeks", () => {
-      component.route.snapshot.parent.routeConfig.path = "profile/:username";
-      component.route.snapshot.root.children[0].params["username"] = "user1";
-      component.authorizedUser = "user1";
-      component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeFalsy();
-
-      component.route.snapshot.parent.firstChild.routeConfig.path = "";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeFalsy();
+      component.route = route;
     });
 
     let arrHome: any = [1, 2];
