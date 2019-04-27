@@ -181,17 +181,21 @@ export class ReplyComponent implements OnInit {
     confirmDeleteRef.componentInstance.clickedKweek = kweek;
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
-        if (!this.busyRequest) {
-          this.busyRequest = true;
-          this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-            this.dialogRef.close();
-            this.busyRequest = false;
-          });
-        }
+        this.deleteActionRoot_ClickedKweek(kweek);
+       
       }
     });
   }
 
+  deleteActionRoot_ClickedKweek(kweek: Kweek): void {
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        this.dialogRef.close();
+        this.busyRequest = false;
+      });
+    }
+  }
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
    * @param kweek
@@ -208,16 +212,20 @@ export class ReplyComponent implements OnInit {
     confirmDeleteRef.componentInstance.clickedKweek = kweek;
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
-        if (!this.busyRequest) {
-          this.busyRequest = true;
-          this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-            const indexToDelete = this.replies.indexOf(kweek);
-            this.replies.splice(indexToDelete, 1);
-            this.busyRequest = false;
-          });
-        }
+        this.deleteActionReply(kweek);
       }
     });
+  }
+
+  deleteActionReply(kweek: Kweek):void {
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        const indexToDelete = this.replies.indexOf(kweek);
+        this.replies.splice(indexToDelete, 1);
+        this.busyRequest = false;
+      });
+    }
   }
 
   Reply(kweek: Kweek): void {

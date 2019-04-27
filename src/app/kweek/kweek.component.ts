@@ -58,14 +58,6 @@ export class KweekComponent implements OnInit {
    * No reurn
    */
   ngOnInit() {
-    if (
-      this.route.snapshot.root.children[0].params["username"] ===
-        this.authorizedUser &&
-      (this.route.snapshot.parent.firstChild.routeConfig.path === "" ||
-        this.route.snapshot.parent.firstChild.routeConfig.path === "kweeks")
-    ) {
-      this.callCommonFunc = false;
-    }
     let mainRoute;
     if (this.route.snapshot.parent.routeConfig) {
       mainRoute = this.route.snapshot.parent.routeConfig.path;
@@ -73,6 +65,12 @@ export class KweekComponent implements OnInit {
     if (mainRoute === "profile/:username") {
       switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
         case "":
+          if (
+            this.route.snapshot.root.children[0].params["username"] ===
+            this.authorizedUser
+          ) {
+            this.callCommonFunc = false;
+          }
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
@@ -86,6 +84,12 @@ export class KweekComponent implements OnInit {
             });
           break;
         case "kweeks":
+          if (
+            this.route.snapshot.root.children[0].params["username"] ===
+            this.authorizedUser
+          ) {
+            this.callCommonFunc = false;
+          }
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
@@ -353,24 +357,27 @@ export class KweekComponent implements OnInit {
     confirmDeleteRef.componentInstance.clickedKweek = kweek;
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
-        if (!this.busyRequest) {
-          this.busyRequest = true;
-          if (this.callCommonFunc) {
-            this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-              this.deleteCallBack(kweek);
-              this.busyRequest = false;
-            });
-          } else {
-            this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-              this.deleteProfileCallBack(kweek);
-              this.busyRequest = false;
-            });
-          }
-        }
+        this.deleteAction(kweek);
       }
     });
   }
 
+  deleteAction(kweek: Kweek): void {
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      if (this.callCommonFunc) {
+        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+          this.deleteCallBack(kweek);
+          this.busyRequest = false;
+        });
+      } else {
+        this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+          this.deleteProfileCallBack(kweek);
+          this.busyRequest = false;
+        });
+      }
+    }
+  }
   /**
    * callback function in subscribe if the user is not in his profile
    * @param kweek

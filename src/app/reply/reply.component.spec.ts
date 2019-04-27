@@ -284,7 +284,7 @@ describe("ReplyComponent", () => {
         return empty();
       });
 
-      component.deleteRoot_ClickedKweek(component.clickedKweek);
+      component.deleteActionRoot_ClickedKweek(component.clickedKweek);
 
       expect(spy).toHaveBeenCalledWith(component.clickedKweek.id);
       expect(component.dialogRef.close).toHaveBeenCalled();
@@ -297,7 +297,7 @@ describe("ReplyComponent", () => {
         return empty();
       });
 
-      component.deleteRoot_ClickedKweek(component.roots[0]);
+      component.deleteActionRoot_ClickedKweek(component.roots[0]);
 
       expect(spy).toHaveBeenCalledWith(component.roots[0].id);
       expect(component.dialogRef.close).toHaveBeenCalled();
@@ -319,7 +319,7 @@ describe("ReplyComponent", () => {
         return empty();
       });
 
-      component.deleteReply(component.replies[0]);
+      component.deleteActionReply(component.replies[0]);
 
       expect(spy).toHaveBeenCalledWith(1); 
       expect(component.replies.length).toBe(2);

@@ -9,6 +9,7 @@ describe("KweekComponent", () => {
   let dataService: DataService;
   let kweeksService: KweeksService;
   let component: KweekComponent;
+  let mockQueryParamMap = jasmine.createSpyObj('queryParamMap', ["get"]);
   let route: any = {
     snapshot: {
       root: {
@@ -29,6 +30,11 @@ describe("KweekComponent", () => {
         routeConfig: {
           path: String
         }
+      },
+      queryParamMap: {
+        get(str: String): String {
+          return 'abdulrahman';
+        }
       }
     }
   };
@@ -43,12 +49,24 @@ describe("KweekComponent", () => {
       null,
       null
     );
-    component.route = route; 
+    component.route = route;
     component.busyRequest = false;
+    // spyOn(component.route.snapshot.queryParamMap,'get');
   });
 
   describe("ngOnInit", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        { id: 1, liked_by_user: false, number_of_likes: 3 },
+        { id: 2, liked_by_user: false, number_of_likes: 3 },
+        { id: 1, liked_by_user: false, number_of_likes: 3 }
+      ];
+      component.kweeks = kWK_ARR;
+    });
+
     it("should make callCommonFunc false if it isnot the user profile kweeks", () => {
+      component.route.snapshot.parent.routeConfig.path = "profile/:username";
       component.route.snapshot.root.children[0].params["username"] = "user1";
       component.authorizedUser = "user2";
       component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
@@ -65,6 +83,7 @@ describe("KweekComponent", () => {
     });
 
     it("should make callCommonFunc false if it is the user profile kweeks", () => {
+      component.route.snapshot.parent.routeConfig.path = "profile/:username";
       component.route.snapshot.root.children[0].params["username"] = "user1";
       component.authorizedUser = "user1";
       component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
@@ -346,7 +365,7 @@ describe("KweekComponent", () => {
         return empty();
       });
 
-      component.delete(kWK_ARR[0]);
+      component.deleteAction(kWK_ARR[0]);
 
       expect(spy).toHaveBeenCalledWith(component.kweeks[0].id);
     });
