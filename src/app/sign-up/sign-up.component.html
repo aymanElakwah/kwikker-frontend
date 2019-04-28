@@ -70,13 +70,36 @@
       <h2 class="fs-title">Thank you for using our app.</h2>
       <div class="errorOccured hide">
           <div  class="msg alert alert-danger " style="width:90%;" role="alert">
-              <p class="alertMsg">An error occured will sign up, there may be an invalid or repeated email, please re-signup.</p>
+              <p class="alertMsg">An error occured will sign up, Please try again later!</p>
           </div>
           <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
+      </div>
+      <div class="errorOccured2 hide">
+        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+            <p class="alertMsg">The Email you've entered already exists, please re-sign up with a different email.</p>
+            <p>Email entered: <strong>{{submitForm.value.email}}</strong></p>
+        </div>
+        <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
+      </div>
+      <div class="errorOccured3 hide">
+        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+            <p class="alertMsg">The Username you've entered already exists, please re-sign up with a different Username.</p>
+            <p>Username entered: <strong>{{submitForm.value.username}}</strong></p>
+        </div>
+        <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
+      </div>
+      <div class="errorOccured4 hide">
+        <div  class="msg alert alert-danger " style="width:90%;" role="alert">
+            <p class="alertMsg">Both your email and username are repeated, please re-sign up with different ones.</p>
+            <p>Username entered: <strong>{{submitForm.value.username}}</strong></p>
+            <p>Email entered: <strong>{{submitForm.value.email}}</strong></p>
+        </div>
+        <button type="submit" class="btn btn-primary action-button" ><a href="signup" >Sign Up </a></button>
       </div>
       <div class="progress hide">
         <h3 class="fs-subtitle">Please check your email for the verification link.</h3>
         <h3 class="fs-subtitle">Email entered: <strong>{{submitForm.value.email}}</strong></h3>
      </div>
+     
      </fieldset>
   </form>

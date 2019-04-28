@@ -28,11 +28,13 @@ export class confirmCode implements OnInit {
         this.data.signUpConfirm(toSend)
         .subscribe(
          res => {
-           console.log(res);
-           localStorage.setItem('TOKEN', res.token);
-           this.router.navigate(['/home']);
+           window.alert("Welcome, please log in")
+           this.router.navigate(['login']);
          },
-          err => console.log('error: ', err)
+          err => {
+            window.alert("An error occured, please check your email again!")
+            this.router.navigate(['']);
+          }
       );
 
       

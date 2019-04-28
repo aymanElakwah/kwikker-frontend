@@ -69,7 +69,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
-    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
     dialogRef.componentInstance.clickedKweek = kweek;
@@ -113,6 +113,7 @@ export class ReplyComponent implements OnInit {
     dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
     dialogLikersRekweekersRef.componentInstance.likers = false;
   }
+
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
    * @param kweek
@@ -166,7 +167,7 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete root or clickedKweek action function
    * @param kweek
    * No @returns
    */
@@ -181,19 +182,28 @@ export class ReplyComponent implements OnInit {
     confirmDeleteRef.componentInstance.clickedKweek = kweek;
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
-        if (!this.busyRequest) {
-          this.busyRequest = true;
-          this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-            this.dialogRef.close();
-            this.busyRequest = false;
-          });
-        }
+        this.deleteActionRoot_ClickedKweek(kweek);
       }
     });
   }
 
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteActionRoot_ClickedKweek(kweek: Kweek): void {
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        this.dialogRef.close();
+        this.busyRequest = false;
+      });
+    }
+  }
+
+  /**
+   * open confirm delete popUp and wait for confirmation res if true call delete reply action function
    * @param kweek
    * No @returns
    */
@@ -208,23 +218,38 @@ export class ReplyComponent implements OnInit {
     confirmDeleteRef.componentInstance.clickedKweek = kweek;
     confirmDeleteRef.afterClosed().subscribe(res => {
       if (res) {
-        if (!this.busyRequest) {
-          this.busyRequest = true;
-          this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-            const indexToDelete = this.replies.indexOf(kweek);
-            this.replies.splice(indexToDelete, 1);
-            this.busyRequest = false;
-          });
-        }
+        this.deleteActionReply(kweek);
       }
     });
   }
 
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteActionReply(kweek: Kweek): void {
+    if (!this.busyRequest) {
+      this.busyRequest = true;
+      this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        const indexToDelete = this.replies.indexOf(kweek);
+        this.replies.splice(indexToDelete, 1);
+        this.busyRequest = false;
+      });
+    }
+  }
+
+  /**
+   * Open Reply popUp
+   * @param kweek  kweek to reply on
+   * No Return
+   */
   Reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: "kweekBox"
     });
     dialogRef.componentInstance.kweek = kweek;
     dialogRef.componentInstance.reply = true;
+    dialogRef.componentInstance.kweekTO = false;
   }
 }

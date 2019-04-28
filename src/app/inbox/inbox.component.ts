@@ -50,7 +50,7 @@ export class InboxComponent implements OnInit {
    */
   SetSenderName(list) {
     list.forEach(element => {
-      if ( element.last_message.text === '' && element.last_message.media_url !== '') {
+      if ( element.last_message.text === ' ' && element.last_message.media_url !== '') {
         if (element.last_message.from_username === localStorage.getItem('username') ) {
           element.last_message.text = 'You sent a photo' ;
         } else {

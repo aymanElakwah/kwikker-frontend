@@ -4,7 +4,7 @@ import { Observable  } from 'rxjs';
 import { Message } from '../model/message';
 import { environment } from 'src/environments/environment.prod';
 @Injectable(
-
+  {providedIn: 'root'}
 )
 export class DirectMessagesService {
   private socket = io(environment.base);
@@ -20,16 +20,6 @@ export class DirectMessagesService {
     let observable = new Observable<Message>(observer=>{
     this.socket.on(username1+username2, (data)=>{
       console.log(username1+username2);
-      observer.next(data);  
-    });
-   // return() => this.socket.disconnect();
-  });
-  return observable;
-  }
-  test(){
-    let observable = new Observable<Message>(observer=>{
-    this.socket.on('hello', (data)=>{
-      console.log("hello");
       observer.next(data);  
     });
    // return() => this.socket.disconnect();

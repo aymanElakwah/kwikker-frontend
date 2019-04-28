@@ -44,78 +44,7 @@ export class NavBarComponent implements OnInit {
     }
     this.nav =  document.querySelector('.myNavBar');
     this.toShow = false;
-    var thisdate = new Date();
-  //  this.users = [
-  //   {
-  //     'bio': 'ev',
-  //     'birth_date':thisdate,
-  //     'blocked':false,
-  //     'created_at':thisdate,
-  //     'followers_count':4,
-  //     'following':false,
-  //     'following_count':12,
-  //     'follows_you':false,
-  //     'kweeks_count':4,
-  //     'likes_count':4,
-  //     'muted':false,
-  //     'profile_banner_url':"ev",
-  //     'profile_image_url':"ev",
-  //     'screen_name':"evram",
-  //     'username':"User1"
-  //   },
-  //   {
-  //     'bio': 'ev',
-  //     'birth_date':thisdate,
-  //     'blocked':false,
-  //     'created_at':thisdate,
-  //     'followers_count':4,
-  //     'following':false,
-  //     'following_count':12,
-  //     'follows_you':false,
-  //     'kweeks_count':4,
-  //     'likes_count':4,
-  //     'muted':false,
-  //     'profile_banner_url':"ev",
-  //     'profile_image_url':"ev",
-  //     'screen_name':"evram",
-  //     'username':"User2"
-  //   },
-  //   {
-  //     'bio': 'ev',
-  //     'birth_date':thisdate,
-  //     'blocked':false,
-  //     'created_at':thisdate,
-  //     'followers_count':4,
-  //     'following':false,
-  //     'following_count':12,
-  //     'follows_you':false,
-  //     'kweeks_count':4,
-  //     'likes_count':4,
-  //     'muted':false,
-  //     'profile_banner_url':"ev",
-  //     'profile_image_url':"ev",
-  //     'screen_name':"evram",
-  //     'username':"User3"
-  //   },
-  //   {
-  //     'bio': 'ev',
-  //     'birth_date':thisdate,
-  //     'blocked':false,
-  //     'created_at':thisdate,
-  //     'followers_count':4,
-  //     'following':false,
-  //     'following_count':12,
-  //     'follows_you':false,
-  //     'kweeks_count':4,
-  //     'likes_count':4,
-  //     'muted':false,
-  //     'profile_banner_url':"ev",
-  //     'profile_image_url':"ev",
-  //     'screen_name':"evram",
-  //     'username':"User4"
-  //   }
-
-  //  ];
+   
     
   }
 
@@ -148,19 +77,12 @@ export class NavBarComponent implements OnInit {
    */
 
   openInboxComponent(){
-    console.log("working")
     const dialogRef = this.dialog.open(ChatComponent,  { panelClass: 'custom-dialog-container' });
   
   /**
    * Function for closing the dialog and displaying a msg 
    * 
    */
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-
-    console.log("modal should show");
   }
    /**
    *
@@ -173,10 +95,6 @@ export class NavBarComponent implements OnInit {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
     this.router.navigate(["/"]);
-    //For testing purposes
-    // localStorage.setItem("TOKEN","123");
-    // localStorage.setItem("username","ev");
-    // this.router.navigate([""]);
   }
   /**
    * after each char send new request or navigate

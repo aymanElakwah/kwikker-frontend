@@ -63,6 +63,11 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
       this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
         this.messageList.push(list);
+        if(list.from_username != localStorage.getItem("username")) {
+          this.playAudio();
+        }
+        setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
+        objDiv.scrollTop = objDiv.scrollHeight+200; }, 10);
       });});
     this.myForm = this.fb.group({
     message: ['', [
@@ -72,8 +77,20 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     });
     this.data.getDirectMessages(this.addressee.username).subscribe(list=>{
       this.messageList = list.reverse();
-      setTimeout(function(){      var objDiv = document.getElementById("mat-dialog-0");
-      objDiv.scrollTop = objDiv.scrollHeight+200; }, 1000);
+      if(this.messageList[0]!= null){
+      this.messageList[0]["img"]=true;
+      }
+      for(let i =1;i<this.messageList.length;i++) {
+        if(this.messageList[i].from_username === this.messageList[i-1].from_username){
+          this.messageList[i]["img"]=false;
+        } else {
+          this.messageList[i]["img"]=true;
+        }
+      }
+      setTimeout(function(){     
+         var objDiv = document.getElementById("mat-dialog-0");
+         if(objDiv){
+      objDiv.scrollTop = objDiv.scrollHeight+200; }}, 1000);
     }
     );
   }
@@ -121,6 +138,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
       media_id: ''
     };
     message.text = this.myForm.controls.message.value;
+    if(message.text == ''){
+      message.text =' ';
+    }
     message.username = this.addressee.username;
     if(this.uploadImg===true){
        this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;
@@ -146,5 +166,11 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
     if(event.key === "Enter" ) {
       this.send();
     }
+  }
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/sounds/beeb.mp3";
+    audio.load();
+    audio.play();
   }
 }

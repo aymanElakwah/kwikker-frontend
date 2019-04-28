@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module'
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -9,18 +8,17 @@ import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-image
 import { LyButtonModule } from '@alyle/ui/button';
 import { LyIconModule } from '@alyle/ui/icon';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { MainProfileComponent } from './main-profile/main-profile.component';
 import { ProfileHeaderCardComponent } from './profile-header-card/profile-header-card.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
 import { ProfileKweeksTabComponent } from '../Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 import { ProfileHeaderCardEditingComponent } from '../Profile/profile-header-card-editing/profile-header-card-editing.component';
 import { EditImagesComponent } from '../Profile/edit-images/edit-images.component'
-
 import { MaterialModule } from '../material.module';
 import { CanActivateTeam } from '../app-routing.module';
 import { ChatModule } from '../chat/chat.module';
-
+//this one better left imported last
+import { RouterModule } from '@angular/router';
 
 
 
@@ -46,7 +44,6 @@ import { ChatModule } from '../chat/chat.module';
     LyResizingCroppingImageModule,
     LyButtonModule,
     LyIconModule,
-    ChatModule,
     RouterModule.forChild([
       { path: 'profile/:username', component:  MainProfileComponent,canActivate:[CanActivateTeam],
       children: [

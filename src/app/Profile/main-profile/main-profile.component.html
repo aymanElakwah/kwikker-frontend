@@ -13,7 +13,7 @@
          <div class="row" id="header">
 
           <!--ProfilePicture Image-->
-   
+
             <div [ngClass]="{'Profile-Picture':!isEditingMode, 'Profile-Picture-Editing':isEditingMode}">
                <!--User Setting Dropdown Menu -->
                <img *ngIf="!isAuthorisedUser() || !isProfilePictureDefault()"
@@ -47,7 +47,7 @@
                <p [ngClass]="{'editProfilePicText':!isProfilePictureDefault() , 'editProfilePicText-default':isProfilePictureDefault()}"
                   *ngIf="isEditingMode"> </p>
             </div>
-       
+
 
             <!--Banner Image-->
             <div class="row" [ngClass]="{'Banner':!isEditingMode, 'Banner-Editing':isEditingMode}">
@@ -129,7 +129,7 @@
                            </a>
                         </li>
                      </ul>
-                     <!--The 2nd part which contains Edit, Follow and Following Buttons 
+                     <!--The 2nd part which contains Edit, Follow and Following Buttons
                       & DropDownMenu on the secondry Navbar -->
                      <span class="MuteIcon" style="font-size: 4ex; color:#939c99;"
                         *ngIf="!isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)">
