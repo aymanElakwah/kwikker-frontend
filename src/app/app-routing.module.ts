@@ -19,6 +19,8 @@ import { MutedListComponent } from './muted-list/muted-list.component';
 import { BlockedListComponent } from './blocked-list/blocked-list.component';
 import { NotificationslistComponent } from './notificationslist/notificationslist.component';
 import { MentionslistComponent } from './mentionslist/mentionslist.component';
+import { SearchComponent } from './search/search.component';
+import { MiniProfileComponent } from './Profile/mini-profile/mini-profile.component';
 
 
 
