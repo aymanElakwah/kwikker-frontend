@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element,protractor } from 'protractor';
 
 export class AppPage {
   //---------Navigation-----------
@@ -146,6 +146,10 @@ export class AppPage {
       return element(by.className('Profile-Name'));
     }
 
+    getHisScreenName(){
+      return element(by.className('Profile-ScreenName'));
+    }
+
     getHisProfileName(){
       return element.all(by.id('usernameref')).get(0);
     }
@@ -231,7 +235,7 @@ export class AppPage {
     }
 
 
-    getScreenName(){
+    getMyScreenName(){
       return element(by.id('EditName'));
     }
 
@@ -243,6 +247,63 @@ export class AppPage {
       return element(by.className('Profile-Bio'));
     }
 
+    getProfileTrends(){
+      return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
+    }
+
+/////////////////////////Message/////////////////////////////////////////
+
+    getChatBox(){
+      return element(by.className('form-control ng-pristine ng-invalid ng-touched'));
+    }
+
+    getSendButton(){
+      return element(by.xpath('//*[@id="send"]'));
+    }
+
+    getBackButton(){
+      return element(by.id('back'));
+    }
+
+///////////////////////Search//////////////////////////////////////
+
+    getHomeSearchBox(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+    }
+
+    getProfileSearchBox(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+    }
+
+    getHomeSearchResult(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+    }
+
+    getProfileSearchResult(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+    }
+
+    navigateToSearchSections(x,y) {
+      return browser.get('/search/'+x+'?filterBy='+y);
+    }
+
+    getSearchKeyWord(){
+      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-kweek/div/div/div[1]/div/div[2]/div/div[3]/div'));
+    }
+
+
+    pressEnter(){
+      var enter = browser.actions().sendKeys(protractor.Key.ENTER);
+      enter.perform();
+    }
+
+
+
+/*
+    getBackButton(){
+      return element(by.id('back'));
+    }
+*/
 
 
     getAllButton(){

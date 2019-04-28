@@ -84,8 +84,6 @@ describe('workspace-project App', () => {
 
 
 
-
-
   it('Open profile', function() {
     page.navigateToHome();
     page.browserPause(1000);
@@ -181,7 +179,7 @@ it('View my following, Unfollow someone, And open his profile to check you unfol
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
   });
-
+*/
 //////////////////Edit-Section///////////////////////
 
 it('Edit profile, change profile photo.', function() {
@@ -228,63 +226,99 @@ it('Edit profile, change profile photo.', function() {
      expect(page.getProfileName().getText()).toEqual('test');
    });
 
+/////////////////Follow--Unfollow--Mute--Unmute--Block--Unblock///////////////////////////
+
+   it('Follow someone', function() {
+     page.navigateToProfile('zamalek');
+     page.getHisFollowButton().click();
+     page.browserPause(1000);
+     expect(page.getHisFollowingButton().getText()).toEqual('');
+   });
+
+   it('Use drop button in someones profile, Mute him', function() {
+     page.getHisDropDownButton().click();
+     page.getMuteButton().click();
+     page.getHisDropDownButton().click();
+     expect(page.getMuteButton().getText()).toEqual('Unmute @zamalek');
+   });
+
+   it('Use drop button in someones profile, Unmute him', function() {
+     page.getMuteButton().click();
+     page.getHisDropDownButton().click();
+     expect(page.getMuteButton().getText()).toEqual('Mute @zamalek');
+   });
+
+
+   it('Block him', function() {
+     page.getBlockButton().click();
+     expect(page.getBlockedButton().getText()).toEqual('Blocked');
+   });
+
+   it('Unblock someone ,Check you are not following him.', function() {
+     page.getBlockedButton().click();
+     page.getHisDropDownButton().click();
+     expect(page.getBlockButton().getText()).toEqual('Block @zamalek');
+     expect(page.getHisFollowButton().getText()).toEqual('Follow');
+   });
+
+
+   it('Unfollow someone', function() {
+     page.getHisFollowButton().click();
+     page.getHisFollowingButton().click();
+     expect(page.getHisFollowButton().getText()).toEqual('Follow');
+   });
+
+
+//////////////Profile-Trends/////////////
+it('Profile trends.', function() {
+  page.getProfileTrends().click();
+  page.browserPause(1000);
+
+  expect(page.getProfileBio().getText()).toEqual('test');
+});
 
 
 
-  it('Tweet to someone', function() {
-    page.navigateToProfile('test_user2');
-    page.getTweetToButton().click();
-    page.browserPause(1000);
-    expect(page.getTweetToButton().getText()).toEqual('Tweet To');
-  });
+//////////Message/////////////////
 
-  it('Message someone', function() {
+
+
+  it('Message someone, send a text message', function() {
+    page.navigateToProfile('zamalek')
     page.getMessageButton().click();
+    //page.getBackButton().click();
+    page.browserPause(10000);
+    page.getChatBox().sendKeys('New message!');
+    page.getSendButton().click();
     page.browserPause(1000);
     expect(page.getMessageButton().getText()).toEqual('Message');
   });
 
 
 
-  it('Follow someone', function() {
-    page.navigateToProfile('zamalek');
-    page.getHisFollowButton().click();
+////////////Search/////////////////////////
+
+  it('Search for a user, select from results suggested in search field.', function() {
+    page.getHomeSearchBox().sendKeys('zamalek');
     page.browserPause(1000);
-    expect(page.getHisFollowingButton().getText()).toEqual('');
+    page.getHomeSearchResult().click();
+    page.browserPause(1000);
+    expect(page.getHisScreenName().getText()).toEqual('zamalek');
   });
 
-  it('Use drop button in someones profile, Mute him', function() {
-    page.getHisDropDownButton().click();
-    page.getMuteButton().click();
-    page.getHisDropDownButton().click();
-    expect(page.getMuteButton().getText()).toEqual('Unmute @zamalek');
-  });
+  it('Search for a user, view latest section.', function() {
+    page.getHomeSearchBox().sendKeys('zamalek');
+    page.pressEnter();
+    page.browserPause(1000);
+    expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
+    });
 
-  it('Use drop button in someones profile, Unmute him', function() {
-    page.getMuteButton().click();
-    page.getHisDropDownButton().click();
-    expect(page.getMuteButton().getText()).toEqual('Mute @zamalek');
-  });
-
-
-  it('Block him', function() {
-    page.getBlockButton().click();
-    expect(page.getBlockedButton().getText()).toEqual('Blocked');
-  });
-
-  it('Unblock someone ,Check you are not following him.', function() {
-    page.getBlockedButton().click();
-    page.getHisDropDownButton().click();
-    expect(page.getBlockButton().getText()).toEqual('Block @zamalek');
-    expect(page.getHisFollowButton().getText()).toEqual('Follow');
+  it('Search for a user, view people section.', function() {
+    page.navigateToSearchSections('people','zamalek');
+  //  expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
   });
 
 
-  it('Unfollow someone', function() {
-    page.getHisFollowButton().click();
-    page.getHisFollowingButton().click();
-    expect(page.getHisFollowButton().getText()).toEqual('Follow');
-  });
 
   // it('View notifications, ALL section', function() {
   //   page.navigateToNotifications();
