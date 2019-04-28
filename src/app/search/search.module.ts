@@ -5,18 +5,22 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { KweekComponent } from '../kweek/kweek.component';
 import { MiniProfileComponent } from '../Profile/mini-profile/mini-profile.component';
+import { CanActivateTeam } from '../app-routing.module';
 @NgModule({
   declarations: [SearchComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'search', component: SearchComponent,
-    children: [
-      {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
-      {path: 'kweeks', component: KweekComponent },
-      {path: 'people', component: MiniProfileComponent}
-    ]}
+      //Evram: To be able to use route guards, all routes must be included in one file
+      //so, I commented these and appended them in app-routing-module
+      //as order matters in routes
+    //   {path: 'search', component: SearchComponent,canActivate:[CanActivateTeam],
+    // children: [
+    //   {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
+    //   {path: 'kweeks', component: KweekComponent },
+    //   {path: 'people', component: MiniProfileComponent}
+    // ]}
     ])
   ]
 })
