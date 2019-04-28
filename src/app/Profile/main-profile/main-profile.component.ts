@@ -128,7 +128,10 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
+    console.log(this.profileUser.profile_banner_url);
+    console.log(this.defaultProfileBanner);
     return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
+ 
   }
 
   /**
@@ -170,10 +173,9 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   removeProfileBanner(): void {
-    this.profileUser.profile_banner_url = null;
+    this.profileUser.profile_banner_url = this.defaultProfileBanner;
     this.ShowMessage("No more header for you");
     this.profileInfoService.removeBanner().subscribe(); 
-    this.profileUser.profile_banner_url = this.defaultProfileBanner;
   }
 
   /**
