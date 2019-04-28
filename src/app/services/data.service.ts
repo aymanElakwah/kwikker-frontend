@@ -369,7 +369,7 @@ export class DataService {
         }
       : {};
     return this.http
-      .get<any>(this.base + "notifications", options)
+      .get<any>(this.base + "notifications/", options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
@@ -674,8 +674,9 @@ export class DataService {
     let val = code.confirmation_code;
     console.log("CODE here: ",val)
     const headers = new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
+    const body = {"password": "123"};
     console.log(headers);
-    return this.http.post<any>(this.base + "account/registration/confirmation", headers)
+    return this.http.post<any>(this.base + "account/registration/confirmation", body, {headers})
       .pipe(
         map(res => res),
         catchError(this.handleError)  

@@ -32,7 +32,8 @@ describe("ReplyComponent", () => {
       const KWKS: any = [{ id: 4 }, { id: 5 }];
       component.clickedKweek = KWKS[0];
       let spy = spyOn(dataService, "getKweekReplies").and.callFake(() => {
-        return from([replies]);
+        component.replies = replies;
+        return empty();
       });
 
       component.ngOnInit();

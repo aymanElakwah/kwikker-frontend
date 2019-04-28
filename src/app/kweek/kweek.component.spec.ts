@@ -11,7 +11,6 @@ describe("KweekComponent", () => {
   let kweeksService: KweeksService;
   let component: KweekComponent;
   let dialog: MatDialog;
-  let mockQueryParamMap = jasmine.createSpyObj('queryParamMap', ["get"]);
   let route: any = {
     snapshot: {
       root: {
@@ -33,10 +32,9 @@ describe("KweekComponent", () => {
           path: String
         }
       },
-      queryParamMap: {
-        get(str: String): String {
-          return 'abdulrahman';
-        }
+      queryParams: {
+        ID: String,
+        filterBy: String
       }
     }
   };
@@ -66,40 +64,7 @@ describe("KweekComponent", () => {
         { id: 3 }
       ];
       component.kweeks = kWK_ARR;
-    });
-
-    it("should make callCommonFunc false if it isnot the user profile kweeks", () => {
-      component.route.snapshot.parent.routeConfig.path = "profile/:username";
-      component.route.snapshot.root.children[0].params["username"] = "user1";
-      component.authorizedUser = "user2";
-      component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeTruthy();
-
-      component.route.snapshot.parent.firstChild.routeConfig.path = "";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeTruthy();
-    });
-
-    it("should make callCommonFunc false if it is the user profile kweeks", () => {
-      component.route.snapshot.parent.routeConfig.path = "profile/:username";
-      component.route.snapshot.root.children[0].params["username"] = "user1";
-      component.authorizedUser = "user1";
-      component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeFalsy();
-
-      component.route.snapshot.parent.firstChild.routeConfig.path = "";
-
-      component.ngOnInit();
-
-      expect(component.callCommonFunc).toBeFalsy();
+      component.route = route;
     });
 
     let arrHome: any = [1, 2];

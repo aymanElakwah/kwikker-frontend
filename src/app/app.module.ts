@@ -56,12 +56,11 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     SharedModule,
     BrowserModule,
     ProfileModule,
-    AppRoutingModule,
+    SearchModule,
     HttpClientModule,
     CoreModule,
     ChatModule,
     NotificationsModule,
-    SearchModule,
     SettingsModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     // InMemoryDataService,
@@ -73,6 +72,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MaterialModule,
     FormsModule,
     LyThemeModule.setTheme('minima-light'),
+    AppRoutingModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },

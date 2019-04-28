@@ -22,4 +22,12 @@ body{
   padding: 0px;
   margin-top: 100px;
   overflow-x: hidden;
+  zoom: 80%;
 }
+mat-dialog-container{
+  padding: 0px;
+  margin-top: 100px;
+  overflow-x: hidden;
+  zoom: 80%;
+}
+
