@@ -25,7 +25,7 @@ export class AccountComponent implements OnInit {
   /** old password */
   oldPassword: string = "";
   emialResponseObject:any;
-
+  
   /**
    * empty constructor
    * @param account_service 
@@ -45,7 +45,7 @@ export class AccountComponent implements OnInit {
       this.oldEmail = this.email;
       
     })
-    
+
   }
 
   /**

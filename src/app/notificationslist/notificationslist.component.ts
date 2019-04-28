@@ -95,7 +95,7 @@ export class NotificationslistComponent implements OnInit {
         this.notification_service.getNotificationsList(last_notification_id).subscribe(
           list =>{
             this.notificationsResponse = list;
-            this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse);
+            this.notificatons_array = this.notificatons_array.concat(this.notificationsResponse.Notifications);
           }
         )
         this.lastSeen = last_notification_id;
