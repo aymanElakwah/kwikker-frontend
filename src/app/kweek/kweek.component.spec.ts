@@ -136,7 +136,7 @@ describe("KweekComponent", () => {
       let spy = spyOn(kweeksService, "like").and.callFake(() => {
         component.kweeks[0].liked_by_user = true;
         component.kweeks[0].number_of_likes++;
-        return empty();
+        return;
       });
 
       component.likeDecision(component.kweeks[0]);
@@ -148,8 +148,8 @@ describe("KweekComponent", () => {
 
     it("should call likeKweek from dataService if callCommonFunc is false", () => {
       component.callCommonFunc = false;
-      let spy = spyOn(dataService, "likeKweek").and.callFake(() => {
-        return empty();
+      let spy = spyOn(dataService, "likeKweek").and.callFake(()=>{
+        return;  
       });
 
       component.likeDecision(component.kweeks[0]);
