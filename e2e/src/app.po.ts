@@ -146,6 +146,15 @@ export class AppPage {
       return element(by.className('Profile-Name'));
     }
 
+    getHisProfileName(){
+      return element.all(by.id('usernameref')).get(0);
+    }
+
+    getFollwingList(){
+      return element.all(by.className('container')).count();
+    }
+
+
     getTweetToButton(){
       return element(by.className('btn btn-primary Kweek-Button'));
     }
@@ -198,7 +207,7 @@ export class AppPage {
     }
 
     getEditButton(){
-      return element(by.id('EDITBUTTON'));
+      return element(by.className('btn btn-outline-primary edit-button'));
     }
 
     getSaveChangesButton(){
@@ -207,6 +216,18 @@ export class AppPage {
 
     getCancelChangesButton(){
       return element(by.className('btn btn-primary cancel-button'));
+    }
+
+    getChangeProfilePictureButton(){
+      return element(by.id('profilePicdropdownMenuButton'));
+    }
+
+    getChangeProfilePictureItems(i){
+      return element.all(by.className('dropdown-item')).get(i);
+    }
+
+    getSelectItemButton(){
+      return element(by.className('y-animations-ib ih y-root-i8 ii'));
     }
 
 
@@ -222,6 +243,8 @@ export class AppPage {
       return element(by.className('Profile-Bio'));
     }
 
+
+
     getAllButton(){
       return element(by.className('btn btn-outline-primary'));
     }
@@ -233,6 +256,13 @@ export class AppPage {
     browserPause(x) {
       return browser.sleep(x);
     }
+
+    browser() {
+      return browser;
+    }
+
+
+
 
     navigateToLogin() {
       return browser.get('/login');

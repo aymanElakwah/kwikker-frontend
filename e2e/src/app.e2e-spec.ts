@@ -11,7 +11,10 @@ describe('workspace-project App', () => {
   var pass1 = "123456";
   var user2 = "zamalek";
   var pass2 = "password";
-/*
+
+
+
+
   it('Sign up', () =>{
     utility.navigateToSignUp();
     utility.browserPause(100);
@@ -79,19 +82,9 @@ describe('workspace-project App', () => {
     utility.logout();
   });
 
-*/
 
-it('Login', () =>{
-  //page.navigateToHome();
-  //page.getDropDownHomeToggle().click();
-  //page.getLogoutButton().click();
-  //page.browserPause(1000);
-  page.navigateToLogin();
-  page.browserPause(1000);
-  page.getUsernameLoginField().sendKeys("ahly");
-  page.getPasswordLoginField().sendKeys("123456");
-  page.getLoginButton().click();
-});
+
+
 
   it('Open profile', function() {
     page.navigateToHome();
@@ -99,14 +92,14 @@ it('Login', () =>{
     page.getDropDownHomeToggle().click();
     page.getDropDownHomeToggleProfile().click();
     page.browserPause(1000);
-    expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
+    expect(page.getProfileName().getText()).toEqual('ahly');
   });
 
 
   it('Open profile, view my kweeks', function() {
     page.navigateToKweeks('ahly');
     page.browserPause(1000);
-    expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
+    expect(page.getProfileName().getText()).toEqual('ahly');
   });
 
 
@@ -115,11 +108,11 @@ it('Login', () =>{
 it('Open profile, view my following', function() {
   page.navigateToFollowing('ahly');
   page.browserPause(1000);
-  expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
+  expect(page.getProfileName().getText()).toEqual('ahly');
 });
 
   it('Open profile, view my following, Unfollow someone', function() {
-    page.navigateToFollowing('ahly');
+    page.getMyFollowingButton().click();
     page.browserPause(1000);
     expect(page.getMyFollowButton().getText()).toEqual('Follow');
   });
@@ -127,7 +120,7 @@ it('Open profile, view my following', function() {
 
   it('In following, follow someone', function() {
     page.getMyFollowButton().click();
-    expect(page.getMyFollowingButton().getText()).toEqual('Following');
+    expect(page.getMyFollowingButton().getText()).toEqual('');
   });
 
 
@@ -158,6 +151,15 @@ it('Open profile, view my following', function() {
     expect(page.getMyFollowButton().getText()).toEqual('Follow');
   });
 
+it('View my following, Unfollow someone, And open his profile to check you unfollowed him', function() {
+  page.getMyFollowingButton().click();
+  var name = page.getHisProfileName().getText();
+  page.navigateToProfile(name);
+  page.browserPause(1000);
+  expect(page.getHisFollowButton().getText()).toEqual('Follow');
+});
+
+
 
 
   ////////////Followers-Section///////////////////
@@ -175,9 +177,25 @@ it('Open profile, view my following', function() {
 
 
   it('Open profile, view my likes', function() {
-    page.navigateToLikes('test_user3');
+    page.navigateToLikes('ahly');
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
+  });
+
+//////////////////Edit-Section///////////////////////
+
+it('Edit profile, change profile photo.', function() {
+  //var currentImage = Storage.getItem('E:/youssef photos/PHOTOS/AAFR9688.JPG');
+  page.getEditButton().click();
+  page.getChangeProfilePictureButton().click();
+  page.browserPause(1000);
+  page.getChangeProfilePictureItems(0).click();
+  page.browserPause(1000);
+  //page.getSelectItemButton().click();
+  //page.browserPause(1000);
+  page.getSelectItemButton().sendKeys('E:/youssef photos/PHOTOS/AAFR9688.JPG');
+  page.getSelectItemButton().click();
+  page.browserPause(1000);
   });
 
 
@@ -210,7 +228,9 @@ it('Open profile, view my following', function() {
      expect(page.getProfileName().getText()).toEqual('test');
    });
 
-/*
+
+
+
   it('Tweet to someone', function() {
     page.navigateToProfile('test_user2');
     page.getTweetToButton().click();
@@ -224,7 +244,7 @@ it('Open profile, view my following', function() {
     expect(page.getMessageButton().getText()).toEqual('Message');
   });
 
-*/
+
 
   it('Follow someone', function() {
     page.navigateToProfile('zamalek');

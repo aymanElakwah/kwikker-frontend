@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
+    "@types/jquery": "^3.3.29",
     "angular-font-awesome": "^3.1.2",
     "angular-in-memory-web-api": "^0.8.0",
     "angular-mat-datepicker": "0.0.2",
