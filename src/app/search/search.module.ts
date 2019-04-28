@@ -12,15 +12,12 @@ import { CanActivateTeam } from '../app-routing.module';
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      //Evram: To be able to use route guards, all routes must be included in one file
-      //so, I commented these and appended them in app-routing-module
-      //as order matters in routes
-    //   {path: 'search', component: SearchComponent,canActivate:[CanActivateTeam],
-    // children: [
-    //   {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
-    //   {path: 'kweeks', component: KweekComponent },
-    //   {path: 'people', component: MiniProfileComponent}
-    // ]}
+      {path: 'search', component: SearchComponent,canActivate:[CanActivateTeam],
+    children: [
+      {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
+      {path: 'kweeks', component: KweekComponent },
+      {path: 'people', component: MiniProfileComponent}
+    ]}
     ])
   ]
 })

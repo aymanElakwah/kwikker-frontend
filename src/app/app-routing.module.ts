@@ -97,12 +97,6 @@ const routes: Routes = [
     {path: 'all', component: NotificationslistComponent },
     {path: 'mentions', component: MentionslistComponent}
   ]},
-  {path: 'search', component: SearchComponent,canActivate:[CanActivateTeam],
-  children: [
-    {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
-    {path: 'kweeks', component: KweekComponent },
-    {path: 'people', component: MiniProfileComponent}
-  ]},
   {path: '**', component: ErrorPageComponent},
   
 ];
