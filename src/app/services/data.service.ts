@@ -369,7 +369,7 @@ export class DataService {
         }
       : {};
     return this.http
-      .get<any>(this.base + "notifications", options)
+      .get<any>(this.base + "notifications/", options)
       .pipe(
         catchError(this.handleError) // code 401 -> Unauthorized access.
       );
