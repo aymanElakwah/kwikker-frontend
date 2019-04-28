@@ -19,6 +19,8 @@ import { MutedListComponent } from './muted-list/muted-list.component';
 import { BlockedListComponent } from './blocked-list/blocked-list.component';
 import { NotificationslistComponent } from './notificationslist/notificationslist.component';
 import { MentionslistComponent } from './mentionslist/mentionslist.component';
+import { SearchComponent } from './search/search.component';
+import { MiniProfileComponent } from './Profile/mini-profile/mini-profile.component';
 
 
 
@@ -94,6 +96,12 @@ const routes: Routes = [
     {path: '', redirectTo: 'all', pathMatch: 'full'} ,
     {path: 'all', component: NotificationslistComponent },
     {path: 'mentions', component: MentionslistComponent}
+  ]},
+  {path: 'search', component: SearchComponent,canActivate:[CanActivateTeam],
+  children: [
+    {path: '', redirectTo: 'kweeks', pathMatch: 'full'} ,
+    {path: 'kweeks', component: KweekComponent },
+    {path: 'people', component: MiniProfileComponent}
   ]},
   {path: '**', component: ErrorPageComponent},
   
