@@ -167,6 +167,7 @@ export class KweekComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.clickedKweek = kweek;
@@ -345,6 +346,7 @@ export class KweekComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
       ConfirmDeleteComponent,
       dialogConfig
