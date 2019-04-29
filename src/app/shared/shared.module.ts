@@ -18,9 +18,10 @@ import { KweekComponent } from "../kweek/kweek.component";
 import { EditImagesComponent } from "../Profile/edit-images/edit-images.component";
 import { RouterModule } from "@angular/router";
 import { ReplyComponent } from '../reply/reply.component';
+import { AlertComponentComponent } from '../alert-component/alert-component.component';
 
 @NgModule({
-  declarations: [NavBarComponent, TrendsComponent],
+  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent],
 
   imports: [
     CommonModule,
@@ -35,7 +36,7 @@ import { ReplyComponent } from '../reply/reply.component';
     RouterModule
   ],
 
-  entryComponents: [EditImagesComponent],
+  entryComponents: [EditImagesComponent,AlertComponentComponent],
   exports: [
     NavBarComponent,
     TrendsComponent,
@@ -43,7 +44,8 @@ import { ReplyComponent } from '../reply/reply.component';
     KweekComponent,
     ReplyComponent,
     TrendsComponent,
-    NewKweekComponent
+    NewKweekComponent,
+    AlertComponentComponent
   ]
 })
 export class SharedModule {}
