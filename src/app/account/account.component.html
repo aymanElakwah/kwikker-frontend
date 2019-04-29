@@ -7,11 +7,11 @@
         <div class="col-md-1" style="padding:0">  
           </div>
       <div class="col-md-3" style="padding-left:0;padding-right: 2%">
+        
         <label for="currentpassword" style="float:right; margin-top:15%"><h5>Current Password</h5></label>
         <label for="username"  style="float:right; margin-top:50%"><h5>Username</h5></label>
         <label for="email" style="float:right; margin-top:110%;margin-right:-45%"><h5>Email</h5></label>
-        <label for="newpassword" style="float:right; margin-top:60%"><h5>New Password</h5></label>
-        <label for="verfpassword" style="float:right; margin-top:20%"><h5>Verify Password</h5></label>
+        
       </div>
       <div class="col-md-7" style="padding:0">
         <div class="form-group" style="padding-top: 5.5%">
@@ -31,12 +31,26 @@
           </div>
 
           <div>
-              <button class="btn btn-primary kweek-btn" style="float:right; margin-right: 10%"
+              <button class="btn btn-primary kweek-btn" style="margin-left: 20% "
               (click)="SaveChanges()" 
               [disabled]="( oldEmail == email && userName == oldUserName ) || oldPassword.length == 0 ">Save Changes</button>
             </div>
 
-            <div class="form-group" style="padding-top: 5.5%;margin-top: 15%">
+            
+
+     
+    </div>
+    <div class="row" style="margin:0">
+      <div class="col-md-2" style="padding:0">  
+      </div>
+      <div class="col-md-3" style="padding-left:0;">
+        <label for="newpassword" style="float:right; margin-top:30%"><h5>New Password</h5></label>
+        <label for="verfpassword" style="float:right; margin-top:20%"><h5>Verify Password</h5></label>
+        
+      </div>
+      <div class="col-md-5" style="padding:0; padding-left:2% ">  
+
+       <div class="form-group" style="padding-top: 5.5%;margin-top: 15%">
                 <input type="password" class="form-control" id="newpassword" [(ngModel)]="newPassword" 
                 name="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
                 title="Password must be at least 8 characters and contains capital letters, small letters and numbers.">
@@ -50,11 +64,16 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-primary kweek-btn" style="float:right; margin-right: 7.5%;margin-bottom:8%"
+                    <button type="submit" class="btn btn-primary kweek-btn" style="float:right;margin-bottom:8%"
                     (click)="ChangePassword()" 
                     [disabled]="(!newPassword || newPassword != verifyNewPassword) || oldPassword.length == 0 ">Change Password</button>
                   </div>
 
+
       </div>
+
+    </div>
+
+    
    
          
