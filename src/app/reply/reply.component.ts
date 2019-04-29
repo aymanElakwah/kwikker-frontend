@@ -69,6 +69,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
@@ -89,6 +90,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
       LikesRekweeksListComponent,
       dialogConfig
@@ -106,6 +108,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
       LikesRekweeksListComponent,
       dialogConfig
@@ -175,6 +178,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
       ConfirmDeleteComponent,
       dialogConfig
@@ -211,6 +215,7 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "520px";
     dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
       ConfirmDeleteComponent,
       dialogConfig

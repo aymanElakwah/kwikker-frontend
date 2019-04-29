@@ -1,6 +1,6 @@
 #popUpEnd {
   height: 61px;
-  width: 100%;
+  width: auto;
   background-color: #e6ecf0;
   text-align: center;
   position: relative;
@@ -29,28 +29,6 @@
   text-align: center;
 } */
 
-.cdk-global-overlay-wrapper::before {
-  /* content: ""; */
-  display: inline-block;
-  height: 100%;
-  white-space: nowrap;
-}
-
-.cdk-overlay-pane {
-  display: inline-block;
-  position: relative;
-  text-align: left;
-  white-space: normal;
-  margin-top: 50px;
-}
-
-.mat-dialog-container {
-  padding: 0;
-  border-radius: 8px;
-  border: 1px solid #e6ecf0;
-  overflow-x: hidden;
-  height: 100%;
-}
 
 .popup-kweek-style {
   padding: 9px 40px;
@@ -105,7 +83,7 @@
 #clicked-kweek-date {
   color: #666;
   font-size: 14px;
-  margin: 10px; 
+  margin: 10px;
 }
 
 /* .vertical-line {

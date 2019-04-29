@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element,protractor } from 'protractor';
 
 export class AppPage {
   //---------Navigation-----------
@@ -146,6 +146,19 @@ export class AppPage {
       return element(by.className('Profile-Name'));
     }
 
+    getHisScreenName(){
+      return element(by.className('Profile-ScreenName'));
+    }
+
+    getHisProfileName(){
+      return element.all(by.id('usernameref')).get(0);
+    }
+
+    getFollwingList(){
+      return element.all(by.className('container')).count();
+    }
+
+
     getTweetToButton(){
       return element(by.className('btn btn-primary Kweek-Button'));
     }
@@ -198,7 +211,7 @@ export class AppPage {
     }
 
     getEditButton(){
-      return element(by.id('EDITBUTTON'));
+      return element(by.className('btn btn-outline-primary edit-button'));
     }
 
     getSaveChangesButton(){
@@ -209,8 +222,20 @@ export class AppPage {
       return element(by.className('btn btn-primary cancel-button'));
     }
 
+    getChangeProfilePictureButton(){
+      return element(by.id('profilePicdropdownMenuButton'));
+    }
 
-    getScreenName(){
+    getChangeProfilePictureItems(i){
+      return element.all(by.className('dropdown-item')).get(i);
+    }
+
+    getSelectItemButton(){
+      return element(by.className('y-animations-ib ih y-root-i8 ii'));
+    }
+
+
+    getMyScreenName(){
       return element(by.id('EditName'));
     }
 
@@ -221,6 +246,65 @@ export class AppPage {
     getProfileBio(){
       return element(by.className('Profile-Bio'));
     }
+
+    getProfileTrends(){
+      return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
+    }
+
+/////////////////////////Message/////////////////////////////////////////
+
+    getChatBox(){
+      return element(by.className('form-control ng-pristine ng-invalid ng-touched'));
+    }
+
+    getSendButton(){
+      return element(by.xpath('//*[@id="send"]'));
+    }
+
+    getBackButton(){
+      return element(by.id('back'));
+    }
+
+///////////////////////Search//////////////////////////////////////
+
+    getHomeSearchBox(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+    }
+
+    getProfileSearchBox(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+    }
+
+    getHomeSearchResult(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+    }
+
+    getProfileSearchResult(){
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+    }
+
+    navigateToSearchSections(x,y) {
+      return browser.get('/search/'+x+'?filterBy='+y);
+    }
+
+    getSearchKeyWord(){
+      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-kweek/div/div/div[1]/div/div[2]/div/div[3]/div'));
+    }
+
+
+    pressEnter(){
+      var enter = browser.actions().sendKeys(protractor.Key.ENTER);
+      enter.perform();
+    }
+
+
+
+/*
+    getBackButton(){
+      return element(by.id('back'));
+    }
+*/
+
 
     getAllButton(){
       return element(by.className('btn btn-outline-primary'));
@@ -233,6 +317,13 @@ export class AppPage {
     browserPause(x) {
       return browser.sleep(x);
     }
+
+    browser() {
+      return browser;
+    }
+
+
+
 
     navigateToLogin() {
       return browser.get('/login');
