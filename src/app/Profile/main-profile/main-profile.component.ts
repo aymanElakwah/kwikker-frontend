@@ -128,8 +128,6 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
-    console.log(this.profileUser.profile_banner_url);
-    console.log(this.defaultProfileBanner);
     return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
  
   }
@@ -150,7 +148,7 @@ export class MainProfileComponent implements OnInit {
     };
 
     /* Send Change The Image Request */
-    this.profileInfoService.updateBanner(file).subscribe(userInfo => {
+      this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
       this.profileUser.profile_banner_url += "?dummy=" + Math.random();
     });
