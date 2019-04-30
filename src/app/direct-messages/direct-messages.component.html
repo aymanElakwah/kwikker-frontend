@@ -32,11 +32,11 @@
 <!-- main body-->
 <div class="body" [ngClass]="{'body2':uploadImg}" >
   <div class="msg" *ngFor="let message of messageList" >
-    <div class="row2 row" [ngClass]="{'right':message.to_username === addressee.username ,'row3':message.media_url!=null}">
+    <div class="row2 row" [ngClass]="{'right':message.to_username === addressee.username ,'row3':message.media_url!=null ,'big-margin':message.text?.length>100 && message.media_url != null, 'type4':message.media_url==null && message.text.length>100} ">
     <div class="frame"  >
       <img *ngIf="message.img" class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'">
       </div>
-      <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username , 'msgText3' :message.media_url!=null}">
+      <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username , 'msgText3' :message.media_url==null && message.text?.length>100}">
         {{message.text}}
         <br>
         <img *ngIf="message.media_url !== null" [src]="message.media_url" style="max-height: 100px; max-width: 200px;">

@@ -1,0 +1,35 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+
+  - docker build -t ajammil/kwikker/frontendtest -f Dockerfile.dev .
+
+
+script:
+  - gem install bundler
+#tests will be here
+# run tests (not yet working)
+  - docker run ajammil/kwikker/frontendtest ng test --karmaConfig=./src/karma.prod.conf.js --watch=false
+
+after_success:
+  #build production image
+  - docker build -t ajammil/kwikkerfrontend:latest .
+  #Log in to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Push image to docker hub
+  - docker push ajammil/kwikkerfrontend:latest
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: Kwikker frontend
+  env: KwikkerFrontend-env
+  bucket_name: elasticbeanstalk-eu-central-1-911980560928
+  bucket_path: frontend-kwikker
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"

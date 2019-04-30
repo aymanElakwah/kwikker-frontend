@@ -81,7 +81,7 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
       this.messageList[0]["img"]=true;
       }
       for(let i =1;i<this.messageList.length;i++) {
-        if(this.messageList[i].from_username === this.messageList[i-1].from_username){
+        if(this.messageList[i].from_username === this.messageList[i-1].from_username && this.messageList[i].text.length<100){
           this.messageList[i]["img"]=false;
         } else {
           this.messageList[i]["img"]=true;

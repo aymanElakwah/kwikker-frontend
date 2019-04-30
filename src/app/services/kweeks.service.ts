@@ -117,7 +117,7 @@ export class KweeksService {
                 const sliceStr = kweek.text.slice(start, end);
                 str +=
                   hashtagStartTagOpen +
-                  "/search/people?filterBy=" +
+                  "/search/kweeks?filterBy=" +
                   sliceStr.slice(1,sliceStr.length) +
                   "&src=hash" +
                   startTagClose +
