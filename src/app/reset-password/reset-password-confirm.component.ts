@@ -14,14 +14,13 @@ export class confirmPassword implements OnInit {
     public pass: string;
     public mail: string;
     public confirm_pass: string;
-    
+    public msg: any;
+
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
     ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
-        //console.log( this.confirmCode );
-       // localStorage.setItem('TOKEN', this.confirmCode);
-
+        this.msg =  document.querySelector('.errorBox'); 
     }
 /**
    *This function is called when updating the password.
@@ -34,16 +33,31 @@ export class confirmPassword implements OnInit {
 public sendPassword(form: NgForm) {
   var toSend = { 
     password: form.value.pass,
-  
  }; 
+  
+  this.data.sendPass(toSend, this.confirmCode)
  
-  this.data.sendPass(toSend, this.confirmCode )
     .subscribe(
       res => {
+        window.alert("Password reset successfully.")
         this.router.navigate(['/login']);
       },
-      err => console.log('error: ', err)
+      err => {
+        if (err.status == 404)
+          this.showError();
+        console.log('error: ', err)
+      }
   );
+  }
+/**
+   * Function to change the error box status from hide, to show
+   * called when an error sending email exists.
+   * @param void
+   * @returns void
+   */
+  public showError() {
+    this.msg.className = 'show';
+    this.router.navigate(['/login']);
   }
 
 }

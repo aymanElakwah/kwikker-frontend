@@ -6,9 +6,14 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { DataService } from '../services/data.service';
 // models
 import { MiniUser } from '../model/mini-user';
+import { User } from '../model/user';
 // angular material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
+import { ChatService } from '../chat/chat.service';
+import { ChatComponent } from '../chat/chat.component';
+import { MatDialogRef } from '@angular/material';
+
 /**
  * search freinds to send message
  */
@@ -19,10 +24,6 @@ import { Router } from '@angular/router';
               '../direct-messages/direct-messages.component.css']
 })
 export class InboxListComponent implements OnInit {
-  /**
-   * addressed person
-   */
-  addressee: MiniUser;
   /**
    * creating message form
    */
@@ -38,7 +39,7 @@ export class InboxListComponent implements OnInit {
   /**
    * filtered list of users
    */
-  users: MiniUser[];
+  users: User[];
   /**
    * selected users list to send message
    */
@@ -55,6 +56,7 @@ export class InboxListComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  image:File;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   /**
    * 
@@ -63,7 +65,8 @@ export class InboxListComponent implements OnInit {
    */
   constructor(private data: DataService,
               private fb: FormBuilder,
-              private router:Router) {
+              private chatService:ChatService,
+              public DialogRef: MatDialogRef<ChatComponent>) {
                }
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -126,7 +129,7 @@ add(event: MatChipInputEvent): void {
  * select user by click
  * @param user user that get clicked on
  */
-  selectUser(user: MiniUser) {
+  selectUser(user: User) {
     let flag = false;
     // tslint:disable-next-line:no-shadowed-variable
     this.selectedUsers.forEach(element => {
@@ -161,6 +164,7 @@ add(event: MatChipInputEvent): void {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
+    this.image = files[0];
   }
   /**
    * remove image from uploading it
@@ -175,20 +179,37 @@ add(event: MatChipInputEvent): void {
    * send current message
    */
   send() {
+    for(let i=0;i<this.selectedUsers.length;i++) {
     const message = {
       text: '',
       username: '',
-      media_url: ''
+      media_id: ''
     };
     message.text = this.myForm2.controls.message.value;
-    message.media_url = '' ;
-    this.selectedUsers.forEach(element => {
-      message.username = element;
+    message.username = this.selectedUsers[i];
+    if(this.uploadImg===true){
+       this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;
+        this.data.createMessage(message).subscribe();}
+        );
+    } else {
+      message.media_id = '' ;
       this.data.createMessage(message).subscribe();
-    });
-    this.router.navigate(['/chat/', {outlets : {body: ['inbox']} }]);
+    }
+    this.myForm.reset();
+    this.removeImg();
+  }
+  this.chatService.setSection(1);
   }
   next(){
     this.secondStep = true;
+  }
+  toInbox(){
+    this.chatService.setSection(1);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

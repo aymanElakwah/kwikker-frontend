@@ -5,6 +5,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { delay } from "q";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { EditImagesComponent } from "../edit-images/edit-images.component";
+import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
+import { ChatComponent } from '../../chat/chat.component';
+import { ChatService } from 'src/app/chat/chat.service';
+
+
 
 /**
  * The Main Component For The Profile Page
@@ -19,26 +24,8 @@ import { EditImagesComponent } from "../edit-images/edit-images.component";
 export class MainProfileComponent implements OnInit {
   /**
    * All Info for the profile user
-   * Initialised With Dummy Data To test Template
    * */
-  profileUser: User = {
-    username: "Ahmed_Mahmoud14",
-    screen_name: "Ahmed Mahmoud",
-    bio:
-      "Play the best of EA for $4.99 a month! EA Access brings you great games for a great price with The Vault, an evolving collection of EA games for Xbox One!",
-    birth_date: new Date(),
-    created_at: new Date(),
-    profile_image_url: "https://i.ibb.co/z2wkPKs/Default.png",
-    profile_banner_url: null,
-    following: false,
-    follows_you: false,
-    followers_count: 0,
-    following_count: 0,
-    kweeks_count: 0,
-    likes_count: 0,
-    blocked: false,
-    muted: false
-  };
+  profileUser: User;
 
   /* The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
@@ -49,23 +36,70 @@ export class MainProfileComponent implements OnInit {
   semiBlockedMode: boolean = false;
 
   /* User Edited Data */
-  editedScreenName: string = this.profileUser.username;
-  editedBio: string = this.profileUser.bio;
+  editedScreenName: string ;
+  editedBio: string ;
+  AuthorisedIsBlocked:boolean = false;
 
-  /* Default Profile Picture */
-  defaultProfilePicture: string = "https://i.ibb.co/z2wkPKs/Default.png";
+  /* Default Profile Picture and Banner */
+  defaultProfilePicture: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg";
+  defaultProfileBanner: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/banner/banner.jpg";
 
+   /**
+   * Open Resize, Scale and Crop Profile Image
+   * No Parameters
+   * No return
+   */
   openEditImagesDialog() {
     let dialogRef = this.dialog.open(EditImagesComponent, {
+      data: this.profileUser.profile_image_url,
       height: "700px",
-      width: "700px"
+      width: "700px",
     });
-
-    dialogRef.afterClosed().subscribe(profilePictureURL => {
-      this.profileUser.profile_image_url = profilePictureURL;
+    dialogRef.afterClosed().subscribe(image => {
+      if(image != null )
+      {
+          /* Preview The Image */
+          var reader = new FileReader();
+          reader.readAsDataURL(image);
+          reader.onload = _event => {
+            this.profileUser.profile_image_url = reader.result.toString();
+          };
+          
+          /* Send Change The Image Request */
+          var S:string;
+          this.profileInfoService.updateProfilePicture(image as File).subscribe 
+          ( serInfo => { S = serInfo; }  );
+          this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
+    }
     });
-    this.profileUser.profile_image_url += "?99999";
   }
+
+    /**
+     * Open Write Kweek Component Dialog
+     * No Parameters
+     * No return
+     */
+    openKweekDialog()
+    {
+      const dialogRef = this.dialog.open(NewKweekComponent,
+         { panelClass: 'kweekBox'});
+         dialogRef.componentInstance.reply = true;
+         dialogRef.componentInstance.kweekTO = true;
+         dialogRef.componentInstance.username = this.profileUser.username;
+         dialogRef.componentInstance.screenname = this.profileUser.screen_name;
+    }
+
+       /**
+     * Open Inbox Component Dialog
+     * No Parameters
+     * No return
+     */
+    openInboxDialog()
+    {
+      this.ChatService.setAddressee(this.profileUser);
+      this.ChatService.setSection(3);
+      const dialogRef = this.dialog.open(ChatComponent);
+    }
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in)
@@ -73,7 +107,10 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isAuthorisedUser(): boolean {
-    return this.profileUser.username == this.authorizedUser;
+    if(this.profileUser != null )
+    {
+       return (this.profileUser.username == this.authorizedUser);
+    }
   }
 
   /**
@@ -82,8 +119,7 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfilePictureDefault(): boolean {
-    return true;
-    /* return (this.profileUser.profile_image_url  == this.defaultProfilePicture); */
+    return (this.profileUser.profile_image_url  == this.defaultProfilePicture);
   }
 
   /**
@@ -92,18 +128,10 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
-    return this.profileUser.profile_banner_url == null;
-  }
-
-  /**
-   * Change User Profile Picture
-   * @param event Event from the browser with the selected new profile photo
-   * No return
-   */
-  changeProfilePicture(event) {
-    const file = event.target.files[0];
-    console.log(file);
-    this.profileInfoService.updateProfilePicture(file).subscribe();
+    console.log(this.profileUser.profile_banner_url);
+    console.log(this.defaultProfileBanner);
+    return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
+ 
   }
 
   /**
@@ -112,6 +140,7 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   changeProfileBanner(event) {
+    /* Preview The Image */
     const file = event.target.files[0];
     var reader = new FileReader();
     var imagePath = event.target.files;
@@ -120,8 +149,10 @@ export class MainProfileComponent implements OnInit {
       this.profileUser.profile_banner_url = reader.result.toString();
     };
 
+    /* Send Change The Image Request */
     this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
+      this.profileUser.profile_banner_url += "?dummy=" + Math.random();
     });
   }
 
@@ -133,7 +164,7 @@ export class MainProfileComponent implements OnInit {
   removeProfilePicture(): void {
     this.profileUser.profile_image_url = this.defaultProfilePicture;
     this.ShowMessage("Profile image removed");
-    this.profileInfoService.removeProfilePicture();
+    this.profileInfoService.removeProfilePicture().subscribe();
   }
 
   /**
@@ -142,9 +173,9 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   removeProfileBanner(): void {
-    this.profileUser.profile_banner_url = null;
+    this.profileUser.profile_banner_url = this.defaultProfileBanner;
     this.ShowMessage("No more header for you");
-    this.profileInfoService.removeBanner();
+    this.profileInfoService.removeBanner().subscribe(); 
   }
 
   /**
@@ -172,14 +203,20 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   toggleFollow() {
-    if (this.profileUser.following) {
+    if (this.profileUser.following)
+     {
       this.profileInfoService
         .unfollowUser(this.profileUser.username)
         .subscribe();
-    } else {
+        this.profileUser.followers_count -= 1;
+    } 
+    else 
+    {
       this.profileInfoService.followUser(this.profileUser.username).subscribe();
+      this.profileUser.followers_count += 1;
     }
     this.profileUser.following = !this.profileUser.following;
+ 
   }
 
   /**
@@ -218,15 +255,19 @@ export class MainProfileComponent implements OnInit {
           this.profileUser.screen_name +
           " will now be able to follow you and read your Kweeks"
       );
+  
     } else {
       this.profileInfoService.blockUser(this.profileUser.username).subscribe();
       this.ShowMessage(
         "@" + this.profileUser.screen_name + " has been blocked"
       );
+ 
       this.profileUser.following = false;
+      this.profileUser.follows_you = false;
     }
     this.profileUser.blocked = !this.profileUser.blocked;
     this.semiBlockedMode = false;
+    
   }
 
   /**
@@ -239,9 +280,7 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Name can't be blank");
       return;
     }
-    this.profileInfoService
-      .updateProfile(this.editedScreenName, this.editedBio)
-      .subscribe(res => console.log(res));
+    this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio).subscribe();
     this.profileUser.screen_name = this.editedScreenName;
     this.profileUser.bio = this.editedBio;
     this.isEditingMode = false;
@@ -266,9 +305,11 @@ export class MainProfileComponent implements OnInit {
     const messageBox = document.getElementById("message-sticky");
     messageBox.style.display = "block";
     messageBox.style.visibility = "visible";
-    messageBox.style.transform = "translate( 0px,40px)";
+    messageBox.style.transform = "translate( 0px,48px)";
+    messageBox.style.borderTopWidth = "2px";
+    messageBox.style.borderTopColor = "black";
     await delay(5000);
-    messageBox.style.transform = "translate( 0px,-40px)";
+    messageBox.style.transform = "translate( 0px,-48px)";
     messageBox.style.visibility = "hidden";
   }
 
@@ -278,13 +319,17 @@ export class MainProfileComponent implements OnInit {
    * and Based on It request Its Information
    * @param profileInfoService DataService Parameter To Send Request getting
    * all Information about the profile user
+   * @param dialog  Dialog Service which is used to open Pop up windows
+   * 
+   * @param router Service used to Navigate To The Error Page
    *
    */
   constructor(
     private profileInfoService: DataService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ChatService:ChatService
   ) {}
 
   /**
@@ -294,17 +339,35 @@ export class MainProfileComponent implements OnInit {
   ngOnInit() {
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
-
-    //To be Added: If The Username doesn't Exist [Not Signed Up]
+    
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
         this.profileUser = userInfo;
+        
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
+        if(!this.isProfilePictureDefault())
+        {
+             this.profileUser.profile_image_url += "?dummy=" + Math.random();
+        }
+
+        if(!this.isProfileBannerDefault())
+        {
+            this.profileUser.profile_banner_url += "?dummy=" + Math.random();
+        }
       },
       err => {
-        this.router.navigateByUrl("/error");
+          //If Theis Profile User Blocked The Authorised User
+          if(err.status == "403")
+          {
+            this.profileUser = err.error;
+            this.AuthorisedIsBlocked = true;
+          }
+          else
+          {
+            this.router.navigateByUrl("/error");   
+          }
       }
     );
   }

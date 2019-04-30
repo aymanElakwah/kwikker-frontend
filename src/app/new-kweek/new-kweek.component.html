@@ -3,7 +3,13 @@
 <div class="modal-header">
     
     <div class="col-md-11" style="padding:0">
-    <h2 md-dialog-title class="modal-title" style="padding-left:37%">Compose new Kweek</h2></div>
+    <h2 md-dialog-title class="modal-title" *ngIf="!reply" 
+    style="padding-left: 28%">Compose new Kweek</h2>
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && !kweekTO" 
+    style="padding-left: 28%">Reply to {{screenname}}</h2>
+    <h2 md-dialog-title class="modal-title" *ngIf="reply && kweekTO" 
+    style="padding-left: 28%">Kweek to {{screenname}}</h2>
+  </div>
     <div class="col-md-1" style="padding:0">
     <div class="clearfix"   >
         <button type="button" class="close" (click)="onClose()">&times;</button>
@@ -13,13 +19,12 @@
   <div class="modal-body">
     <div class="row" style="padding:0; margin: 0">
       <div class="col-md-1" style="padding:0">
-          <div class="tweet-box-avatar">
-              <img src="https://www.w3schools.com/images/w3schools_green.jpg" class="user-image" >
-            </div>
+          <!-- add profile pic line here -->
       </div>
       <div class="col-md-11"style="padding:0">
           <div class="tweet-box-content">
               <div class="tweet-content">
+                  <a [routerLink] = "['/profile',username]" *ngIf="reply">@{{username}}</a>
                   <div class="form-group">
                       <textarea class="form-control" rows="5"cols="90" 
                       id="kweek" name="kweekData" [(ngModel)]="kweekData"></textarea>
@@ -54,8 +59,8 @@
           </span>
       </span>
       <span style=" float: right; margin-right:2.5%">
-        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260" 
-          (click)="addKweek()">Kweek</button>
+        <button class="btn btn-primary kweek-btn" [disabled]="!kweekData || kweekData.length>260 || disableButton" 
+          (click)="addKweek()">{{kweekButtonText}}</button>
           <span style="padding-left:4px">{{260-kweekData.length}}</span>
       </span>
       

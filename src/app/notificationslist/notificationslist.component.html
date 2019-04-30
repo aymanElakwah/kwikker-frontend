@@ -1,31 +1,32 @@
 
-         <div class="card"  style="border-color:#e6ecf0">
-              <div class="card-header "  id="notificatioCard" *ngFor="let n of notificatons_array" >
-                  <div class="row" style="padding-left:4%">
-                    <span class="notificationPics">
-                        <img [src]='n.profie_pic_URL' class=" rounded-circle float-left notificationPics" >
-                    </span>
-                    <span class="userName">
-                      <h6>{{n.screen_name}}<small>@{{n.username}}</small></h6>
-                    </span>
-                  </div>
-                  <div class="row" style="padding-left:11%">
-                    <h5 *ngIf="n.type=='LIKE'"><small> liked ❤ your kweek</small></h5>
-                    <h5 *ngIf="n.type=='REKWEEK'"><small> Rekweeked 🔁 your kweek</small></h5>
-                    <h5 *ngIf="n.type=='FOLLOW'"><small> Has Followed you! 🙈 Don't be shy and go say hi 😄</small></h5>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11">
-                        <div class="card bg-light text-dark" style="border-color:#00acee" *ngIf="n.type=='LIKE' || n.type=='REKWEEK'">
-                            <div class="card-body">{{n.kweek_text | clapKweek}}</div>
-                            
-                          </div>
-                    </div>
-                  </div>
-                  </div>
-              
+ <div class="card"  style="border-color:#e6ecf0" *ngIf="notificatons_array">
+   <div class="card-header "  id="notificatioCard" infiniteScroll (scrolled)="onScroll()" 
+   *ngFor="let n of notificatons_array; let i = index; "
+   [ngStyle]="{'backgroundColor':getColor(i)}" >
+      <div class="row" style="padding-left:4%">
+          <span class="notificationPics">
+              <a [routerLink] = "['/profile',n.username]"><img [src]='n.profile_pic_url'  class=" rounded-circle float-left notificationPics" ></a> 
+          </span>
+    
+          <span class="userName">
+             <h6>{{n.screen_name}}<small>@{{n.username}}</small></h6>
+          </span>
+      </div>
+      <div class="row" style="padding-left:11%">
+        <h5 *ngIf="n.type=='LIKE'"><small> liked ❤ your kweek</small></h5>
+        <h5 *ngIf="n.type=='REKWEEK'"><small> Rekweeked 🔁 your kweek</small></h5>
+        <h5 *ngIf="n.type=='FOLLOW'"><small> Has Followed you! 🙈 Don't be shy and go say hi 😄</small></h5>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <div class="card bg-light text-dark" style="border-color:#00acee" *ngIf="n.type=='LIKE' || n.type=='REKWEEK'">
+              <div class="card-body">{{n.kweek_text | clapKweek}}</div>              
+              </div>
+            </div>
           </div>
+        </div>        
+       </div>
           
     
     

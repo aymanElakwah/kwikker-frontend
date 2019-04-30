@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //when initializing the HomeComponent, check if the user is already logged-in and navigates him to the appropriate page.
-    if (isNull(localStorage.getItem("TOKEN"))) {
-      this.router.navigate(["/home"]);
-    } else {
-      this.router.navigate(["/home"]);
-    }
+    // if (isNull(localStorage.getItem("TOKEN"))) {
+    //   this.router.navigate(["/home"]);
+    // } else {
+    //   this.router.navigate(["/home"]);
+    // }
     //localStorage.setItem("TOKEN","123");
   }
   /**
@@ -32,6 +32,6 @@ export class HomeComponent implements OnInit {
   logOutUser() {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
   }
 }

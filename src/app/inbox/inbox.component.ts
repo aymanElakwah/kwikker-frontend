@@ -8,6 +8,8 @@ import { DataService } from '../services/data.service';
 import { Conversation } from '../model/inbox';
 import { BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash'; 
+import { MatDialogRef } from '@angular/material';
+import { ChatComponent } from '../chat/chat.component';
 /**
  * latest conversations
  */
@@ -17,28 +19,6 @@ import * as _ from 'lodash';
   styleUrls: ['./inbox.component.css']
 })
 export class InboxComponent implements OnInit {
-  user :Conversation = {
-    user: {
-      username: 'filonabil333',
-      screen_name: 'filo nabil',
-      profile_image_url: 'string',
-      following: true,
-      follows_you: true,
-      blocked: true,
-      muted: true,
-      bio:'hello'
-    },
-    last_message: {
-      id: '123',
-      created_at: '2019-03-14T20:40:36.456Z',
-      text: 'first message in this site',
-      media_url: 'string',
-      from_username:'phella',
-      to_username: ' 7mada'
-    }
-  };
-  conversations: Conversation[] =[this.user , this.user,this.user,this.user,this.user,this.user,this.user,this.user
-           ];
   conversations2 = new BehaviorSubject([]);
   lastUsername = '';
   finished=false;
@@ -49,7 +29,7 @@ export class InboxComponent implements OnInit {
    */
   constructor(private data: DataService,
               private chatService: ChatService,
-              private router: Router) { }
+              public DialogRef: MatDialogRef<ChatComponent>) { }
   /**
    * get all conversations
    */
@@ -62,7 +42,7 @@ export class InboxComponent implements OnInit {
    */
   toDirectMessage(selected: Conversation): void {
     this.chatService.setAddressee(selected.user);
-    this.router.navigate(['/chat/', {outlets : {body: ['dm']} }]);
+    this.chatService.setSection(3);
   }
   /**
    * add prefix before recent last messages
@@ -70,7 +50,7 @@ export class InboxComponent implements OnInit {
    */
   SetSenderName(list) {
     list.forEach(element => {
-      if ( element.last_message.text === '' && element.last_message.media_url !== '') {
+      if ( element.last_message.text === ' ' && element.last_message.media_url !== '') {
         if (element.last_message.from_username === localStorage.getItem('username') ) {
           element.last_message.text = 'You sent a photo' ;
         } else {
@@ -103,8 +83,17 @@ export class InboxComponent implements OnInit {
                 this.finished = true;
               }
     
-              this.conversations2.next(_.contact(currentConversation , newConversation)) ;
+              this.conversations2.next(_.concat(currentConversation , newConversation)) ;
           }
      );
+  }
+  composeMsg(){
+    this.chatService.setSection(2);
+  }
+  /**
+   * close dialog
+   */
+  exit(){
+    this.DialogRef.close();
   }
 }

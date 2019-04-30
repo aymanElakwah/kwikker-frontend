@@ -11,6 +11,9 @@ import {
 import { FormControl } from "@angular/forms";
 import { KweeksService } from "../services/kweeks.service";
 import { Overlay } from "@angular/cdk/overlay";
+import { LikesRekweeksListComponent } from "../likes-rekweeks-list/likes-rekweeks-list.component";
+import { NewKweekComponent } from "../new-kweek/new-kweek.component";
+import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -32,6 +35,7 @@ export class ReplyComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ReplyComponent>,
+    public dialogLikersRekweekersRef: MatDialogRef<LikesRekweeksListComponent>,
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     private dialog: MatDialog,
@@ -65,7 +69,8 @@ export class ReplyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
-    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    dialogConfig.panelClass = "custom-dialog-container";
+    // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
     dialogRef.componentInstance.clickedKweek = kweek;
@@ -77,12 +82,48 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
+   * close popup when another nested popup appear and open the new popup
+   * @param kweek
+   * No @returns
+   */
+  likersDialog(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
+    const dialogLikersRekweekersRef = this.dialog.open(
+      LikesRekweeksListComponent,
+      dialogConfig
+    );
+    dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
+    dialogLikersRekweekersRef.componentInstance.likers = true;
+  }
+
+  /**
+   * close popup when another nested popup appear and open the new popup
+   * @param kweek
+   * No @returns
+   */
+  rekweekersDialog(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
+    const dialogLikersRekweekersRef = this.dialog.open(
+      LikesRekweeksListComponent,
+      dialogConfig
+    );
+    dialogLikersRekweekersRef.componentInstance.clickedKweek = kweek;
+    dialogLikersRekweekersRef.componentInstance.likers = false;
+  }
+
+  /**
    * calling function to like kweek from service which has the common replies and kweeks functions
    * @param kweek
    * No @returns
    */
   like(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.like(kweek);
       this.busyRequest = false;
@@ -95,7 +136,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   unlike(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.unlike(kweek);
       this.busyRequest = false;
@@ -108,7 +149,7 @@ export class ReplyComponent implements OnInit {
    * No @returns
    */
   rekweek(kweek: Kweek): void {
-    if(!this.busyRequest) {
+    if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekFunc.rekweek(kweek);
       this.busyRequest = false;
@@ -129,11 +170,33 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete root or clickedKweek action function
    * @param kweek
    * No @returns
    */
   deleteRoot_ClickedKweek(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
+    const confirmDeleteRef = this.dialog.open(
+      ConfirmDeleteComponent,
+      dialogConfig
+    );
+    confirmDeleteRef.componentInstance.clickedKweek = kweek;
+    confirmDeleteRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.deleteActionRoot_ClickedKweek(kweek);
+      }
+    });
+  }
+
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteActionRoot_ClickedKweek(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekService.deleteKweek(kweek.id).subscribe(() => {
@@ -144,11 +207,33 @@ export class ReplyComponent implements OnInit {
   }
 
   /**
-   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * open confirm delete popUp and wait for confirmation res if true call delete reply action function
    * @param kweek
    * No @returns
    */
   deleteReply(kweek: Kweek): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "520px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = "custom-dialog-container";
+    const confirmDeleteRef = this.dialog.open(
+      ConfirmDeleteComponent,
+      dialogConfig
+    );
+    confirmDeleteRef.componentInstance.clickedKweek = kweek;
+    confirmDeleteRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.deleteActionReply(kweek);
+      }
+    });
+  }
+
+  /**
+   * calling function to delete kweek from service which has the common replies and kweeks functions
+   * @param kweek
+   * No @returns
+   */
+  deleteActionReply(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekService.deleteKweek(kweek.id).subscribe(() => {
@@ -157,5 +242,19 @@ export class ReplyComponent implements OnInit {
         this.busyRequest = false;
       });
     }
+  }
+
+  /**
+   * Open Reply popUp
+   * @param kweek  kweek to reply on
+   * No Return
+   */
+  Reply(kweek: Kweek): void {
+    const dialogRef = this.dialog.open(NewKweekComponent, {
+      panelClass: "kweekBox"
+    });
+    dialogRef.componentInstance.kweek = kweek;
+    dialogRef.componentInstance.reply = true;
+    dialogRef.componentInstance.kweekTO = false;
   }
 }

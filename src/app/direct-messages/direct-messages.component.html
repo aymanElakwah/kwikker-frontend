@@ -1,7 +1,7 @@
 <!-- chat header-->
 <div class="head row align-items-center">
   <div class="activity ">
-      <button id="back"class=" esc " [routerLink]="['/chat/', {outlets: {body:['inbox']}}]">
+      <button id="back"class=" esc " (click)="toInbox()">
           <i class="fas fa-arrow-left">
           </i>
       </button>
@@ -9,7 +9,7 @@
   <div class="title">
     <div class="row">
       <div class="frame">
-        <img class="avatar" [src]="addressee?.profile_image_url" [title]="addressee?.screen_name">
+        <img class="avatar" [src]="addressee?.profile_image_url" [title]="addressee?.screen_name" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'">
       </div>
       <div>
         <p class="screenName">
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="activity ">
-    <button class="esc">
+    <button class="esc" (click)="exit()">
       <i class="fas fa-times">
       </i>
     </button>
@@ -30,21 +30,23 @@
 </div>
 
 <!-- main body-->
-<div class="body" [ngClass]="{'body2':uploadImg}">
-  <div class="msg" *ngFor="let message of messageList">
-    <div class="row">
-    <div class="frame" [ngClass]="{'right':message.to_user === addressee}">
-      <img class="avatar" src="../../assets/kweeks/default.png">
+<div class="body" [ngClass]="{'body2':uploadImg}" >
+  <div class="msg" *ngFor="let message of messageList" >
+    <div class="row2 row" [ngClass]="{'right':message.to_username === addressee.username ,'row3':message.media_url!=null ,'big-margin':message.text?.length>100 && message.media_url != null, 'type4':message.media_url==null && message.text.length>100} ">
+    <div class="frame"  >
+      <img *ngIf="message.img" class="avatar" [src]="'http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/'+message.from_username+'profile.png'" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'">
       </div>
-      <div class="msgText">
-        hello wanna chat?
+      <div class="msgText" [ngClass]="{'msgText2':message.to_username === addressee.username , 'msgText3' :message.media_url==null && message.text?.length>100}">
+        {{message.text}}
+        <br>
+        <img *ngIf="message.media_url !== null" [src]="message.media_url" style="max-height: 100px; max-width: 200px;">
       </div>
       </div>
   </div>
 </div>
 
 <!-- create message-->
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (keydown)="enter($event)">
   <div class="new row " [ngClass]="{'new2':uploadImg}">
     <div class="col-10 my-auto">
       <div *ngIf="uploadImg" class="space" style="background-color:white; ">
@@ -56,14 +58,14 @@
         </div>
       </div>
       <div class="input-group mb-3">
-        <input  type="text" autocomplete="off" id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
+        <input (keydown)="enter($event)" type="text" autocomplete="off" #message id="message" class="form-control" formControlName="message" [ngClass]="{'input2':uploadImg}" >
       </div>
     </div>
     <div style="float:right;" class="my-auto">
       <div style="height:0px;display: none">
         <input type="file" formControlName="file" #file (change)="uploadIamge(file.files)" id="fileInput" name="fileInput" accept="image/*" />
      </div>
-      <button id="upload" *ngIf="!uploadImg" (click)="upload()">
+      <button id="upload" *ngIf="!uploadImg" (mouseover)="upload()">
         <i class="far fa-2x fa-image"></i>
       </button>
       <button id="send" (click)="send()" [disabled]="myForm.invalid && !uploadImg" [ngClass]="{'blocked': myForm.invalid && !uploadImg}">

@@ -1,0 +1,23 @@
+#popup-kweek {
+  font-size: 8px;
+}
+
+#header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #14171a;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 12px;
+  border-bottom: 2px solid #e6ecf0;
+}
+
+.image-list {
+    width: 32px;
+}
+
+.mini-user {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e6ecf0;
+    margin-left: 5px;
+}
