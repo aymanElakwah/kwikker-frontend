@@ -14,12 +14,12 @@ export class CacheInterceptor implements HttpInterceptor {
      * all cached requests in the website
      */
     requestsUrl = [
-      //  environment.base+'interactions/blocks',
-      //  environment.base+'interactions/mutes'
+        environment.base+'interactions/blocks',
+        environment.base+'interactions/mutes'
 
     ];
     requestsUrlWithParams = [
-       /* { 
+        { 
             url:environment.base+'kweeks/timelines/profile',
             params: localStorage.getItem('username')   
         },
@@ -31,7 +31,7 @@ export class CacheInterceptor implements HttpInterceptor {
             url:environment.base+'user/profile',
             params: localStorage.getItem('username') 
         }
-        */
+        
     ];
     cachedRequest = false;
     /**
@@ -57,7 +57,7 @@ export class CacheInterceptor implements HttpInterceptor {
                 this.cachedRequest = true;
             }
         });
-        if ( req.method !== 'GET' || !this.cachedRequest ) {
+        if ( req.method !== "GET" || !this.cachedRequest ) {
        return next.handle(req);
     }
     const cachedResponse: HttpResponse<any> = this.HttpCacheService.get(req.url);
