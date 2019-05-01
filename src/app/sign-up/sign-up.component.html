@@ -15,8 +15,7 @@
         <img src="../../assets/main/twitter.png" id="icon" alt="User Icon" />
       </div>
       
-      <h2 class="fs-title">Create your Email</h2>
-      <h3 class="fs-subtitle">This is step 1</h3>
+      <h2 class="fs-title">Create your Account</h2>
       <input type="text" name="username" placeholder="Username" #username="ngModel" [(ngModel)]="userName" maxlength="50" pattern="[A-Za-z0-9._%+-]{2,50}" required/>
           <div  *ngIf="username.invalid && username.touched" class="msg alert alert-danger " style="width: 95%" role="alert">
             <p class="alertMsg">Username must be entered for registeration, it should contain more than one character and has no spaces.</p>
@@ -45,25 +44,25 @@
   
     <fieldset class="fs2">
       <h2 class="fs-title">Basic Info</h2>
-      <input type="text" name="screenname" placeholder="Screen-name" #screenname="ngModel" [(ngModel)]="screenName"  maxlength="50" pattern="[a-z0-9._%+-]{2,50}" required/>
+      <input type="text" name="screenname" placeholder="Screen-name" #screenname="ngModel" [(ngModel)]="screenName"  maxlength="50" pattern="[A-Za-z0-9._%+-]{2,50}" required/>
           <div  *ngIf="screenname.invalid && screenname.touched" class="msg alert alert-danger " role="alert">
             <p class="alertMsg">Screen name invalid.</p>
           </div>
 <!-- This code is copied from https://material.angular.io/components/datepicker/examples -->
-      <mat-form-field class="datepicker">
+      <!-- <mat-form-field class="datepicker">
         <label class="labelForBD">Please select your Birthdate  </label>
         <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" #birth_date="ngModel" [(ngModel)]="birthdate" name="datepicker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      </mat-form-field> -->
   <!-- it ends here -->
-  
+<!--   
      <div  *ngIf="birth_date.invalid && birth_date.touched" class="msg alert alert-danger " role="alert">
       <p class="alertMsg">Not a valid Date Pattern!</p>
     </div>
       <button type="submit" name="previous1" class="btn btn-primary action-button"  (click)="previousOne()" >Previous</button>
       <button type="submit" name="Next2" class="btn btn-primary action-button" (click)="Submit(submitForm)" [disabled]="screenname.invalid ||
-                                                                                                                  birth_date.invalid ">Submit</button>                                                                                                       
+                                                                                                                  birth_date.invalid ">Submit</button> -->
     </fieldset>
     
     <fieldset class="fs3">

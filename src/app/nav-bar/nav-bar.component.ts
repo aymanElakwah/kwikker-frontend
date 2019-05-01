@@ -24,7 +24,6 @@ export class NavBarComponent implements OnInit {
   filterBy:string;
   public nav: any;
   public toShow: boolean;
-
   constructor(private dialog: MatDialog,
               private data: DataService, 
               private router: Router
@@ -36,7 +35,6 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.userName =  localStorage.getItem('username');
-    console.log(this.userName);
     if (isNull(this.userName))
     {
       
@@ -104,7 +102,10 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(['/search'] , { queryParams: { filterBy: this.filterBy } });
     }
     this.data.searchUsers(this.filterBy).subscribe(
-      list => { this.users = list; }
+      list => { this.users = list; 
+        this.users = this.users.slice(0,5);
+      }
+
 
     );
   }
