@@ -108,53 +108,54 @@
 //   });
 // });
 
-import { TestBed, ComponentFixture, async } from "@angular/core/testing";
-import { Observable, from, of, empty } from "rxjs";
-import { DataService } from "../services/data.service";
-import { MatDialog } from '@angular/material';
-import {SignUpComponent} from './sign-up.component';
-import { By } from '@angular/platform-browser';
-import { ControlContainer, FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
-import { DebugElement } from '@angular/core';
+// import { TestBed, ComponentFixture, async } from "@angular/core/testing";
+// import { Observable, from, of, empty } from "rxjs";
+// import { DataService } from "../services/data.service";
+// import { MatDialog } from '@angular/material';
+// import {SignUpComponent} from './sign-up.component';
+// import { By } from '@angular/platform-browser';
+// import { ControlContainer, FormsModule } from '@angular/forms';
+// import { RouterTestingModule } from '@angular/router/testing';
+// import { Router } from '@angular/router';
+// import { DebugElement } from '@angular/core';
 
-//Before anything else, test that component is created!
-describe("SignupComponent", () => {
-  let component: SignUpComponent;
-  let fixture: ComponentFixture<SignUpComponent>;
-  let router: Router;
-  let dataService: DataService;
- 
+// //Before anything else, test that component is created!
+// describe("SignupComponent", () => {
+//   let component: SignUpComponent;
+//   let fixture: ComponentFixture<SignUpComponent>;
+//   let router: Router;
+//   let dataService: DataService;
+//   let cool:        HTMLElement;
   
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([
-        {path: 'signup' , component: SignUpComponent
-        }]),FormsModule
-      ],
-      declarations: [ SignUpComponent,
-       ],
-    })
-    .compileComponents();
-  }));
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       imports: [
+//         RouterTestingModule.withRoutes([
+//         {path: 'signup' , component: SignUpComponent
+//         }]),FormsModule
+//       ],
+//       declarations: [ SignUpComponent],
+//     });
+//     fixture = TestBed.createComponent(SignUpComponent);
+//    component = fixture.componentInstance; // BannerComponent test instance
+//     cool = fixture.nativeElement.querySelector('progress');
+//   });
 
-  router = TestBed.get(Router);
+//   router = TestBed.get(Router);
   
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SignUpComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    let mockservice;
-   // const comp = new SignUpComponent(dataService,router);
-  //  mockservice = jasmine.createSpyObj(['route']);
-  });
+//   // beforeEach(() => {
+//   //   fixture = TestBed.createComponent(SignUpComponent);
+//   //   component = fixture.componentInstance;
+//   //   fixture.detectChanges();
+//   //   let mockservice;
+//   //  // const comp = new SignUpComponent(dataService,router);
+//   // //  mockservice = jasmine.createSpyObj(['route']);
+//   // });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
 /*
 describe("SignupComponent", () => {
   let dataService: DataService;
