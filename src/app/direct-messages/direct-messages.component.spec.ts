@@ -14,7 +14,7 @@ describe('DirctMessagesComponent', () => {
   let component: DirectMessagesComponent;
   let fixture: ComponentFixture<DirectMessagesComponent>;
   let fb = new FormBuilder;
-  let ds = new DataService(null,null);
+  let ds = new DataService(null,null,null);
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports:[FormsModule , ReactiveFormsModule]
@@ -28,9 +28,14 @@ describe('DirctMessagesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  /*
+  
   it('should call postMedia' ,()=>{
-    spyOn(ds,'postMedia').and.returnValue(of('1234'));
+    let spy = spyOn(ds, "postMedia").and.callFake(() => {
+      return of('1234');
+    });
+    let spy2 = spyOn(ds, "createMessage").and.callFake(() => {
+      return of('1234');
+    });
     const message1={
     from_username: 'ahly',
     to_username: 'zamalek',
@@ -55,6 +60,6 @@ describe('DirctMessagesComponent', () => {
       muted: false,
       bio: 'empty'};
     component.send();
-    expect(ds.postMedia).toHaveBeenCalled();
-  })*/
+    expect(spy).toHaveBeenCalled();
+  })
 });
