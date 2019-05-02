@@ -139,11 +139,18 @@ export class NavBarComponent implements OnInit {
   onResize(event){
     if(event.target.innerWidth <=765 )
     {
-      //small devices
-      console.log("small device", event.target.innerWidth );
-      console.log("To show is:" , this.toShow)
-      //just stroe that value
-      this.screenWidth = event.target.innerWidth;
+      if(this.screenWidth > 765)
+      {
+       this.nav.className = 'hide';
+       this.toShow = true;
+      }
+      if(this.screenWidth <= 765)
+      {
+       this.nav.className = 'hide';
+       this.toShow = true;
+      }
+      
+     this.screenWidth = event.target.innerWidth;
     }else{
         //larger deveice, check the latest value
         console.log("large device", event.target.innerWidth );
