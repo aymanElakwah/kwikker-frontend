@@ -29,14 +29,13 @@
             [(ngModel)]="email" name="email"  >
             <small id="emailHelp" class="form-text text-muted">Email will not be publicly displayed.</small>
           </div>
-
+            
           <div>
               <button class="btn btn-primary kweek-btn" style="margin-left: 20% "
               (click)="SaveChanges()" 
-              [disabled]="( oldEmail == email && userName == oldUserName ) || oldPassword.length == 0 ">Save Changes</button>
+              [disabled]=" oldEmail != email || userName != oldUserName || (oldPassword.length == 0 )">Save Changes</button>
             </div>
-
-            
+           
 
      
     </div>
