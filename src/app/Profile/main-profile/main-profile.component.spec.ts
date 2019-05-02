@@ -4,6 +4,8 @@ import { from } from "rxjs";
 import { User } from "../../model/user";
 import { element } from '@angular/core/src/render3';
 import { DebugElement } from '@angular/core';
+import { TitleService } from 'src/app/services/title.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -24,10 +26,11 @@ describe('MainProfileComponent', () => {
  };
 
  beforeEach(() => {
-   dataService = new DataService(null, null);
+   dataService = new DataService(null, null,null);
    component = new MainProfileComponent(
      dataService,
      route,
+     null,
      null,
      null,
      null

@@ -17,6 +17,7 @@ import { BlockedMutedUser } from "../model/bloked-muted-users";
 import { $ } from "protractor";
 import { CacheService } from "./cache.service";
 import { Message } from "../model/message";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -31,7 +32,7 @@ export class DataService {
    *
    * @param http component to send requests
    */
-  constructor(private http: HttpClient, private cacheService: CacheService) {}
+  constructor(private http: HttpClient, private cacheService: CacheService,private router:Router) {}
 
   /**
    * get request to get All information about certain user
@@ -615,7 +616,9 @@ export class DataService {
           break;
         case 401:
           console.error("unauthorized");
-          localStorage.removeItem("Token");
+          localStorage.removeItem("TOKEN");
+          localStorage.removeItem("username");
+          this.router.navigate(["/"]);
           break;
       }
       console.error(

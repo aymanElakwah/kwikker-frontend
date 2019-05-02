@@ -8,7 +8,7 @@ describe('SettingsComponent', () => {
 
 
   beforeEach(() => {
-    component = new SettingsComponent();
+    component = new SettingsComponent(null);
    
   });
 

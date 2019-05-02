@@ -72,11 +72,19 @@ export class AccountComponent implements OnInit {
       (response =>{
         this.res = response
         if (response.token) {
-          this.giveAlert("Username Changes Sucessfuly");
+          
           localStorage.setItem('TOKEN', response.token);
          localStorage.setItem('username', this.userName);
          this.oldUserName = this.userName;
          this.ngOnInit();
+         const dialogREF = this.dialog.open(AlertComponentComponent,{
+          height: '150px',
+          width: '400px',
+         });
+         dialogREF.componentInstance.meesage = "Username Changes Sucessfuly";
+         dialogREF.afterClosed().subscribe(result => {
+          window.location.reload();  
+        });
         }
       },
       err=>{ 

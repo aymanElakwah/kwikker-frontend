@@ -30,7 +30,7 @@ describe('MiniProfileComponent', () => {
   };
 
   beforeEach(() => {
-    dataService = new DataService(null, null);
+    dataService = new DataService(null, null,null);
     component = new MiniProfileComponent(
       dataService,
       route,

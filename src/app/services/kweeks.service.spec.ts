@@ -15,7 +15,7 @@ describe("kweekService", () => {
   // let mockDataService;
   // let mockActivatedRoute;
   beforeEach(() => {
-    dataService = new DataService(null, null);
+    dataService = new DataService(null, null,null);
     kweekS = new KweeksService(dataService);
     // Test objects to unit test kweeks before each unit test
     KWEEKS = [

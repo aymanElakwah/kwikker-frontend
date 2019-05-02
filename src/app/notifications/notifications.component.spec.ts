@@ -9,7 +9,7 @@ describe('NotificationsComponent', () => {
 
 
   beforeEach(() => {
-    component = new NotificationsComponent();
+    component = new NotificationsComponent(null);
     
   });
 
