@@ -33,7 +33,7 @@ input:focus{
     font-size: 14px;
     line-height: 20px;
     padding: 6px 16px;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-weight: bold;
     white-space: nowrap;
     text-transform: none;

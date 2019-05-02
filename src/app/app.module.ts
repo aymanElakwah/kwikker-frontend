@@ -35,6 +35,7 @@ import { MinimaLight } from '@alyle/ui/themes/minima';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { KweeksModule } from './kweeks/kweeks.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 
 
@@ -77,7 +78,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
                {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
-               { provide: LY_THEME, useClass: MinimaLight, multi: true } 
+               { provide: LY_THEME, useClass: MinimaLight, multi: true }
             ],
   bootstrap: [AppComponent]
 })
