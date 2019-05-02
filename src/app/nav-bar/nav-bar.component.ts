@@ -42,7 +42,7 @@ export class NavBarComponent implements OnInit {
       this.userName = "username"; 
     }
     this.nav =  document.querySelector('.myNavBar');
-    this.toShow = false;
+    this.toShow = true;
    this.screenWidth = 1000;
     
   }
@@ -66,7 +66,8 @@ export class NavBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.toShow = false;
+      this.nav.className = 'show';
+      this.toShow = true;
     });
 
    
@@ -85,7 +86,8 @@ export class NavBarComponent implements OnInit {
    */
     dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
-    this.toShow = false;
+    this.nav.className = 'show';
+    this.toShow = true;
   });
 
   }
