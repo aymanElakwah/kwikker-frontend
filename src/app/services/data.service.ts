@@ -615,7 +615,7 @@ export class DataService {
           break;
         case 401:
           console.error("unauthorized");
-          localStorage.removeItem("Token");
+          localStorage.removeItem("TOKEN");
           break;
       }
       console.error(
