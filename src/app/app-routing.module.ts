@@ -84,7 +84,7 @@ const routes: Routes = [
   {path: 'reset_password/:code', component: confirmPassword,canActivate: [CanDeactivateTeam]},
   {path: 'forget_password', component: ResetPasswordComponent,canActivate: [CanDeactivateTeam]},
   {path: 'kweeks', component: KweekComponent,canActivate: [CanActivateTeam]}, 
-  {path: 'error', component: ErrorPageComponent},
+  {path: 'error', component: ErrorPageComponent,canActivate:[CanActivateTeam]},
   {path: 'settings', component: SettingsComponent ,canActivate: [CanActivateTeam],
       children: [
         {path: '' , redirectTo: 'account' , pathMatch: 'full'},
@@ -100,7 +100,7 @@ const routes: Routes = [
     {path: 'mentions', component: MentionslistComponent}
   ]},
   
-  {path: '**', component: ErrorPageComponent},
+  {path: '**', component: ErrorPageComponent,canActivate:[CanActivateTeam]},
   
 ];
 

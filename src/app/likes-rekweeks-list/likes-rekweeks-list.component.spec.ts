@@ -6,7 +6,7 @@ describe("LikesRekweeksListComponent", () => {
   let component: LikesRekweeksListComponent;
   let dataService: DataService;
   beforeEach(() => {
-    dataService = new DataService(null, null);
+    dataService = new DataService(null, null,null);
     component = new LikesRekweeksListComponent(dataService);
   });
   describe("ngOnInit", () => {

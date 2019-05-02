@@ -14,7 +14,7 @@ describe('DirctMessagesComponent', () => {
   let component: DirectMessagesComponent;
   let fixture: ComponentFixture<DirectMessagesComponent>;
   let fb = new FormBuilder;
-  let ds = new DataService(null,null);
+  let ds = new DataService(null,null,null);
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports:[FormsModule , ReactiveFormsModule]
