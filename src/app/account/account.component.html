@@ -33,7 +33,7 @@
           <div>
               <button class="btn btn-primary kweek-btn" style="margin-left: 20% "
               (click)="SaveChanges()" 
-              [disabled]=" oldEmail != email || userName != oldUserName || (oldPassword.length == 0 )">Save Changes</button>
+              [disabled]=" (oldEmail == email && userName == oldUserName) || (oldPassword.length == 0 )">Save Changes</button>
             </div>
            
 
@@ -44,7 +44,7 @@
       </div>
       <div class="col-md-3" style="padding-left:0;">
         <label for="newpassword" style="float:right; margin-top:30%"><h5>New Password</h5></label>
-        <label for="verfpassword" style="float:right; margin-top:20%"><h5>Verify Password</h5></label>
+        <label for="verfpassword" style="float:right; margin-top:80%"><h5>Verify Password</h5></label>
         
       </div>
       <div class="col-md-5" style="padding:0; padding-left:2% ">  
@@ -53,7 +53,9 @@
                 <input type="password" class="form-control" id="newpassword" [(ngModel)]="newPassword" 
                 name="newPassword" #NEWpassword="ngModel"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
                 title="Password must be at least 8 characters and contains capital letters, small letters and numbers.">
-                
+                <small id="emailHelp" class="form-text text-muted">Password must be at least 8 </small>
+                <small id="emailHelp" class="form-text text-muted">characters and contains capital</small>
+                <small id="emailHelp" class="form-text text-muted">letters, small letters and numbers.</small>
               </div>
 
               <div class="form-group" style="padding-top: 5.5%">
