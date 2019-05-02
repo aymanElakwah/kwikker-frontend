@@ -80,10 +80,47 @@ describe('workspace-project App', () => {
   });
   */
   it('Settings', () => {
+    let username1 = 'uname1';
+    let password1 = 'Password1';
+
+    let username2 = 'uname1username';
+    let password2 = 'Password2';
+    let email2 = 'mail2@mail.com';
+
     utility.login(user1, pass1);
-    page.getDropDownMenuButton();
+
+    page.getDropDownMenuButton().click();
     page.getSettingsButton().click();
-    
+    page.getCurrentPasswordField().sendKeys(pass1);
+    page.getUsernameSettingsField().sendKeys(username2);
+    page.getEmailSettingsField().sendKeys(email2);
+    utility.browserPause(1000);
+    page.getSaveChangesSettingsButton().click();
+    page.getNewPasswordField().sendKeys(password2);
+    page.getVerifyPasswordField().sendKeys(password2);
+    utility.browserPause(1000);
+    page.getChangePasswordSettingsButton().click();
+
+    utility.logout();
+    utility.login(username2, password2);
+
+    let email = 'mail@mail.com';
+
+    page.getDropDownMenuButton().click();
+    page.getSettingsButton().click();
+    page.getCurrentPasswordField().sendKeys(password2);
+    page.getUsernameSettingsField().sendKeys(user1);
+    page.getEmailSettingsField().sendKeys(email);
+    utility.browserPause(1000);
+    page.getSaveChangesSettingsButton().click();
+    page.getNewPasswordField().sendKeys(pass1);
+    page.getVerifyPasswordField().sendKeys(pass1);
+    utility.browserPause(1000);
+    page.getChangePasswordSettingsButton().click();
+
+    utility.logout();
+    utility.login(user1, pass1);
+    utility.logout();
   });
 
   /*

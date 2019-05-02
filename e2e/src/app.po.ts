@@ -63,6 +63,26 @@ export class AppPage {
   getWriteKweekField(){
     return element(by.xpath('//textarea[@class = "form-control ng-untouched ng-pristine ng-valid"]'));
   }
+
+  getCurrentPasswordField(){
+    return element(by.xpath('//input [@id = "currentpassword"]'));
+  }
+
+  getUsernameSettingsField(){
+    return element(by.xpath('//input [@id = "username"]'));
+  }
+
+  getEmailSettingsField(){
+    return element(by.xpath('//input [@id = "email"]'));
+  }
+
+  getNewPasswordField(){
+    return element(by.xpath('//input [@id = "newpassword"]'));
+  }
+
+  getVerifyPasswordField(){
+    return element(by.xpath('//input [@id = "verfpassword"]'));
+  }
   //---------Button-----------
   getTweetToDropDown(){
     return element(by.tagName('p'));
@@ -107,7 +127,15 @@ export class AppPage {
   getSettingsButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-cog"]'));
   }
-  
+
+  getSaveChangesSettingsButton(){
+    return element(by.buttonText('Save Changes'));
+  }
+
+  getChangePasswordSettingsButton(){
+    return element(by.buttonText('Change Password'));
+  }
+
   getLogoutButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-arrow-left"]'));
   }
