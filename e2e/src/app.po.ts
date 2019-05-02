@@ -81,11 +81,7 @@ export class AppPage {
   }
 
   getKweekButton(){
-    return element(by.xpath('//button [@class = "btn btn-primary kweek-btn"]'));
-  }
-
-  getSecondKweekButton(){
-    return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
+    return element(by.buttonText('Kweek'));
   }
 
   getRekweekButton(x){
@@ -108,6 +104,10 @@ export class AppPage {
     return element(by.xpath('//span [@class = "glyphicon glyphicon-user"]'));
   }
 
+  getSettingsButton(){
+    return element(by.xpath('//span [@class = "glyphicon glyphicon-cog"]'));
+  }
+  
   getLogoutButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-arrow-left"]'));
   }
@@ -340,7 +340,7 @@ export class utilityFunctions{
   browserPause(x) {
     return browser.sleep(x);
   }
-
+  
   getElementWithText(selector, text){
     return element(by.cssContainingText(selector, text));
   }

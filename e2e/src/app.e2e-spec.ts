@@ -11,10 +11,7 @@ describe('workspace-project App', () => {
   var pass1 = "123456";
   var user2 = "zamalek";
   var pass2 = "password";
-
-
-
-
+/*
   it('Sign up', () =>{
     utility.navigateToSignUp();
     utility.browserPause(100);
@@ -49,11 +46,11 @@ describe('workspace-project App', () => {
 
   it('Kweek', () => {
     utility.login(user1, pass1);
-    let kweek = "E2E 7";
+    let kweek = "E2E";
     page.getKweekButton().click();
     page.getWriteKweekField().sendKeys(kweek);
     utility.browserPause(1000);
-    page.getSecondKweekButton().click();
+    page.getKweekButton().click();
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
@@ -81,9 +78,15 @@ describe('workspace-project App', () => {
     expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
     utility.logout();
   });
+  */
+  it('Settings', () => {
+    utility.login(user1, pass1);
+    page.getDropDownMenuButton();
+    page.getSettingsButton().click();
+    
+  });
 
-
-
+  /*
   it('Open profile', function() {
     page.navigateToHome();
     page.browserPause(1000);
@@ -93,21 +96,18 @@ describe('workspace-project App', () => {
     expect(page.getProfileName().getText()).toEqual('ahly');
   });
 
-
   it('Open profile, view my kweeks', function() {
     page.navigateToKweeks('ahly');
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahly');
   });
 
-
 ////////////Following-Section///////////////////
-
-it('Open profile, view my following', function() {
-  page.navigateToFollowing('ahly');
-  page.browserPause(1000);
-  expect(page.getProfileName().getText()).toEqual('ahly');
-});
+  it('Open profile, view my following', function() {
+    page.navigateToFollowing('ahly');
+    page.browserPause(1000);
+    expect(page.getProfileName().getText()).toEqual('ahly');
+  });
 
   it('Open profile, view my following, Unfollow someone', function() {
     page.getMyFollowingButton().click();
@@ -115,12 +115,10 @@ it('Open profile, view my following', function() {
     expect(page.getMyFollowButton().getText()).toEqual('Follow');
   });
 
-
   it('In following, follow someone', function() {
     page.getMyFollowButton().click();
     expect(page.getMyFollowingButton().getText()).toEqual('');
   });
-
 
   it('Use drop button, Mute him', function() {
     page.getMyDropDownButton().click();
@@ -129,13 +127,11 @@ it('Open profile, view my following', function() {
     expect(page.getMuteButton().getText()).toEqual('Unmute @deglascreenname');
   });
 
-
   it('Use drop button, Unmute him', function() {
     page.getMuteButton().click();
     page.getMyDropDownButton().click();
     expect(page.getMuteButton().getText()).toEqual('Mute @deglascreenname');
   });
-
 
   it('Use drop button, Block him', function() {
     page.getBlockButton().click();
@@ -149,140 +145,116 @@ it('Open profile, view my following', function() {
     expect(page.getMyFollowButton().getText()).toEqual('Follow');
   });
 
-it('View my following, Unfollow someone, And open his profile to check you unfollowed him', function() {
-  page.getMyFollowingButton().click();
-  var name = page.getHisProfileName().getText();
-  page.navigateToProfile(name);
-  page.browserPause(1000);
-  expect(page.getHisFollowButton().getText()).toEqual('Follow');
-});
-
-
-
-
+  it('View my following, Unfollow someone, And open his profile to check you unfollowed him', function() {
+    page.getMyFollowingButton().click();
+    var name = page.getHisProfileName().getText();
+    page.navigateToProfile(name);
+    page.browserPause(1000);
+    expect(page.getHisFollowButton().getText()).toEqual('Follow');
+  });
   ////////////Followers-Section///////////////////
-
-
   it('Open profile, view my followers', function() {
     page.navigateToFollowers('ahly');
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
   });
-
-
   ////////////likes-Section///////////////////
-
-
-
   it('Open profile, view my likes', function() {
     page.navigateToLikes('ahly');
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
   });
-*/
-//////////////////Edit-Section///////////////////////
-
-it('Edit profile, change profile photo.', function() {
-  //var currentImage = Storage.getItem('E:/youssef photos/PHOTOS/AAFR9688.JPG');
-  page.getEditButton().click();
-  page.getChangeProfilePictureButton().click();
-  page.browserPause(1000);
-  page.getChangeProfilePictureItems(0).click();
-  page.browserPause(1000);
-  //page.getSelectItemButton().click();
-  //page.browserPause(1000);
-  page.getSelectItemButton().sendKeys('E:/youssef photos/PHOTOS/AAFR9688.JPG');
-  page.getSelectItemButton().click();
-  page.browserPause(1000);
+  //////////////////Edit-Section///////////////////////
+  it('Edit profile, change profile photo.', function() {
+    //var currentImage = Storage.getItem('E:/youssef photos/PHOTOS/AAFR9688.JPG');
+    page.getEditButton().click();
+    page.getChangeProfilePictureButton().click();
+    page.browserPause(1000);
+    page.getChangeProfilePictureItems(0).click();
+    page.browserPause(1000);
+    //page.getSelectItemButton().click();
+    //page.browserPause(1000);
+    page.getSelectItemButton().sendKeys('E:/youssef photos/PHOTOS/AAFR9688.JPG');
+    page.getSelectItemButton().click();
+    page.browserPause(1000);
   });
 
+  it('Edit profile, change screen name.', function() {
+    page.browserPause(5000);
+    //page.browser(page.getEditButton());
+    page.getEditButton().click();
+    page.getScreenName().clear();
+    page.getScreenName().sendKeys('test');
+    page.getSaveChangesButton().click();
+    expect(page.getProfileName().getText()).toEqual('test');
+  });
 
-   it('Edit profile, change screen name.', function() {
-     page.browserPause(5000);
-     //page.browser(page.getEditButton());
-     page.getEditButton().click();
-     page.getScreenName().clear();
-     page.getScreenName().sendKeys('test');
-     page.getSaveChangesButton().click();
-     expect(page.getProfileName().getText()).toEqual('test');
-   });
+  it('Edit profile, change bio.', function() {
+    page.getEditButton().click();
+    page.getBio().clear();
+    page.getBio().sendKeys('test');
+    page.getSaveChangesButton().click();
+    expect(page.getProfileBio().getText()).toEqual('test');
+  });
 
-   it('Edit profile, change bio.', function() {
-     page.getEditButton().click();
-     page.getBio().clear();
-     page.getBio().sendKeys('test');
-     page.getSaveChangesButton().click();
-     expect(page.getProfileBio().getText()).toEqual('test');
-   });
+  it('Edit profile, change bio ,change screen name then cancel changes.', function() {
+    page.getEditButton().click();
+    page.getScreenName().clear();
+    page.getScreenName().sendKeys('no test');
+    page.getBio().clear();
+    page.getScreenName().sendKeys('no test');
+    page.getCancelChangesButton().click();
+    expect(page.getProfileName().getText()).toEqual('test');
+    expect(page.getProfileName().getText()).toEqual('test');
+  });
 
-   it('Edit profile, change bio ,change screen name then cancel changes.', function() {
-     page.getEditButton().click();
-     page.getScreenName().clear();
-     page.getScreenName().sendKeys('no test');
-     page.getBio().clear();
-     page.getScreenName().sendKeys('no test');
-     page.getCancelChangesButton().click();
-     expect(page.getProfileName().getText()).toEqual('test');
-     expect(page.getProfileName().getText()).toEqual('test');
-   });
+  /////////////////Follow--Unfollow--Mute--Unmute--Block--Unblock///////////////////////////
+  it('Follow someone', function() {
+    page.navigateToProfile('zamalek');
+    page.getHisFollowButton().click();
+    page.browserPause(1000);
+    expect(page.getHisFollowingButton().getText()).toEqual('');
+  });
 
-/////////////////Follow--Unfollow--Mute--Unmute--Block--Unblock///////////////////////////
+  it('Use drop button in someones profile, Mute him', function() {
+    page.getHisDropDownButton().click();
+    page.getMuteButton().click();
+    page.getHisDropDownButton().click();
+    expect(page.getMuteButton().getText()).toEqual('Unmute @zamalek');
+  });
 
-   it('Follow someone', function() {
-     page.navigateToProfile('zamalek');
-     page.getHisFollowButton().click();
-     page.browserPause(1000);
-     expect(page.getHisFollowingButton().getText()).toEqual('');
-   });
+  it('Use drop button in someones profile, Unmute him', function() {
+    page.getMuteButton().click();
+    page.getHisDropDownButton().click();
+    expect(page.getMuteButton().getText()).toEqual('Mute @zamalek');
+  });
 
-   it('Use drop button in someones profile, Mute him', function() {
-     page.getHisDropDownButton().click();
-     page.getMuteButton().click();
-     page.getHisDropDownButton().click();
-     expect(page.getMuteButton().getText()).toEqual('Unmute @zamalek');
-   });
+  it('Block him', function() {
+    page.getBlockButton().click();
+    expect(page.getBlockedButton().getText()).toEqual('Blocked');
+  });
 
-   it('Use drop button in someones profile, Unmute him', function() {
-     page.getMuteButton().click();
-     page.getHisDropDownButton().click();
-     expect(page.getMuteButton().getText()).toEqual('Mute @zamalek');
-   });
+  it('Unblock someone ,Check you are not following him.', function() {
+    page.getBlockedButton().click();
+    page.getHisDropDownButton().click();
+    expect(page.getBlockButton().getText()).toEqual('Block @zamalek');
+    expect(page.getHisFollowButton().getText()).toEqual('Follow');
+  });
 
+  it('Unfollow someone', function() {
+    page.getHisFollowButton().click();
+    page.getHisFollowingButton().click();
+    expect(page.getHisFollowButton().getText()).toEqual('Follow');
+  });
 
-   it('Block him', function() {
-     page.getBlockButton().click();
-     expect(page.getBlockedButton().getText()).toEqual('Blocked');
-   });
+  //////////////Profile-Trends/////////////
+  it('Profile trends.', function() {
+    page.getProfileTrends().click();
+    page.browserPause(1000);
+    expect(page.getProfileBio().getText()).toEqual('test');
+  });
 
-   it('Unblock someone ,Check you are not following him.', function() {
-     page.getBlockedButton().click();
-     page.getHisDropDownButton().click();
-     expect(page.getBlockButton().getText()).toEqual('Block @zamalek');
-     expect(page.getHisFollowButton().getText()).toEqual('Follow');
-   });
-
-
-   it('Unfollow someone', function() {
-     page.getHisFollowButton().click();
-     page.getHisFollowingButton().click();
-     expect(page.getHisFollowButton().getText()).toEqual('Follow');
-   });
-
-
-//////////////Profile-Trends/////////////
-it('Profile trends.', function() {
-  page.getProfileTrends().click();
-  page.browserPause(1000);
-
-  expect(page.getProfileBio().getText()).toEqual('test');
-});
-
-
-
-//////////Message/////////////////
-
-
-
+  //////////Message/////////////////
   it('Message someone, send a text message', function() {
     page.navigateToProfile('zamalek')
     page.getMessageButton().click();
@@ -294,10 +266,7 @@ it('Profile trends.', function() {
     expect(page.getMessageButton().getText()).toEqual('Message');
   });
 
-
-
-////////////Search/////////////////////////
-
+  ////////////Search/////////////////////////
   it('Search for a user, select from results suggested in search field.', function() {
     page.getHomeSearchBox().sendKeys('zamalek');
     page.browserPause(1000);
@@ -318,28 +287,16 @@ it('Profile trends.', function() {
   //  expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
   });
 
-
-
-  // it('View notifications, ALL section', function() {
-  //   page.navigateToNotifications();
-  //   page.browserPause(1000);
-  //   expect(page.getAllButton().getText()).toEqual('All');
-  // });
-/*
+  it('View notifications, ALL section', function() {
+    page.navigateToNotifications();
+    page.browserPause(1000);
+    expect(page.getAllButton().getText()).toEqual('All');
+  });
   it('View notifications, ALL section, for user having rekweek or like', function() {
     page.browserPause(1000);
     page.getNotificationCard().getText().then(function(text) {
       expect(text.length).toEqual(0)
     });
   });
-
-  it('Logout', function() {
-    page.navigateToHome();
-    page.browserPause(1000);
-    page.getLogoutButton().click();
-    expect(page.getSignUpTitle().getText()).toEqual('EMAIL SETUP');
-  });
-
-*/
-
+  */
 });

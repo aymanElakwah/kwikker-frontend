@@ -10,10 +10,13 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    // 'chromeOptions': {
-    //   'args': ['--disable-web-security', '--user-data-dir=~/.e2e-chrome-profile']
-    // }
+    // 'browserName': 'firefox',
   },
+  // multiCapabilities: [{
+  //   'browserName': 'firefox'
+  // }, {
+  //   'browserName': 'chrome'
+  // }],
   directConnect: true,
   baseUrl: 'http://localhost:4200',
   framework: 'jasmine',
@@ -23,11 +26,9 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
-    browser.manage().window().setSize(1600, 1000);
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-    browser.manage().window().maximize();
   }
 };
