@@ -11,7 +11,7 @@
                                 <img src="../../assets/main/twitter.png" alt="Main icon" id="icon">
                         </a>
                 </div>
-                        <div class="collapse navbar-collapse myNavBar hide" >
+                        <div class="collapse myNavBar show" (window:resize)="onResize($event)">
                                 <ul class="nav navbar-nav navbar-left ">
                                         <li> <a href="home"><span class=" glyphicon glyphicon-home"></span>&nbsp; Home</a></li>
                                         <li> <a href="notifications"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notifications</a></li>
