@@ -24,6 +24,7 @@ export class NavBarComponent implements OnInit {
   filterBy:string;
   public nav: any;
   public toShow: boolean;
+  public screenWidth: number;
   constructor(private dialog: MatDialog,
               private data: DataService, 
               private router: Router
@@ -42,7 +43,7 @@ export class NavBarComponent implements OnInit {
     }
     this.nav =  document.querySelector('.myNavBar');
     this.toShow = false;
-   
+   this.screenWidth = 1000;
     
   }
 
@@ -65,6 +66,7 @@ export class NavBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.toShow = false;
     });
 
    
@@ -81,6 +83,11 @@ export class NavBarComponent implements OnInit {
    * Function for closing the dialog and displaying a msg 
    * 
    */
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    this.toShow = false;
+  });
+
   }
    /**
    *
@@ -113,18 +120,47 @@ export class NavBarComponent implements OnInit {
    * toggleNav
    */
   public toggleNav() {
-    if (this.toShow == true)
+   // screen.width
+    if (this.toShow == false)
     {
+
        this.nav.className = 'hide';
-       this.toShow = false;
+       this.toShow = true;
        return;
     }
     else {
        this.nav.className = 'show';
-       this.toShow = true;
+       this.toShow = false;
       return;
     }
   }
-  
+  onResize(event){
+    if(event.target.innerWidth <=765 )
+    {
+      //small devices
+      console.log("small device", event.target.innerWidth );
+      console.log("To show is:" , this.toShow)
+      //just stroe that value
+      this.screenWidth = event.target.innerWidth;
+    }else{
+        //larger deveice, check the latest value
+        console.log("large device", event.target.innerWidth );
+        if(this.screenWidth <= 765)
+        {
+          //act
+          if(this.toShow == true)
+            {
+              this.nav.className = 'show';
+              this.toShow = false;
+            }
+            this.screenWidth = event.target.innerWidth;
+        }
+        else{
+          //we was on a large screen, just re-store
+          this.screenWidth = event.target.innerWidth;
+        }
+    }
+   
+  }
 }
 

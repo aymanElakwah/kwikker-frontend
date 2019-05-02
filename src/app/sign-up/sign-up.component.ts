@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
-import { MaterialModule } from '../material.module';
+//import { MaterialModule } from '../material.module';
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
@@ -31,6 +31,7 @@ public birthdate: string;
 //Data to set the date picker module
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
+
 /**
  * A constructor called when initialiizing logInComponent.
  * It creates two private vairables.
