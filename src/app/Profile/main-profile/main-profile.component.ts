@@ -8,6 +8,8 @@ import { EditImagesComponent } from "../edit-images/edit-images.component";
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { ChatComponent } from '../../chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
+import { TitleService } from 'src/app/services/title.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -128,8 +130,6 @@ export class MainProfileComponent implements OnInit {
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
-    console.log(this.profileUser.profile_banner_url);
-    console.log(this.defaultProfileBanner);
     return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
  
   }
@@ -150,7 +150,7 @@ export class MainProfileComponent implements OnInit {
     };
 
     /* Send Change The Image Request */
-    this.profileInfoService.updateBanner(file).subscribe(userInfo => {
+      this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
       this.profileUser.profile_banner_url += "?dummy=" + Math.random();
     });
@@ -163,7 +163,7 @@ export class MainProfileComponent implements OnInit {
    */
   removeProfilePicture(): void {
     this.profileUser.profile_image_url = this.defaultProfilePicture;
-    this.ShowMessage("Profile image removed");
+   // this.ShowMessage("Profile image removed");
     this.profileInfoService.removeProfilePicture().subscribe();
   }
 
@@ -174,7 +174,7 @@ export class MainProfileComponent implements OnInit {
    */
   removeProfileBanner(): void {
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
-    this.ShowMessage("No more header for you");
+   // this.ShowMessage("No more header for you");
     this.profileInfoService.removeBanner().subscribe(); 
   }
 
@@ -228,13 +228,13 @@ export class MainProfileComponent implements OnInit {
   toggleMute(): void {
     if (this.profileUser.muted) {
       this.profileInfoService.unmuteUser(this.profileUser.username).subscribe();
-      this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
+      //this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
     } else {
       this.profileInfoService.muteUser(this.profileUser.username).subscribe();
-      this.ShowMessage(
+      /* this.ShowMessage(
         "You will no longer receive notification from @" +
-          this.profileUser.screen_name
-      );
+        this.profileUser.screen_name
+     ); */
     }
     this.profileUser.muted = !this.profileUser.muted;
     this.muteMode = true;
@@ -250,17 +250,17 @@ export class MainProfileComponent implements OnInit {
       this.profileInfoService
         .unblockUser(this.profileUser.username)
         .subscribe();
-      this.ShowMessage(
+      /* this.ShowMessage(
         "@" +
           this.profileUser.screen_name +
           " will now be able to follow you and read your Kweeks"
-      );
+      ); */
   
     } else {
       this.profileInfoService.blockUser(this.profileUser.username).subscribe();
-      this.ShowMessage(
+      /* this.ShowMessage(
         "@" + this.profileUser.screen_name + " has been blocked"
-      );
+      ); */
  
       this.profileUser.following = false;
       this.profileUser.follows_you = false;
@@ -277,7 +277,7 @@ export class MainProfileComponent implements OnInit {
    */
   updateProfile(): void {
     if (this.editedScreenName === "") {
-      this.ShowMessage("Name can't be blank");
+     // this.ShowMessage("Name can't be blank");
       return;
     }
     this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio).subscribe();
@@ -329,7 +329,8 @@ export class MainProfileComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private ChatService:ChatService
+    private ChatService:ChatService,
+    private title:TitleService
   ) {}
 
   /**
@@ -339,12 +340,13 @@ export class MainProfileComponent implements OnInit {
   ngOnInit() {
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
-    
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
         this.profileUser = userInfo;
-        
+        if(this.title!=null){
+        this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+        }
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
         if(!this.isProfilePictureDefault())

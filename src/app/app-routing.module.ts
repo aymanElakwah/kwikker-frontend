@@ -21,6 +21,8 @@ import { NotificationslistComponent } from './notificationslist/notificationslis
 import { MentionslistComponent } from './mentionslist/mentionslist.component';
 import { SearchComponent } from './search/search.component';
 import { MiniProfileComponent } from './Profile/mini-profile/mini-profile.component';
+import { MainProfileComponent } from './Profile/main-profile/main-profile.component';
+import { ProfileKweeksTabComponent } from './Profile/profile-kweeks-tab/profile-kweeks-tab.component';
 
 
 
@@ -97,6 +99,7 @@ const routes: Routes = [
     {path: 'all', component: NotificationslistComponent },
     {path: 'mentions', component: MentionslistComponent}
   ]},
+  
   {path: '**', component: ErrorPageComponent},
   
 ];

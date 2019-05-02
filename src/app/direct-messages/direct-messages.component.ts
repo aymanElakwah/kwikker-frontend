@@ -138,9 +138,6 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
       media_id: ''
     };
     message.text = this.myForm.controls.message.value;
-    if(message.text == ''){
-      message.text =' ';
-    }
     message.username = this.addressee.username;
     if(this.uploadImg===true){
        this.data.postMedia(this.image).subscribe(mediaUrl => {message.media_id= mediaUrl.media_id;
@@ -148,7 +145,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
         );
     } else {
       message.media_id = '' ;
+      if(message.text != ''){
       this.data.createMessage(message).subscribe();
+      }
     }
     this.myForm.reset();
     this.removeImg();

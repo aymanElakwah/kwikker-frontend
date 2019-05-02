@@ -29,14 +29,13 @@
             [(ngModel)]="email" name="email"  >
             <small id="emailHelp" class="form-text text-muted">Email will not be publicly displayed.</small>
           </div>
-
+            
           <div>
               <button class="btn btn-primary kweek-btn" style="margin-left: 20% "
               (click)="SaveChanges()" 
-              [disabled]="( oldEmail == email && userName == oldUserName ) || oldPassword.length == 0 ">Save Changes</button>
+              [disabled]=" oldEmail != email || userName != oldUserName || (oldPassword.length == 0 )">Save Changes</button>
             </div>
-
-            
+           
 
      
     </div>
@@ -52,21 +51,21 @@
 
        <div class="form-group" style="padding-top: 5.5%;margin-top: 15%">
                 <input type="password" class="form-control" id="newpassword" [(ngModel)]="newPassword" 
-                name="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
+                name="newPassword" #NEWpassword="ngModel"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required
                 title="Password must be at least 8 characters and contains capital letters, small letters and numbers.">
                 
               </div>
 
               <div class="form-group" style="padding-top: 5.5%">
                   <input type="password" class="form-control" id="verfpassword" [(ngModel)]="verifyNewPassword" 
-                  name="verifyNewPassword" >
+                  name="verifyNewPassword" #confirm_password = "ngModel" required  >
                   
                 </div>
 
                 <div>
                     <button type="submit" class="btn btn-primary kweek-btn" style="float:right;margin-bottom:8%"
                     (click)="ChangePassword()" 
-                    [disabled]="(!newPassword || newPassword != verifyNewPassword) || oldPassword.length == 0 ">Change Password</button>
+                    [disabled]="NEWpassword.invalid || NEWpassword.value != confirm_password.value ||  oldPassword.length == 0">Change Password</button>
                   </div>
 
 
@@ -75,5 +74,3 @@
     </div>
 
     
-   
-         
