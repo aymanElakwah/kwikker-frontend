@@ -1,25 +1,37 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture } from '@angular/core/testing';
+import { WelcomeComponent } from './welcome.component';
+describe('Welcome Component', () => {
+  let component: WelcomeComponent;
+  let fixture: ComponentFixture<WelcomeComponent>;
+   let route: any = {
+    snapshot: {
+      root: {
+        children: [
+          {
+            params: {
+              username: String
+            }
+          }
+        ]
+      },
+      url:[
+        {
+            path: String
+        }
+      ],
+      queryParams: {
+        filterBy: String
+      }
+    }
+  };
+  beforeEach(() => {
+    component = new WelcomeComponent(route);
 
-// import { WelcomeComponent } from './welcome.component';
+    });
 
-// describe('WelcomeComponent', () => {
-//   let component: WelcomeComponent;
-//   let fixture: ComponentFixture<WelcomeComponent>;
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ WelcomeComponent ]
-//     })
-//     .compileComponents();
-//   }));
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(WelcomeComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+});
