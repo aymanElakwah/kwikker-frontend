@@ -31,7 +31,7 @@
 </div>
 </div>
 <!-- main body-->
-<div class="body" #body  >
+<div class="body" #body style="padding-top: 60px" >
   <div class="msg" *ngFor="let message of messageList" >
     <div class="row2 row" [ngClass]="{'right':message.to_username === addressee.username ,'row3':message.media_url!=null ,'big-margin':message.text?.length>100 && message.media_url != null, 'type4':message.media_url==null && message.text.length>100} ">
     <div class="frame"  >
