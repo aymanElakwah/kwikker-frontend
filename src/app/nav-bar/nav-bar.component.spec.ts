@@ -3,7 +3,7 @@ import { DataService } from '../services/data.service';
 import { NavBarComponent } from './nav-bar.component';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 
 describe('Navbar Component', () => {
   let component: NavBarComponent;
@@ -22,24 +22,6 @@ describe('Navbar Component', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-/**
- * A unit test function, tests that user's usrename is stored
- */
-  describe("ngOnInit Function", () => {
-        beforeEach(() => {
-            dataService = new DataService(null, null,null);
-            component = new NavBarComponent(dialog,dataService,route,spinner);
-            });
-        
-        it("It should store user's suername", () => {
-            
-            component.ngOnInit();
-            let usr = localStorage.getItem("username");
-            let usr2 = component.userName;
-            expect(usr).toBeTruthy();
-            expect(usr).toEqual(usr2);
-              });
-      });
 
 /**
  * A unit test function, tests that user is successfully logged out of the system.

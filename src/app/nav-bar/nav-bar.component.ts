@@ -1,18 +1,11 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 import { isNull } from 'util';
-import { InboxComponent } from '../inbox/inbox.component';
-import { NgForm,  FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TitleService } from '../services/title.service';
-import { MiniUser } from '../model/mini-user';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ChatComponent } from '../chat/chat.component';
 import { User } from '../model/user';
-import { hasClassName } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -21,6 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  //Public variables
   public userName: string;
   users:User[];
   filterBy:string;
@@ -28,40 +22,48 @@ export class NavBarComponent implements OnInit {
   public toShow: boolean;
   public screenWidth: number;
   
+  /**
+   * Navbar component's constructor
+   * @param dialog for popup components
+   * @param data for dataService's communications
+   * @param router for navigating among pages
+   * @param spinit to create the loading spinner
+   */
   constructor(private dialog: MatDialog,
               private data: DataService, 
               private router: Router, 
               private spinit: NgxSpinnerService
-              ){
-                
-             }
+              ){}
 
-  ngOnInit() {
 
-    /** spinner starts on init */
-    this.spinit.show();
-    setTimeout(() => {
-        /** spinner ends after 1 second */
-        this.spinit.hide();
-    }, 1000);
+/**
+ * ngOnInit for navbar component
+ * Creates the loading spinner for a second.
+ * initialize some public data that used later
+ */
+ngOnInit() {
   
+        /** spinner starts on init */
+        this.spinit.show();
+        setTimeout(() => {
+            /** spinner ends after 1 second */
+            this.spinit.hide();
+        }, 1000);
+    
     this.userName =  localStorage.getItem('username');
     if (isNull(this.userName))
-    {
-      
-      this.userName = "username"; 
+    {   
+      this.userName = "username";
     }
     this.nav =  document.querySelector('.myNavBar');
     this.toShow = true;
     this.screenWidth = 1000;
-  
   }
 
   /**
    * Function to open kweek dialog 
    * paneClass -> attach the dialog to specific css class
    */
-
   openKweekComponent(){
     console.log("working")
     const dialogRef = this.dialog.open(NewKweekComponent, {
@@ -73,7 +75,6 @@ export class NavBarComponent implements OnInit {
    * Function for closing the dialog and displaying a msg 
    * 
    */
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.nav.className = 'show';
@@ -86,7 +87,6 @@ export class NavBarComponent implements OnInit {
    * Function to open kweek dialog 
    * paneClass -> attach the dialog to specific css class
    */
-
   openInboxComponent(){
     const dialogRef = this.dialog.open(ChatComponent,  { panelClass: 'custom-dialog-container' });
   
@@ -99,10 +99,9 @@ export class NavBarComponent implements OnInit {
     this.nav.className = 'show';
     this.toShow = true;
   });
-
   }
+
    /**
-   *
    *Log out function, removes the Token and username saved in localStorage
    * @param form {NgForm} the Form parameter, which has all the 'log-out' form information
    * @returns void
@@ -124,12 +123,13 @@ export class NavBarComponent implements OnInit {
       list => { this.users = list; 
         this.users = this.users.slice(0,5);
       }
-
-
     );
   }
   /**
-   * toggleNav
+   * toggleNav function
+   * when the toggle button is clicked this function emmits
+   * checks on the old status of the navbar (show/hide)
+   * and toggle the state of it.
    */
   public toggleNav() {
    // screen.width
@@ -146,6 +146,12 @@ export class NavBarComponent implements OnInit {
       return;
     }
   }
+
+
+/**
+ * Checks on the current state of the navbar, decides whether to show it or hide it.
+ * @param event The current event of the window
+ */
   onResize(event){
     if(event.target.innerWidth <=765 )
     {
@@ -167,12 +173,10 @@ export class NavBarComponent implements OnInit {
         if(this.screenWidth <= 765)
         {
           //act
-          if(this.toShow == true)
-            {
-              this.nav.className = 'show';
-              this.toShow = false;
-            }
-            this.screenWidth = event.target.innerWidth;
+          
+        this.nav.className = 'show';
+        this.toShow = false;
+        this.screenWidth = event.target.innerWidth;
         }
         else{
           //we was on a large screen, just re-store
