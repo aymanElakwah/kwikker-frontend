@@ -47,6 +47,7 @@ export class MiniProfileComponent implements OnInit {
    */
   isAuthorisedUser(index: number): boolean {
     return (this.miniCardProfileUsers[index].username == this.authorizedUser);
+
   }
 
    /**
@@ -159,18 +160,20 @@ export class MiniProfileComponent implements OnInit {
    if(this.miniCardProfileUsers.length != 0)
    {
       var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username;
+  
       if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
       {
         this.miniProfileInfoService.getUserFollowers(this.ProfileUserName, LastUsername).subscribe
         ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
         this.LastSent = LastUsername;
+
       }
       else if (this.route.snapshot.url[0].path == 'following' && this.LastSent != LastUsername)
       {
         this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, LastUsername).subscribe
         ( usersInfo => {  this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
-       
         this.LastSent = LastUsername;
+       
       }
      
   }
@@ -190,11 +193,8 @@ export class MiniProfileComponent implements OnInit {
     }
     else if (this.route.snapshot.url[0].path == 'following')
     {
-   
       this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
-
-
     }
     else 
     {
