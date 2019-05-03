@@ -63,6 +63,26 @@ export class AppPage {
   getWriteKweekField(){
     return element(by.xpath('//textarea[@class = "form-control ng-untouched ng-pristine ng-valid"]'));
   }
+
+  getCurrentPasswordField(){
+    return element(by.xpath('//input [@id = "currentpassword"]'));
+  }
+
+  getUsernameSettingsField(){
+    return element(by.xpath('//input [@id = "username"]'));
+  }
+
+  getEmailSettingsField(){
+    return element(by.xpath('//input [@id = "email"]'));
+  }
+
+  getNewPasswordField(){
+    return element(by.xpath('//input [@id = "newpassword"]'));
+  }
+
+  getVerifyPasswordField(){
+    return element(by.xpath('//input [@id = "verfpassword"]'));
+  }
   //---------Button-----------
   getTweetToDropDown(){
     return element(by.tagName('p'));
@@ -81,11 +101,11 @@ export class AppPage {
   }
 
   getKweekButton(){
-    return element(by.xpath('//button [@class = "btn btn-primary kweek-btn"]'));
+    return element(by.buttonText('Kweek'));
   }
 
   getSecondKweekButton(){
-    return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
+    return element.all(by.buttonText('Kweek')).get(1);
   }
 
   getRekweekButton(x){
@@ -100,12 +120,40 @@ export class AppPage {
     return element(by.xpath('(//span [@class = "reply"])[' + x +']'));
   }
 
+  getDeleteKweekx(x){
+    return element(by.xpath('(//mat-icon [@class = "close mat-icon notranslate material-icons mat-icon-no-color"])[' + x + ']'));
+  }
+
+  getDeleteKweekButton(){
+    return element(by.xpath('//*[@id="delete"]'));
+  }
+
+  getKweekToButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[1]/div[1]/app-profile-header-card/div/div[3]/button[1]'));
+  }
+
   getDropDownMenuButton(){
     return element(by.xpath('//a [@class = "dropdown-toggle"]'));
   }
 
   getProfileButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-user"]'));
+  }
+
+  getSettingsButton(){
+    return element(by.xpath('//span [@class = "glyphicon glyphicon-cog"]'));
+  }
+
+  getSaveChangesSettingsButton(){
+    return element(by.buttonText('Save Changes'));
+  }
+
+  getChangePasswordSettingsButton(){
+    return element(by.buttonText('Change Password'));
+  }
+
+  getOkButton(){
+    return element(by.buttonText('OK'));
   }
 
   getLogoutButton(){
@@ -141,7 +189,6 @@ export class AppPage {
       return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
     }
 
-
     getProfileName(){
       return element(by.className('Profile-Name'));
     }
@@ -169,7 +216,7 @@ export class AppPage {
 
 
     getHisFollowButton(){
-      return element(by.className('btn btn-outline-primary follow-button'));
+      return element(by.xpath('//*[@id="header"]/div[4]/div/div[2]/button'));
     }
 
     getMyFollowButton(){
@@ -255,6 +302,9 @@ export class AppPage {
       return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
     }
 
+    getPrompt(){
+      return element(by.id('prompt'));
+    }
 
     getLikeCount(){
       return element.all(by.xpath('//*[@id="Taps"]/li[4]/a/text()[2]'));
@@ -271,20 +321,29 @@ export class AppPage {
       return element(by.xpath('//*[@id="message"]'));
     }
 
-    getNewMessageButton(){
+    getSentMsg(){
+      return element.all(by.className('msgText msgText2')).last();
+    }
+
+
+    getRecentReciever(){
       return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox/div[2]/div[1]'));
+    }
+
+    getNewMessageButton(){
+      return element(by.id('new'));
     }
     getSendButton(){
       return element(by.xpath('//*[@id="send"]'));
     }
 
     getReciever(){
-      return element(by.xpath('//*[@id="mat-dialog-1"]/app-chat/div/app-inbox-list/div[2]/div[3]'));
+      return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox-list/div[2]/div[3]'));
     }
 
 
     getNextButton(){
-      return element(by.id('//*[@id="new"]'));
+      return element(by.xpath('//*[@id="new"]'));
     }
 
     getBackButton(){
@@ -302,7 +361,7 @@ export class AppPage {
     }
 
     getSearchProfileName(){
-      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div/div/div[2]/div/div[2]/div[1]'));
+      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
     }
 
     getProfileSearchBox(){
@@ -370,8 +429,6 @@ export class AppPage {
       return element(by.id('back'));
     }
 */
-
-
     getAllButton(){
       return element(by.className('btn btn-outline-primary'));
     }
@@ -385,14 +442,9 @@ export class AppPage {
       return browser;
     }
 
-
-
-
     navigateToLogin() {
       return browser.get('/login');
     }
-
-
   }
 
 export class utilityFunctions{
@@ -415,6 +467,10 @@ export class utilityFunctions{
     this.page.getPasswordLoginField().sendKeys(password);
     this.page.getLoginButton().click();
     this.browserPause(1000);
+  }
+
+  browserForceClick(element){
+    browser.actions().mouseMove(element).click().perform();
   }
 
   navigateToLogin() {

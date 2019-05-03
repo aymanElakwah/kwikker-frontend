@@ -1,4 +1,5 @@
-<nav class=" mynav navbar navbar-default navbar-expand-md  navbar-fixed-top">
+
+<nav class=" mynav navbar navbar-default navbar-expand-md  navbar-fixed-top" >
         <div class="container-fluid">
                 <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  aria-expanded="false" (click)="toggleNav()">
@@ -7,9 +8,13 @@
                                 <span class="icon-bar"></span>
                         </button>
                         
-                        <a href="home" class="navbar-brand">
+                        <a href="home" class="navbar-brand logo show">
                                 <img src="../../assets/main/twitter.png" alt="Main icon" id="icon">
                         </a>
+                        <!-- <div class="  spinner-border text-primary loader show" role="status" >
+                                <span class="sr-only">Loading...</span>
+                        </div> -->
+                      
                 </div>
                         <div class="collapse myNavBar show" (window:resize)="onResize($event)">
                                 <ul class="nav navbar-nav navbar-left ">
@@ -56,10 +61,4 @@
                          </div>
         </div>      
 </nav>
-<div class="popup">
-                                                                                                        
-<span class="popuptext" id="myPopup" >
-        popup
-</span>
 
- </div>

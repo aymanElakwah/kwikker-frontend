@@ -10,17 +10,22 @@ import {Router} from '@angular/router';
 
 
 export class LogInComponent implements OnInit {
+  //public variables.
   public mail: string;
   public pass: string;
   public isLoggedIn: boolean;
   public msg: any;
   public msg2: any;
-  public msg3: any;
+ 
 
+/**
+ * LogIn Component's condtructor.
+ * @param data: DataService
+ * @param router: Router
+ * @returns void
+ */
+  constructor(private data: DataService , private router: Router) {}
 
-  constructor(private data: DataService , private router: Router) {
-
-   }
 /**
  * A function called when initialiizing logInComponent.
  * It assigns values for msg and msg2, as they could only be assigned once.
@@ -30,7 +35,6 @@ export class LogInComponent implements OnInit {
    ngOnInit() {
       this.msg =  document.querySelector('.progress');
       this.msg2 =  document.querySelector('.progress2');
-      this.msg3 =  document.querySelector('.progress3');
     }
 /**
  * To check for user's information when logging in, and then send it to be posted in the backend
@@ -39,6 +43,10 @@ export class LogInComponent implements OnInit {
  * @returns void
  */
   submitForm(form: NgForm) {
+    
+      this.msg.className = 'hide';
+      this.msg2.className = 'hide';
+  
     this.isLoggedIn = false;
     const user = form.value;
     var ev: (err: any) => void;
@@ -74,21 +82,13 @@ export class LogInComponent implements OnInit {
     {
       this.msg.className = 'show';
       this.msg2.className = 'hide';
-      this.msg3.className = 'hide';
     }
     if(type == 2)
     {
       this.msg.className = 'hide';
       this.msg2.className = 'show';
-      this.msg3.className = 'hide';
     }
-    // if(type == 3)
-    // {
-    // this.msg.className = 'hide';
-    // this.msg2.className = 'hide';
-    // this.msg3.className = 'show';
-    // }
-     
+      
   }
 
 }

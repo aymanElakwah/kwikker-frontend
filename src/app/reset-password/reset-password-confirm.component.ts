@@ -10,15 +10,26 @@ import { NgForm } from '@angular/forms';
     styleUrls: ['./reset-password.component.css']
 })
 export class confirmPassword implements OnInit {
+  //public variables
     public confirmCode: any;
     public pass: string;
     public mail: string;
     public confirm_pass: string;
     public msg: any;
 
+  /**
+   * confirmPassword component's constructor
+   * @param data for dataService's communications
+   * @param router for navigating among pages
+   * @param route to snapshot a value in the url
+   */
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
-    ngOnInit() {
+  /**
+   * ngOnInit for confirm-password component
+   * initialize some public data that used later
+   */
+  ngOnInit() {
         this.confirmCode  = this.route.snapshot.paramMap.get("code");
         this.msg =  document.querySelector('.errorBox'); 
     }
@@ -45,7 +56,12 @@ public sendPassword(form: NgForm) {
       err => {
         if (err.status == 404)
           this.showError();
-        console.log('error: ', err)
+         if (err.status == 401)
+         {
+          window.alert("Unauthorized user, please send your email for verification link");
+          this.router.navigate(['/resend_email']);
+         }
+      
       }
   );
   }

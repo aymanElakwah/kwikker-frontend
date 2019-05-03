@@ -757,23 +757,16 @@ export class DataService {
    * @returns any
    */
   public sendPass(pass: any, code: any): Observable<any> {
-    const body = JSON.stringify(pass);
-    console.log("body: ", body);
+  
+  const body = JSON.stringify(pass);
     let val: string;
     val = code;
-    console.log("code: ", val);
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      CODE: `${val}`
-    });
-    console.log(headers);
+    const headers = new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
     return this.http
       .put<any>(this.base + "account/reset_password", body, { headers })
       .pipe(
-        map(res => res),
-        catchError(this.handleError)
+        map(res => res)
       );
-    // return null;
   }
 
   // in memory mock data service function

@@ -30,7 +30,7 @@ describe('Signup Component', () => {
 
 
   beforeEach(() => {
-    dataService = new DataService(null, null);
+    dataService = new DataService(null, null,null);
     component = new SignUpComponent(dataService,route);
 
     component.bar2 =  document.querySelector('.secondProgress');

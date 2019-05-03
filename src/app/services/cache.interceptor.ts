@@ -18,6 +18,7 @@ export class CacheInterceptor implements HttpInterceptor {
         environment.base+'interactions/mutes'
 
     ];
+    flag:boolean = true;
     requestsUrlWithParams = [
         { 
             url:environment.base+'kweeks/timelines/profile',
@@ -53,21 +54,23 @@ export class CacheInterceptor implements HttpInterceptor {
             }
         });
         this.requestsUrlWithParams.forEach(element => {
-            if(element.url === req.url && element.params === req.params.get('username')) {
+            if(element.url === req.url && element.params === req.params.get('username') &&this.flag&& req.params.get('last_retrieved_kweek_id')== 'A'&& req.params.get('last_retrieved_username')== null) {
                 this.cachedRequest = true;
+                this.flag=false;
             }
         });
         if ( req.method !== "GET" || !this.cachedRequest ) {
-       return next.handle(req);
+            this.flag= false;
+            return next.handle(req);
     }
     const cachedResponse: HttpResponse<any> = this.HttpCacheService.get(req.url);
 
-    if ( cachedResponse) {
+    if ( cachedResponse ) {
         return of(cachedResponse);
     }
     return next.handle(req).pipe(
         tap(event => {
-            if ( event instanceof HttpResponse) {
+            if ( event instanceof HttpResponse ) {
                 this.HttpCacheService.put(req.url, event);
             }
         })
