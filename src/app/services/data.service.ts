@@ -660,6 +660,22 @@ export class DataService {
       );
   }
   /**
+   * A post method function to resend Email to the back-service to give it a confirmation link.
+   * @param code {any} sends confirmation code
+   * Returns either success/error message
+   * @returns any
+   */
+  public sendEmail2(email: any): Observable<any> {
+    const body = JSON.stringify(email);
+    console.log("body",body);
+    return this.http
+      .post<any>(this.base + "account/registration/resend_email", body)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
+  }
+  /**
    * A post method function to send confirmation code to the back-service to verify it.
    * @param code {any} sends confirmation code
    * Token is given with a success response

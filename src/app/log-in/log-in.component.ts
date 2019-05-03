@@ -15,6 +15,7 @@ export class LogInComponent implements OnInit {
   public isLoggedIn: boolean;
   public msg: any;
   public msg2: any;
+  public msg3: any;
 
 
   constructor(private data: DataService , private router: Router) {
@@ -29,6 +30,7 @@ export class LogInComponent implements OnInit {
    ngOnInit() {
       this.msg =  document.querySelector('.progress');
       this.msg2 =  document.querySelector('.progress2');
+      this.msg3 =  document.querySelector('.progress3');
     }
 /**
  * To check for user's information when logging in, and then send it to be posted in the backend
@@ -51,8 +53,12 @@ export class LogInComponent implements OnInit {
         err => {
           if (err.status == 404)
             this.showErrorMSg(1);
-          else 
+          else {
+            if (err.status == 403)
+              this.router.navigate['/resend_email'];
+            else
           this.showErrorMSg(2);
+          }
         }
     );
     this.isLoggedIn = true;
@@ -65,9 +71,24 @@ export class LogInComponent implements OnInit {
    */
   public showErrorMSg(type:number) {
     if(type == 1)
+    {
       this.msg.className = 'show';
-    else
-    this.msg2.className = 'show';
+      this.msg2.className = 'hide';
+      this.msg3.className = 'hide';
+    }
+    if(type == 2)
+    {
+      this.msg.className = 'hide';
+      this.msg2.className = 'show';
+      this.msg3.className = 'hide';
+    }
+    // if(type == 3)
+    // {
+    // this.msg.className = 'hide';
+    // this.msg2.className = 'hide';
+    // this.msg3.className = 'show';
+    // }
+     
   }
 
 }
