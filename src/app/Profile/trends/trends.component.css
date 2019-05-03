@@ -1,9 +1,10 @@
 .Trends-Container
 {
     width: 310px;
-    height: 465px;
+    height: 510px;
     background-color: white;
-    text-align: center
+    text-align: center;
+    border-radius: 10%;
 
 }
 

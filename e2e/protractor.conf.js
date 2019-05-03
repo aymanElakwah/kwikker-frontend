@@ -10,6 +10,7 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
+//    'browserName': 'firefox',
     // 'chromeOptions': {
     //   'args': ['--disable-web-security', '--user-data-dir=~/.e2e-chrome-profile']
     // }
@@ -23,7 +24,7 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
-    browser.manage().window().setSize(1600, 1000);
+    browser.manage().window().setSize(1000, 700);
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });

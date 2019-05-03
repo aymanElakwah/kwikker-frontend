@@ -17,6 +17,7 @@ import { BlockedMutedUser } from "../model/bloked-muted-users";
 import { $ } from "protractor";
 import { CacheService } from "./cache.service";
 import { Message } from "../model/message";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -31,7 +32,7 @@ export class DataService {
    *
    * @param http component to send requests
    */
-  constructor(private http: HttpClient, private cacheService: CacheService) {}
+  constructor(private http: HttpClient, private cacheService: CacheService,private router:Router) {}
 
   /**
    * get request to get All information about certain user
@@ -245,10 +246,7 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowers(
-    userName: string,
-    last_follower_username: string
-  ): Observable<User[]> {
+  getUserFollowers( userName: string, last_follower_username: string ): Observable<User[]> {
     if (last_follower_username) {
       const parametersSent = userName
         ? {
@@ -275,16 +273,13 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowings(
-    userName: string,
-    last_following_username: string
-  ): Observable<User[]> {
+  getUserFollowings( userName: string, last_following_username: string ): Observable<User[]> {
     if (last_following_username) {
       const parametersSent = userName
         ? {
-            params: new HttpParams()
+             params: new HttpParams()
               .set("username", userName)
-              .append("last_retrieved_username", last_following_username)
+              .append("last_retrieved_username", last_following_username) 
           }
         : {};
       return this.http
@@ -294,6 +289,7 @@ export class DataService {
       const parametersSent = userName
         ? { params: new HttpParams().set("username", userName) }
         : {};
+      console.log(parametersSent); 
       return this.http
         .get<User[]>(`${this.base}interactions/following`, parametersSent)
         .pipe(catchError(this.handleError));
@@ -406,11 +402,7 @@ export class DataService {
    */
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
-  const headers = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" })
-  };
-
-    return this.http.post<any>(this.base + "account/login", body, headers).pipe(
+    return this.http.post<any>(this.base + "account/login", body).pipe(
       map(res => res),
       map(err=>err)
     );
@@ -615,6 +607,9 @@ export class DataService {
           break;
         case 401:
           console.error("unauthorized");
+          localStorage.removeItem("TOKEN");
+          localStorage.removeItem("username");
+          this.router.navigate(["/"]);
           break;
       }
       console.error(
@@ -657,6 +652,22 @@ export class DataService {
     
     return this.http
       .post<any>(this.base + "account/forget_password", body)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * A post method function to resend Email to the back-service to give it a confirmation link.
+   * @param code {any} sends confirmation code
+   * Returns either success/error message
+   * @returns any
+   */
+  public sendEmail2(email: any): Observable<any> {
+    const body = JSON.stringify(email);
+    console.log("body",body);
+    return this.http
+      .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
         map(res => res),
         catchError(this.handleError)

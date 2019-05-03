@@ -49,6 +49,8 @@
     padding:3px 4px;
     border-radius: 10px;
     max-height: 30px;
+    overflow: inherit;
+    word-wrap: break-word;
 }
 .msgText2 {
     background-color: #1da1f2;
@@ -58,6 +60,9 @@
 
 .msgText3 {
     max-height: 200px;
+}
+.type4 {
+    margin-bottom: 65px !important;
 }
 .avatar {
     width: 100%;
@@ -90,7 +95,7 @@
 }
 
 .body {
-    height: 510px;
+    height: 300px;
     width:100%;
     background-color: white;
     margin-left:0px;
@@ -218,7 +223,7 @@ input {
     }
 }
 .row2{
-    margin-top:6px;
+    margin-bottom:6px;
     margin-left:0px;
     max-height: 30px;
 }
@@ -228,4 +233,7 @@ input {
 }
 .no-margin{
     margin-top:0px;
+}
+.big-margin {
+    margin-bottom: 200px;
 }

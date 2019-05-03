@@ -8,6 +8,8 @@ import { EditImagesComponent } from "../edit-images/edit-images.component";
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { ChatComponent } from '../../chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
+import { TitleService } from 'src/app/services/title.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -129,6 +131,7 @@ export class MainProfileComponent implements OnInit {
    */
   isProfileBannerDefault(): boolean {
     return (this.profileUser.profile_banner_url ==  this.defaultProfileBanner);
+ 
   }
 
   /**
@@ -147,7 +150,7 @@ export class MainProfileComponent implements OnInit {
     };
 
     /* Send Change The Image Request */
-    this.profileInfoService.updateBanner(file).subscribe(userInfo => {
+      this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
       this.profileUser.profile_banner_url += "?dummy=" + Math.random();
     });
@@ -170,10 +173,9 @@ export class MainProfileComponent implements OnInit {
    * No return
    */
   removeProfileBanner(): void {
-    this.profileUser.profile_banner_url = null;
+    this.profileUser.profile_banner_url = this.defaultProfileBanner;
     this.ShowMessage("No more header for you");
     this.profileInfoService.removeBanner().subscribe(); 
-    this.profileUser.profile_banner_url = this.defaultProfileBanner;
   }
 
   /**
@@ -229,10 +231,10 @@ export class MainProfileComponent implements OnInit {
       this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
     } else {
       this.profileInfoService.muteUser(this.profileUser.username).subscribe();
-      this.ShowMessage(
+       this.ShowMessage(
         "You will no longer receive notification from @" +
-          this.profileUser.screen_name
-      );
+        this.profileUser.screen_name
+     ); 
     }
     this.profileUser.muted = !this.profileUser.muted;
     this.muteMode = true;
@@ -248,17 +250,17 @@ export class MainProfileComponent implements OnInit {
       this.profileInfoService
         .unblockUser(this.profileUser.username)
         .subscribe();
-      this.ShowMessage(
+       this.ShowMessage(
         "@" +
           this.profileUser.screen_name +
           " will now be able to follow you and read your Kweeks"
-      );
+      ); 
   
     } else {
       this.profileInfoService.blockUser(this.profileUser.username).subscribe();
-      this.ShowMessage(
+       this.ShowMessage(
         "@" + this.profileUser.screen_name + " has been blocked"
-      );
+      ); 
  
       this.profileUser.following = false;
       this.profileUser.follows_you = false;
@@ -300,7 +302,7 @@ export class MainProfileComponent implements OnInit {
    */
   async ShowMessage(Msg: string) {
     document.querySelector(".Msg").textContent = Msg;
-    const messageBox = document.getElementById("message-sticky");
+    var messageBox = document.getElementById("message-sticky");
     messageBox.style.display = "block";
     messageBox.style.visibility = "visible";
     messageBox.style.transform = "translate( 0px,48px)";
@@ -327,7 +329,8 @@ export class MainProfileComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private ChatService:ChatService
+    private ChatService:ChatService,
+    private title:TitleService
   ) {}
 
   /**
@@ -337,12 +340,13 @@ export class MainProfileComponent implements OnInit {
   ngOnInit() {
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
-    
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
         this.profileUser = userInfo;
-        
+        if(this.title!=null){
+        this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+        }
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
         if(!this.isProfilePictureDefault())
