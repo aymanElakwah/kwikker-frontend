@@ -1,3 +1,4 @@
+<mat-dialog-content>
 <div *ngIf="users">
   <ng-container *ngIf="likers; else rekweekersList">
     <div id="header">Liked {{ users.length }} times</div>
@@ -52,7 +53,6 @@
       </div>
     </div>
   </div>
-  <mat-dialog-content>
     <!-- check if kweeks exists -->
     <div *ngFor="let miniUser of users" class="mini-user">
       <div class="media" *ngIf="!miniUser.blocked">
@@ -75,5 +75,5 @@
         </div>
       </div>
     </div>
-  </mat-dialog-content>
 </div>
+</mat-dialog-content>

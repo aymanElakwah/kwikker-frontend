@@ -8,6 +8,8 @@ import { EditImagesComponent } from "../edit-images/edit-images.component";
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { ChatComponent } from '../../chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
+import { TitleService } from 'src/app/services/title.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -327,7 +329,8 @@ export class MainProfileComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private ChatService:ChatService
+    private ChatService:ChatService,
+    private title:TitleService
   ) {}
 
   /**
@@ -337,12 +340,13 @@ export class MainProfileComponent implements OnInit {
   ngOnInit() {
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
-    
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
       userInfo => {
         this.profileUser = userInfo;
-        
+        if(this.title!=null){
+        this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+        }
         this.editedScreenName = this.profileUser.screen_name;
         this.editedBio = this.profileUser.bio;
         if(!this.isProfilePictureDefault())

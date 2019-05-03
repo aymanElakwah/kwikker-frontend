@@ -161,17 +161,18 @@ export class MiniProfileComponent implements OnInit {
       var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username;
       if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
       {
-       
-        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
+        this.miniProfileInfoService.getUserFollowers(this.ProfileUserName, LastUsername).subscribe
         ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
         this.LastSent = LastUsername;
       }
       else if (this.route.snapshot.url[0].path == 'following' && this.LastSent != LastUsername)
       {
-        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
-        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, LastUsername).subscribe
+        ( usersInfo => {  this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+       
         this.LastSent = LastUsername;
       }
+     
   }
 }
 
@@ -189,8 +190,11 @@ export class MiniProfileComponent implements OnInit {
     }
     else if (this.route.snapshot.url[0].path == 'following')
     {
+   
       this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, null).subscribe
       ( usersInfo => { this.miniCardProfileUsers = usersInfo; } )
+
+
     }
     else 
     {

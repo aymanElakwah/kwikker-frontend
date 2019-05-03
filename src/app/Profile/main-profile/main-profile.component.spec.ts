@@ -2,19 +2,13 @@ import { MainProfileComponent } from './main-profile.component';
 import { DataService } from "../../services/data.service";
 import { from } from "rxjs";
 import { User } from "../../model/user";
-import { element } from '@angular/core/src/render3';
-import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { SharedModule } from '../../shared/shared.module';
-import { AppModule } from '../../app.module';
 import { ProfileModule } from '../profile.module'; 
-import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserDynamicTestingModule,
   platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
-
-
 
 
 describe('MainProfileComponent', () => {
@@ -34,12 +28,12 @@ describe('MainProfileComponent', () => {
    }
  };
 
- 
  beforeEach(() => {
-   dataService = new DataService(null, null);
+   dataService = new DataService(null, null,null);
    component = new MainProfileComponent(
      dataService,
      route,
+     null,
      null,
      null,
      null

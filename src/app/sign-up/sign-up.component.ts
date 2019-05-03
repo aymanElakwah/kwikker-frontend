@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
-
+//import { MaterialModule } from '../material.module';
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
@@ -22,7 +22,6 @@ public errorOccured2: any;
 public errorOccured3: any;
 public errorOccured4: any;
 public email: string;
-public counter: number;
 public userName: string;
 public mail: string;
 public pass: string;
@@ -32,6 +31,7 @@ public birthdate: string;
 //Data to set the date picker module
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
+
 /**
  * A constructor called when initialiizing logInComponent.
  * It creates two private vairables.
@@ -52,13 +52,7 @@ constructor(private data: DataService , private router: Router) {}
    * @returns void
    */
 ngOnInit() {
-  if(!isNull(localStorage.getItem('TOKEN')))
-    {
-      this.router.navigate(['home']);
-    }
-    else 
-    {this.router.navigate(['signup']);}
-
+  
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
    this.fs1=  document.querySelector('.fs1');
@@ -69,7 +63,6 @@ ngOnInit() {
    this.errorOccured2 =  document.querySelector('.errorOccured2');
    this.errorOccured3 =  document.querySelector('.errorOccured3');
    this.errorOccured4 =  document.querySelector('.errorOccured4');
-   this.counter = 0;
 }
 
 /**
@@ -122,7 +115,6 @@ public previousOne (){
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
- 
   this.data.signUpUser(toSend)
       .subscribe(
        res => {

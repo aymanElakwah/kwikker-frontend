@@ -12,7 +12,7 @@ describe('MutedListComponent', () => {
   
 
   beforeEach(() => {
-    muted_service = new DataService(null,null);
+    muted_service = new DataService(null,null,null);
     component = new MutedListComponent(muted_service)
     
   });

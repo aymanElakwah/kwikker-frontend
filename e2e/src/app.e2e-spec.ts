@@ -34,11 +34,12 @@ describe('workspace-project App', () => {
     expect(utility.getElementWithText('.fs-title', 'Thank you for using our app.').getText()).toEqual('Thank you for using our app.');
   });
 
+
   it('Login and logout', () =>{
     utility.navigateToLogin();
     utility.browserPause(1000);
-    page.getUsernameLoginField().sendKeys(user1);
-    page.getPasswordLoginField().sendKeys(pass1);
+    page.getUsernameLoginField().sendKeys('ahly');
+    page.getPasswordLoginField().sendKeys('123456');
     page.getLoginButton().click();
     utility.browserPause(2000);
     page.getDropDownMenuButton().click();
@@ -81,6 +82,7 @@ describe('workspace-project App', () => {
     expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
     utility.logout();
   });
+
 
 
 
@@ -179,7 +181,7 @@ it('View my following, Unfollow someone, And open his profile to check you unfol
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('ahlyscreenname');
   });
-*/
+
 //////////////////Edit-Section///////////////////////
 
 it('Edit profile, change profile photo.', function() {
@@ -298,27 +300,51 @@ it('Profile trends.', function() {
 
 ////////////Search/////////////////////////
 
+it('Check search bar after typing any word.', function() {
+  page.getHomeSearchBox().sendKeys('zamalek');
+  page.pressEnter();
+  page.browserPause(2000);
+  expect(page.getSearchBar().getText()).toContain('zamalek');
+  });
+
+  it('Search for a text.', function() {
+    page.getHomeSearchBox().sendKeys('barca');
+    page.pressEnter();
+    page.browserPause(2000);
+    expect(page.getSearchKeyWord().getText()).toContain('barca');
+  });
+
+  it('Search for hashtag.', function() {
+    page.getHomeSearchBox().sendKeys('barca');
+    page.pressEnter();
+    page.browserPause(2000);
+    expect(page.getSearchKeyWord().getText()).toContain('barca');
+  });
+
+
+
   it('Search for a user, select from results suggested in search field.', function() {
     page.getHomeSearchBox().sendKeys('zamalek');
-    page.browserPause(1000);
+    page.browserPause(2000);
     page.getHomeSearchResult().click();
     page.browserPause(1000);
-    expect(page.getHisScreenName().getText()).toEqual('zamalek');
+    expect(page.getHisScreenName().getText()).toEqual('@zamalek');
   });
 
   it('Search for a user, view latest section.', function() {
     page.getHomeSearchBox().sendKeys('zamalek');
     page.pressEnter();
-    page.browserPause(1000);
+    page.browserPause(2000);
     expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
     });
 
   it('Search for a user, view people section.', function() {
     page.navigateToSearchSections('people','zamalek');
-  //  expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
+    page.browserPause(1000);
+    expect(page.getHisProfileName().getText()).toContain('@zamalek');
   });
 
-
+/*
 
   // it('View notifications, ALL section', function() {
   //   page.navigateToNotifications();

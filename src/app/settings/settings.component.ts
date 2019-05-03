@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 /**
  * change username , password , muted people
  */
@@ -11,7 +12,11 @@ export class SettingsComponent  {
 /**
  * empty constructor
  */
-  constructor() { }
+  constructor(private titleService:Title) {
+    if(this.titleService){
+    this.titleService.setTitle("settings");
+    }
+   }
 
 
 }
