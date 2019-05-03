@@ -10,6 +10,13 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class confirmCode implements OnInit {
     public confirmCode: string;
+
+  /**
+   * confirm-code component's constructor
+   * @param data for dataService's communications
+   * @param router for navigating among pages
+   * @param route to snapshot a value in the url
+   */
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
    /**
@@ -21,7 +28,7 @@ export class confirmCode implements OnInit {
    * @returns void
    */
     ngOnInit() {
-        this.confirmCode  = this.route.snapshot.paramMap.get("code");
+        this.confirmCode = this.route.snapshot.paramMap.get("code");
         var toSend = { 
           confirmation_code:this.confirmCode
        };

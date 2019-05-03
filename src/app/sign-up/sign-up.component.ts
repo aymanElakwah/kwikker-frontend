@@ -52,7 +52,6 @@ constructor(private data: DataService , private router: Router) {}
    * @returns void
    */
 ngOnInit() {
-  
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
    this.fs1=  document.querySelector('.fs1');
@@ -82,7 +81,6 @@ public previousOne (){
    * @returns void
    */
   public secondStep() {
-    
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
@@ -100,7 +98,6 @@ public previousOne (){
    *and function 'whatToShow()' handels the situation
    * @returns void
    */
-
  public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
@@ -141,11 +138,10 @@ public previousOne (){
     
 }
 /**
-   *Takes either 0/1 to show an error/success message at the front view.
-   *@param id {number} 
-   * @returns void
-   */
-
+*Takes either 0/1 to show an error/success message at the front view.
+*@param id {number} 
+* @returns void
+*/
 public whatToShow(id: number) {
   if(id == 0)
   {
@@ -201,7 +197,6 @@ public whatToShow(id: number) {
    *@param date {string} 
    * @returns string
    */
- 
 redesignDateFormat(date: string): string {
   if (!date) {
     return null;

@@ -10,16 +10,28 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
+  //Public variables
   public confirmCode: string;
   public msg: any;
   public pass: string;
   public confirm_pass: string;
   public mail: string;
-    constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
+
+  /**
+   * Reset-password component's constructor
+   * @param data for dataService's communications
+   * @param router for navigating among pages
+   */
+    constructor(private data: DataService,private router: Router ) {
     }
+/**
+ * ngOnInit for Reset-password component
+ * initialize some public data that used later
+ */
     ngOnInit() {
       this.msg =  document.querySelector('.errorBox');  
     }
+    
     /**
    *This function is called when sending new email to take a reset-password link.
    * It takes the submitForm values and wrap the email in an object.
