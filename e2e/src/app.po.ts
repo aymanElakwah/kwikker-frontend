@@ -104,6 +104,10 @@ export class AppPage {
     return element(by.buttonText('Kweek'));
   }
 
+  getSecondKweekButton(){
+    return element.all(by.buttonText('Kweek')).get(1);
+  }
+
   getRekweekButton(x){
     return element(by.xpath('(//span [@class = "rekweek"])[' + x +']'));
   }
@@ -116,6 +120,18 @@ export class AppPage {
     return element(by.xpath('(//span [@class = "reply"])[' + x +']'));
   }
 
+  getDeleteKweekx(x){
+    return element(by.xpath('(//mat-icon [@class = "close mat-icon notranslate material-icons mat-icon-no-color"])[' + x + ']'));
+  }
+
+  getDeleteKweekButton(){
+    return element(by.xpath('//*[@id="delete"]'));
+  }
+
+  getKweekToButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[1]/div[1]/app-profile-header-card/div/div[3]/button[1]'));
+  }
+  
   getDropDownMenuButton(){
     return element(by.xpath('//a [@class = "dropdown-toggle"]'));
   }
@@ -134,6 +150,10 @@ export class AppPage {
 
   getChangePasswordSettingsButton(){
     return element(by.buttonText('Change Password'));
+  }
+
+  getOkButton(){
+    return element(by.buttonText('OK'));
   }
 
   getLogoutButton(){
@@ -168,7 +188,6 @@ export class AppPage {
     getDropDownHomeToggleProfile(){
       return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
     }
-
 
     getProfileName(){
       return element(by.className('Profile-Name'));
@@ -324,16 +343,11 @@ export class AppPage {
       var enter = browser.actions().sendKeys(protractor.Key.ENTER);
       enter.perform();
     }
-
-
-
 /*
     getBackButton(){
       return element(by.id('back'));
     }
 */
-
-
     getAllButton(){
       return element(by.className('btn btn-outline-primary'));
     }
@@ -350,14 +364,9 @@ export class AppPage {
       return browser;
     }
 
-
-
-
     navigateToLogin() {
       return browser.get('/login');
     }
-
-
   }
 
 export class utilityFunctions{
@@ -380,6 +389,10 @@ export class utilityFunctions{
     this.page.getPasswordLoginField().sendKeys(password);
     this.page.getLoginButton().click();
     this.browserPause(1000);
+  }
+
+  browserForceClick(element){
+    browser.actions().mouseMove(element).click().perform();
   }
 
   navigateToLogin() {

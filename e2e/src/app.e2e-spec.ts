@@ -7,23 +7,23 @@ describe('workspace-project App', () => {
   page = new AppPage();
   utility = new utilityFunctions(page);
 
-  var user1 = "ahly";
-  var pass1 = "123456";
+  var user1 = "test_user1";
+  var pass1 = "pass";
   var user2 = "zamalek";
   var pass2 = "password";
-/*
+
   it('Sign up', () =>{
     utility.navigateToSignUp();
     utility.browserPause(100);
 
-    page.getUsernameLoginField().sendKeys("e11");
-    page.getEmailSignupField().sendKeys("e11@yahoo.com");
-    page.getPasswordSignupField().sendKeys("Ee111111");
-    page.getPasswordConfirmationSignupField().sendKeys("Ee111111");
+    page.getUsernameLoginField().sendKeys("ee11");
+    page.getEmailSignupField().sendKeys("ee11@yahoo.com");
+    page.getPasswordSignupField().sendKeys("Eee111111");
+    page.getPasswordConfirmationSignupField().sendKeys("Eee111111");
     page.getNext1SignupButton().click();
 
     utility.browserPause(10);
-    page.getScreenNameSignupField().sendKeys("ee11");
+    page.getScreenNameSignupField().sendKeys("eee11");
     page.getDatePickerSignupBoard().click();
     page.getDateDaySignupBoard().click();
     page.getNext2SignupButton().click();
@@ -46,11 +46,12 @@ describe('workspace-project App', () => {
 
   it('Kweek', () => {
     utility.login(user1, pass1);
-    let kweek = "E2E";
+    let kweek = "E2E 10";
     page.getKweekButton().click();
+    utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(kweek);
     utility.browserPause(1000);
-    page.getKweekButton().click();
+    page.getSecondKweekButton().click();
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
@@ -78,51 +79,122 @@ describe('workspace-project App', () => {
     expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
     utility.logout();
   });
-  */
+  
+  it('Reply', () => {
+    let reply = 'E2E reply'
+    utility.login(user2, pass2);
+    page.navigateToProfile(user1);
+    page.getReplyButton(1).click();
+    utility.browserPause(1000);
+    page.getWriteKweekField().sendKeys(reply);
+    utility.browserPause(1000);
+    page.getSecondKweekButton().click();
+    utility.browserPause(1000);
+    page.getFirstKweekText().click();
+    expect(utility.getElementWithText('p', reply).getText()).toEqual('@' + user1 + ' ' + reply);
+    page.navigateToHome();
+    utility.logout();
+  });
+
+  it('Delete', () => {
+    utility.login(user1, pass1);
+    utility.navigateToMyProfile();
+    page.getDeleteKweekx(1).click();
+    utility.browserPause(1000);
+    page.getDeleteKweekButton().click();
+    utility.browserPause(1000);
+    utility.logout();
+  });
+
+  it('Kweek To', () => {
+    let kweek = 'Hi user';
+    utility.login(user1, pass1);
+    page.navigateToProfile(user2);
+    page.getKweekToButton().click();
+    page.getWriteKweekField().sendKeys(kweek);
+    utility.browserPause(1000);
+    page.getSecondKweekButton().click();
+    utility.browserPause(1000);
+    page.navigateToKweeks(user1);
+    expect(page.getFirstKweekText().getText()).toEqual('@' + user2 + ' ' + kweek);
+    page.getDeleteKweekx(1).click();
+    utility.browserPause(1000);
+    page.getDeleteKweekButton().click();
+    utility.browserPause(1000);
+    utility.logout();
+  });
+  
   it('Settings', () => {
     let username1 = 'uname1';
     let password1 = 'Password1';
-
+    let email1 = 'mymail10@mail.com';
+    
     let username2 = 'uname1username';
     let password2 = 'Password2';
-    let email2 = 'mail2@mail.com';
+    let email2 = 'mymail21@mail.com';
 
-    utility.login(user1, pass1);
+    utility.login(username1, password1);
 
     page.getDropDownMenuButton().click();
     page.getSettingsButton().click();
-    page.getCurrentPasswordField().sendKeys(pass1);
-    page.getUsernameSettingsField().sendKeys(username2);
+    page.getCurrentPasswordField().sendKeys(password1);
+    page.getEmailSettingsField().clear();
     page.getEmailSettingsField().sendKeys(email2);
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
+    utility.browserPause(1000);
+    page.getOkButton().click();
+
+    page.getUsernameSettingsField().clear();
+    page.getUsernameSettingsField().sendKeys(username2);
+    utility.browserPause(1000);
+    page.getSaveChangesSettingsButton().click();
+    utility.browserPause(1000);
+    page.getOkButton().click();
+    utility.browserPause(1000);
+
+    page.getCurrentPasswordField().sendKeys(password1);
     page.getNewPasswordField().sendKeys(password2);
     page.getVerifyPasswordField().sendKeys(password2);
     utility.browserPause(1000);
     page.getChangePasswordSettingsButton().click();
+    utility.browserPause(1000);
+    page.getOkButton().click();
 
     utility.logout();
     utility.login(username2, password2);
 
-    let email = 'mail@mail.com';
-
     page.getDropDownMenuButton().click();
     page.getSettingsButton().click();
     page.getCurrentPasswordField().sendKeys(password2);
-    page.getUsernameSettingsField().sendKeys(user1);
-    page.getEmailSettingsField().sendKeys(email);
+    page.getEmailSettingsField().clear();
+    page.getEmailSettingsField().sendKeys(email1);
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
-    page.getNewPasswordField().sendKeys(pass1);
-    page.getVerifyPasswordField().sendKeys(pass1);
+    utility.browserPause(1000);
+    page.getOkButton().click();
+    
+    page.getUsernameSettingsField().clear();
+    page.getUsernameSettingsField().sendKeys(username1);
+    utility.browserPause(1000);
+    page.getSaveChangesSettingsButton().click();
+    utility.browserPause(1000);
+    page.getOkButton().click();
+    utility.browserPause(1000);
+
+    page.getCurrentPasswordField().sendKeys(password2);
+    page.getNewPasswordField().sendKeys(password1);
+    page.getVerifyPasswordField().sendKeys(password1);
     utility.browserPause(1000);
     page.getChangePasswordSettingsButton().click();
+    utility.browserPause(1000);
+    page.getOkButton().click();
 
     utility.logout();
-    utility.login(user1, pass1);
+    utility.login(username1, password1);
     utility.logout();
+    expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   });
-
   /*
   it('Open profile', function() {
     page.navigateToHome();
