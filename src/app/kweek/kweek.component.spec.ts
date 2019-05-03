@@ -417,9 +417,9 @@ describe("KweekComponent", () => {
     let kWK_ARR: any[];
     beforeEach(() => {
       kWK_ARR = [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 }
+        { id: 1 , rekweek_info: null},
+        { id: 2 , rekweek_info: null},
+        { id: 3 , rekweek_info: null}
       ];
       component.kweeks = kWK_ARR;
       component.route.snapshot.root.children[0].params["username"] = "user1";

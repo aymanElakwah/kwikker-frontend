@@ -5,7 +5,7 @@ import {
   HttpParams,
   HttpHeaders
 } from "@angular/common/http";
-import { throwError, Observable, observable } from "rxjs";
+import { throwError, Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { Conversation } from "../model/inbox";
 import { Notification } from "../model/notification";
@@ -52,23 +52,40 @@ export class DataService {
 
   /**
    * get request to get Kweeks of home page
-   * @param lastRetrivedId {string} sends the last kweek id to git
+   * @param lastRetrivedId {string} sends the last kweek id to get
+   * @param last_retrieved_rekweeker_username {string} sends the last retrieved rekweeker username
+   *  make the backend know if the last kweek was original or rekweeked
    * newer kweeks after it and also could be null
    * @returns array of Kweeks
    */
-  getHomeKweeks(last_retrieved_kweek_id: string): Observable<Kweek[]> {
-    const parametersSent = last_retrieved_kweek_id
-      ? {
-          params: new HttpParams().set(
-            "last_retrieved_kweek_id",
-            last_retrieved_kweek_id
+  getHomeKweeks(
+    last_retrieved_kweek_id: string,
+    last_retrieved_rekweeker_username: string
+  ): Observable<Kweek[]> {
+    let parametersSent = {};
+    if (last_retrieved_kweek_id && last_retrieved_rekweeker_username) {
+      parametersSent = {
+        params: new HttpParams()
+          .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+          .append(
+            "last_retrieved_rekweeker_username",
+            last_retrieved_rekweeker_username
           )
-        }
-      : {};
+      };
+    } else if (last_retrieved_kweek_id) {
+      parametersSent = {
+        params: new HttpParams().set(
+          "last_retrieved_kweek_id",
+          last_retrieved_kweek_id
+        )
+      };
+    }
+
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/home`, parametersSent)
       .pipe(catchError(this.handleError));
   }
+
   /**
    * to get hashtag kweeks
    * @param trendID every hashtag has ID
@@ -81,18 +98,34 @@ export class DataService {
       .get<Kweek[]>(`${this.base}trends/kweeks`, Trend)
       .pipe(catchError(this.handleError));
   }
+
   /**
    * get request to get All Kweeks made by a certain user
    * @param userName {string} the user that we want to get his kweeks
-   * @param lastRetrivedId {string} sends the last kweek id to git
+   * @param last_retrieved_kweek_id {string} sends the last kweek id to get the kweeks below it
+   * @param last_retrieved_rekweeker_username {string} sends the last retrieved rekweeker username
+   *  make the backend know if the last kweek was original or rekweeked
    * newer kweeks after it and also could be null
    * @returns array of Kweeks
    */
   getUserKweeks(
     userName: string,
-    last_retrieved_kweek_id: string
+    last_retrieved_kweek_id: string,
+    last_retrieved_rekweeker_username: string
   ): Observable<Kweek[]> {
-    if (last_retrieved_kweek_id) {
+    if (last_retrieved_kweek_id && last_retrieved_rekweeker_username) {
+      const parametersSent = userName
+        ? {
+            params: new HttpParams()
+              .set("username", userName)
+              .append("last_retrieved_kweek_id", last_retrieved_kweek_id)
+              .append(
+                "last_retrieved_rekweeker_username",
+                last_retrieved_rekweeker_username
+              )
+          }
+        : {};
+    } else if (last_retrieved_kweek_id) {
       const parametersSent = userName
         ? {
             params: new HttpParams()
@@ -232,6 +265,21 @@ export class DataService {
       map(res => res),
       catchError(this.handleError)
     );
+  }
+
+  /**
+   * get a Kweek
+   * @param id {string} of kweek that we want to retreive
+   * @returns observable
+   */
+  getKweek(id: string): Observable<any> {
+    const paramsSent = { params: new HttpParams().set("id", id) };
+    return this.http
+      .get<Kweek>(`${this.base}kweeks/kweek_only`, paramsSent)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -399,6 +447,7 @@ export class DataService {
       catchError(this.handleError) // code 401 -> Unauthorized access.
     );
   }
+
   /**
    * get first 20 users that contain filter by substring
    * @param filterBy used to filter search
@@ -757,16 +806,16 @@ export class DataService {
    * @returns any
    */
   public sendPass(pass: any, code: any): Observable<any> {
-  
-  const body = JSON.stringify(pass);
+    const body = JSON.stringify(pass);
     let val: string;
     val = code;
-    const headers = new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      CODE: `${val}`
+    });
     return this.http
       .put<any>(this.base + "account/reset_password", body, { headers })
-      .pipe(
-        map(res => res)
-      );
+      .pipe(map(res => res));
   }
 
   // in memory mock data service function

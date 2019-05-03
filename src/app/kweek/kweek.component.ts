@@ -76,6 +76,7 @@ export class KweekComponent implements OnInit {
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
+              null,
               null
             )
             .subscribe(lists => {
@@ -95,6 +96,7 @@ export class KweekComponent implements OnInit {
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
+              null,
               null
             )
             .subscribe(lists => {
@@ -117,7 +119,7 @@ export class KweekComponent implements OnInit {
           break;
       }
     } else if (mainRoute === "home") {
-      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+      this.kweekService.getHomeKweeks(null, null).subscribe(homeKweeks => {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
         // const str = JSON.stringify(this.kweeks[0], null, 4);
@@ -147,7 +149,7 @@ export class KweekComponent implements OnInit {
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else {
-      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+      this.kweekService.getHomeKweeks(null, null).subscribe(homeKweeks => {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
@@ -170,19 +172,20 @@ export class KweekComponent implements OnInit {
     dialogConfig.width = "640px";
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
+    dialogConfig.data = { kweeks: this.kweeks };
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
-    let rootKweek = null;
+    let dialogRef;
     if (kweek.reply_info) {
       this.kweekService
-        .getKweekWithReplies(kweek.reply_info.reply_to_kweek_id)
-        .subscribe(lists => {
-          const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-          dialogRef.componentInstance.roots.push(lists.kweek);
+        .getKweek(kweek.reply_info.reply_to_kweek_id)
+        .subscribe(retrievedKweek => {
+          dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+          dialogRef.componentInstance.roots.push(retrievedKweek);
           this.kweekFunc.injectTagsInText(dialogRef.componentInstance.roots);
           dialogRef.componentInstance.clickedKweek = kweek;
         });
     } else {
-      const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+      dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
       dialogRef.componentInstance.clickedKweek = kweek;
     }
   }
@@ -463,34 +466,72 @@ export class KweekComponent implements OnInit {
       if (mainRoute === "profile/:username") {
         switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
           case "":
-            this.kweekService
-              .getUserKweeks(
-                this.route.snapshot.root.children[0].params["username"],
-                lastKweekId
-              )
-              .subscribe(lists => {
-                if (lists && lists.length > 0) {
-                  this.kweekFunc.injectTagsInText(lists);
-                  this.kweeks = this.kweeks.concat(lists);
-                  // const str = JSON.stringify(this.kweeks[0], null, 4);
-                  // console.log(str);
-                }
-              });
+            if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  this.kweeks[this.kweeks.length - 1].rekweek_info
+                    .rekweeker_username
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            } else {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  null
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            }
             break;
           case "kweeks":
-            this.kweekService
-              .getUserKweeks(
-                this.route.snapshot.root.children[0].params["username"],
-                lastKweekId
-              )
-              .subscribe(lists => {
-                if (lists && lists.length > 0) {
-                  // const str = JSON.stringify(lists, null, 4);
-                  // console.log(str);
-                  this.kweekFunc.injectTagsInText(lists);
-                  this.kweeks = this.kweeks.concat(lists);
-                }
-              });
+            if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  this.kweeks[this.kweeks.length - 1].rekweek_info
+                    .rekweeker_username
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            } else {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  null
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    // const str = JSON.stringify(lists, null, 4);
+                    // console.log(str);
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                  }
+                });
+            }
             break;
           case "likes":
             this.kweekService
@@ -507,12 +548,29 @@ export class KweekComponent implements OnInit {
             break;
         }
       } else if (mainRoute === "home") {
-        this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          if (homeKweeks && homeKweeks.length > 0) {
-            this.kweekFunc.injectTagsInText(homeKweeks);
-            this.kweeks = this.kweeks.concat(homeKweeks);
-          }
-        });
+        if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+          this.kweekService
+            .getHomeKweeks(
+              lastKweekId,
+              this.kweeks[this.kweeks.length - 1].rekweek_info
+                .rekweeker_username
+            )
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        } else {
+          this.kweekService
+            .getHomeKweeks(lastKweekId, null)
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        }
       } else if (mainRoute === "notifications") {
         this.kweekService.getUserMentions(lastKweekId).subscribe(mentions => {
           if (mentions && mentions.length > 0) {
@@ -524,12 +582,29 @@ export class KweekComponent implements OnInit {
           }
         });
       } else {
-        this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          if (homeKweeks && homeKweeks.length > 0) {
-            this.kweekFunc.injectTagsInText(homeKweeks);
-            this.kweeks = this.kweeks.concat(homeKweeks);
-          }
-        });
+        if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+          this.kweekService
+            .getHomeKweeks(
+              lastKweekId,
+              this.kweeks[this.kweeks.length - 1].rekweek_info
+                .rekweeker_username
+            )
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        } else {
+          this.kweekService
+            .getHomeKweeks(lastKweekId, null)
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        }
       }
     }
   }

@@ -10,6 +10,7 @@ describe("ReplyComponent", () => {
   let component: ReplyComponent;
   let dialog: MatDialog;
   let mockDialogRef = jasmine.createSpyObj(["close"]);
+  let data = {length: 0};
   let mockDialogNestedRef = jasmine.createSpyObj(["close"]);
   beforeEach(() => {
     dataService = new DataService(null, null,null);
@@ -18,6 +19,7 @@ describe("ReplyComponent", () => {
     component = new ReplyComponent(
       mockDialogNestedRef,
       mockDialogRef,
+      data,
       dataService,
       kweeksService,
       dialog,
