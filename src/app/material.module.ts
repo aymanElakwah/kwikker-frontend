@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatDatepickerModule,
         MatNativeDateModule,
         MatFormFieldModule,
-        MatInputModule, 
-        MAT_DATE_LOCALE} from '@angular/material';
+        MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatNativeDateModule,
     MatInputModule,
     BrowserAnimationsModule
-    
   ],
   exports: [
     MatDatepickerModule,
@@ -22,9 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     BrowserAnimationsModule
   ],
-  providers: [ MatDatepickerModule,
-                {provide: MAT_DATE_LOCALE, useValue: 'en-GB'} 
-              ],
+  providers: [ MatDatepickerModule ],
 })
 
 export class MaterialModule {}

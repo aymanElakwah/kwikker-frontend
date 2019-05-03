@@ -36,6 +36,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { KweeksModule } from './kweeks/kweeks.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { ResendEmailComponent } from './log-in/resend-email.component';
 
 
 
@@ -45,6 +46,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     AppComponent,
     LogInComponent,
     HomeComponent,
+    ResendEmailComponent,
     SignUpComponent,
     ErrorPageComponent,
     confirmCode,
