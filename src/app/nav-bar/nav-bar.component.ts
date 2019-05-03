@@ -28,11 +28,7 @@ export class NavBarComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private data: DataService, 
               private router: Router
-             )
-
-              {
-
-              }
+             ){}
 
   ngOnInit() {
     this.userName =  localStorage.getItem('username');
@@ -101,7 +97,7 @@ export class NavBarComponent implements OnInit {
   logOutUser() {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
-    this.router.navigate(["/"]);
+    this.router.navigate([""]);
   }
   /**
    * after each char send new request or navigate
@@ -139,11 +135,18 @@ export class NavBarComponent implements OnInit {
   onResize(event){
     if(event.target.innerWidth <=765 )
     {
-      //small devices
-      console.log("small device", event.target.innerWidth );
-      console.log("To show is:" , this.toShow)
-      //just stroe that value
-      this.screenWidth = event.target.innerWidth;
+      if(this.screenWidth > 765)
+      {
+       this.nav.className = 'hide';
+       this.toShow = true;
+      }
+      if(this.screenWidth <= 765)
+      {
+       this.nav.className = 'hide';
+       this.toShow = true;
+      }
+      
+     this.screenWidth = event.target.innerWidth;
     }else{
         //larger deveice, check the latest value
         console.log("large device", event.target.innerWidth );

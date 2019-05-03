@@ -23,6 +23,7 @@ import { SearchComponent } from './search/search.component';
 import { MiniProfileComponent } from './Profile/mini-profile/mini-profile.component';
 import { MainProfileComponent } from './Profile/main-profile/main-profile.component';
 import { ProfileKweeksTabComponent } from './Profile/profile-kweeks-tab/profile-kweeks-tab.component';
+import { ResendEmailComponent } from './log-in/resend-email.component';
 
 
 
@@ -80,6 +81,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent,canActivate:[CanActivateTeam] },
   {path: 'signup', component: SignUpComponent, canActivate: [CanDeactivateTeam]},
   {path: 'login', component: LogInComponent,canActivate: [CanDeactivateTeam] },
+  {path: 'resend_email', component: ResendEmailComponent,canActivate: [CanDeactivateTeam] },
   {path: 'confirm/:code', component: confirmCode,canActivate: [CanDeactivateTeam]},
   {path: 'reset_password/:code', component: confirmPassword,canActivate: [CanDeactivateTeam]},
   {path: 'forget_password', component: ResetPasswordComponent,canActivate: [CanDeactivateTeam]},
