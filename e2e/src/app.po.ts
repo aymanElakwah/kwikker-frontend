@@ -177,7 +177,7 @@ export class AppPage {
   }
 
   getDateDaySignupBoard(){
-    return element(by.cssContainingText('.mat-calendar-body-cell-content', '1'));
+    return element.all(by.cssContainingText('.mat-calendar-body-cell-content', '1')).first();
   }
   //---------Dawood Edits-----------
 
@@ -246,6 +246,10 @@ export class AppPage {
 
   getBlockButton(){
     return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[4]'));
+  }
+
+  getUnblockButton(){
+    return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
   }
 
   getSignUpTitle(){
@@ -383,7 +387,7 @@ export class AppPage {
   }
 
   getSearchKeyWord(){
-    return element(by.className('kweek-text'));
+    return element.all(by.className('kweek-text')).first();
   }
 
   getSearchBar(){
