@@ -116,6 +116,8 @@ export class MiniProfileComponent implements OnInit {
     else
     {
       this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username).subscribe();
+      this.miniCardProfileUsers[index].following = false;
+      this.miniCardProfileUsers[index].follows_you = false;
     }
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 

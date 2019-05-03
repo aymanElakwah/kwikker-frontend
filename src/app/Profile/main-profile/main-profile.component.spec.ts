@@ -4,10 +4,21 @@ import { from } from "rxjs";
 import { User } from "../../model/user";
 import { element } from '@angular/core/src/render3';
 import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
+import { AppModule } from '../../app.module';
+import { ProfileModule } from '../profile.module'; 
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { By } from '@angular/platform-browser';
+
 
 
 
 describe('MainProfileComponent', () => {
+  
  let dataService: DataService;
  let component: MainProfileComponent;
  let route: any = {
@@ -23,6 +34,7 @@ describe('MainProfileComponent', () => {
    }
  };
 
+ 
  beforeEach(() => {
    dataService = new DataService(null, null);
    component = new MainProfileComponent(
@@ -33,6 +45,22 @@ describe('MainProfileComponent', () => {
      null
    );
    component.route = route;
+
+   TestBed.resetTestEnvironment();
+   TestBed.initTestEnvironment(BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting());
+
+   TestBed.configureTestingModule({
+    imports: [
+       SharedModule,
+       ProfileModule,
+       RouterTestingModule.withRoutes([
+        { path: 'profile/:username', component:  MainProfileComponent} ])
+    ],
+    declarations: [],
+    providers: [],
+  }).compileComponents();
+
  });
  
  describe("ngOnInit", () => {
@@ -257,6 +285,7 @@ describe('MainProfileComponent', () => {
 
    let ReturnedValue:any;
 
+
    it('should return Profile Picture to its default value', () => {
      component.route.snapshot.paramMap["username"] = "User1";
      let spy = spyOn(dataService, "getProfileInfo").and.callFake(() => {
@@ -270,18 +299,22 @@ describe('MainProfileComponent', () => {
        return from([ReturnedValue]);
      });
 
-     
-   /*   spyOn(document, "querySelector").and.callFake(function() {
-    return {
-        value: 'test'
-    };
-  });
+     let fixture= TestBed.createComponent(MainProfileComponent);
+     const MsgBoxText = fixture.debugElement.nativeElement.querySelector(".Msg");
 
-     spyOn(document, "getElementById").and.callFake(function() {
-    return {
-        value: 'test'
-    };
-  });  */
+     spyOn(document, "querySelector").and.callFake(() => {
+      return from([MsgBoxText]);
+    });
+
+    const MsgBox = fixture.debugElement.query(By.css('#message-sticky'));
+    
+    spyOn(document, "getElementById").and.callFake(function() {
+      return {
+          style: {
+            display: "",
+          }
+      }
+  });
 
      component.removeProfilePicture();
      expect(spy2).toHaveBeenCalled();
@@ -310,7 +343,10 @@ describe('MainProfileComponent', () => {
        muted: false
    };
 
+
    let ReturnedValue:any;
+
+
 
    it('should return Profile Banner to its default value', () => {
      component.route.snapshot.paramMap["username"] = "User1";
@@ -324,18 +360,23 @@ describe('MainProfileComponent', () => {
        return from([ReturnedValue]);
      });
 
-    /*     
-     spyOn(document, "querySelector").and.callFake(function() {
-      return {
-          value: 'test'
-      };
+     let fixture= TestBed.createComponent(MainProfileComponent);
+     const MsgBoxText = fixture.debugElement.nativeElement.querySelector(".Msg");
+
+     spyOn(document, "querySelector").and.callFake(() => {
+      return from([MsgBoxText]);
     });
-  
-       spyOn(document, "getElementById").and.callFake(function() {
+
+    const MsgBox = fixture.debugElement.query(By.css('#message-sticky'));
+    
+    spyOn(document, "getElementById").and.callFake(function() {
       return {
-          value: 'test'
-      };
-    });  */
+          style: {
+            display: "",
+          }
+      }
+  });
+ 
 
      component.removeProfileBanner();
      expect(spy2).toHaveBeenCalled();
