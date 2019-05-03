@@ -82,8 +82,8 @@
             <div class="user-setting-dropdown Nav" *ngIf="!isAuthorisedUser() && !isEditingMode">
                <button class="btn  btn-light DIcon" id="userActionDropdownMenuButton" data-toggle="dropdown">
                   <!-- 3 Dots Icon => Font-Awesome -->
-                  <span class="Dots-Icon" id="dots" style="font-size: 4ex; color:#657786;">
-                     <i class="fas fa-ellipsis-v fa-1x"></i>
+                  <span class="Dots-Icon" id="dots" style="color:#657786;">
+                     <i class="fas fa-ellipsis-v fa-2x"></i>
                   </span>
                </button>
                <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
@@ -131,9 +131,9 @@
                      </ul>
                      <!--The 2nd part which contains Edit, Follow and Following Buttons
                       & DropDownMenu on the secondry Navbar -->
-                     <span class="MuteIcon" style="font-size: 4ex; color:#939c99;"
+                     <span class="MuteIcon" style="color:#939c99;"
                         *ngIf="!isAuthorisedUser() && !profileUser?.blocked  && (muteMode || profileUser?.muted)">
-                        <i class="fas fa-volume-mute" [style.opacity]="(profileUser?.muted)? '1' : '0.5'"
+                        <i class="fas fa-volume-mute fa-2x" [style.opacity]="(profileUser?.muted)? '1' : '0.5'"
                            [style.color]="(profileUser?.muted)? '#9e0909e3' : '#939c99'" (click)='toggleMute()'> </i>
                      </span>
                      <button id="EDITBUTTON" type="button" class="btn btn-outline-primary edit-button"
