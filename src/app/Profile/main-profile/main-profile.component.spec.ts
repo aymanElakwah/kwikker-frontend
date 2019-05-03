@@ -26,7 +26,7 @@ describe('MainProfileComponent', () => {
  };
 
  beforeEach(() => {
-   dataService = new DataService(null, null);
+   dataService = new DataService(null, null,null);
    component = new MainProfileComponent(
      dataService,
      route,

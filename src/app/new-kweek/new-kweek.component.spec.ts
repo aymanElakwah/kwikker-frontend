@@ -17,7 +17,7 @@ describe('NewKweekComponent', () => {
   beforeEach(() => {
    // thisDialogRef = new MatDialogRef<NewKweekComponent>(null,null,null,null);
     http = new HttpClient(null);
-    newKweekService = new DataService(null,null);
+    newKweekService = new DataService(null,null,null);
     component = new NewKweekComponent( mockDialogRef, http, newKweekService);
   });
 
