@@ -407,11 +407,7 @@ export class DataService {
    */
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
-  const headers = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" })
-  };
-
-    return this.http.post<any>(this.base + "account/login", body, headers).pipe(
+    return this.http.post<any>(this.base + "account/login", body).pipe(
       map(res => res),
       map(err=>err)
     );
@@ -661,6 +657,22 @@ export class DataService {
     
     return this.http
       .post<any>(this.base + "account/forget_password", body)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
+  }
+  /**
+   * A post method function to resend Email to the back-service to give it a confirmation link.
+   * @param code {any} sends confirmation code
+   * Returns either success/error message
+   * @returns any
+   */
+  public sendEmail2(email: any): Observable<any> {
+    const body = JSON.stringify(email);
+    console.log("body",body);
+    return this.http
+      .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
         map(res => res),
         catchError(this.handleError)
