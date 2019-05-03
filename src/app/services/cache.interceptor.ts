@@ -16,7 +16,6 @@ export class CacheInterceptor implements HttpInterceptor {
     requestsUrl = [
         environment.base+'interactions/blocks',
         environment.base+'interactions/mutes'
-
     ];
     flag:boolean = true;
     requestsUrlWithParams = [
@@ -27,11 +26,11 @@ export class CacheInterceptor implements HttpInterceptor {
         {
             url:environment.base+'interactions/following',
             params: localStorage.getItem('username')   
-        },
+        },  
         {
             url:environment.base+'user/profile',
             params: localStorage.getItem('username') 
-        }
+        } 
         
     ];
     cachedRequest = false;
@@ -48,7 +47,7 @@ export class CacheInterceptor implements HttpInterceptor {
      * @param next modifed request
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.requestsUrl.forEach(element => {
+         this.requestsUrl.forEach(element => {
             if(element === req.url) {
                 this.cachedRequest = true;
             }
@@ -75,5 +74,5 @@ export class CacheInterceptor implements HttpInterceptor {
             }
         })
     );
-    }
+    } 
 }

@@ -27,7 +27,8 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-        "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+         "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/"; 
+    
   /**
    *
    * @param http component to send requests
@@ -289,7 +290,6 @@ export class DataService {
       const parametersSent = userName
         ? { params: new HttpParams().set("username", userName) }
         : {};
-      console.log(parametersSent); 
       return this.http
         .get<User[]>(`${this.base}interactions/following`, parametersSent)
         .pipe(catchError(this.handleError));
