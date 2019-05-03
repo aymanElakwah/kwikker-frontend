@@ -181,248 +181,247 @@ export class AppPage {
   }
   //---------Dawood Edits-----------
 
-    getDropDownHomeToggle(){
-      return element(by.className('dropdown-toggle'));
-    }
+  getDropDownHomeToggle(){
+    return element(by.className('dropdown-toggle'));
+  }
 
-    getDropDownHomeToggleProfile(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
-    }
+  getDropDownHomeToggleProfile(){
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
+  }
 
-    getProfileName(){
-      return element(by.className('Profile-Name'));
-    }
+  getProfileName(){
+    return element(by.className('Profile-Name'));
+  }
 
-    getHisScreenName(){
-      return element(by.className('Profile-ScreenName'));
-    }
+  getHisScreenName(){
+    return element(by.className('Profile-ScreenName'));
+  }
 
-    getHisProfileName(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
-    }
+  getHisProfileName(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
+  }
 
-    getFollwingList(){
-      return element.all(by.className('container')).count();
-    }
-
-
-    getTweetToButton(){
-      return element(by.className('btn btn-primary Kweek-Button'));
-    }
-
-    getMessageButton(){
-      return element(by.className('btn btn-primary Msg-Button'));
-    }
+  getFollwingList(){
+    return element.all(by.className('container')).count();
+  }
 
 
-    getHisFollowButton(){
-      return element(by.xpath('//*[@id="header"]/div[4]/div/div[2]/button'));
-    }
+  getTweetToButton(){
+    return element(by.className('btn btn-primary Kweek-Button'));
+  }
 
-    getMyFollowButton(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
-    }
-    getHisFollowingButton(){
-      return element(by.className('btn btn-primary following-button'));
-    }
-
-    getMyFollowingButton(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
-    }
+  getMessageButton(){
+    return element(by.className('btn btn-primary Msg-Button'));
+  }
 
 
-    getHisDropDownButton(){
-      return element(by.id('userActionDropdownMenuButton'));
-    }
+  getHisFollowButton(){
+    return element(by.xpath('//*[@id="header"]/div[4]/div/div[2]/button'));
+  }
 
-    getMyDropDownButton(){
-      return element(by.xpath('//*[@id="dropdownMenuButton"]'));
-    }
+  getMyFollowButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+  }
+  getHisFollowingButton(){
+    return element(by.className('btn btn-primary following-button'));
+  }
 
-
-    getMuteButton(){
-      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[3]'));
-    }
-
-    getBlockButton(){
-      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[4]'));
-    }
-
-    getSignUpTitle(){
-      return element(by.className('active'));
-    }
+  getMyFollowingButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+  }
 
 
-    getMyBlockedButton(){
-      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
-    }
+  getHisDropDownButton(){
+    return element(by.id('userActionDropdownMenuButton'));
+  }
 
-    getBlockedButton(){
-      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
-    }
-
-    getEditButton(){
-      return element(by.className('btn btn-outline-primary edit-button'));
-    }
-
-    getSaveChangesButton(){
-      return element(by.className('btn btn-primary saveChanges-button'));
-    }
-
-    getCancelChangesButton(){
-      return element(by.className('btn btn-primary cancel-button'));
-    }
-
-    getChangeProfilePictureButton(){
-      return element(by.id('profilePicdropdownMenuButton'));
-    }
-
-    getChangeProfilePictureItems(i){
-      return element.all(by.className('dropdown-item')).get(i);
-    }
-
-    getSelectItemButton(){
-      return element(by.xpath('//*[@id="mat-dialog-0"]/app-edit-image/div[1]/button'));
-    }
+  getMyDropDownButton(){
+    return element(by.xpath('//*[@id="dropdownMenuButton"]'));
+  }
 
 
-    getMyScreenName(){
-      return element(by.id('EditName'));
-    }
+  getMuteButton(){
+    return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[3]'));
+  }
 
-    getBio(){
-      return element(by.id('EditBio'));
-    }
+  getBlockButton(){
+    return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[4]'));
+  }
 
-    getProfileBio(){
-      return element(by.className('Profile-Bio'));
-    }
+  getSignUpTitle(){
+    return element(by.className('active'));
+  }
 
-    getProfileTrends(){
-      return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
-    }
 
-    getPrompt(){
-      return element(by.id('prompt'));
-    }
+  getMyBlockedButton(){
+    return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
+  }
 
-    getLikeCount(){
-      return element.all(by.xpath('//*[@id="Taps"]/li[4]/a/text()[2]'));
-    }
+  getBlockedButton(){
+    return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
+  }
+
+  getEditButton(){
+    return element(by.className('btn btn-outline-primary edit-button'));
+  }
+
+  getSaveChangesButton(){
+    return element(by.className('btn btn-primary saveChanges-button'));
+  }
+
+  getCancelChangesButton(){
+    return element(by.className('btn btn-primary cancel-button'));
+  }
+
+  getChangeProfilePictureButton(){
+    return element(by.id('profilePicdropdownMenuButton'));
+  }
+
+  getChangeProfilePictureItems(i){
+    return element.all(by.className('dropdown-item')).get(i);
+  }
+
+  getSelectItemButton(){
+    return element(by.xpath('//*[@id="mat-dialog-0"]/app-edit-image/div[1]/button'));
+  }
+
+
+  getMyScreenName(){
+    return element(by.id('EditName'));
+  }
+
+  getBio(){
+    return element(by.id('EditBio'));
+  }
+
+  getProfileBio(){
+    return element(by.className('Profile-Bio'));
+  }
+
+  getProfileTrends(){
+    return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
+  }
+
+  getPrompt(){
+    return element(by.id('prompt'));
+  }
+
+  getLikeCount(){
+    return element.all(by.xpath('//*[@id="Taps"]/li[4]/a/text()[2]'));
+  }
 
 /////////////////////////Message/////////////////////////////////////////
 
 
-    getNewMessage(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[1]/li[3]/a'));
-    }
+  getNewMessage(){
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[1]/li[3]/a'));
+  }
 
-    getChatBox(){
-      return element(by.xpath('//*[@id="message"]'));
-    }
+  getChatBox(){
+    return element(by.xpath('//*[@id="message"]'));
+  }
 
-    getSentMsg(){
-      return element.all(by.className('msgText msgText2')).last();
-    }
-
-
-    getRecentReciever(){
-      return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox/div[2]/div[1]'));
-    }
-
-    getNewMessageButton(){
-      return element(by.id('new'));
-    }
-    getSendButton(){
-      return element(by.xpath('//*[@id="send"]'));
-    }
-
-    getReciever(){
-      return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox-list/div[2]/div[3]'));
-    }
+  getSentMsg(){
+    return element.all(by.className('msgText msgText2')).last();
+  }
 
 
-    getNextButton(){
-      return element(by.xpath('//*[@id="new"]'));
-    }
+  getRecentReciever(){
+    return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox/div[2]/div[1]'));
+  }
 
-    getBackButton(){
-      return element(by.id('back'));
-    }
+  getNewMessageButton(){
+    return element(by.id('new'));
+  }
+  getSendButton(){
+    return element(by.xpath('//*[@id="send"]'));
+  }
 
+  getRecieverNameField(){
+    return element(by.css('[placeholder = "Enter a name"]'));
+  }
+
+  getReciever(){
+    return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox-list/div[2]/div[3]'));
+  }
+
+  getNextButton(){
+    return element(by.xpath('//*[@id="new"]'));
+  }
+
+  getBackButton(){
+    return element(by.id('back'));
+  }
 ///////////////////////Search//////////////////////////////////////
 
-    getHomeSearchBox(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
-    }
+  getHomeSearchBox(){
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+  }
 
-    getSearchBox(){
-      return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
-    }
+  getSearchBox(){
+    return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+  }
 
-    getSearchProfileName(){
-      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
-    }
+  getSearchProfileName(){
+    return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
+  }
 
-    getProfileSearchBox(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
-    }
+  getProfileSearchBox(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+  }
 
-    getSearchResult(){
-      return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/a'));
-    }
+  getSearchResult(){
+    return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/a'));
+  }
 
-    getProfileSearchResult(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
-    }
+  getProfileSearchResult(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+  }
 
-    navigateToSearchSections(x,y) {
-      return browser.get('/search/'+x+'?filterBy='+y);
-    }
+  navigateToSearchSections(x,y) {
+    return browser.get('/search/'+x+'?filterBy='+y);
+  }
 
-    getSearchKeyWord(){
-      return element(by.className('kweek-text'));
-    }
+  getSearchKeyWord(){
+    return element(by.className('kweek-text'));
+  }
 
-    getSearchBar(){
-      return element(by.xpath('//*[@id="first"]'));
-    }
-
-    pressEnter(){
-      var enter = browser.actions().sendKeys(protractor.Key.ENTER);
-      enter.perform();
-    }
-
+  getSearchBar(){
+    return element(by.xpath('//*[@id="first"]'));
+  }
 /////////////////////////Notifications/////////////////////////////////////////
 
-    getHomeKweekButton(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[3]/form/div/button'));
-    }
+  getHomeKweekButton(){
+    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[3]/form/div/button'));
+  }
 
-    getKweekField(){
-      return element(by.xpath('//*[@id="kweek"]'));
-    }
+  getKweekField(){
+    return element(by.xpath('//*[@id="kweek"]'));
+  }
 
-    getKweekFieldButton(){
-      return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
-    }
+  getKweekFieldButton(){
+    return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
+  }
 
-    getMentionNotificationText(){
-      return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
-    }
+  getMentionNotificationText(){
+    return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
+  }
 
-    getLike(){
-      return element.all(by.className('like')).get(0);
-    }
+  getLike(){
+    return element.all(by.className('like')).get(0);
+  }
 
-    getTypeNotificationText(){
-      return element(by.xpath('//*[@id="notificatioCard"]/div[2]/h5/small'));
-    }
+  getTypeNotificationText(){
+    return element(by.xpath('(//h5)[1]'));
+  }
 
-    getNotificationCard(){
-      return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
-    }
+  getNotificationCard(){
+    return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
+  }
 
+  getUsernameFirstNotification(){
+    return element(by.xpath('(//span [@class = "userName"])[0]'));
+  }
 /*
 
     getBackButton(){
@@ -487,6 +486,10 @@ export class utilityFunctions{
     this.page.getDropDownMenuButton().click();
     this.browserPause(1000);
     this.page.getProfileButton().click();
+  }
+
+  pressEnter(element){
+    element.sendKeys(protractor.Key.RETURN);
   }
 
   logout(){
