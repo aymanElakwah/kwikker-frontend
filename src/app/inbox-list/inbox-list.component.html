@@ -49,11 +49,11 @@
       <img [src]="user.profile_image_url" onError="this.src='http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg'"> 
       <div class="username">
         <p style="line-height: initial;">
-        {{user.username}}
+        {{user.screen_name}}
         </p>
       </div>
       <div class="screenName">
-        @{{user.screen_name}}
+        @{{user.username}}
       </div> 
     </div>
   </div>
