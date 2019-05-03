@@ -115,7 +115,6 @@ public previousOne (){
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
- 
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
