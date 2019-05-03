@@ -406,11 +406,7 @@ export class DataService {
    */
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
-  const headers = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" })
-  };
-
-    return this.http.post<any>(this.base + "account/login", body, headers).pipe(
+    return this.http.post<any>(this.base + "account/login", body).pipe(
       map(res => res),
       map(err=>err)
     );

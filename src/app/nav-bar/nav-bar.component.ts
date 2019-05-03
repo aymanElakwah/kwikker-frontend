@@ -28,11 +28,7 @@ export class NavBarComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private data: DataService, 
               private router: Router
-             )
-
-              {
-
-              }
+             ){}
 
   ngOnInit() {
     this.userName =  localStorage.getItem('username');
@@ -101,7 +97,7 @@ export class NavBarComponent implements OnInit {
   logOutUser() {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("username");
-    this.router.navigate(["/"]);
+    this.router.navigate([""]);
   }
   /**
    * after each char send new request or navigate

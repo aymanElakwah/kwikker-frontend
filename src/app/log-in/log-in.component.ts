@@ -27,7 +27,6 @@ export class LogInComponent implements OnInit {
  * @returns void
  */
    ngOnInit() {
-    
       this.msg =  document.querySelector('.progress');
       this.msg2 =  document.querySelector('.progress2');
     }
