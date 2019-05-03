@@ -177,7 +177,8 @@ export class KweekComponent implements OnInit {
         .getKweekWithReplies(kweek.reply_info.reply_to_kweek_id)
         .subscribe(lists => {
           const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-          dialogRef.componentInstance.roots.concat(lists.kweek);
+          dialogRef.componentInstance.roots.push(lists.kweek);
+          this.kweekFunc.injectTagsInText(dialogRef.componentInstance.roots);
           dialogRef.componentInstance.clickedKweek = kweek;
         });
     } else {
