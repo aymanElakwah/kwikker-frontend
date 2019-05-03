@@ -163,7 +163,7 @@ export class MainProfileComponent implements OnInit {
    */
   removeProfilePicture(): void {
     this.profileUser.profile_image_url = this.defaultProfilePicture;
-   // this.ShowMessage("Profile image removed");
+    this.ShowMessage("Profile image removed");
     this.profileInfoService.removeProfilePicture().subscribe();
   }
 
@@ -174,7 +174,7 @@ export class MainProfileComponent implements OnInit {
    */
   removeProfileBanner(): void {
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
-   // this.ShowMessage("No more header for you");
+    this.ShowMessage("No more header for you");
     this.profileInfoService.removeBanner().subscribe(); 
   }
 
@@ -228,13 +228,13 @@ export class MainProfileComponent implements OnInit {
   toggleMute(): void {
     if (this.profileUser.muted) {
       this.profileInfoService.unmuteUser(this.profileUser.username).subscribe();
-      //this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
+      this.ShowMessage("Unmuted @" + this.profileUser.screen_name);
     } else {
       this.profileInfoService.muteUser(this.profileUser.username).subscribe();
-      /* this.ShowMessage(
+       this.ShowMessage(
         "You will no longer receive notification from @" +
         this.profileUser.screen_name
-     ); */
+     ); 
     }
     this.profileUser.muted = !this.profileUser.muted;
     this.muteMode = true;
@@ -250,17 +250,17 @@ export class MainProfileComponent implements OnInit {
       this.profileInfoService
         .unblockUser(this.profileUser.username)
         .subscribe();
-      /* this.ShowMessage(
+       this.ShowMessage(
         "@" +
           this.profileUser.screen_name +
           " will now be able to follow you and read your Kweeks"
-      ); */
+      ); 
   
     } else {
       this.profileInfoService.blockUser(this.profileUser.username).subscribe();
-      /* this.ShowMessage(
+       this.ShowMessage(
         "@" + this.profileUser.screen_name + " has been blocked"
-      ); */
+      ); 
  
       this.profileUser.following = false;
       this.profileUser.follows_you = false;
@@ -277,7 +277,7 @@ export class MainProfileComponent implements OnInit {
    */
   updateProfile(): void {
     if (this.editedScreenName === "") {
-     // this.ShowMessage("Name can't be blank");
+      this.ShowMessage("Name can't be blank");
       return;
     }
     this.profileInfoService.updateProfile(this.editedScreenName, this.editedBio).subscribe();
@@ -302,7 +302,7 @@ export class MainProfileComponent implements OnInit {
    */
   async ShowMessage(Msg: string) {
     document.querySelector(".Msg").textContent = Msg;
-    const messageBox = document.getElementById("message-sticky");
+    var messageBox = document.getElementById("message-sticky");
     messageBox.style.display = "block";
     messageBox.style.visibility = "visible";
     messageBox.style.transform = "translate( 0px,48px)";

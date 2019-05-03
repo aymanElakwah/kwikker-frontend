@@ -62,7 +62,7 @@ export class CacheInterceptor implements HttpInterceptor {
     }
     const cachedResponse: HttpResponse<any> = this.HttpCacheService.get(req.url);
 
-    if ( cachedResponse) {
+    if ( cachedResponse && req.params.get('last_retrieved_kweek_id')== null) {
         return of(cachedResponse);
     }
     return next.handle(req).pipe(

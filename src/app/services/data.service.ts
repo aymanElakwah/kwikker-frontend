@@ -246,10 +246,7 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowers(
-    userName: string,
-    last_follower_username: string
-  ): Observable<User[]> {
+  getUserFollowers( userName: string, last_follower_username: string ): Observable<User[]> {
     if (last_follower_username) {
       const parametersSent = userName
         ? {
@@ -276,16 +273,13 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowings(
-    userName: string,
-    last_following_username: string
-  ): Observable<User[]> {
+  getUserFollowings( userName: string, last_following_username: string ): Observable<User[]> {
     if (last_following_username) {
       const parametersSent = userName
         ? {
-            params: new HttpParams()
+             params: new HttpParams()
               .set("username", userName)
-              .append("last_retrieved_username", last_following_username)
+              .append("last_retrieved_username", last_following_username) 
           }
         : {};
       return this.http
@@ -295,6 +289,7 @@ export class DataService {
       const parametersSent = userName
         ? { params: new HttpParams().set("username", userName) }
         : {};
+      console.log(parametersSent); 
       return this.http
         .get<User[]>(`${this.base}interactions/following`, parametersSent)
         .pipe(catchError(this.handleError));
