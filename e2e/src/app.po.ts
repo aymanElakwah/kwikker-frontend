@@ -131,7 +131,7 @@ export class AppPage {
   getKweekToButton(){
     return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[1]/div[1]/app-profile-header-card/div/div[3]/button[1]'));
   }
-  
+
   getDropDownMenuButton(){
     return element(by.xpath('//a [@class = "dropdown-toggle"]'));
   }
@@ -216,7 +216,7 @@ export class AppPage {
 
 
     getHisFollowButton(){
-      return element(by.className('btn btn-outline-primary follow-button'));
+      return element(by.xpath('//*[@id="header"]/div[4]/div/div[2]/button'));
     }
 
     getMyFollowButton(){
@@ -361,7 +361,7 @@ export class AppPage {
     }
 
     getSearchProfileName(){
-      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div/div/div[2]/div/div[2]/div[1]'));
+      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
     }
 
     getProfileSearchBox(){
@@ -455,7 +455,7 @@ export class utilityFunctions{
   browserPause(x) {
     return browser.sleep(x);
   }
-  
+
   getElementWithText(selector, text){
     return element(by.cssContainingText(selector, text));
   }
