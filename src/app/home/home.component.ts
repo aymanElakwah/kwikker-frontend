@@ -11,27 +11,12 @@ import { NewKweekComponent } from '../new-kweek/new-kweek.component';
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  constructor(private data: DataService, private router: Router) {}
-
-  ngOnInit() {
-    //when initializing the HomeComponent, check if the user is already logged-in and navigates him to the appropriate page.
-    // if (isNull(localStorage.getItem("TOKEN"))) {
-    //   this.router.navigate(["/home"]);
-    // } else {
-    //   this.router.navigate(["/home"]);
-    // }
-    //localStorage.setItem("TOKEN","123");
-  }
   /**
-   *
-   *Log out function, removes the Token and username saved in localStorage
-   * @param form {NgForm} the Form parameter, which has all the 'log-out' form information
-   * @returns void
-   * it navigates to the main page 'welcome page'.
+   * Home component's constructor
+   * @param data : DataService
+   * @param router : Router
    */
-  logOutUser() {
-    localStorage.removeItem("TOKEN");
-    localStorage.removeItem("username");
-    this.router.navigate(["/login"]);
-  }
+  constructor(private data: DataService, private router: Router) {}
+  ngOnInit() {}
+ 
 }

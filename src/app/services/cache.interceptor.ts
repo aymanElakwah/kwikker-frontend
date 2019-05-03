@@ -14,24 +14,24 @@ export class CacheInterceptor implements HttpInterceptor {
      * all cached requests in the website
      */
     requestsUrl = [
-      //  environment.base+'interactions/blocks',
-      //  environment.base+'interactions/mutes'
-
+        environment.base+'interactions/blocks',
+        environment.base+'interactions/mutes'
     ];
+    flag:boolean = true;
     requestsUrlWithParams = [
-       /* { 
+        { 
             url:environment.base+'kweeks/timelines/profile',
             params: localStorage.getItem('username')   
         },
         {
             url:environment.base+'interactions/following',
             params: localStorage.getItem('username')   
-        },
+        },  
         {
             url:environment.base+'user/profile',
             params: localStorage.getItem('username') 
-        }
-        */
+        } 
+        
     ];
     cachedRequest = false;
     /**
@@ -47,30 +47,32 @@ export class CacheInterceptor implements HttpInterceptor {
      * @param next modifed request
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.requestsUrl.forEach(element => {
+         this.requestsUrl.forEach(element => {
             if(element === req.url) {
                 this.cachedRequest = true;
             }
         });
         this.requestsUrlWithParams.forEach(element => {
-            if(element.url === req.url && element.params === req.params.get('username')) {
+            if(element.url === req.url && element.params === req.params.get('username') &&this.flag&& req.params.get('last_retrieved_kweek_id')== 'A'&& req.params.get('last_retrieved_username')== null) {
                 this.cachedRequest = true;
+                this.flag=false;
             }
         });
-        if ( req.method !== 'GET' || !this.cachedRequest ) {
-       return next.handle(req);
+        if ( req.method !== "GET" || !this.cachedRequest ) {
+            this.flag= false;
+            return next.handle(req);
     }
     const cachedResponse: HttpResponse<any> = this.HttpCacheService.get(req.url);
 
-    if ( cachedResponse) {
+    if ( cachedResponse ) {
         return of(cachedResponse);
     }
     return next.handle(req).pipe(
         tap(event => {
-            if ( event instanceof HttpResponse) {
+            if ( event instanceof HttpResponse ) {
                 this.HttpCacheService.put(req.url, event);
             }
         })
     );
-    }
+    } 
 }

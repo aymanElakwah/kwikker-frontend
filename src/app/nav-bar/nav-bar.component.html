@@ -1,61 +1,5 @@
-<!-- bg-light
-<nav class="navbar navbar-inverse navbar-expand-lg  navbar-light ">
-                
-                <img src="../../assets/main/twitter.png" id="icon"  alt="User Icon" />
-                               
-              
-                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                 </button>
-                
-                <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                           <button class="btn btn-link  nav-link" style="margin-top: 8px;" (click)="openInboxComponent()">Messages</button>
-                          </li> 
-                        <li class="nav-item">
-                            <a class="nav-link" href="notification">Notifications</a>
-                        </li>
-                        <li class="nav-item">
-                                        <a class="nav-link" href="settings">Settings</a>
-                                      </li>
-                        <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['profile',userName]">Profile</a>
-                        </li> 
-                        <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0 searchForm">
-                                 <input (keydown)="newSearch($event)" name="ngModel" #searchBar [(ngModel)]="filterBy" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <div *ngIf="searchBar.dirty">
-                                 <ul class="heroes">
-                                <li *ngFor="let user of users"
-                                        [routerLink]="['profile',user.username]">
-                                        <span class="badge">{{user.username}}</span>
-                                </li>
-                                </ul>
-                        </div>
-                                               
-                          </form>    
-                        </li> 
-                        <li class="nav-item">             
-                        <button class="btn btn-primary kweek-btn" (click)="openKweekComponent()">Kweek</button>
-                                </li> 
-                        <li class="nav-item">
-                                <button class=" kweek-btn btn-info btn "  type="submit" (click)="logOutUser()" >Log out</button>
-                        </li> 
 
-
-                        </ul>
-
-                                </div>
-                       
-     
-              </nav> -->
-
-<!-- NEW NAVBAR :D -->
-<nav class=" mynav navbar navbar-default navbar-expand-md  navbar-fixed-top">
+<nav class=" mynav navbar navbar-default navbar-expand-md  navbar-fixed-top" >
         <div class="container-fluid">
                 <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  aria-expanded="false" (click)="toggleNav()">
@@ -64,46 +8,47 @@
                                 <span class="icon-bar"></span>
                         </button>
                         
-                        <a href="home" class="navbar-brand">
+                        <a href="home" class="navbar-brand logo show">
                                 <img src="../../assets/main/twitter.png" alt="Main icon" id="icon">
                         </a>
+                        <!-- <div class="  spinner-border text-primary loader show" role="status" >
+                                <span class="sr-only">Loading...</span>
+                        </div> -->
+                      
                 </div>
-                        <div class="collapse navbar-collapse myNavBar hide" >
-                                <ul class="nav navbar-nav navbar-lef">
+                        <div class="collapse myNavBar show" (window:resize)="onResize($event)">
+                                <ul class="nav navbar-nav navbar-left ">
                                         <li> <a href="home"><span class=" glyphicon glyphicon-home"></span>&nbsp; Home</a></li>
-                                        <li> <a href="notifications"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notification</a></li>
+                                        <li> <a href="notifications"><span class=" glyphicon glyphicon-bell"></span>&nbsp; Notifications</a></li>
                                         <li class="navbarMsg"> <a (click)="openInboxComponent()" (click)="toggleNav()"> <span class="glyphicon glyphicon-envelope"></span>&nbsp; Message</a></li>
                                         
                                          
                                 </ul>
                                
                                 <ul class="nav navbar-nav navbar-right">
-                                        <li>
+                                        <li  class="dropdown">
                                                 <form class="navbar-form searchBar">
-                                                        <div class="form-group">
-                                                                <input class="form-control" (keydown)="newSearch($event)" #searchBar [(ngModel)]="filterBy" type="search" aria-label="Search" name="ngModel" placeholder="Search...">
-                                                                <div class="list-group  " [hidden]="!searchBar.value" >
-                                                                     
-                                                                <a class="list-group-item list-group-item-action"  *ngFor="let user of users" (click)="testFunc(user.username)"  [routerLink]="['/profile',user.username]">
+                                                        <input class="form-control" (keydown)="newSearch($event)" #searchBar [(ngModel)]="filterBy" type="search" aria-label="Search" name="ngModel" placeholder="Search...">
+                                                        <div class="list-group msgBox" [hidden]="!searchBar.value" >
+                                                                
+                                                                <a class="list-group-item "  *ngFor="let user of users" href="./profile/{{user.username}}">
                                                                         {{user.username}}
                                                                 </a>
-                                                                       
-                                                                </div>
-                                                              
                                                         </div>
+                                                        
                                                 </form>
                                         </li>
                                         <li class="dropdown">
-                                              
+                                            
                                                 <a class="dropdown-toggle" data-toggle="dropdown" href="home">
-                                                        <span class="glyphicon glyphicon-list"></span>&nbsp; {{userName}}
+                                                        <span class="glyphicon glyphicon-list"></span>&nbsp; {{userName}}               
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                <li> <a  [routerLink]="['/profile',userName]"><span class="glyphicon glyphicon-user"></span>&nbsp; Profile</a></li>
+                                                <li> <a href="./profile/{{userName}}"> <span class="glyphicon glyphicon-user"></span>&nbsp; Profile</a></li>
                                                 <li> <a href="settings"><span class="glyphicon glyphicon-cog"></span>&nbsp; Settings</a></li>
                                                 <li class="navbarMsg"> <a (click)="logOutUser()"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Logout</a></li>
                                                 </ul>
-                                                       
+                                                
                                         </li>
                                         <li>
                                                 <form class="navbar-form ">
@@ -116,7 +61,4 @@
                          </div>
         </div>      
 </nav>
-
-
-
 

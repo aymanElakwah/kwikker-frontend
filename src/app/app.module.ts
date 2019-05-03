@@ -35,7 +35,9 @@ import { MinimaLight } from '@alyle/ui/themes/minima';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { KweeksModule } from './kweeks/kweeks.module';
 import { NotificationsModule } from './notifications/notifications.module';
-
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { ResendEmailComponent } from './log-in/resend-email.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
@@ -44,6 +46,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     AppComponent,
     LogInComponent,
     HomeComponent,
+    ResendEmailComponent,
     SignUpComponent,
     ErrorPageComponent,
     confirmCode,
@@ -72,12 +75,13 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MaterialModule,
     FormsModule,
     LyThemeModule.setTheme('minima-light'),
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
                {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
-               { provide: LY_THEME, useClass: MinimaLight, multi: true } 
+               { provide: LY_THEME, useClass: MinimaLight, multi: true }
             ],
   bootstrap: [AppComponent]
 })

@@ -26,8 +26,8 @@ export class AppPage {
     return browser.get('/profile/'+x+'/likes');
   }
 
-  navigateToNotifications() {
-    return browser.get('/notifications');
+  navigateToNotifications(x) {
+    return browser.get('/notifications/'+x);
   }
 
   navigateToHome() {
@@ -63,6 +63,26 @@ export class AppPage {
   getWriteKweekField(){
     return element(by.xpath('//textarea[@class = "form-control ng-untouched ng-pristine ng-valid"]'));
   }
+
+  getCurrentPasswordField(){
+    return element(by.xpath('//input [@id = "currentpassword"]'));
+  }
+
+  getUsernameSettingsField(){
+    return element(by.xpath('//input [@id = "username"]'));
+  }
+
+  getEmailSettingsField(){
+    return element(by.xpath('//input [@id = "email"]'));
+  }
+
+  getNewPasswordField(){
+    return element(by.xpath('//input [@id = "newpassword"]'));
+  }
+
+  getVerifyPasswordField(){
+    return element(by.xpath('//input [@id = "verfpassword"]'));
+  }
   //---------Button-----------
   getTweetToDropDown(){
     return element(by.tagName('p'));
@@ -81,11 +101,11 @@ export class AppPage {
   }
 
   getKweekButton(){
-    return element(by.xpath('//button [@class = "btn btn-primary kweek-btn"]'));
+    return element(by.buttonText('Kweek'));
   }
 
   getSecondKweekButton(){
-    return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
+    return element.all(by.buttonText('Kweek')).get(1);
   }
 
   getRekweekButton(x){
@@ -100,12 +120,40 @@ export class AppPage {
     return element(by.xpath('(//span [@class = "reply"])[' + x +']'));
   }
 
+  getDeleteKweekx(x){
+    return element(by.xpath('(//mat-icon [@class = "close mat-icon notranslate material-icons mat-icon-no-color"])[' + x + ']'));
+  }
+
+  getDeleteKweekButton(){
+    return element(by.xpath('//*[@id="delete"]'));
+  }
+
+  getKweekToButton(){
+    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[1]/div[1]/app-profile-header-card/div/div[3]/button[1]'));
+  }
+
   getDropDownMenuButton(){
     return element(by.xpath('//a [@class = "dropdown-toggle"]'));
   }
 
   getProfileButton(){
     return element(by.xpath('//span [@class = "glyphicon glyphicon-user"]'));
+  }
+
+  getSettingsButton(){
+    return element(by.xpath('//span [@class = "glyphicon glyphicon-cog"]'));
+  }
+
+  getSaveChangesSettingsButton(){
+    return element(by.buttonText('Save Changes'));
+  }
+
+  getChangePasswordSettingsButton(){
+    return element(by.buttonText('Change Password'));
+  }
+
+  getOkButton(){
+    return element(by.buttonText('OK'));
   }
 
   getLogoutButton(){
@@ -141,7 +189,6 @@ export class AppPage {
       return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[2]/ul/li[1]/a'));
     }
 
-
     getProfileName(){
       return element(by.className('Profile-Name'));
     }
@@ -151,7 +198,7 @@ export class AppPage {
     }
 
     getHisProfileName(){
-      return element.all(by.id('usernameref')).get(0);
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
     }
 
     getFollwingList(){
@@ -169,7 +216,7 @@ export class AppPage {
 
 
     getHisFollowButton(){
-      return element(by.className('btn btn-outline-primary follow-button'));
+      return element(by.xpath('//*[@id="header"]/div[4]/div/div[2]/button'));
     }
 
     getMyFollowButton(){
@@ -189,16 +236,16 @@ export class AppPage {
     }
 
     getMyDropDownButton(){
-      return element(by.id('dropdownMenuButton'));
+      return element(by.xpath('//*[@id="dropdownMenuButton"]'));
     }
 
 
     getMuteButton(){
-      return element.all(by.className('dropdown-item')).get(2);
+      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[3]'));
     }
 
     getBlockButton(){
-      return element.all(by.className('dropdown-item')).get(3);
+      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[4]'));
     }
 
     getSignUpTitle(){
@@ -206,8 +253,12 @@ export class AppPage {
     }
 
 
+    getMyBlockedButton(){
+      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
+    }
+
     getBlockedButton(){
-      return element(by.className('btn btn-primary Blocked-button'));
+      return element(by.xpath('//*[@id="userActionDropDownMenu"]/li[2]'));
     }
 
     getEditButton(){
@@ -231,7 +282,7 @@ export class AppPage {
     }
 
     getSelectItemButton(){
-      return element(by.className('y-animations-ib ih y-root-i8 ii'));
+      return element(by.xpath('//*[@id="mat-dialog-0"]/app-edit-image/div[1]/button'));
     }
 
 
@@ -251,14 +302,48 @@ export class AppPage {
       return element.all(by.xpath('//*[@id="Trends-Item"]/h1'));
     }
 
-/////////////////////////Message/////////////////////////////////////////
-
-    getChatBox(){
-      return element(by.className('form-control ng-pristine ng-invalid ng-touched'));
+    getPrompt(){
+      return element(by.id('prompt'));
     }
 
+    getLikeCount(){
+      return element.all(by.xpath('//*[@id="Taps"]/li[4]/a/text()[2]'));
+    }
+
+/////////////////////////Message/////////////////////////////////////////
+
+
+    getNewMessage(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[1]/li[3]/a'));
+    }
+
+    getChatBox(){
+      return element(by.xpath('//*[@id="message"]'));
+    }
+
+    getSentMsg(){
+      return element.all(by.className('msgText msgText2')).last();
+    }
+
+
+    getRecentReciever(){
+      return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox/div[2]/div[1]'));
+    }
+
+    getNewMessageButton(){
+      return element(by.id('new'));
+    }
     getSendButton(){
       return element(by.xpath('//*[@id="send"]'));
+    }
+
+    getReciever(){
+      return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox-list/div[2]/div[3]'));
+    }
+
+
+    getNextButton(){
+      return element(by.xpath('//*[@id="new"]'));
     }
 
     getBackButton(){
@@ -268,15 +353,23 @@ export class AppPage {
 ///////////////////////Search//////////////////////////////////////
 
     getHomeSearchBox(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+    }
+
+    getSearchBox(){
+      return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+    }
+
+    getSearchProfileName(){
+      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[3]/div[1]'));
     }
 
     getProfileSearchBox(){
-      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/input'));
+      return element(by.xpath('/html/body/app-root/app-main-profile/div/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
     }
 
-    getHomeSearchResult(){
-      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/div/a'));
+    getSearchResult(){
+      return element(by.xpath('/html/body/app-root/app-search/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/div/a'));
     }
 
     getProfileSearchResult(){
@@ -288,31 +381,58 @@ export class AppPage {
     }
 
     getSearchKeyWord(){
-      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-kweek/div/div/div[1]/div/div[2]/div/div[3]/div'));
+      return element(by.className('kweek-text'));
     }
 
+    getSearchBar(){
+      return element(by.xpath('//*[@id="first"]'));
+    }
 
     pressEnter(){
       var enter = browser.actions().sendKeys(protractor.Key.ENTER);
       enter.perform();
     }
 
+/////////////////////////Notifications/////////////////////////////////////////
 
+    getHomeKweekButton(){
+      return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[3]/form/div/button'));
+    }
+
+    getKweekField(){
+      return element(by.xpath('//*[@id="kweek"]'));
+    }
+
+    getKweekFieldButton(){
+      return element(by.xpath('//*[@id="mat-dialog-0"]/app-new-kweek/div[2]/div[2]/div[2]/span[2]/button'));
+    }
+
+    getMentionNotificationText(){
+      return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
+    }
+
+    getLike(){
+      return element.all(by.className('like')).get(0);
+    }
+
+    getTypeNotificationText(){
+      return element(by.xpath('//*[@id="notificatioCard"]/div[2]/h5/small'));
+    }
+
+    getNotificationCard(){
+      return element(by.xpath('/html/body/app-root/app-notifications/div/div/div[2]/app-mentionslist/app-kweek/div/div/div[1]/div/div[3]/div/div[3]/div/p'));
+    }
 
 /*
+
     getBackButton(){
       return element(by.id('back'));
     }
 */
-
-
     getAllButton(){
       return element(by.className('btn btn-outline-primary'));
     }
 
-    getNotificationCard(){
-      return element.all(by.className('card-body'));
-    }
 
     browserPause(x) {
       return browser.sleep(x);
@@ -322,14 +442,9 @@ export class AppPage {
       return browser;
     }
 
-
-
-
     navigateToLogin() {
       return browser.get('/login');
     }
-
-
   }
 
 export class utilityFunctions{
@@ -352,6 +467,10 @@ export class utilityFunctions{
     this.page.getPasswordLoginField().sendKeys(password);
     this.page.getLoginButton().click();
     this.browserPause(1000);
+  }
+
+  browserForceClick(element){
+    browser.actions().mouseMove(element).click().perform();
   }
 
   navigateToLogin() {

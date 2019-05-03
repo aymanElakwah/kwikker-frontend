@@ -11,7 +11,7 @@ describe('BlockedListComponent', () => {
   
 
   beforeEach(() => {
-    blocked_service = new DataService(null,null);
+    blocked_service = new DataService(null,null,null);
     component = new BlockedListComponent(blocked_service);
     
   });

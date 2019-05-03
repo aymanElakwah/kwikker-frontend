@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
-
+//import { MaterialModule } from '../material.module';
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
@@ -22,7 +22,6 @@ public errorOccured2: any;
 public errorOccured3: any;
 public errorOccured4: any;
 public email: string;
-public counter: number;
 public userName: string;
 public mail: string;
 public pass: string;
@@ -32,6 +31,7 @@ public birthdate: string;
 //Data to set the date picker module
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
+
 /**
  * A constructor called when initialiizing logInComponent.
  * It creates two private vairables.
@@ -52,13 +52,6 @@ constructor(private data: DataService , private router: Router) {}
    * @returns void
    */
 ngOnInit() {
-  if(!isNull(localStorage.getItem('TOKEN')))
-    {
-      this.router.navigate(['home']);
-    }
-    else 
-    {this.router.navigate(['signup']);}
-
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
    this.fs1=  document.querySelector('.fs1');
@@ -69,7 +62,6 @@ ngOnInit() {
    this.errorOccured2 =  document.querySelector('.errorOccured2');
    this.errorOccured3 =  document.querySelector('.errorOccured3');
    this.errorOccured4 =  document.querySelector('.errorOccured4');
-   this.counter = 0;
 }
 
 /**
@@ -89,7 +81,6 @@ public previousOne (){
    * @returns void
    */
   public secondStep() {
-    
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
@@ -107,7 +98,6 @@ public previousOne (){
    *and function 'whatToShow()' handels the situation
    * @returns void
    */
-
  public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
@@ -122,7 +112,6 @@ public previousOne (){
     screen_name: user.screenname,
     birth_date: user.datepicker
  }; 
- 
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
@@ -149,11 +138,10 @@ public previousOne (){
     
 }
 /**
-   *Takes either 0/1 to show an error/success message at the front view.
-   *@param id {number} 
-   * @returns void
-   */
-
+*Takes either 0/1 to show an error/success message at the front view.
+*@param id {number} 
+* @returns void
+*/
 public whatToShow(id: number) {
   if(id == 0)
   {
@@ -209,7 +197,6 @@ public whatToShow(id: number) {
    *@param date {string} 
    * @returns string
    */
- 
 redesignDateFormat(date: string): string {
   if (!date) {
     return null;

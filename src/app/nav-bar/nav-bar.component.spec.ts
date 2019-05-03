@@ -1,59 +1,45 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture, TestBed } from '@angular/core/testing';
+import { DataService } from '../services/data.service';
+import { NavBarComponent } from './nav-bar.component';
+import { MatDialog, MatChipInputEvent } from '@angular/material';
+import { Router } from '@angular/router';
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 
-// import { NavBarComponent } from './nav-bar.component';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { MatDialog } from '@angular/material';
-// import { Router } from '@angular/router';
-// import { DataService } from '../services/data.service';
+describe('Navbar Component', () => {
+  let component: NavBarComponent;
+  let fixture: ComponentFixture<NavBarComponent>;
+  let dataService: DataService;
+  let  dialog: MatDialog;
+  let route: Router;
+  let spinner: NgxSpinnerService;
 
-// describe('NavBarComponent', () => {
-//   let component: NavBarComponent;
-  
-//   let dialog: MatDialog;
-//   let data: DataService;
-//   let router: Router;
-  
-  
+  beforeEach(() => {
+    dataService = new DataService(null, null,null);
+    component = new NavBarComponent(dialog,dataService,route,spinner);
+    });
 
-//   beforeEach(() => {
-//     component = new NavBarComponent(dialog,data,router)
-//   });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
-// /**
-//  * A descripe function to test which error message to show for different data entries.
-//  * and tests for date conversion function into string
-//  */
-// describe('NavBarComponent', () => {
-//   let component: NavBarComponent;
-//   let fixture: ComponentFixture<NavBarComponent>;
-  
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ NavBarComponent ]
-//     })
-//     .compileComponents();
-//   }));
-
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(NavBarComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create a valid date', () => {
-//     component.toggleNav();
-//     expect(this.nav.className).toEqual('hide');
-//     component.toggleNav();
-//     expect(this.nav.className).toEqual('show');
-     
-
-//   });
- 
- 
-  
-// });
+/**
+ * A unit test function, tests that user is successfully logged out of the system.
+ */
+  describe("logOutUser Function", () => {
+    beforeEach(() => {
+        dataService = new DataService(null, null,null);
+        let router = jasmine.createSpyObj("Router", ["navigate"]);
+        component = new NavBarComponent(dialog,dataService,router,spinner);
+        });
+    
+    it('It should log out user by freeing up the token and username places, then navigate to the welcome page.', () => {
+        let router = jasmine.createSpyObj("Router", ["navigate"]);
+        component.logOutUser();
+        let tok = localStorage.getItem("TOKEN");
+        let usr = localStorage.getItem("username");
+        expect(tok).toBeNull();
+        expect(usr).toBeNull();
+          });
+  });
+});

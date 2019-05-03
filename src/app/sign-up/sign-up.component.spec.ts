@@ -1,109 +1,85 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture, TestBed } from '@angular/core/testing';
+import { SignUpComponent } from './sign-up.component';
+import { DataService } from '../services/data.service';
 
-// import { SignUpComponent } from './sign-up.component';
-// import { DataService } from '../services/data.service';
-// import { HttpClient } from '@angular/common/http';
-// /**
-//  * A descripe function to test which error message to show for different data entries.
-//  * and tests for date conversion function into string
-//  */
-// describe('SignUpComponent', () => {
-//   let component: SignUpComponent;
-//   let fixture: ComponentFixture<SignUpComponent>;
-  
-
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ SignUpComponent ]
-//     })
-//     .compileComponents();
-//   }));
-
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SignUpComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create a valid date', () => {
-//     const result  = component.redesignDateFormat("Sun Jan 01 2011");
-//     const result2  = component.redesignDateFormat("Sun Feb 01 2011");
-//     const result3  = component.redesignDateFormat("Sun Jan 01 2011");
-//     expect(result).toContain("2011");    
-//     expect(result2).toContain("2011");    
-//     expect(result3).toContain("2011");    
+describe('Signup Component', () => {
+  let component: SignUpComponent;
+  let fixture: ComponentFixture<SignUpComponent>;
+  let dataService: DataService;
+  let route: any = {
+    snapshot: {
+      root: {
+        children: [
+          {
+            params: {
+              username: String
+            }
+          }
+        ]
+      },
+      url:[
+        {
+            path: String
+        }
+      ],
+      queryParams: {
+        filterBy: String
+      }
+    }
+  };
 
 
-//   });
-//  it('should redesign the view', () => {
-//     component.whatToShow(0);
-//     expect( this.cool.className).toEqual("show");
-//     expect(this.errorOccured.className).toEqual('hide');
-//     expect(this.errorOccured2.className).toEqual('hide');
-//     expect(this.errorOccured3.className).toEqual('hide');
-//     expect(this.errorOccured4.className).toEqual('hide');
-    
+  beforeEach(() => {
+    dataService = new DataService(null, null,null);
+    component = new SignUpComponent(dataService,route);
 
-//     component.whatToShow(1);
-//     expect( this.cool.className).toEqual("hide");
-//     expect(this.errorOccured.className).toEqual('hide');
-//     expect(this.errorOccured2.className).toEqual('show');
-//     expect(this.errorOccured3.className).toEqual('hide');
-//     expect(this.errorOccured4.className).toEqual('hide');
-    
-//     component.whatToShow(2);
-//     expect( this.cool.className).toEqual("hide");
-//     expect(this.errorOccured.className).toEqual('hide');
-//     expect(this.errorOccured2.className).toEqual('hide');
-//     expect(this.errorOccured3.className).toEqual('show');
-//     expect(this.errorOccured4.className).toEqual('hide');
-      
+    component.bar2 =  document.querySelector('.secondProgress');
+    component.bar3 =  document.querySelector('.thirdProgress');
+    component.fs1=  document.querySelector('.fs1');
+    component.fs2=  document.querySelector('.fs2');
+    component.fs3 =  document.querySelector('.fs3');
+    component.cool =  document.querySelector('.progress');
+    component.errorOccured =  document.querySelector('.errorOccured');
+    component.errorOccured2 =  document.querySelector('.errorOccured2');
+    component.errorOccured3 =  document.querySelector('.errorOccured3');
+    component.errorOccured4 =  document.querySelector('.errorOccured4');
+    });
 
 
-//     component.whatToShow(3);
-//     expect( this.cool.className).toEqual("hide");
-//     expect(this.errorOccured.className).toEqual('hide');
-//     expect(this.errorOccured2.className).toEqual('hide');
-//     expect(this.errorOccured3.className).toEqual('hide');
-//     expect(this.errorOccured4.className).toEqual('show');
-    
-
-//     component.whatToShow(4);
-//     expect( this.cool.className).toEqual("hide");
-//     expect(this.errorOccured.className).toEqual('show');
-//     expect(this.errorOccured2.className).toEqual('hide');
-//     expect(this.errorOccured3.className).toEqual('hide');
-//     expect(this.errorOccured4.className).toEqual('hide');
 
 
-//     component.whatToShow(NaN);
-//     expect( this.cool.className).toEqual("hide");
-//     expect(this.errorOccured.className).toEqual('hide');
-//     expect(this.errorOccured2.className).toEqual('hide');
-//     expect(this.errorOccured3.className).toEqual('hide');
-//     expect(this.errorOccured4.className).toEqual('hide');
-    
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
+  describe("redesignDateFormat Function", () => {
+    it('It should rewrite the date in a new format', () => {
+            const result  = component.redesignDateFormat("Sun Jan 01 2011");
+            const result2  = component.redesignDateFormat("Sun Feb 01 2011");
+            const result3  = component.redesignDateFormat("Sun Jan 01 2011");
+            const result4  = component.redesignDateFormat("Sun Jan 05 2011");
+            const result5  = component.redesignDateFormat("Sun Feb 05 2011");
+            const result6  = component.redesignDateFormat("Sun Mar 05 2011");
+            const result7  = component.redesignDateFormat("Mon Apr 01 2011");
+            const result8  = component.redesignDateFormat("Tue Apr 02 2011");
+            const result9  = component.redesignDateFormat("Wed Apr 03 2011");
+            const result10  = component.redesignDateFormat(null);
 
-//   });
- 
- 
-  
-// });
+            //Test the year
+            expect(result).toContain("2011");    
+            expect(result2).toContain("2011");    
+            expect(result3).toContain("2011");
+            //Test the month
+            expect(result4).toContain("1");
+            expect(result5).toContain("2");
+            expect(result6).toContain("3"); 
+            //Test the day
+            expect(result7).toContain("1");
+            expect(result8).toContain("2");
+            expect(result9).toContain("3"); 
+            //Null values
+            expect(result10).toBeNull(); 
+          });
+  });
 
-
-// /**
-//  * Funciton to test hte creation and calling for signup function and calling of its dataservices.
-//  */
-
-// describe("LogInComponent", () => {
-//   let dataServices: DataService;
-//   let http: HttpClient;
-//   it("should call #signup in the constructor", () => {
-//     let signUp_Spy = spyOn(DataService.prototype, 'signUpUser');
-
-//     dataServices = new DataService(http, null);
-
-//     expect(signUp_Spy).toHaveBeenCalled();
-//   });
-// });
+});

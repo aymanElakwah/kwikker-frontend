@@ -33,7 +33,7 @@ input:focus{
     font-size: 14px;
     line-height: 20px;
     padding: 6px 16px;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-weight: bold;
     white-space: nowrap;
     text-transform: none;
@@ -59,3 +59,8 @@ input:focus{
  .card-body{
     border-bottom: 1px solid rgba(0,0,0,.125);
  }
+
+ .alertMsg{
+	text-align: left;
+	font-size: 12px;
+}
