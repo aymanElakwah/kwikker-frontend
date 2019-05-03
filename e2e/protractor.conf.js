@@ -9,8 +9,8 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    // 'browserName': 'chrome',
-    'browserName': 'firefox',
+     'browserName': 'chrome',
+    // 'browserName': 'firefox',
   },
   // multiCapabilities: [{
   //   'browserName': 'firefox'
