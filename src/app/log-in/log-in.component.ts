@@ -43,6 +43,10 @@ export class LogInComponent implements OnInit {
  * @returns void
  */
   submitForm(form: NgForm) {
+    
+      this.msg.className = 'hide';
+      this.msg2.className = 'hide';
+  
     this.isLoggedIn = false;
     const user = form.value;
     var ev: (err: any) => void;

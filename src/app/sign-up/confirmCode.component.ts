@@ -28,7 +28,7 @@ export class confirmCode implements OnInit {
    * @returns void
    */
     ngOnInit() {
-        this.confirmCode  = this.route.snapshot.paramMap.get("code");
+        this.confirmCode = this.route.snapshot.paramMap.get("code");
         var toSend = { 
           confirmation_code:this.confirmCode
        };
