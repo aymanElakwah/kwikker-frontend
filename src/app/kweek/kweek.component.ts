@@ -120,6 +120,8 @@ export class KweekComponent implements OnInit {
       this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
+        // const str = JSON.stringify(this.kweeks[0], null, 4);
+        // console.log(str);
       });
     } else if (
       mainRoute === "search" &&
@@ -169,8 +171,19 @@ export class KweekComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
-    const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = kweek;
+    let rootKweek = null;
+    if (kweek.reply_info) {
+      this.kweekService
+        .getKweekWithReplies(kweek.reply_info.reply_to_kweek_id)
+        .subscribe(lists => {
+          const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+          dialogRef.componentInstance.roots.concat(lists.kweek);
+          dialogRef.componentInstance.clickedKweek = kweek;
+        });
+    } else {
+      const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+      dialogRef.componentInstance.clickedKweek = kweek;
+    }
   }
 
   /**

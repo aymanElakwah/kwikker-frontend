@@ -85,7 +85,7 @@ a:hover {
 }
 
 .kweeks .kweek-user:hover .screen_name,
-#rekweeked-screen_name:hover {
+.rekweeked-reply-screen_name:hover {
   text-decoration: underline;
   color: #1da1f2;
 }
@@ -105,7 +105,7 @@ a:hover {
   background-color: #e6ecf0;
 }
 
-#rekweeked-info {
+.rekweeked-reply-info {
   color: #657786;
   font-size: 14px;
   margin: 3px 45px;
@@ -115,7 +115,7 @@ a:hover {
   padding: 3px 12px 11px 12px;
 }
 
-#rekweeked-screen_name {
+.rekweeked-reply-screen_name {
   color: #657786;
   text-decoration: none;
 }

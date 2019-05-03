@@ -17,7 +17,7 @@ import { BlockedMutedUser } from "../model/bloked-muted-users";
 import { $ } from "protractor";
 import { CacheService } from "./cache.service";
 import { Message } from "../model/message";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -27,12 +27,16 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-        "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
   /**
    *
    * @param http component to send requests
    */
-  constructor(private http: HttpClient, private cacheService: CacheService,private router:Router) {}
+  constructor(
+    private http: HttpClient,
+    private cacheService: CacheService,
+    private router: Router
+  ) {}
 
   /**
    * get request to get All information about certain user
@@ -54,7 +58,12 @@ export class DataService {
    */
   getHomeKweeks(last_retrieved_kweek_id: string): Observable<Kweek[]> {
     const parametersSent = last_retrieved_kweek_id
-      ? { params: new HttpParams().set("last_retrieved_kweek_id", last_retrieved_kweek_id) }
+      ? {
+          params: new HttpParams().set(
+            "last_retrieved_kweek_id",
+            last_retrieved_kweek_id
+          )
+        }
       : {};
     return this.http
       .get<Kweek[]>(`${this.base}kweeks/timelines/home`, parametersSent)
@@ -79,7 +88,10 @@ export class DataService {
    * newer kweeks after it and also could be null
    * @returns array of Kweeks
    */
-  getUserKweeks(userName: string, last_retrieved_kweek_id: string): Observable<Kweek[]> {
+  getUserKweeks(
+    userName: string,
+    last_retrieved_kweek_id: string
+  ): Observable<Kweek[]> {
     if (last_retrieved_kweek_id) {
       const parametersSent = userName
         ? {
@@ -210,6 +222,19 @@ export class DataService {
   }
 
   /**
+   * retreive a Kweek with Replies
+   * @param id {string} of kweek that we want to retreive with its replies
+   * @returns observable
+   */
+  getKweekWithReplies(id: string): Observable<any> {
+    const paramsSent = { params: new HttpParams().set("id", id) };
+    return this.http.get<Kweek[]>(`${this.base}kweeks/`, paramsSent).pipe(
+      map(res => res),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
    * get request to get All Liked Kweeks by a certain user
    * @param userName {string} the user that we want to get his liked kweeks
    * @param lastRetrivedId {string} sends the last kweek id to git
@@ -246,7 +271,10 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowers( userName: string, last_follower_username: string ): Observable<User[]> {
+  getUserFollowers(
+    userName: string,
+    last_follower_username: string
+  ): Observable<User[]> {
     if (last_follower_username) {
       const parametersSent = userName
         ? {
@@ -273,13 +301,16 @@ export class DataService {
    * No Parameters
    * @returns array of MiniUsers
    */
-  getUserFollowings( userName: string, last_following_username: string ): Observable<User[]> {
+  getUserFollowings(
+    userName: string,
+    last_following_username: string
+  ): Observable<User[]> {
     if (last_following_username) {
       const parametersSent = userName
         ? {
-             params: new HttpParams()
+            params: new HttpParams()
               .set("username", userName)
-              .append("last_retrieved_username", last_following_username) 
+              .append("last_retrieved_username", last_following_username)
           }
         : {};
       return this.http
@@ -289,7 +320,7 @@ export class DataService {
       const parametersSent = userName
         ? { params: new HttpParams().set("username", userName) }
         : {};
-      console.log(parametersSent); 
+      console.log(parametersSent);
       return this.http
         .get<User[]>(`${this.base}interactions/following`, parametersSent)
         .pipe(catchError(this.handleError));
@@ -364,11 +395,9 @@ export class DataService {
           )
         }
       : {};
-    return this.http
-      .get<any>(this.base + "notifications/", options)
-      .pipe(
-        catchError(this.handleError) // code 401 -> Unauthorized access.
-      );
+    return this.http.get<any>(this.base + "notifications/", options).pipe(
+      catchError(this.handleError) // code 401 -> Unauthorized access.
+    );
   }
   /**
    * get first 20 users that contain filter by substring
@@ -404,7 +433,7 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/login", body).pipe(
       map(res => res),
-      map(err=>err)
+      map(err => err)
     );
   }
   /**
@@ -630,8 +659,8 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-      map(err=>err)
-     // catchError(this.handleError)
+      map(err => err)
+      // catchError(this.handleError)
     );
   }
 
@@ -649,7 +678,7 @@ export class DataService {
    */
   public sendEmail(email: any): Observable<any> {
     const body = JSON.stringify(email);
-    
+
     return this.http
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
@@ -665,7 +694,7 @@ export class DataService {
    */
   public sendEmail2(email: any): Observable<any> {
     const body = JSON.stringify(email);
-    console.log("body",body);
+    console.log("body", body);
     return this.http
       .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
@@ -681,18 +710,22 @@ export class DataService {
    * @returns any
    */
   public signUpConfirm(code: any): Observable<any> {
-
     let val = code.confirmation_code;
-    console.log("CODE here: ",val)
-    const headers = new HttpHeaders({ "Content-Type": "application/json","CODE":`${val}` });
-    const body = {"password": "123"};
+    console.log("CODE here: ", val);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      CODE: `${val}`
+    });
+    const body = { password: "123" };
     console.log(headers);
-    return this.http.post<any>(this.base + "account/registration/confirmation", body, {headers})
+    return this.http
+      .post<any>(this.base + "account/registration/confirmation", body, {
+        headers
+      })
       .pipe(
         map(res => res),
-        catchError(this.handleError)  
+        catchError(this.handleError)
       );
-  
   }
   /**
    * post request To add a new kweek/reply as a new kweek
@@ -700,7 +733,11 @@ export class DataService {
    * @param reply_to {string} the id of kweek that was replyed to
    * @returns Request Response
    */
-  addNewKweek(text: string, reply_to: string, media_id:string): Observable<any> {
+  addNewKweek(
+    text: string,
+    reply_to: string,
+    media_id: string
+  ): Observable<any> {
     this.cacheService.invalidateUrl(this.base + "kweeks/timelines/profile");
     const obj = { text: String(), reply_to: String(), media_id: String() };
     obj.text = text;
@@ -720,22 +757,23 @@ export class DataService {
    * @returns any
    */
   public sendPass(pass: any, code: any): Observable<any> {
-  
-  const body = JSON.stringify(pass);
-  console.log("body: ",body);
+    const body = JSON.stringify(pass);
+    console.log("body: ", body);
     let val: string;
     val = code;
-    console.log("code: ",val);
-    const headers = new HttpHeaders ({"Content-Type": "application/json","CODE":`${val}`})
+    console.log("code: ", val);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      CODE: `${val}`
+    });
     console.log(headers);
     return this.http
-      .put<any>(this.base + "account/reset_password", body,{headers})
+      .put<any>(this.base + "account/reset_password", body, { headers })
       .pipe(
         map(res => res),
         catchError(this.handleError)
       );
-    // return null;  
-    
+    // return null;
   }
 
   // in memory mock data service function
@@ -832,14 +870,16 @@ export class DataService {
    * @param image_file {File} The Uploaded Image
    * @returns Request Response (media id);
    */
-  postMedia(image_file: File): Observable<{media_id:string}> {
+  postMedia(image_file: File): Observable<{ media_id: string }> {
     let body = new FormData();
     body.append("file", image_file);
-  
-    return this.http.post<{media_id:string}>(this.base + "media/", body).pipe(
-      map(res => res),
-      catchError(this.handleError)
-    );
+
+    return this.http
+      .post<{ media_id: string }>(this.base + "media/", body)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError)
+      );
   }
 
   /**
