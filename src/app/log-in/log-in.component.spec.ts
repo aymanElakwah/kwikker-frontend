@@ -14,7 +14,7 @@ describe('Login Component', () => {
   let route:Router;
 
   beforeEach(() => {
-    dataService = new DataService(http, cacheService);
+    dataService = new DataService(http, cacheService,null);
     component = new LogInComponent(dataService,route);
     });
 

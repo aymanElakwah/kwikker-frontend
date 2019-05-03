@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { NavBarComponent } from './nav-bar.component';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 describe('Navbar Component', () => {
   let component: NavBarComponent;
@@ -10,11 +11,11 @@ describe('Navbar Component', () => {
   let dataService: DataService;
   let  dialog: MatDialog;
   let route: Router;
-
+  let spinner: NgxSpinnerService;
 
   beforeEach(() => {
-    dataService = new DataService(null, null);
-    component = new NavBarComponent(dialog,dataService,route);
+    dataService = new DataService(null, null,null);
+    component = new NavBarComponent(dialog,dataService,route,spinner);
     });
 
 
@@ -26,8 +27,8 @@ describe('Navbar Component', () => {
  */
   describe("ngOnInit Function", () => {
         beforeEach(() => {
-            dataService = new DataService(null, null);
-            component = new NavBarComponent(dialog,dataService,route);
+            dataService = new DataService(null, null,null);
+            component = new NavBarComponent(dialog,dataService,route,spinner);
             });
         
         it("It should store user's suername", () => {
@@ -45,9 +46,9 @@ describe('Navbar Component', () => {
  */
   describe("logOutUser Function", () => {
     beforeEach(() => {
-        dataService = new DataService(null, null);
+        dataService = new DataService(null, null,null);
         let router = jasmine.createSpyObj("Router", ["navigate"]);
-        component = new NavBarComponent(dialog,dataService,router);
+        component = new NavBarComponent(dialog,dataService,router,spinner);
         });
     
     it('It should log out user by freeing up the token and username places, then navigate to the welcome page.', () => {

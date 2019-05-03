@@ -12,6 +12,8 @@ import { MiniUser } from '../model/mini-user';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ChatComponent } from '../chat/chat.component';
 import { User } from '../model/user';
+import { hasClassName } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nav-bar',
@@ -25,12 +27,24 @@ export class NavBarComponent implements OnInit {
   public nav: any;
   public toShow: boolean;
   public screenWidth: number;
+  
   constructor(private dialog: MatDialog,
               private data: DataService, 
-              private router: Router
-             ){}
+              private router: Router, 
+              private spinit: NgxSpinnerService
+              ){
+                
+             }
 
   ngOnInit() {
+
+    /** spinner starts on init */
+    this.spinit.show();
+    setTimeout(() => {
+        /** spinner ends after 1 second */
+        this.spinit.hide();
+    }, 1000);
+  
     this.userName =  localStorage.getItem('username');
     if (isNull(this.userName))
     {
@@ -39,8 +53,8 @@ export class NavBarComponent implements OnInit {
     }
     this.nav =  document.querySelector('.myNavBar');
     this.toShow = true;
-   this.screenWidth = 1000;
-    
+    this.screenWidth = 1000;
+  
   }
 
   /**
@@ -167,5 +181,6 @@ export class NavBarComponent implements OnInit {
     }
    
   }
+
 }
 
