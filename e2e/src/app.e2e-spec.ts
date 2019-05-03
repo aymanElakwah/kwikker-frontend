@@ -197,6 +197,7 @@ it('Open profile, view my following', function() {
     page.browserPause(1000);
     page.getSelectItemButton().click();
     page.browserPause(5000);
+    page.getPrompt();
   });
 */
 
@@ -294,10 +295,10 @@ it('Open profile, view my following', function() {
 
 //////////Message/////////////////
 
-
 /*
-  it('Message someone, send a text message', function() {
 
+  it('Message someone, send a text message', function() {
+    page.navigateToHome();
     page.getNewMessage().click();
     //page.getBackButton().click();
     page.browserPause(2000);
@@ -307,7 +308,8 @@ it('Open profile, view my following', function() {
     page.getChatBox().sendKeys('New message!');
     page.getSendButton().click();
     page.browserPause(1000);
-    //expect(page.getMessageButton().getText()).toEqual('Message');
+    page.getRecentReciever().click();
+    expect(page.getSentMsg().getText()).toEqual('New message');
   });
 */
 
