@@ -26,10 +26,14 @@ a:active {
   color: #1da1f2;
 }
 
+.counter {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .reply,
 .rekweek,
 .like {
-  font-size: 24;
   color: #657786;
 }
 
@@ -95,8 +99,8 @@ a:hover {
   color: #666;
 }
 
-.tooltip-style {
-}
+/* .tooltip-style {
+} */
 
 .pointer {
   cursor: pointer;

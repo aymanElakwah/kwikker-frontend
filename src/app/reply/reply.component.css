@@ -60,11 +60,6 @@
   margin-top: 10px;
 }
 
-#last-clicked-kweek .counter {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 #likers-rekweekers {
   border-bottom: 1px solid #e6ecf0;
   border-top: 1px solid #e6ecf0;
@@ -155,3 +150,22 @@
     background-color: #1DA1F2;
 
 } */
+
+.content {
+  width: auto;
+}
+
+mat-icon.close-reply {
+  font-size: 16px;
+  position: absolute;
+  top: 12px;
+  right: 30px;
+  display: inline-block;
+  color: #657786;
+}
+
+mat-icon.close-reply:hover {
+  color: red;
+  font-size: 17px;
+  cursor: pointer;
+}

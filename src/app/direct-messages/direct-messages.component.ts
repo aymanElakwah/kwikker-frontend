@@ -62,6 +62,9 @@ export class DirectMessagesComponent implements OnInit , AfterViewInit{
   ngOnInit() {
     this.chatService.currentAddresse.subscribe(addressee => {this.addressee = addressee;
       this.socket.ReciveMessage(this.addressee.username,localStorage.getItem("username")).subscribe(list => {
+        if(this.messageList[this.messageList.length-1].from_username != list.from_username){
+          list["img"]=true;
+        }
         this.messageList.push(list);
         if(list.from_username != localStorage.getItem("username")) {
           this.playAudio();

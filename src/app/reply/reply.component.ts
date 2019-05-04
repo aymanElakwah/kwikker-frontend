@@ -71,7 +71,7 @@ export class ReplyComponent implements OnInit {
   nestedDialog(kweek: Kweek): void {
     this.roots.push(this.clickedKweek);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "640px";
+    dialogConfig.width = "auto"; // 640px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     dialogConfig.data = this.data;
@@ -93,7 +93,7 @@ export class ReplyComponent implements OnInit {
    */
   likersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
@@ -111,7 +111,7 @@ export class ReplyComponent implements OnInit {
    */
   rekweekersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
@@ -181,7 +181,7 @@ export class ReplyComponent implements OnInit {
    */
   deleteRoot_ClickedKweek(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
@@ -227,7 +227,7 @@ export class ReplyComponent implements OnInit {
    */
   deleteReply(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //620px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
