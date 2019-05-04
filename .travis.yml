@@ -12,7 +12,7 @@ script:
 # run unit tests
   - docker run ajammil/kwikker/frontendtest ng test --karmaConfig=./src/karma.prod.conf.js --watch=false
 # run e2e tests
-  - docker run ajammil/kwikker/frontendtest ng e2e
+  - docker run ajammil/kwikker/frontendtest ng e2e --protractorConfig=./e2e/protractor.prod.conf.js
 
 
 after_success:
