@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
-import { isNull } from "util";
-import { NewKweekComponent } from '../new-kweek/new-kweek.component';
 
+/**
+ * Home component.
+ * Shows an html page with the navbar selector and kweeks selector.
+*/
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
