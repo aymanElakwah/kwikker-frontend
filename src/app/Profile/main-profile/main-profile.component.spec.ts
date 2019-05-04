@@ -105,12 +105,15 @@ describe('MainProfileComponent', () => {
    it("should get User Info", () => {
      component.route.snapshot.paramMap["username"] = "User1";
 
-    let spy = spyOn(dataService, "getProfileInfo").and.returnValue({ subscribe: () => {} });
+     let spy = spyOn(dataService, "getProfileInfo").and.callFake(() => {
+      return from([ProfileInfo]);
+    });
 
      component.ngOnInit();
      expect(spy).toHaveBeenCalled();
-     /* expect(component.profileUser).toBe(ProfileInfo);  */
+     expect(component.profileUser).toBe(ProfileInfo);  
    });
+
 
    it("shouldn't change ImageUrl", () => {
      component.route.snapshot.paramMap["username"] = "User1";

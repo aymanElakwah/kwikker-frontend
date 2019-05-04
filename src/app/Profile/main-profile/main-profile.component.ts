@@ -66,8 +66,6 @@ export class MainProfileComponent implements OnInit {
 
    /**
    * Open Resize, Scale and Crop Profile Image,
-   * No Parameters,
-   * No return
    */
   openEditImagesDialog() {
     let dialogRef = this.dialog.open(EditImagesComponent, {
@@ -94,8 +92,6 @@ export class MainProfileComponent implements OnInit {
 
     /**
      * Open Write Kweek Component Dialog,
-     * No Parameters,
-     * No return
      */
     openKweekDialog()
     {
@@ -109,8 +105,6 @@ export class MainProfileComponent implements OnInit {
 
      /**
      * Open Profile Image When Clicked,
-     * No Parameters,
-     * No return
      */
     openProfileImage()
     {
@@ -125,8 +119,6 @@ export class MainProfileComponent implements OnInit {
 
     /**
      * Close Profile Image Pop up,
-     * No Parameters,
-     * No return
      */
     closeProfileImage()
     {
@@ -134,10 +126,8 @@ export class MainProfileComponent implements OnInit {
       modal.style.display = "none";
     }
 
-       /**
+     /**
      * Open Inbox Component Dialog,
-     * No Parameters,
-     * No return
      */
     openInboxDialog()
     {
@@ -148,7 +138,7 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Check If this Profile belongs to the authorized User (The one who loged in),
-   * No Parameters
+   * 
    * @returns {boolean}
    */
   isAuthorisedUser(): boolean {
@@ -160,7 +150,7 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Check If User has No profile Picture,
-   * No Parameters
+   * 
    * @returns {boolean}
    */
   isProfilePictureDefault(): boolean {
@@ -169,7 +159,7 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Check If User has No Banner,
-   * No Parameters
+   * 
    * @returns {boolean}
    */
   isProfileBannerDefault(): boolean {
@@ -179,7 +169,7 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Change User Profile Banner,
-   *  No return
+   * 
    * @param event Event from the browser with the selected new banner photo
    */
   changeProfileBanner(event) {
@@ -200,8 +190,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Remove User Profile Photo,
-   * No Parameters,
-   * No return
    */
   removeProfilePicture(): void {
     this.profileUser.profile_image_url = this.defaultProfilePicture;
@@ -211,8 +199,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Remove User Profile Banner,
-   * No Parameters,
-   * No return
    */
   removeProfileBanner(): void {
     this.profileUser.profile_banner_url = this.defaultProfileBanner;
@@ -222,8 +208,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Change Between Editing Mode and Default Mode,
-   * No Parameters,
-   * No return
    */
   toggleEditingMode(): void {
     this.isEditingMode = !this.isEditingMode;
@@ -232,8 +216,6 @@ export class MainProfileComponent implements OnInit {
   /**
    * Change Between Blocked Mode(User can't see Kweeks, Followers Or Followings)
    * and Semi-Blocked Mode (Still Blocked But Kweeks, Followers And Followings are available),
-   * No Parameters,
-   * No return
    */
   togglesemiBlockedMode(): void {
     this.semiBlockedMode = !this.semiBlockedMode;
@@ -241,8 +223,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Change Between Follow And Unfollow Buttons, And Send their requests,
-   * No Parameters,
-   * No return
    */
   toggleFollow() {
     if (this.profileUser.following)
@@ -264,8 +244,6 @@ export class MainProfileComponent implements OnInit {
   /**
    * Change Between Mute And Unmute Buttons, And Send their requests,
    * It Also Activate muteMode (Mute Icon in the Navbar),
-   * No Parameters,
-   * No return
    */
   toggleMute(): void {
     if (this.profileUser.muted) {
@@ -284,8 +262,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Change Between Block And UnBlock Buttons, And Send their requests,
-   * No Parameters,
-   * No return
    */
   toggleBlock(): void {
     if (this.profileUser.blocked) {
@@ -314,8 +290,6 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Check The Edited Data are Valid and Send The request to change it,
-   * No Parameters,
-   * No return
    */
   updateProfile(): void {
     if (this.editedScreenName === "") {
@@ -329,9 +303,10 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Generate Delay,
-   * No Parameters,
-   * No return
+   * Generate Delay
+   * @param ms Delay Time in Milliseconds
+   * 
+   * @returns { Promise } Promise For The Delay 
    */
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -339,7 +314,7 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Make the Notification bar visible with a message for some time
-   * No return
+   * 
    * @param Msg {string} The Message that would appear in the notification bar
    * 
    */
@@ -399,7 +374,7 @@ export class MainProfileComponent implements OnInit {
                 this.profileUser = userInfo;
                 if(this.title!=null)
                 {
-                this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+                   this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
                 }
                 this.editedScreenName = this.profileUser.screen_name;
                 this.editedBio = this.profileUser.bio;
