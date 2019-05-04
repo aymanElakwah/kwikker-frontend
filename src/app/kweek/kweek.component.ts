@@ -2,18 +2,17 @@ import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Kweek } from "../model/kweek";
 import { ActivatedRoute, Router } from "@angular/router";
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-  TooltipPosition
-} from "@angular/material";
+import { MatDialog, MatDialogConfig, TooltipPosition } from "@angular/material";
 import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
-import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
+import { Overlay } from "@angular/cdk/overlay";
 import { NewKweekComponent } from "../new-kweek/new-kweek.component";
 import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
+
+/**
+ * List of loaded Kweeks
+ */
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -21,30 +20,51 @@ import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.compone
   encapsulation: ViewEncapsulation.None
 })
 export class KweekComponent implements OnInit {
-  //ToolTips parameters
+  /**
+   * position option for tooltip
+   */
   positionOption: TooltipPosition = "above";
+  /**
+   * position form option for tooltip
+   */
   position = new FormControl(this.positionOption);
+  /**
+   * Time on delay before showing tooltip
+   */
   showDelay = new FormControl(50);
+  /**
+   * Time on delay before hiding tooltip
+   */
   hideDelay = new FormControl(50);
-
-  kweeks: Kweek[] = []; // kweeks
+  /**
+   * Loaded kweeks
+   */
+  kweeks: Kweek[] = [];
+  /**
+   * mention response
+   */
   mentionsResponse: any;
-
-  /* The Authorized User (The one who made Log in) */
+  /**
+   * The Authorized User (The one who made Log in)
+   */
   authorizedUser: string = localStorage.getItem("username");
+  /**
+   * To call common like-unlike-rekweek-unrekweek functions from kweek service
+   */
+  callCommonFunc = true;
+  /**
+   * To see if the request is done to do another request and it is checked at the beginning of some functions
+   */
+  busyRequest: Boolean = false;
 
-  callCommonFunc = true; // to call common like-unlike-rekweek-unrekweek functions from kweek service
-
-  busyRequest: Boolean = false; // to see if the request is done to do another request and it is checked at the beginning of some functions
-
-  /*
+  /**
    * constructor called when component is made
    * @param kweekService to use DataService functions and deal with backend
    * @param kweekFunc to use kweeksService functions which has common kweeks functions
    * @param route to use snapshot from the url to know which URL you are in
+   * @param router tp navigate
    * @param dialog to open and close dialogs
    * @param overlay to open popup when hover on userName in the (updated comming version)
-   * No @return
    */
   constructor(
     private kweekService: DataService,
@@ -193,8 +213,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
    */
   likeDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -215,8 +234,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
    */
   likeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
@@ -229,8 +247,8 @@ export class KweekComponent implements OnInit {
 
   /**
    * calling function to unlike kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
+   * @returns
    */
   unlikeDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -251,8 +269,8 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
+   * @returns
    */
   unlikeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
@@ -265,8 +283,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * call the function rekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to rekweek
    */
   rekweekDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -287,8 +304,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to rekweek
    */
   rekweekCallBack(kweek: Kweek): void {
     kweek.number_of_rekweeks++;
@@ -304,8 +320,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * call the function unrekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unrekweek
    */
   unrekweekDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -326,8 +341,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unrekweek
    */
   unrekweekCallBack(kweek: Kweek): void {
     const id = kweek.id;
@@ -357,8 +371,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * open confirm delete popUp and wait for confirmation res if true call delete action
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delete
    */
   delete(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
@@ -380,7 +393,7 @@ export class KweekComponent implements OnInit {
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteAction(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -402,7 +415,7 @@ export class KweekComponent implements OnInit {
   /**
    * callback function in subscribe if the user is not in his profile
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteCallBack(kweek: Kweek): void {
     const indexToDelete = this.kweeks.indexOf(kweek);
@@ -412,7 +425,7 @@ export class KweekComponent implements OnInit {
   /**
    * callback function in subscribe if the user is in his profile
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteProfileCallBack(kweek: Kweek): void {
     const id = kweek.id;
@@ -440,7 +453,6 @@ export class KweekComponent implements OnInit {
   /**
    * Open Reply popUp
    * @param kweek  kweek to reply on
-   * No Return
    */
   reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
@@ -451,19 +463,18 @@ export class KweekComponent implements OnInit {
     dialogRef.componentInstance.kweekTO = false;
   }
 
-   /**
-   * Open User Profile when his Profile Picture Clicked 
-   */  
-  openUserProfile(index: number)
-  {
-    this.router.navigate(['/profile/'+ this.kweeks[index].user.username]);
+  /**
+   * Open User Profile when his Profile Picture Clicked
+   */
+
+  openUserProfile(index: number) {
+    this.router.navigate(["/profile/" + this.kweeks[index].user.username]);
   }
 
   /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling
    * No Parms
-   * No Return
    */
   onScroll(): void {
     if (this.kweeks.length != 0) {

@@ -15,8 +15,13 @@ import { Overlay } from "@angular/cdk/overlay";
 import { LikesRekweeksListComponent } from "../likes-rekweeks-list/likes-rekweeks-list.component";
 import { NewKweekComponent } from "../new-kweek/new-kweek.component";
 import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
-import { inject } from "@angular/core/testing";
-import { element } from "@angular/core/src/render3";
+
+/**
+ * Reply component
+ * roots' kweeks above clicked kweek
+ * clicked Kweek
+ * replies' kweeks below clicked kweek
+ */
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -24,18 +29,53 @@ import { element } from "@angular/core/src/render3";
   encapsulation: ViewEncapsulation.None
 })
 export class ReplyComponent implements OnInit {
+  /**
+   * kweeks above clicked kweek
+   */
   roots: Kweek[] = [];
+  /**
+   * kweek which I clicked to open the popup
+   */
   clickedKweek: Kweek;
+  /**
+   * kweeks below clicked kweek
+   */
   replies: Kweek[] = [];
+  /**
+   * position option for tooltip
+   */
   positionOption: TooltipPosition = "above";
+  /**
+   * position form option for tooltip
+   */
   position = new FormControl(this.positionOption);
+  /**
+   * Time on delay before showing tooltip
+   */
   showDelay = new FormControl(50);
+  /**
+   * Time on delay before hiding tooltip
+   */
   hideDelay = new FormControl(50);
+  /**
+   * To see if the request is done to do another request and it is checked at the beginning of some functions
+   */
   busyRequest: Boolean = false;
-
-  /* The Authorized User (The one who made Log in) */
+  /**
+   * The Authorized User (The one who made Log in)
+   */
   authorizedUser: string = localStorage.getItem("username");
 
+  /**
+   * constructor called when component is made
+   * @param dialogRef a reference to a reply popup dialog to open it or close it ... etc
+   * @param dialogLikersRekweekersRef a reference to a likers-rekweekers-list popup dialog to open it or close it ... etc
+   * @param data used to pass data between the component before open the dialog and the entry component 
+   * @param kweekService to use DataService functions and deal with backend
+   * @param kweekFunc to use kweeksService functions which has common kweeks functions
+   * @param dialog to open and close dialogs
+   * @param overlay to open popup when hover on userName in the (updated comming version)
+   */
   constructor(
     public dialogRef: MatDialogRef<ReplyComponent>,
     public dialogLikersRekweekersRef: MatDialogRef<LikesRekweeksListComponent>,
@@ -48,8 +88,7 @@ export class ReplyComponent implements OnInit {
 
   /**
    * load replies of a certian kweek with specific kweek id
-   * No @params
-   * No @returns
+   * No params
    */
   ngOnInit() {
     // mockService
@@ -65,8 +104,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * close popup when another nested popup appear and open the new popup
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to be clickedKweek in the new popup
+   * @returns
    */
   nestedDialog(kweek: Kweek): void {
     this.roots.push(this.clickedKweek);
@@ -88,8 +127,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * close popup when another nested popup appear and open the new popup
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to open likers dialog
+   * @returns
    */
   likersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
@@ -106,8 +145,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * close popup when another nested popup appear and open the new popup
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to open rekweekers dialog
+   * @returns
    */
   rekweekersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
@@ -124,8 +163,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
+   * @returns
    */
   like(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -137,8 +176,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * calling function to unlike kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
+   * @returns
    */
   unlike(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -150,8 +189,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * call the function rekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to rekweek
+   * @returns
    */
   rekweek(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -163,8 +202,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * call the function unrekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unrekweek
+   * @returns
    */
   unrekweek(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -176,8 +215,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * open confirm delete popUp and wait for confirmation res if true call delete root or clickedKweek action function
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delete
+   * @returns
    */
   deleteRoot_ClickedKweek(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
@@ -198,8 +237,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delte
+   * @returns
    */
   deleteActionRoot_ClickedKweek(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -222,8 +261,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * open confirm delete popUp and wait for confirmation res if true call delete reply action function
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delete
+   * @returns
    */
   deleteReply(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
@@ -244,8 +283,8 @@ export class ReplyComponent implements OnInit {
 
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delete
+   * @returns
    */
   deleteActionReply(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -270,7 +309,6 @@ export class ReplyComponent implements OnInit {
   /**
    * Open Reply popUp
    * @param kweek  kweek to reply on
-   * No Return
    */
   Reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
