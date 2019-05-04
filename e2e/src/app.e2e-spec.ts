@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { utilityFunctions } from './app.po';
 
-describe('Kwikker E2E -', () => {
+describe('Kwikker E2E', () => {
   let page: AppPage;
   let utility: utilityFunctions;
   page = new AppPage();
@@ -13,7 +13,6 @@ describe('Kwikker E2E -', () => {
   var pass2 = "DaWood@123";
 
   it('Sign up', () =>{
-    utility.browserPause(3000);
     utility.navigateToSignUp();
     utility.browserPause(100);
 
@@ -105,7 +104,7 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(reply);
     utility.browserPause(1000);
-    page.getSecondKweekButton().click();
+    utility.sendClick(page.getSecondKweekButton());
     utility.browserPause(1000);
     page.getFirstKweekText().click();
     expect(utility.getElementWithText('p', reply).getText()).toEqual('@' + user1 + ' ' + reply);
@@ -118,7 +117,7 @@ describe('Kwikker E2E -', () => {
     utility.navigateToMyProfile();
     page.getDeleteKweekx(1).click();
     utility.browserPause(1000);
-    page.getDeleteKweekButton().click();
+    utility.sendClick(page.getDeleteKweekButton());
     utility.browserPause(1000);
     utility.logout();
   });
@@ -128,15 +127,16 @@ describe('Kwikker E2E -', () => {
     utility.login(user1, pass1);
     page.navigateToProfile(user2);
     page.getKweekToButton().click();
+    utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(kweek);
     utility.browserPause(1000);
-    page.getSecondKweekButton().click();
+    utility.sendClick(page.getSecondKweekButton());
     utility.browserPause(1000);
     page.navigateToKweeks(user1);
     expect(page.getFirstKweekText().getText()).toEqual('@' + user2 + ' ' + kweek);
     page.getDeleteKweekx(1).click();
     utility.browserPause(1000);
-    page.getDeleteKweekButton().click();
+    utility.sendClick(page.getDeleteKweekButton());
     utility.browserPause(1000);
     utility.logout();
   });
@@ -160,14 +160,14 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
 
     page.getUsernameSettingsField().clear();
     page.getUsernameSettingsField().sendKeys(username2);
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
     utility.browserPause(1000);
 
     page.getCurrentPasswordField().sendKeys(password1);
@@ -176,7 +176,7 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getChangePasswordSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
 
     utility.logout();
     utility.login(username2, password2);
@@ -189,14 +189,14 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
 
     page.getUsernameSettingsField().clear();
     page.getUsernameSettingsField().sendKeys(username1);
     utility.browserPause(1000);
     page.getSaveChangesSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
     utility.browserPause(1000);
 
     page.getCurrentPasswordField().sendKeys(password2);
@@ -205,7 +205,7 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getChangePasswordSettingsButton().click();
     utility.browserPause(1000);
-    page.getOkButton().click();
+    utility.sendClick(page.getOkButton());
 
     utility.logout();
     utility.login(username1, password1);
@@ -371,25 +371,6 @@ describe('Kwikker E2E -', () => {
     page.getHisFollowButton().click();
   });
 
-///////////Direct Message/////////////////
-  //Not Clickable
-  // it('Message someone, send a text message', function() {
-  //   page.navigateToHome();
-  //   page.getNewMessage().click();
-  //   //page.getBackButton().click();
-  //   page.browserPause(2000);
-  //   page.getNewMessageButton().click();
-  //   page.getRecieverNameField().sendKeys('Ayman');
-  //   page.browserPause(2000);
-  //   page.getReciever().click();
-  //   page.getNextButton().click();
-  //   page.getChatBox().sendKeys('New message!');
-  //   page.getSendButton().click();
-  //   page.browserPause(1000);
-  //   page.getRecentReciever().click();
-  //   expect(page.getSentMsg().getText()).toEqual('New message');
-  // });
-
 // ////////////Search/////////////////////////
   it('Check search bar after typing any word.', function() {
     page.navigateToHome();
@@ -413,13 +394,12 @@ describe('Kwikker E2E -', () => {
     expect(page.getSearchKeyWord().getText()).toContain('barca');
   });
 
-  //To be discussed...Error in back end
-  // it("Search for text with opened single quote.", function() {
-  //   page.getSearchBox().sendKeys("'barca");
-  //   page.pressEnter();
-  //   page.browserPause(2000);
-  //   expect(page.getSearchKeyWord().getText()).toContain('barca');
-  // });
+  it("Search for text with opened single quote.", function() {
+    page.getSearchBox().sendKeys("'barca");
+    utility.pressEnter(page.getSearchBox());
+    page.browserPause(2000);
+    expect(page.getSearchKeyWord().getText()).toContain('barca');
+  });
   
   it('Search for a user, view latest section.', function() {
     page.getSearchBox().sendKeys('zamalek');
@@ -440,4 +420,25 @@ describe('Kwikker E2E -', () => {
     expect(page.getFirstKweekText().getText()).toContain('@dawood');
     utility.logout();
   });
+
+ ///////////Direct Message/////////////////
+  // it('Message someone, send a text message', function() {
+  //   let message = "New message!";
+
+  //   utility.login(user2, pass2);
+  //   page.getNewMessage().click();
+  //   page.browserPause(1000);
+  //   utility.sendClick(page.getNewMessageButton());
+  //   page.browserPause(2000);
+  //   page.getRecieverNameField().sendKeys('Ayman');
+  //   page.browserPause(1000);
+  //   utility.sendClick(page.getReciever());
+  //   page.browserPause(1000);
+  //   utility.sendClick(page.getNextButton());
+  //   page.browserPause(1000);
+  //   page.getChatBox().sendKeys(message);
+  //   utility.sendClick(page.getSendButton());
+  //   page.browserPause(1000);
+  //   expect(page.getLastSentMsg().getText()).toEqual("You :" + message);
+  // });
 });

@@ -129,7 +129,7 @@ export class AppPage {
   }
 
   getKweekToButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[1]/div[1]/app-profile-header-card/div/div[3]/button[1]'));
+    return element(by.buttonText('Tweet To'));
   }
 
   getDropDownMenuButton(){
@@ -220,14 +220,14 @@ export class AppPage {
   }
 
   getMyFollowButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+    return element(by.buttonText('Follow'));
   }
   getHisFollowingButton(){
     return element(by.className('btn btn-primary following-button'));
   }
 
   getMyFollowingButton(){
-    return element(by.xpath('/html/body/app-root/app-main-profile/div/div[2]/div/div[2]/div/div[2]/app-mini-profile/div[1]/div[1]/div/div[2]/div/div[1]/button[1]'));
+    return element(by.buttonText('Following'));
   }
 
 
@@ -329,6 +329,9 @@ export class AppPage {
     return element.all(by.className('msgText msgText2')).last();
   }
 
+  getLastSentMsg(){
+    return element.all(by.xpath('//p [@class = "lastmsg"]')).first();
+  }
 
   getRecentReciever(){
     return element(by.xpath('//*[@id="mat-dialog-0"]/app-chat/div/app-inbox/div[2]/div[1]'));
@@ -350,7 +353,7 @@ export class AppPage {
   }
 
   getNextButton(){
-    return element(by.xpath('//*[@id="new"]'));
+    return element(by.buttonText('Next'));
   }
 
   getBackButton(){
@@ -469,11 +472,7 @@ export class utilityFunctions{
     this.page.getUsernameLoginField().sendKeys(username);
     this.page.getPasswordLoginField().sendKeys(password);
     this.page.getLoginButton().click();
-    this.browserPause(1000);
-  }
-
-  browserForceClick(element){
-    browser.actions().mouseMove(element).click().perform();
+    this.browserPause(2000);
   }
 
   navigateToLogin() {
