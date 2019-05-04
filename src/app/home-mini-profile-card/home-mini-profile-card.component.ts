@@ -3,6 +3,10 @@ import { User } from '../model/user';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 
+/**
+ * The Home Mini Profile Card Which Include
+ * The Authorised Used Data
+ */
 @Component({
   selector: 'app-home-mini-profile-card',
   templateUrl: './home-mini-profile-card.component.html',
@@ -10,7 +14,9 @@ import { Router } from '@angular/router';
 })
 export class HomeMiniProfileCardComponent implements OnInit {
 
+  /** The Authorised Username To Get Its Information */
   ProfileUserName: string;
+    /** The Authorised User All Information */
   ProfileInfo: User; 
 
   constructor(private profileCardService: DataService,
