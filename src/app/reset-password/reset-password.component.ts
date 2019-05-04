@@ -3,19 +3,42 @@ import { DataService } from '../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-
+/**
+ * Reset password component.
+ * This component open an html page to allow user to send his email, to get a verification link to change his password.
+ * If any user tried to enter an invalid email, an error message is shown.
+ */
 @Component({
   selector: 'app-reset-password',
   templateUrl: './enter-email.component.html',
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  //Public variables
+  /**
+   * class ResetPasswordComponent's variables.
+   * string for confirmation code snapshoted from the url
+   */
   public confirmCode: string;
-  public msg: any;
+  /**
+  * class ResetPasswordComponent's variables.
+  * string for password (ngModel) two ways binding
+  */
   public pass: string;
+  /**
+  * class ResetPasswordComponent's variables.
+  * string for confirmed password (ngModel) two ways binding
+  */
   public confirm_pass: string;
+  /**
+  * class ResetPasswordComponent's variables.
+  * string for email (ngModel) two ways binding
+  */
   public mail: string;
+  /**
+   * class ResetPasswordComponent's variables.
+   * variable used as a pointer to the error messages class, to show/hide them
+   */
+  public msg: any;
 
   /**
    * Reset-password component's constructor
@@ -32,7 +55,7 @@ export class ResetPasswordComponent implements OnInit {
       this.msg =  document.querySelector('.errorBox');  
     }
     
-    /**
+  /**
    *This function is called when sending new email to take a reset-password link.
    * It takes the submitForm values and wrap the email in an object.
    * Then send it to sendEmail() function, that pushes it to the backend server
@@ -59,8 +82,8 @@ export class ResetPasswordComponent implements OnInit {
    * @param void
    * @returns void
    */
-    public appearError() {
-      this.msg.className = 'show';
-    }
+  public appearError() {
+    this.msg.className = 'show';
+  }
 
 }

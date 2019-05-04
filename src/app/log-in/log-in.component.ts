@@ -2,21 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { NgForm } from '@angular/forms';
 import {Router} from '@angular/router';
+
+
+/**
+ * Log In component.
+ * Log in user with the matching username and password
+ * Shows error messages depending on error status
+ * Or navigate user to 'Resend email' page.
+ */
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
 
-
+            
 export class LogInComponent implements OnInit {
-  //public variables.
+  /**
+   * class LogInComponent's variables.
+   * string for mail (ngModel) two ways binding
+   */
   public mail: string;
+  /**
+   * class LogInComponent's variables.
+   * string for password (ngModel) two ways binding
+   */
   public pass: string;
+  /**
+   * class LogInComponent's variables.
+   * simple indicator to check if user is not logged in, and if he's logged.
+   */
   public isLoggedIn: boolean;
+  /**
+   * class LogInComponent's variables.
+   * variable used as a pointer to the error messages class, to show/hide them
+   */
   public msg: any;
+  /**
+   * class LogInComponent's variables.
+   * variable used as a pointer to the error messages class, to show/hide them
+   */
   public msg2: any;
- 
 
 /**
  * LogIn Component's condtructor.

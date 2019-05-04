@@ -4,18 +4,43 @@ import { DataService } from '../services/data.service';
 import { ActivatedRoute } from "@angular/router";
 import { NgForm } from '@angular/forms';
 
+/**
+ * Confirm password component.
+ * Sends the new password in the body of the request.
+ * And the confirmation code in the header.
+ */
 @Component({
     selector: 'app-confirm-password',
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.css']
 })
 export class confirmPassword implements OnInit {
-  //public variables
-    public confirmCode: any;
+    /**
+     * class confirmPassword's variables.
+     * string for confirmation code snapshoted from the url
+     */
+    public confirmCode: string;
+    /**
+    * class confirmPassword's variables.
+    * string for password (ngModel) two ways binding
+    */
     public pass: string;
-    public mail: string;
+    /**
+    * class confirmPassword's variables.
+    * string for confirmed password (ngModel) two ways binding
+    */
     public confirm_pass: string;
+    /**
+    * class confirmPassword's variables.
+    * string for email (ngModel) two ways binding
+    */
+    public mail: string;
+    /**
+     * class confirmPassword's variables.
+     * variable used as a pointer to the error messages class, to show/hide them
+     */
     public msg: any;
+      
 
   /**
    * confirmPassword component's constructor

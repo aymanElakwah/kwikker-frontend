@@ -2,10 +2,17 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Router } from "@angular/router";
 
+<<<<<<< HEAD
 
   /**
    * Home Page Component
    */
+=======
+/**
+ * Home component.
+ * Shows an html page with the navbar selector and kweeks selector.
+*/
+>>>>>>> final4/5
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
