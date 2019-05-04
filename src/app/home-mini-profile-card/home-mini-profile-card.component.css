@@ -29,6 +29,7 @@
 .BannerImage {
 	height: 90px;
 	width: 290px;
+	cursor: pointer;
 }
 
 

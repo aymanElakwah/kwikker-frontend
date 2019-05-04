@@ -120,7 +120,7 @@
                   <!-- The Second Column contains Taps, UserAction -->
                   <div class="col-9  nopadding">
                      <ul id="Taps" *ngIf='(!profileUser?.blocked || (profileUser?.blocked && semiBlockedMode)) && !AuthorisedIsBlocked'>
-                        <li> <a routerLinkActive="active" [routerLink]="['kweeks']"> Tweets <br>
+                        <li> <a routerLinkActive="active" [routerLink]="['kweeks']"> Kweeks <br>
                               {{profileUser?.kweeks_count}}
                            </a>
                         </li>

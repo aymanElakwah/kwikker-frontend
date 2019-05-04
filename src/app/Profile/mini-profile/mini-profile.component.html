@@ -5,7 +5,9 @@
       <div class="profile-card">
          <!--  The Upper Part for the banner -->
          <div class="row banner">
-            <img class='BannerImage' src={{user?.profile_banner_url}}  id="BannerImage" />
+            <img class='BannerImage' src={{user?.profile_banner_url}}  
+                 id="BannerImage" 
+                (click) = "openUserProfile(i)"/>
          </div>
          <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
          <div class=" row profile-content">
@@ -56,8 +58,8 @@
                </div>
                <!-- Profile Info Part [Username, Screen Name, Bio] -->
                <div class="profile-data">
-                  <div class="username"> <a id="usernameref" href="./profile/{{user.username}}"> {{user.screen_name}} </a>  </div>
-                  <div class="screen-name">  <a id="usernameref" href="./profile/{{user.username}}"> @{{user.username}} </a> </div>
+                  <div class="username"> <a id="usernameref" [routerLink]="['/profile', user?.username]"> {{user.screen_name}} </a>  </div>
+                  <div class="screen-name">  <a id="usernameref" [routerLink]="['/profile', user?.username]"> @{{user.username}} </a> </div>
                   <p class="FollowsYou" *ngIf="user.follows_you && !isAuthorisedUser(i)"> Follows You </p>
                   <p class="bio"> {{user.bio}} </p>
                </div>

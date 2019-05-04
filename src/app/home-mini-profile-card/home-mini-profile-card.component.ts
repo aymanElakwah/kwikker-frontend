@@ -16,6 +16,20 @@ export class HomeMiniProfileCardComponent implements OnInit {
   constructor(private profileCardService: DataService,
               private router: Router) { }
 
+  /**
+   * Open User Profile when his Profile Picture Clicked 
+   *  @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   */  
+  openUserProfile()
+  {
+    this.router.navigate(['/profile/'+ this. ProfileInfo.username]);
+  }
+
+  /**
+   * Get The Username From The Local Storage And Send The Request
+   * To Get Its Data,
+   * In error case, Naviagte To The Error Page  
+   */  
   ngOnInit()  {
     this.ProfileUserName = localStorage.getItem("username");
     this.profileCardService.getProfileInfo(this.ProfileUserName).subscribe(
