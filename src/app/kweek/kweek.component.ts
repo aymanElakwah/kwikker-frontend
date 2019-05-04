@@ -152,13 +152,13 @@ export class KweekComponent implements OnInit {
     ) {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
       const ID: string = this.route.snapshot.queryParams["ID"];
-      this.kweekService.getTrendsKweeks(ID,null).subscribe(trendsKweeks => {
+      this.kweekService.getTrendsKweeks(ID, null).subscribe(trendsKweeks => {
         this.kweeks = trendsKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else if (mainRoute === "search") {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
-      this.kweekService.searchKweeks(filterBy,null).subscribe(searchKweeks => {
+      this.kweekService.searchKweeks(filterBy, null).subscribe(searchKweeks => {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
@@ -471,13 +471,12 @@ export class KweekComponent implements OnInit {
     this.router.navigate(["/profile/" + this.kweeks[index].user.username]);
   }
 
-  
   /**
    * Open Home Page When Kiwkker Logo is Clicked
    */
 
   openHomePage() {
-    this.router.navigate(['/home/']);
+    this.router.navigate(["/home/"]);
   }
 
   /**
@@ -610,6 +609,26 @@ export class KweekComponent implements OnInit {
             this.kweeks = this.kweeks.concat(mentions.replies_and_mentions);
           }
         });
+      } else if (
+        mainRoute === "search" &&
+        this.route.snapshot.queryParams["ID"] != undefined
+      ) {
+        const filterBy: string = this.route.snapshot.queryParams["filterBy"];
+        const ID: string = this.route.snapshot.queryParams["ID"];
+        this.kweekService
+          .getTrendsKweeks(ID, lastKweekId)
+          .subscribe(trendsKweeks => {
+            this.kweekFunc.injectTagsInText(trendsKweeks);
+            this.kweeks = this.kweeks.concat(trendsKweeks);
+          });
+      } else if (mainRoute === "search") {
+        const filterBy: string = this.route.snapshot.queryParams["filterBy"];
+        this.kweekService
+          .searchKweeks(filterBy, lastKweekId)
+          .subscribe(searchKweeks => {
+            this.kweekFunc.injectTagsInText(searchKweeks);
+            this.kweeks = this.kweeks.concat(searchKweeks);
+          });
       } else {
         if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
           this.kweekService

@@ -731,7 +731,7 @@ export class DataService {
     );
   }
 
-  searchKweeks(filterBy: string,last_retrieved_kweek_id:null): Observable<Kweek[]> {
+  searchKweeks(filterBy: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
       let parametersSent = {};
       if (last_retrieved_kweek_id && filterBy) {
         parametersSent = {
