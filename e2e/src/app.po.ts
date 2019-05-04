@@ -1,4 +1,4 @@
-import { browser, by, element,protractor } from 'protractor';
+import { browser, by, element,protractor, ElementFinder } from 'protractor';
 
 export class AppPage {
   //---------Navigation-----------
@@ -500,5 +500,18 @@ export class utilityFunctions{
     this.page.getDropDownMenuButton().click();
     this.browserPause(1000);
     this.page.getLogoutButton().click();
+  }
+
+  async sendClick(element: ElementFinder): Promise<boolean> {
+    try { 
+      if(!await element.isDisplayed()) {
+        return false;
+      }
+      await browser.executeScript('arguments[0].click();', await element.getWebElement());
+      return true;
+    }
+    catch (err) {
+      return false;
+    }
   }
 }
