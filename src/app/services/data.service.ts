@@ -711,12 +711,7 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-<<<<<<< HEAD
-      map(err => err)
-      // catchError(this.handleError)
-=======
       map(err=>err)
->>>>>>> final4/5
     );
   }
 
@@ -780,11 +775,7 @@ export class DataService {
       })
       .pipe(
         map(res => res),
-<<<<<<< HEAD
-        catchError(this.handleError)
-=======
         map(err=>err)
->>>>>>> final4/5
       );
   }
   /**
@@ -825,16 +816,11 @@ export class DataService {
       CODE: `${val}`
     });
     return this.http
-<<<<<<< HEAD
-      .put<any>(this.base + "account/reset_password", body, { headers })
-      .pipe(map(res => res));
-=======
       .put<any>(this.base + "account/reset_password", body,{headers})
       .pipe(
         map(res => res),
         map(err=>err)
       );
->>>>>>> final4/5
   }
 
   // in memory mock data service function
