@@ -54,12 +54,13 @@ public sendPassword(form: NgForm) {
         this.router.navigate(['/login']);
       },
       err => {
-        if (err.status == 404)
-          this.showError();
          if (err.status == 401)
          {
           window.alert("Unauthorized user, please send your email for verification link");
           this.router.navigate(['/resend_email']);
+         }else{
+          window.alert("An error happened due to a currupted code, please try again later.");
+          this.showError();
          }
       
       }

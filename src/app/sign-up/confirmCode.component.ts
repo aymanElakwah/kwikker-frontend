@@ -41,7 +41,7 @@ export class confirmCode implements OnInit {
           err => {
             window.alert("An error occured, please check your email again!")
             this.router.navigate(['']);
-          }
+          } 
       );
 
       
