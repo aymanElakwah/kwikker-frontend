@@ -19,24 +19,24 @@
            </div>
            <!-- Profile Info Part [Username, Screen Name] -->
            <div class="profile-data">
-              <div class="username"> <a id="usernameref" [routerLink]="['/profile', ProfileInfo?.username]"> {{ ProfileInfo?.screen_name}} </a>  </div>
-              <div class="screen-name">  <a id="usernameref" [routerLink]="['/profile', ProfileInfo?.username]"> @{{ ProfileInfo?.username}} </a> </div>
+              <div class="username"> <a id="usernameref" *ngIf = "ProfileInfo" ng [routerLink]="['/profile', ProfileInfo?.username]"> {{ ProfileInfo?.screen_name}} </a>  </div>
+              <div class="screen-name">  <a id="usernameref" *ngIf = "ProfileInfo" ng [routerLink]="['/profile', ProfileInfo?.username]"> @{{ ProfileInfo?.username}} </a> </div>
            </div>
            <div class="ProfileCardState">
             <li class="ProfileCardStats-State">
-               <a  [routerLink]="['/profile', ProfileInfo?.username,'kweeks']" >
+               <a *ngIf = "ProfileInfo" ng [routerLink]="['/profile', ProfileInfo?.username,'kweeks']" >
                  <span class="ProfileCardStats-Text"> Kweeks </span>
                  <span class="ProfileCardStats-Value">  {{ ProfileInfo?.kweeks_count }} </span>
                </a>
              </li>
              <li class="ProfileCardStats-State">
-               <a  [routerLink]="['/profile', ProfileInfo?.username,'following']"  >
+               <a *ngIf = "ProfileInfo" ng [routerLink]="['/profile', ProfileInfo?.username,'following']"  >
                  <span class="ProfileCardStats-Text"> Following </span>
                  <span class="ProfileCardStats-Value"> {{ ProfileInfo?.following_count }} </span>
                </a>
              </li>
              <li class="ProfileCardStats-State">
-               <a  [routerLink]="['/profile', ProfileInfo?.username,'followers']"  >
+               <a *ngIf = "ProfileInfo" ng [routerLink]="['/profile', ProfileInfo?.username,'followers']"  >
                  <span class="ProfileCardStats-Text"> Followers </span>
                  <span class="ProfileCardStats-Value"> {{ ProfileInfo?.followers_count }} </span>
                </a>
