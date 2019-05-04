@@ -2,7 +2,37 @@ import { Observable, from, of, empty } from "rxjs";
 import { KweekComponent } from "./kweek.component";
 import { KweeksService } from "../services/kweeks.service";
 import { DataService } from "../services/data.service";
-import { MatDialog } from "@angular/material";
+import {
+  MatDialog,
+  MatDialogModule,
+  MatTooltipModule,
+  MatIconModule
+} from "@angular/material";
+import { TestBed } from "@angular/core/testing";
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from "@angular/platform-browser-dynamic/testing";
+import { CommonModule } from "@angular/common";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ImgFallbackModule } from "ngx-img-fallback";
+import { OverlayModule } from "@angular/cdk/overlay";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { By } from "@angular/platform-browser";
+import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
+import { ReplyComponent } from "../reply/reply.component";
+import { NewKweekComponent } from "../new-kweek/new-kweek.component";
+import { LikesRekweeksListComponent } from "../likes-rekweeks-list/likes-rekweeks-list.component";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { MainProfileComponent } from "../Profile/main-profile/main-profile.component";
+import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { SharedModule } from "../shared/shared.module";
+import { KweeksModule } from "../kweeks/kweeks.module";
+import { Kweek } from "../model/kweek";
+import { MiniUser } from "../model/mini-user";
 
 describe("KweekComponent", () => {
   let dataService: DataService;
@@ -41,7 +71,7 @@ describe("KweekComponent", () => {
     dataService = new DataService(null, null, null);
     kweeksService = new KweeksService(dataService);
     dialog = new MatDialog(null, null, null, null, null, null, null);
-    
+
     component = new KweekComponent(
       dataService,
       kweeksService,
@@ -49,6 +79,19 @@ describe("KweekComponent", () => {
       dialog,
       null
     );
+
+    TestBed.resetTestEnvironment();
+    TestBed.initTestEnvironment(
+      BrowserDynamicTestingModule,
+      platformBrowserDynamicTesting()
+    );
+
+    TestBed.configureTestingModule({
+      declarations: [],
+      imports: [KweeksModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [KweeksService]
+    }).compileComponents();
+
     spyOn(kweeksService, "injectTagsInText").and.callFake(() => {
       return empty();
     });
@@ -451,14 +494,22 @@ describe("KweekComponent", () => {
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id, null);
+      expect(spy).toHaveBeenCalledWith(
+        "user1",
+        kWK_ARR[kWK_ARR.length - 1].id,
+        null
+      );
       expect(component.kweeks.length).toBe(arrProfileKweeks.length);
 
       component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id, null);
+      expect(spy).toHaveBeenCalledWith(
+        "user1",
+        kWK_ARR[kWK_ARR.length - 1].id,
+        null
+      );
       expect(component.kweeks).toBe(arrProfileKweeks);
     });
 
@@ -474,6 +525,308 @@ describe("KweekComponent", () => {
 
       expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id);
       expect(component.kweeks).toBe(arrProfileLikes);
+    });
+  });
+
+  describe("Kweeks like and unlike style", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: false,
+          rekweeked_by_user: false
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        }
+      ];
+      component.kweeks = kWK_ARR;
+      component.busyRequest = false;
+    });
+
+    it("should have one kweek with css liked class", () => {
+      let fixture = TestBed.createComponent(KweekComponent);
+      fixture.componentInstance.kweeks = kWK_ARR;
+      fixture.componentInstance.route = route;
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".liked"));
+      expect(de.length).toBe(2);
+    });
+
+    it("should have two kweek with css like class", () => {
+      let fixture = TestBed.createComponent(KweekComponent);
+      fixture.componentInstance.kweeks = kWK_ARR;
+      fixture.componentInstance.route = route;
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".like"));
+      expect(de.length).toBe(1);
+    });
+  });
+
+  describe("Kweeks like and unlike style", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: false,
+          rekweeked_by_user: false
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        }
+      ];
+      component.kweeks = kWK_ARR;
+      component.busyRequest = false;
+    });
+
+    it("should have one kweek with css rekweeked class", () => {
+      let fixture = TestBed.createComponent(KweekComponent);
+      fixture.componentInstance.kweeks = kWK_ARR;
+      fixture.componentInstance.route = route;
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".rekweeked"));
+      expect(de.length).toBe(2);
+    });
+
+    it("should have two kweek with css rekweek class", () => {
+      let fixture = TestBed.createComponent(KweekComponent);
+      fixture.componentInstance.kweeks = kWK_ARR;
+      fixture.componentInstance.route = route;
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".rekweek"));
+      expect(de.length).toBe(1);
     });
   });
 });
