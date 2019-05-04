@@ -471,18 +471,21 @@ export class utilityFunctions{
     this.browserPause(1000);
     this.page.getUsernameLoginField().sendKeys(username);
     this.page.getPasswordLoginField().sendKeys(password);
+    this.browserPause(1000);
     this.page.getLoginButton().click();
-    this.browserPause(2000);
+    this.browserPause(1000);
   }
 
   navigateToLogin() {
-    this.page.navigateTo();
-    element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[2]')).click();
+    browser.get('/login');
+    // this.page.navigateTo();
+    // element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[2]')).click();
   }
 
   navigateToSignUp() {
-    this.page.navigateTo();
-    element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[1]')).click();
+    browser.get('/signup');
+    // this.page.navigateTo();
+    // element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[1]')).click();
   }
 
   navigateToMyProfile() {
@@ -499,6 +502,7 @@ export class utilityFunctions{
     this.page.getDropDownMenuButton().click();
     this.browserPause(1000);
     this.page.getLogoutButton().click();
+    this.browserPause(1000);
   }
 
   async sendClick(element: ElementFinder): Promise<boolean> {

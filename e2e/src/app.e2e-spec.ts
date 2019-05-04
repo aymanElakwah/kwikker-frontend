@@ -14,9 +14,8 @@ describe('Kwikker E2E', () => {
 
   it('Sign up', () =>{
     utility.navigateToSignUp();
-    utility.browserPause(100);
+    utility.browserPause(1000);
 
-    page.getUsernameLoginField().click();
     page.getUsernameLoginField().sendKeys("ee11");
     page.getEmailSignupField().sendKeys("ee11@yahoo.com");
     page.getPasswordSignupField().sendKeys("Eee111111");
