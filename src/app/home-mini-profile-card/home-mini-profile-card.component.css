@@ -1,12 +1,10 @@
 .container {
-	height: 281px;
+	height: 214px;
 	width: 290px;
 	background-color: #FFF;
 	padding: 0 0;
-	margin-left: 0;
-	margin-right: 12px;
-	margin-bottom: 12px;
-	margin-top: 0;
+	margin: 0 0;
+	zoom: 125%;
 }
 
 
@@ -37,7 +35,7 @@
 /* Second Part [UserActon, ProfilePicture, ProfileInfo] */
 
 .profile-content {
-	height: 191px;
+	height: 124px;
 	width: 288px;
 	text-align: center;
 	vertical-align: middle;
@@ -46,26 +44,12 @@
 }
 
 .content {
-	height: 170px;
+	height: 100px;
 	width: 255px;
 	background-color: white;
 	display: inline-block;
 	position: relative;
 }
-
-.user-action {
-	height: 37px;
-	width: 127px;
-	position: relative;
-	left: 130px;
-	top: 10px;
-	text-align: left;
-	display: flex;
-	align-items: center
-}
-
-
-
 /* Profiel Picture */
 
 .profile-pic {
@@ -79,6 +63,7 @@
 	background-color: #1B95E0;
 	border-width: 1px;
 	left: 0;
+	top: 10%;
 }
 
 .ProfileImage {
@@ -93,8 +78,8 @@
 }
 
 .profile-data {
-	height: 126px;
-	width: 259px;
+	height: 42px;
+	width: 185px;
 	background-color: #FFF;
 	margin-top: 10px;
 }
@@ -105,6 +90,8 @@
 	font-size: 18px;
 	font-weight: bold;
 	padding-right: 2px;
+	transform: translate(80px,-14px);
+	
 }
 
 #usernameref
@@ -119,9 +106,50 @@
 	line-height: 1;
 	text-align: left;
 	font-family: "Segoe UI", Arial, sans-serif;
+	transform: translate(80px,-14px);
+}
+
+.ProfileCardState
+{
+	padding: 16px;
+	height: 69px;
+	width: 288px;
+	position: relative;
+	bottom: 15%;
+	left: 2%;
 }
 
 .Padding
 {
 	height: 400px;
+}
+
+.ProfileCardStats-State
+{
+	width: 50px !important;
+	display: table-cell;
+	padding: 0;
+	box-sizing: border-box;
+    line-height: 1;
+	overflow: hidden;
+	padding-right: 25px;
+}
+
+.ProfileCardStats-Text
+{
+	color: #657786;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .02em;
+    line-height: 16px;
+    overflow: hidden;
+}
+
+.ProfileCardStats-Value
+{
+	display: block;
+    font-size: 16px;
+    font-weight: bold;
+	padding-top: 3px;
+	text-align: left;
 }

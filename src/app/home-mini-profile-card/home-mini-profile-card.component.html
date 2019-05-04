@@ -16,8 +16,28 @@
            </div>
            <!-- Profile Info Part [Username, Screen Name] -->
            <div class="profile-data">
-              <div class="username"> <a id="usernameref" href="./profile/{{user.username}}"> {{ ProfileInfo.screen_name}} </a>  </div>
-              <div class="screen-name">  <a id="usernameref" href="./profile/{{user.username}}"> @{{ ProfileInfo.username}} </a> </div>
+              <div class="username"> <a id="usernameref" href="./profile/{{ProfileInfo?.username}}"> {{ ProfileInfo?.screen_name}} </a>  </div>
+              <div class="screen-name">  <a id="usernameref" href="./profile/{{ProfileInfo?.username}}"> @{{ ProfileInfo?.username}} </a> </div>
+           </div>
+           <div class="ProfileCardState">
+            <li class="ProfileCardStats-State">
+               <a  href="/Ahmed_Mahmoud14/following" >
+                 <span class="ProfileCardStats-Text"> Kweeks </span>
+                 <span class="ProfileCardStats-Value">  {{ ProfileInfo?.kweeks_count }} </span>
+               </a>
+             </li>
+             <li class="ProfileCardStats-State">
+               <a  href="/Ahmed_Mahmoud14/following" >
+                 <span class="ProfileCardStats-Text"> Following </span>
+                 <span class="ProfileCardStats-Value"> {{ ProfileInfo?.following_count }} </span>
+               </a>
+             </li>
+             <li class="ProfileCardStats-State">
+               <a  href="/Ahmed_Mahmoud14/following" >
+                 <span class="ProfileCardStats-Text"> Followers </span>
+                 <span class="ProfileCardStats-Value"> {{ ProfileInfo?.followers_count }} </span>
+               </a>
+             </li>
            </div>
         </div>
      </div>
