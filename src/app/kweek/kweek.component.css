@@ -102,12 +102,13 @@ a:hover {
 /* .tooltip-style {
 } */
 
-.pointer {
+.pointer-cursor {
   cursor: pointer;
 }
 
-.pointer:hover {
+.pointer-cursor:hover {
   background-color: #e6ecf0;
+  cursor: pointer;
 }
 
 .rekweeked-reply-info {

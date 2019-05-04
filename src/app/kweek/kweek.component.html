@@ -4,8 +4,8 @@
     <div *ngFor="let kweek of kweeks" class="kweeks">
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-      <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
-        <div class="rekweeked-reply-info" *ngIf="kweek.rekweek_info !== null">
+      <div class="p-0 kweek-style pointer-cursor" *ngIf="!kweek.user.muted">
+        <div class="rekweeked-reply-info pointer-cursor" *ngIf="kweek.rekweek_info !== null">
           <i class="fas fa-retweet m-1"></i
           ><a
             href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
@@ -19,10 +19,10 @@
           Rekweeked
         </div>
         <div class="rekweeked-reply-info" *ngIf="kweek.reply_info !== null">
-          <i class="far fa-comment icons m-1"></i>Reply to 
+          <i class="far fa-comment icons m-1"></i>Reply to
           <a
             href="/profile/{{ kweek.reply_info.reply_to_username }}"
-            class="rekweeked-reply-screen_name" 
+            class="rekweeked-reply-screen_name"
             >{{
               kweek.reply_info.reply_to_username !== this.authorizedUser
                 ? kweek.reply_info.reply_to_username
@@ -30,9 +30,9 @@
             }}</a
           >
         </div>
-
-        <div *ngIf="kweek.rekweek_info === null" style="margin-top: 9px"></div>
-
+        <div *ngIf="kweek.rekweek_info === null">
+          <div style="height: 9px"></div>
+        </div>
         <!-- delete button -->
         <div
           *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
