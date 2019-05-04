@@ -3,32 +3,106 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { isNull } from 'util';
 import { NgForm, Form, NgModel, FormsModule, } from '@angular/forms';
-//import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../material.module';
+
+/**
+ * Sign up component.
+ * Signup user and show success or appropriate error message
+ */
 @Component({
   selector: 'app-sign-up' ,
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-//In class data used in the signup component
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public bar2: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public bar3: any;
+/**
+* Signup variable
+* used to access a specific class in the css files
+*/
 public fs1: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public fs2: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public fs3: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public cool: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public errorOccured: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public errorOccured2: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public errorOccured3: any;
+/**
+ * Signup variable
+ * used to access a specific class in the css files
+ */
 public errorOccured4: any;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public email: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public userName: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public mail: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public pass: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public confirm_pass: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public screenName: string;
+/**
+ * Signup variable
+ * used to store user's data
+ */
 public birthdate: string;
-//Data to set the date picker module
+/**
+ * Datepicker setters, to sit minimum allowed date and maximum.
+ */
 minDate = new Date(1900, 0, 1);
 maxDate = new Date(2012, 0, 1);
 
@@ -52,7 +126,6 @@ constructor(private data: DataService , private router: Router) {}
    * @returns void
    */
 ngOnInit() {
-  
    this.bar2 =  document.querySelector('.secondProgress');
    this.bar3 =  document.querySelector('.thirdProgress');
    this.fs1=  document.querySelector('.fs1');
@@ -82,7 +155,6 @@ public previousOne (){
    * @returns void
    */
   public secondStep() {
-    
   this.bar2.className = 'active';
   this.fs1.className = 'hide';
   this.fs2.className = 'show';  
@@ -93,14 +165,13 @@ public previousOne (){
    *Then wrap some form values in an object 'toSend'.
    *Calls 'redesignDateFormat()' to change the date format.
    *Sends the object to the DataServices
-   *@param form {NgForm} 
    *If error does exist or not, the 'whatToShow()' function is called.
    *If no errors does exist, it sends 0 to it
    *If there's an error it sends 1
    *and function 'whatToShow()' handels the situation
+   * @param form {NgForm} 
    * @returns void
    */
-
  public Submit(form: NgForm) {
   this.bar3.className = 'active';
   this.fs2.className = 'hide';
@@ -118,7 +189,7 @@ public previousOne (){
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
-         console.log(res);
+        //  console.log(res);
          this.whatToShow(0);
        },
         err => {
@@ -141,11 +212,10 @@ public previousOne (){
     
 }
 /**
-   *Takes either 0/1 to show an error/success message at the front view.
-   *@param id {number} 
-   * @returns void
-   */
-
+*Takes either 0/1 to show an error/success message at the front view.
+* @param id {number} 
+* @returns void
+*/
 public whatToShow(id: number) {
   if(id == 0)
   {
@@ -198,10 +268,9 @@ public whatToShow(id: number) {
    *This function takes a date in a time zone format.
    *Specify the month.
    *then rearrange the date in a suitable string format.
-   *@param date {string} 
-   * @returns string
+   * @param date {string} 
+   * @returns string, that contains the date in a new format
    */
- 
 redesignDateFormat(date: string): string {
   if (!date) {
     return null;

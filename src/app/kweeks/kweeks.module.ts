@@ -14,6 +14,9 @@ import { RouterModule } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
+/**
+ * The module responsable on kweeks 
+ */
 @NgModule({
   declarations: [
     KweekComponent,

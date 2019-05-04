@@ -1,14 +1,20 @@
 import {  ComponentFixture } from '@angular/core/testing';
 import { DataService } from '../services/data.service';
-import { LogInComponent } from './log-in.component';
 import { HttpClient, HttpErrorResponse,  HttpParams,  HttpHeaders } from '@angular/common/http';
 import { CacheService } from '../services/cache.service';
-describe('Login Component', () => {
-  let component: LogInComponent;
-  let fixture: ComponentFixture<LogInComponent>;
+import { confirmPassword } from './reset-password-confirm.component';
+import { ActivatedRoute } from '@angular/router';
+
+/**
+ * Describe funciton to test confirm email component.
+ */
+describe('Password confirmation code Component', () => {
+  let component: confirmPassword;
+  let fixture: ComponentFixture<confirmPassword>;
   let dataService: DataService;
   let http: HttpClient;
   let cacheService: CacheService;
+  let routes: ActivatedRoute;
   let route: any = {
     snapshot: {
       root: {
@@ -30,9 +36,10 @@ describe('Login Component', () => {
       }
     }
   };
+  
   beforeEach(() => {
     dataService = new DataService(http, cacheService,route);
-    component = new LogInComponent(dataService,route);
+    component = new confirmPassword(dataService,route,routes);
 
     });
 

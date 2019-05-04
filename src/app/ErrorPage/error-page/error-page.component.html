@@ -8,19 +8,19 @@
       alt="Logo"
       id="ProfileImage"/>
     </a>
-    <button class="btn btn-primary btnStyle" [routerLink]="[ '/' ]" type="button">or, Go to Home Page</button>
+    <button class="btn btn-primary btnStyle" [routerLink]="[ '/' ]" type="button"> Home Page </button>
   </div>
   <div class="body-background"> 
     <div class="body-content">
         <h1 class = "Sorry-Msg">Sorry, that page doesn’t exist!</h1>
-        <p>You can 
-          <a href="">search Kwikker </a> 
+        <p> You can 
+          search Kwikker 
           using the search box below or 
           <a href="">return to the homepage</a>.
         </p>
         <form class="search" action="" method="get">
-          <input id="search-bar" name="q" type="text" aria-label="Search query" placeholder="Search for a topic, full name, or @username">
-          <input class="search-btn" id="search_submit" type="submit" value="Search">
+          <input id="search-bar"  [(ngModel)]="filterBy" name="ngModel"  type="search" aria-label="Search" placeholder="Search for a topic, full name, or @username">
+          <input class="search-btn" id="search_submit" type="submit" value="Search" (click)="newSearch()">
         </form>
        
     </div>

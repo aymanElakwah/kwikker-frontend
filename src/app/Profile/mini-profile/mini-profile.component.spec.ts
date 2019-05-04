@@ -35,6 +35,7 @@ describe('MiniProfileComponent', () => {
       dataService,
       route,
       null,
+      null,
       null
     );
     component.route = route;

@@ -1,8 +1,10 @@
 import { Component, Input , OnInit,  EventEmitter, Output } from '@angular/core';
 import { User } from '../../model/user';
 
-                   /* Edit-Mode Header Card */
-/* The User can edit its Screen Name, Date and Bio From this Component */
+/** Edit-Mode Header Card 
+ * 
+ The User can edit its Screen Name, Date and Bio From this Component 
+ */
 @Component({
   selector: 'app-profile-header-card-editing',
   templateUrl: './profile-header-card-editing.component.html',
@@ -10,28 +12,34 @@ import { User } from '../../model/user';
 })
 export class ProfileHeaderCardEditingComponent implements OnInit {
 
-  /* All Info for the profile user: Input from MainProfileComponent */
+  /** All Info for the profile user: Input from MainProfileComponent 
+   * 
+  */
   @Input() profileHeaderInfo:User;
 
-  /*Is The Profile for The Authorized User (The one who made Log in): Input from MainProfileComponent */
+  /**
+   *  Is The Profile for The Authorized User (The one who made Log in): 
+   * Input from MainProfileComponent 
+   * */
   @Input() isAuthorisedUser: boolean;
 
-  /* The Edited data that will be sent To The main Component */
-                 /* The Edited Screen Name */
+  /** The Edited data that will be sent To The main Component 
+   * 
+   * The Edited Screen Name 
+  */
   @Output() editedScreenName: EventEmitter<string> = new EventEmitter<string>();
-                    /* The Edited Bio */
+    /** 
+     * The Edited Bio 
+     * 
+    */
   @Output() editedBio: EventEmitter<string> = new EventEmitter<string>();
-                    /* The Edited Date */
+     /** 
+      * The Edited Date
+      *  */
   @Output() editedDate: EventEmitter<string> = new EventEmitter<string>();
 
-  minDate = new Date(1912, 0, 1);
-  maxDate = new Date();
-
- 
   /**
    * Send the edited data to The Main Component
-   * No Parameters  
-   * No return 
    */
   changeProfileData()
   {
@@ -40,14 +48,14 @@ export class ProfileHeaderCardEditingComponent implements OnInit {
   }
 
   /**
-   * Empty Constructor => May be used later
+   * Profile Headear Card Editing Constructor
    */
   constructor() { 
     
   }
 
   /**
-   * Empty ngOnInit => May be used later
+   * Empty ngOnInit 
    */
   ngOnInit() {
     

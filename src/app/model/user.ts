@@ -4,9 +4,9 @@
  * The Main Model for All Website Users
  */
 export interface User {
-    /** Username */
+    /** Username  => Must be unique */
     username: string;
-    /** User Screen Name => Must be unique */
+    /** User Screen Name */
     screen_name: string;
     /** Bio: Description Added By The User */
     bio: string;

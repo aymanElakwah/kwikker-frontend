@@ -1,15 +1,18 @@
 <div infiniteScroll (scrolled)="onScroll()">
   <div *ngIf="kweeks && kweeks.length">
     <!-- check if kweeks exists -->
-    <div *ngFor="let kweek of kweeks" class="kweeks">
+    <div *ngFor="let kweek of kweeks; let i = index" class="kweeks">
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
-      <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
-        <div id="rekweeked-info" *ngIf="kweek.rekweek_info !== null">
+      <div class="p-0 kweek-style pointer-cursor" *ngIf="!kweek.user.muted">
+        <div
+          class="rekweeked-reply-info pointer-cursor"
+          *ngIf="kweek.rekweek_info !== null"
+        >
           <i class="fas fa-retweet m-1"></i
           ><a
             href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
-            id="rekweeked-screen_name"
+            class="rekweeked-reply-screen_name"
             >{{
               kweek.rekweek_info.rekweeker_username !== this.authorizedUser
                 ? kweek.rekweek_info.rekweeker_name
@@ -18,9 +21,21 @@
           >
           Rekweeked
         </div>
-
-        <div *ngIf="kweek.rekweek_info === null" style="margin-top: 9px"></div>
-
+        <div class="rekweeked-reply-info" *ngIf="kweek.reply_info !== null">
+          <i class="far fa-comment icons m-1"></i>Reply to
+          <a
+            href="/profile/{{ kweek.reply_info?.reply_to_username }}"
+            class="rekweeked-reply-screen_name"
+            >{{
+              kweek.reply_info?.reply_to_username !== this.authorizedUser
+                ? kweek.reply_info?.reply_to_username
+                : "You"
+            }}</a
+          >
+        </div>
+        <div *ngIf="kweek.rekweek_info === null">
+          <div style="height: 9px"></div>
+        </div>
         <!-- delete button -->
         <div
           *ngIf="authorizedUser === kweek.user.username && !kweek.rekweek_info"
@@ -36,6 +51,7 @@
             [src]="kweek.user.profile_image_url"
             src-fallback="../../assets/kweeks/default.png"
             class="mr-3 rounded-circle kweek-img"
+            (click)="openUserProfile(i)"
           />
           <!-- alt could be a pic in our files -->
           <div class="media-body">
@@ -77,7 +93,7 @@
                       ><i class="far fa-comment icons"></i
                     ></span>
                     <span class="p-2"></span>
-                    <span style="font-weight:bold">{{
+                    <span class="counter" style="font-weight:bold">{{
                       kweek.number_of_replies === 0
                         ? " "
                         : kweek.number_of_replies
@@ -99,7 +115,7 @@
                         ><i class="fas fa-retweet icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" style="font-weight:bold">{{
                         kweek.number_of_rekweeks === 0
                           ? " "
                           : kweek.number_of_rekweeks
@@ -119,7 +135,7 @@
                         ><i class="fas fa-retweet icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" style="font-weight:bold">{{
                         kweek.number_of_rekweeks === 0
                           ? " "
                           : kweek.number_of_rekweeks
@@ -139,7 +155,7 @@
                         ><i class="fas fa-heart icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" style="font-weight:bold">{{
                         kweek.number_of_likes === 0
                           ? " "
                           : kweek.number_of_likes
@@ -159,7 +175,7 @@
                         ><i class="far fa-heart icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" style="font-weight:bold">{{
                         kweek.number_of_likes === 0
                           ? " "
                           : kweek.number_of_likes
@@ -175,4 +191,15 @@
       </div>
     </div>
   </div>
+</div>
+
+<div style="margin:20px;"></div>
+
+<div class="m-5">
+  <img
+    class="Logo"
+    src="../../../assets/main/8800.png"
+    alt="No Kweeks"
+    (click) = 'openHomePage()'  
+    />
 </div>

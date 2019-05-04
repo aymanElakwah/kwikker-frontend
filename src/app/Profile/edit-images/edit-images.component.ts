@@ -2,10 +2,9 @@ import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, Inject} f
 import { LyTheme2, ThemeVariables, Platform } from '@alyle/ui';
 import { ImgCropperConfig, ImgCropperEvent, 
          LyResizingCroppingImages, ImgCropperErrorEvent } from '@alyle/ui/resizing-cropping-images';
-import { DataService } from 'src/app/services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
-
+/** Page Styles */
 const styles = (theme: ThemeVariables) => ({
   actions: {
     display: 'flex'
@@ -116,6 +115,11 @@ const styles = (theme: ThemeVariables) => ({
   }
 });
 
+/**
+ * Edit Image Component is responsible 
+ * for editing The Profile Picture
+ * Resizing, Rotating and Croping
+ */
 @Component({
     selector: 'app-edit-image',
     templateUrl: './edit-images.component.html',
@@ -126,14 +130,27 @@ const styles = (theme: ThemeVariables) => ({
   
   export class EditImagesComponent implements AfterViewInit {
 
+    /** Component Themes */
     classes = this.theme.addStyleSheet(styles);
+     /** The Cropped Image Url */
     croppedImage?: string;
+     /** The File That will be sent to Main Component To be used In Upload Request */
     fileToUpload: ImgCropperEvent = null;
+    /** The First Image Url Before Changing */
     ImageUrl: string;
-    result: string;
+    /** The Image Scale (Zooming in and Out) */
     scale: number;
+    /** The Cropped Image But with another Type */
     img: LyResizingCroppingImages;
+
+    /**
+     *  Set Default Changes To The Image 
+     * */
     @ViewChild(LyResizingCroppingImages) cropper: LyResizingCroppingImages;
+
+     /**
+     *  The Default Config To The Image 
+     * */
     myConfig: ImgCropperConfig = {
       autoCrop: true,
       width: 200, // Default `250`
@@ -142,13 +159,25 @@ const styles = (theme: ThemeVariables) => ({
       type: 'image/jpeg'
     };
   
+  /**
+   * Edit Image Component Constructor
+   * 
+   * @param theme  The Component Default Theme
+   * 
+   * @param dialogRef  Dialog Service which is used to open Pop up windows
+   * 
+   * @param data  is Used To Send Data To The Main Profile Component   
+   * 
+   */
     constructor(
       private theme: LyTheme2,
-      private EditImageService: DataService,
       private dialogRef: MatDialogRef<EditImagesComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any,
     ) { }
   
+     /**
+      *  Set Default Changes To The Image
+      *  */
     ngAfterViewInit() {
   
       // demo: Load image from URL and update position, scale, rotate
@@ -170,29 +199,38 @@ const styles = (theme: ThemeVariables) => ({
       }
     }
   
+     /** For Each Change In The Image, Make It ready To Be Uploaded
+      * @param e The Cropped Image
+      */
     onCropped(e: ImgCropperEvent) {
       this.croppedImage = e.dataURL;
       this.fileToUpload = e as File;
     }
 
+     /** When The Original Image Loaded at First */
     onloaded(e: ImgCropperEvent) {
     }
 
+      /** When Error Occurs While Loading */
     onerror(e: ImgCropperErrorEvent) {
     }
 
+    /** Save The Changes And Send The Cropped Image To The Main Component  */
     changeImage()
     {
-
       let image = this.dataURItoBlob(this.fileToUpload.dataURL);
        this.dialogRef.close( image );
     } 
 
+     /** Ignore The Changes And Close The Dialog  */
     CancelChanging()
     {
       this.dialogRef.close();
     }
 
+    /**  Convert The Th Image To Blob To be able To Upload it
+    * @param dataURI The Image Want To Be Converted Url
+    */
     dataURItoBlob(dataURI): Blob {
       const binary = atob(dataURI.split(',')[1]);
       const array = [];

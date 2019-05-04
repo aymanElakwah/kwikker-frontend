@@ -44,7 +44,7 @@ export class CanActivateTeam implements CanActivate {
       }
     else
     {
-      console.log("Welcome");
+      // console.log("Welcome");
       return true;
     }
   }

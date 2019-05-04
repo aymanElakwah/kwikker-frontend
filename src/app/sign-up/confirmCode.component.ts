@@ -2,14 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from "@angular/router";
-
+/**
+ * Confirm code component.
+ * Sends the code to data services after snapping it from the url
+ */
 @Component({
     selector: 'app-confirm-signUp',
     templateUrl: './confirm-signUp.component.html',
     styleUrls: ['./sign-up.component.css']
 })
 export class confirmCode implements OnInit {
+  /**
+   * The confirmation code snapped later from the URL.
+   */
     public confirmCode: string;
+
+  /**
+   * confirm-code component's constructor
+   * @param data for dataService's communications
+   * @param router for navigating among pages
+   * @param route to snapshot a value in the url
+   */
     constructor(private data: DataService,private router: Router , private route: ActivatedRoute) {
     }
    /**
@@ -21,7 +34,7 @@ export class confirmCode implements OnInit {
    * @returns void
    */
     ngOnInit() {
-        this.confirmCode  = this.route.snapshot.paramMap.get("code");
+        this.confirmCode = this.route.snapshot.paramMap.get("code");
         var toSend = { 
           confirmation_code:this.confirmCode
        };
@@ -34,7 +47,7 @@ export class confirmCode implements OnInit {
           err => {
             window.alert("An error occured, please check your email again!")
             this.router.navigate(['']);
-          }
+          } 
       );
 
       

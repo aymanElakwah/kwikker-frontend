@@ -1,11 +1,15 @@
 import {  ComponentFixture } from '@angular/core/testing';
 import { DataService } from '../services/data.service';
-import { LogInComponent } from './log-in.component';
 import { HttpClient, HttpErrorResponse,  HttpParams,  HttpHeaders } from '@angular/common/http';
 import { CacheService } from '../services/cache.service';
-describe('Login Component', () => {
-  let component: LogInComponent;
-  let fixture: ComponentFixture<LogInComponent>;
+import { ResendEmailComponent } from './resend-email.component';
+
+/**
+ * Describe funciton to test ResendEmail component.
+ */
+describe('Resen-Email Component', () => {
+  let component: ResendEmailComponent;
+  let fixture: ComponentFixture<ResendEmailComponent>;
   let dataService: DataService;
   let http: HttpClient;
   let cacheService: CacheService;
@@ -30,9 +34,10 @@ describe('Login Component', () => {
       }
     }
   };
+  
   beforeEach(() => {
     dataService = new DataService(http, cacheService,route);
-    component = new LogInComponent(dataService,route);
+    component = new ResendEmailComponent(dataService,route);
 
     });
 

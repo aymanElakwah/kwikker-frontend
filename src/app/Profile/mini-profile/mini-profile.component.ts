@@ -3,7 +3,7 @@ import { User } from '../../model/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { ChatComponent } from '../../chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
 
@@ -19,52 +19,75 @@ import { ChatService } from 'src/app/chat/chat.service';
 
 export class MiniProfileComponent implements OnInit {
 
-  /* Array of MiniUsers To get some of the following and followers Info */
+  /** Array of MiniUsers To get some of the following and followers Info */
   public miniCardProfileUsers: User[] = [];
 
-   /* Array of MuteModes for each MiniUsers */
+   /** Array of MuteModes for each MiniUsers */
   public muteModes: boolean[] = [];
   
-          /* route children name which based on it, 
+          /**  route children name which based on it, 
   The right request will be sent  [Followers OR Followings] */
   public routeChildName: string;
 
-  /* The Authorized User (The one who made Log in) */
+  /** The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
 
-  /* Last UserName Sent To The Backend To retireve more */
+  /** Last UserName Sent To The Backend To retireve more */
   LastSent: string = null;
 
-  /* Profile Username */
+  /** Profile Username */
   ProfileUserName: string;
 
-  DummyString: string = "?dummy=" + Math.random();
 
-      /**
+    /**
    * Check If this Profile belongs to the authorized User (The one who loged in)
-   * No Parameters
+   * 
+   *  @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   * 
    * @returns {boolean}
    */
   isAuthorisedUser(index: number): boolean {
     return (this.miniCardProfileUsers[index].username == this.authorizedUser);
+
   }
 
-   /**
+  /**
+   * Open User Profile when his Profile Picture Clicked 
+   *  @param index The Number of MiniUser in The Array to Send The Appropiate request  
+   */  
+  openUserProfile(index: number)
+  {
+    this.router.navigate(['/profile/'+ this.miniCardProfileUsers[index].username]);
+  }
+
+  
+  /**
    *
-   * @param route to Know which Url is Activated To send The appropiate request
+   *  Mini Profile Constructor 
+   * 
+   * @param route is used to Know which Parameter is sent To The Profile Url
+   * and Based on It request Its Information
+   * 
+   * @param dialog  Dialog Service which is used to open Pop up windows
+   * 
+   * @param router Service used to Navigate To The Error Page
+   *
+   * @param ChatService Service used To Open Chat Inbox
+   * 
    * @param miniProfileInfoService DataService Parameter To Send Request getting
    * all followers or following information
    */
   constructor(private miniProfileInfoService: DataService,
                public route: ActivatedRoute,
+               private router: Router,
                private dialog: MatDialog,
                private ChatService:ChatService) { }
 
   /**
    * Change Between Follow And Unfollow Buttons, And Send their requests
-   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
-   * No return 
+   * 
    */             
   toggleFollow(index: number)
   {
@@ -80,10 +103,10 @@ export class MiniProfileComponent implements OnInit {
   }
 
   /**
-   * Change Between Mute And Unmute Buttons, And Send their requests
+   * Change Between Mute And Unmute Buttons, And Send their requests,
    * It Also Activate muteMode (Mute Icon in the Navbar)
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
-   * No return 
    */
   toggleMute(index: number): void
   {
@@ -102,10 +125,9 @@ export class MiniProfileComponent implements OnInit {
 
    
   /**
-   * Change Between Block And UnBlock Buttons, And Send their requests
-   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * Change Between Block And UnBlock Buttons, And Send their requests,
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
-   * No return 
    */
   toggleBlock(index: number): void
   {
@@ -116,15 +138,18 @@ export class MiniProfileComponent implements OnInit {
     else
     {
       this.miniProfileInfoService.blockUser(this.miniCardProfileUsers[index].username).subscribe();
+      this.miniCardProfileUsers[index].following = false;
+      this.miniCardProfileUsers[index].follows_you = false;
     }
 
     this.miniCardProfileUsers[index].blocked = ! this.miniCardProfileUsers[index].blocked 
   }
 
      /**
-     * Open Write Kweek Component Dialog
-     * No Parameters
-     * No return
+     * Open Write Kweek Component Dialog,
+     * 
+     * @param inex The Number of MiniUser in The Array to Send The Appropiate request  
+     *
      */
     openKweekDialog(index: number)
     {
@@ -136,10 +161,11 @@ export class MiniProfileComponent implements OnInit {
          dialogRef.componentInstance.screenname = this.miniCardProfileUsers[index].screen_name;
     }
 
-       /**
+    /**
      * Open Inbox Component Dialog
-     * No Parameters
-     * No return
+     * 
+     * @param index The Number of MiniUser in The Array to Send The Appropiate request  
+     * 
      */
     openInboxDialog(index: number)
     {
@@ -148,7 +174,7 @@ export class MiniProfileComponent implements OnInit {
       const dialogRef = this.dialog.open(ChatComponent);
     }
              
-/**
+   /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling 
    */
@@ -157,19 +183,22 @@ export class MiniProfileComponent implements OnInit {
    if(this.miniCardProfileUsers.length != 0)
    {
       var LastUsername = this.miniCardProfileUsers[this.miniCardProfileUsers.length - 1].username;
+  
       if(this.route.snapshot.url[0].path == 'followers' && this.LastSent != LastUsername )
       {
-       
-        this.miniProfileInfoService.getUserFollowers(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
+        this.miniProfileInfoService.getUserFollowers(this.ProfileUserName, LastUsername).subscribe
         ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
         this.LastSent = LastUsername;
+
       }
       else if (this.route.snapshot.url[0].path == 'following' && this.LastSent != LastUsername)
       {
-        this.miniProfileInfoService.getUserFollowings(this.route.snapshot.root.children[0].params['username'], LastUsername).subscribe
-        ( usersInfo => { this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
+        this.miniProfileInfoService.getUserFollowings(this.ProfileUserName, LastUsername).subscribe
+        ( usersInfo => {  this.miniCardProfileUsers = this.miniCardProfileUsers.concat(usersInfo); } )
         this.LastSent = LastUsername;
+       
       }
+     
   }
 }
 

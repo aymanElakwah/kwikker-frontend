@@ -19,9 +19,15 @@ import { EditImagesComponent } from "../Profile/edit-images/edit-images.componen
 import { RouterModule } from "@angular/router";
 import { ReplyComponent } from '../reply/reply.component';
 import { AlertComponentComponent } from '../alert-component/alert-component.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
-  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent],
+  declarations: [
+    NavBarComponent, 
+    TrendsComponent, 
+    AlertComponentComponent
+  ],
 
   imports: [
     CommonModule,
@@ -33,7 +39,9 @@ import { AlertComponentComponent } from '../alert-component/alert-component.comp
     NgbModule.forRoot(),
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule,
+
   ],
 
   entryComponents: [EditImagesComponent,AlertComponentComponent],
@@ -45,7 +53,7 @@ import { AlertComponentComponent } from '../alert-component/alert-component.comp
     ReplyComponent,
     TrendsComponent,
     NewKweekComponent,
-    AlertComponentComponent
+    AlertComponentComponent,
   ]
 })
 export class SharedModule {}

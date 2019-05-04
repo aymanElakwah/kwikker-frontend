@@ -1,18 +1,14 @@
-import { HomeComponent } from './home.component';
+import { HomeMiniProfileCardComponent } from './home-mini-profile-card.component';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
+describe('HomeMiniProfileCardComponent', () => {
+  let component: HomeMiniProfileCardComponent;
   let data: DataService; 
   let router: Router;
- 
-
 
   beforeEach(() => {
-
-    component = new HomeComponent(data, router);
-
+    component = new HomeMiniProfileCardComponent(data, router);
   });
 
   it('should create', () => {

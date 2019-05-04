@@ -4,14 +4,14 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 20 * 60 * 1000,
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome',
-    // 'chromeOptions': {
-    //   'args': ['--disable-web-security', '--user-data-dir=~/.e2e-chrome-profile']
+    // chromeOptions: {
+    //   args: ['--headless', '--disable-gpu', '--window-size=1600,1200', '--no-sandbox']
     // }
   },
   directConnect: true,
@@ -19,15 +19,14 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 60 * 1000,
     print: function() {}
   },
   onPrepare() {
-    browser.manage().window().setSize(1600, 1000);
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-    browser.manage().window().maximize();
+    browser.driver.manage().window().maximize();
   }
 };

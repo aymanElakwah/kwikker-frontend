@@ -37,7 +37,8 @@ import { KweeksModule } from './kweeks/kweeks.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { ResendEmailComponent } from './log-in/resend-email.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { HomeMiniProfileCardComponent } from './home-mini-profile-card/home-mini-profile-card.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
@@ -52,7 +53,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     confirmCode,
     ResetPasswordComponent,
     confirmPassword,
-    WelcomeComponent
+    WelcomeComponent,
+    HomeMiniProfileCardComponent,
     ],
   imports: [
     SocketIoModule.forRoot(config),
@@ -75,7 +77,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MaterialModule,
     FormsModule,
     LyThemeModule.setTheme('minima-light'),
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule
   ],
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
