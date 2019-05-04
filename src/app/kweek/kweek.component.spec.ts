@@ -76,6 +76,7 @@ describe("KweekComponent", () => {
       dataService,
       kweeksService,
       route,
+      null,
       dialog,
       null
     );

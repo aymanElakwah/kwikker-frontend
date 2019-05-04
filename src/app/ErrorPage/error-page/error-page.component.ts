@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+
+/**
+ * The Error Page , if anything Wrong happened 
+ * It should be navigated To this Page
+ * 
+ */
 @Component({
   selector: 'app-error-page',
   templateUrl: './error-page.component.html',
@@ -7,9 +14,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorPageComponent implements OnInit {
 
-  constructor() { }
+  /**
+   *  The Value That the User want To Search About 
+   * */
+  filterBy: string;
 
+     
+  /**
+   * Error Page Constructor 
+   * 
+   * @param router  Service that used To Naviagte To Search Page
+   * 
+   */
+  constructor(private router: Router) { }
+
+  /**
+   * Empty ngOnInit
+   */
   ngOnInit() {
+
+  }
+
+  /**
+   * after each char send new request or navigate
+   */
+  newSearch() {
+    this.router.navigate(['/search'] , { queryParams: { filterBy: this.filterBy } });
   }
 
 }

@@ -14,7 +14,6 @@ import { Trend } from "../model/Trend";
 import { Kweek } from "../model/kweek";
 import { MiniUser } from "../model/mini-user";
 import { BlockedMutedUser } from "../model/bloked-muted-users";
-import { $ } from "protractor";
 import { CacheService } from "./cache.service";
 import { Message } from "../model/message";
 import { Router } from "@angular/router";
@@ -32,6 +31,10 @@ export class DataService {
   /**
    *
    * @param http component to send requests
+   * 
+   * @param cacheService Serive used to Cache some requests 
+   * 
+   * @param router is Used To Navigate To Home In Error Cases
    */
   constructor(
     private http: HttpClient,

@@ -1,4 +1,11 @@
 <div class= "PROFILE">
+      <div id="myModal" class="modal">
+            <span class="close" (click) = "closeProfileImage()">&times;</span>
+      
+            <img class="modal-content" id="img01">
+      
+            <div id="caption"></div>
+      </div>
    <div id="message-sticky">
       <span class="close-button" onclick=" this.parentElement.style.transform ='translate( 0px,-40px)';
        this.parentElementstyle.visibility = 'hidden';"> &times; </span>
@@ -18,7 +25,8 @@
                <!--User Setting Dropdown Menu -->
                <img *ngIf="!isAuthorisedUser() || !isProfilePictureDefault()"
                   [ngClass]="{'ProfileImage':!isEditingMode, 'ProfileImage-Editing':isEditingMode}"
-                  src={{profileUser?.profile_image_url}} id="ProfileImage" />
+                  src={{profileUser?.profile_image_url}} id="ProfileImage" 
+                  (click) = "openProfileImage()"/>
 
                <span class="Default-Image-Icon" style="color:#fff" *ngIf="!isEditingMode && isAuthorisedUser() && isProfilePictureDefault()">
                   <i class="fas fa-camera fa-3x"></i>
@@ -68,7 +76,7 @@
                   <li class="dropdown-item">
                      <input type="file" id="file" accept=".png, .jpg, .jpeg" enctype="multipart/form-data" id="file"
                         (change)="changeProfileBanner($event)" />
-                     <label for="file"> Upload photo </label>
+                     <label for="file"> <p> Upload photo </p> </label>
                   </li>
                   <li class="dropdown-item" *ngIf="!isProfileBannerDefault()" (click)="removeProfileBanner()">
                      <P> Remove </P>

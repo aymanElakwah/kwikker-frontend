@@ -156,7 +156,7 @@
 
 .Dots-Icon {
 	position: absolute;
-	Top: -2px;
+	Top: 4px;
 	right: 5px;
 }
 
@@ -172,9 +172,11 @@
 {
 	position: absolute;
 	right: 5px;
-	Top: 10px;
-	height: 22px;
-	width: 2px;
+	Top: 8px;
+	height: 25px; 
+	width: 18px;
+	background: transparent;
+    border: none !important;
 }
 
 .dropdown-item>p {
@@ -190,6 +192,8 @@
 	min-width: 100%;
 	text-align: left;
 }
+
+
 
 
 /* Profiel Picture */
@@ -215,6 +219,7 @@
 	width: 71px;
 	border: 2px solid #fff;
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .profile-data {
