@@ -8,6 +8,7 @@ import { Replied } from './replied';
  * The Main Model for the Kweeks In The Website
  */
 export interface Kweek {
+  /** loop */
   forEach(arg0: (kweek: any) => void);
     /** Each Kweekd has a unique ID */
     id: string;
