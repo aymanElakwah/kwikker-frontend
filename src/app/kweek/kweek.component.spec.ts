@@ -13,26 +13,10 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from "@angular/platform-browser-dynamic/testing";
-import { CommonModule } from "@angular/common";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ImgFallbackModule } from "ngx-img-fallback";
-import { OverlayModule } from "@angular/cdk/overlay";
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { By } from "@angular/platform-browser";
-import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
-import { ReplyComponent } from "../reply/reply.component";
-import { NewKweekComponent } from "../new-kweek/new-kweek.component";
-import { LikesRekweeksListComponent } from "../likes-rekweeks-list/likes-rekweeks-list.component";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { MainProfileComponent } from "../Profile/main-profile/main-profile.component";
-import { NavBarComponent } from "../nav-bar/nav-bar.component";
-import { SharedModule } from "../shared/shared.module";
 import { KweeksModule } from "../kweeks/kweeks.module";
-import { Kweek } from "../model/kweek";
-import { MiniUser } from "../model/mini-user";
 
 describe("KweekComponent", () => {
   let dataService: DataService;

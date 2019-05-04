@@ -2,7 +2,21 @@ import { ReplyComponent } from "./reply.component";
 import { DataService } from "../services/data.service";
 import { KweeksService } from "../services/kweeks.service";
 import { from, empty } from "rxjs";
-import { MatDialog } from '@angular/material';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogModule,
+  MAT_DIALOG_DATA
+} from "@angular/material";
+import { TestBed } from "@angular/core/testing";
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from "@angular/platform-browser-dynamic/testing";
+import { KweeksModule } from "../kweeks/kweeks.module";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { By } from "@angular/platform-browser";
 
 describe("ReplyComponent", () => {
   let dataService: DataService;
@@ -10,10 +24,10 @@ describe("ReplyComponent", () => {
   let component: ReplyComponent;
   let dialog: MatDialog;
   let mockDialogRef = jasmine.createSpyObj(["close"]);
-  let data = {length: 0};
+  let data = { length: 0 };
   let mockDialogNestedRef = jasmine.createSpyObj(["close"]);
   beforeEach(() => {
-    dataService = new DataService(null, null,null);
+    dataService = new DataService(null, null, null);
     kweeksService = new KweeksService(dataService);
     dialog = new MatDialog(null, null, null, null, null, null, null);
     component = new ReplyComponent(
@@ -25,6 +39,23 @@ describe("ReplyComponent", () => {
       dialog,
       null
     );
+
+    TestBed.resetTestEnvironment();
+    TestBed.initTestEnvironment(
+      BrowserDynamicTestingModule,
+      platformBrowserDynamicTesting()
+    );
+
+    TestBed.configureTestingModule({
+      declarations: [],
+      imports: [KweeksModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        KweeksService,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
+    }).compileComponents();
+
     component.busyRequest = false;
   });
 
@@ -366,7 +397,7 @@ describe("ReplyComponent", () => {
 
       component.deleteActionReply(component.replies[0]);
 
-      expect(spy).toHaveBeenCalledWith(1); 
+      expect(spy).toHaveBeenCalledWith(1);
       expect(component.replies.length).toBe(2);
     });
   });
@@ -436,7 +467,6 @@ describe("ReplyComponent", () => {
     });
   });
 
-
   describe("rekweekersDialog fucntion", () => {
     it("should open rekweekersDialog", () => {
       let kWK_ARR: any[] = [{ id: 1 }, { id: 2 }, { id: 1 }];
@@ -465,7 +495,7 @@ describe("ReplyComponent", () => {
         componentInstance: {
           kweek: kWK_ARR[0],
           reply: false,
-          kweekTO: true                                     
+          kweekTO: true
         }
       };
       let spy = spyOn(dialog, "open").and.callFake(() => {
@@ -481,4 +511,305 @@ describe("ReplyComponent", () => {
     });
   });
 
+  describe("Kweeks like and unlike style", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: false,
+          rekweeked_by_user: false
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        }
+      ];
+      component.replies = kWK_ARR;
+      component.busyRequest = false;
+    });
+
+    it("should have three kweek with css liked class", () => {
+      let fixture = TestBed.createComponent(ReplyComponent);
+      fixture.componentInstance.replies = kWK_ARR;
+      fixture.componentInstance.clickedKweek = kWK_ARR[0];
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".liked"));
+      expect(de.length).toBe(3); //3 not 2 because clickedKweek
+    });
+
+    it("should have one kweek with css like class", () => {
+      let fixture = TestBed.createComponent(ReplyComponent);
+      fixture.componentInstance.replies = kWK_ARR;
+      fixture.componentInstance.clickedKweek = kWK_ARR[0];
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".like"));
+      expect(de.length).toBe(1);
+    });
+  });
+
+  describe("Kweeks like and unlike style", () => {
+    let kWK_ARR: any[];
+    beforeEach(() => {
+      kWK_ARR = [
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: false,
+          rekweeked_by_user: false
+        },
+        {
+          id: "string",
+          created_at: "2019-05-04T05:00:02.403Z",
+          text: "string",
+          media_url: "string",
+          user: {
+            username: "string",
+            screen_name: "string",
+            profile_image_url: "string",
+            following: true,
+            follows_you: true,
+            blocked: false,
+            bio: "string",
+            muted: false
+          },
+          mentions: [
+            {
+              username: "string",
+              indices: [0]
+            }
+          ],
+          hashtags: [
+            {
+              id: "string",
+              indices: [0]
+            }
+          ],
+          number_of_likes: 0,
+          number_of_rekweeks: 0,
+          number_of_replies: 0,
+          reply_info: {
+            reply_to_username: "string",
+            reply_to_kweek_id: "string"
+          },
+          rekweek_info: {
+            rekweeker_name: "string",
+            rekweeker_username: "string"
+          },
+          liked_by_user: true,
+          rekweeked_by_user: true
+        }
+      ];
+      component.clickedKweek = kWK_ARR[0];
+      component.busyRequest = false;
+    });
+
+    it("should have two kweek with css rekweeked class", () => {
+      let fixture = TestBed.createComponent(ReplyComponent);
+      fixture.componentInstance.replies = kWK_ARR;
+      fixture.componentInstance.clickedKweek = kWK_ARR[0];
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".rekweeked"));
+      expect(de.length).toBe(3);
+    });
+
+    it("should have one kweek with css rekweek class", () => {
+      let fixture = TestBed.createComponent(ReplyComponent);
+      fixture.componentInstance.replies = kWK_ARR;
+      fixture.componentInstance.clickedKweek = kWK_ARR[0];
+      fixture.detectChanges();
+      const de = fixture.debugElement.queryAll(By.css(".rekweek"));
+      expect(de.length).toBe(1);
+    });
+  });
 });
