@@ -500,8 +500,8 @@ export class DataService {
   logInUser(user: any): Observable<any> {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/login", body).pipe(
-      map(res => res),
-      map(err => err)
+      map(res => res)
+      
     );
   }
   /**

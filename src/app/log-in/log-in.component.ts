@@ -85,14 +85,22 @@ export class LogInComponent implements OnInit {
          this.router.navigate(['/home']);
        },
         err => {
+         
           if (err.status == 404)
-            this.showErrorMSg(1);
-          else {
-            if (err.status == 403)
-              this.router.navigate['/resend_email'];
-            else
-          this.showErrorMSg(2);
-          }
+            {
+              this.showErrorMSg(1);
+            }
+          else{
+          
+                  if (err.status == 403)
+                  {
+                    this.router.navigate(['/resend_email']);
+                  }
+                    else
+                      {
+                        this.showErrorMSg(2);
+                      }
+                }
         }
     );
     this.isLoggedIn = true;
