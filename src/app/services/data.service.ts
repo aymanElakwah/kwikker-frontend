@@ -94,12 +94,27 @@ export class DataService {
    * to get hashtag kweeks
    * @param trendID every hashtag has ID
    */
-  getTrendsKweeks(trendID: string): Observable<Kweek[]> {
-    const Trend = trendID
-      ? { params: new HttpParams().set("trend_id", trendID) }
-      : {};
+  getTrendsKweeks(trendID: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
+      let parametersSent = {};
+      if (last_retrieved_kweek_id && trendID) {
+        parametersSent = {
+          params: new HttpParams()
+            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+            .append(
+              "trend_id",
+              trendID
+            )
+        };
+      } else if (trendID) {
+        parametersSent = {
+          params: new HttpParams().set(
+            "trend_id",
+            trendID
+          )
+        };
+      }  
     return this.http
-      .get<Kweek[]>(`${this.base}trends/kweeks`, Trend)
+      .get<Kweek[]>(`${this.base}trends/kweeks`, parametersSent)
       .pipe(catchError(this.handleError));
   }
 
@@ -461,6 +476,7 @@ export class DataService {
           params: new HttpParams().set("search_text", filterBy)
         }
       : {};
+        
     return this.http.get<User[]>(`${this.base}search/users`, options);
   }
   /**
@@ -716,11 +732,26 @@ export class DataService {
     );
   }
 
-  searchKweeks(filterBy: string): Observable<Kweek[]> {
-    const params = filterBy
-      ? { params: new HttpParams().set("search_text", filterBy) }
-      : {};
-    return this.http.get<Kweek[]>(this.base + "search/kweeks", params);
+  searchKweeks(filterBy: string,last_retrieved_kweek_id:null): Observable<Kweek[]> {
+      let parametersSent = {};
+      if (last_retrieved_kweek_id && filterBy) {
+        parametersSent = {
+          params: new HttpParams()
+            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+            .append(
+              "search_text",
+              filterBy
+            )
+        };
+      } else if (filterBy) {
+        parametersSent = {
+          params: new HttpParams().set(
+            "search_text",
+            filterBy
+          )
+        };
+      }   
+    return this.http.get<Kweek[]>(this.base + "search/kweeks", parametersSent);
   }
   /**
    * A post method function to send Email to the back-service to give it a confirmation link.

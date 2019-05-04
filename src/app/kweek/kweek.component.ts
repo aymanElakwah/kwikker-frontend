@@ -152,13 +152,13 @@ export class KweekComponent implements OnInit {
     ) {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
       const ID: string = this.route.snapshot.queryParams["ID"];
-      this.kweekService.getTrendsKweeks(ID).subscribe(trendsKweeks => {
+      this.kweekService.getTrendsKweeks(ID,null).subscribe(trendsKweeks => {
         this.kweeks = trendsKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else if (mainRoute === "search") {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
-      this.kweekService.searchKweeks(filterBy).subscribe(searchKweeks => {
+      this.kweekService.searchKweeks(filterBy,null).subscribe(searchKweeks => {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
