@@ -19,6 +19,11 @@ export class HomeMiniProfileCardComponent implements OnInit {
     /** The Authorised User All Information */
   ProfileInfo: User; 
 
+  /**
+   * Home Profile Card Constructor 
+   * @param profileCardService Service used To Get The Profile Information
+   * @param router Service which is used to navigate to another Pages
+   */
   constructor(private profileCardService: DataService,
               private router: Router) { }
 

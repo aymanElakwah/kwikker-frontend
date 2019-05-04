@@ -1,22 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeMiniProfileCardComponent } from './home-mini-profile-card.component';
+import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 describe('HomeMiniProfileCardComponent', () => {
   let component: HomeMiniProfileCardComponent;
-  let fixture: ComponentFixture<HomeMiniProfileCardComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HomeMiniProfileCardComponent ]
-    })
-    .compileComponents();
-  }));
+  let data: DataService; 
+  let router: Router;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeMiniProfileCardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new HomeMiniProfileCardComponent(data, router);
   });
 
   it('should create', () => {
