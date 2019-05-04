@@ -8,7 +8,6 @@ import {DirectMessagesService } from './direct-messages.service';
 import { MiniUser } from '../model/mini-user';
 import { DataService } from '../services/data.service';
 import {Message} from '../model/message';
-import { BehaviorSubject } from 'rxjs';
 import { MatDialogRef } from '@angular/material';
 import { ChatComponent } from '../chat/chat.component';
 @Component({
@@ -17,7 +16,13 @@ import { ChatComponent } from '../chat/chat.component';
   styleUrls: ['./direct-messages.component.css'],
   providers: [ DirectMessagesService]
 })
+/**
+ * Direct Messages rooms
+ */
 export class DirectMessagesComponent implements OnInit , AfterViewInit{
+  /**
+   * scroll of the body 
+   */
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   /**
    * addressed person

@@ -99,7 +99,7 @@ ngOnInit() {
    * @returns void
    */
   openKweekComponent(){
-    console.log("working")
+    // console.log("working")
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: 'kweekBox'
     });
@@ -109,7 +109,7 @@ ngOnInit() {
    * Function for closing the dialog and displaying a msg 
    */
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.nav.className = 'show';
       this.toShow = true;
     });
@@ -129,7 +129,7 @@ ngOnInit() {
    * @returns void
    */
     dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
+    // console.log('The dialog was closed');
     this.nav.className = 'show';
     this.toShow = true;
   });
@@ -206,7 +206,7 @@ ngOnInit() {
      this.screenWidth = event.target.innerWidth;
     }else{
         //larger deveice, check the latest value
-        console.log("large device", event.target.innerWidth );
+        // console.log("large device", event.target.innerWidth );
         if(this.screenWidth <= 765)
         {
           //act

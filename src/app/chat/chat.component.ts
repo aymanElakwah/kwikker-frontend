@@ -17,6 +17,7 @@ export class ChatComponent  {
   /**
    *
    * @param router to navigate to children components
+   * @param chatService to set the section and the addresse
    */
   constructor(private router: Router,
               private chatService: ChatService) {
