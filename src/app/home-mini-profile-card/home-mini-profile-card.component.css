@@ -1,0 +1,127 @@
+.container {
+	height: 281px;
+	width: 290px;
+	background-color: #FFF;
+	padding: 0 0;
+	margin-left: 0;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	margin-top: 0;
+}
+
+
+/* As Bootstrap Rows and Colums generate default margins and Paddings */
+
+.nopadding {
+	padding: 0 0 !important;
+	margin-left: 0.2% !important;
+	height: auto;
+}
+
+
+/* First Part [Banner] */
+
+.banner {
+	background-color: #1B95E0;
+	height: 90px;
+	width: 290px;
+	margin: 0 0;
+}
+
+.BannerImage {
+	height: 90px;
+	width: 290px;
+}
+
+
+/* Second Part [UserActon, ProfilePicture, ProfileInfo] */
+
+.profile-content {
+	height: 191px;
+	width: 288px;
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+	padding: 0 0;
+}
+
+.content {
+	height: 170px;
+	width: 255px;
+	background-color: white;
+	display: inline-block;
+	position: relative;
+}
+
+.user-action {
+	height: 37px;
+	width: 127px;
+	position: relative;
+	left: 130px;
+	top: 10px;
+	text-align: left;
+	display: flex;
+	align-items: center
+}
+
+
+
+/* Profiel Picture */
+
+.profile-pic {
+	height: 69px;
+	width: 69px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	margin: -65px 2px 0 -3px;
+	padding: 3px;
+	position: absolute;
+	background-color: #1B95E0;
+	border-width: 1px;
+	left: 0;
+}
+
+.ProfileImage {
+	position: absolute;
+	Left: -2%;
+	Top: -1%;
+	height: 71px;
+	width: 71px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.profile-data {
+	height: 126px;
+	width: 259px;
+	background-color: #FFF;
+	margin-top: 10px;
+}
+
+.username {
+	color: #14171a;
+	text-align: left;
+	font-size: 18px;
+	font-weight: bold;
+	padding-right: 2px;
+}
+
+#usernameref
+{
+	color: #14171a !important;
+}
+
+.screen-name {
+	color: #66757f;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1;
+	text-align: left;
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.Padding
+{
+	height: 400px;
+}

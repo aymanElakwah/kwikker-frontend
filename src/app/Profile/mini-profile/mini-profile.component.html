@@ -5,7 +5,7 @@
       <div class="profile-card">
          <!--  The Upper Part for the banner -->
          <div class="row banner">
-            <img class='BannerImage' src={{user?.profile_banner_url}}{{DummyString}}  id="BannerImage" />
+            <img class='BannerImage' src={{user?.profile_banner_url}}  id="BannerImage" />
          </div>
          <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
          <div class=" row profile-content">
@@ -51,7 +51,7 @@
                </div>
                <!-- Profile Picture Part -->
                <div class="profile-pic">
-                  <img class="ProfileImage" src={{user?.profile_image_url}}{{DummyString}} id="ProfileImage"
+                  <img class="ProfileImage" src={{user?.profile_image_url}} id="ProfileImage"
                   (click) = "openUserProfile(i)" />
                </div>
                <!-- Profile Info Part [Username, Screen Name, Bio] -->

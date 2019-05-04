@@ -1,0 +1,25 @@
+<!-- The main Part For each Card , For Loop to show all of them -->
+<div class="container">
+  <!-- Profile Card is divided into two main Rows [Banner, Info] -->
+  <div class="profile-card">
+     <!--  The Upper Part for the banner -->
+     <div class="row banner">
+        <img class='BannerImage' src={{user?.profile_banner_url}} id="BannerImage" />
+     </div>
+     <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
+     <div class=" row profile-content">
+        <div class="content">
+           <!-- Profile Picture Part -->
+           <div class="profile-pic">
+              <img class="ProfileImage" src={{user?.profile_image_url}} id="ProfileImage"
+              (click) = "openUserProfile(i)" />
+           </div>
+           <!-- Profile Info Part [Username, Screen Name] -->
+           <div class="profile-data">
+              <div class="username"> <a id="usernameref" href="./profile/{{user.username}}"> {{user.screen_name}} </a>  </div>
+              <div class="screen-name">  <a id="usernameref" href="./profile/{{user.username}}"> @{{user.username}} </a> </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>

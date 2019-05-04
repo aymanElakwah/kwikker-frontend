@@ -20,9 +20,10 @@ import { RouterModule } from "@angular/router";
 import { ReplyComponent } from '../reply/reply.component';
 import { AlertComponentComponent } from '../alert-component/alert-component.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HomeMiniProfileCardComponent } from '../home-mini-profile-card/home-mini-profile-card.component';
 
 @NgModule({
-  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent],
+  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent, HomeMiniProfileCardComponent],
 
   imports: [
     CommonModule,
