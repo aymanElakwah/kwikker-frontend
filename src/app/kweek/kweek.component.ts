@@ -485,7 +485,7 @@ export class KweekComponent implements OnInit {
    * No Parms
    */
   onScroll(): void {
-    if (this.kweeks.length != 0) {
+    if (this.kweeks.length > 0) {
       const lastKweekId = this.kweeks[this.kweeks.length - 1].id;
       let mainRoute;
       if (this.route.snapshot.parent.routeConfig) {
@@ -513,8 +513,8 @@ export class KweekComponent implements OnInit {
             } else {
               this.kweekService
                 .getUserKweeks(
-                  this.route.snapshot.root.children[0].params["username"],
                   lastKweekId,
+                  this.route.snapshot.root.children[0].params["username"],
                   null
                 )
                 .subscribe(lists => {
