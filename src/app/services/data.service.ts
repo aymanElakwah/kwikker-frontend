@@ -94,12 +94,27 @@ export class DataService {
    * to get hashtag kweeks
    * @param trendID every hashtag has ID
    */
-  getTrendsKweeks(trendID: string): Observable<Kweek[]> {
-    const Trend = trendID
-      ? { params: new HttpParams().set("trend_id", trendID) }
-      : {};
+  getTrendsKweeks(trendID: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
+      let parametersSent = {};
+      if (last_retrieved_kweek_id && trendID) {
+        parametersSent = {
+          params: new HttpParams()
+            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+            .append(
+              "trend_id",
+              trendID
+            )
+        };
+      } else if (trendID) {
+        parametersSent = {
+          params: new HttpParams().set(
+            "trend_id",
+            trendID
+          )
+        };
+      }  
     return this.http
-      .get<Kweek[]>(`${this.base}trends/kweeks`, Trend)
+      .get<Kweek[]>(`${this.base}trends/kweeks`, parametersSent)
       .pipe(catchError(this.handleError));
   }
 
@@ -461,6 +476,7 @@ export class DataService {
           params: new HttpParams().set("search_text", filterBy)
         }
       : {};
+        
     return this.http.get<User[]>(`${this.base}search/users`, options);
   }
   /**
@@ -711,20 +727,30 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-<<<<<<< HEAD
-      map(err => err)
-      // catchError(this.handleError)
-=======
       map(err=>err)
->>>>>>> final4/5
     );
   }
 
-  searchKweeks(filterBy: string): Observable<Kweek[]> {
-    const params = filterBy
-      ? { params: new HttpParams().set("search_text", filterBy) }
-      : {};
-    return this.http.get<Kweek[]>(this.base + "search/kweeks", params);
+  searchKweeks(filterBy: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
+      let parametersSent = {};
+      if (last_retrieved_kweek_id && filterBy) {
+        parametersSent = {
+          params: new HttpParams()
+            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+            .append(
+              "search_text",
+              filterBy
+            )
+        };
+      } else if (filterBy) {
+        parametersSent = {
+          params: new HttpParams().set(
+            "search_text",
+            filterBy
+          )
+        };
+      }   
+    return this.http.get<Kweek[]>(this.base + "search/kweeks", parametersSent);
   }
   /**
    * A post method function to send Email to the back-service to give it a confirmation link.
@@ -780,11 +806,7 @@ export class DataService {
       })
       .pipe(
         map(res => res),
-<<<<<<< HEAD
-        catchError(this.handleError)
-=======
         map(err=>err)
->>>>>>> final4/5
       );
   }
   /**
@@ -825,16 +847,11 @@ export class DataService {
       CODE: `${val}`
     });
     return this.http
-<<<<<<< HEAD
-      .put<any>(this.base + "account/reset_password", body, { headers })
-      .pipe(map(res => res));
-=======
       .put<any>(this.base + "account/reset_password", body,{headers})
       .pipe(
         map(res => res),
         map(err=>err)
       );
->>>>>>> final4/5
   }
 
   // in memory mock data service function
