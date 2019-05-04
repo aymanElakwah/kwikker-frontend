@@ -53,7 +53,7 @@ export class ResendEmailComponent implements OnInit {
          this.router.navigate(['/login']);
        },
         err => {
-          console.log('error: ', err);
+          // console.log('error: ', err);
           this.appearError();
            }
     );

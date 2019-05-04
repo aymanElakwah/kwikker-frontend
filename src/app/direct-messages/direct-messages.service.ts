@@ -19,7 +19,7 @@ export class DirectMessagesService {
     }
     let observable = new Observable<Message>(observer=>{
     this.socket.on(username1+username2, (data)=>{
-      console.log(username1+username2);
+      // console.log(username1+username2);
       observer.next(data);  
     });
    // return() => this.socket.disconnect();

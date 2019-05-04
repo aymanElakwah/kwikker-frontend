@@ -26,14 +26,14 @@ export class DataService {
    * Backend server base
    */
   private base: String =
-         "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/"; 
-    
+    "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/";
+
   /**
    *
    * @param http component to send requests
-   * 
-   * @param cacheService Serive used to Cache some requests 
-   * 
+   *
+   * @param cacheService Serive used to Cache some requests
+   *
    * @param router is Used To Navigate To Home In Error Cases
    */
   constructor(
@@ -94,25 +94,22 @@ export class DataService {
    * to get hashtag kweeks
    * @param trendID every hashtag has ID
    */
-  getTrendsKweeks(trendID: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
-      let parametersSent = {};
-      if (last_retrieved_kweek_id && trendID) {
-        parametersSent = {
-          params: new HttpParams()
-            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
-            .append(
-              "trend_id",
-              trendID
-            )
-        };
-      } else if (trendID) {
-        parametersSent = {
-          params: new HttpParams().set(
-            "trend_id",
-            trendID
-          )
-        };
-      }  
+  getTrendsKweeks(
+    trendID: string,
+    last_retrieved_kweek_id: string
+  ): Observable<Kweek[]> {
+    let parametersSent = {};
+    if (last_retrieved_kweek_id && trendID) {
+      parametersSent = {
+        params: new HttpParams()
+          .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+          .append("trend_id", trendID)
+      };
+    } else if (trendID) {
+      parametersSent = {
+        params: new HttpParams().set("trend_id", trendID)
+      };
+    }
     return this.http
       .get<Kweek[]>(`${this.base}trends/kweeks`, parametersSent)
       .pipe(catchError(this.handleError));
@@ -144,6 +141,9 @@ export class DataService {
               )
           }
         : {};
+      return this.http
+        .get<Kweek[]>(`${this.base}kweeks/timelines/profile`, parametersSent)
+        .pipe(catchError(this.handleError));
     } else if (last_retrieved_kweek_id) {
       const parametersSent = userName
         ? {
@@ -291,7 +291,7 @@ export class DataService {
    * @param id {string} of kweek that we want to retreive
    * @returns observable
    */
-  getKweek(id: string): Observable<any> {
+  getKweek(id: string): Observable<Kweek> {
     const paramsSent = { params: new HttpParams().set("id", id) };
     return this.http
       .get<Kweek>(`${this.base}kweeks/kweek_only`, paramsSent)
@@ -476,7 +476,7 @@ export class DataService {
           params: new HttpParams().set("search_text", filterBy)
         }
       : {};
-        
+
     return this.http.get<User[]>(`${this.base}search/users`, options);
   }
   /**
@@ -727,29 +727,26 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
-      map(err=>err)
+      map(err => err)
     );
   }
 
-  searchKweeks(filterBy: string,last_retrieved_kweek_id:string): Observable<Kweek[]> {
-      let parametersSent = {};
-      if (last_retrieved_kweek_id && filterBy) {
-        parametersSent = {
-          params: new HttpParams()
-            .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
-            .append(
-              "search_text",
-              filterBy
-            )
-        };
-      } else if (filterBy) {
-        parametersSent = {
-          params: new HttpParams().set(
-            "search_text",
-            filterBy
-          )
-        };
-      }   
+  searchKweeks(
+    filterBy: string,
+    last_retrieved_kweek_id: string
+  ): Observable<Kweek[]> {
+    let parametersSent = {};
+    if (last_retrieved_kweek_id && filterBy) {
+      parametersSent = {
+        params: new HttpParams()
+          .set("last_retrieved_kweek_id", last_retrieved_kweek_id)
+          .append("search_text", filterBy)
+      };
+    } else if (filterBy) {
+      parametersSent = {
+        params: new HttpParams().set("search_text", filterBy)
+      };
+    }
     return this.http.get<Kweek[]>(this.base + "search/kweeks", parametersSent);
   }
   /**
@@ -765,7 +762,7 @@ export class DataService {
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
         map(res => res),
-        map(err=>err)
+        map(err => err)
       );
   }
   /**
@@ -776,12 +773,12 @@ export class DataService {
    */
   public sendEmail2(email: any): Observable<any> {
     const body = JSON.stringify(email);
-    console.log("body", body);
+    // console.log("body", body);
     return this.http
       .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
         map(res => res),
-        map(err=>err)
+        map(err => err)
       );
   }
   /**
@@ -793,20 +790,20 @@ export class DataService {
    */
   public signUpConfirm(code: any): Observable<any> {
     let val = code.confirmation_code;
-    console.log("CODE here: ", val);
+    // console.log("CODE here: ", val);
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
       CODE: `${val}`
     });
     const body = { password: "123" };
-    console.log(headers);
+    // console.log(headers);
     return this.http
       .post<any>(this.base + "account/registration/confirmation", body, {
         headers
       })
       .pipe(
         map(res => res),
-        map(err=>err)
+        map(err => err)
       );
   }
   /**
@@ -847,10 +844,10 @@ export class DataService {
       CODE: `${val}`
     });
     return this.http
-      .put<any>(this.base + "account/reset_password", body,{headers})
+      .put<any>(this.base + "account/reset_password", body, { headers })
       .pipe(
         map(res => res),
-        map(err=>err)
+        map(err => err)
       );
   }
 

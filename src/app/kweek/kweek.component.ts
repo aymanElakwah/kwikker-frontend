@@ -163,7 +163,7 @@ export class KweekComponent implements OnInit {
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else if (mainRoute === "notifications") {
-      console.log("mentions");
+      // console.log("mentions");
       this.kweekService.getUserMentions(null).subscribe(mentions => {
         this.mentionsResponse = mentions;
         this.kweeks = this.mentionsResponse.replies_and_mentions;
@@ -348,7 +348,6 @@ export class KweekComponent implements OnInit {
     if (kweek.rekweek_info) {
       const index = this.kweeks.indexOf(kweek);
       this.kweeks.splice(index, 1);
-      console.log("here");
     } else {
       kweek.number_of_rekweeks--;
       kweek.rekweeked_by_user = false;
@@ -362,7 +361,6 @@ export class KweekComponent implements OnInit {
         } else if (loopKweek.rekweeked_by_user) {
           loopKweek.number_of_rekweeks--;
           loopKweek.rekweeked_by_user = !loopKweek.rekweeked_by_user;
-          console.log("here2");
           return;
         }
       }
@@ -485,7 +483,7 @@ export class KweekComponent implements OnInit {
    * No Parms
    */
   onScroll(): void {
-    if (this.kweeks.length != 0) {
+    if (this.kweeks.length > 0) {
       const lastKweekId = this.kweeks[this.kweeks.length - 1].id;
       let mainRoute;
       if (this.route.snapshot.parent.routeConfig) {

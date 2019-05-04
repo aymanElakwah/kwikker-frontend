@@ -15,7 +15,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
+// route guards
 import { CanActivateTeam } from '../app-routing.module';
 @NgModule({
   declarations: [
