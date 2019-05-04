@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content class="p-0 content">
   <div>
     <div *ngIf="roots && roots.length">
       <div style="padding-top: 5px;"></div>
@@ -10,7 +10,7 @@
           <!-- delete button -->
           <div *ngIf="authorizedUser === root.user.username">
             <div>
-              <mat-icon class="close" (click)="deleteRoot_ClickedKweek(root)"
+              <mat-icon class="close-reply"  (click)="deleteRoot_ClickedKweek(root)"
                 >close</mat-icon
               >
             </div>
@@ -176,7 +176,7 @@
         <div *ngIf="authorizedUser === clickedKweek.user.username">
           <div>
             <mat-icon
-              class="close"
+              class="close-reply" 
               (click)="deleteRoot_ClickedKweek(clickedKweek)"
               >close</mat-icon
             >
@@ -374,7 +374,7 @@
           <div *ngIf="authorizedUser === reply.user.username">
             <div (click)="openDialog(reply)"></div>
             <div>
-              <mat-icon class="close" (click)="deleteReply(reply)"
+              <mat-icon class="close-reply"  (click)="deleteReply(reply)"
                 >close</mat-icon
               >
             </div>

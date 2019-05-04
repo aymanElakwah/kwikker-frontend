@@ -150,3 +150,22 @@
     background-color: #1DA1F2;
 
 } */
+
+.content {
+  width: auto;
+}
+
+mat-icon.close-reply {
+  font-size: 16px;
+  position: absolute;
+  top: 12px;
+  right: 30px;
+  display: inline-block;
+  color: #657786;
+}
+
+mat-icon.close-reply:hover {
+  color: red;
+  font-size: 17px;
+  cursor: pointer;
+}

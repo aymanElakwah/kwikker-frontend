@@ -169,7 +169,7 @@ export class KweekComponent implements OnInit {
    */
   openDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "640px";
+    dialogConfig.width = "auto"; //640px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     dialogConfig.data = { kweeks: this.kweeks };
@@ -361,7 +361,7 @@ export class KweekComponent implements OnInit {
    */
   delete(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; // 520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
