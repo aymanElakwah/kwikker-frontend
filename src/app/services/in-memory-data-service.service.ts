@@ -175,7 +175,8 @@ export class InMemoryDataService {
             'following': true,
             'follows_you': true,
             'blocked': false,
-            'muted': false
+            'muted': false,
+            'bio': 'Hello world'
           },
           'mentions': [
             {
@@ -196,7 +197,7 @@ export class InMemoryDataService {
           'number_of_likes': 1,
           'number_of_rekweeks': 2,
           'number_of_replies': 3,
-          'reply_to': 'string',
+          'reply_info': null,
           'rekweek_info': null,
           'liked_by_user': true,
           'rekweeked_by_user': true
@@ -213,7 +214,8 @@ export class InMemoryDataService {
             'following': true,
             'follows_you': true,
             'blocked': false,
-            'muted': false
+            'muted': false,
+            'bio': 'Hello world'
           },
           'mentions': [
             {
@@ -252,7 +254,7 @@ export class InMemoryDataService {
           'number_of_likes': 2,
           'number_of_rekweeks': 0,
           'number_of_replies': 0,
-          'reply_to': 'string',
+          'reply_info': null,
           'rekweek_info': {
             'rekweeker_name': 'string',
             'rekweeker_username': 'string'
@@ -272,7 +274,8 @@ export class InMemoryDataService {
             'following': true,
             'follows_you': true,
             'blocked': false,
-            'muted': false
+            'muted': false,
+            'bio': 'Hello world'
           },
           'mentions': [
           ],
@@ -281,7 +284,7 @@ export class InMemoryDataService {
           'number_of_likes': 1,
           'number_of_rekweeks': 2,
           'number_of_replies': 3,
-          'reply_to': 'string',
+          'reply_info': null,
           'rekweek_info': {
             'rekweeker_name': 'string',
             'rekweeker_username': 'string'
@@ -301,7 +304,8 @@ export class InMemoryDataService {
             'following': true,
             'follows_you': true,
             'blocked': false,
-            'muted': false
+            'muted': false,
+            'bio': 'Hello world'
           },
           'mentions': [
           ],
@@ -310,7 +314,7 @@ export class InMemoryDataService {
           'number_of_likes': 1,
           'number_of_rekweeks': 2,
           'number_of_replies': 3,
-          'reply_to': 'string',
+          'reply_info': null,
           'rekweek_info': {
             'rekweeker_name': 'string',
             'rekweeker_username': 'string'
@@ -348,7 +352,8 @@ export class InMemoryDataService {
         'following': true,
         'follows_you': true,
         'blocked': false,
-        'muted': false
+        'muted': false,
+        'bio': 'Hello world'
       },
       'mentions': [
         {
@@ -369,7 +374,7 @@ export class InMemoryDataService {
       'number_of_likes': 1,
       'number_of_rekweeks': 2,
       'number_of_replies': 3,
-      'reply_to': 'string',
+      'reply_info': null,
       'rekweek_info': {
         'rekweeker_name': 'string',
         'rekweeker_username': 'string'
@@ -389,7 +394,8 @@ export class InMemoryDataService {
         'following': true,
         'follows_you': true,
         'blocked': false,
-        'muted': false
+        'muted': false,
+        'bio': 'Hello world'
       },
       'mentions': [
         {
@@ -428,7 +434,7 @@ export class InMemoryDataService {
       'number_of_likes': 2,
       'number_of_rekweeks': 0,
       'number_of_replies': 0,
-      'reply_to': 'string',
+      'reply_info': null,
       'rekweek_info': {
         'rekweeker_name': 'string',
         'rekweeker_username': 'string'
@@ -448,7 +454,8 @@ export class InMemoryDataService {
         'following': true,
         'follows_you': true,
         'blocked': false,
-        'muted': false
+        'muted': false,
+        'bio': 'Hello world'
       },
       'mentions': [
       ],
@@ -457,7 +464,7 @@ export class InMemoryDataService {
       'number_of_likes': 1,
       'number_of_rekweeks': 2,
       'number_of_replies': 3,
-      'reply_to': 'string',
+      'reply_info': null,
       'rekweek_info': {
         'rekweeker_name': 'string',
         'rekweeker_username': 'string'
@@ -722,7 +729,7 @@ const LIKED = [ {
   'number_of_likes': 1,
   'number_of_rekweeks': 2,
   'number_of_replies': 3,
-  'reply_to': 'string',
+  'reply_info': null,
   'rekweek_info': {
     'rekweeker_name': 'string',
     'rekweeker_username': 'string'
@@ -781,7 +788,7 @@ const LIKED = [ {
   'number_of_likes': 2,
   'number_of_rekweeks': 0,
   'number_of_replies': 0,
-  'reply_to': 'string',
+  'reply_info': null,
   'rekweek_info': {
     'rekweeker_name': 'string',
     'rekweeker_username': 'string'
