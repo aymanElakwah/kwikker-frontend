@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Inject } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Kweek } from "../model/kweek";
 
@@ -6,7 +6,8 @@ import {
   MatDialog,
   MatDialogConfig,
   MatDialogRef,
-  TooltipPosition
+  TooltipPosition,
+  MAT_DIALOG_DATA
 } from "@angular/material";
 import { FormControl } from "@angular/forms";
 import { KweeksService } from "../services/kweeks.service";
@@ -14,6 +15,8 @@ import { Overlay } from "@angular/cdk/overlay";
 import { LikesRekweeksListComponent } from "../likes-rekweeks-list/likes-rekweeks-list.component";
 import { NewKweekComponent } from "../new-kweek/new-kweek.component";
 import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
+import { inject } from "@angular/core/testing";
+import { element } from "@angular/core/src/render3";
 @Component({
   selector: "app-reply",
   templateUrl: "./reply.component.html",
@@ -36,6 +39,7 @@ export class ReplyComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ReplyComponent>,
     public dialogLikersRekweekersRef: MatDialogRef<LikesRekweeksListComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     private dialog: MatDialog,
@@ -67,9 +71,10 @@ export class ReplyComponent implements OnInit {
   nestedDialog(kweek: Kweek): void {
     this.roots.push(this.clickedKweek);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "640px";
+    dialogConfig.width = "auto"; // 640px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
+    dialogConfig.data = this.data;
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
     dialogRef.componentInstance.roots = this.roots;
@@ -88,7 +93,7 @@ export class ReplyComponent implements OnInit {
    */
   likersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
@@ -106,7 +111,7 @@ export class ReplyComponent implements OnInit {
    */
   rekweekersDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const dialogLikersRekweekersRef = this.dialog.open(
@@ -176,7 +181,7 @@ export class ReplyComponent implements OnInit {
    */
   deleteRoot_ClickedKweek(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
@@ -200,6 +205,15 @@ export class ReplyComponent implements OnInit {
     if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekService.deleteKweek(kweek.id).subscribe(() => {
+        let indexToDelete = this.data.kweeks.findIndex(element => {
+          return element.id === kweek.id;
+        });
+        while (indexToDelete !== -1) {
+          this.data.kweeks.splice(indexToDelete, 1);
+          indexToDelete = this.data.kweeks.findIndex(element => {
+            return element.id === kweek.id;
+          });
+        }
         this.dialogRef.close();
         this.busyRequest = false;
       });
@@ -213,7 +227,7 @@ export class ReplyComponent implements OnInit {
    */
   deleteReply(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; //620px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
@@ -237,8 +251,17 @@ export class ReplyComponent implements OnInit {
     if (!this.busyRequest) {
       this.busyRequest = true;
       this.kweekService.deleteKweek(kweek.id).subscribe(() => {
-        const indexToDelete = this.replies.indexOf(kweek);
-        this.replies.splice(indexToDelete, 1);
+        let indexToDelete = this.data.kweeks.findIndex(element => {
+          return element.id === kweek.id;
+        });
+        while (indexToDelete !== -1) {
+          this.data.kweeks.splice(indexToDelete, 1);
+          indexToDelete = this.data.kweeks.findIndex(element => {
+            return element.id === kweek.id;
+          });
+        }
+        const indexToDeleteFromReplies = this.replies.indexOf(kweek);
+        this.replies.splice(indexToDeleteFromReplies, 1);
         this.busyRequest = false;
       });
     }

@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { utilityFunctions } from './app.po';
 
-describe('workspace-project App', () => {
+describe('Kwikker E2E -', () => {
   let page: AppPage;
   let utility: utilityFunctions;
   page = new AppPage();
@@ -9,15 +9,15 @@ describe('workspace-project App', () => {
 
   var user1 = "test_user1";
   var pass1 = "pass";
-  var user2 = "zamalek";
-  var pass2 = "password";
-  var user3 = "dawood";
-  var pass3 = "DaWood@123";
-/*
+  var user2 = "dawood";
+  var pass2 = "DaWood@123";
+
   it('Sign up', () =>{
+    utility.browserPause(3000);
     utility.navigateToSignUp();
     utility.browserPause(100);
 
+    page.getUsernameLoginField().click();
     page.getUsernameLoginField().sendKeys("ee11");
     page.getEmailSignupField().sendKeys("ee11@yahoo.com");
     page.getPasswordSignupField().sendKeys("Eee111111");
@@ -37,8 +37,8 @@ describe('workspace-project App', () => {
   it('Login and logout', () =>{
     utility.navigateToLogin();
     utility.browserPause(1000);
-    page.getUsernameLoginField().sendKeys('zamalek');
-    page.getPasswordLoginField().sendKeys('password');
+    page.getUsernameLoginField().sendKeys(user1);
+    page.getPasswordLoginField().sendKeys(pass1);
     page.getLoginButton().click();
     utility.browserPause(2000);
     page.getDropDownMenuButton().click();
@@ -47,7 +47,6 @@ describe('workspace-project App', () => {
     expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   });
 
-
   it('Kweek', () => {
     utility.login(user1, pass1);
     let kweek = "E2E 10";
@@ -55,7 +54,7 @@ describe('workspace-project App', () => {
     utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(kweek);
     utility.browserPause(1000);
-    page.getSecondKweekButton().click();
+    utility.sendClick(page.getSecondKweekButton());
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
@@ -73,6 +72,14 @@ describe('workspace-project App', () => {
     utility.logout();
   });
 
+  // it('Check Rekweek notification.', function() {
+  //   utility.login(user1, pass1);
+  //   utility.browserPause(1000);
+  //   page.navigateToNotifications('all');
+  //   expect(page.getUsernameFirstNotification().getText()).toContain('@' + user2);
+  //   expect(page.getTypeNotificationText().getText()).toContain(' Rekweeked 🔁 your kweek');
+  // });
+
   it('Like', () => {
     utility.login(user2, pass2);
     page.navigateToProfile(user1);
@@ -83,6 +90,12 @@ describe('workspace-project App', () => {
     expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
     utility.logout();
   });
+
+  // it('Check like notification.', function() {
+  //   page.getLike().click();
+  //   page.navigateToNotifications('all');
+  //   expect(page.getTypeNotificationText().getText()).toContain('liked');
+  // });
 
   it('Reply', () => {
     let reply = 'E2E reply'
@@ -135,7 +148,7 @@ describe('workspace-project App', () => {
 
     let username2 = 'uname1username';
     let password2 = 'Password2';
-    let email2 = 'mymail21@mail.com';
+    let email2 = 'mymail20@mail.com';
 
     utility.login(username1, password1);
 
@@ -198,27 +211,25 @@ describe('workspace-project App', () => {
     utility.login(username1, password1);
     utility.logout();
     expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
-  });
-*/
-
+  }, 2 * 60 * 1000);
 
   it('Open profile', function() {
-    utility.login(user3, pass3);
+    utility.login(user2, pass2);
     page.getDropDownHomeToggle().click();
     page.getDropDownHomeToggleProfile().click();
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });
-/*
+
   it('Open profile, view my kweeks', function() {
-    page.navigateToKweeks(user3);
+    page.navigateToKweeks(user2);
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });
-*/
+
 ////////////Following-Section///////////////////
   it('Open profile, view my following', function() {
-    page.navigateToFollowing(user3);
+    page.navigateToFollowing(user2);
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });
@@ -248,10 +259,11 @@ describe('workspace-project App', () => {
   });
 
   it('Use drop button, Block him', function() {
+    utility.browserPause(1000);
     page.getBlockButton().click();
     page.getMyDropDownButton().click();
     page.browserPause(1000);
-    expect(page.getBlockButton().getText()).toEqual('Unblock @akwah');
+    expect(page.getUnblockButton().getText()).toEqual('Unblock @akwah');
   });
 
   it('Unblock someone.', function() {
@@ -260,24 +272,21 @@ describe('workspace-project App', () => {
     expect(page.getMyFollowButton().getText()).toEqual('Follow');
   });
 
-
-
   ////////////Followers-Section///////////////////
   it('Open profile, view my followers', function() {
-    page.navigateToFollowers(user3);
+    page.navigateToFollowers(user2);
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });
 
   ////////////likes-Section///////////////////
   it('Open profile, view my likes', function() {
-    page.navigateToLikes(user3);
+    page.navigateToLikes(user2);
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });
 
 //////////////////Edit-Section///////////////////////
-
   it('Edit profile, change screen name.', function() {
     page.browserPause(1000);
     page.getEditButton().click();
@@ -312,14 +321,15 @@ describe('workspace-project App', () => {
     page.getSaveChangesButton().click();
   });
 
-  //////////////Profile-Trends/////////////
-  /*
-  it('Profile trends.', function() {
-    page.getProfileTrends().click();
-    page.browserPause(1000);
-    expect(page.getSearchKeyWord().getText()).toContain('hashtag2_end');
-  });
-*/
+  // //////////////Profile-Trends/////////////
+  // //Zoom 90% Error
+  // it('Profile trends.', function() {
+  //   page.getProfileTrends().click();
+  //   page.browserPause(1000);
+  //   expect(page.getSearchKeyWord().getText()).toContain('hashtag2_end');
+  // });
+
+
 /////////////////Follow--Unfollow--Mute--Unmute--Block--Unblock///////////////////////////
   it('Follow someone', function() {
     page.navigateToProfile('akwah');
@@ -361,62 +371,62 @@ describe('workspace-project App', () => {
     page.getHisFollowButton().click();
   });
 
-
 ///////////Direct Message/////////////////
-/*
-  it('Message someone, send a text message', function() {
-    page.navigateToHome();
-    page.getNewMessage().click();
-    //page.getBackButton().click();
-    page.browserPause(2000);
-    page.getNewMessageButton().click();
-    page.getReciever().click();
-    page.getNextButton().click();
-    page.getChatBox().sendKeys('New message!');
-    page.getSendButton().click();
-    page.browserPause(1000);
-    page.getRecentReciever().click();
-    expect(page.getSentMsg().getText()).toEqual('New message');
-  });
-*/
-////////////Search/////////////////////////
+  //Not Clickable
+  // it('Message someone, send a text message', function() {
+  //   page.navigateToHome();
+  //   page.getNewMessage().click();
+  //   //page.getBackButton().click();
+  //   page.browserPause(2000);
+  //   page.getNewMessageButton().click();
+  //   page.getRecieverNameField().sendKeys('Ayman');
+  //   page.browserPause(2000);
+  //   page.getReciever().click();
+  //   page.getNextButton().click();
+  //   page.getChatBox().sendKeys('New message!');
+  //   page.getSendButton().click();
+  //   page.browserPause(1000);
+  //   page.getRecentReciever().click();
+  //   expect(page.getSentMsg().getText()).toEqual('New message');
+  // });
+
+// ////////////Search/////////////////////////
   it('Check search bar after typing any word.', function() {
     page.navigateToHome();
     page.getHomeSearchBox().sendKeys('zamalek');
-    page.pressEnter();
+    utility.pressEnter(page.getHomeSearchBox());
     page.browserPause(2000);
     expect(page.getSearchBar().getText()).toContain('zamalek');
   });
 
   it('Search for a text.', function() {
     page.getSearchBox().sendKeys('barca');
-    page.pressEnter();
+    utility.pressEnter(page.getSearchBox());
     page.browserPause(2000);
     expect(page.getSearchKeyWord().getText()).toContain('barca');
   });
 
   it('Search for hashtag.', function() {
     page.getSearchBox().sendKeys('#barca');
-    page.pressEnter();
+    utility.pressEnter(page.getSearchBox());
     page.browserPause(2000);
     expect(page.getSearchKeyWord().getText()).toContain('barca');
   });
 
-        //To be discussed
-  it("Search for text with opened single quote.", function() {
-    page.getSearchBox().sendKeys("'barca");
-    page.pressEnter();
-    page.browserPause(2000);
-    expect(page.getSearchKeyWord().getText()).toContain('barca');
-  });
-
+  //To be discussed...Error in back end
+  // it("Search for text with opened single quote.", function() {
+  //   page.getSearchBox().sendKeys("'barca");
+  //   page.pressEnter();
+  //   page.browserPause(2000);
+  //   expect(page.getSearchKeyWord().getText()).toContain('barca');
+  // });
+  
   it('Search for a user, view latest section.', function() {
     page.getSearchBox().sendKeys('zamalek');
-    page.pressEnter();
+    utility.pressEnter(page.getSearchBox());
     page.browserPause(2000);
     expect(page.getSearchKeyWord().getText()).toContain('@zamalek');
-    });
-
+  });
 
   it('Search for a user, view people section.', function() {
     page.navigateToSearchSections('people','ayman');
@@ -427,27 +437,7 @@ describe('workspace-project App', () => {
   //////////Notifications/////////////////
   it('Check mention notification.', function() {
     page.navigateToNotifications('mentions');
-    expect(page.getMentionNotificationText().getText()).toContain('@dawood');
+    expect(page.getFirstKweekText().getText()).toContain('@dawood');
+    utility.logout();
   });
-/*
-  it('View notifications, ALL section', function() {
-    page.navigateToNotifications('all');
-    page.browserPause(1000);
-    expect(page.getAllButton().getText()).toEqual('All');
-  });
-
-  it('View notifications, ALL section, for user having rekweek or like', function() {
-    page.browserPause(1000);
-    page.getNotificationCard().getText().then(function(text) {
-      expect(text.length).toEqual(0)
-    });
-  });
-
-  it('Check like notification.', function() {
-    page.getLike().click();
-    page.navigateToNotifications('all');
-    expect(page.getTypeNotificationText().getText()).toContain('liked');
-  //  expect(page.getNotificationCard().getText()).toContain('@zamalek');
-  });
-  */
 });

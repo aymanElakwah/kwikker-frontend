@@ -1,5 +1,6 @@
 .kweek-img {
   width: 48px;
+  height: 48px;
 }
 
 .kweek-style {
@@ -25,10 +26,14 @@ a:active {
   color: #1da1f2;
 }
 
+.counter {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .reply,
 .rekweek,
 .like {
-  font-size: 24;
   color: #657786;
 }
 
@@ -85,7 +90,7 @@ a:hover {
 }
 
 .kweeks .kweek-user:hover .screen_name,
-#rekweeked-screen_name:hover {
+.rekweeked-reply-screen_name:hover {
   text-decoration: underline;
   color: #1da1f2;
 }
@@ -94,18 +99,19 @@ a:hover {
   color: #666;
 }
 
-.tooltip-style {
-}
+/* .tooltip-style {
+} */
 
-.pointer {
+.pointer-cursor {
   cursor: pointer;
 }
 
-.pointer:hover {
+.pointer-cursor:hover {
   background-color: #e6ecf0;
+  cursor: pointer;
 }
 
-#rekweeked-info {
+.rekweeked-reply-info {
   color: #657786;
   font-size: 14px;
   margin: 3px 45px;
@@ -115,7 +121,7 @@ a:hover {
   padding: 3px 12px 11px 12px;
 }
 
-#rekweeked-screen_name {
+.rekweeked-reply-screen_name {
   color: #657786;
   text-decoration: none;
 }

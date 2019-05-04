@@ -1,5 +1,5 @@
 #popup-kweek {
-  font-size: 8px;
+  font-size: 14px;
 }
 
 #header {
@@ -13,7 +13,8 @@
 }
 
 .image-list {
-    width: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .mini-user {
