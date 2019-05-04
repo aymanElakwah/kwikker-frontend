@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../model/user';
+import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-mini-profile-card',
@@ -7,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeMiniProfileCardComponent implements OnInit {
 
-  constructor() { }
+  ProfileUserName: string;
+  ProfileInfo: User; 
 
-  ngOnInit(
-    
-  ) {}
+  constructor(private profileCardService: DataService,
+              private router: Router) { }
+
+  ngOnInit()  {
+    this.ProfileUserName = localStorage.getItem("username");
+    this.profileCardService.getProfileInfo(this.ProfileUserName).subscribe(
+      userInfo => {  this.ProfileInfo = userInfo; },
+          err  => {  this.router.navigateByUrl("/error"); });
+  }
 
 }

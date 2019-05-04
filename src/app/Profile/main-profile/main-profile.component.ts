@@ -374,7 +374,7 @@ export class MainProfileComponent implements OnInit {
                 this.profileUser = userInfo;
                 if(this.title!=null)
                 {
-                this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+                   this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
                 }
                 this.editedScreenName = this.profileUser.screen_name;
                 this.editedBio = this.profileUser.bio;

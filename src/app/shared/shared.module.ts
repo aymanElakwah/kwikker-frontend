@@ -20,10 +20,14 @@ import { RouterModule } from "@angular/router";
 import { ReplyComponent } from '../reply/reply.component';
 import { AlertComponentComponent } from '../alert-component/alert-component.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HomeMiniProfileCardComponent } from '../home-mini-profile-card/home-mini-profile-card.component';
+
 
 @NgModule({
-  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent, HomeMiniProfileCardComponent],
+  declarations: [
+    NavBarComponent, 
+    TrendsComponent, 
+    AlertComponentComponent
+  ],
 
   imports: [
     CommonModule,
@@ -36,7 +40,8 @@ import { HomeMiniProfileCardComponent } from '../home-mini-profile-card/home-min
     HttpClientModule,
     FormsModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
   ],
 
   entryComponents: [EditImagesComponent,AlertComponentComponent],
@@ -48,7 +53,7 @@ import { HomeMiniProfileCardComponent } from '../home-mini-profile-card/home-min
     ReplyComponent,
     TrendsComponent,
     NewKweekComponent,
-    AlertComponentComponent
+    AlertComponentComponent,
   ]
 })
 export class SharedModule {}
