@@ -54,7 +54,7 @@ describe('Kwikker E2E -', () => {
     utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(kweek);
     utility.browserPause(1000);
-    page.getSecondKweekButton().click();
+    utility.sendClick(page.getSecondKweekButton());
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
