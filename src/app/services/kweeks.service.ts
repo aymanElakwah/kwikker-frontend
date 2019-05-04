@@ -2,20 +2,21 @@ import { Injectable } from "@angular/core";
 import { Kweek } from "../model/kweek";
 import { DataService } from "./data.service";
 
+/**
+ * Service which has a common functions kweek and reply component use
+ */
 @Injectable({
   providedIn: "root"
 })
 export class KweeksService {
   /**
-   * @param kweekService
-   * No  @returns
+   * @param kweekService to call functions deal with the back end
    */
   constructor(private kweekService: DataService) {}
 
   /**
    * inject tags before and after mentions or hashtags and inject the redirection link foreach one of them and edit message string to appear
    * @param kweeks that will inject the tags in
-   * No @returns
    */
   injectTagsInText(kweeks: Kweek[]): void {
     const hashtagStartTagOpen = "<a href='";
@@ -143,8 +144,7 @@ export class KweeksService {
 
   /**
    * call the function like the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
    */
   like(kweek: Kweek): void {
     this.kweekService.likeKweek(kweek.id).subscribe(()=> {
@@ -155,8 +155,7 @@ export class KweeksService {
 
   /**
    * call the function unlike the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
    */
   unlike(kweek: Kweek): void {
     this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
@@ -167,7 +166,7 @@ export class KweeksService {
 
    /**
    * call the function rekweek the kweek from data service which deal with backend
-   * @param kweek
+   * @param kweek kweek to rekweek
    * No @returns
    */
   rekweek(kweek: Kweek): void {
@@ -179,7 +178,7 @@ export class KweeksService {
 
   /**
    * call the function unrekweek the kweek from data service which deal with backend
-   * @param kweek
+   * @param kweek kweek to unrekweek
    * No @returns
    */
   unrekweek(kweek: Kweek): void {

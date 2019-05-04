@@ -155,11 +155,12 @@ a {
 	position: absolute;
 	Left: 8%;
 	Top: 26%;
-	z-index: 998 !important;
+	z-index: 5 !important;
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 	-webkit-transform: translate(0, 90px);
 	transform: translate(0,90px);
+	cursor: pointer;
 }
 
 
@@ -250,7 +251,7 @@ a {
 	right: 7%;
 	Top: 125%;
 	height: 30px;
-	z-index: 9999 !important;
+	z-index: 1 !important;
 }
 
 .dropdown-menu li:hover {
@@ -259,6 +260,7 @@ a {
 
 .dropdown-item {
 	overflow: hidden;
+	text-align: center;
 }
 
 /* Text */
@@ -310,7 +312,7 @@ a {
 .editProfilePicText-default {
 	position: absolute;
 	Top: 55%;
-	left: 7%;
+	left:13%;
 	color: #fff;
 	font-size: 18px;
 	font-weight: bold;
@@ -332,6 +334,7 @@ a {
 
 #BannerDropDownMenu p {
 	text-align: center;
+	margin: 0 auto;
 }
 
 .dropdown-item>p {
@@ -719,6 +722,75 @@ a {
 	margin-bottom: 20px !important;
 }
 
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1000; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  /* Modal Content (Image) */
+  .modal-content {
+	margin: auto;
+	width: 80%;
+	max-width: 700px;
+	border-radius: 50%;
+	zoom: 50%;
+	display: block;
+	position: absolute;
+    top: 20%;
+    left: 37%;
+  }
+  
+  
+  /* Add Animation - Zoom in the Modal */
+  .modal-content, #caption { 
+	animation-name: zoom;
+	animation-duration: 0.6s;
+  }
+  
+  @keyframes zoom {
+	from {transform:scale(0)} 
+	to {transform:scale(1)}
+  }
+  
+  /* The Close Button */
+  .close {
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+	transform: translate(0,150px);
+	color: white;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px){
+	.modal-content {
+	  width: 100%;
+	}
+  }
+
+
+  
 /* Media Queries */
  @media (max-width: 1350px) { 
 	
@@ -764,20 +836,56 @@ a {
    {
 	   display: inline;
    }
+   .Camera-Icon 
+   {
+	   transform: translate(20px,0);
+   }
+
 }
 
 @media(max-width: 1100px)   {.PROFILE {	zoom: 90%; }}
+@media(max-width: 1050px)   {.PROFILE {	zoom: 87%; }}
 @media(max-width: 1000px)   {.PROFILE {	zoom: 85%; }}
+@media(max-width: 950px)    {.PROFILE {	zoom: 83%; }}
 @media(max-width: 900px)    {.PROFILE {	zoom: 80%; }}
+@media(max-width: 850px)    {.PROFILE {	zoom: 77%; }}
 @media(max-width: 800px)    {.PROFILE {	zoom: 75%; }}
+@media(max-width: 750px)    {.PROFILE {	zoom: 70%; }}
 @media(max-width: 700px)    {.PROFILE {	zoom: 65%; }}
+@media(max-width: 650px)    {.PROFILE {	zoom: 60%; }}
 @media(max-width: 600px)    {.PROFILE {	zoom: 55%; }}
+@media(max-width: 550px)    {.PROFILE {	zoom: 50%; }}
 @media(max-width: 500px)    {.PROFILE {	zoom: 45%; }}
+@media(max-width: 450px)    {.PROFILE {	zoom: 40%; }}
 @media(max-width: 400px)    {.PROFILE {	zoom: 35%; }}
+@media(max-width: 350px)    {.PROFILE {	zoom: 30%; }}
 @media(max-width: 300px)    {.PROFILE {	zoom: 25%; }}
-@media(max-width: 200px)    {.PROFILE {	zoom: 20%; }}
-@media(max-width: 100px)    {.PROFILE {	zoom: 15%; }}
-@media(max-width:  0px)     {.PROFILE {	zoom: 10%; }}
+@media(max-width: 250px)    {.PROFILE {	zoom: 20%; }}
+@media(max-width: 200px)    {.PROFILE { zoom: 15%; }}
+@media(max-width: 150px)    {.PROFILE { zoom: 10%; }}
+@media(max-width: 100px)    {.PROFILE { zoom: 5%;  }}
+
+@media(max-height: 470px)
+{
+	/* DropDown Menus */
+	#profilePicDropDownMenu 
+	{
+		transform: translate(60px,220px) !important;
+	}
+}
+
+@media(max-height: 413px)
+{
+	/* DropDown Menus */
+	#BannerDropDownMenu
+	{
+		transform: translate(0px,300px) !important;
+	}
+}
+
+
+
+
 
 
 

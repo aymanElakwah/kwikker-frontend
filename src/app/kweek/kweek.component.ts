@@ -2,18 +2,17 @@ import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
 import { DataService } from "../services/data.service";
 import { Kweek } from "../model/kweek";
 import { ActivatedRoute, Router } from "@angular/router";
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-  TooltipPosition
-} from "@angular/material";
+import { MatDialog, MatDialogConfig, TooltipPosition } from "@angular/material";
 import { FormControl } from "@angular/forms";
 import { ReplyComponent } from "../reply/reply.component";
 import { KweeksService } from "../services/kweeks.service";
-import { Overlay, OverlayConfig } from "@angular/cdk/overlay";
+import { Overlay } from "@angular/cdk/overlay";
 import { NewKweekComponent } from "../new-kweek/new-kweek.component";
 import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.component";
+
+/**
+ * List of loaded Kweeks
+ */
 @Component({
   selector: "app-kweek",
   templateUrl: "./kweek.component.html",
@@ -21,35 +20,57 @@ import { ConfirmDeleteComponent } from "../confirm-delete/confirm-delete.compone
   encapsulation: ViewEncapsulation.None
 })
 export class KweekComponent implements OnInit {
-  //ToolTips parameters
+  /**
+   * position option for tooltip
+   */
   positionOption: TooltipPosition = "above";
+  /**
+   * position form option for tooltip
+   */
   position = new FormControl(this.positionOption);
+  /**
+   * Time on delay before showing tooltip
+   */
   showDelay = new FormControl(50);
+  /**
+   * Time on delay before hiding tooltip
+   */
   hideDelay = new FormControl(50);
-
-  kweeks: Kweek[] = []; // kweeks
+  /**
+   * Loaded kweeks
+   */
+  kweeks: Kweek[] = [];
+  /**
+   * mention response
+   */
   mentionsResponse: any;
-
-  /* The Authorized User (The one who made Log in) */
+  /**
+   * The Authorized User (The one who made Log in)
+   */
   authorizedUser: string = localStorage.getItem("username");
+  /**
+   * To call common like-unlike-rekweek-unrekweek functions from kweek service
+   */
+  callCommonFunc = true;
+  /**
+   * To see if the request is done to do another request and it is checked at the beginning of some functions
+   */
+  busyRequest: Boolean = false;
 
-  callCommonFunc = true; // to call common like-unlike-rekweek-unrekweek functions from kweek service
-
-  busyRequest: Boolean = false; // to see if the request is done to do another request and it is checked at the beginning of some functions
-
-  /*
+  /**
    * constructor called when component is made
    * @param kweekService to use DataService functions and deal with backend
    * @param kweekFunc to use kweeksService functions which has common kweeks functions
    * @param route to use snapshot from the url to know which URL you are in
+   * @param router tp navigate
    * @param dialog to open and close dialogs
    * @param overlay to open popup when hover on userName in the (updated comming version)
-   * No @return
    */
   constructor(
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     public route: ActivatedRoute,
+    public router: Router,
     private dialog: MatDialog,
     private overlay: Overlay
   ) {}
@@ -76,6 +97,7 @@ export class KweekComponent implements OnInit {
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
+              null,
               null
             )
             .subscribe(lists => {
@@ -95,6 +117,7 @@ export class KweekComponent implements OnInit {
           this.kweekService
             .getUserKweeks(
               this.route.snapshot.root.children[0].params["username"],
+              null,
               null
             )
             .subscribe(lists => {
@@ -117,9 +140,11 @@ export class KweekComponent implements OnInit {
           break;
       }
     } else if (mainRoute === "home") {
-      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+      this.kweekService.getHomeKweeks(null, null).subscribe(homeKweeks => {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
+        // const str = JSON.stringify(this.kweeks[0], null, 4);
+        // console.log(str);
       });
     } else if (
       mainRoute === "search" &&
@@ -127,25 +152,25 @@ export class KweekComponent implements OnInit {
     ) {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
       const ID: string = this.route.snapshot.queryParams["ID"];
-      this.kweekService.getTrendsKweeks(ID).subscribe(trendsKweeks => {
+      this.kweekService.getTrendsKweeks(ID, null).subscribe(trendsKweeks => {
         this.kweeks = trendsKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else if (mainRoute === "search") {
       const filterBy: string = this.route.snapshot.queryParams["filterBy"];
-      this.kweekService.searchKweeks(filterBy).subscribe(searchKweeks => {
+      this.kweekService.searchKweeks(filterBy, null).subscribe(searchKweeks => {
         this.kweeks = searchKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else if (mainRoute === "notifications") {
-      console.log("mentions");
+      // console.log("mentions");
       this.kweekService.getUserMentions(null).subscribe(mentions => {
         this.mentionsResponse = mentions;
         this.kweeks = this.mentionsResponse.replies_and_mentions;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
     } else {
-      this.kweekService.getHomeKweeks(null).subscribe(homeKweeks => {
+      this.kweekService.getHomeKweeks(null, null).subscribe(homeKweeks => {
         this.kweeks = homeKweeks;
         this.kweekFunc.injectTagsInText(this.kweeks);
       });
@@ -165,18 +190,30 @@ export class KweekComponent implements OnInit {
    */
   openDialog(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "640px";
+    dialogConfig.width = "auto"; //640px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
+    dialogConfig.data = { kweeks: this.kweeks };
     // dialogConfig.scrollStrategy = this.overlay.scrollStrategies.reposition();
-    const dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
-    dialogRef.componentInstance.clickedKweek = kweek;
+    let dialogRef;
+    if (kweek.reply_info) {
+      this.kweekService
+        .getKweek(kweek.reply_info.reply_to_kweek_id)
+        .subscribe(retrievedKweek => {
+          dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+          dialogRef.componentInstance.roots.push(retrievedKweek);
+          this.kweekFunc.injectTagsInText(dialogRef.componentInstance.roots);
+          dialogRef.componentInstance.clickedKweek = kweek;
+        });
+    } else {
+      dialogRef = this.dialog.open(ReplyComponent, dialogConfig);
+      dialogRef.componentInstance.clickedKweek = kweek;
+    }
   }
 
   /**
    * calling function to like kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
    */
   likeDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -197,8 +234,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to like
    */
   likeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
@@ -211,8 +247,8 @@ export class KweekComponent implements OnInit {
 
   /**
    * calling function to unlike kweek from service which has the common replies and kweeks functions
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
+   * @returns
    */
   unlikeDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -233,8 +269,8 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unlike
+   * @returns
    */
   unlikeCallBack(kweek: Kweek): void {
     this.kweeks.forEach(loopKweek => {
@@ -247,8 +283,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * call the function rekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to rekweek
    */
   rekweekDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -269,8 +304,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to rekweek
    */
   rekweekCallBack(kweek: Kweek): void {
     kweek.number_of_rekweeks++;
@@ -286,8 +320,7 @@ export class KweekComponent implements OnInit {
 
   /**
    * call the function unrekweek the kweek from data service which deal with backend
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unrekweek
    */
   unrekweekDecision(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -308,15 +341,13 @@ export class KweekComponent implements OnInit {
 
   /**
    * callback function in subscribe if the user is in his profile
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to unrekweek
    */
   unrekweekCallBack(kweek: Kweek): void {
     const id = kweek.id;
     if (kweek.rekweek_info) {
       const index = this.kweeks.indexOf(kweek);
       this.kweeks.splice(index, 1);
-      console.log("here");
     } else {
       kweek.number_of_rekweeks--;
       kweek.rekweeked_by_user = false;
@@ -330,7 +361,6 @@ export class KweekComponent implements OnInit {
         } else if (loopKweek.rekweeked_by_user) {
           loopKweek.number_of_rekweeks--;
           loopKweek.rekweeked_by_user = !loopKweek.rekweeked_by_user;
-          console.log("here2");
           return;
         }
       }
@@ -339,12 +369,11 @@ export class KweekComponent implements OnInit {
 
   /**
    * open confirm delete popUp and wait for confirmation res if true call delete action
-   * @param kweek
-   * No @returns
+   * @param kweek kweek to delete
    */
   delete(kweek: Kweek): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "520px";
+    dialogConfig.width = "auto"; // 520px
     dialogConfig.autoFocus = false;
     dialogConfig.panelClass = "custom-dialog-container";
     const confirmDeleteRef = this.dialog.open(
@@ -362,7 +391,7 @@ export class KweekComponent implements OnInit {
   /**
    * calling function to delete kweek from service which has the common replies and kweeks functions
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteAction(kweek: Kweek): void {
     if (!this.busyRequest) {
@@ -384,7 +413,7 @@ export class KweekComponent implements OnInit {
   /**
    * callback function in subscribe if the user is not in his profile
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteCallBack(kweek: Kweek): void {
     const indexToDelete = this.kweeks.indexOf(kweek);
@@ -394,7 +423,7 @@ export class KweekComponent implements OnInit {
   /**
    * callback function in subscribe if the user is in his profile
    * @param kweek
-   * No @returns
+   * @returns
    */
   deleteProfileCallBack(kweek: Kweek): void {
     const id = kweek.id;
@@ -422,7 +451,6 @@ export class KweekComponent implements OnInit {
   /**
    * Open Reply popUp
    * @param kweek  kweek to reply on
-   * No Return
    */
   reply(kweek: Kweek): void {
     const dialogRef = this.dialog.open(NewKweekComponent, {
@@ -434,13 +462,28 @@ export class KweekComponent implements OnInit {
   }
 
   /**
+   * Open User Profile when his Profile Picture Clicked
+   */
+
+  openUserProfile(index: number) {
+    this.router.navigate(["/profile/" + this.kweeks[index].user.username]);
+  }
+
+  /**
+   * Open Home Page When Kiwkker Logo is Clicked
+   */
+
+  openHomePage() {
+    this.router.navigate(["/home/"]);
+  }
+
+  /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling
    * No Parms
-   * No Return
    */
   onScroll(): void {
-    if (this.kweeks.length != 0) {
+    if (this.kweeks.length > 0) {
       const lastKweekId = this.kweeks[this.kweeks.length - 1].id;
       let mainRoute;
       if (this.route.snapshot.parent.routeConfig) {
@@ -449,29 +492,72 @@ export class KweekComponent implements OnInit {
       if (mainRoute === "profile/:username") {
         switch (this.route.snapshot.parent.firstChild.routeConfig.path) {
           case "":
-            this.kweekService
-              .getUserKweeks(
-                this.route.snapshot.root.children[0].params["username"],
-                lastKweekId
-              )
-              .subscribe(lists => {
-                this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists);
-                // const str = JSON.stringify(this.kweeks[0], null, 4);
-                // console.log(str);
-              });
+            if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  this.kweeks[this.kweeks.length - 1].rekweek_info
+                    .rekweeker_username
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            } else {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  null
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            }
             break;
           case "kweeks":
-            this.kweekService
-              .getUserKweeks(
-                this.route.snapshot.root.children[0].params["username"],
-                lastKweekId
-              )
-              .subscribe(lists => {
-                this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists);
-                // const str = JSON.stringify(this.kweeks[0], null, 4);
-              });
+            if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  this.kweeks[this.kweeks.length - 1].rekweek_info
+                    .rekweeker_username
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                    // const str = JSON.stringify(this.kweeks[0], null, 4);
+                    // console.log(str);
+                  }
+                });
+            } else {
+              this.kweekService
+                .getUserKweeks(
+                  this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
+                  null
+                )
+                .subscribe(lists => {
+                  if (lists && lists.length > 0) {
+                    // const str = JSON.stringify(lists, null, 4);
+                    // console.log(str);
+                    this.kweekFunc.injectTagsInText(lists);
+                    this.kweeks = this.kweeks.concat(lists);
+                  }
+                });
+            }
             break;
           case "likes":
             this.kweekService
@@ -480,29 +566,91 @@ export class KweekComponent implements OnInit {
                 lastKweekId
               )
               .subscribe(lists => {
-                this.kweekFunc.injectTagsInText(lists);
-                this.kweeks = this.kweeks.concat(lists);
+                if (lists && lists.length > 0) {
+                  this.kweekFunc.injectTagsInText(lists);
+                  this.kweeks = this.kweeks.concat(lists);
+                }
               });
             break;
         }
       } else if (mainRoute === "home") {
-        this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          this.kweekFunc.injectTagsInText(homeKweeks);
-          this.kweeks = this.kweeks.concat(homeKweeks);
-        });
+        if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+          this.kweekService
+            .getHomeKweeks(
+              lastKweekId,
+              this.kweeks[this.kweeks.length - 1].rekweek_info
+                .rekweeker_username
+            )
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        } else {
+          this.kweekService
+            .getHomeKweeks(lastKweekId, null)
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        }
       } else if (mainRoute === "notifications") {
         this.kweekService.getUserMentions(lastKweekId).subscribe(mentions => {
-          this.kweekFunc.injectTagsInText(mentions.replies_and_mentions);
-          this.mentionsResponse.replies_and_mentions = this.mentionsResponse.replies_and_mentions.concat(
-            mentions.replies_and_mentions
-          );
-          this.kweeks = this.kweeks.concat(mentions.replies_and_mentions);
+          if (mentions && mentions.length > 0) {
+            this.kweekFunc.injectTagsInText(mentions.replies_and_mentions);
+            this.mentionsResponse.replies_and_mentions = this.mentionsResponse.replies_and_mentions.concat(
+              mentions.replies_and_mentions
+            );
+            this.kweeks = this.kweeks.concat(mentions.replies_and_mentions);
+          }
         });
+      } else if (
+        mainRoute === "search" &&
+        this.route.snapshot.queryParams["ID"] != undefined
+      ) {
+        const filterBy: string = this.route.snapshot.queryParams["filterBy"];
+        const ID: string = this.route.snapshot.queryParams["ID"];
+        this.kweekService
+          .getTrendsKweeks(ID, lastKweekId)
+          .subscribe(trendsKweeks => {
+            this.kweekFunc.injectTagsInText(trendsKweeks);
+            this.kweeks = this.kweeks.concat(trendsKweeks);
+          });
+      } else if (mainRoute === "search") {
+        const filterBy: string = this.route.snapshot.queryParams["filterBy"];
+        this.kweekService
+          .searchKweeks(filterBy, lastKweekId)
+          .subscribe(searchKweeks => {
+            this.kweekFunc.injectTagsInText(searchKweeks);
+            this.kweeks = this.kweeks.concat(searchKweeks);
+          });
       } else {
-        this.kweekService.getHomeKweeks(lastKweekId).subscribe(homeKweeks => {
-          this.kweekFunc.injectTagsInText(homeKweeks);
-          this.kweeks = this.kweeks.concat(homeKweeks);
-        });
+        if (this.kweeks[this.kweeks.length - 1].rekweek_info) {
+          this.kweekService
+            .getHomeKweeks(
+              lastKweekId,
+              this.kweeks[this.kweeks.length - 1].rekweek_info
+                .rekweeker_username
+            )
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        } else {
+          this.kweekService
+            .getHomeKweeks(lastKweekId, null)
+            .subscribe(homeKweeks => {
+              if (homeKweeks && homeKweeks.length > 0) {
+                this.kweekFunc.injectTagsInText(homeKweeks);
+                this.kweeks = this.kweeks.concat(homeKweeks);
+              }
+            });
+        }
       }
     }
   }

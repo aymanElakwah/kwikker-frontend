@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { NgForm } from '@angular/forms';
 import {Router} from '@angular/router';
+
+/**
+ * ResendEmailComponent.
+ * User is navigated to it, if he's not verified yet and tried to log in.
+ */
 @Component({
   selector: 'app-resend-email',
   templateUrl: './resend-email.component.html',
@@ -10,11 +15,23 @@ import {Router} from '@angular/router';
 
 export class ResendEmailComponent implements OnInit {
    
+  /**
+   * class Resend-Email's variables.
+   * variable used as a pointer to the error messages class, to show/hide them
+   */
     public msg: any;
+    /**
+   * class Resend-Email's variables.
+   * string for mail (ngModel) two ways binding.
+   */
     public mail: string;
-    constructor(private data: DataService , private router: Router) {
-  
-     }
+    /**
+     * Resend email Component's condtructor.
+     * @param data: DataService
+     * @param router: Router
+     * @returns void
+     */
+    constructor(private data: DataService , private router: Router) {}
   
      ngOnInit() {
         this.msg =  document.querySelector('.errorBox');  
@@ -36,7 +53,7 @@ export class ResendEmailComponent implements OnInit {
          this.router.navigate(['/login']);
        },
         err => {
-          console.log('error: ', err);
+          // console.log('error: ', err);
           this.appearError();
            }
     );

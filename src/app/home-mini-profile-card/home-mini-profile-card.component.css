@@ -1,0 +1,160 @@
+.container {
+	height: 214px;
+	width: 290px;
+	background-color: #FFF;
+	padding: 0 0;
+	margin: 0 0;
+	zoom: 125%;
+}
+
+
+/* As Bootstrap Rows and Colums generate default margins and Paddings */
+
+.nopadding {
+	padding: 0 0 !important;
+	margin-left: 0.2% !important;
+	height: auto;
+}
+
+
+/* First Part [Banner] */
+
+.banner {
+	background-color: #1B95E0;
+	height: 90px;
+	width: 290px;
+	margin: 0 0;
+}
+
+.BannerImage {
+	height: 90px;
+	width: 290px;
+	cursor: pointer;
+}
+
+
+/* Second Part [UserActon, ProfilePicture, ProfileInfo] */
+
+.profile-content {
+	height: 124px;
+	width: 288px;
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+	padding: 0 0;
+}
+
+.content {
+	height: 100px;
+	width: 255px;
+	background-color: white;
+	display: inline-block;
+	position: relative;
+}
+/* Profiel Picture */
+
+.profile-pic {
+	height: 69px;
+	width: 69px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	margin: -65px 2px 0 -3px;
+	padding: 3px;
+	position: absolute;
+	background-color: #1B95E0;
+	border-width: 1px;
+	left: 0;
+	top: 10%;
+}
+
+.ProfileImage {
+	position: absolute;
+	Left: -2%;
+	Top: -1%;
+	height: 71px;
+	width: 71px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.profile-data {
+	height: 42px;
+	width: 185px;
+	background-color: #FFF;
+	margin-top: 10px;
+}
+
+.username {
+	color: #14171a;
+	text-align: left;
+	font-size: 18px;
+	font-weight: bold;
+	padding-right: 2px;
+	transform: translate(80px,-14px);
+	
+}
+
+#usernameref
+{
+	color: #14171a !important;
+}
+
+.screen-name {
+	color: #66757f;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1;
+	text-align: left;
+	font-family: "Segoe UI", Arial, sans-serif;
+	transform: translate(80px,-14px);
+}
+
+.ProfileCardState
+{
+	padding: 16px;
+	height: 69px;
+	width: 288px;
+	position: relative;
+	bottom: 15%;
+	left: 2%;
+}
+
+.Padding
+{
+	height: 400px;
+}
+
+.ProfileCardStats-State
+{
+	width: 50px !important;
+	display: table-cell;
+	padding: 0;
+	box-sizing: border-box;
+    line-height: 1;
+	overflow: hidden;
+	padding-right: 25px;
+}
+
+.ProfileCardStats-Text
+{
+	color: #657786;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .02em;
+    line-height: 16px;
+    overflow: hidden;
+}
+
+.ProfileCardStats-Value
+{
+	display: block;
+    font-size: 16px;
+    font-weight: bold;
+	padding-top: 3px;
+	text-align: left;
+}
+
+@media(max-width: 350px)    {.ProfileCardState-Text { font-size: 8px }}
+@media(max-width: 300px)    {.ProfileCardState { transform: translate(-40px,30px); 
+                                                 zoom: 40%; }}

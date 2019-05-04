@@ -7,19 +7,48 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ChatComponent } from '../chat/chat.component';
 import { User } from '../model/user';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+/**
+ * Navbar component.
+ * Shows user a navigating bar on top.
+ * Navigates to (Home, Notifications, Profile, Settings)
+ * Log out user
+ * Pop up (kweeks or Messages)
+ */
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  //Public variables
+  /**
+   * class NavBarComponent's variables.
+   * string for user's username, taken from loaclstorage
+   */
   public userName: string;
+   /**
+   * class NavBarComponent's variables.
+   * a User variable, to sotre users that are returned from the search function.
+   */
   users:User[];
+  /**
+   * class NavBarComponent's variables.
+   * Two ways (ngModel) variable, that sends datat to data services function to check be searched.
+   */
   filterBy:string;
+  /**
+   * class Navbar component's variables.
+   * variable used as a pointer to the error navbar class, to show/hide them
+   */
   public nav: any;
+  /**
+   * class Navbar component's variables.
+   * Boolean to check for the last condition of the navbar ot show/hide it.
+   */
   public toShow: boolean;
+  /**
+   * class Navbar component's variables.
+   * A number used to store the last state of the screen width.
+   */
   public screenWidth: number;
   
   /**
@@ -28,6 +57,7 @@ export class NavBarComponent implements OnInit {
    * @param data for dataService's communications
    * @param router for navigating among pages
    * @param spinit to create the loading spinner
+   * @returns void
    */
   constructor(private dialog: MatDialog,
               private data: DataService, 
@@ -40,6 +70,8 @@ export class NavBarComponent implements OnInit {
  * ngOnInit for navbar component
  * Creates the loading spinner for a second.
  * initialize some public data that used later
+ * @param void
+ * @returns void
  */
 ngOnInit() {
   
@@ -63,9 +95,11 @@ ngOnInit() {
   /**
    * Function to open kweek dialog 
    * paneClass -> attach the dialog to specific css class
+   * @param void
+   * @returns void
    */
   openKweekComponent(){
-    console.log("working")
+    // console.log("working")
     const dialogRef = this.dialog.open(NewKweekComponent, {
       panelClass: 'kweekBox'
     });
@@ -73,10 +107,9 @@ ngOnInit() {
   dialogRef.componentInstance.kweekTO = false;
   /**
    * Function for closing the dialog and displaying a msg 
-   * 
    */
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.nav.className = 'show';
       this.toShow = true;
     });
@@ -92,10 +125,11 @@ ngOnInit() {
   
   /**
    * Function for closing the dialog and displaying a msg 
-   * 
+   * @param void
+   * @returns void
    */
     dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
+    // console.log('The dialog was closed');
     this.nav.className = 'show';
     this.toShow = true;
   });
@@ -130,6 +164,8 @@ ngOnInit() {
    * when the toggle button is clicked this function emmits
    * checks on the old status of the navbar (show/hide)
    * and toggle the state of it.
+   * @param void
+   * @returns void
    */
   public toggleNav() {
    // screen.width
@@ -151,6 +187,7 @@ ngOnInit() {
 /**
  * Checks on the current state of the navbar, decides whether to show it or hide it.
  * @param event The current event of the window
+ * @returns void
  */
   onResize(event){
     if(event.target.innerWidth <=765 )
@@ -169,7 +206,7 @@ ngOnInit() {
      this.screenWidth = event.target.innerWidth;
     }else{
         //larger deveice, check the latest value
-        console.log("large device", event.target.innerWidth );
+        // console.log("large device", event.target.innerWidth );
         if(this.screenWidth <= 765)
         {
           //act

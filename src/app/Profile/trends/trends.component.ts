@@ -3,8 +3,8 @@ import { Trend } from '../../model/Trend';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 
-/**
- * Trends Components is Used To Show Trends Bar in The whole Website "Shared Component"
+/** 
+ * Trends Components is Used To Show Trends Bar in The whole Website (Shared Component)
  */
 @Component({
   selector: 'app-trends',
@@ -15,20 +15,27 @@ import { Router } from '@angular/router';
 
 export class TrendsComponent implements OnInit {
   
-  /* Array of Tredns */
-  trends:Trend[] = [];
+  /** 
+   * Array of Tredns Used to Store The Trends Data
+   * 
+   * */
+  trends:Trend[];
 
   
    /**
-   * @param trendsService DataService Parameter To Send Request getting
+   * Trends Constructor
+   * 
+   * @param trendsService DataService Parameter To Send Request getting The First 10 Trends To show
+   * 
    * @param router to navigate to search component
-   *  The First 10 Trends To show
+   *  
    */
   constructor(private trendsService: DataService,
               private router:Router) { }
 
   /**
    * ngOnInit is used to start the process of Sending request to get Trends
+   * 
    */
   ngOnInit() 
   {
@@ -37,6 +44,20 @@ export class TrendsComponent implements OnInit {
     ( trendsInfo => {this.trends = trendsInfo; } )
   }
 
+    
+  /**
+   * Open Home Page When Kiwkker Logo is Clicked
+   */
+
+  openHomePage() {
+    this.router.navigate(['/home/']);
+  }
+
+
+   /**
+   * When The User Click On Some Trend , This Function will navigate To The Search Page
+   * @param trend The Searched Trend
+   */
   searchForTrend(trend:Trend){
     const filterBy = trend.text.slice(1,trend.text.length);
     const id = trend.id;

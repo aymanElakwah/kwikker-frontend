@@ -38,6 +38,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { ResendEmailComponent } from './log-in/resend-email.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HomeMiniProfileCardComponent } from './home-mini-profile-card/home-mini-profile-card.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
@@ -52,7 +53,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     confirmCode,
     ResetPasswordComponent,
     confirmPassword,
-    WelcomeComponent
+    WelcomeComponent,
+    HomeMiniProfileCardComponent,
     ],
   imports: [
     SocketIoModule.forRoot(config),

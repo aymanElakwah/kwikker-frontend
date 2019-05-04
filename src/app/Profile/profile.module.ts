@@ -30,8 +30,9 @@ import { RouterModule } from '@angular/router';
     MainProfileComponent,                //The main architecture for the profile page
     ProfileHeaderCardComponent,          //Profile User Information Card
     MiniProfileComponent,                //Small card for any other user Information
-    ProfileKweeksTabComponent, ProfileHeaderCardEditingComponent, //All Kweeks that written or liked By The profile user + Trends Tab 
-    EditImagesComponent,         
+    ProfileKweeksTabComponent,           //All Kweeks that written or liked By The profile user + Trends Tab 
+    ProfileHeaderCardEditingComponent,   //Editable Profile User Information Card
+    EditImagesComponent,                 //The Component That is used To Edit Profile Image(Resizing, Rotating And Cropping)
   ],
 
   imports: [
@@ -57,5 +58,4 @@ import { RouterModule } from '@angular/router';
   ],
 })
 
-export class ProfileModule { 
-}
+export class ProfileModule {}

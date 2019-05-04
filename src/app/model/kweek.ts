@@ -2,11 +2,13 @@ import { Mention } from './mention';
 import { Hashtag } from './Hashtag';
 import { Rekweek } from './rekweek';
 import { MiniUser } from './mini-user';
+import { Replied } from './replied';
 
 /**
  * The Main Model for the Kweeks In The Website
  */
 export interface Kweek {
+  /** loop */
   forEach(arg0: (kweek: any) => void);
     /** Each Kweekd has a unique ID */
     id: string;
@@ -35,7 +37,7 @@ export interface Kweek {
     /** Number Of Replies To That Kweek */
     number_of_replies: number;
     /** If This Kweek With just a reply to another Kweek */
-    reply_to: string;
+    reply_info: Replied;
     /** If This The Authorised User Likes This Kweek */
     liked_by_user: boolean;
     /** If This The Authorised User Rekweeks This Kweek */

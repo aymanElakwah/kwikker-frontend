@@ -19,23 +19,21 @@ import { ChatService } from 'src/app/chat/chat.service';
 
 export class ProfileHeaderCardComponent implements OnInit {
  
-  /* All Info for the profile user: Input from MainProfileComponent */
+  /** All Info for the profile user: Input from MainProfileComponent */
   @Input() profileHeaderInfo:User;
 
-  /*Is The Profile for The Authorized User (The one who made Log in): Input from MainProfileComponent */
+  /** Is The Profile for The Authorized User (The one who made Log in): Input from MainProfileComponent */
   @Input() isAuthorisedUser: boolean;
 
-  /* if The user in Semi Block Mode, Some Information Must be Hidden */
+  /** if The user in Semi Block Mode, Some Information Must be Hidden */
   @Input() semiBlockedMode: boolean;
 
-  /* if The user in Semi Block Mode, Some Information Must be Hidden */
+  /** if The user in Semi Block Mode, Some Information Must be Hidden */
    @Input() AuthorisedIsBlocked: boolean;
    
   /**
-     * Open Write Kweek Component Dialog
-     * No Parameters
-     * No return
-     */
+  * Open Write Kweek Component Dialog
+  */
   openKweekDialog()
   {
     const dialogRef = this.dialog.open(NewKweekComponent,
@@ -48,8 +46,6 @@ export class ProfileHeaderCardComponent implements OnInit {
 
    /**
      * Open Inbox Component Dialog
-     * No Parameters
-     * No return
      */
   openInboxDialog()
   {
@@ -59,7 +55,7 @@ export class ProfileHeaderCardComponent implements OnInit {
   }
  
   /**
-   * Empty Constructor 
+   * Profile Header Card Constructor 
    * @param dialog Dialog Service which is used to open Pop up windows
    * @param ChatService to send DM
    */

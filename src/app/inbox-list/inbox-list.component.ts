@@ -87,7 +87,7 @@ export class InboxListComponent implements OnInit {
    */
   newSearch() {
     this.data.searchUsers(this.myForm.controls.filterBy.value).subscribe(
-      list => { this.users = list; }
+      list => { this.users = list.slice(0,7); }
     );
   }
   /**

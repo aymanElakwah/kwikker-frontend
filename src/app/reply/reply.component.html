@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content class="p-0 content">
   <div>
     <div *ngIf="roots && roots.length">
       <div style="padding-top: 5px;"></div>
@@ -10,7 +10,7 @@
           <!-- delete button -->
           <div *ngIf="authorizedUser === root.user.username">
             <div>
-              <mat-icon class="close" (click)="deleteRoot_ClickedKweek(root)"
+              <mat-icon class="close-reply"  (click)="deleteRoot_ClickedKweek(root)"
                 >close</mat-icon
               >
             </div>
@@ -63,7 +63,7 @@
                         ><i class="far fa-comment icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" >{{
                         root.number_of_replies === 0
                           ? " "
                           : root.number_of_replies
@@ -88,7 +88,7 @@
                           ><i class="fas fa-retweet icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" >{{
                           root.number_of_rekweeks === 0
                             ? " "
                             : root.number_of_rekweeks
@@ -111,7 +111,7 @@
                           ><i class="fas fa-retweet icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" >{{
                           root.number_of_rekweeks === 0
                             ? " "
                             : root.number_of_rekweeks
@@ -131,7 +131,7 @@
                           ><i class="fas fa-heart icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" >{{
                           root.number_of_likes === 0
                             ? " "
                             : root.number_of_likes
@@ -151,7 +151,7 @@
                           ><i class="far fa-heart icons icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" >{{
                           root.number_of_likes === 0
                             ? " "
                             : root.number_of_likes
@@ -176,7 +176,7 @@
         <div *ngIf="authorizedUser === clickedKweek.user.username">
           <div>
             <mat-icon
-              class="close"
+              class="close-reply" 
               (click)="deleteRoot_ClickedKweek(clickedKweek)"
               >close</mat-icon
             >
@@ -367,14 +367,14 @@
         <!-- loop the kweeks as every kweek has the name kweek -->
         <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
         <div
-          class="container p-0 kweek-style pointer"
+          class="container p-0 kweek-style pointer-cursor"
           *ngIf="!reply.user.muted"
         >
           <!-- delete button -->
           <div *ngIf="authorizedUser === reply.user.username">
             <div (click)="openDialog(reply)"></div>
             <div>
-              <mat-icon class="close" (click)="deleteReply(reply)"
+              <mat-icon class="close-reply"  (click)="deleteReply(reply)"
                 >close</mat-icon
               >
             </div>
@@ -428,7 +428,7 @@
                         ><i class="far fa-comment icons"></i
                       ></span>
                       <span class="p-2"></span>
-                      <span style="font-weight:bold">{{
+                      <span class="counter" style="font-weight:bold">{{
                         reply.number_of_replies === 0
                           ? " "
                           : reply.number_of_replies
@@ -453,7 +453,7 @@
                           ><i class="fas fa-retweet icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" style="font-weight:bold">{{
                           reply.number_of_rekweeks === 0
                             ? " "
                             : reply.number_of_rekweeks
@@ -476,7 +476,7 @@
                           ><i class="fas fa-retweet icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" style="font-weight:bold">{{
                           reply.number_of_rekweeks === 0
                             ? " "
                             : reply.number_of_rekweeks
@@ -496,7 +496,7 @@
                           ><i class="fas fa-heart icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" style="font-weight:bold">{{
                           reply.number_of_likes === 0
                             ? " "
                             : reply.number_of_likes
@@ -516,7 +516,7 @@
                           ><i class="far fa-heart icons"></i
                         ></span>
                         <span class="p-2"></span>
-                        <span style="font-weight:bold">{{
+                        <span class="counter" style="font-weight:bold">{{
                           reply.number_of_likes === 0
                             ? " "
                             : reply.number_of_likes
