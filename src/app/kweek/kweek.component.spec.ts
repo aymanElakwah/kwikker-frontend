@@ -1,10 +1,8 @@
-/*import { TestBed } from "@angular/core/testing";
-
 import { Observable, from, of, empty } from "rxjs";
 import { KweekComponent } from "./kweek.component";
 import { KweeksService } from "../services/kweeks.service";
 import { DataService } from "../services/data.service";
-import { MatDialog } from '@angular/material';
+import { MatDialog } from "@angular/material";
 
 describe("KweekComponent", () => {
   let dataService: DataService;
@@ -40,9 +38,10 @@ describe("KweekComponent", () => {
   };
 
   beforeEach(() => {
-    dataService = new DataService(null, null);
+    dataService = new DataService(null, null, null);
     kweeksService = new KweeksService(dataService);
-    dialog = new MatDialog(null,null,null,null,null,null,null);
+    dialog = new MatDialog(null, null, null, null, null, null, null);
+    
     component = new KweekComponent(
       dataService,
       kweeksService,
@@ -50,6 +49,9 @@ describe("KweekComponent", () => {
       dialog,
       null
     );
+    spyOn(kweeksService, "injectTagsInText").and.callFake(() => {
+      return empty();
+    });
     component.route = route;
     component.busyRequest = false;
     // spyOn(component.route.snapshot.queryParamMap,'get');
@@ -58,11 +60,7 @@ describe("KweekComponent", () => {
   describe("ngOnInit", () => {
     let kWK_ARR: any[];
     beforeEach(() => {
-      kWK_ARR = [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 }
-      ];
+      kWK_ARR = [{ id: 1 }, { id: 2 }, { id: 3 }];
       component.kweeks = kWK_ARR;
       component.route = route;
     });
@@ -148,8 +146,8 @@ describe("KweekComponent", () => {
 
     it("should call likeKweek from dataService if callCommonFunc is false", () => {
       component.callCommonFunc = false;
-      
-      let spy = spyOn(dataService, "likeKweek").and.callFake(()=>{
+
+      let spy = spyOn(dataService, "likeKweek").and.callFake(() => {
         return of([component.kweeks]);
       });
 
@@ -412,14 +410,13 @@ describe("KweekComponent", () => {
     });
   });
 
-
   describe("onScroll", () => {
     let kWK_ARR: any[];
     beforeEach(() => {
       kWK_ARR = [
-        { id: 1 , rekweek_info: null},
-        { id: 2 , rekweek_info: null},
-        { id: 3 , rekweek_info: null}
+        { id: 1, rekweek_info: null },
+        { id: 2, rekweek_info: null },
+        { id: 3, rekweek_info: null }
       ];
       component.kweeks = kWK_ARR;
       component.route.snapshot.root.children[0].params["username"] = "user1";
@@ -440,7 +437,7 @@ describe("KweekComponent", () => {
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith(kWK_ARR[kWK_ARR.length-1].id);
+      expect(spy).toHaveBeenCalledWith(kWK_ARR[kWK_ARR.length - 1].id, null);
       expect(component.kweeks).toBe(arrHome);
     });
 
@@ -454,14 +451,14 @@ describe("KweekComponent", () => {
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id, null);
       expect(component.kweeks.length).toBe(arrProfileKweeks.length);
 
       component.route.snapshot.parent.firstChild.routeConfig.path = "kweeks";
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id, null);
       expect(component.kweeks).toBe(arrProfileKweeks);
     });
 
@@ -475,9 +472,8 @@ describe("KweekComponent", () => {
 
       component.onScroll();
 
-      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length-1].id);
+      expect(spy).toHaveBeenCalledWith("user1", kWK_ARR[kWK_ARR.length - 1].id);
       expect(component.kweeks).toBe(arrProfileLikes);
     });
   });
-
-});*/
+});
