@@ -147,3 +147,13 @@ mat-icon.close:hover {
   font-size: 17px;
   cursor: pointer;
 }
+
+.Logo
+{
+	width: 40px;
+	height: 40px;
+	position: relative;
+	left: 42%;
+	margin-top: 20px;
+	margin-bottom: 60px;
+}

@@ -5,7 +5,10 @@
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
       <div class="p-0 kweek-style pointer-cursor" *ngIf="!kweek.user.muted">
-        <div class="rekweeked-reply-info pointer-cursor" *ngIf="kweek.rekweek_info !== null">
+        <div
+          class="rekweeked-reply-info pointer-cursor"
+          *ngIf="kweek.rekweek_info !== null"
+        >
           <i class="fas fa-retweet m-1"></i
           ><a
             href="/profile/{{ kweek.rekweek_info.rekweeker_username }}"
@@ -48,7 +51,7 @@
             [src]="kweek.user.profile_image_url"
             src-fallback="../../assets/kweeks/default.png"
             class="mr-3 rounded-circle kweek-img"
-            (click) = "openUserProfile(i)"
+            (click)="openUserProfile(i)"
           />
           <!-- alt could be a pic in our files -->
           <div class="media-body">
@@ -192,4 +195,10 @@
 
 <div style="margin:20px;"></div>
 
-<h1 *ngIf="kweeks && kweeks.length === 0" class="m-5">No Kweeks</h1>
+<div *ngIf="kweeks && kweeks.length === 0" class="m-5">
+  <img
+    class="Logo"
+    src="../../../assets/main/8800.png"
+    alt="No Kweeks"
+  />
+</div>
