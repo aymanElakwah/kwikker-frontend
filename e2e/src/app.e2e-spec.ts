@@ -46,6 +46,7 @@ describe('Kwikker E2E', () => {
   });
 
   it('Kweek', () => {
+    page.navigateTo();
     utility.login(user1, pass1);
     let kweek = "E2E 10";
     page.getKweekButton().click();
@@ -60,10 +61,11 @@ describe('Kwikker E2E', () => {
   });
 
   it('Rekweek', () => {
+    page.navigateTo();
     utility.login(user2, pass2);
     page.navigateToProfile(user1);
     let kweek = page.getFirstKweekText().getText();
-    page.getRekweekButton(1).click();
+    page.getRekweekButton().click();
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
@@ -79,10 +81,11 @@ describe('Kwikker E2E', () => {
   // });
 
   it('Like', () => {
+    page.navigateTo();
     utility.login(user2, pass2);
     page.navigateToProfile(user1);
     let kweek = page.getFirstKweekText().getText();
-    page.getLikeButton(1).click();
+    page.getLikeButton().click();
     utility.browserPause(1000);
     page.navigateToLikes(user2);
     expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
@@ -96,10 +99,11 @@ describe('Kwikker E2E', () => {
   // });
 
   it('Reply', () => {
+    page.navigateTo();
     let reply = 'E2E reply'
     utility.login(user2, pass2);
     page.navigateToProfile(user1);
-    page.getReplyButton(1).click();
+    page.getReplyButton().click();
     utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(reply);
     utility.browserPause(1000);
@@ -112,9 +116,10 @@ describe('Kwikker E2E', () => {
   });
 
   it('Delete', () => {
+    page.navigateTo();
     utility.login(user1, pass1);
     utility.navigateToMyProfile();
-    page.getDeleteKweekx(1).click();
+    page.getDeleteKweekx().click();
     utility.browserPause(1000);
     utility.sendClick(page.getDeleteKweekButton());
     utility.browserPause(1000);
@@ -123,6 +128,7 @@ describe('Kwikker E2E', () => {
 
   it('Kweek To', () => {
     let kweek = 'Hi user';
+    page.navigateTo();
     utility.login(user1, pass1);
     page.navigateToProfile(user2);
     page.getKweekToButton().click();
@@ -133,7 +139,7 @@ describe('Kwikker E2E', () => {
     utility.browserPause(1000);
     page.navigateToKweeks(user1);
     expect(page.getFirstKweekText().getText()).toEqual('@' + user2 + ' ' + kweek);
-    page.getDeleteKweekx(1).click();
+    page.getDeleteKweekx().click();
     utility.browserPause(1000);
     utility.sendClick(page.getDeleteKweekButton());
     utility.browserPause(1000);
@@ -149,6 +155,7 @@ describe('Kwikker E2E', () => {
     let password2 = 'Password2';
     let email2 = 'mymail20@mail.com';
 
+    page.navigateTo();
     utility.login(username1, password1);
 
     page.getDropDownMenuButton().click();

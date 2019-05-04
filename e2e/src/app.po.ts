@@ -89,7 +89,7 @@ export class AppPage {
   }
 
   getLoginButton(){
-    return element(by.xpath('//button [@class = "btn btn-primary fadeIn fourth"]'));
+    return element(by.buttonText('Log in'));
   }
 
   getNext1SignupButton(){
@@ -108,20 +108,20 @@ export class AppPage {
     return element.all(by.buttonText('Kweek')).get(1);
   }
 
-  getRekweekButton(x){
-    return element(by.xpath('(//span [@class = "rekweek"])[' + x +']'));
+  getRekweekButton(){
+    return element.all(by.className("fas fa-retweet icons")).first();
   }
 
-  getLikeButton(x){
-    return element(by.xpath('(//span [@class = "like"])[' + x +']'));
+  getLikeButton(){
+    return element.all(by.className("far fa-heart icons")).first();
   }
 
-  getReplyButton(x){
-    return element(by.xpath('(//span [@class = "reply"])[' + x +']'));
+  getReplyButton(){
+    return element.all(by.className("far fa-comment icons")).first();
   }
 
-  getDeleteKweekx(x){
-    return element(by.xpath('(//mat-icon [@class = "close mat-icon notranslate material-icons mat-icon-no-color"])[' + x + ']'));
+  getDeleteKweekx(){
+    return element.all(by.className("close mat-icon notranslate material-icons mat-icon-no-color")).first();
   }
 
   getDeleteKweekButton(){
