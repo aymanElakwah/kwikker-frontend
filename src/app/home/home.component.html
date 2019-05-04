@@ -1,17 +1,24 @@
 <!-- Log out button, just to check that log out is working -->
 
   <!-- Showing navbar at home, for testing and checking -->
+  <div class="Home">
   <app-nav-bar ></app-nav-bar>
-<div class="container-fluid" style="margin-top:5%; background-color: #e6ecf0;">
-  <div class="row">
-    <div class="col-md-3">
+<div class="container-fluid Home-Container" style="margin-top:4%; background-color: #e6ecf0;">
+  <div class="row  justify-content-center">
+    <div class="ProfileCard col-3">
       <app-home-mini-profile-card> </app-home-mini-profile-card>
+      <app-trends id="Left-Trends"> </app-trends>
     </div>
 
-    <div class="col-md-6">
+    <div class="Kweeks fixed-col">
         <app-kweek ></app-kweek>
     </div>
 
+    <div class="Trends col-3 pull-right">
+      <app-trends id="Right-Trends"> </app-trends>
+    </div>
 
   </div>
+</div>
+
 </div>
