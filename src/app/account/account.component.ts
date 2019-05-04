@@ -115,6 +115,10 @@ export class AccountComponent implements OnInit {
       }
     )
   }
+  /**
+   * alert using dialog
+   * @param message the shwon message in alert
+   */
 
   giveAlert(message:string){
     const dialogRef = this.dialog.open(AlertComponentComponent, {
