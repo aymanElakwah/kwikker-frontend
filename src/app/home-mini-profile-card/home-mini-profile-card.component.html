@@ -1,0 +1,48 @@
+<!-- The main Part For each Card , For Loop to show all of them -->
+<div class="container">
+  <!-- Profile Card is divided into two main Rows [Banner, Info] -->
+  <div class="profile-card">
+     <!--  The Upper Part for the banner -->
+     <div class="row banner">
+        <img class='BannerImage' src={{ProfileInfo?.profile_banner_url}} 
+             id="BannerImage"
+             (click) = "openUserProfile()"/>
+     </div>
+     <!--  The Lower Part for the Profile Info [UserAction, ProfilePicture, ProfileData] -->
+     <div class=" row profile-content">
+        <div class="content">
+           <!-- Profile Picture Part -->
+           <div class="profile-pic">
+              <img class="ProfileImage" src= {{ProfileInfo?.profile_image_url}} 
+                   id="ProfileImage"
+                   (click) = "openUserProfile()" />
+           </div>
+           <!-- Profile Info Part [Username, Screen Name] -->
+           <div class="profile-data">
+              <div class="username"> <a id="usernameref" [routerLink]="['/profile', ProfileInfo?.username]"> {{ ProfileInfo?.screen_name}} </a>  </div>
+              <div class="screen-name">  <a id="usernameref" [routerLink]="['/profile', ProfileInfo?.username]"> @{{ ProfileInfo?.username}} </a> </div>
+           </div>
+           <div class="ProfileCardState">
+            <li class="ProfileCardStats-State">
+               <a  [routerLink]="['/profile', ProfileInfo?.username,'kweeks']" >
+                 <span class="ProfileCardStats-Text"> Kweeks </span>
+                 <span class="ProfileCardStats-Value">  {{ ProfileInfo?.kweeks_count }} </span>
+               </a>
+             </li>
+             <li class="ProfileCardStats-State">
+               <a  [routerLink]="['/profile', ProfileInfo?.username,'following']"  >
+                 <span class="ProfileCardStats-Text"> Following </span>
+                 <span class="ProfileCardStats-Value"> {{ ProfileInfo?.following_count }} </span>
+               </a>
+             </li>
+             <li class="ProfileCardStats-State">
+               <a  [routerLink]="['/profile', ProfileInfo?.username,'followers']"  >
+                 <span class="ProfileCardStats-Text"> Followers </span>
+                 <span class="ProfileCardStats-Value"> {{ ProfileInfo?.followers_count }} </span>
+               </a>
+             </li>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>

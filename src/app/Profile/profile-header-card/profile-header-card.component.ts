@@ -32,10 +32,8 @@ export class ProfileHeaderCardComponent implements OnInit {
    @Input() AuthorisedIsBlocked: boolean;
    
   /**
-     * Open Write Kweek Component Dialog,
-     * No Parameters,
-     * No return
-     */
+  * Open Write Kweek Component Dialog
+  */
   openKweekDialog()
   {
     const dialogRef = this.dialog.open(NewKweekComponent,
@@ -47,9 +45,7 @@ export class ProfileHeaderCardComponent implements OnInit {
   }
 
    /**
-     * Open Inbox Component Dialog,
-     * No Parameters,
-     * No return
+     * Open Inbox Component Dialog
      */
   openInboxDialog()
   {

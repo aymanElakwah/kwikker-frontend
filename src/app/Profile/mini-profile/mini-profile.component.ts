@@ -84,8 +84,8 @@ export class MiniProfileComponent implements OnInit {
                private ChatService:ChatService) { }
 
   /**
-   * Change Between Follow And Unfollow Buttons, And Send their requests,
-   * No return 
+   * Change Between Follow And Unfollow Buttons, And Send their requests
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
    * 
    */             
@@ -104,8 +104,8 @@ export class MiniProfileComponent implements OnInit {
 
   /**
    * Change Between Mute And Unmute Buttons, And Send their requests,
-   * It Also Activate muteMode (Mute Icon in the Navbar),
-   * No return 
+   * It Also Activate muteMode (Mute Icon in the Navbar)
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
    */
   toggleMute(index: number): void
@@ -126,7 +126,7 @@ export class MiniProfileComponent implements OnInit {
    
   /**
    * Change Between Block And UnBlock Buttons, And Send their requests,
-   * No return 
+   * 
    * @param index The Number of MiniUser in The Array to Send The Appropiate request  
    */
   toggleBlock(index: number): void
@@ -147,7 +147,7 @@ export class MiniProfileComponent implements OnInit {
 
      /**
      * Open Write Kweek Component Dialog,
-     * No return
+     * 
      * @param inex The Number of MiniUser in The Array to Send The Appropiate request  
      *
      */
@@ -163,7 +163,7 @@ export class MiniProfileComponent implements OnInit {
 
     /**
      * Open Inbox Component Dialog
-     * No return
+     * 
      * @param index The Number of MiniUser in The Array to Send The Appropiate request  
      * 
      */
@@ -174,7 +174,7 @@ export class MiniProfileComponent implements OnInit {
       const dialogRef = this.dialog.open(ChatComponent);
     }
              
-/**
+   /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling 
    */

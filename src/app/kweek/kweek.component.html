@@ -24,11 +24,11 @@
         <div class="rekweeked-reply-info" *ngIf="kweek.reply_info !== null">
           <i class="far fa-comment icons m-1"></i>Reply to
           <a
-            href="/profile/{{ kweek.reply_info.reply_to_username }}"
+            href="/profile/{{ kweek.reply_info?.reply_to_username }}"
             class="rekweeked-reply-screen_name"
             >{{
-              kweek.reply_info.reply_to_username !== this.authorizedUser
-                ? kweek.reply_info.reply_to_username
+              kweek.reply_info?.reply_to_username !== this.authorizedUser
+                ? kweek.reply_info?.reply_to_username
                 : "You"
             }}</a
           >
@@ -195,10 +195,11 @@
 
 <div style="margin:20px;"></div>
 
-<div *ngIf="kweeks && kweeks.length === 0" class="m-5">
+<div class="m-5">
   <img
     class="Logo"
     src="../../../assets/main/8800.png"
     alt="No Kweeks"
-  />
+    (click) = 'openHomePage()'  
+    />
 </div>

@@ -21,8 +21,13 @@ import { ReplyComponent } from '../reply/reply.component';
 import { AlertComponentComponent } from '../alert-component/alert-component.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
 @NgModule({
-  declarations: [NavBarComponent, TrendsComponent, AlertComponentComponent],
+  declarations: [
+    NavBarComponent, 
+    TrendsComponent, 
+    AlertComponentComponent
+  ],
 
   imports: [
     CommonModule,
@@ -35,7 +40,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
   ],
 
   entryComponents: [EditImagesComponent,AlertComponentComponent],
@@ -47,7 +53,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReplyComponent,
     TrendsComponent,
     NewKweekComponent,
-    AlertComponentComponent
+    AlertComponentComponent,
   ]
 })
 export class SharedModule {}

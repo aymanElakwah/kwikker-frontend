@@ -2,19 +2,17 @@ import {  ComponentFixture } from '@angular/core/testing';
 import { DataService } from '../services/data.service';
 import { HttpClient, HttpErrorResponse,  HttpParams,  HttpHeaders } from '@angular/common/http';
 import { CacheService } from '../services/cache.service';
-import { ActivatedRoute } from '@angular/router';
-import { ResetPasswordComponent } from './reset-password.component';
+import { ResendEmailComponent } from './resend-email.component';
 
 /**
- * Describe funciton to test reset password component.
+ * Describe funciton to test ResendEmail component.
  */
-describe('Reset password Component', () => {
-  let component: ResetPasswordComponent;
-  let fixture: ComponentFixture<ResetPasswordComponent>;
+describe('Resen-Email Component', () => {
+  let component: ResendEmailComponent;
+  let fixture: ComponentFixture<ResendEmailComponent>;
   let dataService: DataService;
   let http: HttpClient;
   let cacheService: CacheService;
-  let routes: ActivatedRoute;
   let route: any = {
     snapshot: {
       root: {
@@ -39,7 +37,7 @@ describe('Reset password Component', () => {
   
   beforeEach(() => {
     dataService = new DataService(http, cacheService,route);
-    component = new ResetPasswordComponent(dataService,route);
+    component = new ResendEmailComponent(dataService,route);
 
     });
 

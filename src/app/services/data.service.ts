@@ -477,8 +477,8 @@ export class DataService {
   }
   /**
    * to post user's name and user's password
-   * @param user {object} sends the user information to get
    * token after it and also could be null
+   * @param user {object} sends the user information to get
    * @returns string
    */
   logInUser(user: any): Observable<any> {
@@ -711,8 +711,12 @@ export class DataService {
     const body = JSON.stringify(user);
     return this.http.post<any>(this.base + "account/registration", body).pipe(
       map(res => res),
+<<<<<<< HEAD
       map(err => err)
       // catchError(this.handleError)
+=======
+      map(err=>err)
+>>>>>>> final4/5
     );
   }
 
@@ -735,7 +739,7 @@ export class DataService {
       .post<any>(this.base + "account/forget_password", body)
       .pipe(
         map(res => res),
-        catchError(this.handleError)
+        map(err=>err)
       );
   }
   /**
@@ -751,7 +755,7 @@ export class DataService {
       .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
         map(res => res),
-        catchError(this.handleError)
+        map(err=>err)
       );
   }
   /**
@@ -776,7 +780,11 @@ export class DataService {
       })
       .pipe(
         map(res => res),
+<<<<<<< HEAD
         catchError(this.handleError)
+=======
+        map(err=>err)
+>>>>>>> final4/5
       );
   }
   /**
@@ -817,8 +825,16 @@ export class DataService {
       CODE: `${val}`
     });
     return this.http
+<<<<<<< HEAD
       .put<any>(this.base + "account/reset_password", body, { headers })
       .pipe(map(res => res));
+=======
+      .put<any>(this.base + "account/reset_password", body,{headers})
+      .pipe(
+        map(res => res),
+        map(err=>err)
+      );
+>>>>>>> final4/5
   }
 
   // in memory mock data service function

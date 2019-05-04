@@ -39,9 +39,7 @@ export class ProfileHeaderCardEditingComponent implements OnInit {
   @Output() editedDate: EventEmitter<string> = new EventEmitter<string>();
 
   /**
-   * Send the edited data to The Main Component,
-   * No Parameters  ,
-   * No return 
+   * Send the edited data to The Main Component
    */
   changeProfileData()
   {
