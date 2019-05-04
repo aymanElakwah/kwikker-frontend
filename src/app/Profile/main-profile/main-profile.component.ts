@@ -1,15 +1,14 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { User } from "../../model/user";
 import { DataService } from "src/app/services/data.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, Params } from "@angular/router";
 import { delay } from "q";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { EditImagesComponent } from "../edit-images/edit-images.component";
 import { NewKweekComponent } from '../../new-kweek/new-kweek.component';
 import { ChatComponent } from '../../chat/chat.component';
 import { ChatService } from 'src/app/chat/chat.service';
 import { TitleService } from 'src/app/services/title.service';
-import { Title } from '@angular/platform-browser';
 
 
 
@@ -29,33 +28,51 @@ export class MainProfileComponent implements OnInit {
    * */
   profileUser: User;
 
-  /* The Authorized User (The one who made Log in) */
+  /** The Authorized User (The one who made Log in) */
   authorizedUser: string = localStorage.getItem("username");
 
   /* Some Modes that helping control UI */
+
+  /** EditingMode is the Mode That The user can change 
+   * Its Screen Name, Bio, Profile Image And Banner Image
+   */
   isEditingMode: boolean = false;
+
+  /** MuteMode is the Mode That Indicate if The Authorised User Mute
+   * The Profile User Or Not which based On it Mute Icon will Appear
+   */
   muteMode: boolean = false;
+
+   /** SemiBlockMode is the Mode That Indicate if The Authorised User Block
+   * The Profile User But it can See his Information
+   */
   semiBlockedMode: boolean = false;
 
   /* User Edited Data */
+
+  /** The Edited Screen Name in Editing Mode */
   editedScreenName: string ;
+
+  /** The Edited Bio in Editing Mode */
   editedBio: string ;
+
+  /** Is The Profile User Blocked The Authorised User */
   AuthorisedIsBlocked:boolean = false;
 
-  /* Default Profile Picture and Banner */
+  /** Default Profile Picture */
   defaultProfilePicture: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/picture/profile.jpg";
+   /** Default Profile Banner */
   defaultProfileBanner: string = "http://kwikkerbackend.eu-central-1.elasticbeanstalk.com/user/upload/banner/banner.jpg";
 
    /**
-   * Open Resize, Scale and Crop Profile Image
-   * No Parameters
+   * Open Resize, Scale and Crop Profile Image,
+   * No Parameters,
    * No return
    */
   openEditImagesDialog() {
     let dialogRef = this.dialog.open(EditImagesComponent, {
       data: this.profileUser.profile_image_url,
-      height: "700px",
-      width: "700px",
+      panelClass: 'EditImageBox'
     });
     dialogRef.afterClosed().subscribe(image => {
       if(image != null )
@@ -71,14 +88,13 @@ export class MainProfileComponent implements OnInit {
           var S:string;
           this.profileInfoService.updateProfilePicture(image as File).subscribe 
           ( serInfo => { S = serInfo; }  );
-          this.profileUser.profile_image_url = S + "?dummy=" + Math.random(); 
     }
     });
   }
 
     /**
-     * Open Write Kweek Component Dialog
-     * No Parameters
+     * Open Write Kweek Component Dialog,
+     * No Parameters,
      * No return
      */
     openKweekDialog()
@@ -91,9 +107,36 @@ export class MainProfileComponent implements OnInit {
          dialogRef.componentInstance.screenname = this.profileUser.screen_name;
     }
 
+     /**
+     * Open Profile Image When Clicked,
+     * No Parameters,
+     * No return
+     */
+    openProfileImage()
+    {
+     
+        var modal = document.getElementById('myModal');
+        var img = document.getElementById('ProfileImage');
+        var modalImg = document.getElementById("img01") as HTMLImageElement;
+        modal.style.display = "block";
+        modalImg.src = this.profileUser.profile_image_url;
+        var span = document.getElementsByClassName("close")[0];
+    }
+
+    /**
+     * Close Profile Image Pop up,
+     * No Parameters,
+     * No return
+     */
+    closeProfileImage()
+    {
+      var modal = document.getElementById('myModal');
+      modal.style.display = "none";
+    }
+
        /**
-     * Open Inbox Component Dialog
-     * No Parameters
+     * Open Inbox Component Dialog,
+     * No Parameters,
      * No return
      */
     openInboxDialog()
@@ -104,7 +147,7 @@ export class MainProfileComponent implements OnInit {
     }
 
   /**
-   * Check If this Profile belongs to the authorized User (The one who loged in)
+   * Check If this Profile belongs to the authorized User (The one who loged in),
    * No Parameters
    * @returns {boolean}
    */
@@ -116,7 +159,7 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Check If User has No profile Picture
+   * Check If User has No profile Picture,
    * No Parameters
    * @returns {boolean}
    */
@@ -125,7 +168,7 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Check If User has No Banner
+   * Check If User has No Banner,
    * No Parameters
    * @returns {boolean}
    */
@@ -135,9 +178,9 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Change User Profile Banner
+   * Change User Profile Banner,
+   *  No return
    * @param event Event from the browser with the selected new banner photo
-   * No return
    */
   changeProfileBanner(event) {
     /* Preview The Image */
@@ -152,13 +195,12 @@ export class MainProfileComponent implements OnInit {
     /* Send Change The Image Request */
       this.profileInfoService.updateBanner(file).subscribe(userInfo => {
       this.profileUser.profile_banner_url = userInfo;
-      this.profileUser.profile_banner_url += "?dummy=" + Math.random();
     });
   }
 
   /**
-   * Remove User Profile Photo
-   * No Parameters
+   * Remove User Profile Photo,
+   * No Parameters,
    * No return
    */
   removeProfilePicture(): void {
@@ -168,8 +210,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Remove User Profile Banner
-   * No Parameters
+   * Remove User Profile Banner,
+   * No Parameters,
    * No return
    */
   removeProfileBanner(): void {
@@ -179,8 +221,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Change Between Editing Mode and Default Mode
-   * No Parameters
+   * Change Between Editing Mode and Default Mode,
+   * No Parameters,
    * No return
    */
   toggleEditingMode(): void {
@@ -189,8 +231,8 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Change Between Blocked Mode(User can't see Kweeks, Followers Or Followings)
-   * and Semi-Blocked Mode (Still Blocked But Kweeks, Followers And Followings are available)
-   * No Parameters
+   * and Semi-Blocked Mode (Still Blocked But Kweeks, Followers And Followings are available),
+   * No Parameters,
    * No return
    */
   togglesemiBlockedMode(): void {
@@ -198,8 +240,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Change Between Follow And Unfollow Buttons, And Send their requests
-   * No Parameters
+   * Change Between Follow And Unfollow Buttons, And Send their requests,
+   * No Parameters,
    * No return
    */
   toggleFollow() {
@@ -220,9 +262,9 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Change Between Mute And Unmute Buttons, And Send their requests
-   * It Also Activate muteMode (Mute Icon in the Navbar)
-   * No Parameters
+   * Change Between Mute And Unmute Buttons, And Send their requests,
+   * It Also Activate muteMode (Mute Icon in the Navbar),
+   * No Parameters,
    * No return
    */
   toggleMute(): void {
@@ -241,8 +283,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Change Between Block And UnBlock Buttons, And Send their requests
-   * No Parameters
+   * Change Between Block And UnBlock Buttons, And Send their requests,
+   * No Parameters,
    * No return
    */
   toggleBlock(): void {
@@ -271,8 +313,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Check The Edited Data are Valid and Send The request to change it
-   * No Parameters
+   * Check The Edited Data are Valid and Send The request to change it,
+   * No Parameters,
    * No return
    */
   updateProfile(): void {
@@ -287,8 +329,8 @@ export class MainProfileComponent implements OnInit {
   }
 
   /**
-   * Generate Delay
-   * No Parameters
+   * Generate Delay,
+   * No Parameters,
    * No return
    */
   delay(ms: number) {
@@ -297,8 +339,9 @@ export class MainProfileComponent implements OnInit {
 
   /**
    * Make the Notification bar visible with a message for some time
-   * @param Msg {string} The Message that would appear in the notification bar
    * No return
+   * @param Msg {string} The Message that would appear in the notification bar
+   * 
    */
   async ShowMessage(Msg: string) {
     document.querySelector(".Msg").textContent = Msg;
@@ -315,6 +358,8 @@ export class MainProfileComponent implements OnInit {
 
   /**
    *
+   *  Main Profile Constructor 
+   * 
    * @param route is used to Know which Parameter is sent To The Profile Url
    * and Based on It request Its Information
    * @param profileInfoService DataService Parameter To Send Request getting
@@ -323,6 +368,10 @@ export class MainProfileComponent implements OnInit {
    * 
    * @param router Service used to Navigate To The Error Page
    *
+   * @param ChatService Service used To Open Chat Inbox
+   * 
+   * @param title Service used To change The Profile Page Title
+   * 
    */
   constructor(
     private profileInfoService: DataService,
@@ -336,41 +385,39 @@ export class MainProfileComponent implements OnInit {
   /**
    * ngOnInit is used to start the process of knowing which Parameter is sent
    * To The Profile Url and Based On It, Send the request
+   * Or Open The Error Page if The User doesn't Exist
+   * Or If The Authorised Uer was Blocked Take Some Decisions
    */
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+
     //Get The Profile user from The Url To Request Its Info
     let profileUserName = this.route.snapshot.paramMap.get("username");
     ///Go To Error Page [Sorry, that page doesn’t exist!]
     this.profileInfoService.getProfileInfo(profileUserName).subscribe(
-      userInfo => {
-        this.profileUser = userInfo;
-        if(this.title!=null){
-        this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
-        }
-        this.editedScreenName = this.profileUser.screen_name;
-        this.editedBio = this.profileUser.bio;
-        if(!this.isProfilePictureDefault())
-        {
-             this.profileUser.profile_image_url += "?dummy=" + Math.random();
-        }
-
-        if(!this.isProfileBannerDefault())
-        {
-            this.profileUser.profile_banner_url += "?dummy=" + Math.random();
-        }
-      },
+    userInfo => {
+                this.profileUser = userInfo;
+                if(this.title!=null)
+                {
+                this.title.setTitleProfile(userInfo.screen_name,userInfo.username);
+                }
+                this.editedScreenName = this.profileUser.screen_name;
+                this.editedBio = this.profileUser.bio;
+             },
       err => {
-          //If Theis Profile User Blocked The Authorised User
-          if(err.status == "403")
-          {
-            this.profileUser = err.error;
-            this.AuthorisedIsBlocked = true;
-          }
-          else
-          {
-            this.router.navigateByUrl("/error");   
-          }
-      }
-    );
-  }
+                //If Theis Profile User Blocked The Authorised User
+                if(err.status == "403")
+                {
+                  this.profileUser = err.error;
+                  this.AuthorisedIsBlocked = true;
+                }
+                else
+                {
+                  this.router.navigateByUrl("/error");   
+                }
+            });
+      });
+   }
 }
+
+

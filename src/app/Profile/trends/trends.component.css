@@ -61,3 +61,18 @@
     margin-top: 13px;
     color:#657786;
 }
+
+
+.Logo {
+	width: 40px;
+	height: 40px;
+	position: relative;
+	left: 42%;
+	margin-top: 20px;
+    margin-bottom: 200px;
+}
+
+
+@media(max-width: 500px)    {.logo { margin-bottom: 240px; }}
+@media(max-width: 450px)    {.logo { margin-bottom: 370px; }}
+

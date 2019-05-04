@@ -11,6 +11,20 @@
     padding: 0;
 }
 
+
+.EditImageBox {
+  top: 5%;
+  width: 600px !important;
+  height: 900px !important;
+  zoom: 140% !important; 
+  padding: 30px !important; 
+  position: relative;
+  transform: translate(0,-110px) !important;
+  z-index: 6000;
+  display: block;
+  padding: 0;
+}
+
 .cdk-global-scrollblock {
   overflow-x: hidden;
 }
@@ -56,4 +70,7 @@ mat-dialog-container{
   overflow-x: hidden;
   zoom: 80%;
 }
+
+
+
 

@@ -36,7 +36,7 @@
 
 .mynav{
   background-color: white;
-  margin: 0%;
+  margin: 0% !important;
   z-index: 999;
  
 } 

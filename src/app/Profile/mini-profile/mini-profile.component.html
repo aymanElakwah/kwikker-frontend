@@ -25,14 +25,14 @@
                      (click)='toggleBlock(i)'>
                      <span> Blocked </span>
                   </button>
-                  <button class="btn" id="dropdownMenuButton" data-toggle="dropdown">
+                  <button  id="dropdownMenuButton" data-toggle="dropdown">
                      <!-- 3 Dots Icon => Font-Awesome -->
                      <span class="Dots-Icon" id="dots" style="color:#657786;">
                         <i class="fas fa-ellipsis-v fa-lg"></i>
                      </span>
                   </button>
                   <!-- The user Setting in The DropDownMenu [Tweet , Mute, Block] -->
-                  <div class="dropdown-menu" id="userActionDropDownMenu" aria-labelledby="dropdownMenuButton">
+                  <div class="dropdown-menu dropdown-menu-right" id="userActionDropDownMenu" aria-labelledby="dropdownMenuButton">
                      <li class="dropdown-item" (click)='openKweekDialog(i)' *ngIf="!user?.blocked">
                         <P> Tweet To @{{user.username}}</P>
                      </li>
@@ -51,7 +51,8 @@
                </div>
                <!-- Profile Picture Part -->
                <div class="profile-pic">
-                  <img class="ProfileImage" src={{user?.profile_image_url}}{{DummyString}} id="ProfileImage" />
+                  <img class="ProfileImage" src={{user?.profile_image_url}}{{DummyString}} id="ProfileImage"
+                  (click) = "openUserProfile(i)" />
                </div>
                <!-- Profile Info Part [Username, Screen Name, Bio] -->
                <div class="profile-data">

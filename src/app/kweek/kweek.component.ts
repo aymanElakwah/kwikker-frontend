@@ -50,6 +50,7 @@ export class KweekComponent implements OnInit {
     private kweekService: DataService,
     private kweekFunc: KweeksService,
     public route: ActivatedRoute,
+    public router: Router,
     private dialog: MatDialog,
     private overlay: Overlay
   ) {}
@@ -431,6 +432,14 @@ export class KweekComponent implements OnInit {
     dialogRef.componentInstance.kweek = kweek;
     dialogRef.componentInstance.reply = true;
     dialogRef.componentInstance.kweekTO = false;
+  }
+
+   /**
+   * Open User Profile when his Profile Picture Clicked 
+   */  
+  openUserProfile(index: number)
+  {
+    this.router.navigate(['/profile/'+ this.kweeks[index].user.username]);
   }
 
   /**

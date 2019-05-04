@@ -4,9 +4,8 @@
 
 
 /* Kweeks Container */
-
 .Kweeks {
-	height: auto;
+/* 	height: auto; */
 	background-color: white;
 	padding: 0 0;
 	margin: 0 0;
@@ -19,16 +18,17 @@
 	} 
 } 
 
-.Logo {
+.col-fixed
+{
+	width: 640px;
+}
+
+.Logo
+{
 	width: 40px;
 	height: 40px;
 	position: relative;
 	left: 42%;
 	margin-top: 20px;
-	margin-bottom: 50px;
-}
-
-.col-fixed
-{
-	width: 640px;
+	margin-bottom: 60px;
 }

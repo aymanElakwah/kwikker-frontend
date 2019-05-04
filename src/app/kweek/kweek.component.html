@@ -1,7 +1,7 @@
 <div infiniteScroll (scrolled)="onScroll()">
   <div *ngIf="kweeks && kweeks.length">
     <!-- check if kweeks exists -->
-    <div *ngFor="let kweek of kweeks" class="kweeks">
+    <div *ngFor="let kweek of kweeks; let i = index" class="kweeks">
       <!-- loop the kweeks as every kweek has the name kweek -->
       <!-- should retrieve not muted users' kweeks but this ngif to make sure -->
       <div class="p-0 kweek-style pointer" *ngIf="!kweek.user.muted">
@@ -36,6 +36,7 @@
             [src]="kweek.user.profile_image_url"
             src-fallback="../../assets/kweeks/default.png"
             class="mr-3 rounded-circle kweek-img"
+            (click) = "openUserProfile(i)"
           />
           <!-- alt could be a pic in our files -->
           <div class="media-body">
