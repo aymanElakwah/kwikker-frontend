@@ -52,22 +52,36 @@ export class InboxListComponent implements OnInit {
    * user selected addresses
    */
   secondStep=false;
+  /**
+   * css effects
+   */
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
+  /**
+   * image that will be uploaded
+   */
   image:File;
+  /**
+   * keyboard shortcuts
+   */
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   /**
-   * 
+   * build the reactive form group
    * @param data data service to connect with backend
    * @param fb component has 2 reactive forms
+   * @param chatService to change section
+   * @param DialogRef for pop up
    */
   constructor(private data: DataService,
               private fb: FormBuilder,
               private chatService:ChatService,
               public DialogRef: MatDialogRef<ChatComponent>) {
-               }
+   }
+  /**
+   * intialize forms
+   */
   ngOnInit(): void {
     this.myForm = this.fb.group({
       filterBy: ['']
@@ -200,9 +214,15 @@ add(event: MatChipInputEvent): void {
   }
   this.chatService.setSection(1);
   }
+  /**
+   * next step to send message;
+   */
   next(){
     this.secondStep = true;
   }
+  /**
+   * after sending message return to inbox 
+   */
   toInbox(){
     this.chatService.setSection(1);
   }
