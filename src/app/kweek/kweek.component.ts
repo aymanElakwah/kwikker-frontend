@@ -513,8 +513,8 @@ export class KweekComponent implements OnInit {
             } else {
               this.kweekService
                 .getUserKweeks(
-                  lastKweekId,
                   this.route.snapshot.root.children[0].params["username"],
+                  lastKweekId,
                   null
                 )
                 .subscribe(lists => {
