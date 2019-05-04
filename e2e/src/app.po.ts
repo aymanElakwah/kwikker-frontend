@@ -151,7 +151,7 @@ export class AppPage {
     }
 
     getHisProfileName(){
-      return element.all(by.id('usernameref')).get(0);
+      return element.all(by.id('usernameref')).get(1);
     }
 
     getFollwingList(){
@@ -288,9 +288,12 @@ export class AppPage {
     }
 
     getSearchKeyWord(){
-      return element(by.xpath('/html/body/app-root/app-search/div[3]/div/div[2]/app-kweek/div/div/div[1]/div/div[2]/div/div[3]/div'));
+      return element(by.className('kweek-text'));
     }
 
+    getSearchBar(){
+      return element(by.xpath('//*[@id="first"]'));
+    }
 
     pressEnter(){
       var enter = browser.actions().sendKeys(protractor.Key.ENTER);
