@@ -471,6 +471,15 @@ export class KweekComponent implements OnInit {
     this.router.navigate(["/profile/" + this.kweeks[index].user.username]);
   }
 
+  
+  /**
+   * Open Home Page When Kiwkker Logo is Clicked
+   */
+
+  openHomePage() {
+    this.router.navigate(['/home/']);
+  }
+
   /**
    * Scroll Event Which is used to get more data for the followers and the followings
    * while the user scrolling

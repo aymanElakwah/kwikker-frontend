@@ -36,7 +36,7 @@ export class ErrorPageComponent implements OnInit {
   }
 
   /**
-   * after each char send new request or navigate
+   * After each char send new request or navigate
    */
   newSearch() {
     this.router.navigate(['/search'] , { queryParams: { filterBy: this.filterBy } });

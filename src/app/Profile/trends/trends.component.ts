@@ -3,10 +3,8 @@ import { Trend } from '../../model/Trend';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 
-/**
- * 
- * Trends Components is Used To Show Trends Bar in The whole Website "Shared Component"
- * 
+/** 
+ * Trends Components is Used To Show Trends Bar in The whole Website (Shared Component)
  */
 @Component({
   selector: 'app-trends',
@@ -45,6 +43,16 @@ export class TrendsComponent implements OnInit {
     this.trendsService.getTrends().subscribe
     ( trendsInfo => {this.trends = trendsInfo; } )
   }
+
+    
+  /**
+   * Open Home Page When Kiwkker Logo is Clicked
+   */
+
+  openHomePage() {
+    this.router.navigate(['/home/']);
+  }
+
 
    /**
    * When The User Click On Some Trend , This Function will navigate To The Search Page

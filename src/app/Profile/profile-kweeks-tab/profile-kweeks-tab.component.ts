@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
 /**
- * This component just merge two other components [Kweeks , Trends] So => No Logic
+ * This component just merge two other components [Kweeks , Trends] 
  *  */
 @Component({
   selector: 'app-profile-kweeks-tab',
