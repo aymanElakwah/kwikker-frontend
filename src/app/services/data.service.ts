@@ -773,7 +773,7 @@ export class DataService {
    */
   public sendEmail2(email: any): Observable<any> {
     const body = JSON.stringify(email);
-    console.log("body", body);
+    // console.log("body", body);
     return this.http
       .post<any>(this.base + "account/registration/resend_email", body)
       .pipe(
@@ -790,13 +790,13 @@ export class DataService {
    */
   public signUpConfirm(code: any): Observable<any> {
     let val = code.confirmation_code;
-    console.log("CODE here: ", val);
+    // console.log("CODE here: ", val);
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
       CODE: `${val}`
     });
     const body = { password: "123" };
-    console.log(headers);
+    // console.log(headers);
     return this.http
       .post<any>(this.base + "account/registration/confirmation", body, {
         headers

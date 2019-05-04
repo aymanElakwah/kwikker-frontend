@@ -189,7 +189,7 @@ public previousOne (){
   this.data.signUpUser(toSend)
       .subscribe(
        res => {
-         console.log(res);
+        //  console.log(res);
          this.whatToShow(0);
        },
         err => {
