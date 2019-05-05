@@ -478,6 +478,7 @@ export class utilityFunctions{
 
   navigateToLogin() {
     this.page.navigateTo();
+    this.browserPause(1000);
     element(by.buttonText('Log in')).click();
   }
 
@@ -491,6 +492,7 @@ export class utilityFunctions{
     this.page.getDropDownMenuButton().click();
     this.browserPause(1000);
     this.page.getProfileButton().click();
+    this.browserPause(1000);
   }
 
   pressEnter(element){
