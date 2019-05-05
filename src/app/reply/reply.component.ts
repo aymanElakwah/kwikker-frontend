@@ -169,8 +169,11 @@ export class ReplyComponent implements OnInit {
   like(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
-      this.kweekFunc.like(kweek);
-      this.busyRequest = false;
+      this.kweekService.likeKweek(kweek.id).subscribe(()=> {
+        kweek.liked_by_user = true;
+        kweek.number_of_likes++;
+        this.busyRequest = false;
+      });
     }
   }
 
@@ -182,8 +185,11 @@ export class ReplyComponent implements OnInit {
   unlike(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
-      this.kweekFunc.unlike(kweek);
-      this.busyRequest = false;
+      this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+        kweek.liked_by_user = false;
+        kweek.number_of_likes--;
+        this.busyRequest = false;
+      });
     }
   }
 
@@ -195,8 +201,11 @@ export class ReplyComponent implements OnInit {
   rekweek(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
-      this.kweekFunc.rekweek(kweek);
-      this.busyRequest = false;
+      this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+        kweek.rekweeked_by_user = true;
+        kweek.number_of_rekweeks++;
+        this.busyRequest = false;
+      });
     }
   }
 
@@ -208,8 +217,11 @@ export class ReplyComponent implements OnInit {
   unrekweek(kweek: Kweek): void {
     if (!this.busyRequest) {
       this.busyRequest = true;
-      this.kweekFunc.unrekweek(kweek);
-      this.busyRequest = false;
+      this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+        kweek.rekweeked_by_user = false;
+        kweek.number_of_rekweeks--;
+        this.busyRequest = false;
+      });
     }
   }
 
