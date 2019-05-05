@@ -159,22 +159,15 @@ describe("KweekComponent", () => {
 
     it("should call like kweek from kweeksService if callCommonFunc is true", () => {
       component.callCommonFunc = true;
-      // let spy = spyOn(kweeksService, "like").and.callFake(() => {
-      //   component.kweeks[0].liked_by_user = true;
-      //   component.kweeks[0].number_of_likes++;
-      //   return of([component.kweeks]);
-      // });
-
-      let spy = spyOn(dataService, "likeKweek").and.callFake(() => {
-        component.callCommonFunc = true;
+      let spy = spyOn(kweeksService, "like").and.callFake(() => {
         component.kweeks[0].liked_by_user = true;
         component.kweeks[0].number_of_likes++;
-        return empty();
+        return of([component.kweeks]);
       });
 
       component.likeDecision(component.kweeks[0]);
 
-      expect(spy).toHaveBeenCalledWith(component.kweeks[0].id);
+      expect(spy).toHaveBeenCalled();
       expect(component.kweeks[0].number_of_likes).toBe(4);
       expect(component.kweeks[0].liked_by_user).toBeTruthy();
     });
@@ -210,27 +203,20 @@ describe("KweekComponent", () => {
       component.busyRequest = false;
     });
 
-    // it("should call unlike kweek from kweeksService if callCommonFunc is true", () => {
-    //   // let spy = spyOn(kweeksService, "unlike").and.callFake(() => {
-    //   //   component.callCommonFunc = true;
-    //   //   component.kweeks[0].liked_by_user = false;
-    //   //   component.kweeks[0].number_of_likes--;
-    //   //   return empty();
-    //   // });
+    it("should call unlike kweek from kweeksService if callCommonFunc is true", () => {
+      let spy = spyOn(kweeksService, "unlike").and.callFake(() => {
+        component.callCommonFunc = true;
+        component.kweeks[0].liked_by_user = false;
+        component.kweeks[0].number_of_likes--;
+        return empty();
+      });
 
-    //   let spy = spyOn(dataService, "unlikeKweek").and.callFake(() => {
-    //     component.callCommonFunc = true;
-    //     component.kweeks[0].liked_by_user = false;
-    //     component.kweeks[0].number_of_likes--;
-    //     return empty();
-    //   });
+      component.unlikeDecision(component.kweeks[0]);
 
-    //   component.unlikeDecision(component.kweeks[0]);
-
-    //   expect(spy).toHaveBeenCalledWith(component.kweeks[0].id);
-    //   expect(component.kweeks[0].number_of_likes).toBe(2);
-    //   expect(component.kweeks[0].liked_by_user).toBeFalsy();
-    // });
+      expect(spy).toHaveBeenCalledWith(component.kweeks[0]);
+      expect(component.kweeks[0].number_of_likes).toBe(2);
+      expect(component.kweeks[0].liked_by_user).toBeFalsy();
+    });
 
     it("should call unlikeKweek from dataService if callCommonFunc is false", () => {
       component.callCommonFunc = false;
@@ -263,22 +249,15 @@ describe("KweekComponent", () => {
 
     it("should call rekweek kweek from kweeksService if callCommonFunc is true", () => {
       component.callCommonFunc = true;
-      // let spy = spyOn(kweeksService, "rekweek").and.callFake(() => {
-      //   component.kweeks[0].rekweeked_by_user = true;
-      //   component.kweeks[0].number_of_rekweeks++;
-      //   return;
-      // });
-
-      let spy = spyOn(dataService, "rekweekKweek").and.callFake(() => {
-        component.callCommonFunc = true;
+      let spy = spyOn(kweeksService, "rekweek").and.callFake(() => {
         component.kweeks[0].rekweeked_by_user = true;
         component.kweeks[0].number_of_rekweeks++;
-        return empty();
+        return;
       });
 
       component.rekweekDecision(component.kweeks[0]);
 
-      expect(spy).toHaveBeenCalledWith(component.kweeks[0].id);
+      expect(spy).toHaveBeenCalledWith(component.kweeks[0]);
       expect(component.kweeks[0].number_of_rekweeks).toBe(4);
       expect(component.kweeks[0].rekweeked_by_user).toBeTruthy();
     });
@@ -329,23 +308,21 @@ describe("KweekComponent", () => {
       component.busyRequest = false;
     });
 
-    // it("should call unrekweek kweek from kweeksService if callCommonFunc is true", () => {
-    //   component.callCommonFunc = true;
-    //   let spy = spyOn(kweeksService, "unrekweek").and.callFake(() => {
-    //     component.kweeks[0].rekweeked_by_user = false;
-    //     component.kweeks[0].number_of_rekweeks--;
-    //     return empty();
-    //   });
+    it("should call unrekweek kweek from kweeksService if callCommonFunc is true", () => {
+      component.callCommonFunc = true;
+      let spy = spyOn(kweeksService, "unrekweek").and.callFake(() => {
+        component.kweeks[0].rekweeked_by_user = false;
+        component.kweeks[0].number_of_rekweeks--;
+        return empty();
+      });
 
-    //   // let spy = spyOn(dataService, "rekweekKweek").and.returnValue(empty());
+      component.unrekweekDecision(component.kweeks[0]);
 
-    //   component.unrekweekDecision(component.kweeks[0]);
+      expect(spy).toHaveBeenCalledWith(component.kweeks[0]);
 
-    //   expect(spy).toHaveBeenCalledWith(component.kweeks[0]);
-
-    //   expect(component.kweeks[0].number_of_rekweeks).toBe(2);
-    //   expect(component.kweeks[0].rekweeked_by_user).toBeFalsy();
-    // });
+      expect(component.kweeks[0].number_of_rekweeks).toBe(2);
+      expect(component.kweeks[0].rekweeked_by_user).toBeFalsy();
+    });
 
     it("should call unrekweekKweek from dataService if callCommonFunc is false", () => {
       component.callCommonFunc = false;

@@ -85,7 +85,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
                {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
                { provide: LY_THEME, useClass: MinimaLight, multi: true },
-               NotificationsServiceService
+               { provide: NotificationsServiceService}
             ],
   bootstrap: [AppComponent]
 })
