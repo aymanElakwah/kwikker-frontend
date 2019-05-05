@@ -46,7 +46,6 @@ describe('Kwikker E2E', () => {
   });
 
   it('Kweek', () => {
-    page.navigateTo();
     utility.login(user1, pass1);
     let kweek = "E2E 10";
     page.getKweekButton().click();
@@ -61,15 +60,13 @@ describe('Kwikker E2E', () => {
   });
 
   it('Rekweek', () => {
-    page.navigateTo();
     utility.login(user2, pass2);
     page.navigateToProfile(user1);
     let kweek = page.getFirstKweekText().getText();
-    page.getRekweekButton().click();
+    utility.sendClick(page.getRekweekButton());
     utility.browserPause(1000);
     utility.navigateToMyProfile();
     expect(page.getFirstKweekText().getText()).toEqual(kweek);
-    utility.logout();
   });
 
   // it('Check Rekweek notification.', function() {
@@ -80,17 +77,14 @@ describe('Kwikker E2E', () => {
   //   expect(page.getTypeNotificationText().getText()).toContain(' Rekweeked 🔁 your kweek');
   // });
 
-  it('Like', () => {
-    page.navigateTo();
-    utility.login(user2, pass2);
-    page.navigateToProfile(user1);
-    let kweek = page.getFirstKweekText().getText();
-    page.getLikeButton().click();
-    utility.browserPause(1000);
-    page.navigateToLikes(user2);
-    expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
-    utility.logout();
-  });
+  // it('Like', () => {
+  //   page.navigateToProfile(user1);
+  //   let kweek = page.getFirstKweekText().getText();
+  //   utility.sendClick(page.getLikeButton());
+  //   utility.browserPause(1000);
+  //   page.navigateToLikes(user2);
+  //   expect(utility.getElementWithText('p', kweek).getText()).toEqual(kweek);
+  // });
 
   // it('Check like notification.', function() {
   //   page.getLike().click();
@@ -99,11 +93,9 @@ describe('Kwikker E2E', () => {
   // });
 
   it('Reply', () => {
-    page.navigateTo();
-    let reply = 'E2E reply'
-    utility.login(user2, pass2);
+    let reply = 'E2E reply';
     page.navigateToProfile(user1);
-    page.getReplyButton().click();
+    utility.sendClick(page.getReplyButton());
     utility.browserPause(1000);
     page.getWriteKweekField().sendKeys(reply);
     utility.browserPause(1000);
@@ -116,20 +108,16 @@ describe('Kwikker E2E', () => {
   });
 
   it('Delete', () => {
-    page.navigateTo();
     utility.login(user1, pass1);
     utility.navigateToMyProfile();
     page.getDeleteKweekx().click();
     utility.browserPause(1000);
     utility.sendClick(page.getDeleteKweekButton());
     utility.browserPause(1000);
-    utility.logout();
   });
 
   it('Kweek To', () => {
     let kweek = 'Hi user';
-    page.navigateTo();
-    utility.login(user1, pass1);
     page.navigateToProfile(user2);
     page.getKweekToButton().click();
     utility.browserPause(1000);
@@ -155,7 +143,6 @@ describe('Kwikker E2E', () => {
     let password2 = 'Password2';
     let email2 = 'mymail20@mail.com';
 
-    page.navigateTo();
     utility.login(username1, password1);
 
     page.getDropDownMenuButton().click();
@@ -214,15 +201,12 @@ describe('Kwikker E2E', () => {
     utility.sendClick(page.getOkButton());
 
     utility.logout();
-    utility.login(username1, password1);
-    utility.logout();
     expect(page.getCoverHeadingText().getText()).toEqual("Welcome to Kwikker");
   }, 2 * 60 * 1000);
 
   it('Open profile', function() {
     utility.login(user2, pass2);
-    page.getDropDownHomeToggle().click();
-    page.getDropDownHomeToggleProfile().click();
+    utility.navigateToMyProfile();
     page.browserPause(1000);
     expect(page.getProfileName().getText()).toEqual('doda');
   });

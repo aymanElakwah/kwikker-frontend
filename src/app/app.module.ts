@@ -39,6 +39,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { ResendEmailComponent } from './log-in/resend-email.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HomeMiniProfileCardComponent } from './home-mini-profile-card/home-mini-profile-card.component';
+import { NotificationsServiceService } from './notifications-service.service';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
@@ -83,7 +84,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   // to do move this services in needed modules
   providers: [{provide: HTTP_INTERCEPTORS , useClass: AddTokenInterceptor, multi: true },
                {provide: HTTP_INTERCEPTORS , useClass: CacheInterceptor, multi: true },
-               { provide: LY_THEME, useClass: MinimaLight, multi: true }
+               { provide: LY_THEME, useClass: MinimaLight, multi: true },
+               { provide: NotificationsServiceService}
             ],
   bootstrap: [AppComponent]
 })

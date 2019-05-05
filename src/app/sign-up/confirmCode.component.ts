@@ -42,7 +42,7 @@ export class confirmCode implements OnInit {
         .subscribe(
          res => {
            window.alert("Welcome, please log in")
-           this.router.navigate(['login']);
+           this.router.navigate(['/login']);
          },
           err => {
             window.alert("An error occured, please check your email again!")

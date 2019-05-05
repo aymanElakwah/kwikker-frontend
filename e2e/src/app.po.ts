@@ -362,7 +362,7 @@ export class AppPage {
 ///////////////////////Search//////////////////////////////////////
 
   getHomeSearchBox(){
-    return element(by.xpath('/html/body/app-root/app-home/app-nav-bar/nav/div/div[2]/ul[2]/li[1]/form/input'));
+    return element(by.css('[placeholder = "Search..."]'));
   }
 
   getSearchBox(){
@@ -477,9 +477,8 @@ export class utilityFunctions{
   }
 
   navigateToLogin() {
-    browser.get('/login');
-    // this.page.navigateTo();
-    // element(by.xpath('/html/body/app-root/app-welcome/body/div/div/main/button[2]')).click();
+    this.page.navigateTo();
+    element(by.buttonText('Log in')).click();
   }
 
   navigateToSignUp() {
