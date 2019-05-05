@@ -39,8 +39,8 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     
     this.socket.ReciveNotifications(localStorage.getItem("username")).subscribe(res=>{
-      console.log(res);
-      this.giveAlert(res);
+     console.log(res);
+     this.giveAlert(res);
 
     })
   }
