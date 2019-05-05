@@ -220,15 +220,18 @@ export class KweekComponent implements OnInit {
       this.busyRequest = true;
       // not in my profile
       if (this.callCommonFunc) {
-        this.kweekFunc.like(kweek);
-        this.busyRequest = false;
-        return;
+        this.kweekService.likeKweek(kweek.id).subscribe(() => {
+          kweek.liked_by_user = true;
+          kweek.number_of_likes++;
+          this.busyRequest = false;
+        });
+      } else {
+        // in my profile
+        this.kweekService.likeKweek(kweek.id).subscribe(() => {
+          this.likeCallBack(kweek);
+          this.busyRequest = false;
+        });
       }
-      // in my profile
-      this.kweekService.likeKweek(kweek.id).subscribe(() => {
-        this.likeCallBack(kweek);
-        this.busyRequest = false;
-      });
     }
   }
 
@@ -255,15 +258,18 @@ export class KweekComponent implements OnInit {
       this.busyRequest = true;
       // not in my profile
       if (this.callCommonFunc) {
-        this.kweekFunc.unlike(kweek);
-        this.busyRequest = false;
-        return;
+        this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+          kweek.liked_by_user = false;
+          kweek.number_of_likes--;
+          this.busyRequest = false;
+        });
+      } else {
+        // in my profile
+        this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
+          this.unlikeCallBack(kweek);
+          this.busyRequest = false;
+        });
       }
-      // in my profile
-      this.kweekService.unlikeKweek(kweek.id).subscribe(() => {
-        this.unlikeCallBack(kweek);
-        this.busyRequest = false;
-      });
     }
   }
 
@@ -290,15 +296,18 @@ export class KweekComponent implements OnInit {
       this.busyRequest = true;
       // not in my profile
       if (this.callCommonFunc) {
-        this.kweekFunc.rekweek(kweek);
-        this.busyRequest = false;
-        return;
+        this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+          kweek.rekweeked_by_user = true;
+          kweek.number_of_rekweeks++;
+          this.busyRequest = false;
+        });
+      } else {
+        // in my profile
+        this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
+          this.rekweekCallBack(kweek);
+          this.busyRequest = false;
+        });
       }
-      // in my profile
-      this.kweekService.rekweekKweek(kweek.id).subscribe(() => {
-        this.rekweekCallBack(kweek);
-        this.busyRequest = false;
-      });
     }
   }
 
@@ -327,15 +336,18 @@ export class KweekComponent implements OnInit {
       this.busyRequest = true;
       // not in my profile
       if (this.callCommonFunc) {
-        this.kweekFunc.unrekweek(kweek);
-        this.busyRequest = false;
-        return;
+        this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+          kweek.rekweeked_by_user = false;
+          kweek.number_of_rekweeks--;
+          this.busyRequest = false;
+        });
+      } else {
+        // in my profile
+        this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
+          this.unrekweekCallBack(kweek);
+          this.busyRequest = false;
+        });
       }
-      // in my profile
-      this.kweekService.unrekweekKweek(kweek.id).subscribe(() => {
-        this.unrekweekCallBack(kweek);
-        this.busyRequest = false;
-      });
     }
   }
 
