@@ -9,8 +9,7 @@ before_install:
 
 script:
   - gem install bundler
-#tests will be here
-# run tests (not yet working)
+#tests will be run here
   - docker run ajammil/kwikker/frontendtest ng test --karmaConfig=./src/karma.prod.conf.js --watch=false
 
 after_success:
